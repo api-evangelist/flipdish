@@ -1,0 +1,177 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — Lightspeed"
+  description: >-
+    Lightspeed operations on the Flipdish Open API v1.0 (3 operations).
+    Lead operation: Flipdish Lightspeed_Get Store Settings. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Lightspeed
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-lightspeed"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — Lightspeed business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "lightspeed-store-id-settings"
+          path: "/api/v1.0/lightspeed/{storeId}/settings"
+          operations:
+            - name: "Lightspeed_GetStoreSettings"
+              method: GET
+              description: "Flipdish Lightspeed_Get Store Settings"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "lightspeed-store-id-settings"
+          path: "/api/v1.0/lightspeed/{storeId}/settings"
+          operations:
+            - name: "Lightspeed_SaveStoreSettings"
+              method: POST
+              description: "Flipdish Lightspeed_Save Store Settings"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "lightspeed-store-id-menu-generate"
+          path: "/api/v1.0/lightspeed/{storeId}/menu/generate"
+          operations:
+            - name: "Lightspeed_GenerateMenu"
+              method: POST
+              description: "Flipdish Lightspeed_Generate Menu"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-lightspeed-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — Lightspeed."
+      resources:
+        - path: "/v1/lightspeed/{store-id}/settings"
+          name: "lightspeed-store-id-settings"
+          description: "REST surface for Lightspeed_GetStoreSettings."
+          operations:
+            - method: GET
+              name: "Lightspeed_GetStoreSettings"
+              description: "Flipdish Lightspeed_Get Store Settings"
+              call: "platform-lightspeed.Lightspeed_GetStoreSettings"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/lightspeed/{store-id}/settings"
+          name: "lightspeed-store-id-settings"
+          description: "REST surface for Lightspeed_SaveStoreSettings."
+          operations:
+            - method: POST
+              name: "Lightspeed_SaveStoreSettings"
+              description: "Flipdish Lightspeed_Save Store Settings"
+              call: "platform-lightspeed.Lightspeed_SaveStoreSettings"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/lightspeed/{store-id}/menu/generate"
+          name: "lightspeed-store-id-menu-generate"
+          description: "REST surface for Lightspeed_GenerateMenu."
+          operations:
+            - method: POST
+              name: "Lightspeed_GenerateMenu"
+              description: "Flipdish Lightspeed_Generate Menu"
+              call: "platform-lightspeed.Lightspeed_GenerateMenu"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-lightspeed-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — Lightspeed."
+      tools:
+        - name: "lightspeed_get-store-settings"
+          description: "Flipdish Lightspeed_Get Store Settings"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-lightspeed.Lightspeed_GetStoreSettings"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "lightspeed_save-store-settings"
+          description: "Flipdish Lightspeed_Save Store Settings"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-lightspeed.Lightspeed_SaveStoreSettings"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "lightspeed_generate-menu"
+          description: "Flipdish Lightspeed_Generate Menu"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-lightspeed.Lightspeed_GenerateMenu"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."

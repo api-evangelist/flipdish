@@ -1,0 +1,373 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — Apm"
+  description: >-
+    Apm operations on the Flipdish Open API v1.0 (6 operations).
+    Lead operation: Flipdish Get Apm Status. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Apm
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-apm"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — Apm business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-apm-status"
+          path: "/api/v1.0/{appId}/apm/status"
+          operations:
+            - name: "GetApmStatus"
+              method: GET
+              description: "Flipdish Get Apm Status"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-apm-statistics"
+          path: "/api/v1.0/{appId}/apm/statistics"
+          operations:
+            - name: "GetBasicStatistics"
+              method: GET
+              description: "Flipdish Get Basic Statistics"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-apm-statistics-calendar"
+          path: "/api/v1.0/{appId}/apm/statistics/calendar"
+          operations:
+            - name: "GetCalendarWeekStatistics"
+              method: GET
+              description: "Flipdish Get Calendar Week Statistics"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-apm-calls"
+          path: "/api/v1.0/{appId}/apm/calls"
+          operations:
+            - name: "GetPaginatedCallList"
+              method: GET
+              description: "Flipdish Get Paginated Call List"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-apm-statistics-calls-aggregate-data-by"
+          path: "/api/v1.0/{appId}/apm/statistics/calls/{aggregateDataBy}"
+          operations:
+            - name: "GetCallsStatistics"
+              method: GET
+              description: "Flipdish Get Calls Statistics"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "aggregateDataBy"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The aggregate data by path parameter."
+                - name: "dataPointLimit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The data point limit query parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-apm-statistics-orders-aggregate-data-by"
+          path: "/api/v1.0/{appId}/apm/statistics/orders/{aggregateDataBy}"
+          operations:
+            - name: "GetOrderStatistics"
+              method: GET
+              description: "Flipdish Get Order Statistics"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "aggregateDataBy"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The aggregate data by path parameter."
+                - name: "dataPointLimit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The data point limit query parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-apm-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — Apm."
+      resources:
+        - path: "/v1/{app-id}/apm/status"
+          name: "app-id-apm-status"
+          description: "REST surface for GetApmStatus."
+          operations:
+            - method: GET
+              name: "GetApmStatus"
+              description: "Flipdish Get Apm Status"
+              call: "platform-apm.GetApmStatus"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/apm/statistics"
+          name: "app-id-apm-statistics"
+          description: "REST surface for GetBasicStatistics."
+          operations:
+            - method: GET
+              name: "GetBasicStatistics"
+              description: "Flipdish Get Basic Statistics"
+              call: "platform-apm.GetBasicStatistics"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/apm/statistics/calendar"
+          name: "app-id-apm-statistics-calendar"
+          description: "REST surface for GetCalendarWeekStatistics."
+          operations:
+            - method: GET
+              name: "GetCalendarWeekStatistics"
+              description: "Flipdish Get Calendar Week Statistics"
+              call: "platform-apm.GetCalendarWeekStatistics"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/apm/calls"
+          name: "app-id-apm-calls"
+          description: "REST surface for GetPaginatedCallList."
+          operations:
+            - method: GET
+              name: "GetPaginatedCallList"
+              description: "Flipdish Get Paginated Call List"
+              call: "platform-apm.GetPaginatedCallList"
+              with:
+                "appId": "rest.appId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/apm/statistics/calls/{aggregate-data-by}"
+          name: "app-id-apm-statistics-calls-aggregate-data-by"
+          description: "REST surface for GetCallsStatistics."
+          operations:
+            - method: GET
+              name: "GetCallsStatistics"
+              description: "Flipdish Get Calls Statistics"
+              call: "platform-apm.GetCallsStatistics"
+              with:
+                "appId": "rest.appId"
+                "aggregateDataBy": "rest.aggregateDataBy"
+                "dataPointLimit": "rest.dataPointLimit"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/apm/statistics/orders/{aggregate-data-by}"
+          name: "app-id-apm-statistics-orders-aggregate-data-by"
+          description: "REST surface for GetOrderStatistics."
+          operations:
+            - method: GET
+              name: "GetOrderStatistics"
+              description: "Flipdish Get Order Statistics"
+              call: "platform-apm.GetOrderStatistics"
+              with:
+                "appId": "rest.appId"
+                "aggregateDataBy": "rest.aggregateDataBy"
+                "dataPointLimit": "rest.dataPointLimit"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-apm-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — Apm."
+      tools:
+        - name: "get-apm-status"
+          description: "Flipdish Get Apm Status"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-apm.GetApmStatus"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-basic-statistics"
+          description: "Flipdish Get Basic Statistics"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-apm.GetBasicStatistics"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-calendar-week-statistics"
+          description: "Flipdish Get Calendar Week Statistics"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-apm.GetCalendarWeekStatistics"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-paginated-call-list"
+          description: "Flipdish Get Paginated Call List"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-apm.GetPaginatedCallList"
+          with:
+            "appId": "tools.appId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-calls-statistics"
+          description: "Flipdish Get Calls Statistics"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-apm.GetCallsStatistics"
+          with:
+            "appId": "tools.appId"
+            "aggregateDataBy": "tools.aggregateDataBy"
+            "dataPointLimit": "tools.dataPointLimit"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-order-statistics"
+          description: "Flipdish Get Order Statistics"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-apm.GetOrderStatistics"
+          with:
+            "appId": "tools.appId"
+            "aggregateDataBy": "tools.aggregateDataBy"
+            "dataPointLimit": "tools.dataPointLimit"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."

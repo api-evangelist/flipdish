@@ -1,0 +1,93 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Apps — AppStoreEntitlements"
+  description: >-
+    AppStoreEntitlements operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Get App Store App Entitlements. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - App Store Entitlements
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "apps-app-store-entitlements"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Apps — AppStoreEntitlements business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-appstore-apps-app-store-app-id-entitlements"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/entitlements"
+          operations:
+            - name: "GetAppStoreAppEntitlements"
+              method: GET
+              description: "Flipdish Get App Store App Entitlements"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "apps-app-store-entitlements-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Apps — AppStoreEntitlements."
+      resources:
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/entitlements"
+          name: "app-id-appstore-apps-app-store-app-id-entitlements"
+          description: "REST surface for GetAppStoreAppEntitlements."
+          operations:
+            - method: GET
+              name: "GetAppStoreAppEntitlements"
+              description: "Flipdish Get App Store App Entitlements"
+              call: "apps-app-store-entitlements.GetAppStoreAppEntitlements"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "apps-app-store-entitlements-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Apps — AppStoreEntitlements."
+      tools:
+        - name: "get-app-store-app-entitlements"
+          description: "Flipdish Get App Store App Entitlements"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-app-store-entitlements.GetAppStoreAppEntitlements"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+          outputParameters:
+            - type: object
+              mapping: "$."

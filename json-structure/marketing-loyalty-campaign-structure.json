@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/marketing-loyalty-campaign-structure.json",
+  "name": "LoyaltyCampaign",
+  "description": "Loyalty campaign",
+  "type": "object",
+  "properties": {
+    "CampaignId": {
+      "description": "Id of campaign",
+      "type": "int32",
+      "example": 500123
+    },
+    "Statistics": {
+      "$ref": "#/components/schemas/CampaignStatistics"
+    },
+    "Stores": {
+      "description": "Stores this campaign applies to with campaign start time in Utc",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StoreCampaignStartTime"
+      },
+      "example": []
+    },
+    "PublicId": {
+      "description": "Permanent reference to the item.",
+      "type": "uuid",
+      "example": "00000000-0000-0000-0000-000000000000"
+    },
+    "OrdersBeforeReceivingVoucher": {
+      "description": "Number of orders customer needs to make, before receiving voucher",
+      "type": "int32",
+      "example": 1
+    },
+    "PercentDiscountAmount": {
+      "description": "Discount amount in percents",
+      "maximum": 100,
+      "minimum": 1,
+      "type": "int32",
+      "nullable": true,
+      "example": 12.5
+    },
+    "MaxDiscount": {
+      "description": "Maximum discount for percentage discounts",
+      "minimum": 0,
+      "type": "double",
+      "nullable": true,
+      "example": 3
+    },
+    "RoundingStrategy": {
+      "description": "Controls how the loyalty voucher's amount is rounded",
+      "maximum": 2,
+      "minimum": 0,
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    },
+    "ShouldIncludeOrdersWithLoyaltyVoucher": {
+      "description": "Controls whether we should include orders with loyalty vouchers in the campaign calculation",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    },
+    "VoucherValidPeriodDays": {
+      "description": "Number of days for which the voucher will be valid.",
+      "maximum": 300,
+      "minimum": 1,
+      "type": "int32",
+      "example": 1
+    },
+    "IncludeDeliveryFee": {
+      "description": "Discount will include delivery fee",
+      "type": "boolean",
+      "example": true
+    },
+    "AutoApplyResultingVouchers": {
+      "description": "Automatically apply resulting vouchers",
+      "type": "boolean",
+      "example": true
+    },
+    "IncludeExistingOrders": {
+      "description": "Campaign will apply to existing orders",
+      "type": "boolean",
+      "example": true
+    },
+    "IsEnabled": {
+      "description": "Is campaign enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "StoreIds": {
+      "description": "Ids of stores this campaign applies to",
+      "type": "array",
+      "items": {
+        "type": "int32"
+      },
+      "example": [
+        1
+      ]
+    },
+    "AppId": {
+      "description": "The app that this campaign belongs to.",
+      "type": "string",
+      "example": "500123"
+    },
+    "ForceDiscount": {
+      "description": "Controls whether the voucher generated from this campaign will override discount exclusions",
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

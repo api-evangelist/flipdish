@@ -1,0 +1,1567 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Customers — Users"
+  description: >-
+    Users operations on the Flipdish Open API v1.0 (32 operations).
+    Lead operation: Flipdish Get Roles. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Users
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "customers-users"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Customers — Users business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "users-roles"
+          path: "/api/v1.0/users/roles"
+          operations:
+            - name: "GetRoles"
+              method: GET
+              description: "Flipdish Get Roles"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id"
+          path: "/api/v1.0/users/{userId}"
+          operations:
+            - name: "GetUserById"
+              method: GET
+              description: "Flipdish Get User by Id"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-roles"
+          path: "/api/v1.0/users/{userId}/roles"
+          operations:
+            - name: "GetRolesAndUnassignedRoles"
+              method: GET
+              description: "Flipdish Get Roles and Unassigned Roles"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-user-notes"
+          path: "/api/v1.0/users/{userId}/UserNotes"
+          operations:
+            - name: "GetUserNotes"
+              method: GET
+              description: "Flipdish Get User Notes"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-orders-order-id"
+          path: "/api/v1.0/users/{userId}/orders/{orderId}"
+          operations:
+            - name: "GetUserOrderByIdForAdmin"
+              method: GET
+              description: "Flipdish Get User Order by Id for Admin"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "orderId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The order id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-restaurant-user-stores"
+          path: "/api/v1.0/users/{userId}/RestaurantUserStores"
+          operations:
+            - name: "GetRestaurantUserStores"
+              method: GET
+              description: "Flipdish Get Restaurant User Stores"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-restaurant-user-accounts"
+          path: "/api/v1.0/users/{userId}/RestaurantUserAccounts"
+          operations:
+            - name: "GetRestaurantUserAccounts"
+              method: GET
+              description: "Flipdish Get Restaurant User Accounts"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-previousordercount-store-id"
+          path: "/api/v1.0/users/{userId}/previousordercount/{storeId}"
+          operations:
+            - name: "GetPreviousOrderCountForStore"
+              method: GET
+              description: "Flipdish Get Previous Order Count for Store"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-search-flipdish-accounts"
+          path: "/api/v1.0/users/searchFlipdishAccounts"
+          operations:
+            - name: "SearchFlipdishAccounts"
+              method: GET
+              description: "Flipdish Search Flipdish Accounts"
+              inputParameters:
+                - name: "searchPattern"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The search pattern query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-delivery-locations"
+          path: "/api/v1.0/users/{userId}/deliveryLocations"
+          operations:
+            - name: "GetUserDeliveryLocationsForAdmin"
+              method: GET
+              description: "Flipdish Get User Delivery Locations for Admin"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "whiteLabelId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The white label id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-delivery-locations"
+          path: "/api/v1.0/users/{userId}/deliveryLocations"
+          operations:
+            - name: "CreateUserDeliveryLocation"
+              method: POST
+              description: "Flipdish Create User Delivery Location"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-orders"
+          path: "/api/v1.0/users/{userId}/orders"
+          operations:
+            - name: "GetUserOrdersForAdmin"
+              method: GET
+              description: "Flipdish Get User Orders for Admin"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "skip"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The skip query parameter."
+                - name: "take"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The take query parameter."
+                - name: "brandId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The brand id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-sms-conversation-items"
+          path: "/api/v1.0/users/{userId}/smsConversationItems"
+          operations:
+            - name: "GetUserSmsConversationItems"
+              method: GET
+              description: "Flipdish Get User Sms Conversation Items"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "mostRecentCount"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The most recent count query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-search"
+          path: "/api/v1.0/users/search"
+          operations:
+            - name: "SearchUsers"
+              method: GET
+              description: "Flipdish Search Users"
+              inputParameters:
+                - name: "searchQuery"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The search query query parameter."
+                - name: "hasUserLoggedIn"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The has user logged in query parameter."
+                - name: "userDiscriminator"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The user discriminator query parameter."
+                - name: "searchIn"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The search in query parameter."
+                - name: "pageIndex"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page index query parameter."
+                - name: "pageSize"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page size query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-sms"
+          path: "/api/v1.0/users/{userId}/sms"
+          operations:
+            - name: "SendUserSms"
+              method: POST
+              description: "Flipdish Send User Sms"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-reset-mfa"
+          path: "/api/v1.0/users/{userId}/ResetMfa"
+          operations:
+            - name: "ResetMfa"
+              method: POST
+              description: "Flipdish Reset Mfa"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-add-user-note"
+          path: "/api/v1.0/users/{userId}/AddUserNote"
+          operations:
+            - name: "AddUserNote"
+              method: POST
+              description: "Flipdish Add User Note"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-anonymize-user"
+          path: "/api/v1.0/users/{userId}/AnonymizeUser"
+          operations:
+            - name: "AnonymizeUser"
+              method: POST
+              description: "Flipdish Anonymize User"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-set-customer-name"
+          path: "/api/v1.0/users/{userId}/SetCustomerName"
+          operations:
+            - name: "SetCustomerName"
+              method: POST
+              description: "Flipdish Set Customer Name"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-push-notifications"
+          path: "/api/v1.0/users/{userId}/pushNotifications"
+          operations:
+            - name: "SendUserPushNotification"
+              method: POST
+              description: "Flipdish Send User Push Notification"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-block-user-phone-number"
+          path: "/api/v1.0/users/{userId}/BlockUserPhoneNumber"
+          operations:
+            - name: "BlockUserPhoneNumber"
+              method: POST
+              description: "Flipdish Block User Phone Number"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-mark-user-as-fraudulent"
+          path: "/api/v1.0/users/{userId}/MarkUserAsFraudulent"
+          operations:
+            - name: "MarkUserAsFraudulent"
+              method: POST
+              description: "Flipdish Mark User as Fraudulent"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-mark-user-as-suspicious"
+          path: "/api/v1.0/users/{userId}/MarkUserAsSuspicious"
+          operations:
+            - name: "MarkUserAsSuspicious"
+              method: POST
+              description: "Flipdish Mark User as Suspicious"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-unblock-user-phone-number"
+          path: "/api/v1.0/users/{userId}/UnblockUserPhoneNumber"
+          operations:
+            - name: "UnblockUserPhoneNumber"
+              method: POST
+              description: "Flipdish Unblock User Phone Number"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-add-user-to-role-role-name"
+          path: "/api/v1.0/users/{userId}/AddUserToRole/{roleName}"
+          operations:
+            - name: "AddUserToRole"
+              method: POST
+              description: "Flipdish Add User to Role"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "roleName"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The role name path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-set-language-language-id"
+          path: "/api/v1.0/users/{userId}/SetLanguage/{languageId}"
+          operations:
+            - name: "SetUserLanguage"
+              method: POST
+              description: "Flipdish Set User Language"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "languageId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The language id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-remove-user-from-role-role-name"
+          path: "/api/v1.0/users/{userId}/RemoveUserFromRole/{roleName}"
+          operations:
+            - name: "RemoveUserFromRole"
+              method: POST
+              description: "Flipdish Remove User from Role"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "roleName"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The role name path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-set-flipdish-account-id-account-id"
+          path: "/api/v1.0/users/{userId}/SetFlipdishAccountId/{accountId}"
+          operations:
+            - name: "SetFlipdishAccountIdForUser"
+              method: POST
+              description: "Flipdish Set Flipdish Account Id for User"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "accountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The account id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-remove-flipdish-account-id-account-id"
+          path: "/api/v1.0/users/{userId}/RemoveFlipdishAccountId/{accountId}"
+          operations:
+            - name: "RemoveFlipdishAccountIdForUser"
+              method: POST
+              description: "Flipdish Remove Flipdish Account Id for User"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "accountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The account id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-delivery-locations-delivery-location-id-hide"
+          path: "/api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/hide"
+          operations:
+            - name: "HideUserDeliveryLocation"
+              method: POST
+              description: "Flipdish Hide User Delivery Location"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "deliveryLocationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The delivery location id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-delivery-locations-delivery-location-id-fields"
+          path: "/api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/fields"
+          operations:
+            - name: "SetUserDeliveryLocationField"
+              method: POST
+              description: "Flipdish Set User Delivery Location Field"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "deliveryLocationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The delivery location id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "users-user-id-delivery-locations-delivery-location-id-coordinates"
+          path: "/api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/coordinates"
+          operations:
+            - name: "SetUserDeliveryLocationCoordinates"
+              method: POST
+              description: "Flipdish Set User Delivery Location Coordinates"
+              inputParameters:
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "deliveryLocationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The delivery location id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "customers-users-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Customers — Users."
+      resources:
+        - path: "/v1/users/roles"
+          name: "users-roles"
+          description: "REST surface for GetRoles."
+          operations:
+            - method: GET
+              name: "GetRoles"
+              description: "Flipdish Get Roles"
+              call: "customers-users.GetRoles"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}"
+          name: "users-user-id"
+          description: "REST surface for GetUserById."
+          operations:
+            - method: GET
+              name: "GetUserById"
+              description: "Flipdish Get User by Id"
+              call: "customers-users.GetUserById"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/roles"
+          name: "users-user-id-roles"
+          description: "REST surface for GetRolesAndUnassignedRoles."
+          operations:
+            - method: GET
+              name: "GetRolesAndUnassignedRoles"
+              description: "Flipdish Get Roles and Unassigned Roles"
+              call: "customers-users.GetRolesAndUnassignedRoles"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/user-notes"
+          name: "users-user-id-user-notes"
+          description: "REST surface for GetUserNotes."
+          operations:
+            - method: GET
+              name: "GetUserNotes"
+              description: "Flipdish Get User Notes"
+              call: "customers-users.GetUserNotes"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/orders/{order-id}"
+          name: "users-user-id-orders-order-id"
+          description: "REST surface for GetUserOrderByIdForAdmin."
+          operations:
+            - method: GET
+              name: "GetUserOrderByIdForAdmin"
+              description: "Flipdish Get User Order by Id for Admin"
+              call: "customers-users.GetUserOrderByIdForAdmin"
+              with:
+                "userId": "rest.userId"
+                "orderId": "rest.orderId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/restaurant-user-stores"
+          name: "users-user-id-restaurant-user-stores"
+          description: "REST surface for GetRestaurantUserStores."
+          operations:
+            - method: GET
+              name: "GetRestaurantUserStores"
+              description: "Flipdish Get Restaurant User Stores"
+              call: "customers-users.GetRestaurantUserStores"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/restaurant-user-accounts"
+          name: "users-user-id-restaurant-user-accounts"
+          description: "REST surface for GetRestaurantUserAccounts."
+          operations:
+            - method: GET
+              name: "GetRestaurantUserAccounts"
+              description: "Flipdish Get Restaurant User Accounts"
+              call: "customers-users.GetRestaurantUserAccounts"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/previousordercount/{store-id}"
+          name: "users-user-id-previousordercount-store-id"
+          description: "REST surface for GetPreviousOrderCountForStore."
+          operations:
+            - method: GET
+              name: "GetPreviousOrderCountForStore"
+              description: "Flipdish Get Previous Order Count for Store"
+              call: "customers-users.GetPreviousOrderCountForStore"
+              with:
+                "userId": "rest.userId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/search-flipdish-accounts"
+          name: "users-search-flipdish-accounts"
+          description: "REST surface for SearchFlipdishAccounts."
+          operations:
+            - method: GET
+              name: "SearchFlipdishAccounts"
+              description: "Flipdish Search Flipdish Accounts"
+              call: "customers-users.SearchFlipdishAccounts"
+              with:
+                "searchPattern": "rest.searchPattern"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/delivery-locations"
+          name: "users-user-id-delivery-locations"
+          description: "REST surface for GetUserDeliveryLocationsForAdmin."
+          operations:
+            - method: GET
+              name: "GetUserDeliveryLocationsForAdmin"
+              description: "Flipdish Get User Delivery Locations for Admin"
+              call: "customers-users.GetUserDeliveryLocationsForAdmin"
+              with:
+                "userId": "rest.userId"
+                "whiteLabelId": "rest.whiteLabelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/delivery-locations"
+          name: "users-user-id-delivery-locations"
+          description: "REST surface for CreateUserDeliveryLocation."
+          operations:
+            - method: POST
+              name: "CreateUserDeliveryLocation"
+              description: "Flipdish Create User Delivery Location"
+              call: "customers-users.CreateUserDeliveryLocation"
+              with:
+                "userId": "rest.userId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/orders"
+          name: "users-user-id-orders"
+          description: "REST surface for GetUserOrdersForAdmin."
+          operations:
+            - method: GET
+              name: "GetUserOrdersForAdmin"
+              description: "Flipdish Get User Orders for Admin"
+              call: "customers-users.GetUserOrdersForAdmin"
+              with:
+                "userId": "rest.userId"
+                "skip": "rest.skip"
+                "take": "rest.take"
+                "brandId": "rest.brandId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/sms-conversation-items"
+          name: "users-user-id-sms-conversation-items"
+          description: "REST surface for GetUserSmsConversationItems."
+          operations:
+            - method: GET
+              name: "GetUserSmsConversationItems"
+              description: "Flipdish Get User Sms Conversation Items"
+              call: "customers-users.GetUserSmsConversationItems"
+              with:
+                "userId": "rest.userId"
+                "mostRecentCount": "rest.mostRecentCount"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/search"
+          name: "users-search"
+          description: "REST surface for SearchUsers."
+          operations:
+            - method: GET
+              name: "SearchUsers"
+              description: "Flipdish Search Users"
+              call: "customers-users.SearchUsers"
+              with:
+                "searchQuery": "rest.searchQuery"
+                "hasUserLoggedIn": "rest.hasUserLoggedIn"
+                "userDiscriminator": "rest.userDiscriminator"
+                "searchIn": "rest.searchIn"
+                "pageIndex": "rest.pageIndex"
+                "pageSize": "rest.pageSize"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/sms"
+          name: "users-user-id-sms"
+          description: "REST surface for SendUserSms."
+          operations:
+            - method: POST
+              name: "SendUserSms"
+              description: "Flipdish Send User Sms"
+              call: "customers-users.SendUserSms"
+              with:
+                "userId": "rest.userId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/reset-mfa"
+          name: "users-user-id-reset-mfa"
+          description: "REST surface for ResetMfa."
+          operations:
+            - method: POST
+              name: "ResetMfa"
+              description: "Flipdish Reset Mfa"
+              call: "customers-users.ResetMfa"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/add-user-note"
+          name: "users-user-id-add-user-note"
+          description: "REST surface for AddUserNote."
+          operations:
+            - method: POST
+              name: "AddUserNote"
+              description: "Flipdish Add User Note"
+              call: "customers-users.AddUserNote"
+              with:
+                "userId": "rest.userId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/anonymize-user"
+          name: "users-user-id-anonymize-user"
+          description: "REST surface for AnonymizeUser."
+          operations:
+            - method: POST
+              name: "AnonymizeUser"
+              description: "Flipdish Anonymize User"
+              call: "customers-users.AnonymizeUser"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/set-customer-name"
+          name: "users-user-id-set-customer-name"
+          description: "REST surface for SetCustomerName."
+          operations:
+            - method: POST
+              name: "SetCustomerName"
+              description: "Flipdish Set Customer Name"
+              call: "customers-users.SetCustomerName"
+              with:
+                "userId": "rest.userId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/push-notifications"
+          name: "users-user-id-push-notifications"
+          description: "REST surface for SendUserPushNotification."
+          operations:
+            - method: POST
+              name: "SendUserPushNotification"
+              description: "Flipdish Send User Push Notification"
+              call: "customers-users.SendUserPushNotification"
+              with:
+                "userId": "rest.userId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/block-user-phone-number"
+          name: "users-user-id-block-user-phone-number"
+          description: "REST surface for BlockUserPhoneNumber."
+          operations:
+            - method: POST
+              name: "BlockUserPhoneNumber"
+              description: "Flipdish Block User Phone Number"
+              call: "customers-users.BlockUserPhoneNumber"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/mark-user-as-fraudulent"
+          name: "users-user-id-mark-user-as-fraudulent"
+          description: "REST surface for MarkUserAsFraudulent."
+          operations:
+            - method: POST
+              name: "MarkUserAsFraudulent"
+              description: "Flipdish Mark User as Fraudulent"
+              call: "customers-users.MarkUserAsFraudulent"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/mark-user-as-suspicious"
+          name: "users-user-id-mark-user-as-suspicious"
+          description: "REST surface for MarkUserAsSuspicious."
+          operations:
+            - method: POST
+              name: "MarkUserAsSuspicious"
+              description: "Flipdish Mark User as Suspicious"
+              call: "customers-users.MarkUserAsSuspicious"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/unblock-user-phone-number"
+          name: "users-user-id-unblock-user-phone-number"
+          description: "REST surface for UnblockUserPhoneNumber."
+          operations:
+            - method: POST
+              name: "UnblockUserPhoneNumber"
+              description: "Flipdish Unblock User Phone Number"
+              call: "customers-users.UnblockUserPhoneNumber"
+              with:
+                "userId": "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/add-user-to-role/{role-name}"
+          name: "users-user-id-add-user-to-role-role-name"
+          description: "REST surface for AddUserToRole."
+          operations:
+            - method: POST
+              name: "AddUserToRole"
+              description: "Flipdish Add User to Role"
+              call: "customers-users.AddUserToRole"
+              with:
+                "userId": "rest.userId"
+                "roleName": "rest.roleName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/set-language/{language-id}"
+          name: "users-user-id-set-language-language-id"
+          description: "REST surface for SetUserLanguage."
+          operations:
+            - method: POST
+              name: "SetUserLanguage"
+              description: "Flipdish Set User Language"
+              call: "customers-users.SetUserLanguage"
+              with:
+                "userId": "rest.userId"
+                "languageId": "rest.languageId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/remove-user-from-role/{role-name}"
+          name: "users-user-id-remove-user-from-role-role-name"
+          description: "REST surface for RemoveUserFromRole."
+          operations:
+            - method: POST
+              name: "RemoveUserFromRole"
+              description: "Flipdish Remove User from Role"
+              call: "customers-users.RemoveUserFromRole"
+              with:
+                "userId": "rest.userId"
+                "roleName": "rest.roleName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/set-flipdish-account-id/{account-id}"
+          name: "users-user-id-set-flipdish-account-id-account-id"
+          description: "REST surface for SetFlipdishAccountIdForUser."
+          operations:
+            - method: POST
+              name: "SetFlipdishAccountIdForUser"
+              description: "Flipdish Set Flipdish Account Id for User"
+              call: "customers-users.SetFlipdishAccountIdForUser"
+              with:
+                "userId": "rest.userId"
+                "accountId": "rest.accountId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/remove-flipdish-account-id/{account-id}"
+          name: "users-user-id-remove-flipdish-account-id-account-id"
+          description: "REST surface for RemoveFlipdishAccountIdForUser."
+          operations:
+            - method: POST
+              name: "RemoveFlipdishAccountIdForUser"
+              description: "Flipdish Remove Flipdish Account Id for User"
+              call: "customers-users.RemoveFlipdishAccountIdForUser"
+              with:
+                "userId": "rest.userId"
+                "accountId": "rest.accountId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/delivery-locations/{delivery-location-id}/hide"
+          name: "users-user-id-delivery-locations-delivery-location-id-hide"
+          description: "REST surface for HideUserDeliveryLocation."
+          operations:
+            - method: POST
+              name: "HideUserDeliveryLocation"
+              description: "Flipdish Hide User Delivery Location"
+              call: "customers-users.HideUserDeliveryLocation"
+              with:
+                "userId": "rest.userId"
+                "deliveryLocationId": "rest.deliveryLocationId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/delivery-locations/{delivery-location-id}/fields"
+          name: "users-user-id-delivery-locations-delivery-location-id-fields"
+          description: "REST surface for SetUserDeliveryLocationField."
+          operations:
+            - method: POST
+              name: "SetUserDeliveryLocationField"
+              description: "Flipdish Set User Delivery Location Field"
+              call: "customers-users.SetUserDeliveryLocationField"
+              with:
+                "userId": "rest.userId"
+                "deliveryLocationId": "rest.deliveryLocationId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{user-id}/delivery-locations/{delivery-location-id}/coordinates"
+          name: "users-user-id-delivery-locations-delivery-location-id-coordinates"
+          description: "REST surface for SetUserDeliveryLocationCoordinates."
+          operations:
+            - method: POST
+              name: "SetUserDeliveryLocationCoordinates"
+              description: "Flipdish Set User Delivery Location Coordinates"
+              call: "customers-users.SetUserDeliveryLocationCoordinates"
+              with:
+                "userId": "rest.userId"
+                "deliveryLocationId": "rest.deliveryLocationId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "customers-users-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Customers — Users."
+      tools:
+        - name: "get-roles"
+          description: "Flipdish Get Roles"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetRoles"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-id"
+          description: "Flipdish Get User by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetUserById"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-roles-unassigned-roles"
+          description: "Flipdish Get Roles and Unassigned Roles"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetRolesAndUnassignedRoles"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-notes"
+          description: "Flipdish Get User Notes"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetUserNotes"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-order-id-admin"
+          description: "Flipdish Get User Order by Id for Admin"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetUserOrderByIdForAdmin"
+          with:
+            "userId": "tools.userId"
+            "orderId": "tools.orderId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-restaurant-user-stores"
+          description: "Flipdish Get Restaurant User Stores"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetRestaurantUserStores"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-restaurant-user-accounts"
+          description: "Flipdish Get Restaurant User Accounts"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetRestaurantUserAccounts"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-previous-order-count-store"
+          description: "Flipdish Get Previous Order Count for Store"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetPreviousOrderCountForStore"
+          with:
+            "userId": "tools.userId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "search-flipdish-accounts"
+          description: "Flipdish Search Flipdish Accounts"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.SearchFlipdishAccounts"
+          with:
+            "searchPattern": "tools.searchPattern"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-delivery-locations-admin"
+          description: "Flipdish Get User Delivery Locations for Admin"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetUserDeliveryLocationsForAdmin"
+          with:
+            "userId": "tools.userId"
+            "whiteLabelId": "tools.whiteLabelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-user-delivery-location"
+          description: "Flipdish Create User Delivery Location"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.CreateUserDeliveryLocation"
+          with:
+            "userId": "tools.userId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-orders-admin"
+          description: "Flipdish Get User Orders for Admin"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetUserOrdersForAdmin"
+          with:
+            "userId": "tools.userId"
+            "skip": "tools.skip"
+            "take": "tools.take"
+            "brandId": "tools.brandId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-sms-conversation-items"
+          description: "Flipdish Get User Sms Conversation Items"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.GetUserSmsConversationItems"
+          with:
+            "userId": "tools.userId"
+            "mostRecentCount": "tools.mostRecentCount"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "search-users"
+          description: "Flipdish Search Users"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "customers-users.SearchUsers"
+          with:
+            "searchQuery": "tools.searchQuery"
+            "hasUserLoggedIn": "tools.hasUserLoggedIn"
+            "userDiscriminator": "tools.userDiscriminator"
+            "searchIn": "tools.searchIn"
+            "pageIndex": "tools.pageIndex"
+            "pageSize": "tools.pageSize"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "send-user-sms"
+          description: "Flipdish Send User Sms"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SendUserSms"
+          with:
+            "userId": "tools.userId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "reset-mfa"
+          description: "Flipdish Reset Mfa"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.ResetMfa"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "add-user-note"
+          description: "Flipdish Add User Note"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.AddUserNote"
+          with:
+            "userId": "tools.userId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "anonymize-user"
+          description: "Flipdish Anonymize User"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.AnonymizeUser"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-customer-name"
+          description: "Flipdish Set Customer Name"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SetCustomerName"
+          with:
+            "userId": "tools.userId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "send-user-push-notification"
+          description: "Flipdish Send User Push Notification"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SendUserPushNotification"
+          with:
+            "userId": "tools.userId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "block-user-phone-number"
+          description: "Flipdish Block User Phone Number"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.BlockUserPhoneNumber"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "mark-user-fraudulent"
+          description: "Flipdish Mark User as Fraudulent"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.MarkUserAsFraudulent"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "mark-user-suspicious"
+          description: "Flipdish Mark User as Suspicious"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.MarkUserAsSuspicious"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "unblock-user-phone-number"
+          description: "Flipdish Unblock User Phone Number"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.UnblockUserPhoneNumber"
+          with:
+            "userId": "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "add-user-role"
+          description: "Flipdish Add User to Role"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.AddUserToRole"
+          with:
+            "userId": "tools.userId"
+            "roleName": "tools.roleName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-user-language"
+          description: "Flipdish Set User Language"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SetUserLanguage"
+          with:
+            "userId": "tools.userId"
+            "languageId": "tools.languageId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "remove-user-role"
+          description: "Flipdish Remove User from Role"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.RemoveUserFromRole"
+          with:
+            "userId": "tools.userId"
+            "roleName": "tools.roleName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-flipdish-account-id-user"
+          description: "Flipdish Set Flipdish Account Id for User"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SetFlipdishAccountIdForUser"
+          with:
+            "userId": "tools.userId"
+            "accountId": "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "remove-flipdish-account-id-user"
+          description: "Flipdish Remove Flipdish Account Id for User"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.RemoveFlipdishAccountIdForUser"
+          with:
+            "userId": "tools.userId"
+            "accountId": "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "hide-user-delivery-location"
+          description: "Flipdish Hide User Delivery Location"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.HideUserDeliveryLocation"
+          with:
+            "userId": "tools.userId"
+            "deliveryLocationId": "tools.deliveryLocationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-user-delivery-location-field"
+          description: "Flipdish Set User Delivery Location Field"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SetUserDeliveryLocationField"
+          with:
+            "userId": "tools.userId"
+            "deliveryLocationId": "tools.deliveryLocationId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-user-delivery-location-coordinates"
+          description: "Flipdish Set User Delivery Location Coordinates"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "customers-users.SetUserDeliveryLocationCoordinates"
+          with:
+            "userId": "tools.userId"
+            "deliveryLocationId": "tools.deliveryLocationId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/payments-payout-store-schema.json",
+  "title": "PayoutStore",
+  "description": "Payout details for a single store",
+  "type": "object",
+  "properties": {
+    "StoreId": {
+      "format": "int32",
+      "description": "The id of the Store.",
+      "type": "integer",
+      "example": 500123
+    },
+    "StoreName": {
+      "description": "Name of the store",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Amount": {
+      "format": "double",
+      "description": "Amount of the payout for this Store",
+      "type": "number",
+      "nullable": true,
+      "example": 12.5
+    },
+    "OnlineRevenue": {
+      "$ref": "#/components/schemas/RevenueDetail"
+    },
+    "Revenue": {
+      "$ref": "#/components/schemas/RevenueDetail"
+    },
+    "RevenueAdjustments": {
+      "$ref": "#/components/schemas/RevenueAdjustmentsDetails"
+    },
+    "FlipdishFees": {
+      "$ref": "#/components/schemas/FlipdishFeesDetails"
+    },
+    "Chargebacks": {
+      "$ref": "#/components/schemas/ChargebackDetails"
+    },
+    "OtherCharges": {
+      "$ref": "#/components/schemas/OtherChargesDetails"
+    },
+    "Balance": {
+      "$ref": "#/components/schemas/BalanceDetails"
+    },
+    "PosRevenue": {
+      "$ref": "#/components/schemas/PosRevenueDetails"
+    },
+    "ThirdPartyFees": {
+      "$ref": "#/components/schemas/ThirdPartyFeesDetails"
+    }
+  }
+}

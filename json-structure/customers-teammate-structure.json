@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/customers-teammate-structure.json",
+  "name": "Teammate",
+  "description": "Teammate schema from Flipdish API - Customers.",
+  "type": "object",
+  "properties": {
+    "TeammateId": {
+      "description": "Unique indentifier",
+      "type": "string",
+      "example": "500123"
+    },
+    "UserId": {
+      "description": "User ID of the teammate",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "Name": {
+      "description": "Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "LastActivity": {
+      "description": "Last activity",
+      "type": "datetime",
+      "nullable": true,
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "AppId": {
+      "description": "Access level is for this App",
+      "type": "string",
+      "example": "500123"
+    },
+    "InvitationStatus": {
+      "description": "Invitation status",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Expired"
+      ],
+      "type": "string",
+      "example": "Pending"
+    },
+    "Email": {
+      "description": "Email address",
+      "type": "string",
+      "example": "owner@example.com"
+    },
+    "AppAccessLevel": {
+      "description": "App access level",
+      "enum": [
+        "None",
+        "Owner",
+        "StoreOwner",
+        "PropertyOwner",
+        "ManagedOwner",
+        "Integrator",
+        "PropertyManager",
+        "StoreManager",
+        "StoreStaff",
+        "StoreReadOnlyAccess",
+        "FinanceManger",
+        "Onboarding",
+        "Support"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "HasAccessToAllStores": {
+      "description": "The user has access to all stores for the app (including new stores that added later)",
+      "type": "boolean",
+      "example": true
+    },
+    "StoreIds": {
+      "description": "Store IDs the user has access to (if HasAccessToAllStores is false)",
+      "type": "array",
+      "items": {
+        "type": "int32"
+      },
+      "example": [
+        1
+      ]
+    },
+    "PropertyIds": {
+      "description": "Property Ids the user has access to (if HasAccessToAllStores is false)",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "string"
+      ]
+    }
+  }
+}

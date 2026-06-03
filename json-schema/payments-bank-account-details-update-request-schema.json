@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/payments-bank-account-details-update-request-schema.json",
+  "title": "BankAccountDetailsUpdateRequest",
+  "description": "Represents a request to update bank account information details",
+  "type": "object",
+  "properties": {
+    "BankAddress": {
+      "description": "Address of the bank account",
+      "type": "string",
+      "example": "string"
+    },
+    "AccountHolderAddress": {
+      "description": "Address of the payee",
+      "type": "string",
+      "example": "string"
+    },
+    "VatNumber": {
+      "description": "Account Holders Vat Number",
+      "type": "string",
+      "example": "string"
+    },
+    "StoreIds": {
+      "description": "List of stores to attach to Account",
+      "type": "array",
+      "items": {
+        "format": "int32",
+        "type": "integer"
+      },
+      "example": [
+        1
+      ]
+    },
+    "BankName": {
+      "description": "Name of Bank",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "AccountName": {
+      "description": "Name of this account",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Iban": {
+      "description": "IBAN of this account",
+      "type": "string",
+      "example": "string"
+    },
+    "Swift": {
+      "description": "SWIFT of this bank account",
+      "type": "string",
+      "example": "string"
+    },
+    "NationalClearingCode": {
+      "description": "National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)",
+      "type": "string",
+      "example": "string"
+    },
+    "PopulatedAccountFields": {
+      "description": "A list of one or more populated account fields (field key-value pairs).\r\nIf this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountFieldKeyValuePair"
+      },
+      "example": []
+    },
+    "RejectionReason": {
+      "description": "Reason for Rejection",
+      "type": "string",
+      "example": "string"
+    },
+    "BusinessType": {
+      "description": "Business Type",
+      "enum": [
+        "Individual",
+        "Company",
+        "NonProfit",
+        "GovernmentEntity"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Individual"
+    }
+  }
+}

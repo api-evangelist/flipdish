@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/payments-payout-detail-structure.json",
+  "name": "PayoutDetail",
+  "description": "Holds the information for a whitelabel payout with details broken down by Store",
+  "type": "object",
+  "properties": {
+    "PayoutId": {
+      "description": "The id of the payout.",
+      "type": "int32",
+      "example": 500123
+    },
+    "BankAccountId": {
+      "description": "Bank account identifier",
+      "type": "int32",
+      "example": 500123
+    },
+    "AccountName": {
+      "description": "Account name of the payout destination",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "PayoutStatus": {
+      "description": "Status of the payout",
+      "enum": [
+        "Pending",
+        "InTransit",
+        "Paid",
+        "Failed",
+        "Cancelled"
+      ],
+      "type": "string",
+      "example": "Pending"
+    },
+    "CreatedDate": {
+      "description": "Date payout was created",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "PeriodStartTime": {
+      "description": "This payout includes operations after at this date (inclusive)",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "PeriodEndTime": {
+      "description": "This payout includes operations before at this date (exclusive)",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "DestinationBank": {
+      "description": "Destination bank name",
+      "type": "string",
+      "example": "string"
+    },
+    "DestinationAccount": {
+      "description": "Last 4 digits of the destination bank IBAN",
+      "type": "string",
+      "example": "string"
+    },
+    "PayoutType": {
+      "description": "Type of payout source",
+      "enum": [
+        "Internal",
+        "Stripe"
+      ],
+      "type": "string",
+      "example": "Internal"
+    },
+    "Currency": {
+      "description": "Payout currency",
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CAD",
+        "AUD",
+        "DJF",
+        "ZAR",
+        "ETB",
+        "AED",
+        "BHD",
+        "DZD",
+        "EGP",
+        "IQD",
+        "JOD",
+        "KWD",
+        "LBP",
+        "LYD",
+        "MAD",
+        "OMR",
+        "QAR",
+        "SAR",
+        "SYP",
+        "TND",
+        "YER",
+        "CLP",
+        "INR",
+        "AZN",
+        "RUB",
+        "BYN",
+        "BGN",
+        "NGN",
+        "BDT",
+        "CNY",
+        "BAM",
+        "CZK",
+        "DKK",
+        "CHF",
+        "MVR",
+        "BTN",
+        "XCD",
+        "BZD",
+        "HKD",
+        "IDR",
+        "JMD",
+        "MYR",
+        "NZD",
+        "PHP",
+        "SGD",
+        "TTD",
+        "XDR",
+        "ARS",
+        "BOB",
+        "COP",
+        "CRC",
+        "CUP",
+        "DOP",
+        "GTQ",
+        "HNL",
+        "MXN",
+        "NIO",
+        "PAB",
+        "PEN",
+        "PYG",
+        "UYU",
+        "VEF",
+        "IRR",
+        "XOF",
+        "CDF",
+        "XAF",
+        "HTG",
+        "ILS",
+        "HRK",
+        "HUF",
+        "AMD",
+        "ISK",
+        "JPY",
+        "GEL",
+        "KZT",
+        "KHR",
+        "KRW",
+        "KGS",
+        "LAK",
+        "MKD",
+        "MNT",
+        "BND",
+        "MMK",
+        "NOK",
+        "NPR",
+        "PKR",
+        "PLN",
+        "AFN",
+        "BRL",
+        "MDL",
+        "RON",
+        "RWF",
+        "SEK",
+        "LKR",
+        "SOS",
+        "ALL",
+        "RSD",
+        "KES",
+        "TJS",
+        "THB",
+        "ERN",
+        "TMT",
+        "BWP",
+        "TRY",
+        "UAH",
+        "UZS",
+        "VND",
+        "MOP",
+        "TWD",
+        "BMD"
+      ],
+      "type": "string",
+      "example": "EUR"
+    },
+    "PayoutStores": {
+      "description": "Payout information broken down by Store",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PayoutStore"
+      },
+      "example": []
+    },
+    "Amount": {
+      "description": "Payout amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "CutoffDate": {
+      "description": "Payouts before this date do not have a details breakdown",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    }
+  }
+}

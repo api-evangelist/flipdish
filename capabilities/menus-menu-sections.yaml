@@ -1,0 +1,625 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Menus — MenuSections"
+  description: >-
+    MenuSections operations on the Flipdish Open API v1.0 (11 operations).
+    Lead operation: Flipdish Get Menu Sections. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Menu Sections
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "menus-menu-sections"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Menus — MenuSections business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "menus-menu-id-sections"
+          path: "/api/v1.0/menus/{menuId}/sections"
+          operations:
+            - name: "GetMenuSections"
+              method: GET
+              description: "Flipdish Get Menu Sections"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections"
+          path: "/api/v1.0/menus/{menuId}/sections"
+          operations:
+            - name: "CreateMenuSection"
+              method: POST
+              description: "Flipdish Create Menu Section"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}"
+          operations:
+            - name: "GetMenuSectionById"
+              method: GET
+              description: "Flipdish Get Menu Section by Id"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}"
+          operations:
+            - name: "UpdateMenuSection"
+              method: POST
+              description: "Flipdish Update Menu Section"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+                - name: "undoAfter"
+                  in: query
+                  type: number
+                  required: false
+                  description: "An optional time period, in hours, after which the hide-section operation will be undone."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}"
+          operations:
+            - name: "DeleteMenuSection"
+              method: DELETE
+              description: "Flipdish Delete Menu Section"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id-clone"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}/clone"
+          operations:
+            - name: "CloneMenuSection"
+              method: POST
+              description: "Flipdish Clone Menu Section"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id-image"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}/image"
+          operations:
+            - name: "UploadMenuSectionImage"
+              method: POST
+              description: "Flipdish Upload Menu Section Image"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id-image"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}/image"
+          operations:
+            - name: "DeleteMenuSectionImage"
+              method: DELETE
+              description: "Flipdish Delete Menu Section Image"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id-availability"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}/availability"
+          operations:
+            - name: "CreateMenuSectionAvailability"
+              method: POST
+              description: "Flipdish Create Menu Section Availability"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id-sectionitemdisplayorders"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitemdisplayorders"
+          operations:
+            - name: "MenuSections_SetItemDisplayOrders"
+              method: POST
+              description: "Flipdish Menu Sections_Set Item Display Orders"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "menus-menu-id-sections-menu-section-id-availability-times-day-of-week"
+          path: "/api/v1.0/menus/{menuId}/sections/{menuSectionId}/availability/times/{dayOfWeek}"
+          operations:
+            - name: "CreateMenuAvailabilityForDay"
+              method: POST
+              description: "Flipdish Create Menu Availability for Day"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "menuSectionId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu section identifier"
+                - name: "dayOfWeek"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Day of the  week"
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "menus-menu-sections-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Menus — MenuSections."
+      resources:
+        - path: "/v1/menus/{menu-id}/sections"
+          name: "menus-menu-id-sections"
+          description: "REST surface for GetMenuSections."
+          operations:
+            - method: GET
+              name: "GetMenuSections"
+              description: "Flipdish Get Menu Sections"
+              call: "menus-menu-sections.GetMenuSections"
+              with:
+                "menuId": "rest.menuId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections"
+          name: "menus-menu-id-sections"
+          description: "REST surface for CreateMenuSection."
+          operations:
+            - method: POST
+              name: "CreateMenuSection"
+              description: "Flipdish Create Menu Section"
+              call: "menus-menu-sections.CreateMenuSection"
+              with:
+                "menuId": "rest.menuId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}"
+          name: "menus-menu-id-sections-menu-section-id"
+          description: "REST surface for GetMenuSectionById."
+          operations:
+            - method: GET
+              name: "GetMenuSectionById"
+              description: "Flipdish Get Menu Section by Id"
+              call: "menus-menu-sections.GetMenuSectionById"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}"
+          name: "menus-menu-id-sections-menu-section-id"
+          description: "REST surface for UpdateMenuSection."
+          operations:
+            - method: POST
+              name: "UpdateMenuSection"
+              description: "Flipdish Update Menu Section"
+              call: "menus-menu-sections.UpdateMenuSection"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+                "undoAfter": "rest.undoAfter"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}"
+          name: "menus-menu-id-sections-menu-section-id"
+          description: "REST surface for DeleteMenuSection."
+          operations:
+            - method: DELETE
+              name: "DeleteMenuSection"
+              description: "Flipdish Delete Menu Section"
+              call: "menus-menu-sections.DeleteMenuSection"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}/clone"
+          name: "menus-menu-id-sections-menu-section-id-clone"
+          description: "REST surface for CloneMenuSection."
+          operations:
+            - method: POST
+              name: "CloneMenuSection"
+              description: "Flipdish Clone Menu Section"
+              call: "menus-menu-sections.CloneMenuSection"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}/image"
+          name: "menus-menu-id-sections-menu-section-id-image"
+          description: "REST surface for UploadMenuSectionImage."
+          operations:
+            - method: POST
+              name: "UploadMenuSectionImage"
+              description: "Flipdish Upload Menu Section Image"
+              call: "menus-menu-sections.UploadMenuSectionImage"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}/image"
+          name: "menus-menu-id-sections-menu-section-id-image"
+          description: "REST surface for DeleteMenuSectionImage."
+          operations:
+            - method: DELETE
+              name: "DeleteMenuSectionImage"
+              description: "Flipdish Delete Menu Section Image"
+              call: "menus-menu-sections.DeleteMenuSectionImage"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}/availability"
+          name: "menus-menu-id-sections-menu-section-id-availability"
+          description: "REST surface for CreateMenuSectionAvailability."
+          operations:
+            - method: POST
+              name: "CreateMenuSectionAvailability"
+              description: "Flipdish Create Menu Section Availability"
+              call: "menus-menu-sections.CreateMenuSectionAvailability"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}/sectionitemdisplayorders"
+          name: "menus-menu-id-sections-menu-section-id-sectionitemdisplayorders"
+          description: "REST surface for MenuSections_SetItemDisplayOrders."
+          operations:
+            - method: POST
+              name: "MenuSections_SetItemDisplayOrders"
+              description: "Flipdish Menu Sections_Set Item Display Orders"
+              call: "menus-menu-sections.MenuSections_SetItemDisplayOrders"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/menus/{menu-id}/sections/{menu-section-id}/availability/times/{day-of-week}"
+          name: "menus-menu-id-sections-menu-section-id-availability-times-day-of-week"
+          description: "REST surface for CreateMenuAvailabilityForDay."
+          operations:
+            - method: POST
+              name: "CreateMenuAvailabilityForDay"
+              description: "Flipdish Create Menu Availability for Day"
+              call: "menus-menu-sections.CreateMenuAvailabilityForDay"
+              with:
+                "menuId": "rest.menuId"
+                "menuSectionId": "rest.menuSectionId"
+                "dayOfWeek": "rest.dayOfWeek"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "menus-menu-sections-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Menus — MenuSections."
+      tools:
+        - name: "get-menu-sections"
+          description: "Flipdish Get Menu Sections"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "menus-menu-sections.GetMenuSections"
+          with:
+            "menuId": "tools.menuId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-menu-section"
+          description: "Flipdish Create Menu Section"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.CreateMenuSection"
+          with:
+            "menuId": "tools.menuId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-menu-section-id"
+          description: "Flipdish Get Menu Section by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "menus-menu-sections.GetMenuSectionById"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-menu-section"
+          description: "Flipdish Update Menu Section"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.UpdateMenuSection"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+            "undoAfter": "tools.undoAfter"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-menu-section"
+          description: "Flipdish Delete Menu Section"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "menus-menu-sections.DeleteMenuSection"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "clone-menu-section"
+          description: "Flipdish Clone Menu Section"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.CloneMenuSection"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "upload-menu-section-image"
+          description: "Flipdish Upload Menu Section Image"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.UploadMenuSectionImage"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-menu-section-image"
+          description: "Flipdish Delete Menu Section Image"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "menus-menu-sections.DeleteMenuSectionImage"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-menu-section-availability"
+          description: "Flipdish Create Menu Section Availability"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.CreateMenuSectionAvailability"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "menu-sections_set-item-display-orders"
+          description: "Flipdish Menu Sections_Set Item Display Orders"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.MenuSections_SetItemDisplayOrders"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-menu-availability-day"
+          description: "Flipdish Create Menu Availability for Day"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menu-sections.CreateMenuAvailabilityForDay"
+          with:
+            "menuId": "tools.menuId"
+            "menuSectionId": "tools.menuSectionId"
+            "dayOfWeek": "tools.dayOfWeek"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

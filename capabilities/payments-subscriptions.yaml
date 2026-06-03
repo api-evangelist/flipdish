@@ -1,0 +1,205 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Payments — Subscriptions"
+  description: >-
+    Subscriptions operations on the Flipdish Open API v1.0 (3 operations).
+    Lead operation: Flipdish Get Subscription by Id. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Subscriptions
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "payments-subscriptions"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Payments — Subscriptions business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-subscriptions-subscription-id"
+          path: "/api/v1.0/{appId}/subscriptions/{subscriptionId}"
+          operations:
+            - name: "GetSubscriptionById"
+              method: GET
+              description: "Flipdish Get Subscription by Id"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "subscriptionId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The subscription id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-subscriptions-has-payment-method"
+          path: "/api/v1.0/{appId}/subscriptions/hasPaymentMethod"
+          operations:
+            - name: "HasCustomerGotPaymentMethodOnFile"
+              method: GET
+              description: "Flipdish Has Customer Got Payment Method on File"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "email"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The email query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-subscriptions"
+          path: "/api/v1.0/{appId}/subscriptions"
+          operations:
+            - name: "GetSubscriptionsForApp"
+              method: GET
+              description: "Flipdish Get Subscriptions for App"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "excludeNotOwnedSubscriptions"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The exclude not owned subscriptions query parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+                - name: "excludeCancelledSubscriptions"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The exclude cancelled subscriptions query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "payments-subscriptions-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Payments — Subscriptions."
+      resources:
+        - path: "/v1/{app-id}/subscriptions/{subscription-id}"
+          name: "app-id-subscriptions-subscription-id"
+          description: "REST surface for GetSubscriptionById."
+          operations:
+            - method: GET
+              name: "GetSubscriptionById"
+              description: "Flipdish Get Subscription by Id"
+              call: "payments-subscriptions.GetSubscriptionById"
+              with:
+                "appId": "rest.appId"
+                "subscriptionId": "rest.subscriptionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/subscriptions/has-payment-method"
+          name: "app-id-subscriptions-has-payment-method"
+          description: "REST surface for HasCustomerGotPaymentMethodOnFile."
+          operations:
+            - method: GET
+              name: "HasCustomerGotPaymentMethodOnFile"
+              description: "Flipdish Has Customer Got Payment Method on File"
+              call: "payments-subscriptions.HasCustomerGotPaymentMethodOnFile"
+              with:
+                "appId": "rest.appId"
+                "email": "rest.email"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/subscriptions"
+          name: "app-id-subscriptions"
+          description: "REST surface for GetSubscriptionsForApp."
+          operations:
+            - method: GET
+              name: "GetSubscriptionsForApp"
+              description: "Flipdish Get Subscriptions for App"
+              call: "payments-subscriptions.GetSubscriptionsForApp"
+              with:
+                "appId": "rest.appId"
+                "excludeNotOwnedSubscriptions": "rest.excludeNotOwnedSubscriptions"
+                "storeId": "rest.storeId"
+                "excludeCancelledSubscriptions": "rest.excludeCancelledSubscriptions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "payments-subscriptions-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Payments — Subscriptions."
+      tools:
+        - name: "get-subscription-id"
+          description: "Flipdish Get Subscription by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-subscriptions.GetSubscriptionById"
+          with:
+            "appId": "tools.appId"
+            "subscriptionId": "tools.subscriptionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "has-customer-got-payment-method"
+          description: "Flipdish Has Customer Got Payment Method on File"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-subscriptions.HasCustomerGotPaymentMethodOnFile"
+          with:
+            "appId": "tools.appId"
+            "email": "tools.email"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-subscriptions-app"
+          description: "Flipdish Get Subscriptions for App"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-subscriptions.GetSubscriptionsForApp"
+          with:
+            "appId": "tools.appId"
+            "excludeNotOwnedSubscriptions": "tools.excludeNotOwnedSubscriptions"
+            "storeId": "tools.storeId"
+            "excludeCancelledSubscriptions": "tools.excludeCancelledSubscriptions"
+          outputParameters:
+            - type: object
+              mapping: "$."

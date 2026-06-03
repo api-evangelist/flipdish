@@ -1,0 +1,100 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — LookerSingleSignOn"
+  description: >-
+    LookerSingleSignOn operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Get SSO Endpoint. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Looker Single Sign On
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-looker-single-sign-on"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — LookerSingleSignOn business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-looker-sso"
+          path: "/api/v1.0/{appId}/looker/sso"
+          operations:
+            - name: "GetSSOEndpoint"
+              method: GET
+              description: "Flipdish Get SSO Endpoint"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "embedPath"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The embed path query parameter."
+                - name: "filters"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The filters query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-looker-single-sign-on-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — LookerSingleSignOn."
+      resources:
+        - path: "/v1/{app-id}/looker/sso"
+          name: "app-id-looker-sso"
+          description: "REST surface for GetSSOEndpoint."
+          operations:
+            - method: GET
+              name: "GetSSOEndpoint"
+              description: "Flipdish Get SSO Endpoint"
+              call: "platform-looker-single-sign-on.GetSSOEndpoint"
+              with:
+                "appId": "rest.appId"
+                "embedPath": "rest.embedPath"
+                "filters": "rest.filters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-looker-single-sign-on-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — LookerSingleSignOn."
+      tools:
+        - name: "get-sso-endpoint"
+          description: "Flipdish Get SSO Endpoint"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-looker-single-sign-on.GetSSOEndpoint"
+          with:
+            "appId": "tools.appId"
+            "embedPath": "tools.embedPath"
+            "filters": "tools.filters"
+          outputParameters:
+            - type: object
+              mapping: "$."

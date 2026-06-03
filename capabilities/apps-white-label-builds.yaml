@@ -1,0 +1,314 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Apps — WhiteLabelBuilds"
+  description: >-
+    WhiteLabelBuilds operations on the Flipdish Open API v1.0 (5 operations).
+    Lead operation: Flipdish Health Check. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - White Label Builds
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "apps-white-label-builds"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Apps — WhiteLabelBuilds business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "whitelabelbuilds-health"
+          path: "/api/v1.0/whitelabelbuilds/health"
+          operations:
+            - name: "HealthCheck"
+              method: GET
+              description: "Flipdish Health Check"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "whitelabelbuilds-app-id-android"
+          path: "/api/v1.0/whitelabelbuilds/{appId}/android"
+          operations:
+            - name: "SubmitAndroidBuild"
+              method: POST
+              description: "Flipdish Submit Android Build"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "branch"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The branch query parameter."
+                - name: "lane"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The lane query parameter."
+                - name: "buildType"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The build type query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "whitelabelbuilds-ios-multiple"
+          path: "/api/v1.0/whitelabelbuilds/ios/multiple"
+          operations:
+            - name: "SubmitIosApps"
+              method: POST
+              description: "Flipdish Submit Ios Apps"
+              inputParameters:
+                - name: "whiteLabelIds"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The white label ids query parameter."
+                - name: "branch"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The branch query parameter."
+                - name: "buildType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The build type query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "whitelabelbuilds-app-id-ios"
+          path: "/api/v1.0/whitelabelbuilds/{appId}/ios"
+          operations:
+            - name: "SubmitIosBuild"
+              method: POST
+              description: "Flipdish Submit Ios Build"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "buildType"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The build type query parameter."
+                - name: "branch"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The branch query parameter."
+                - name: "submitForReview"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The submit for review query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "whitelabelbuilds-android-multiple"
+          path: "/api/v1.0/whitelabelbuilds/android/multiple"
+          operations:
+            - name: "SubmitAndroidApps"
+              method: POST
+              description: "Flipdish Submit Android Apps"
+              inputParameters:
+                - name: "whiteLabelIds"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The white label ids query parameter."
+                - name: "branch"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The branch query parameter."
+                - name: "buildType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The build type query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "apps-white-label-builds-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Apps — WhiteLabelBuilds."
+      resources:
+        - path: "/v1/whitelabelbuilds/health"
+          name: "whitelabelbuilds-health"
+          description: "REST surface for HealthCheck."
+          operations:
+            - method: GET
+              name: "HealthCheck"
+              description: "Flipdish Health Check"
+              call: "apps-white-label-builds.HealthCheck"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/whitelabelbuilds/{app-id}/android"
+          name: "whitelabelbuilds-app-id-android"
+          description: "REST surface for SubmitAndroidBuild."
+          operations:
+            - method: POST
+              name: "SubmitAndroidBuild"
+              description: "Flipdish Submit Android Build"
+              call: "apps-white-label-builds.SubmitAndroidBuild"
+              with:
+                "appId": "rest.appId"
+                "branch": "rest.branch"
+                "lane": "rest.lane"
+                "buildType": "rest.buildType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/whitelabelbuilds/ios/multiple"
+          name: "whitelabelbuilds-ios-multiple"
+          description: "REST surface for SubmitIosApps."
+          operations:
+            - method: POST
+              name: "SubmitIosApps"
+              description: "Flipdish Submit Ios Apps"
+              call: "apps-white-label-builds.SubmitIosApps"
+              with:
+                "whiteLabelIds": "rest.whiteLabelIds"
+                "branch": "rest.branch"
+                "buildType": "rest.buildType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/whitelabelbuilds/{app-id}/ios"
+          name: "whitelabelbuilds-app-id-ios"
+          description: "REST surface for SubmitIosBuild."
+          operations:
+            - method: POST
+              name: "SubmitIosBuild"
+              description: "Flipdish Submit Ios Build"
+              call: "apps-white-label-builds.SubmitIosBuild"
+              with:
+                "appId": "rest.appId"
+                "buildType": "rest.buildType"
+                "branch": "rest.branch"
+                "submitForReview": "rest.submitForReview"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/whitelabelbuilds/android/multiple"
+          name: "whitelabelbuilds-android-multiple"
+          description: "REST surface for SubmitAndroidApps."
+          operations:
+            - method: POST
+              name: "SubmitAndroidApps"
+              description: "Flipdish Submit Android Apps"
+              call: "apps-white-label-builds.SubmitAndroidApps"
+              with:
+                "whiteLabelIds": "rest.whiteLabelIds"
+                "branch": "rest.branch"
+                "buildType": "rest.buildType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "apps-white-label-builds-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Apps — WhiteLabelBuilds."
+      tools:
+        - name: "health-check"
+          description: "Flipdish Health Check"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-white-label-builds.HealthCheck"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "submit-android-build"
+          description: "Flipdish Submit Android Build"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-white-label-builds.SubmitAndroidBuild"
+          with:
+            "appId": "tools.appId"
+            "branch": "tools.branch"
+            "lane": "tools.lane"
+            "buildType": "tools.buildType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "submit-ios-apps"
+          description: "Flipdish Submit Ios Apps"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-white-label-builds.SubmitIosApps"
+          with:
+            "whiteLabelIds": "tools.whiteLabelIds"
+            "branch": "tools.branch"
+            "buildType": "tools.buildType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "submit-ios-build"
+          description: "Flipdish Submit Ios Build"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-white-label-builds.SubmitIosBuild"
+          with:
+            "appId": "tools.appId"
+            "buildType": "tools.buildType"
+            "branch": "tools.branch"
+            "submitForReview": "tools.submitForReview"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "submit-android-apps"
+          description: "Flipdish Submit Android Apps"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-white-label-builds.SubmitAndroidApps"
+          with:
+            "whiteLabelIds": "tools.whiteLabelIds"
+            "branch": "tools.branch"
+            "buildType": "tools.buildType"
+          outputParameters:
+            - type: object
+              mapping: "$."

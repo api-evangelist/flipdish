@@ -1,0 +1,328 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/orders-order-summary-structure.json",
+  "name": "OrderSummary",
+  "description": "Order summary",
+  "type": "object",
+  "properties": {
+    "OrderId": {
+      "description": "Order identifier",
+      "type": "int32",
+      "example": 500123
+    },
+    "DeliveryType": {
+      "description": "Delivery type",
+      "enum": [
+        "Delivery",
+        "Pickup"
+      ],
+      "type": "string",
+      "example": "Delivery"
+    },
+    "PickupLocationType": {
+      "description": "Pickup location type",
+      "enum": [
+        "TakeOut",
+        "TableService",
+        "DineIn"
+      ],
+      "type": "string",
+      "example": "TakeOut"
+    },
+    "TableServiceCatagory": {
+      "description": "Table service category",
+      "enum": [
+        "Generic",
+        "Villa",
+        "House",
+        "Room",
+        "Area",
+        "Table",
+        "ParkingBay",
+        "Gate",
+        "DriveThrough",
+        "Team"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Generic"
+    },
+    "OrderState": {
+      "description": "Order state",
+      "enum": [
+        "Created",
+        "PlacedCanBeCancelled",
+        "ReadyToProcess",
+        "AcceptedByRestaurant",
+        "Dispatched",
+        "Delivered",
+        "Cancelled",
+        "ManualReview",
+        "RejectedByStore",
+        "RejectedByFlipdish",
+        "RejectedAutomatically",
+        "RejectedAfterBeingAccepted",
+        "AcceptedAndRefunded",
+        "PendingPayment"
+      ],
+      "type": "string",
+      "example": "Created"
+    },
+    "RequestedForTime": {
+      "description": "Order requested for",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "StoreName": {
+      "description": "Name of the store",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "StoreIanaTimeZone": {
+      "description": "Store IANA time zone",
+      "type": "string",
+      "example": "string"
+    },
+    "CustomerName": {
+      "description": "Name of the customer",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "CustomerPhoneNumber": {
+      "description": "Phone number of customer",
+      "type": "string",
+      "example": "+353000000000"
+    },
+    "Amount": {
+      "description": "This is the sum of the OrderItemsAmount, DeliveryAmount, TipAmount and Voucher.Amount (which is usually negative) and OnlineOrderingFee\r\nIt does include the OnlineOrderingFee",
+      "type": "double",
+      "example": 12.5
+    },
+    "RefundedAmount": {
+      "description": "Refunded amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "PaymentAccountType": {
+      "description": "Payment Account",
+      "enum": [
+        "Card",
+        "Cash",
+        "Ideal",
+        "Bancontact",
+        "Giropay",
+        "Eps",
+        "Emv",
+        "PayPal",
+        "PayGreen",
+        "GoogleWalletToken"
+      ],
+      "type": "string",
+      "example": "Card"
+    },
+    "PaymentStatus": {
+      "description": "Status of the payment",
+      "enum": [
+        "Paid",
+        "Unpaid",
+        "Refunded",
+        "PartiallyRefunded",
+        "Disputed"
+      ],
+      "type": "string",
+      "example": "Paid"
+    },
+    "Currency": {
+      "description": "Currency of payment",
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CAD",
+        "AUD",
+        "DJF",
+        "ZAR",
+        "ETB",
+        "AED",
+        "BHD",
+        "DZD",
+        "EGP",
+        "IQD",
+        "JOD",
+        "KWD",
+        "LBP",
+        "LYD",
+        "MAD",
+        "OMR",
+        "QAR",
+        "SAR",
+        "SYP",
+        "TND",
+        "YER",
+        "CLP",
+        "INR",
+        "AZN",
+        "RUB",
+        "BYN",
+        "BGN",
+        "NGN",
+        "BDT",
+        "CNY",
+        "BAM",
+        "CZK",
+        "DKK",
+        "CHF",
+        "MVR",
+        "BTN",
+        "XCD",
+        "BZD",
+        "HKD",
+        "IDR",
+        "JMD",
+        "MYR",
+        "NZD",
+        "PHP",
+        "SGD",
+        "TTD",
+        "XDR",
+        "ARS",
+        "BOB",
+        "COP",
+        "CRC",
+        "CUP",
+        "DOP",
+        "GTQ",
+        "HNL",
+        "MXN",
+        "NIO",
+        "PAB",
+        "PEN",
+        "PYG",
+        "UYU",
+        "VEF",
+        "IRR",
+        "XOF",
+        "CDF",
+        "XAF",
+        "HTG",
+        "ILS",
+        "HRK",
+        "HUF",
+        "AMD",
+        "ISK",
+        "JPY",
+        "GEL",
+        "KZT",
+        "KHR",
+        "KRW",
+        "KGS",
+        "LAK",
+        "MKD",
+        "MNT",
+        "BND",
+        "MMK",
+        "NOK",
+        "NPR",
+        "PKR",
+        "PLN",
+        "AFN",
+        "BRL",
+        "MDL",
+        "RON",
+        "RWF",
+        "SEK",
+        "LKR",
+        "SOS",
+        "ALL",
+        "RSD",
+        "KES",
+        "TJS",
+        "THB",
+        "ERN",
+        "TMT",
+        "BWP",
+        "TRY",
+        "UAH",
+        "UZS",
+        "VND",
+        "MOP",
+        "TWD",
+        "BMD"
+      ],
+      "type": "string",
+      "example": "EUR"
+    },
+    "AppType": {
+      "description": "Type of app end user is on",
+      "enum": [
+        "Unknown",
+        "Ios",
+        "Android",
+        "Web",
+        "Kiosk",
+        "Pos",
+        "TelephoneCall",
+        "Sms",
+        "PwaAndroid",
+        "PwaIos",
+        "Google"
+      ],
+      "type": "string",
+      "example": "Unknown"
+    },
+    "LocalOrderId": {
+      "description": "Local order Id. This is used for displaying a \"shorter\" order ID for customers (eg. Kiosk orders)",
+      "type": "string",
+      "example": "500123"
+    },
+    "DropOffLocationId": {
+      "description": "id of the collection/drop off location",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "DropOffLocation": {
+      "description": "Represents table service drop off location",
+      "type": "string",
+      "example": "string"
+    },
+    "AcceptedFor": {
+      "description": "Time store has accepted the order for",
+      "type": "datetime",
+      "nullable": true,
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "Channel": {
+      "$ref": "#/components/schemas/Channel"
+    },
+    "InFraudZone": {
+      "description": "Was order made within a fraud zone",
+      "type": "boolean",
+      "example": true
+    },
+    "UnusualHighValueOrder": {
+      "description": "Is order of unusually high value",
+      "type": "boolean",
+      "example": true
+    },
+    "ChannelOrderId": {
+      "description": "ChannelOrderId from external channel",
+      "type": "string",
+      "example": "500123"
+    },
+    "ChannelOrderDisplayId": {
+      "description": "ChannelOrderDisplayId from external channel",
+      "type": "string",
+      "example": "500123"
+    },
+    "OrderDropOffLocation": {
+      "$ref": "#/components/schemas/OrderDropOffLocation"
+    },
+    "OrderBatchInfo": {
+      "$ref": "#/components/schemas/OrderBatchSummary"
+    },
+    "DeliveryLocation": {
+      "$ref": "#/components/schemas/DeliveryLocation"
+    }
+  }
+}

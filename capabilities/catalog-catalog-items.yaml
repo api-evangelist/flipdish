@@ -1,0 +1,366 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Catalog — CatalogItems"
+  description: >-
+    CatalogItems operations on the Flipdish Open API v1.0 (6 operations).
+    Lead operation: Flipdish Get Catalog Item by Id. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Catalog Items
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "catalog-catalog-items"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Catalog — CatalogItems business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-catalog-items-catalog-item-id"
+          path: "/api/v1.0/{appId}/catalog/items/{catalogItemId}"
+          operations:
+            - name: "GetCatalogItemById"
+              method: GET
+              description: "Flipdish Get Catalog Item by Id"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "catalogItemId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-catalog-items-catalog-item-id"
+          path: "/api/v1.0/{appId}/catalog/items/{catalogItemId}"
+          operations:
+            - name: "UpdateCatalogItem"
+              method: POST
+              description: "Flipdish Update Catalog Item"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "catalogItemId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-catalog-items"
+          path: "/api/v1.0/{appId}/catalog/items"
+          operations:
+            - name: "GetItems"
+              method: GET
+              description: "Flipdish Get Items"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "itemTypes"
+                  in: query
+                  type: array
+                  required: true
+                  description: "The item types query parameter."
+                - name: "searchTerm"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The search term query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-catalog-items"
+          path: "/api/v1.0/{appId}/catalog/items"
+          operations:
+            - name: "CreateCatalogItem"
+              method: POST
+              description: "Flipdish Create Catalog Item"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-catalog-items-catalog-item-id-archive"
+          path: "/api/v1.0/{appId}/catalog/items/{catalogItemId}/archive"
+          operations:
+            - name: "ArchiveCatalogItem"
+              method: POST
+              description: "Flipdish Archive Catalog Item"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "catalogItemId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-catalog-items-catalog-item-id-duplicate"
+          path: "/api/v1.0/{appId}/catalog/items/{catalogItemId}/duplicate"
+          operations:
+            - name: "DuplicateCatalogItem"
+              method: POST
+              description: "Flipdish Duplicate Catalog Item"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "catalogItemId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "catalog-catalog-items-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Catalog — CatalogItems."
+      resources:
+        - path: "/v1/{app-id}/catalog/items/{catalog-item-id}"
+          name: "app-id-catalog-items-catalog-item-id"
+          description: "REST surface for GetCatalogItemById."
+          operations:
+            - method: GET
+              name: "GetCatalogItemById"
+              description: "Flipdish Get Catalog Item by Id"
+              call: "catalog-catalog-items.GetCatalogItemById"
+              with:
+                "appId": "rest.appId"
+                "catalogItemId": "rest.catalogItemId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/catalog/items/{catalog-item-id}"
+          name: "app-id-catalog-items-catalog-item-id"
+          description: "REST surface for UpdateCatalogItem."
+          operations:
+            - method: POST
+              name: "UpdateCatalogItem"
+              description: "Flipdish Update Catalog Item"
+              call: "catalog-catalog-items.UpdateCatalogItem"
+              with:
+                "appId": "rest.appId"
+                "catalogItemId": "rest.catalogItemId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/catalog/items"
+          name: "app-id-catalog-items"
+          description: "REST surface for GetItems."
+          operations:
+            - method: GET
+              name: "GetItems"
+              description: "Flipdish Get Items"
+              call: "catalog-catalog-items.GetItems"
+              with:
+                "appId": "rest.appId"
+                "itemTypes": "rest.itemTypes"
+                "searchTerm": "rest.searchTerm"
+                "page": "rest.page"
+                "limit": "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/catalog/items"
+          name: "app-id-catalog-items"
+          description: "REST surface for CreateCatalogItem."
+          operations:
+            - method: POST
+              name: "CreateCatalogItem"
+              description: "Flipdish Create Catalog Item"
+              call: "catalog-catalog-items.CreateCatalogItem"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/catalog/items/{catalog-item-id}/archive"
+          name: "app-id-catalog-items-catalog-item-id-archive"
+          description: "REST surface for ArchiveCatalogItem."
+          operations:
+            - method: POST
+              name: "ArchiveCatalogItem"
+              description: "Flipdish Archive Catalog Item"
+              call: "catalog-catalog-items.ArchiveCatalogItem"
+              with:
+                "appId": "rest.appId"
+                "catalogItemId": "rest.catalogItemId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/catalog/items/{catalog-item-id}/duplicate"
+          name: "app-id-catalog-items-catalog-item-id-duplicate"
+          description: "REST surface for DuplicateCatalogItem."
+          operations:
+            - method: POST
+              name: "DuplicateCatalogItem"
+              description: "Flipdish Duplicate Catalog Item"
+              call: "catalog-catalog-items.DuplicateCatalogItem"
+              with:
+                "appId": "rest.appId"
+                "catalogItemId": "rest.catalogItemId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "catalog-catalog-items-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Catalog — CatalogItems."
+      tools:
+        - name: "get-catalog-item-id"
+          description: "Flipdish Get Catalog Item by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "catalog-catalog-items.GetCatalogItemById"
+          with:
+            "appId": "tools.appId"
+            "catalogItemId": "tools.catalogItemId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-catalog-item"
+          description: "Flipdish Update Catalog Item"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "catalog-catalog-items.UpdateCatalogItem"
+          with:
+            "appId": "tools.appId"
+            "catalogItemId": "tools.catalogItemId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-items"
+          description: "Flipdish Get Items"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "catalog-catalog-items.GetItems"
+          with:
+            "appId": "tools.appId"
+            "itemTypes": "tools.itemTypes"
+            "searchTerm": "tools.searchTerm"
+            "page": "tools.page"
+            "limit": "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-catalog-item"
+          description: "Flipdish Create Catalog Item"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "catalog-catalog-items.CreateCatalogItem"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "archive-catalog-item"
+          description: "Flipdish Archive Catalog Item"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "catalog-catalog-items.ArchiveCatalogItem"
+          with:
+            "appId": "tools.appId"
+            "catalogItemId": "tools.catalogItemId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "duplicate-catalog-item"
+          description: "Flipdish Duplicate Catalog Item"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "catalog-catalog-items.DuplicateCatalogItem"
+          with:
+            "appId": "tools.appId"
+            "catalogItemId": "tools.catalogItemId"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,275 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Menus — MenusNutritionInfoV2"
+  description: >-
+    MenusNutritionInfoV2 operations on the Flipdish Open API v1.0 (4 operations).
+    Lead operation: Flipdish Get Menu Nutrition Info V2 by Menu Id. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Menus Nutrition Info V2
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "menus-menus-nutrition-info-v2"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Menus — MenusNutritionInfoV2 business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-menus-menu-id-nutritionv2"
+          path: "/api/v1.0/{appId}/menus/{menuId}/nutritionv2"
+          operations:
+            - name: "GetMenuNutritionInfoV2ByMenuId"
+              method: GET
+              description: "Flipdish Get Menu Nutrition Info V2 by Menu Id"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "languageId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The language id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-menus-nutritionv2-allergens"
+          path: "/api/v1.0/{appId}/menus/nutritionv2/allergens"
+          operations:
+            - name: "GetAllergensV2"
+              method: GET
+              description: "Flipdish Get Allergens V2"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "languageId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The language id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-menus-menu-id-menu-item-public-id-nutritionv2"
+          path: "/api/v1.0/{appId}/menus/{menuId}/menuItem/{publicId}/nutritionv2"
+          operations:
+            - name: "AddOrUpdateMenuItemNutritionInfoV2"
+              method: POST
+              description: "Flipdish Add or Update Menu Item Nutrition Info V2"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "publicId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Menu item's publicId"
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-menus-menu-id-menu-item-option-public-id-nutritionv2"
+          path: "/api/v1.0/{appId}/menus/{menuId}/menuItemOption/{publicId}/nutritionv2"
+          operations:
+            - name: "AddOrUpdateMenuItemOptionSetItemNutritionInfoV2"
+              method: POST
+              description: "Flipdish Add or Update Menu Item Option Set Item Nutrition Info V2"
+              inputParameters:
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Menu identifier"
+                - name: "publicId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Menu item option set item's publicId"
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "menus-menus-nutrition-info-v2-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Menus — MenusNutritionInfoV2."
+      resources:
+        - path: "/v1/{app-id}/menus/{menu-id}/nutritionv2"
+          name: "app-id-menus-menu-id-nutritionv2"
+          description: "REST surface for GetMenuNutritionInfoV2ByMenuId."
+          operations:
+            - method: GET
+              name: "GetMenuNutritionInfoV2ByMenuId"
+              description: "Flipdish Get Menu Nutrition Info V2 by Menu Id"
+              call: "menus-menus-nutrition-info-v2.GetMenuNutritionInfoV2ByMenuId"
+              with:
+                "appId": "rest.appId"
+                "menuId": "rest.menuId"
+                "languageId": "rest.languageId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/menus/nutritionv2/allergens"
+          name: "app-id-menus-nutritionv2-allergens"
+          description: "REST surface for GetAllergensV2."
+          operations:
+            - method: GET
+              name: "GetAllergensV2"
+              description: "Flipdish Get Allergens V2"
+              call: "menus-menus-nutrition-info-v2.GetAllergensV2"
+              with:
+                "appId": "rest.appId"
+                "languageId": "rest.languageId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/menus/{menu-id}/menu-item/{public-id}/nutritionv2"
+          name: "app-id-menus-menu-id-menu-item-public-id-nutritionv2"
+          description: "REST surface for AddOrUpdateMenuItemNutritionInfoV2."
+          operations:
+            - method: POST
+              name: "AddOrUpdateMenuItemNutritionInfoV2"
+              description: "Flipdish Add or Update Menu Item Nutrition Info V2"
+              call: "menus-menus-nutrition-info-v2.AddOrUpdateMenuItemNutritionInfoV2"
+              with:
+                "menuId": "rest.menuId"
+                "publicId": "rest.publicId"
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/menus/{menu-id}/menu-item-option/{public-id}/nutritionv2"
+          name: "app-id-menus-menu-id-menu-item-option-public-id-nutritionv2"
+          description: "REST surface for AddOrUpdateMenuItemOptionSetItemNutritionInfoV2."
+          operations:
+            - method: POST
+              name: "AddOrUpdateMenuItemOptionSetItemNutritionInfoV2"
+              description: "Flipdish Add or Update Menu Item Option Set Item Nutrition Info V2"
+              call: "menus-menus-nutrition-info-v2.AddOrUpdateMenuItemOptionSetItemNutritionInfoV2"
+              with:
+                "menuId": "rest.menuId"
+                "publicId": "rest.publicId"
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "menus-menus-nutrition-info-v2-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Menus — MenusNutritionInfoV2."
+      tools:
+        - name: "get-menu-nutrition-info-v2"
+          description: "Flipdish Get Menu Nutrition Info V2 by Menu Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "menus-menus-nutrition-info-v2.GetMenuNutritionInfoV2ByMenuId"
+          with:
+            "appId": "tools.appId"
+            "menuId": "tools.menuId"
+            "languageId": "tools.languageId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-allergens-v2"
+          description: "Flipdish Get Allergens V2"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "menus-menus-nutrition-info-v2.GetAllergensV2"
+          with:
+            "appId": "tools.appId"
+            "languageId": "tools.languageId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "add-update-menu-item-nutrition"
+          description: "Flipdish Add or Update Menu Item Nutrition Info V2"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menus-nutrition-info-v2.AddOrUpdateMenuItemNutritionInfoV2"
+          with:
+            "menuId": "tools.menuId"
+            "publicId": "tools.publicId"
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "add-update-menu-item-option"
+          description: "Flipdish Add or Update Menu Item Option Set Item Nutrition Info V2"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "menus-menus-nutrition-info-v2.AddOrUpdateMenuItemOptionSetItemNutritionInfoV2"
+          with:
+            "menuId": "tools.menuId"
+            "publicId": "tools.publicId"
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

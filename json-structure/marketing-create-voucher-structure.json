@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/marketing-create-voucher-structure.json",
+  "name": "CreateVoucher",
+  "description": "Create Voucher",
+  "type": "object",
+  "properties": {
+    "VoucherType": {
+      "description": "Voucher Type",
+      "enum": [
+        "PercentageDiscount",
+        "LumpDiscount",
+        "AddItem",
+        "CreditNote",
+        "FreeDelivery"
+      ],
+      "type": "string",
+      "example": "PercentageDiscount"
+    },
+    "Promotion": {
+      "$ref": "#/components/schemas/CreatePromotion"
+    },
+    "CreditNoteDetails": {
+      "$ref": "#/components/schemas/CreditNoteDetails"
+    },
+    "LumpDiscountDetails": {
+      "$ref": "#/components/schemas/LumpDiscountDetails"
+    },
+    "PercentDiscountDetails": {
+      "$ref": "#/components/schemas/PercentDiscountDetails"
+    },
+    "Code": {
+      "description": "Voucher Code",
+      "type": "string",
+      "example": "string"
+    },
+    "Description": {
+      "description": "Voucher Description (Visible on printout)",
+      "type": "string",
+      "example": "string"
+    },
+    "Stores": {
+      "description": "Stores that this voucher applies to",
+      "type": "array",
+      "items": {
+        "type": "int32"
+      },
+      "example": [
+        1
+      ]
+    },
+    "ValidOnOrdersOver": {
+      "description": "Valid on orders on or above",
+      "type": "double",
+      "example": 1.0
+    },
+    "TakesPriority": {
+      "description": "Takes priority",
+      "type": "boolean",
+      "example": true
+    },
+    "IsEnabled": {
+      "description": "Is voucher enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "IsAutomaticallyApplied": {
+      "description": "Is voucher automatically applied",
+      "type": "boolean",
+      "example": true
+    },
+    "IncludeDeliveryFee": {
+      "description": "Include delivery fees",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidForDeliveryOrders": {
+      "description": "Valid for delivery orders",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidForPickupOrders": {
+      "description": "Valid for pickup orders",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidForOrdersPayedOnline": {
+      "description": "Valid for orders payed online",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidForOrdersPayedByCash": {
+      "description": "Valid for orders payed in cash",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidForFirstOrderOnly": {
+      "description": "Valid only on the first order by the customer",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidOncePerCustomer": {
+      "description": "Valid once per customer",
+      "type": "boolean",
+      "example": true
+    },
+    "IsValidOnlyOnce": {
+      "description": "Valid only once, by any customer (once used cannot be used again by any other customer)",
+      "type": "boolean",
+      "example": true
+    },
+    "IsDiscoverable": {
+      "description": "Enables the voucher to be offered in the Voucher Discoverability feature",
+      "type": "boolean",
+      "example": true
+    },
+    "ForceDiscount": {
+      "description": "Force the discount to be applied which bypasses some menu restrictions",
+      "type": "boolean",
+      "example": true
+    },
+    "StartDate": {
+      "description": "Voucher Starts On (Time in UTC)",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "ExpiryDate": {
+      "description": "Voucher Expires On (Time in UTC)",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "ChannelRestrictions": {
+      "description": "Limit the channels this voucher can be used on",
+      "type": "array",
+      "items": {
+        "enum": [
+          "Ios",
+          "Android",
+          "Web",
+          "Kiosk",
+          "Pos",
+          "Google"
+        ],
+        "type": "string"
+      },
+      "example": [
+        "Ios"
+      ]
+    },
+    "ValidityPeriods": {
+      "description": "Periods in which the voucher is valid.\r\nAn empty list means the voucher is valid at all times.\r\nWhen updating the voucher, if this is set to null, the validity periods won't be updated.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ValidityPeriod"
+      },
+      "example": []
+    },
+    "VoucherSubType": {
+      "description": "Voucher Subtype",
+      "enum": [
+        "None",
+        "SignUp",
+        "Loyalty",
+        "Loyalty25",
+        "Retention",
+        "SecondaryRetention",
+        "Custom"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "CustomerId": {
+      "description": "Customer UserID",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "MaxRedemptions": {
+      "description": "Maximum number of times the voucher can be redeemed (used)",
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    }
+  }
+}

@@ -1,0 +1,709 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Devices — CardReaders"
+  description: >-
+    CardReaders operations on the Flipdish Open API v1.0 (13 operations).
+    Lead operation: Flipdish Get Stripe Connection Token. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Card Readers
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "devices-card-readers"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Devices — CardReaders business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-stripeterminal-connectiontoken"
+          path: "/api/v1.0/{appId}/stripeterminal/connectiontoken"
+          operations:
+            - name: "GetStripeConnectionToken"
+              method: GET
+              description: "Flipdish Get Stripe Connection Token"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payments-terminals-stripe-reader-id"
+          path: "/api/v1.0/{appId}/payments/terminals/stripe/{readerId}"
+          operations:
+            - name: "CardReaders_GetReader"
+              method: GET
+              description: "Flipdish Card Readers_Get Reader"
+              inputParameters:
+                - name: "readerId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The reader id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-cardreaders-kiosk-device-id-bluetooth-status"
+          path: "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/status"
+          operations:
+            - name: "GetBluetoothTerminalStatus"
+              method: GET
+              description: "Flipdish Get Bluetooth Terminal Status"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stripeterminal-location"
+          path: "/api/v1.0/{appId}/stripeterminal/location"
+          operations:
+            - name: "GenerateStripeTerminalLocation"
+              method: POST
+              description: "Flipdish Generate Stripe Terminal Location"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payments-terminals-stripe-register"
+          path: "/api/v1.0/{appId}/payments/terminals/stripe/register"
+          operations:
+            - name: "RegisterStripeTerminal"
+              method: POST
+              description: "Flipdish Register Stripe Terminal"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payments-terminals-stripe-reader-id-cancel-action"
+          path: "/api/v1.0/{appId}/payments/terminals/stripe/{readerId}/cancel_action"
+          operations:
+            - name: "CancelReaderAction"
+              method: POST
+              description: "Flipdish Cancel Reader Action"
+              inputParameters:
+                - name: "readerId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The reader id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payments-terminals-stripe-reader-id-process-payment-intent"
+          path: "/api/v1.0/{appId}/payments/terminals/stripe/{readerId}/processPaymentIntent"
+          operations:
+            - name: "InitiateReaderProcessPaymentIntent"
+              method: POST
+              description: "Flipdish Initiate Reader Process Payment Intent"
+              inputParameters:
+                - name: "readerId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The reader id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-pair"
+          path: "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/pair"
+          operations:
+            - name: "InitiateKioskBluetoothPairingMode"
+              method: POST
+              description: "Flipdish Initiate Kiosk Bluetooth Pairing Mode"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "terminalType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The terminal type path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-cancel-update"
+          path: "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/cancelUpdate"
+          operations:
+            - name: "CancelCurrentlyInitiatedBluetoothDeviceUpdate"
+              method: POST
+              description: "Flipdish Cancel Currently Initiated Bluetooth Device Update"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "terminalType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The terminal type path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-install-update"
+          path: "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/installUpdate"
+          operations:
+            - name: "InitiateKioskBluetoothUpdateInstall"
+              method: POST
+              description: "Flipdish Initiate Kiosk Bluetooth Update Install"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "terminalType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The terminal type path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-check-for-update"
+          path: "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/checkForUpdate"
+          operations:
+            - name: "InitiateBluetoothTerminalDeviceUpdateCheck"
+              method: POST
+              description: "Flipdish Initiate Bluetooth Terminal Device Update Check"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "terminalType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The terminal type path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payments-terminals-stripe-unregister"
+          path: "/api/v1.0/{appId}/payments/terminals/stripe/unregister"
+          operations:
+            - name: "UnRegisterTerminal"
+              method: DELETE
+              description: "Flipdish Un Register Terminal"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-cardreaders-kiosk-device-id-bluetooth-unpair"
+          path: "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/unpair"
+          operations:
+            - name: "UnpairCurrentlyPairedBluetoothDevice"
+              method: DELETE
+              description: "Flipdish Unpair Currently Paired Bluetooth Device"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "devices-card-readers-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Devices — CardReaders."
+      resources:
+        - path: "/v1/{app-id}/stripeterminal/connectiontoken"
+          name: "app-id-stripeterminal-connectiontoken"
+          description: "REST surface for GetStripeConnectionToken."
+          operations:
+            - method: GET
+              name: "GetStripeConnectionToken"
+              description: "Flipdish Get Stripe Connection Token"
+              call: "devices-card-readers.GetStripeConnectionToken"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payments/terminals/stripe/{reader-id}"
+          name: "app-id-payments-terminals-stripe-reader-id"
+          description: "REST surface for CardReaders_GetReader."
+          operations:
+            - method: GET
+              name: "CardReaders_GetReader"
+              description: "Flipdish Card Readers_Get Reader"
+              call: "devices-card-readers.CardReaders_GetReader"
+              with:
+                "readerId": "rest.readerId"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/cardreaders/kiosk/{device-id}/bluetooth/status"
+          name: "app-id-cardreaders-kiosk-device-id-bluetooth-status"
+          description: "REST surface for GetBluetoothTerminalStatus."
+          operations:
+            - method: GET
+              name: "GetBluetoothTerminalStatus"
+              description: "Flipdish Get Bluetooth Terminal Status"
+              call: "devices-card-readers.GetBluetoothTerminalStatus"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stripeterminal/location"
+          name: "app-id-stripeterminal-location"
+          description: "REST surface for GenerateStripeTerminalLocation."
+          operations:
+            - method: POST
+              name: "GenerateStripeTerminalLocation"
+              description: "Flipdish Generate Stripe Terminal Location"
+              call: "devices-card-readers.GenerateStripeTerminalLocation"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payments/terminals/stripe/register"
+          name: "app-id-payments-terminals-stripe-register"
+          description: "REST surface for RegisterStripeTerminal."
+          operations:
+            - method: POST
+              name: "RegisterStripeTerminal"
+              description: "Flipdish Register Stripe Terminal"
+              call: "devices-card-readers.RegisterStripeTerminal"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payments/terminals/stripe/{reader-id}/cancel-action"
+          name: "app-id-payments-terminals-stripe-reader-id-cancel-action"
+          description: "REST surface for CancelReaderAction."
+          operations:
+            - method: POST
+              name: "CancelReaderAction"
+              description: "Flipdish Cancel Reader Action"
+              call: "devices-card-readers.CancelReaderAction"
+              with:
+                "readerId": "rest.readerId"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payments/terminals/stripe/{reader-id}/process-payment-intent"
+          name: "app-id-payments-terminals-stripe-reader-id-process-payment-intent"
+          description: "REST surface for InitiateReaderProcessPaymentIntent."
+          operations:
+            - method: POST
+              name: "InitiateReaderProcessPaymentIntent"
+              description: "Flipdish Initiate Reader Process Payment Intent"
+              call: "devices-card-readers.InitiateReaderProcessPaymentIntent"
+              with:
+                "readerId": "rest.readerId"
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/cardreaders/kiosk/{device-id}/bluetooth/{terminal-type}/pair"
+          name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-pair"
+          description: "REST surface for InitiateKioskBluetoothPairingMode."
+          operations:
+            - method: POST
+              name: "InitiateKioskBluetoothPairingMode"
+              description: "Flipdish Initiate Kiosk Bluetooth Pairing Mode"
+              call: "devices-card-readers.InitiateKioskBluetoothPairingMode"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "terminalType": "rest.terminalType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/cardreaders/kiosk/{device-id}/bluetooth/{terminal-type}/cancel-update"
+          name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-cancel-update"
+          description: "REST surface for CancelCurrentlyInitiatedBluetoothDeviceUpdate."
+          operations:
+            - method: POST
+              name: "CancelCurrentlyInitiatedBluetoothDeviceUpdate"
+              description: "Flipdish Cancel Currently Initiated Bluetooth Device Update"
+              call: "devices-card-readers.CancelCurrentlyInitiatedBluetoothDeviceUpdate"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "terminalType": "rest.terminalType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/cardreaders/kiosk/{device-id}/bluetooth/{terminal-type}/install-update"
+          name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-install-update"
+          description: "REST surface for InitiateKioskBluetoothUpdateInstall."
+          operations:
+            - method: POST
+              name: "InitiateKioskBluetoothUpdateInstall"
+              description: "Flipdish Initiate Kiosk Bluetooth Update Install"
+              call: "devices-card-readers.InitiateKioskBluetoothUpdateInstall"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "terminalType": "rest.terminalType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/cardreaders/kiosk/{device-id}/bluetooth/{terminal-type}/check-for-update"
+          name: "app-id-cardreaders-kiosk-device-id-bluetooth-terminal-type-check-for-update"
+          description: "REST surface for InitiateBluetoothTerminalDeviceUpdateCheck."
+          operations:
+            - method: POST
+              name: "InitiateBluetoothTerminalDeviceUpdateCheck"
+              description: "Flipdish Initiate Bluetooth Terminal Device Update Check"
+              call: "devices-card-readers.InitiateBluetoothTerminalDeviceUpdateCheck"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "terminalType": "rest.terminalType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payments/terminals/stripe/unregister"
+          name: "app-id-payments-terminals-stripe-unregister"
+          description: "REST surface for UnRegisterTerminal."
+          operations:
+            - method: DELETE
+              name: "UnRegisterTerminal"
+              description: "Flipdish Un Register Terminal"
+              call: "devices-card-readers.UnRegisterTerminal"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/cardreaders/kiosk/{device-id}/bluetooth/unpair"
+          name: "app-id-cardreaders-kiosk-device-id-bluetooth-unpair"
+          description: "REST surface for UnpairCurrentlyPairedBluetoothDevice."
+          operations:
+            - method: DELETE
+              name: "UnpairCurrentlyPairedBluetoothDevice"
+              description: "Flipdish Unpair Currently Paired Bluetooth Device"
+              call: "devices-card-readers.UnpairCurrentlyPairedBluetoothDevice"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "devices-card-readers-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Devices — CardReaders."
+      tools:
+        - name: "get-stripe-connection-token"
+          description: "Flipdish Get Stripe Connection Token"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "devices-card-readers.GetStripeConnectionToken"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "card-readers_get-reader"
+          description: "Flipdish Card Readers_Get Reader"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "devices-card-readers.CardReaders_GetReader"
+          with:
+            "readerId": "tools.readerId"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-bluetooth-terminal-status"
+          description: "Flipdish Get Bluetooth Terminal Status"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "devices-card-readers.GetBluetoothTerminalStatus"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "generate-stripe-terminal-location"
+          description: "Flipdish Generate Stripe Terminal Location"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.GenerateStripeTerminalLocation"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "register-stripe-terminal"
+          description: "Flipdish Register Stripe Terminal"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.RegisterStripeTerminal"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "cancel-reader-action"
+          description: "Flipdish Cancel Reader Action"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.CancelReaderAction"
+          with:
+            "readerId": "tools.readerId"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "initiate-reader-process-payment-intent"
+          description: "Flipdish Initiate Reader Process Payment Intent"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.InitiateReaderProcessPaymentIntent"
+          with:
+            "readerId": "tools.readerId"
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "initiate-kiosk-bluetooth-pairing-mode"
+          description: "Flipdish Initiate Kiosk Bluetooth Pairing Mode"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.InitiateKioskBluetoothPairingMode"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "terminalType": "tools.terminalType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "cancel-currently-initiated-bluetooth-device"
+          description: "Flipdish Cancel Currently Initiated Bluetooth Device Update"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.CancelCurrentlyInitiatedBluetoothDeviceUpdate"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "terminalType": "tools.terminalType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "initiate-kiosk-bluetooth-update-install"
+          description: "Flipdish Initiate Kiosk Bluetooth Update Install"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.InitiateKioskBluetoothUpdateInstall"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "terminalType": "tools.terminalType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "initiate-bluetooth-terminal-device-update"
+          description: "Flipdish Initiate Bluetooth Terminal Device Update Check"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: false
+          call: "devices-card-readers.InitiateBluetoothTerminalDeviceUpdateCheck"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "terminalType": "tools.terminalType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "un-register-terminal"
+          description: "Flipdish Un Register Terminal"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "devices-card-readers.UnRegisterTerminal"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "unpair-currently-paired-bluetooth-device"
+          description: "Flipdish Unpair Currently Paired Bluetooth Device"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "devices-card-readers.UnpairCurrentlyPairedBluetoothDevice"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."

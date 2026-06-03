@@ -1,0 +1,86 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — LookerDashboard"
+  description: >-
+    LookerDashboard operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Looker Dashboard.Get All. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Looker Dashboard
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-looker-dashboard"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — LookerDashboard business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-looker-dashboards"
+          path: "/api/v1.0/{appId}/looker/dashboards"
+          operations:
+            - name: "LookerDashboard.GetAll"
+              method: GET
+              description: "Flipdish Looker Dashboard.Get All"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-looker-dashboard-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — LookerDashboard."
+      resources:
+        - path: "/v1/{app-id}/looker/dashboards"
+          name: "app-id-looker-dashboards"
+          description: "REST surface for LookerDashboard.GetAll."
+          operations:
+            - method: GET
+              name: "LookerDashboard.GetAll"
+              description: "Flipdish Looker Dashboard.Get All"
+              call: "platform-looker-dashboard.LookerDashboard.GetAll"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-looker-dashboard-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — LookerDashboard."
+      tools:
+        - name: "looker-dashboard.get-all"
+          description: "Flipdish Looker Dashboard.Get All"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-looker-dashboard.LookerDashboard.GetAll"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."

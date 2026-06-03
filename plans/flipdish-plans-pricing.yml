@@ -1,0 +1,114 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Flipdish
+providerId: flipdish
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Restaurant
+  - Online Ordering
+  - Point of Sale
+  - Branded Apps
+description: >-
+  Flipdish prices its platform as a hybrid subscription plus transaction-fee model aimed at
+  restaurants and takeaways. The public pricing page leads with a bundled POS + Online Ordering
+  subscription starting at EUR 99/month (billed annually) or EUR 129/month (billed monthly),
+  with up to a 29% discount for bundling. Transaction/payment fees and individual product tiers
+  are quoted on request ("contact sales"), and there is no separately metered developer/API
+  pricing tier — API access is included with a Flipdish account. Prices below preserve the figures
+  published on the pricing page; figures quoted only via sales are recorded as "contact sales".
+sources:
+  - https://www.flipdish.com/pricing
+  - https://developers.flipdish.com/docs/getting-started
+plans:
+  - id: flipdish-bundle
+    name: POS + Online Ordering Bundle
+    type: subscription
+    description: >-
+      Bundled subscription combining Flipdish POS and Online Ordering with a branded website,
+      integrated payments, centralized menu management, and consolidated reporting.
+    entries:
+      - label: Bundle subscription (annual billing)
+        name: bundle_subscription_annual
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'from EUR 99/month (billed annually)'
+        userMultiplied: false
+      - label: Bundle subscription (monthly billing)
+        name: bundle_subscription_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'EUR 129/month'
+        userMultiplied: false
+      - label: Payment / transaction fees
+        name: transaction_fees
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: Branded website
+      - name: Flipdish POS system
+      - name: Integrated payments
+      - name: Centralized menu management
+      - name: Consolidated reporting
+      - name: Customer support
+      - name: REST API and webhooks access
+  - id: flipdish-online-ordering
+    name: Online Ordering
+    type: subscription
+    description: >-
+      Standalone online ordering with branded websites and mobile apps. Pricing quoted via sales;
+      see the online ordering pricing page.
+    entries:
+      - label: Online ordering subscription
+        name: online_ordering_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: Branded ordering website
+      - name: Branded mobile apps
+      - name: Menu management
+      - name: REST API and webhooks access
+  - id: flipdish-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom enterprise arrangements for multi-location brands and integration partners. Pricing
+      and transaction terms negotiated with the Flipdish sales team.
+    entries:
+      - label: Enterprise agreement
+        name: enterprise_agreement
+        type: flat
+        metric: varies
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: Multi-location management
+      - name: Kiosks and white-label apps
+      - name: Priority support
+      - name: Custom integrations and App Store access

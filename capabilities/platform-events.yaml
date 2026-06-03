@@ -1,0 +1,1388 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — Events"
+  description: >-
+    Events operations on the Flipdish Open API v1.0 (9 operations).
+    Lead operation: Flipdish Get Events by Id. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Events
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-events"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — Events business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-events-event-id"
+          path: "/api/v1.0/{appId}/events/{eventId}"
+          operations:
+            - name: "GetEventsById"
+              method: GET
+              description: "Flipdish Get Events by Id"
+              inputParameters:
+                - name: "eventId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The event id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-menu-menu-id"
+          path: "/api/v1.0/{appId}/events/menu/{menuId}"
+          operations:
+            - name: "GetMenuEvents"
+              method: GET
+              description: "Flipdish Get Menu Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The menu id path parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-user-user-id"
+          path: "/api/v1.0/{appId}/events/user/{userId}"
+          operations:
+            - name: "GetUserEvents"
+              method: GET
+              description: "Flipdish Get User Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "userId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The user id path parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-order-order-id"
+          path: "/api/v1.0/{appId}/events/order/{orderId}"
+          operations:
+            - name: "GetOrderEvents"
+              method: GET
+              description: "Flipdish Get Order Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "orderId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The order id path parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-store-store-id"
+          path: "/api/v1.0/{appId}/events/store/{storeId}"
+          operations:
+            - name: "GetStoreEvents"
+              method: GET
+              description: "Flipdish Get Store Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-customer-customer-id"
+          path: "/api/v1.0/{appId}/events/customer/{customerId}"
+          operations:
+            - name: "GetCustomerEvents"
+              method: GET
+              description: "Flipdish Get Customer Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "customerId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The customer id path parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-whitelabel-whitelabel-id"
+          path: "/api/v1.0/{appId}/events/whitelabel/{whitelabelId}"
+          operations:
+            - name: "GetWhiteLabelEvents"
+              method: GET
+              description: "Flipdish Get White Label Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "whitelabelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The whitelabel id path parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events-order"
+          path: "/api/v1.0/{appId}/events/order"
+          operations:
+            - name: "GetOrderEventsByCustomer"
+              method: GET
+              description: "Flipdish Get Order Events by Customer"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "customerId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The customer id query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-events"
+          path: "/api/v1.0/{appId}/events"
+          operations:
+            - name: "GetEvents"
+              method: GET
+              description: "Flipdish Get Events"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "whiteLabelId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The white label id query parameter."
+                - name: "customerId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The customer id query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum elements to return"
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The index of the page to return, starting by 1"
+                - name: "start"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: "end"
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: "orderId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Order Id"
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Id"
+                - name: "storeIdList"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have Store Id List"
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Store Group Id"
+                - name: "userId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have User Id"
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Menu Id"
+                - name: "campaignId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Events that have Campaign Id"
+                - name: "userEmail"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Email"
+                - name: "userName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have User Name"
+                - name: "voucherCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Events that have voucher code"
+                - name: "eventType"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Events that have event type/s"
+                - name: "flipdishEventId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unique Identifier of Event, if this is specified, all other criteria are ignored."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-events-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — Events."
+      resources:
+        - path: "/v1/{app-id}/events/{event-id}"
+          name: "app-id-events-event-id"
+          description: "REST surface for GetEventsById."
+          operations:
+            - method: GET
+              name: "GetEventsById"
+              description: "Flipdish Get Events by Id"
+              call: "platform-events.GetEventsById"
+              with:
+                "eventId": "rest.eventId"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/menu/{menu-id}"
+          name: "app-id-events-menu-menu-id"
+          description: "REST surface for GetMenuEvents."
+          operations:
+            - method: GET
+              name: "GetMenuEvents"
+              description: "Flipdish Get Menu Events"
+              call: "platform-events.GetMenuEvents"
+              with:
+                "appId": "rest.appId"
+                "menuId": "rest.menuId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/user/{user-id}"
+          name: "app-id-events-user-user-id"
+          description: "REST surface for GetUserEvents."
+          operations:
+            - method: GET
+              name: "GetUserEvents"
+              description: "Flipdish Get User Events"
+              call: "platform-events.GetUserEvents"
+              with:
+                "appId": "rest.appId"
+                "userId": "rest.userId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/order/{order-id}"
+          name: "app-id-events-order-order-id"
+          description: "REST surface for GetOrderEvents."
+          operations:
+            - method: GET
+              name: "GetOrderEvents"
+              description: "Flipdish Get Order Events"
+              call: "platform-events.GetOrderEvents"
+              with:
+                "appId": "rest.appId"
+                "orderId": "rest.orderId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/store/{store-id}"
+          name: "app-id-events-store-store-id"
+          description: "REST surface for GetStoreEvents."
+          operations:
+            - method: GET
+              name: "GetStoreEvents"
+              description: "Flipdish Get Store Events"
+              call: "platform-events.GetStoreEvents"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/customer/{customer-id}"
+          name: "app-id-events-customer-customer-id"
+          description: "REST surface for GetCustomerEvents."
+          operations:
+            - method: GET
+              name: "GetCustomerEvents"
+              description: "Flipdish Get Customer Events"
+              call: "platform-events.GetCustomerEvents"
+              with:
+                "appId": "rest.appId"
+                "customerId": "rest.customerId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/whitelabel/{whitelabel-id}"
+          name: "app-id-events-whitelabel-whitelabel-id"
+          description: "REST surface for GetWhiteLabelEvents."
+          operations:
+            - method: GET
+              name: "GetWhiteLabelEvents"
+              description: "Flipdish Get White Label Events"
+              call: "platform-events.GetWhiteLabelEvents"
+              with:
+                "appId": "rest.appId"
+                "whitelabelId": "rest.whitelabelId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events/order"
+          name: "app-id-events-order"
+          description: "REST surface for GetOrderEventsByCustomer."
+          operations:
+            - method: GET
+              name: "GetOrderEventsByCustomer"
+              description: "Flipdish Get Order Events by Customer"
+              call: "platform-events.GetOrderEventsByCustomer"
+              with:
+                "appId": "rest.appId"
+                "customerId": "rest.customerId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/events"
+          name: "app-id-events"
+          description: "REST surface for GetEvents."
+          operations:
+            - method: GET
+              name: "GetEvents"
+              description: "Flipdish Get Events"
+              call: "platform-events.GetEvents"
+              with:
+                "appId": "rest.appId"
+                "whiteLabelId": "rest.whiteLabelId"
+                "customerId": "rest.customerId"
+                "limit": "rest.limit"
+                "page": "rest.page"
+                "start": "rest.start"
+                "end": "rest.end"
+                "orderId": "rest.orderId"
+                "storeId": "rest.storeId"
+                "storeIdList": "rest.storeIdList"
+                "storeGroupId": "rest.storeGroupId"
+                "userId": "rest.userId"
+                "menuId": "rest.menuId"
+                "campaignId": "rest.campaignId"
+                "userEmail": "rest.userEmail"
+                "userName": "rest.userName"
+                "voucherCode": "rest.voucherCode"
+                "eventType": "rest.eventType"
+                "flipdishEventId": "rest.flipdishEventId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-events-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — Events."
+      tools:
+        - name: "get-events-id"
+          description: "Flipdish Get Events by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetEventsById"
+          with:
+            "eventId": "tools.eventId"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-menu-events"
+          description: "Flipdish Get Menu Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetMenuEvents"
+          with:
+            "appId": "tools.appId"
+            "menuId": "tools.menuId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-events"
+          description: "Flipdish Get User Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetUserEvents"
+          with:
+            "appId": "tools.appId"
+            "userId": "tools.userId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-order-events"
+          description: "Flipdish Get Order Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetOrderEvents"
+          with:
+            "appId": "tools.appId"
+            "orderId": "tools.orderId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-events"
+          description: "Flipdish Get Store Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetStoreEvents"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-customer-events"
+          description: "Flipdish Get Customer Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetCustomerEvents"
+          with:
+            "appId": "tools.appId"
+            "customerId": "tools.customerId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-white-label-events"
+          description: "Flipdish Get White Label Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetWhiteLabelEvents"
+          with:
+            "appId": "tools.appId"
+            "whitelabelId": "tools.whitelabelId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-order-events-customer"
+          description: "Flipdish Get Order Events by Customer"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetOrderEventsByCustomer"
+          with:
+            "appId": "tools.appId"
+            "customerId": "tools.customerId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-events"
+          description: "Flipdish Get Events"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-events.GetEvents"
+          with:
+            "appId": "tools.appId"
+            "whiteLabelId": "tools.whiteLabelId"
+            "customerId": "tools.customerId"
+            "limit": "tools.limit"
+            "page": "tools.page"
+            "start": "tools.start"
+            "end": "tools.end"
+            "orderId": "tools.orderId"
+            "storeId": "tools.storeId"
+            "storeIdList": "tools.storeIdList"
+            "storeGroupId": "tools.storeGroupId"
+            "userId": "tools.userId"
+            "menuId": "tools.menuId"
+            "campaignId": "tools.campaignId"
+            "userEmail": "tools.userEmail"
+            "userName": "tools.userName"
+            "voucherCode": "tools.voucherCode"
+            "eventType": "tools.eventType"
+            "flipdishEventId": "tools.flipdishEventId"
+          outputParameters:
+            - type: object
+              mapping: "$."

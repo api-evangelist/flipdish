@@ -1,0 +1,700 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fd": "https://developers.flipdish.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Order": "fd:Order",
+    "OrderSummary": "fd:OrderSummary",
+    "FulfillmentStatusConfigurationItem": "fd:FulfillmentStatusConfigurationItem",
+    "OrderItem": "fd:OrderItem",
+    "StoreSummary": "fd:StoreSummary",
+    "OrderItemOption": "fd:OrderItemOption",
+    "OrderDeliveryInformation": "fd:OrderDeliveryInformation",
+    "DeliveryLocation": "fd:DeliveryLocation",
+    "FulfillmentStatesConfiguration": "fd:FulfillmentStatesConfiguration",
+    "OrderDeliveryInformationBase": "fd:OrderDeliveryInformationBase",
+    "OrderVoucherSummary": "fd:OrderVoucherSummary",
+    "TipConfiguration": "fd:TipConfiguration",
+    "Channel": "fd:Channel",
+    "CustomerSummary": "fd:CustomerSummary",
+    "OrderDropOffLocation": "fd:OrderDropOffLocation",
+    "OrderFulfillmentStatusWithConfigurationActions": "fd:OrderFulfillmentStatusWithConfigurationActions",
+    "UpdateFulfillmentStatesConfiguration": "fd:UpdateFulfillmentStatesConfiguration",
+    "UpdateTipConfiguration": "fd:UpdateTipConfiguration",
+    "CreateFulfillmentStatesConfiguration": "fd:CreateFulfillmentStatesConfiguration",
+    "FulfillmentStatesConfigurationSummary": "fd:FulfillmentStatesConfigurationSummary",
+    "OrderBatch": "fd:OrderBatch",
+    "OrderBatchSummary": "fd:OrderBatchSummary",
+    "OrderFulfillmentStatus": "fd:OrderFulfillmentStatus",
+    "FeeSummary": "fd:FeeSummary",
+    "MaskedPhoneNumber": "fd:MaskedPhoneNumber",
+    "OrderFulfillmentStatusBase": "fd:OrderFulfillmentStatusBase",
+    "Refund": "fd:Refund",
+    "TaxItem": "fd:TaxItem",
+    "Coordinates": "fd:Coordinates",
+    "FulfillentStatusActionItem": "fd:FulfillentStatusActionItem",
+    "store": {
+      "@id": "fd:Store",
+      "@type": "xsd:string"
+    },
+    "customer": {
+      "@id": "fd:Customer",
+      "@type": "xsd:string"
+    },
+    "voucher": {
+      "@id": "fd:Voucher",
+      "@type": "xsd:string"
+    },
+    "fees": {
+      "@id": "fd:Fees",
+      "@type": "xsd:string"
+    },
+    "orderItems": {
+      "@id": "fd:OrderItems",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "deliveryLocation": {
+      "@id": "fd:DeliveryLocation",
+      "@type": "xsd:string"
+    },
+    "customerLocation": {
+      "@id": "fd:CustomerLocation",
+      "@type": "xsd:string"
+    },
+    "maskedPhoneNumber": {
+      "@id": "fd:MaskedPhoneNumber",
+      "@type": "xsd:string"
+    },
+    "dropOffLocationId": {
+      "@id": "fd:DropOffLocationId",
+      "@type": "xsd:integer"
+    },
+    "dropOffLocation": {
+      "@id": "fd:DropOffLocation",
+      "@type": "xsd:string"
+    },
+    "acceptedFor": {
+      "@id": "fd:AcceptedFor",
+      "@type": "xsd:dateTime"
+    },
+    "inFraudZone": {
+      "@id": "fd:InFraudZone",
+      "@type": "xsd:boolean"
+    },
+    "unusualHighValueOrder": {
+      "@id": "fd:UnusualHighValueOrder",
+      "@type": "xsd:boolean"
+    },
+    "rejectedByUserId": {
+      "@id": "fd:RejectedByUserId",
+      "@type": "xsd:integer"
+    },
+    "channelOrderId": {
+      "@id": "fd:ChannelOrderId",
+      "@type": "xsd:string"
+    },
+    "channelOrderDisplayId": {
+      "@id": "fd:ChannelOrderDisplayId",
+      "@type": "xsd:string"
+    },
+    "channel": {
+      "@id": "fd:Channel",
+      "@type": "xsd:string"
+    },
+    "orderDropOffLocation": {
+      "@id": "fd:OrderDropOffLocation",
+      "@type": "xsd:string"
+    },
+    "fulfillmentStatus": {
+      "@id": "fd:FulfillmentStatus",
+      "@type": "xsd:string"
+    },
+    "orderBatchInfo": {
+      "@id": "fd:OrderBatchInfo",
+      "@type": "xsd:string"
+    },
+    "taxItems": {
+      "@id": "fd:TaxItems",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "createdCampaignVoucherId": {
+      "@id": "fd:CreatedCampaignVoucherId",
+      "@type": "xsd:integer"
+    },
+    "orderId": {
+      "@id": "fd:OrderId",
+      "@type": "xsd:integer"
+    },
+    "localOrderId": {
+      "@id": "fd:LocalOrderId",
+      "@type": "xsd:string"
+    },
+    "deliveryType": {
+      "@id": "fd:DeliveryType",
+      "@type": "xsd:string"
+    },
+    "pickupLocationType": {
+      "@id": "fd:PickupLocationType",
+      "@type": "xsd:string"
+    },
+    "tableServiceCatagory": {
+      "@id": "fd:TableServiceCatagory",
+      "@type": "xsd:string"
+    },
+    "tipAmount": {
+      "@id": "fd:TipAmount",
+      "@type": "xsd:double"
+    },
+    "deliveryAmount": {
+      "@id": "fd:DeliveryAmount",
+      "@type": "xsd:double"
+    },
+    "orderItemsAmount": {
+      "@id": "fd:OrderItemsAmount",
+      "@type": "xsd:double"
+    },
+    "serviceChargeAmount": {
+      "@id": "fd:ServiceChargeAmount",
+      "@type": "xsd:double"
+    },
+    "serviceChargePercentage": {
+      "@id": "fd:ServiceChargePercentage",
+      "@type": "xsd:double"
+    },
+    "amount": {
+      "@id": "fd:Amount",
+      "@type": "xsd:double"
+    },
+    "processingFee": {
+      "@id": "fd:ProcessingFee",
+      "@type": "xsd:double"
+    },
+    "paymentAccountType": {
+      "@id": "fd:PaymentAccountType",
+      "@type": "xsd:string"
+    },
+    "paymentAccountDescription": {
+      "@id": "fd:PaymentAccountDescription",
+      "@type": "xsd:string"
+    },
+    "orderState": {
+      "@id": "fd:OrderState",
+      "@type": "xsd:string"
+    },
+    "isPreOrder": {
+      "@id": "fd:IsPreOrder",
+      "@type": "xsd:boolean"
+    },
+    "placedTime": {
+      "@id": "fd:PlacedTime",
+      "@type": "xsd:dateTime"
+    },
+    "requestedForTime": {
+      "@id": "fd:RequestedForTime",
+      "@type": "xsd:dateTime"
+    },
+    "chefNote": {
+      "@id": "fd:ChefNote",
+      "@type": "xsd:string"
+    },
+    "appType": {
+      "@id": "fd:AppType",
+      "@type": "xsd:string"
+    },
+    "userRating": {
+      "@id": "fd:UserRating",
+      "@type": "xsd:integer"
+    },
+    "paymentStatus": {
+      "@id": "fd:PaymentStatus",
+      "@type": "xsd:string"
+    },
+    "rejectionReason": {
+      "@id": "fd:RejectionReason",
+      "@type": "xsd:string"
+    },
+    "refundedAmount": {
+      "@id": "fd:RefundedAmount",
+      "@type": "xsd:double"
+    },
+    "deliveryTrackingStatus": {
+      "@id": "fd:DeliveryTrackingStatus",
+      "@type": "xsd:string"
+    },
+    "driverId": {
+      "@id": "fd:DriverId",
+      "@type": "xsd:integer"
+    },
+    "totalTax": {
+      "@id": "fd:TotalTax",
+      "@type": "xsd:double"
+    },
+    "orderTrackingCode": {
+      "@id": "fd:OrderTrackingCode",
+      "@type": "xsd:string"
+    },
+    "deliveryFeeAreaId": {
+      "@id": "fd:DeliveryFeeAreaId",
+      "@type": "xsd:integer"
+    },
+    "receiptCode": {
+      "@id": "fd:ReceiptCode",
+      "@type": "xsd:string"
+    },
+    "totalDepositReturnFeeAmount": {
+      "@id": "fd:TotalDepositReturnFeeAmount",
+      "@type": "xsd:double"
+    },
+    "storeName": {
+      "@id": "fd:StoreName",
+      "@type": "xsd:string"
+    },
+    "storeIanaTimeZone": {
+      "@id": "fd:StoreIanaTimeZone",
+      "@type": "xsd:string"
+    },
+    "customerName": {
+      "@id": "fd:CustomerName",
+      "@type": "xsd:string"
+    },
+    "customerPhoneNumber": {
+      "@id": "fd:CustomerPhoneNumber",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "fd:Currency",
+      "@type": "xsd:string"
+    },
+    "statusId": {
+      "@id": "fd:StatusId",
+      "@type": "xsd:string"
+    },
+    "statusName": {
+      "@id": "fd:StatusName",
+      "@type": "xsd:string"
+    },
+    "enabled": {
+      "@id": "fd:Enabled",
+      "@type": "xsd:boolean"
+    },
+    "displayName": {
+      "@id": "fd:DisplayName",
+      "@type": "xsd:string"
+    },
+    "icon": {
+      "@id": "fd:Icon",
+      "@type": "xsd:string"
+    },
+    "publicDescription": {
+      "@id": "fd:PublicDescription",
+      "@type": "xsd:string"
+    },
+    "internal": {
+      "@id": "fd:Internal",
+      "@type": "xsd:boolean"
+    },
+    "nextStatuses": {
+      "@id": "fd:NextStatuses",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "defaultNextStatus": {
+      "@id": "fd:DefaultNextStatus",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "changeType": {
+      "@id": "fd:ChangeType",
+      "@type": "xsd:string"
+    },
+    "includeInReports": {
+      "@id": "fd:IncludeInReports",
+      "@type": "xsd:boolean"
+    },
+    "isCustom": {
+      "@id": "fd:IsCustom",
+      "@type": "xsd:boolean"
+    },
+    "orderTypes": {
+      "@id": "fd:OrderTypes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "communication": {
+      "@id": "fd:Communication",
+      "@type": "xsd:boolean"
+    },
+    "image": {
+      "@id": "fd:Image",
+      "@type": "xsd:string"
+    },
+    "orderItemOptions": {
+      "@id": "fd:OrderItemOptions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "fd:Metadata",
+      "@type": "@id"
+    },
+    "menuItemPublicId": {
+      "@id": "fd:MenuItemPublicId",
+      "@type": "xsd:string"
+    },
+    "menuSectionName": {
+      "@id": "fd:MenuSectionName",
+      "@type": "xsd:string"
+    },
+    "menuSectionDisplayOrder": {
+      "@id": "fd:MenuSectionDisplayOrder",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "price": {
+      "@id": "fd:Price",
+      "@type": "xsd:double"
+    },
+    "taxAmount": {
+      "@id": "fd:TaxAmount",
+      "@type": "xsd:double"
+    },
+    "priceIncludingOptionSetItems": {
+      "@id": "fd:PriceIncludingOptionSetItems",
+      "@type": "xsd:double"
+    },
+    "menuItemId": {
+      "@id": "fd:MenuItemId",
+      "@type": "xsd:integer"
+    },
+    "menuItemDisplayOrder": {
+      "@id": "fd:MenuItemDisplayOrder",
+      "@type": "xsd:integer"
+    },
+    "isAvailable": {
+      "@id": "fd:IsAvailable",
+      "@type": "xsd:boolean"
+    },
+    "depositReturnFee": {
+      "@id": "fd:DepositReturnFee",
+      "@type": "xsd:double"
+    },
+    "id": {
+      "@id": "fd:Id",
+      "@type": "xsd:integer"
+    },
+    "menuId": {
+      "@id": "fd:MenuId",
+      "@type": "xsd:integer"
+    },
+    "menuPublishId": {
+      "@id": "fd:MenuPublishId",
+      "@type": "xsd:string"
+    },
+    "coordinates": {
+      "@id": "fd:Coordinates",
+      "@type": "xsd:string"
+    },
+    "storeTimezone": {
+      "@id": "fd:StoreTimezone",
+      "@type": "xsd:string"
+    },
+    "storeIanaTimezone": {
+      "@id": "fd:StoreIanaTimezone",
+      "@type": "xsd:string"
+    },
+    "storeGroupId": {
+      "@id": "fd:StoreGroupId",
+      "@type": "xsd:integer"
+    },
+    "taxId": {
+      "@id": "fd:TaxId",
+      "@type": "xsd:string"
+    },
+    "prettyAddress": {
+      "@id": "fd:PrettyAddress",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "fd:CountryCode",
+      "@type": "xsd:string"
+    },
+    "propertyId": {
+      "@id": "fd:PropertyId",
+      "@type": "xsd:string"
+    },
+    "menuItemOptionPublicId": {
+      "@id": "fd:MenuItemOptionPublicId",
+      "@type": "xsd:string"
+    },
+    "menuItemOptionId": {
+      "@id": "fd:MenuItemOptionId",
+      "@type": "xsd:integer"
+    },
+    "isMasterOptionSetItem": {
+      "@id": "fd:IsMasterOptionSetItem",
+      "@type": "xsd:boolean"
+    },
+    "menuItemOptionDisplayOrder": {
+      "@id": "fd:MenuItemOptionDisplayOrder",
+      "@type": "xsd:integer"
+    },
+    "menuItemOptionSetDisplayOrder": {
+      "@id": "fd:MenuItemOptionSetDisplayOrder",
+      "@type": "xsd:integer"
+    },
+    "externalReferenceId": {
+      "@id": "fd:ExternalReferenceId",
+      "@type": "xsd:string"
+    },
+    "trackUrl": {
+      "@id": "fd:TrackUrl",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "fd:Status",
+      "@type": "xsd:string"
+    },
+    "deliveryStatusNotes": {
+      "@id": "fd:DeliveryStatusNotes",
+      "@type": "xsd:string"
+    },
+    "errorMessage": {
+      "@id": "fd:ErrorMessage",
+      "@type": "xsd:string"
+    },
+    "integrationCode": {
+      "@id": "fd:IntegrationCode",
+      "@type": "xsd:string"
+    },
+    "integrationName": {
+      "@id": "fd:IntegrationName",
+      "@type": "xsd:string"
+    },
+    "building": {
+      "@id": "fd:Building",
+      "@type": "xsd:string"
+    },
+    "street": {
+      "@id": "fd:Street",
+      "@type": "xsd:string"
+    },
+    "town": {
+      "@id": "fd:Town",
+      "@type": "xsd:string"
+    },
+    "postCode": {
+      "@id": "fd:PostCode",
+      "@type": "xsd:string"
+    },
+    "deliveryInstructions": {
+      "@id": "fd:DeliveryInstructions",
+      "@type": "xsd:string"
+    },
+    "prettyAddressString": {
+      "@id": "fd:PrettyAddressString",
+      "@type": "xsd:string"
+    },
+    "states": {
+      "@id": "fd:States",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "automaticTransitionsEnabled": {
+      "@id": "fd:AutomaticTransitionsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "appId": {
+      "@id": "fd:AppId",
+      "@type": "xsd:string"
+    },
+    "configurationUid": {
+      "@id": "fd:ConfigurationUid",
+      "@type": "xsd:string"
+    },
+    "storeSelectorType": {
+      "@id": "fd:StoreSelectorType",
+      "@type": "xsd:string"
+    },
+    "storeIds": {
+      "@id": "fd:StoreIds",
+      "@container": "@set",
+      "@type": "xsd:integer"
+    },
+    "voucherId": {
+      "@id": "fd:VoucherId",
+      "@type": "xsd:integer"
+    },
+    "code": {
+      "@id": "fd:Code",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "fd:Type",
+      "@type": "xsd:string"
+    },
+    "subType": {
+      "@id": "fd:SubType",
+      "@type": "xsd:string"
+    },
+    "storeId": {
+      "@id": "fd:StoreId",
+      "@type": "xsd:integer"
+    },
+    "isEnabled": {
+      "@id": "fd:IsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "allowCustomTips": {
+      "@id": "fd:AllowCustomTips",
+      "@type": "xsd:boolean"
+    },
+    "allowRoundUp": {
+      "@id": "fd:AllowRoundUp",
+      "@type": "xsd:boolean"
+    },
+    "allowEmojis": {
+      "@id": "fd:AllowEmojis",
+      "@type": "xsd:boolean"
+    },
+    "percentages": {
+      "@id": "fd:Percentages",
+      "@container": "@set",
+      "@type": "xsd:double"
+    },
+    "defaultPercentage": {
+      "@id": "fd:DefaultPercentage",
+      "@type": "xsd:double"
+    },
+    "channelId": {
+      "@id": "fd:ChannelId",
+      "@type": "xsd:integer"
+    },
+    "translationKey": {
+      "@id": "fd:TranslationKey",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "fd:Source",
+      "@type": "xsd:string"
+    },
+    "logoUri": {
+      "@id": "fd:LogoUri",
+      "@type": "xsd:string"
+    },
+    "available": {
+      "@id": "fd:Available",
+      "@type": "xsd:boolean"
+    },
+    "maintainedExternally": {
+      "@id": "fd:MaintainedExternally",
+      "@type": "xsd:boolean"
+    },
+    "emailAddress": {
+      "@id": "fd:EmailAddress",
+      "@type": "xsd:string"
+    },
+    "phoneNumberLocalFormat": {
+      "@id": "fd:PhoneNumberLocalFormat",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "fd:PhoneNumber",
+      "@type": "xsd:string"
+    },
+    "languagePreference": {
+      "@id": "fd:LanguagePreference",
+      "@type": "xsd:string"
+    },
+    "locationName": {
+      "@id": "fd:LocationName",
+      "@type": "xsd:string"
+    },
+    "locationAreaName": {
+      "@id": "fd:LocationAreaName",
+      "@type": "xsd:string"
+    },
+    "locationId": {
+      "@id": "fd:LocationId",
+      "@type": "xsd:integer"
+    },
+    "locationAreaId": {
+      "@id": "fd:LocationAreaId",
+      "@type": "xsd:integer"
+    },
+    "externalLocationId": {
+      "@id": "fd:ExternalLocationId",
+      "@type": "xsd:string"
+    },
+    "overwriteSystemTemplate": {
+      "@id": "fd:OverwriteSystemTemplate",
+      "@type": "xsd:boolean"
+    },
+    "stores": {
+      "@id": "fd:Stores",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "orderIds": {
+      "@id": "fd:OrderIds",
+      "@container": "@set",
+      "@type": "xsd:integer"
+    },
+    "displayCode": {
+      "@id": "fd:DisplayCode",
+      "@type": "xsd:string"
+    },
+    "createTime": {
+      "@id": "fd:CreateTime",
+      "@type": "xsd:dateTime"
+    },
+    "isPublished": {
+      "@id": "fd:IsPublished",
+      "@type": "xsd:boolean"
+    },
+    "feeAmount": {
+      "@id": "fd:FeeAmount",
+      "@type": "xsd:double"
+    },
+    "percentageRate": {
+      "@id": "fd:PercentageRate",
+      "@type": "xsd:double"
+    },
+    "perTransactionFee": {
+      "@id": "fd:PerTransactionFee",
+      "@type": "xsd:double"
+    },
+    "refundReason": {
+      "@id": "fd:RefundReason",
+      "@type": "xsd:string"
+    },
+    "refundAmount": {
+      "@id": "fd:RefundAmount",
+      "@type": "xsd:double"
+    },
+    "notifyCustomer": {
+      "@id": "fd:NotifyCustomer",
+      "@type": "xsd:boolean"
+    },
+    "rate": {
+      "@id": "fd:Rate",
+      "@type": "xsd:double"
+    },
+    "latitude": {
+      "@id": "fd:Latitude",
+      "@type": "xsd:double"
+    },
+    "longitude": {
+      "@id": "fd:Longitude",
+      "@type": "xsd:double"
+    }
+  }
+}

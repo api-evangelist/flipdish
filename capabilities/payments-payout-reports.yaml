@@ -1,0 +1,688 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Payments — PayoutReports"
+  description: >-
+    PayoutReports operations on the Flipdish Open API v1.0 (10 operations).
+    Lead operation: Flipdish Get Payout Report3 Overview. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Payout Reports
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "payments-payout-reports"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Payments — PayoutReports business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-overview"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/overview"
+          operations:
+            - name: "GetPayoutReport3Overview"
+              method: GET
+              description: "Flipdish Get Payout Report3 Overview"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-stores"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/stores"
+          operations:
+            - name: "GetPayoutReport3Stores"
+              method: GET
+              description: "Flipdish Get Payout Report3 Stores"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "stores"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The stores query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-orders"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/export/orders"
+          operations:
+            - name: "PayoutReport3ExportPayoutOrders"
+              method: GET
+              description: "Flipdish Payout Report3 Export Payout Orders"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "stores"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The stores query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-stores"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/export/stores"
+          operations:
+            - name: "PayoutReport3ExportPayoutStores"
+              method: GET
+              description: "Flipdish Payout Report3 Export Payout Stores"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "stores"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The stores query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-details"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/details"
+          operations:
+            - name: "GetPayoutReport3Details"
+              method: GET
+              description: "Flipdish Get Payout Report3 Details"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-possales"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/export/possales"
+          operations:
+            - name: "PayoutReport3ExportPayoutPosSales"
+              method: GET
+              description: "Flipdish Payout Report3 Export Payout Pos Sales"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "stores"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The stores query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-chargebacks"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/export/chargebacks"
+          operations:
+            - name: "PayoutReport3ExportPayoutChargebacks"
+              method: GET
+              description: "Flipdish Payout Report3 Export Payout Chargebacks"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "stores"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The stores query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-refunded-orders"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/export/refundedOrders"
+          operations:
+            - name: "PayoutReport3ExportPayoutRefundedOrders"
+              method: GET
+              description: "Flipdish Payout Report3 Export Payout Refunded Orders"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "stores"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The stores query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-refunded-orders"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/refundedOrders"
+          operations:
+            - name: "GetPayoutReport3RefundedOrders"
+              method: GET
+              description: "Flipdish Get Payout Report3 Refunded Orders"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-properties"
+          path: "/api/v1.0/{appId}/reporting/reports/payouts3/{bankAccountId}/{payoutId}/properties"
+          operations:
+            - name: "GetPayoutReport3PropertyDetails"
+              method: GET
+              description: "Flipdish Get Payout Report3 Property Details"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "propertyIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The property ids query parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "payments-payout-reports-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Payments — PayoutReports."
+      resources:
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/overview"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-overview"
+          description: "REST surface for GetPayoutReport3Overview."
+          operations:
+            - method: GET
+              name: "GetPayoutReport3Overview"
+              description: "Flipdish Get Payout Report3 Overview"
+              call: "payments-payout-reports.GetPayoutReport3Overview"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/stores"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-stores"
+          description: "REST surface for GetPayoutReport3Stores."
+          operations:
+            - method: GET
+              name: "GetPayoutReport3Stores"
+              description: "Flipdish Get Payout Report3 Stores"
+              call: "payments-payout-reports.GetPayoutReport3Stores"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "stores": "rest.stores"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/export/orders"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-orders"
+          description: "REST surface for PayoutReport3ExportPayoutOrders."
+          operations:
+            - method: GET
+              name: "PayoutReport3ExportPayoutOrders"
+              description: "Flipdish Payout Report3 Export Payout Orders"
+              call: "payments-payout-reports.PayoutReport3ExportPayoutOrders"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "stores": "rest.stores"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/export/stores"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-stores"
+          description: "REST surface for PayoutReport3ExportPayoutStores."
+          operations:
+            - method: GET
+              name: "PayoutReport3ExportPayoutStores"
+              description: "Flipdish Payout Report3 Export Payout Stores"
+              call: "payments-payout-reports.PayoutReport3ExportPayoutStores"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "stores": "rest.stores"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/details"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-details"
+          description: "REST surface for GetPayoutReport3Details."
+          operations:
+            - method: GET
+              name: "GetPayoutReport3Details"
+              description: "Flipdish Get Payout Report3 Details"
+              call: "payments-payout-reports.GetPayoutReport3Details"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "storeIds": "rest.storeIds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/export/possales"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-possales"
+          description: "REST surface for PayoutReport3ExportPayoutPosSales."
+          operations:
+            - method: GET
+              name: "PayoutReport3ExportPayoutPosSales"
+              description: "Flipdish Payout Report3 Export Payout Pos Sales"
+              call: "payments-payout-reports.PayoutReport3ExportPayoutPosSales"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "stores": "rest.stores"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/export/chargebacks"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-chargebacks"
+          description: "REST surface for PayoutReport3ExportPayoutChargebacks."
+          operations:
+            - method: GET
+              name: "PayoutReport3ExportPayoutChargebacks"
+              description: "Flipdish Payout Report3 Export Payout Chargebacks"
+              call: "payments-payout-reports.PayoutReport3ExportPayoutChargebacks"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "stores": "rest.stores"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/export/refunded-orders"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-export-refunded-orders"
+          description: "REST surface for PayoutReport3ExportPayoutRefundedOrders."
+          operations:
+            - method: GET
+              name: "PayoutReport3ExportPayoutRefundedOrders"
+              description: "Flipdish Payout Report3 Export Payout Refunded Orders"
+              call: "payments-payout-reports.PayoutReport3ExportPayoutRefundedOrders"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "stores": "rest.stores"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/refunded-orders"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-refunded-orders"
+          description: "REST surface for GetPayoutReport3RefundedOrders."
+          operations:
+            - method: GET
+              name: "GetPayoutReport3RefundedOrders"
+              description: "Flipdish Get Payout Report3 Refunded Orders"
+              call: "payments-payout-reports.GetPayoutReport3RefundedOrders"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "storeIds": "rest.storeIds"
+                "page": "rest.page"
+                "limit": "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/reporting/reports/payouts3/{bank-account-id}/{payout-id}/properties"
+          name: "app-id-reporting-reports-payouts3-bank-account-id-payout-id-properties"
+          description: "REST surface for GetPayoutReport3PropertyDetails."
+          operations:
+            - method: GET
+              name: "GetPayoutReport3PropertyDetails"
+              description: "Flipdish Get Payout Report3 Property Details"
+              call: "payments-payout-reports.GetPayoutReport3PropertyDetails"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "propertyIds": "rest.propertyIds"
+                "storeIds": "rest.storeIds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "payments-payout-reports-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Payments — PayoutReports."
+      tools:
+        - name: "get-payout-report3-overview"
+          description: "Flipdish Get Payout Report3 Overview"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.GetPayoutReport3Overview"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-report3-stores"
+          description: "Flipdish Get Payout Report3 Stores"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.GetPayoutReport3Stores"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "stores": "tools.stores"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "payout-report3-export-payout-orders"
+          description: "Flipdish Payout Report3 Export Payout Orders"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.PayoutReport3ExportPayoutOrders"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "stores": "tools.stores"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "payout-report3-export-payout-stores"
+          description: "Flipdish Payout Report3 Export Payout Stores"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.PayoutReport3ExportPayoutStores"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "stores": "tools.stores"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-report3-details"
+          description: "Flipdish Get Payout Report3 Details"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.GetPayoutReport3Details"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "storeIds": "tools.storeIds"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "payout-report3-export-payout-pos"
+          description: "Flipdish Payout Report3 Export Payout Pos Sales"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.PayoutReport3ExportPayoutPosSales"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "stores": "tools.stores"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "payout-report3-export-payout-chargebacks"
+          description: "Flipdish Payout Report3 Export Payout Chargebacks"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.PayoutReport3ExportPayoutChargebacks"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "stores": "tools.stores"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "payout-report3-export-payout-refunded"
+          description: "Flipdish Payout Report3 Export Payout Refunded Orders"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.PayoutReport3ExportPayoutRefundedOrders"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "stores": "tools.stores"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-report3-refunded-orders"
+          description: "Flipdish Get Payout Report3 Refunded Orders"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.GetPayoutReport3RefundedOrders"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "storeIds": "tools.storeIds"
+            "page": "tools.page"
+            "limit": "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-report3-property-details"
+          description: "Flipdish Get Payout Report3 Property Details"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payout-reports.GetPayoutReport3PropertyDetails"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "propertyIds": "tools.propertyIds"
+            "storeIds": "tools.storeIds"
+          outputParameters:
+            - type: object
+              mapping: "$."

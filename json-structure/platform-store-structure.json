@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/platform-store-structure.json",
+  "name": "Store",
+  "description": "Store",
+  "type": "object",
+  "properties": {
+    "StoreId": {
+      "description": "Store identifier",
+      "type": "int32",
+      "example": 500123
+    },
+    "StoreGroupId": {
+      "description": "Store group id to which this store belongs",
+      "type": "int32",
+      "example": 500123
+    },
+    "Address": {
+      "$ref": "#/components/schemas/StoreAddress"
+    },
+    "DeliveryZones": {
+      "description": "Delivery zones",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DeliveryZone"
+      },
+      "example": []
+    },
+    "ApmPhoneNumber": {
+      "description": "Automated Phone Marketing number",
+      "type": "string",
+      "example": "+353000000000"
+    },
+    "PickupHours": {
+      "description": "Pickup hours",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BusinessHoursPeriod"
+      },
+      "example": []
+    },
+    "DeliveryHours": {
+      "description": "Delivery hours",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BusinessHoursPeriod"
+      },
+      "example": []
+    },
+    "MenuId": {
+      "description": "Menu identifier",
+      "type": "int32",
+      "example": 500123
+    },
+    "OrderConfirmationMessageOverrideDelivery": {
+      "description": "Overridden confirmation message for delivery orders",
+      "type": "string",
+      "example": "string"
+    },
+    "OrderConfirmationMessageOverridePickup": {
+      "description": "Overridden confirmation message for pickup orders",
+      "type": "string",
+      "example": "string"
+    },
+    "PrintoutLayoutType": {
+      "description": "Printout layout",
+      "enum": [
+        "Default",
+        "Centra",
+        "SmallChefNotes",
+        "SmallChefNotesAndCentra"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Default"
+    },
+    "StoreNotes": {
+      "description": "Store notes",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StoreNote"
+      },
+      "example": []
+    },
+    "MicrosoftTimeZone": {
+      "description": "Microsoft Time Zone Index Values (https://msdn.microsoft.com/en-us/library/ms912391)\r\n(Editable through store coordinate change)",
+      "type": "string",
+      "example": "string"
+    },
+    "IanaTimeZone": {
+      "description": "IANA Time Zone (https://www.iana.org/time-zones)\r\n(Editable through store coordinate change)",
+      "type": "string",
+      "example": "string"
+    },
+    "Currency": {
+      "description": "Currency (derived from Store Group)",
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CAD",
+        "AUD",
+        "DJF",
+        "ZAR",
+        "ETB",
+        "AED",
+        "BHD",
+        "DZD",
+        "EGP",
+        "IQD",
+        "JOD",
+        "KWD",
+        "LBP",
+        "LYD",
+        "MAD",
+        "OMR",
+        "QAR",
+        "SAR",
+        "SYP",
+        "TND",
+        "YER",
+        "CLP",
+        "INR",
+        "AZN",
+        "RUB",
+        "BYN",
+        "BGN",
+        "NGN",
+        "BDT",
+        "CNY",
+        "BAM",
+        "CZK",
+        "DKK",
+        "CHF",
+        "MVR",
+        "BTN",
+        "XCD",
+        "BZD",
+        "HKD",
+        "IDR",
+        "JMD",
+        "MYR",
+        "NZD",
+        "PHP",
+        "SGD",
+        "TTD",
+        "XDR",
+        "ARS",
+        "BOB",
+        "COP",
+        "CRC",
+        "CUP",
+        "DOP",
+        "GTQ",
+        "HNL",
+        "MXN",
+        "NIO",
+        "PAB",
+        "PEN",
+        "PYG",
+        "UYU",
+        "VEF",
+        "IRR",
+        "XOF",
+        "CDF",
+        "XAF",
+        "HTG",
+        "ILS",
+        "HRK",
+        "HUF",
+        "AMD",
+        "ISK",
+        "JPY",
+        "GEL",
+        "KZT",
+        "KHR",
+        "KRW",
+        "KGS",
+        "LAK",
+        "MKD",
+        "MNT",
+        "BND",
+        "MMK",
+        "NOK",
+        "NPR",
+        "PKR",
+        "PLN",
+        "AFN",
+        "BRL",
+        "MDL",
+        "RON",
+        "RWF",
+        "SEK",
+        "LKR",
+        "SOS",
+        "ALL",
+        "RSD",
+        "KES",
+        "TJS",
+        "THB",
+        "ERN",
+        "TMT",
+        "BWP",
+        "TRY",
+        "UAH",
+        "UZS",
+        "VND",
+        "MOP",
+        "TWD",
+        "BMD"
+      ],
+      "type": "string",
+      "example": "EUR"
+    },
+    "PreOrderDeliveryEnabled": {
+      "description": "Is PerOrder Enabled for Delivery",
+      "type": "boolean",
+      "example": true
+    },
+    "PreOrderPickupEnabled": {
+      "description": "Is PerOrder Enabled for Pickup",
+      "type": "boolean",
+      "example": true
+    },
+    "LogoUrl": {
+      "description": "Url for logo image",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "FraudPreventionStrategy": {
+      "description": "Fraud Prevention Strategy",
+      "type": "string",
+      "example": "string"
+    },
+    "AppIds": {
+      "description": "Store's app ids",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "string"
+      ]
+    },
+    "PropertyId": {
+      "description": "Property Id",
+      "type": "string",
+      "example": "500123"
+    },
+    "PhoneNumber": {
+      "description": "Phone number",
+      "type": "string",
+      "example": "+353000000000"
+    },
+    "AlwaysAppearOpen": {
+      "description": "True if the store always appears open",
+      "type": "boolean",
+      "example": true
+    },
+    "PreOrderEnabled": {
+      "description": "True if the store accepts pre-orders",
+      "type": "boolean",
+      "example": true
+    },
+    "TakeOutEnabled": {
+      "description": "True if the store accepts take-out orders",
+      "type": "boolean",
+      "example": true
+    },
+    "TableServiceEnabled": {
+      "description": "True if the store has table service",
+      "type": "boolean",
+      "example": true
+    },
+    "DineInEnabled": {
+      "description": "True if the store accepts dine-in orders",
+      "type": "boolean",
+      "example": true
+    },
+    "AllowPreOrdersAndTableService": {
+      "description": "True if both pre-orders and talbe service can be enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "PickupEnabled": {
+      "description": "True if the store accepts pickup orders",
+      "type": "boolean",
+      "example": true
+    },
+    "DeliveryEnabled": {
+      "description": "True if the store accepts delivery orders",
+      "type": "boolean",
+      "example": true
+    },
+    "CardOrderDeliveryEnabled": {
+      "description": "True if the store accepts card payment for delivery orders",
+      "type": "boolean",
+      "example": true
+    },
+    "CashOrdersDeliveryEnabled": {
+      "description": "True if the store accepts cash payment for delivery orders",
+      "type": "boolean",
+      "example": true
+    },
+    "CardOrdersPickupEnabled": {
+      "description": "True if the store accepts card payment for pickup orders",
+      "type": "boolean",
+      "example": true
+    },
+    "CashOrdersPickupEnabled": {
+      "description": "True if the store accepts cash payment for pickup orders",
+      "type": "boolean",
+      "example": true
+    },
+    "TipsEnabled": {
+      "description": "True if the store accepts tips",
+      "type": "boolean",
+      "example": true
+    },
+    "AutomaticallyAcceptOrders": {
+      "description": "True if the stores orders are automatically accepted in Flipdish",
+      "type": "boolean",
+      "example": true
+    },
+    "OpenForDelivery": {
+      "description": "True if the store is open for delivery",
+      "type": "boolean",
+      "example": true
+    },
+    "OpenForPickup": {
+      "description": "True if the store is open for pickup",
+      "type": "boolean",
+      "example": true
+    },
+    "MinimumPickupOrderAmount": {
+      "description": "Minimum pickup order amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "RequireCustomerNameForPickup": {
+      "description": "True if customer name required for pickup orders",
+      "type": "boolean",
+      "example": true
+    },
+    "GdprCustomerPhoneNumbers": {
+      "description": "Mask your customers phone numbers printed on receipts and reduce the amout of personally identifiable customer information that is exposed.",
+      "type": "boolean",
+      "example": true
+    },
+    "RequireCustomerNameForDelivery": {
+      "description": "True if customer name required for delivery orders",
+      "type": "boolean",
+      "example": true
+    },
+    "AllowChefNotes": {
+      "description": "True if the customer is allowed enter custom notes with their orders",
+      "type": "boolean",
+      "example": true
+    },
+    "EtaInPickupConfirmationSmsEnabled": {
+      "description": "True if order confirmation sms includes estimated time when order will be ready for collection",
+      "type": "boolean",
+      "example": true
+    },
+    "EtaInDeliveryConfirmationSmsEnabled": {
+      "description": "True if order confirmation sms includes estimated time when order will delivered",
+      "type": "boolean",
+      "example": true
+    },
+    "IsArchived": {
+      "description": "Is the Store Archived",
+      "type": "boolean",
+      "example": true
+    },
+    "IsPublished": {
+      "description": "Is the Store Published",
+      "type": "boolean",
+      "example": true
+    },
+    "Name": {
+      "description": "Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "EmailAddress": {
+      "description": "Email address (visible to customers)",
+      "maxLength": 100,
+      "minLength": 0,
+      "type": "string",
+      "example": "owner@example.com"
+    },
+    "StaffLanguage": {
+      "description": "Staff Language (used for communication with the staff)\r\nEmails, Printouts etc",
+      "type": "string",
+      "example": "string"
+    },
+    "SalesChannelTypes": {
+      "description": "Sales Channel Types",
+      "type": "array",
+      "items": {
+        "enum": [
+          "Web",
+          "App",
+          "Kiosk",
+          "Pos",
+          "None"
+        ],
+        "type": "string"
+      },
+      "example": [
+        "Web"
+      ]
+    },
+    "InheritanceConfigTypes": {
+      "description": "Inheritance Config Types",
+      "type": "array",
+      "items": {
+        "enum": [
+          "CollectionSettings"
+        ],
+        "type": "string"
+      },
+      "example": [
+        "CollectionSettings"
+      ]
+    }
+  }
+}

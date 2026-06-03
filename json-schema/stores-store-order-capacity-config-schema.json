@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/stores-store-order-capacity-config-schema.json",
+  "title": "StoreOrderCapacityConfig",
+  "description": "Represents one store's order capacity configuration",
+  "type": "object",
+  "properties": {
+    "StoreId": {
+      "format": "int32",
+      "description": "Store identifier",
+      "type": "integer",
+      "example": 500123
+    },
+    "DeliveryType": {
+      "description": "Signifies whether the order capacity configuration is for Delivery / Pickup",
+      "enum": [
+        "Delivery",
+        "Pickup"
+      ],
+      "type": "string",
+      "example": "Delivery"
+    },
+    "StoreIntervalInMinutes": {
+      "format": "int32",
+      "description": "Store Interval - time between orders, e.g. 10 minutes between each order time available to customer",
+      "type": "integer",
+      "example": 1
+    },
+    "OrderCapacityPeriods": {
+      "description": "Order capacity periods",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StoreOrderCapacityPeriod"
+      },
+      "example": []
+    }
+  }
+}

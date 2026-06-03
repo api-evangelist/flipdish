@@ -1,0 +1,93 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Catalog — CatalogImages"
+  description: >-
+    CatalogImages operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Upload Catalog Image. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Catalog Images
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "catalog-catalog-images"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Catalog — CatalogImages business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-catalog-images"
+          path: "/api/v1.0/{appId}/catalog/images"
+          operations:
+            - name: "UploadCatalogImage"
+              method: POST
+              description: "Flipdish Upload Catalog Image"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "catalog-catalog-images-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Catalog — CatalogImages."
+      resources:
+        - path: "/v1/{app-id}/catalog/images"
+          name: "app-id-catalog-images"
+          description: "REST surface for UploadCatalogImage."
+          operations:
+            - method: POST
+              name: "UploadCatalogImage"
+              description: "Flipdish Upload Catalog Image"
+              call: "catalog-catalog-images.UploadCatalogImage"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "catalog-catalog-images-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Catalog — CatalogImages."
+      tools:
+        - name: "upload-catalog-image"
+          description: "Flipdish Upload Catalog Image"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "catalog-catalog-images.UploadCatalogImage"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

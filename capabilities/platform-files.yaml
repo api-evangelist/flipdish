@@ -1,0 +1,93 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — Files"
+  description: >-
+    Files operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Download File. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Files
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-files"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — Files business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-files-download-file-id"
+          path: "/api/v1.0/{appId}/files/download/{fileId}"
+          operations:
+            - name: "DownloadFile"
+              method: GET
+              description: "Flipdish Download File"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "fileId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The file id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-files-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — Files."
+      resources:
+        - path: "/v1/{app-id}/files/download/{file-id}"
+          name: "app-id-files-download-file-id"
+          description: "REST surface for DownloadFile."
+          operations:
+            - method: GET
+              name: "DownloadFile"
+              description: "Flipdish Download File"
+              call: "platform-files.DownloadFile"
+              with:
+                "appId": "rest.appId"
+                "fileId": "rest.fileId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-files-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — Files."
+      tools:
+        - name: "download-file"
+          description: "Flipdish Download File"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-files.DownloadFile"
+          with:
+            "appId": "tools.appId"
+            "fileId": "tools.fileId"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,562 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Payments — Payouts"
+  description: >-
+    Payouts operations on the Flipdish Open API v1.0 (7 operations).
+    Lead operation: Flipdish Get Payout. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Payouts
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "payments-payouts"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Payments — Payouts business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-bankaccounts-bank-account-id-payouts-payout-id"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}"
+          operations:
+            - name: "GetPayout"
+              method: GET
+              description: "Flipdish Get Payout"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payouts-summaries"
+          path: "/api/v1.0/{appId}/payouts/summaries"
+          operations:
+            - name: "GetPayoutSummaries"
+              method: GET
+              description: "Flipdish Get Payout Summaries"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "startDate"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The start date query parameter."
+                - name: "endDate"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The end date query parameter."
+                - name: "payoutRequestIds.bankAccountIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "List of bank account ids to search for"
+                - name: "payoutRequestIds.states"
+                  in: query
+                  type: array
+                  required: false
+                  description: "List of {Flipdish.PublicModels.V1.Payouts.PayoutStatus} so search for"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-payouts"
+          path: "/api/v1.0/{appId}/payouts"
+          operations:
+            - name: "GetPayouts"
+              method: GET
+              description: "Flipdish Get Payouts"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "startDate"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The start date query parameter."
+                - name: "endDate"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The end date query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "payoutRequestIds.bankAccountIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "List of bank account ids to search for"
+                - name: "payoutRequestIds.states"
+                  in: query
+                  type: array
+                  required: false
+                  description: "List of {Flipdish.PublicModels.V1.Payouts.PayoutStatus} so search for"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-orders"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/orders"
+          operations:
+            - name: "GetPayoutOrders"
+              method: GET
+              description: "Flipdish Get Payout Orders"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-refunds"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/refunds"
+          operations:
+            - name: "GetPayoutRefunds"
+              method: GET
+              description: "Flipdish Get Payout Refunds"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-chargebacks"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/chargebacks"
+          operations:
+            - name: "GetPayoutChargebacks"
+              method: GET
+              description: "Flipdish Get Payout Chargebacks"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-othercharges"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/othercharges"
+          operations:
+            - name: "GetPayoutOtherCharges"
+              method: GET
+              description: "Flipdish Get Payout Other Charges"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "payoutId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The payout id path parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "payments-payouts-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Payments — Payouts."
+      resources:
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/payouts/{payout-id}"
+          name: "app-id-bankaccounts-bank-account-id-payouts-payout-id"
+          description: "REST surface for GetPayout."
+          operations:
+            - method: GET
+              name: "GetPayout"
+              description: "Flipdish Get Payout"
+              call: "payments-payouts.GetPayout"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payouts/summaries"
+          name: "app-id-payouts-summaries"
+          description: "REST surface for GetPayoutSummaries."
+          operations:
+            - method: GET
+              name: "GetPayoutSummaries"
+              description: "Flipdish Get Payout Summaries"
+              call: "payments-payouts.GetPayoutSummaries"
+              with:
+                "appId": "rest.appId"
+                "startDate": "rest.startDate"
+                "endDate": "rest.endDate"
+                "payoutRequestIds.bankAccountIds": "rest.payoutRequestIds.bankAccountIds"
+                "payoutRequestIds.states": "rest.payoutRequestIds.states"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/payouts"
+          name: "app-id-payouts"
+          description: "REST surface for GetPayouts."
+          operations:
+            - method: GET
+              name: "GetPayouts"
+              description: "Flipdish Get Payouts"
+              call: "payments-payouts.GetPayouts"
+              with:
+                "appId": "rest.appId"
+                "startDate": "rest.startDate"
+                "endDate": "rest.endDate"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "payoutRequestIds.bankAccountIds": "rest.payoutRequestIds.bankAccountIds"
+                "payoutRequestIds.states": "rest.payoutRequestIds.states"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/payouts/{payout-id}/orders"
+          name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-orders"
+          description: "REST surface for GetPayoutOrders."
+          operations:
+            - method: GET
+              name: "GetPayoutOrders"
+              description: "Flipdish Get Payout Orders"
+              call: "payments-payouts.GetPayoutOrders"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "storeIds": "rest.storeIds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/payouts/{payout-id}/refunds"
+          name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-refunds"
+          description: "REST surface for GetPayoutRefunds."
+          operations:
+            - method: GET
+              name: "GetPayoutRefunds"
+              description: "Flipdish Get Payout Refunds"
+              call: "payments-payouts.GetPayoutRefunds"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "storeIds": "rest.storeIds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/payouts/{payout-id}/chargebacks"
+          name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-chargebacks"
+          description: "REST surface for GetPayoutChargebacks."
+          operations:
+            - method: GET
+              name: "GetPayoutChargebacks"
+              description: "Flipdish Get Payout Chargebacks"
+              call: "payments-payouts.GetPayoutChargebacks"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "storeIds": "rest.storeIds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/payouts/{payout-id}/othercharges"
+          name: "app-id-bankaccounts-bank-account-id-payouts-payout-id-othercharges"
+          description: "REST surface for GetPayoutOtherCharges."
+          operations:
+            - method: GET
+              name: "GetPayoutOtherCharges"
+              description: "Flipdish Get Payout Other Charges"
+              call: "payments-payouts.GetPayoutOtherCharges"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "payoutId": "rest.payoutId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "storeIds": "rest.storeIds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "payments-payouts-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Payments — Payouts."
+      tools:
+        - name: "get-payout"
+          description: "Flipdish Get Payout"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayout"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-summaries"
+          description: "Flipdish Get Payout Summaries"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayoutSummaries"
+          with:
+            "appId": "tools.appId"
+            "startDate": "tools.startDate"
+            "endDate": "tools.endDate"
+            "payoutRequestIds.bankAccountIds": "tools.payoutRequestIds.bankAccountIds"
+            "payoutRequestIds.states": "tools.payoutRequestIds.states"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payouts"
+          description: "Flipdish Get Payouts"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayouts"
+          with:
+            "appId": "tools.appId"
+            "startDate": "tools.startDate"
+            "endDate": "tools.endDate"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "payoutRequestIds.bankAccountIds": "tools.payoutRequestIds.bankAccountIds"
+            "payoutRequestIds.states": "tools.payoutRequestIds.states"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-orders"
+          description: "Flipdish Get Payout Orders"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayoutOrders"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "storeIds": "tools.storeIds"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-refunds"
+          description: "Flipdish Get Payout Refunds"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayoutRefunds"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "storeIds": "tools.storeIds"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-chargebacks"
+          description: "Flipdish Get Payout Chargebacks"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayoutChargebacks"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "storeIds": "tools.storeIds"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-payout-other-charges"
+          description: "Flipdish Get Payout Other Charges"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-payouts.GetPayoutOtherCharges"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "payoutId": "tools.payoutId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "storeIds": "tools.storeIds"
+          outputParameters:
+            - type: object
+              mapping: "$."

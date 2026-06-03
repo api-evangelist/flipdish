@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/payments-stripe-connected-account-schema.json",
+  "title": "StripeConnectedAccount",
+  "description": "Represents a Stripe custom connected account",
+  "type": "object",
+  "properties": {
+    "FlipdishConnectedAccountId": {
+      "format": "int32",
+      "description": "Flipdish connected account identifier",
+      "type": "integer",
+      "example": 500123
+    },
+    "StripeId": {
+      "description": "Stripe's own connected account identifier",
+      "type": "string",
+      "example": "500123"
+    },
+    "WhitelabelConfigId": {
+      "format": "int32",
+      "description": "Id of the WhitelabelConfig the connected account is assigned to",
+      "type": "integer",
+      "example": 500123
+    },
+    "CardPaymentsStatus": {
+      "description": "Card payments capability status (Inactive, Pending, Active, Unrequested)",
+      "enum": [
+        "Inactive",
+        "Pending",
+        "Active",
+        "Unrequested"
+      ],
+      "type": "string",
+      "example": "Inactive"
+    },
+    "TransfersStatus": {
+      "description": "Transfers capability status (Inactive, Pending, Active, Unrequested)",
+      "enum": [
+        "Inactive",
+        "Pending",
+        "Active",
+        "Unrequested"
+      ],
+      "type": "string",
+      "example": "Inactive"
+    },
+    "AccountStatus": {
+      "description": "Current status of the account",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "AdditionalInformationRequired",
+        "PendingVerification",
+        "Unverified",
+        "Rejected",
+        "UpdateExternalAccount",
+        "PlatformPaused"
+      ],
+      "type": "string",
+      "example": "Disabled"
+    },
+    "PayoutsEnabled": {
+      "description": "Payouts Enabled status",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    },
+    "PaymentsEnabled": {
+      "description": "Payments Enabled status",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    }
+  }
+}

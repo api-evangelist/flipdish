@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/catalog-create-product-reference-structure.json",
+  "name": "CreateProductReference",
+  "description": "Information to create a reference to a {Flipdish.Menus.PublicModels.V1.Catalog.Product}",
+  "type": "object",
+  "properties": {
+    "CatalogItemId": {
+      "description": "Identifier of the CatalogItemId to use as SubProduct",
+      "maxLength": 30,
+      "minLength": 0,
+      "type": "string",
+      "example": "500123"
+    },
+    "ProductType": {
+      "description": "Type of the SupProduct",
+      "enum": [
+        "Product",
+        "Modifier"
+      ],
+      "type": "string",
+      "example": "Product"
+    },
+    "PreselectedQuantity": {
+      "description": "Quantity of the modifier that will be set when the parent product is placed in the basket",
+      "type": "int32",
+      "example": 3
+    }
+  },
+  "required": [
+    "CatalogItemId",
+    "ProductType"
+  ]
+}

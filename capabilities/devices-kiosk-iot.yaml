@@ -1,0 +1,125 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Devices — KioskIot"
+  description: >-
+    KioskIot operations on the Flipdish Open API v1.0 (2 operations).
+    Lead operation: Flipdish Get Kiosk Iot Connection. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Kiosk Iot
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "devices-kiosk-iot"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Devices — KioskIot business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "kioskiot-connect"
+          path: "/api/v1.0/kioskiot/connect"
+          operations:
+            - name: "GetKioskIotConnection"
+              method: POST
+              description: "Flipdish Get Kiosk Iot Connection"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-kioskiot-timeseries-query"
+          path: "/api/v1.0/{appId}/kioskiot/timeseries/query"
+          operations:
+            - name: "QueryTelemetrySeries"
+              method: POST
+              description: "Flipdish Query Telemetry Series"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "devices-kiosk-iot-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Devices — KioskIot."
+      resources:
+        - path: "/v1/kioskiot/connect"
+          name: "kioskiot-connect"
+          description: "REST surface for GetKioskIotConnection."
+          operations:
+            - method: POST
+              name: "GetKioskIotConnection"
+              description: "Flipdish Get Kiosk Iot Connection"
+              call: "devices-kiosk-iot.GetKioskIotConnection"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/kioskiot/timeseries/query"
+          name: "app-id-kioskiot-timeseries-query"
+          description: "REST surface for QueryTelemetrySeries."
+          operations:
+            - method: POST
+              name: "QueryTelemetrySeries"
+              description: "Flipdish Query Telemetry Series"
+              call: "devices-kiosk-iot.QueryTelemetrySeries"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "devices-kiosk-iot-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Devices — KioskIot."
+      tools:
+        - name: "get-kiosk-iot-connection"
+          description: "Flipdish Get Kiosk Iot Connection"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: false
+          call: "devices-kiosk-iot.GetKioskIotConnection"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "query-telemetry-series"
+          description: "Flipdish Query Telemetry Series"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: false
+          call: "devices-kiosk-iot.QueryTelemetrySeries"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

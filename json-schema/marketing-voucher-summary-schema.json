@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/marketing-voucher-summary-schema.json",
+  "title": "VoucherSummary",
+  "description": "Voucher Summary",
+  "type": "object",
+  "properties": {
+    "VoucherId": {
+      "format": "int32",
+      "description": "Voucher Id",
+      "type": "integer",
+      "example": 500123
+    },
+    "Code": {
+      "description": "Voucher Code",
+      "type": "string",
+      "example": "string"
+    },
+    "Status": {
+      "description": "Voucher Status",
+      "enum": [
+        "Valid",
+        "NotYetValid",
+        "Expired",
+        "Used",
+        "Disabled"
+      ],
+      "type": "string",
+      "example": "Valid"
+    },
+    "VoucherType": {
+      "description": "Voucher Type",
+      "enum": [
+        "PercentageDiscount",
+        "LumpDiscount",
+        "AddItem",
+        "CreditNote",
+        "FreeDelivery"
+      ],
+      "type": "string",
+      "example": "PercentageDiscount"
+    },
+    "VoucherSubType": {
+      "description": "Voucher Sub Type",
+      "enum": [
+        "None",
+        "SignUp",
+        "Loyalty",
+        "Loyalty25",
+        "Retention",
+        "SecondaryRetention",
+        "Custom"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "Description": {
+      "description": "Voucher Description (Visible on printout)",
+      "type": "string",
+      "example": "string"
+    },
+    "IsEnabled": {
+      "description": "Is voucher enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "StoreNames": {
+      "description": "Store names associated with this voucher",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Example Name"
+      ]
+    },
+    "IsAvailableOnAllStores": {
+      "description": "True if the voucher is available on all active stores in the app",
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

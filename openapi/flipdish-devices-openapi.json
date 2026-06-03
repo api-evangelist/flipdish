@@ -1,0 +1,4680 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Flipdish API - Devices",
+    "version": "v1.0",
+    "description": "Flipdish Open API v1.0 \u2014 Devices operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.",
+    "contact": {
+      "name": "Flipdish Support",
+      "email": "help@flipdish.com",
+      "url": "https://help.flipdish.com"
+    },
+    "x-generated-from": "https://api.flipdish.co/swagger/docs/v1.0",
+    "x-last-validated": "2026-06-02"
+  },
+  "servers": [
+    {
+      "url": "https://api.flipdish.co",
+      "description": "Flipdish production API"
+    }
+  ],
+  "security": [
+    {
+      "oauth2": [
+        "api"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "CardReaders",
+      "description": "Operations for Card Readers."
+    },
+    {
+      "name": "Device",
+      "description": "Operations for Device."
+    },
+    {
+      "name": "Heartbeat",
+      "description": "Operations for Heartbeat."
+    },
+    {
+      "name": "KioskEntitlements",
+      "description": "Operations for Kiosk Entitlements."
+    },
+    {
+      "name": "KioskIot",
+      "description": "Operations for Kiosk Iot."
+    },
+    {
+      "name": "TerminalIot",
+      "description": "Operations for Terminal Iot."
+    }
+  ],
+  "paths": {
+    "/api/v1.0/{appId}/stripeterminal/connectiontoken": {
+      "get": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "GetStripeConnectionToken",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_StripeTerminalConnectionToken_"
+                },
+                "examples": {
+                  "GetStripeConnectionToken200Example": {
+                    "summary": "Default GetStripeConnectionToken 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Token": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetStripeConnectionToken400Example": {
+                    "summary": "Default GetStripeConnectionToken 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetStripeConnectionToken401Example": {
+                    "summary": "Default GetStripeConnectionToken 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetStripeConnectionToken403Example": {
+                    "summary": "Default GetStripeConnectionToken 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetStripeConnectionToken500Example": {
+                    "summary": "Default GetStripeConnectionToken 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Get Stripe Connection Token",
+        "description": "Get Stripe Connection Token via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/stripeterminal/connectiontoken).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/payments/terminals/stripe/{readerId}": {
+      "get": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "CardReaders_GetReader",
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The reader id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_CardReader_"
+                },
+                "examples": {
+                  "CardReaders_GetReader200Example": {
+                    "summary": "Default CardReaders_GetReader 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Id": "500123",
+                        "DeviceSoftwareVersion": "string",
+                        "SerialNumber": "string",
+                        "Status": "Active",
+                        "RegistrationCode": "string",
+                        "DeviceType": "string",
+                        "Deleted": true,
+                        "Action": {
+                          "ActionState": "string",
+                          "FailureCode": "string",
+                          "FailureMessage": "string",
+                          "Type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CardReaders_GetReader400Example": {
+                    "summary": "Default CardReaders_GetReader 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CardReaders_GetReader401Example": {
+                    "summary": "Default CardReaders_GetReader 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CardReaders_GetReader403Example": {
+                    "summary": "Default CardReaders_GetReader 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CardReaders_GetReader500Example": {
+                    "summary": "Default CardReaders_GetReader 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Card Readers_Get Reader",
+        "description": "Card Readers_Get Reader via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/payments/terminals/stripe/{readerId}).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/status": {
+      "get": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "GetBluetoothTerminalStatus",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_BluetoothTerminalStatus_"
+                },
+                "examples": {
+                  "GetBluetoothTerminalStatus200Example": {
+                    "summary": "Default GetBluetoothTerminalStatus 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "SerialNumber": "string",
+                        "SoftwareVersion": "string",
+                        "DeviceType": "CHIPPER_2X",
+                        "Status": "Not_Connected",
+                        "BatteryLevel": 1.0,
+                        "UpdateTime": "2026-06-02T12:00:00Z",
+                        "ReaderId": "500123"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetBluetoothTerminalStatus400Example": {
+                    "summary": "Default GetBluetoothTerminalStatus 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetBluetoothTerminalStatus401Example": {
+                    "summary": "Default GetBluetoothTerminalStatus 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetBluetoothTerminalStatus403Example": {
+                    "summary": "Default GetBluetoothTerminalStatus 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetBluetoothTerminalStatus500Example": {
+                    "summary": "Default GetBluetoothTerminalStatus 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Get Bluetooth Terminal Status",
+        "description": "Get Bluetooth Terminal Status via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/status).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/stripeterminal/location": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "GenerateStripeTerminalLocation",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeoPointRequest"
+              },
+              "examples": {
+                "GenerateStripeTerminalLocationRequestExample": {
+                  "summary": "Default GenerateStripeTerminalLocation request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "Latitude": 1.0,
+                    "Longitude": 1.0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_StripeTerminalLocation_"
+                },
+                "examples": {
+                  "GenerateStripeTerminalLocation200Example": {
+                    "summary": "Default GenerateStripeTerminalLocation 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Location": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GenerateStripeTerminalLocation400Example": {
+                    "summary": "Default GenerateStripeTerminalLocation 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GenerateStripeTerminalLocation401Example": {
+                    "summary": "Default GenerateStripeTerminalLocation 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GenerateStripeTerminalLocation403Example": {
+                    "summary": "Default GenerateStripeTerminalLocation 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GenerateStripeTerminalLocation500Example": {
+                    "summary": "Default GenerateStripeTerminalLocation 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Generate Stripe Terminal Location",
+        "description": "Generate Stripe Terminal Location via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/stripeterminal/location).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/payments/terminals/stripe/register": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "RegisterStripeTerminal",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardReaderRegistrationRequest"
+              },
+              "examples": {
+                "RegisterStripeTerminalRequestExample": {
+                  "summary": "Default RegisterStripeTerminal request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "RegistrationCode": "string",
+                    "KioskDeviceId": "500123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_CardReader_"
+                },
+                "examples": {
+                  "RegisterStripeTerminal200Example": {
+                    "summary": "Default RegisterStripeTerminal 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Id": "500123",
+                        "DeviceSoftwareVersion": "string",
+                        "SerialNumber": "string",
+                        "Status": "Active",
+                        "RegistrationCode": "string",
+                        "DeviceType": "string",
+                        "Deleted": true,
+                        "Action": {
+                          "ActionState": "string",
+                          "FailureCode": "string",
+                          "FailureMessage": "string",
+                          "Type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "RegisterStripeTerminal400Example": {
+                    "summary": "Default RegisterStripeTerminal 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "RegisterStripeTerminal401Example": {
+                    "summary": "Default RegisterStripeTerminal 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "RegisterStripeTerminal403Example": {
+                    "summary": "Default RegisterStripeTerminal 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "RegisterStripeTerminal500Example": {
+                    "summary": "Default RegisterStripeTerminal 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Register Stripe Terminal",
+        "description": "Register Stripe Terminal via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/payments/terminals/stripe/register).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/payments/terminals/stripe/{readerId}/cancel_action": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "CancelReaderAction",
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The reader id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_CardReader_"
+                },
+                "examples": {
+                  "CancelReaderAction200Example": {
+                    "summary": "Default CancelReaderAction 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Id": "500123",
+                        "DeviceSoftwareVersion": "string",
+                        "SerialNumber": "string",
+                        "Status": "Active",
+                        "RegistrationCode": "string",
+                        "DeviceType": "string",
+                        "Deleted": true,
+                        "Action": {
+                          "ActionState": "string",
+                          "FailureCode": "string",
+                          "FailureMessage": "string",
+                          "Type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelReaderAction400Example": {
+                    "summary": "Default CancelReaderAction 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelReaderAction401Example": {
+                    "summary": "Default CancelReaderAction 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelReaderAction403Example": {
+                    "summary": "Default CancelReaderAction 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelReaderAction500Example": {
+                    "summary": "Default CancelReaderAction 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Cancel Reader Action",
+        "description": "Cancel Reader Action via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/payments/terminals/stripe/{readerId}/cancel_action).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/payments/terminals/stripe/{readerId}/processPaymentIntent": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "InitiateReaderProcessPaymentIntent",
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The reader id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPaymentIntentRequest"
+              },
+              "examples": {
+                "InitiateReaderProcessPaymentIntentRequestExample": {
+                  "summary": "Default InitiateReaderProcessPaymentIntent request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "PaymentIntentId": "500123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_CardReader_"
+                },
+                "examples": {
+                  "InitiateReaderProcessPaymentIntent200Example": {
+                    "summary": "Default InitiateReaderProcessPaymentIntent 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Id": "500123",
+                        "DeviceSoftwareVersion": "string",
+                        "SerialNumber": "string",
+                        "Status": "Active",
+                        "RegistrationCode": "string",
+                        "DeviceType": "string",
+                        "Deleted": true,
+                        "Action": {
+                          "ActionState": "string",
+                          "FailureCode": "string",
+                          "FailureMessage": "string",
+                          "Type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateReaderProcessPaymentIntent400Example": {
+                    "summary": "Default InitiateReaderProcessPaymentIntent 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateReaderProcessPaymentIntent401Example": {
+                    "summary": "Default InitiateReaderProcessPaymentIntent 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateReaderProcessPaymentIntent403Example": {
+                    "summary": "Default InitiateReaderProcessPaymentIntent 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateReaderProcessPaymentIntent500Example": {
+                    "summary": "Default InitiateReaderProcessPaymentIntent 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Initiate Reader Process Payment Intent",
+        "description": "Initiate Reader Process Payment Intent via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/payments/terminals/stripe/{readerId}/processPaymentIntent).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/pair": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "InitiateKioskBluetoothPairingMode",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "terminalType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CHIPPER_2X",
+                "COTS_DEVICE",
+                "VERIFONE_P400",
+                "WISEPAD_3",
+                "WISEPOS_E"
+              ]
+            },
+            "description": "The terminal type path parameter.",
+            "example": "CHIPPER_2X"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothPairingMode400Example": {
+                    "summary": "Default InitiateKioskBluetoothPairingMode 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothPairingMode401Example": {
+                    "summary": "Default InitiateKioskBluetoothPairingMode 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothPairingMode403Example": {
+                    "summary": "Default InitiateKioskBluetoothPairingMode 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothPairingMode500Example": {
+                    "summary": "Default InitiateKioskBluetoothPairingMode 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Initiate Kiosk Bluetooth Pairing Mode",
+        "description": "Initiate Kiosk Bluetooth Pairing Mode via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/pair).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/cancelUpdate": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "CancelCurrentlyInitiatedBluetoothDeviceUpdate",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "terminalType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CHIPPER_2X",
+                "COTS_DEVICE",
+                "VERIFONE_P400",
+                "WISEPAD_3",
+                "WISEPOS_E"
+              ]
+            },
+            "description": "The terminal type path parameter.",
+            "example": "CHIPPER_2X"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelCurrentlyInitiatedBluetoothDeviceUpdate400Example": {
+                    "summary": "Default CancelCurrentlyInitiatedBluetoothDeviceUpdate 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelCurrentlyInitiatedBluetoothDeviceUpdate401Example": {
+                    "summary": "Default CancelCurrentlyInitiatedBluetoothDeviceUpdate 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelCurrentlyInitiatedBluetoothDeviceUpdate403Example": {
+                    "summary": "Default CancelCurrentlyInitiatedBluetoothDeviceUpdate 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "CancelCurrentlyInitiatedBluetoothDeviceUpdate500Example": {
+                    "summary": "Default CancelCurrentlyInitiatedBluetoothDeviceUpdate 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Cancel Currently Initiated Bluetooth Device Update",
+        "description": "Cancel Currently Initiated Bluetooth Device Update via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/cancelUpdate).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/installUpdate": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "InitiateKioskBluetoothUpdateInstall",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "terminalType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CHIPPER_2X",
+                "COTS_DEVICE",
+                "VERIFONE_P400",
+                "WISEPAD_3",
+                "WISEPOS_E"
+              ]
+            },
+            "description": "The terminal type path parameter.",
+            "example": "CHIPPER_2X"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothUpdateInstall400Example": {
+                    "summary": "Default InitiateKioskBluetoothUpdateInstall 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothUpdateInstall401Example": {
+                    "summary": "Default InitiateKioskBluetoothUpdateInstall 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothUpdateInstall403Example": {
+                    "summary": "Default InitiateKioskBluetoothUpdateInstall 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateKioskBluetoothUpdateInstall500Example": {
+                    "summary": "Default InitiateKioskBluetoothUpdateInstall 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Initiate Kiosk Bluetooth Update Install",
+        "description": "Initiate Kiosk Bluetooth Update Install via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/installUpdate).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/checkForUpdate": {
+      "post": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "InitiateBluetoothTerminalDeviceUpdateCheck",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "terminalType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The terminal type path parameter.",
+            "example": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateBluetoothTerminalDeviceUpdateCheck400Example": {
+                    "summary": "Default InitiateBluetoothTerminalDeviceUpdateCheck 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateBluetoothTerminalDeviceUpdateCheck401Example": {
+                    "summary": "Default InitiateBluetoothTerminalDeviceUpdateCheck 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateBluetoothTerminalDeviceUpdateCheck403Example": {
+                    "summary": "Default InitiateBluetoothTerminalDeviceUpdateCheck 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "InitiateBluetoothTerminalDeviceUpdateCheck500Example": {
+                    "summary": "Default InitiateBluetoothTerminalDeviceUpdateCheck 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Initiate Bluetooth Terminal Device Update Check",
+        "description": "Initiate Bluetooth Terminal Device Update Check via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/{terminalType}/checkForUpdate).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/payments/terminals/stripe/unregister": {
+      "delete": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "UnRegisterTerminal",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnRegisterCardReaderRequest"
+              },
+              "examples": {
+                "UnRegisterTerminalRequestExample": {
+                  "summary": "Default UnRegisterTerminal request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "ReaderId": "500123",
+                    "KioskDeviceId": "500123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_CardReader_"
+                },
+                "examples": {
+                  "UnRegisterTerminal200Example": {
+                    "summary": "Default UnRegisterTerminal 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Id": "500123",
+                        "DeviceSoftwareVersion": "string",
+                        "SerialNumber": "string",
+                        "Status": "Active",
+                        "RegistrationCode": "string",
+                        "DeviceType": "string",
+                        "Deleted": true,
+                        "Action": {
+                          "ActionState": "string",
+                          "FailureCode": "string",
+                          "FailureMessage": "string",
+                          "Type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnRegisterTerminal400Example": {
+                    "summary": "Default UnRegisterTerminal 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnRegisterTerminal401Example": {
+                    "summary": "Default UnRegisterTerminal 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnRegisterTerminal403Example": {
+                    "summary": "Default UnRegisterTerminal 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnRegisterTerminal500Example": {
+                    "summary": "Default UnRegisterTerminal 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Un Register Terminal",
+        "description": "Un Register Terminal via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/payments/terminals/stripe/unregister).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/unpair": {
+      "delete": {
+        "tags": [
+          "CardReaders"
+        ],
+        "operationId": "UnpairCurrentlyPairedBluetoothDevice",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnpairCurrentlyPairedBluetoothDevice400Example": {
+                    "summary": "Default UnpairCurrentlyPairedBluetoothDevice 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnpairCurrentlyPairedBluetoothDevice401Example": {
+                    "summary": "Default UnpairCurrentlyPairedBluetoothDevice 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnpairCurrentlyPairedBluetoothDevice403Example": {
+                    "summary": "Default UnpairCurrentlyPairedBluetoothDevice 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "UnpairCurrentlyPairedBluetoothDevice500Example": {
+                    "summary": "Default UnpairCurrentlyPairedBluetoothDevice 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Unpair Currently Paired Bluetooth Device",
+        "description": "Unpair Currently Paired Bluetooth Device via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/cardreaders/kiosk/{deviceId}/bluetooth/unpair).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/devices/device/{deviceModel}/{deviceId}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "GetDeviceDetails",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "deviceModel",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device model path parameter.",
+            "example": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_ClientDevice_"
+                },
+                "examples": {
+                  "GetDeviceDetails200Example": {
+                    "summary": "Default GetDeviceDetails 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "DeviceModel": "string",
+                        "DeviceId": "500123",
+                        "DeviceName": "Example Name"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetDeviceDetails400Example": {
+                    "summary": "Default GetDeviceDetails 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetDeviceDetails401Example": {
+                    "summary": "Default GetDeviceDetails 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetDeviceDetails403Example": {
+                    "summary": "Default GetDeviceDetails 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetDeviceDetails500Example": {
+                    "summary": "Default GetDeviceDetails 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Get Device Details",
+        "description": "Get Device Details via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/devices/device/{deviceModel}/{deviceId}).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/devices/search": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "SearchDevices",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          },
+          {
+            "name": "storeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "The store id query parameter.",
+            "example": 500123
+          },
+          {
+            "name": "deviceModel",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The device model query parameter.",
+            "example": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiArrayResult_ClientDeviceSummary_"
+                },
+                "examples": {
+                  "SearchDevices200Example": {
+                    "summary": "Default SearchDevices 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "SearchDevices400Example": {
+                    "summary": "Default SearchDevices 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "SearchDevices401Example": {
+                    "summary": "Default SearchDevices 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "SearchDevices403Example": {
+                    "summary": "Default SearchDevices 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "SearchDevices500Example": {
+                    "summary": "Default SearchDevices 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Search Devices",
+        "description": "Search Devices via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/devices/search).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/devices/assign": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "AssignDevice",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeviceAssignEnrolledDevice"
+              },
+              "examples": {
+                "AssignDeviceRequestExample": {
+                  "summary": "Default AssignDevice request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "DeviceModel": "string",
+                    "PinCode": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_ClientDeviceEnrollmentResult_"
+                },
+                "examples": {
+                  "AssignDevice200Example": {
+                    "summary": "Default AssignDevice 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "PinCode": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "AssignDevice400Example": {
+                    "summary": "Default AssignDevice 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "AssignDevice401Example": {
+                    "summary": "Default AssignDevice 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "AssignDevice403Example": {
+                    "summary": "Default AssignDevice 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "AssignDevice500Example": {
+                    "summary": "Default AssignDevice 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Assign Device",
+        "description": "Assign Device via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/devices/assign).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/devices/enroll": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "EnrollDevice",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeviceEnroll"
+              },
+              "examples": {
+                "EnrollDeviceRequestExample": {
+                  "summary": "Default EnrollDevice request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "DeviceModel": "string",
+                    "DeviceId": "500123",
+                    "DeviceName": "Example Name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_ClientDeviceEnrollmentResult_"
+                },
+                "examples": {
+                  "EnrollDevice200Example": {
+                    "summary": "Default EnrollDevice 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "PinCode": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "EnrollDevice400Example": {
+                    "summary": "Default EnrollDevice 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "EnrollDevice401Example": {
+                    "summary": "Default EnrollDevice 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "EnrollDevice403Example": {
+                    "summary": "Default EnrollDevice 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "EnrollDevice500Example": {
+                    "summary": "Default EnrollDevice 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Enroll Device",
+        "description": "Enroll Device via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/devices/enroll).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/heartbeat": {
+      "get": {
+        "tags": [
+          "Heartbeat"
+        ],
+        "operationId": "Ping",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiStringResult"
+                },
+                "examples": {
+                  "Ping200Example": {
+                    "summary": "Default Ping 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Ping400Example": {
+                    "summary": "Default Ping 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Ping401Example": {
+                    "summary": "Default Ping 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Ping403Example": {
+                    "summary": "Default Ping 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Ping500Example": {
+                    "summary": "Default Ping 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Ping",
+        "description": "Ping via the Flipdish Open API v1.0 (GET /api/v1.0/heartbeat).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      },
+      "head": {
+        "tags": [
+          "Heartbeat"
+        ],
+        "operationId": "HeadPing",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiStringResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiStringResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiStringResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiStringResult"
+                }
+              },
+              "Data": {
+                "examples": {
+                  "response": {
+                    "value": "foobar"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1.0/heartbeat/Hostname": {
+      "get": {
+        "tags": [
+          "Heartbeat"
+        ],
+        "operationId": "Hostname",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Hostname200Example": {
+                    "summary": "Default Hostname 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Hostname400Example": {
+                    "summary": "Default Hostname 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Hostname401Example": {
+                    "summary": "Default Hostname 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Hostname403Example": {
+                    "summary": "Default Hostname 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "Hostname500Example": {
+                    "summary": "Default Hostname 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Hostname",
+        "description": "Hostname via the Flipdish Open API v1.0 (GET /api/v1.0/heartbeat/Hostname).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      },
+      "head": {
+        "tags": [
+          "Heartbeat"
+        ],
+        "operationId": "HeadHostname",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiErrorResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiUnauthorizedResult"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiForbiddenResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1.0/orgs/{orgId}/kiosk/entitlements": {
+      "get": {
+        "tags": [
+          "KioskEntitlements"
+        ],
+        "operationId": "QueryKioskEntitlementsByOrgId",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The org id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_KioskEntitlementsResult_"
+                },
+                "examples": {
+                  "QueryKioskEntitlementsByOrgId200Example": {
+                    "summary": "Default QueryKioskEntitlementsByOrgId 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "EntitledQuantity": 3,
+                        "UsedQuantity": 3
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryKioskEntitlementsByOrgId400Example": {
+                    "summary": "Default QueryKioskEntitlementsByOrgId 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryKioskEntitlementsByOrgId401Example": {
+                    "summary": "Default QueryKioskEntitlementsByOrgId 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryKioskEntitlementsByOrgId403Example": {
+                    "summary": "Default QueryKioskEntitlementsByOrgId 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryKioskEntitlementsByOrgId500Example": {
+                    "summary": "Default QueryKioskEntitlementsByOrgId 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Query Kiosk Entitlements by Org Id",
+        "description": "Query Kiosk Entitlements by Org Id via the Flipdish Open API v1.0 (GET /api/v1.0/orgs/{orgId}/kiosk/entitlements).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/kioskiot/connect": {
+      "post": {
+        "tags": [
+          "KioskIot"
+        ],
+        "operationId": "GetKioskIotConnection",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_KioskIotConnectionParameters_"
+                },
+                "examples": {
+                  "GetKioskIotConnection200Example": {
+                    "summary": "Default GetKioskIotConnection 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "ConnectionString": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetKioskIotConnection400Example": {
+                    "summary": "Default GetKioskIotConnection 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetKioskIotConnection401Example": {
+                    "summary": "Default GetKioskIotConnection 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetKioskIotConnection403Example": {
+                    "summary": "Default GetKioskIotConnection 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetKioskIotConnection500Example": {
+                    "summary": "Default GetKioskIotConnection 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Get Kiosk Iot Connection",
+        "description": "Get Kiosk Iot Connection via the Flipdish Open API v1.0 (POST /api/v1.0/kioskiot/connect).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/{appId}/kioskiot/timeseries/query": {
+      "post": {
+        "tags": [
+          "KioskIot"
+        ],
+        "operationId": "QueryTelemetrySeries",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The app id path parameter.",
+            "example": "500123"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TelemetrySeriesQueryParameters"
+              },
+              "examples": {
+                "QueryTelemetrySeriesRequestExample": {
+                  "summary": "Default QueryTelemetrySeries request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "KioskId": "500123",
+                    "Variables": [
+                      "string"
+                    ],
+                    "StartDate": "2026-06-02T12:00:00Z",
+                    "EndDate": "2026-06-02T12:00:00Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_TelemetrySeriesResult_"
+                },
+                "examples": {
+                  "QueryTelemetrySeries200Example": {
+                    "summary": "Default QueryTelemetrySeries 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "Timestamps": [
+                          "2026-06-02T12:00:00Z"
+                        ],
+                        "Properties": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryTelemetrySeries400Example": {
+                    "summary": "Default QueryTelemetrySeries 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryTelemetrySeries401Example": {
+                    "summary": "Default QueryTelemetrySeries 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryTelemetrySeries403Example": {
+                    "summary": "Default QueryTelemetrySeries 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "QueryTelemetrySeries500Example": {
+                    "summary": "Default QueryTelemetrySeries 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Query Telemetry Series",
+        "description": "Query Telemetry Series via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/kioskiot/timeseries/query).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/api/v1.0/terminaliot/connect": {
+      "post": {
+        "tags": [
+          "TerminalIot"
+        ],
+        "operationId": "GetTerminalIotConnection",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestApiResult_KioskIotConnectionParameters_"
+                },
+                "examples": {
+                  "GetTerminalIotConnection200Example": {
+                    "summary": "Default GetTerminalIotConnection 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "Data": {
+                        "ConnectionString": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetTerminalIotConnection400Example": {
+                    "summary": "Default GetTerminalIotConnection 400 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetTerminalIotConnection401Example": {
+                    "summary": "Default GetTerminalIotConnection 401 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Successful authentication, but authorization has been denied for this request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetTerminalIotConnection403Example": {
+                    "summary": "Default GetTerminalIotConnection 403 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlipdishError"
+                },
+                "examples": {
+                  "GetTerminalIotConnection500Example": {
+                    "summary": "Default GetTerminalIotConnection 500 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "error": {
+                        "errorMessage": "Invalid or missing parameters.",
+                        "errorCode": "BadRequest",
+                        "details": "Validation failed for field 'storeId'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "api"
+            ]
+          }
+        ],
+        "summary": "Flipdish Get Terminal Iot Connection",
+        "description": "Get Terminal Iot Connection via the Flipdish Open API v1.0 (POST /api/v1.0/terminaliot/connect).",
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BluetoothTerminalStatus": {
+        "description": "Status of the bluetooth terminal",
+        "type": "object",
+        "properties": {
+          "SerialNumber": {
+            "description": "Serial Number",
+            "type": "string",
+            "example": "string"
+          },
+          "SoftwareVersion": {
+            "description": "Software Version",
+            "type": "string",
+            "example": "string"
+          },
+          "DeviceType": {
+            "description": "Device Type",
+            "enum": [
+              "CHIPPER_2X",
+              "COTS_DEVICE",
+              "VERIFONE_P400",
+              "WISEPAD_3",
+              "WISEPOS_E"
+            ],
+            "type": "string",
+            "example": "CHIPPER_2X"
+          },
+          "Status": {
+            "description": "Device Status",
+            "enum": [
+              "Not_Connected",
+              "Connecting",
+              "Connected",
+              "Online",
+              "Offline"
+            ],
+            "type": "string",
+            "example": "Not_Connected"
+          },
+          "BatteryLevel": {
+            "format": "float",
+            "description": "Indication of the battery level from 0 to 1",
+            "type": "number",
+            "nullable": true,
+            "example": 1.0
+          },
+          "UpdateTime": {
+            "format": "date-time",
+            "description": "Last time the status was updated",
+            "type": "string",
+            "example": "2026-06-02T12:00:00Z"
+          },
+          "ReaderId": {
+            "description": "ReaderId for Stripe Terminal",
+            "type": "string",
+            "example": "500123"
+          }
+        }
+      },
+      "CardReader": {
+        "description": "Card reader",
+        "type": "object",
+        "properties": {
+          "Id": {
+            "description": "Stripe reader id",
+            "type": "string",
+            "example": "500123"
+          },
+          "DeviceSoftwareVersion": {
+            "description": "Software version",
+            "type": "string",
+            "example": "string"
+          },
+          "SerialNumber": {
+            "description": "Device serial number",
+            "type": "string",
+            "example": "string"
+          },
+          "Status": {
+            "description": "Device status online or offline",
+            "type": "string",
+            "example": "Active"
+          },
+          "RegistrationCode": {
+            "description": "Registration code",
+            "type": "string",
+            "example": "string"
+          },
+          "DeviceType": {
+            "description": "Device type",
+            "type": "string",
+            "example": "string"
+          },
+          "Deleted": {
+            "description": "Indicates that the reader is deleted or not",
+            "type": "boolean",
+            "nullable": true,
+            "example": true
+          },
+          "Action": {
+            "$ref": "#/components/schemas/ReaderActionStateInfo"
+          }
+        }
+      },
+      "CardReaderRegistrationRequest": {
+        "description": "Card reader registration request",
+        "required": [
+          "RegistrationCode"
+        ],
+        "type": "object",
+        "properties": {
+          "RegistrationCode": {
+            "description": "The reader registration code",
+            "type": "string",
+            "example": "string"
+          },
+          "KioskDeviceId": {
+            "description": "The kiosk device id",
+            "type": "string",
+            "example": "500123"
+          }
+        }
+      },
+      "ClientDevice": {
+        "description": "Client Device",
+        "type": "object",
+        "properties": {
+          "DeviceModel": {
+            "description": "Device Model",
+            "type": "string",
+            "example": "string"
+          },
+          "DeviceId": {
+            "description": "Device Id",
+            "type": "string",
+            "example": "500123"
+          },
+          "DeviceName": {
+            "description": "Device Name",
+            "type": "string",
+            "example": "Example Name"
+          }
+        }
+      },
+      "ClientDeviceAssignEnrolledDevice": {
+        "description": "Assign enrolled device to AppId",
+        "type": "object",
+        "properties": {
+          "DeviceModel": {
+            "description": "Device Model",
+            "type": "string",
+            "example": "string"
+          },
+          "PinCode": {
+            "description": "Pin Code",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "ClientDeviceEnroll": {
+        "description": "Enroll a client device",
+        "type": "object",
+        "properties": {
+          "DeviceModel": {
+            "description": "Device model",
+            "type": "string",
+            "example": "string"
+          },
+          "DeviceId": {
+            "description": "Device Id",
+            "type": "string",
+            "example": "500123"
+          },
+          "DeviceName": {
+            "description": "Device Name",
+            "type": "string",
+            "example": "Example Name"
+          }
+        }
+      },
+      "ClientDeviceEnrollmentResult": {
+        "description": "Device enrollment result",
+        "type": "object",
+        "properties": {
+          "PinCode": {
+            "description": "PIN Code for assigning",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "ClientDeviceSummary": {
+        "description": "Client Device summary (header fields)",
+        "type": "object",
+        "properties": {
+          "DeviceModel": {
+            "description": "Device Model",
+            "type": "string",
+            "example": "string"
+          },
+          "DeviceId": {
+            "description": "Device Id",
+            "type": "string",
+            "example": "500123"
+          },
+          "DeviceName": {
+            "description": "Device Name",
+            "type": "string",
+            "example": "Example Name"
+          }
+        }
+      },
+      "FlipdishError": {
+        "type": "object",
+        "description": "Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).",
+        "properties": {
+          "error": {
+            "type": "object",
+            "description": "Error detail object.",
+            "properties": {
+              "errorMessage": {
+                "type": "string",
+                "description": "Descriptive explanation of the issue.",
+                "example": "Invalid or missing parameters."
+              },
+              "errorCode": {
+                "type": "string",
+                "description": "Unique identifier for programmatic error handling.",
+                "example": "BadRequest"
+              },
+              "details": {
+                "type": "string",
+                "description": "Additional context returned in non-production environments.",
+                "example": "Validation failed for field 'storeId'."
+              }
+            }
+          }
+        }
+      },
+      "GeoPointRequest": {
+        "description": "Terminal location request",
+        "type": "object",
+        "properties": {
+          "Latitude": {
+            "format": "double",
+            "description": "Kiosk device latitude",
+            "type": "number",
+            "example": 1.0
+          },
+          "Longitude": {
+            "format": "double",
+            "description": "Kiosk device longitude",
+            "type": "number",
+            "example": 1.0
+          }
+        }
+      },
+      "KioskEntitlementsResult": {
+        "description": "Kiosk entitlements and usage",
+        "type": "object",
+        "properties": {
+          "EntitledQuantity": {
+            "format": "int32",
+            "description": "Number of kiosk devices entitled",
+            "type": "integer",
+            "example": 3
+          },
+          "UsedQuantity": {
+            "format": "int32",
+            "description": "The quantity of entitlements that have been used",
+            "type": "integer",
+            "example": 3
+          }
+        }
+      },
+      "KioskIotConnectionParameters": {
+        "description": "Connection parameters to IoT",
+        "type": "object",
+        "properties": {
+          "ConnectionString": {
+            "description": "The device connection string to the IoT server",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "ProcessPaymentIntentRequest": {
+        "description": "Initiate card reader Payment process request",
+        "required": [
+          "PaymentIntentId"
+        ],
+        "type": "object",
+        "properties": {
+          "PaymentIntentId": {
+            "description": "Device card paymentIntentId",
+            "type": "string",
+            "example": "500123"
+          }
+        }
+      },
+      "ReaderActionStateInfo": {
+        "description": "Card reader state information",
+        "type": "object",
+        "properties": {
+          "ActionState": {
+            "description": "Action state",
+            "type": "string",
+            "example": "string"
+          },
+          "FailureCode": {
+            "description": "Failure code",
+            "type": "string",
+            "example": "string"
+          },
+          "FailureMessage": {
+            "description": "Failure Message",
+            "type": "string",
+            "example": "string"
+          },
+          "Type": {
+            "description": "Type",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "RestApiArrayResult_ClientDeviceSummary_": {
+        "description": "Rest api array result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "description": "Generic data object.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientDeviceSummary"
+            },
+            "example": []
+          }
+        }
+      },
+      "RestApiErrorResult": {
+        "description": "Rest api error result",
+        "required": [
+          "Message"
+        ],
+        "type": "object",
+        "properties": {
+          "Message": {
+            "description": "Error message",
+            "type": "string",
+            "example": "string"
+          },
+          "ErrorCode": {
+            "format": "int32",
+            "description": "Error code",
+            "type": "integer",
+            "example": 1
+          },
+          "StackTrace": {
+            "description": "Stack trace",
+            "type": "string",
+            "example": "string"
+          },
+          "Errors": {
+            "description": "List of errors grouped by field name",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorResult"
+            },
+            "example": []
+          }
+        }
+      },
+      "RestApiForbiddenResult": {
+        "description": "Rest Api Forbidden Result",
+        "required": [
+          "Message"
+        ],
+        "type": "object",
+        "properties": {
+          "Message": {
+            "description": "Message",
+            "type": "string",
+            "readOnly": true,
+            "example": "string"
+          }
+        }
+      },
+      "RestApiResult_BluetoothTerminalStatus_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/BluetoothTerminalStatus"
+          }
+        }
+      },
+      "RestApiResult_CardReader_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/CardReader"
+          }
+        }
+      },
+      "RestApiResult_ClientDeviceEnrollmentResult_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/ClientDeviceEnrollmentResult"
+          }
+        }
+      },
+      "RestApiResult_ClientDevice_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/ClientDevice"
+          }
+        }
+      },
+      "RestApiResult_KioskEntitlementsResult_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/KioskEntitlementsResult"
+          }
+        }
+      },
+      "RestApiResult_KioskIotConnectionParameters_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/KioskIotConnectionParameters"
+          }
+        }
+      },
+      "RestApiResult_StripeTerminalConnectionToken_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/StripeTerminalConnectionToken"
+          }
+        }
+      },
+      "RestApiResult_StripeTerminalLocation_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/StripeTerminalLocation"
+          }
+        }
+      },
+      "RestApiResult_TelemetrySeriesResult_": {
+        "description": "Rest api result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/TelemetrySeriesResult"
+          }
+        }
+      },
+      "RestApiStringResult": {
+        "description": "Rest api string result",
+        "required": [
+          "Data"
+        ],
+        "type": "object",
+        "properties": {
+          "Data": {
+            "description": "Data string",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "RestApiUnauthorizedResult": {
+        "description": "Rest api unauthorized result",
+        "required": [
+          "Message"
+        ],
+        "type": "object",
+        "properties": {
+          "Message": {
+            "description": "Message",
+            "type": "string",
+            "readOnly": true,
+            "example": "string"
+          }
+        }
+      },
+      "StripeTerminalConnectionToken": {
+        "description": "Stripe Terminal Connection Token",
+        "type": "object",
+        "properties": {
+          "Token": {
+            "description": "Connection Token",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "StripeTerminalLocation": {
+        "description": "Stripe Terminal Private Key",
+        "type": "object",
+        "properties": {
+          "Location": {
+            "description": "Registered location of the terminal",
+            "type": "string",
+            "example": "string"
+          }
+        }
+      },
+      "TelemetrySeriesProperty": {
+        "description": "TelemetrySeriesProperty.",
+        "type": "object",
+        "properties": {
+          "Name": {
+            "description": "Name.",
+            "type": "string",
+            "example": "Example Name"
+          },
+          "Type": {
+            "description": "Type.",
+            "type": "string",
+            "example": "string"
+          },
+          "IntValues": {
+            "description": "IntValues.",
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "example": [
+              1
+            ]
+          },
+          "StringValues": {
+            "description": "StringValues.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "string"
+            ]
+          },
+          "DoubleValues": {
+            "description": "DoubleValues.",
+            "type": "array",
+            "items": {
+              "format": "double",
+              "type": "number"
+            },
+            "example": [
+              1.0
+            ]
+          }
+        }
+      },
+      "TelemetrySeriesQueryParameters": {
+        "description": "TelemetrySeriesQueryParameters.",
+        "type": "object",
+        "properties": {
+          "KioskId": {
+            "description": "KioskId.",
+            "type": "string",
+            "example": "500123"
+          },
+          "Variables": {
+            "description": "Variables.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "string"
+            ]
+          },
+          "StartDate": {
+            "format": "date-time",
+            "description": "StartDate.",
+            "type": "string",
+            "example": "2026-06-02T12:00:00Z"
+          },
+          "EndDate": {
+            "format": "date-time",
+            "description": "EndDate.",
+            "type": "string",
+            "example": "2026-06-02T12:00:00Z"
+          }
+        }
+      },
+      "TelemetrySeriesResult": {
+        "description": "TelemetrySeriesResult.",
+        "type": "object",
+        "properties": {
+          "Timestamps": {
+            "description": "Timestamps.",
+            "type": "array",
+            "items": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "example": [
+              "2026-06-02T12:00:00Z"
+            ]
+          },
+          "Properties": {
+            "description": "Properties.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetrySeriesProperty"
+            },
+            "example": []
+          }
+        }
+      },
+      "UnRegisterCardReaderRequest": {
+        "description": "Un-Register card reader request",
+        "required": [
+          "ReaderId",
+          "KioskDeviceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ReaderId": {
+            "description": "Device card readerid",
+            "type": "string",
+            "example": "500123"
+          },
+          "KioskDeviceId": {
+            "description": "The kiosk device id",
+            "type": "string",
+            "example": "500123"
+          }
+        }
+      },
+      "ValidationErrorResult": {
+        "description": "Validation error result",
+        "type": "object",
+        "properties": {
+          "FieldName": {
+            "description": "Field name",
+            "type": "string",
+            "example": "Example Name"
+          },
+          "Errors": {
+            "description": "List of errors relates to field",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "string"
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "description": "OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://api.flipdish.co/identity/connect/authorize",
+            "scopes": {
+              "api": "Access to the Flipdish API"
+            }
+          },
+          "clientCredentials": {
+            "tokenUrl": "https://api.flipdish.co/identity/connect/token",
+            "scopes": {
+              "api": "Access to the Flipdish API"
+            }
+          }
+        }
+      }
+    }
+  }
+}

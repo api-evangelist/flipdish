@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/payments-account-field-definition-structure.json",
+  "name": "AccountFieldDefinition",
+  "description": "Represents the format of a bank account field",
+  "type": "object",
+  "properties": {
+    "Key": {
+      "description": "Depending on the Key, the field's value will be stored in a different field in PayeeBankAccountData",
+      "enum": [
+        "Iban",
+        "AccountNumber",
+        "RoutingNumber",
+        "BSB",
+        "BranchCode",
+        "BankCode",
+        "InstitutionNumber",
+        "TransitNumber",
+        "ClearingCode",
+        "IfscCode",
+        "Clabe",
+        "SortCode",
+        "Swift"
+      ],
+      "type": "string",
+      "example": "Iban"
+    },
+    "DisplayName": {
+      "description": "Display name of the field",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Type": {
+      "description": "There are some fields that are of type known to the frontend (IBAN, Swift) -- for those frontend should use its own validation library, e.g. ibantools",
+      "enum": [
+        "None",
+        "Iban"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "MinLength": {
+      "description": "Minimum length of the field",
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    },
+    "MaxLength": {
+      "description": "Maximum length of the field",
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    },
+    "DigitsOnly": {
+      "description": "Is the field digits (numeric) only",
+      "type": "boolean",
+      "example": true
+    },
+    "Regex": {
+      "description": "Regex for validating the field (if specified)",
+      "type": "string",
+      "example": "string"
+    }
+  }
+}

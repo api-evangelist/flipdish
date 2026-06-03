@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/catalog-create-product-schema.json",
+  "title": "CreateProduct",
+  "description": "Create a Catalog Item",
+  "type": "object",
+  "properties": {
+    "Groups": {
+      "description": "Collection of groups associated with this item",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CreateGroupReference"
+      },
+      "example": []
+    },
+    "Metafields": {
+      "description": "Collection of metafields",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Metafield"
+      },
+      "example": []
+    },
+    "ProductType": {
+      "description": "Type of item (Product, Modifier, etc)",
+      "enum": [
+        "Product",
+        "Modifier"
+      ],
+      "type": "string",
+      "example": "Product"
+    },
+    "Sku": {
+      "description": "Stock Keeping Unit (SKU)",
+      "maxLength": 30,
+      "minLength": 0,
+      "type": "string",
+      "example": "string"
+    },
+    "Name": {
+      "description": "Product name",
+      "maxLength": 300,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Description": {
+      "description": "Product description",
+      "maxLength": 3000,
+      "minLength": 0,
+      "type": "string",
+      "example": "string"
+    },
+    "Price": {
+      "format": "double",
+      "description": "Product price",
+      "minimum": 0,
+      "type": "number",
+      "example": 12.5
+    },
+    "ImageFileName": {
+      "description": "Image File Name",
+      "maxLength": 512,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Alcohol": {
+      "description": "Product contains alcohol",
+      "type": "boolean",
+      "example": true
+    }
+  },
+  "required": [
+    "ProductType",
+    "Sku",
+    "Name",
+    "Price"
+  ]
+}

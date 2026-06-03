@@ -1,0 +1,639 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Apps — Channels"
+  description: >-
+    Channels operations on the Flipdish Open API v1.0 (12 operations).
+    Lead operation: Flipdish Get Channels. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Channels
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "apps-channels"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Apps — Channels business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-channels"
+          path: "/api/v1.0/{appId}/channels"
+          operations:
+            - name: "GetChannels"
+              method: GET
+              description: "Flipdish Get Channels"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-id"
+          path: "/api/v1.0/{appId}/channels/{id}"
+          operations:
+            - name: "GetChannel"
+              method: GET
+              description: "Flipdish Get Channel"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-assigned-channels"
+          path: "/api/v1.0/{appId}/channels/assigned-channels"
+          operations:
+            - name: "GetAssignedChannels"
+              method: GET
+              description: "Flipdish Get Assigned Channels"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-available-channels"
+          path: "/api/v1.0/{appId}/channels/available-channels"
+          operations:
+            - name: "GetAvailableChannels"
+              method: GET
+              description: "Flipdish Get Available Channels"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-channel-id-stores"
+          path: "/api/v1.0/{appId}/channels/{channelId}/stores"
+          operations:
+            - name: "GetStoresBySalesChannel"
+              method: GET
+              description: "Flipdish Get Stores by Sales Channel"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The channel id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-channel-id-stores"
+          path: "/api/v1.0/{appId}/channels/{channelId}/stores"
+          operations:
+            - name: "DetachAllStoresFromSalesChannel"
+              method: DELETE
+              description: "Flipdish Detach All Stores from Sales Channel"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The channel id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-channel-id-assigned-stores"
+          path: "/api/v1.0/{appId}/channels/{channelId}/assigned-stores"
+          operations:
+            - name: "GetStoresAssignedToChannel"
+              method: GET
+              description: "Flipdish Get Stores Assigned to Channel"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The channel id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-channel-id-assign-app-id"
+          path: "/api/v1.0/{appId}/channels/{channelId}/assign-appId"
+          operations:
+            - name: "AssignAppIdToSalesChannel"
+              method: POST
+              description: "Flipdish Assign App Id to Sales Channel"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The channel id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-channel-id-stores-store-id"
+          path: "/api/v1.0/{appId}/channels/{channelId}/stores/{storeId}"
+          operations:
+            - name: "AttachStoreToSalesChannel"
+              method: POST
+              description: "Flipdish Attach Store to Sales Channel"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The channel id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-channel-id-stores-store-id"
+          path: "/api/v1.0/{appId}/channels/{channelId}/stores/{storeId}"
+          operations:
+            - name: "DetachStoreFromSalesChannel"
+              method: DELETE
+              description: "Flipdish Detach Store from Sales Channel"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The channel id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-assign-store"
+          path: "/api/v1.0/{appId}/channels/assign-store"
+          operations:
+            - name: "AssignStoreToChannel"
+              method: POST
+              description: "Flipdish Assign Store to Channel"
+              inputParameters:
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The store id query parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The channel id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-channels-unassign-store"
+          path: "/api/v1.0/{appId}/channels/unassign-store"
+          operations:
+            - name: "UnassignStoreFromChannel"
+              method: DELETE
+              description: "Flipdish Unassign Store from Channel"
+              inputParameters:
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The store id query parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "channelId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The channel id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "apps-channels-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Apps — Channels."
+      resources:
+        - path: "/v1/{app-id}/channels"
+          name: "app-id-channels"
+          description: "REST surface for GetChannels."
+          operations:
+            - method: GET
+              name: "GetChannels"
+              description: "Flipdish Get Channels"
+              call: "apps-channels.GetChannels"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{id}"
+          name: "app-id-channels-id"
+          description: "REST surface for GetChannel."
+          operations:
+            - method: GET
+              name: "GetChannel"
+              description: "Flipdish Get Channel"
+              call: "apps-channels.GetChannel"
+              with:
+                "id": "rest.id"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/assigned-channels"
+          name: "app-id-channels-assigned-channels"
+          description: "REST surface for GetAssignedChannels."
+          operations:
+            - method: GET
+              name: "GetAssignedChannels"
+              description: "Flipdish Get Assigned Channels"
+              call: "apps-channels.GetAssignedChannels"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/available-channels"
+          name: "app-id-channels-available-channels"
+          description: "REST surface for GetAvailableChannels."
+          operations:
+            - method: GET
+              name: "GetAvailableChannels"
+              description: "Flipdish Get Available Channels"
+              call: "apps-channels.GetAvailableChannels"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{channel-id}/stores"
+          name: "app-id-channels-channel-id-stores"
+          description: "REST surface for GetStoresBySalesChannel."
+          operations:
+            - method: GET
+              name: "GetStoresBySalesChannel"
+              description: "Flipdish Get Stores by Sales Channel"
+              call: "apps-channels.GetStoresBySalesChannel"
+              with:
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{channel-id}/stores"
+          name: "app-id-channels-channel-id-stores"
+          description: "REST surface for DetachAllStoresFromSalesChannel."
+          operations:
+            - method: DELETE
+              name: "DetachAllStoresFromSalesChannel"
+              description: "Flipdish Detach All Stores from Sales Channel"
+              call: "apps-channels.DetachAllStoresFromSalesChannel"
+              with:
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{channel-id}/assigned-stores"
+          name: "app-id-channels-channel-id-assigned-stores"
+          description: "REST surface for GetStoresAssignedToChannel."
+          operations:
+            - method: GET
+              name: "GetStoresAssignedToChannel"
+              description: "Flipdish Get Stores Assigned to Channel"
+              call: "apps-channels.GetStoresAssignedToChannel"
+              with:
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{channel-id}/assign-app-id"
+          name: "app-id-channels-channel-id-assign-app-id"
+          description: "REST surface for AssignAppIdToSalesChannel."
+          operations:
+            - method: POST
+              name: "AssignAppIdToSalesChannel"
+              description: "Flipdish Assign App Id to Sales Channel"
+              call: "apps-channels.AssignAppIdToSalesChannel"
+              with:
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{channel-id}/stores/{store-id}"
+          name: "app-id-channels-channel-id-stores-store-id"
+          description: "REST surface for AttachStoreToSalesChannel."
+          operations:
+            - method: POST
+              name: "AttachStoreToSalesChannel"
+              description: "Flipdish Attach Store to Sales Channel"
+              call: "apps-channels.AttachStoreToSalesChannel"
+              with:
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/{channel-id}/stores/{store-id}"
+          name: "app-id-channels-channel-id-stores-store-id"
+          description: "REST surface for DetachStoreFromSalesChannel."
+          operations:
+            - method: DELETE
+              name: "DetachStoreFromSalesChannel"
+              description: "Flipdish Detach Store from Sales Channel"
+              call: "apps-channels.DetachStoreFromSalesChannel"
+              with:
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/assign-store"
+          name: "app-id-channels-assign-store"
+          description: "REST surface for AssignStoreToChannel."
+          operations:
+            - method: POST
+              name: "AssignStoreToChannel"
+              description: "Flipdish Assign Store to Channel"
+              call: "apps-channels.AssignStoreToChannel"
+              with:
+                "storeId": "rest.storeId"
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/channels/unassign-store"
+          name: "app-id-channels-unassign-store"
+          description: "REST surface for UnassignStoreFromChannel."
+          operations:
+            - method: DELETE
+              name: "UnassignStoreFromChannel"
+              description: "Flipdish Unassign Store from Channel"
+              call: "apps-channels.UnassignStoreFromChannel"
+              with:
+                "storeId": "rest.storeId"
+                "appId": "rest.appId"
+                "channelId": "rest.channelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "apps-channels-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Apps — Channels."
+      tools:
+        - name: "get-channels"
+          description: "Flipdish Get Channels"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-channels.GetChannels"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-channel"
+          description: "Flipdish Get Channel"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-channels.GetChannel"
+          with:
+            "id": "tools.id"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-assigned-channels"
+          description: "Flipdish Get Assigned Channels"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-channels.GetAssignedChannels"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-available-channels"
+          description: "Flipdish Get Available Channels"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-channels.GetAvailableChannels"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-stores-sales-channel"
+          description: "Flipdish Get Stores by Sales Channel"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-channels.GetStoresBySalesChannel"
+          with:
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "detach-all-stores-sales-channel"
+          description: "Flipdish Detach All Stores from Sales Channel"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "apps-channels.DetachAllStoresFromSalesChannel"
+          with:
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-stores-assigned-channel"
+          description: "Flipdish Get Stores Assigned to Channel"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-channels.GetStoresAssignedToChannel"
+          with:
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "assign-app-id-sales-channel"
+          description: "Flipdish Assign App Id to Sales Channel"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-channels.AssignAppIdToSalesChannel"
+          with:
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "attach-store-sales-channel"
+          description: "Flipdish Attach Store to Sales Channel"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-channels.AttachStoreToSalesChannel"
+          with:
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "detach-store-sales-channel"
+          description: "Flipdish Detach Store from Sales Channel"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "apps-channels.DetachStoreFromSalesChannel"
+          with:
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "assign-store-channel"
+          description: "Flipdish Assign Store to Channel"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-channels.AssignStoreToChannel"
+          with:
+            "storeId": "tools.storeId"
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "unassign-store-channel"
+          description: "Flipdish Unassign Store from Channel"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "apps-channels.UnassignStoreFromChannel"
+          with:
+            "storeId": "tools.storeId"
+            "appId": "tools.appId"
+            "channelId": "tools.channelId"
+          outputParameters:
+            - type: object
+              mapping: "$."

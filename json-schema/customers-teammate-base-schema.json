@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/customers-teammate-base-schema.json",
+  "title": "TeammateBase",
+  "description": "TeammateBase schema from Flipdish API - Customers.",
+  "type": "object",
+  "properties": {
+    "AppAccessLevel": {
+      "description": "App access level",
+      "enum": [
+        "None",
+        "Owner",
+        "StoreOwner",
+        "PropertyOwner",
+        "ManagedOwner",
+        "Integrator",
+        "PropertyManager",
+        "StoreManager",
+        "StoreStaff",
+        "StoreReadOnlyAccess",
+        "FinanceManger",
+        "Onboarding",
+        "Support"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "HasAccessToAllStores": {
+      "description": "The user has access to all stores for the app (including new stores that added later)",
+      "type": "boolean",
+      "example": true
+    },
+    "StoreIds": {
+      "description": "Store IDs the user has access to (if HasAccessToAllStores is false)",
+      "type": "array",
+      "items": {
+        "format": "int32",
+        "type": "integer"
+      },
+      "example": [
+        1
+      ]
+    },
+    "PropertyIds": {
+      "description": "Property Ids the user has access to (if HasAccessToAllStores is false)",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "string"
+      ]
+    }
+  }
+}

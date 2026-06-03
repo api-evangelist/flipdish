@@ -1,0 +1,1086 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fd": "https://developers.flipdish.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Payout": "fd:Payout",
+    "PayoutReport3DetailsFlipdishFees": "fd:PayoutReport3DetailsFlipdishFees",
+    "PreviousOrder": "fd:PreviousOrder",
+    "PayoutOrder": "fd:PayoutOrder",
+    "PayoutReport3DetailsAdjustments": "fd:PayoutReport3DetailsAdjustments",
+    "BankAccountDetail": "fd:BankAccountDetail",
+    "BankAccountSummary": "fd:BankAccountSummary",
+    "PayoutDetail": "fd:PayoutDetail",
+    "Subscription": "fd:Subscription",
+    "PayoutReport3OverviewHeader": "fd:PayoutReport3OverviewHeader",
+    "RevenueDetail": "fd:RevenueDetail",
+    "BankAccountDetailsUpdateRequest": "fd:BankAccountDetailsUpdateRequest",
+    "PayoutStore": "fd:PayoutStore",
+    "PayoutRefund": "fd:PayoutRefund",
+    "SubscriptionInvoice": "fd:SubscriptionInvoice",
+    "GetReceiptByOrderIdQueryResponse": "fd:GetReceiptByOrderIdQueryResponse",
+    "SubscriptionSummary": "fd:SubscriptionSummary",
+    "FlipdishFeesDetails": "fd:FlipdishFeesDetails",
+    "PayoutChargeback": "fd:PayoutChargeback",
+    "PayoutReport3RefundedOrder": "fd:PayoutReport3RefundedOrder",
+    "PayoutOtherCharge": "fd:PayoutOtherCharge",
+    "PayoutReport3DetailsRevenue": "fd:PayoutReport3DetailsRevenue",
+    "PayoutReport3DetailsSummary": "fd:PayoutReport3DetailsSummary",
+    "PayoutReport3StorePayout": "fd:PayoutReport3StorePayout",
+    "RevenueAdjustmentsDetails": "fd:RevenueAdjustmentsDetails",
+    "StripeConnectedAccount": "fd:StripeConnectedAccount",
+    "UpcomingInvoice": "fd:UpcomingInvoice",
+    "AccountFieldDefinition": "fd:AccountFieldDefinition",
+    "PreviousOrderItem": "fd:PreviousOrderItem",
+    "StripeConnectedAccountInfo": "fd:StripeConnectedAccountInfo",
+    "payoutId": {
+      "@id": "fd:PayoutId",
+      "@type": "xsd:integer"
+    },
+    "payeeBankAccountId": {
+      "@id": "fd:PayeeBankAccountId",
+      "@type": "xsd:integer"
+    },
+    "accountName": {
+      "@id": "fd:AccountName",
+      "@type": "xsd:string"
+    },
+    "payoutStatus": {
+      "@id": "fd:PayoutStatus",
+      "@type": "xsd:string"
+    },
+    "createdDate": {
+      "@id": "fd:CreatedDate",
+      "@type": "xsd:dateTime"
+    },
+    "periodStartTime": {
+      "@id": "fd:PeriodStartTime",
+      "@type": "xsd:dateTime"
+    },
+    "periodEndTime": {
+      "@id": "fd:PeriodEndTime",
+      "@type": "xsd:dateTime"
+    },
+    "destinationBank": {
+      "@id": "fd:DestinationBank",
+      "@type": "xsd:string"
+    },
+    "destinationAccount": {
+      "@id": "fd:DestinationAccount",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "fd:Amount",
+      "@type": "xsd:double"
+    },
+    "payoutType": {
+      "@id": "fd:PayoutType",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "fd:Currency",
+      "@type": "xsd:string"
+    },
+    "cutoffDate": {
+      "@id": "fd:CutoffDate",
+      "@type": "xsd:dateTime"
+    },
+    "onlineSalesAmount": {
+      "@id": "fd:OnlineSalesAmount",
+      "@type": "xsd:double"
+    },
+    "onlineSalesDeliveryCharges": {
+      "@id": "fd:OnlineSalesDeliveryCharges",
+      "@type": "xsd:double"
+    },
+    "onlineSalesTips": {
+      "@id": "fd:OnlineSalesTips",
+      "@type": "xsd:double"
+    },
+    "onlineSalesServiceCharges": {
+      "@id": "fd:OnlineSalesServiceCharges",
+      "@type": "xsd:double"
+    },
+    "onlineSalesRefundedFees": {
+      "@id": "fd:OnlineSalesRefundedFees",
+      "@type": "xsd:double"
+    },
+    "onlineSalesFees": {
+      "@id": "fd:OnlineSalesFees",
+      "@type": "xsd:double"
+    },
+    "posSalesFees": {
+      "@id": "fd:PosSalesFees",
+      "@type": "xsd:double"
+    },
+    "onlineSalesRefundedAmount": {
+      "@id": "fd:OnlineSalesRefundedAmount",
+      "@type": "xsd:double"
+    },
+    "posSalesRefundedAmount": {
+      "@id": "fd:PosSalesRefundedAmount",
+      "@type": "xsd:double"
+    },
+    "onlineSalesTax": {
+      "@id": "fd:OnlineSalesTax",
+      "@type": "xsd:double"
+    },
+    "totalOnlineRevenue": {
+      "@id": "fd:TotalOnlineRevenue",
+      "@type": "xsd:double"
+    },
+    "cashSalesFees": {
+      "@id": "fd:CashSalesFees",
+      "@type": "xsd:double"
+    },
+    "cashSalesRefundedFees": {
+      "@id": "fd:CashSalesRefundedFees",
+      "@type": "xsd:double"
+    },
+    "customerCashFees": {
+      "@id": "fd:CustomerCashFees",
+      "@type": "xsd:double"
+    },
+    "salesFeesVat": {
+      "@id": "fd:SalesFeesVat",
+      "@type": "xsd:double"
+    },
+    "totalFees": {
+      "@id": "fd:TotalFees",
+      "@type": "xsd:double"
+    },
+    "totalOnlineRevenueAdjustments": {
+      "@id": "fd:TotalOnlineRevenueAdjustments",
+      "@type": "xsd:double"
+    },
+    "chargebackAmount": {
+      "@id": "fd:ChargebackAmount",
+      "@type": "xsd:double"
+    },
+    "posSalesChargebackAmount": {
+      "@id": "fd:PosSalesChargebackAmount",
+      "@type": "xsd:double"
+    },
+    "chargebackRefundedFees": {
+      "@id": "fd:ChargebackRefundedFees",
+      "@type": "xsd:double"
+    },
+    "totalChargebackCost": {
+      "@id": "fd:TotalChargebackCost",
+      "@type": "xsd:double"
+    },
+    "totalOtherCharges": {
+      "@id": "fd:TotalOtherCharges",
+      "@type": "xsd:double"
+    },
+    "openingBalance": {
+      "@id": "fd:OpeningBalance",
+      "@type": "xsd:double"
+    },
+    "closingBalance": {
+      "@id": "fd:ClosingBalance",
+      "@type": "xsd:double"
+    },
+    "payGreenSalesAmount": {
+      "@id": "fd:PayGreenSalesAmount",
+      "@type": "xsd:double"
+    },
+    "deliveryIntegrationFee": {
+      "@id": "fd:DeliveryIntegrationFee",
+      "@type": "xsd:double"
+    },
+    "deliveryIntegrationTipFee": {
+      "@id": "fd:DeliveryIntegrationTipFee",
+      "@type": "xsd:double"
+    },
+    "totalThirdPartyFees": {
+      "@id": "fd:TotalThirdPartyFees",
+      "@type": "xsd:double"
+    },
+    "posSalesAmount": {
+      "@id": "fd:PosSalesAmount",
+      "@type": "xsd:double"
+    },
+    "posSalesTax": {
+      "@id": "fd:PosSalesTax",
+      "@type": "xsd:double"
+    },
+    "tipsOnPosSales": {
+      "@id": "fd:TipsOnPosSales",
+      "@type": "xsd:double"
+    },
+    "bankAccountHasChanged": {
+      "@id": "fd:BankAccountHasChanged",
+      "@type": "xsd:boolean"
+    },
+    "webAndAppCash": {
+      "@id": "fd:WebAndAppCash",
+      "@type": "xsd:double"
+    },
+    "webAndAppCashRevenueIncludingTips": {
+      "@id": "fd:WebAndAppCashRevenueIncludingTips",
+      "@type": "xsd:double"
+    },
+    "webAndAppCard": {
+      "@id": "fd:WebAndAppCard",
+      "@type": "xsd:double"
+    },
+    "webAndAppCardRevenueIncludingTips": {
+      "@id": "fd:WebAndAppCardRevenueIncludingTips",
+      "@type": "xsd:double"
+    },
+    "kioskCash": {
+      "@id": "fd:KioskCash",
+      "@type": "xsd:double"
+    },
+    "kioskCashRevenue": {
+      "@id": "fd:KioskCashRevenue",
+      "@type": "xsd:double"
+    },
+    "kioskCard": {
+      "@id": "fd:KioskCard",
+      "@type": "xsd:double"
+    },
+    "kioskCardRevenue": {
+      "@id": "fd:KioskCardRevenue",
+      "@type": "xsd:double"
+    },
+    "qropCash": {
+      "@id": "fd:QropCash",
+      "@type": "xsd:double"
+    },
+    "qropCashRevenue": {
+      "@id": "fd:QropCashRevenue",
+      "@type": "xsd:double"
+    },
+    "qropCard": {
+      "@id": "fd:QropCard",
+      "@type": "xsd:double"
+    },
+    "qropCardRevenue": {
+      "@id": "fd:QropCardRevenue",
+      "@type": "xsd:double"
+    },
+    "posCard": {
+      "@id": "fd:PosCard",
+      "@type": "xsd:double"
+    },
+    "posCardRevenue": {
+      "@id": "fd:PosCardRevenue",
+      "@type": "xsd:double"
+    },
+    "posCardOnFlipdishOrders": {
+      "@id": "fd:PosCardOnFlipdishOrders",
+      "@type": "xsd:double"
+    },
+    "otherIntegrationFees": {
+      "@id": "fd:OtherIntegrationFees",
+      "@type": "xsd:double"
+    },
+    "otherIntegrationFeesExcludingVat": {
+      "@id": "fd:OtherIntegrationFeesExcludingVat",
+      "@type": "xsd:double"
+    },
+    "otherIntegrationFeesVatAmount": {
+      "@id": "fd:OtherIntegrationFeesVatAmount",
+      "@type": "xsd:double"
+    },
+    "otherIntegrationTips": {
+      "@id": "fd:OtherIntegrationTips",
+      "@type": "xsd:double"
+    },
+    "refundedFeesOnRefundedSales": {
+      "@id": "fd:RefundedFeesOnRefundedSales",
+      "@type": "xsd:double"
+    },
+    "vat": {
+      "@id": "fd:Vat",
+      "@type": "xsd:double"
+    },
+    "refundedFeesOnPosSales": {
+      "@id": "fd:RefundedFeesOnPosSales",
+      "@type": "xsd:double"
+    },
+    "total": {
+      "@id": "fd:Total",
+      "@type": "xsd:double"
+    },
+    "thirdPartyIntegrationFeesAndTips": {
+      "@id": "fd:ThirdPartyIntegrationFeesAndTips",
+      "@type": "xsd:double"
+    },
+    "webAndAppCardOnXOrders": {
+      "@id": "fd:WebAndAppCardOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "webAndAppCashOnXOrders": {
+      "@id": "fd:WebAndAppCashOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "kioskCardOnXOrders": {
+      "@id": "fd:KioskCardOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "kioskCashOnXOrders": {
+      "@id": "fd:KioskCashOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "qropCardOnXOrders": {
+      "@id": "fd:QropCardOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "qropCashOnXOrders": {
+      "@id": "fd:QropCashOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "posCardOnXOrders": {
+      "@id": "fd:PosCardOnXOrders",
+      "@type": "xsd:integer"
+    },
+    "deliveryType": {
+      "@id": "fd:DeliveryType",
+      "@type": "xsd:string"
+    },
+    "deliveryLocationAddressString": {
+      "@id": "fd:DeliveryLocationAddressString",
+      "@type": "xsd:string"
+    },
+    "paymentAccountType": {
+      "@id": "fd:PaymentAccountType",
+      "@type": "xsd:string"
+    },
+    "orderId": {
+      "@id": "fd:OrderId",
+      "@type": "xsd:integer"
+    },
+    "receiptCode": {
+      "@id": "fd:ReceiptCode",
+      "@type": "xsd:string"
+    },
+    "restaurantName": {
+      "@id": "fd:RestaurantName",
+      "@type": "xsd:string"
+    },
+    "localOrderId": {
+      "@id": "fd:LocalOrderId",
+      "@type": "xsd:string"
+    },
+    "tableServiceCategory": {
+      "@id": "fd:TableServiceCategory",
+      "@type": "xsd:string"
+    },
+    "pickupLocationOptionValue": {
+      "@id": "fd:PickupLocationOptionValue",
+      "@type": "xsd:string"
+    },
+    "customerName": {
+      "@id": "fd:CustomerName",
+      "@type": "xsd:string"
+    },
+    "phoneNumberInternationalFormatString": {
+      "@id": "fd:PhoneNumberInternationalFormatString",
+      "@type": "xsd:string"
+    },
+    "deliveryInstructions": {
+      "@id": "fd:DeliveryInstructions",
+      "@type": "xsd:string"
+    },
+    "processingFee": {
+      "@id": "fd:ProcessingFee",
+      "@type": "xsd:double"
+    },
+    "serviceChargePercentage": {
+      "@id": "fd:ServiceChargePercentage",
+      "@type": "xsd:double"
+    },
+    "serviceChargeAmount": {
+      "@id": "fd:ServiceChargeAmount",
+      "@type": "xsd:double"
+    },
+    "tipAmount": {
+      "@id": "fd:TipAmount",
+      "@type": "xsd:double"
+    },
+    "deliveryAmount": {
+      "@id": "fd:DeliveryAmount",
+      "@type": "xsd:double"
+    },
+    "depositReturnFeeAmount": {
+      "@id": "fd:DepositReturnFeeAmount",
+      "@type": "xsd:double"
+    },
+    "totalTax": {
+      "@id": "fd:TotalTax",
+      "@type": "xsd:double"
+    },
+    "totalAmount": {
+      "@id": "fd:TotalAmount",
+      "@type": "xsd:double"
+    },
+    "items": {
+      "@id": "fd:Items",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "taxRates": {
+      "@id": "fd:TaxRates",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "whiteLabelId": {
+      "@id": "fd:WhiteLabelId",
+      "@type": "xsd:integer"
+    },
+    "orderDate": {
+      "@id": "fd:OrderDate",
+      "@type": "xsd:dateTime"
+    },
+    "orderType": {
+      "@id": "fd:OrderType",
+      "@type": "xsd:string"
+    },
+    "orderCurrency": {
+      "@id": "fd:OrderCurrency",
+      "@type": "xsd:string"
+    },
+    "sales": {
+      "@id": "fd:Sales",
+      "@type": "xsd:double"
+    },
+    "salesTax": {
+      "@id": "fd:SalesTax",
+      "@type": "xsd:double"
+    },
+    "deliveryCharges": {
+      "@id": "fd:DeliveryCharges",
+      "@type": "xsd:double"
+    },
+    "tips": {
+      "@id": "fd:Tips",
+      "@type": "xsd:double"
+    },
+    "voucher": {
+      "@id": "fd:Voucher",
+      "@type": "xsd:double"
+    },
+    "flatFeeExcludingVat": {
+      "@id": "fd:FlatFeeExcludingVat",
+      "@type": "xsd:double"
+    },
+    "flatFeeExcludingVAT": {
+      "@id": "fd:FlatFeeExcludingVAT",
+      "@type": "xsd:double"
+    },
+    "flatFeeIncludingVat": {
+      "@id": "fd:FlatFeeIncludingVat",
+      "@type": "xsd:double"
+    },
+    "percentageFeeExcludingVat": {
+      "@id": "fd:PercentageFeeExcludingVat",
+      "@type": "xsd:double"
+    },
+    "percentageFeeExcludingVAT": {
+      "@id": "fd:PercentageFeeExcludingVAT",
+      "@type": "xsd:double"
+    },
+    "cashFeeChargedToCustomer": {
+      "@id": "fd:CashFeeChargedToCustomer",
+      "@type": "xsd:double"
+    },
+    "netSales": {
+      "@id": "fd:NetSales",
+      "@type": "xsd:double"
+    },
+    "storeId": {
+      "@id": "fd:StoreId",
+      "@type": "xsd:integer"
+    },
+    "openingBalanceDate": {
+      "@id": "fd:OpeningBalanceDate",
+      "@type": "xsd:dateTime"
+    },
+    "closingBalanceDate": {
+      "@id": "fd:ClosingBalanceDate",
+      "@type": "xsd:dateTime"
+    },
+    "refundsOnCardOrders": {
+      "@id": "fd:RefundsOnCardOrders",
+      "@type": "xsd:double"
+    },
+    "refundsOnCashOrders": {
+      "@id": "fd:RefundsOnCashOrders",
+      "@type": "xsd:double"
+    },
+    "cashCustomerFees": {
+      "@id": "fd:CashCustomerFees",
+      "@type": "xsd:double"
+    },
+    "chargebacks": {
+      "@id": "fd:Chargebacks",
+      "@type": "xsd:double"
+    },
+    "otherTransactions": {
+      "@id": "fd:OtherTransactions",
+      "@type": "xsd:double"
+    },
+    "balanceRepaid": {
+      "@id": "fd:BalanceRepaid",
+      "@type": "xsd:double"
+    },
+    "refundsOnCardOrdersBracketsAmount": {
+      "@id": "fd:RefundsOnCardOrdersBracketsAmount",
+      "@type": "xsd:double"
+    },
+    "refundsOnCardOrdersBracketsOutOfAmount": {
+      "@id": "fd:RefundsOnCardOrdersBracketsOutOfAmount",
+      "@type": "xsd:double"
+    },
+    "refundsOnCashOrdersBracketsAmount": {
+      "@id": "fd:RefundsOnCashOrdersBracketsAmount",
+      "@type": "xsd:double"
+    },
+    "refundsOnCashOrdersBracketsOutOfAmount": {
+      "@id": "fd:RefundsOnCashOrdersBracketsOutOfAmount",
+      "@type": "xsd:double"
+    },
+    "cashCustomerFeesBracketsAmount": {
+      "@id": "fd:CashCustomerFeesBracketsAmount",
+      "@type": "xsd:double"
+    },
+    "cashCustomerFeesBracketsOutOfAmount": {
+      "@id": "fd:CashCustomerFeesBracketsOutOfAmount",
+      "@type": "xsd:double"
+    },
+    "balanceChange": {
+      "@id": "fd:BalanceChange",
+      "@type": "xsd:double"
+    },
+    "previousPayoutId": {
+      "@id": "fd:PreviousPayoutId",
+      "@type": "xsd:integer"
+    },
+    "nextPayoutId": {
+      "@id": "fd:NextPayoutId",
+      "@type": "xsd:integer"
+    },
+    "refundedFeesOnChargebacks": {
+      "@id": "fd:RefundedFeesOnChargebacks",
+      "@type": "xsd:double"
+    },
+    "id": {
+      "@id": "fd:Id",
+      "@type": "xsd:integer"
+    },
+    "storeNames": {
+      "@id": "fd:StoreNames",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "accountState": {
+      "@id": "fd:AccountState",
+      "@type": "xsd:string"
+    },
+    "stripeConnectedAccountInfo": {
+      "@id": "fd:StripeConnectedAccountInfo",
+      "@type": "xsd:string"
+    },
+    "bankAddress": {
+      "@id": "fd:BankAddress",
+      "@type": "xsd:string"
+    },
+    "bankCountryCode": {
+      "@id": "fd:BankCountryCode",
+      "@type": "xsd:string"
+    },
+    "accountHolderAddress": {
+      "@id": "fd:AccountHolderAddress",
+      "@type": "xsd:string"
+    },
+    "accountHolderCountryCode": {
+      "@id": "fd:AccountHolderCountryCode",
+      "@type": "xsd:string"
+    },
+    "vatNumber": {
+      "@id": "fd:VatNumber",
+      "@type": "xsd:string"
+    },
+    "currencyCode": {
+      "@id": "fd:CurrencyCode",
+      "@type": "xsd:string"
+    },
+    "storeIds": {
+      "@id": "fd:StoreIds",
+      "@container": "@set",
+      "@type": "xsd:integer"
+    },
+    "bankName": {
+      "@id": "fd:BankName",
+      "@type": "xsd:string"
+    },
+    "iban": {
+      "@id": "fd:Iban",
+      "@type": "xsd:string"
+    },
+    "swift": {
+      "@id": "fd:Swift",
+      "@type": "xsd:string"
+    },
+    "nationalClearingCode": {
+      "@id": "fd:NationalClearingCode",
+      "@type": "xsd:string"
+    },
+    "populatedAccountFields": {
+      "@id": "fd:PopulatedAccountFields",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "rejectionReason": {
+      "@id": "fd:RejectionReason",
+      "@type": "xsd:string"
+    },
+    "businessType": {
+      "@id": "fd:BusinessType",
+      "@type": "xsd:string"
+    },
+    "bankAccountId": {
+      "@id": "fd:BankAccountId",
+      "@type": "xsd:integer"
+    },
+    "payoutStores": {
+      "@id": "fd:PayoutStores",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "products": {
+      "@id": "fd:Products",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "nextInvoiceAmount": {
+      "@id": "fd:NextInvoiceAmount",
+      "@type": "xsd:double"
+    },
+    "nextInvoiceBillingDate": {
+      "@id": "fd:NextInvoiceBillingDate",
+      "@type": "xsd:dateTime"
+    },
+    "upcomingInvoiceItems": {
+      "@id": "fd:UpcomingInvoiceItems",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "upcomingInvoiceDiscounts": {
+      "@id": "fd:UpcomingInvoiceDiscounts",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "upcomingInvoice": {
+      "@id": "fd:UpcomingInvoice",
+      "@type": "xsd:string"
+    },
+    "subscriptionId": {
+      "@id": "fd:SubscriptionId",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "status": {
+      "@id": "fd:Status",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "fd:User",
+      "@type": "xsd:string"
+    },
+    "defaultPaymentDescription": {
+      "@id": "fd:DefaultPaymentDescription",
+      "@type": "xsd:string"
+    },
+    "cancellationRequestDate": {
+      "@id": "fd:CancellationRequestDate",
+      "@type": "xsd:dateTime"
+    },
+    "cancellationDate": {
+      "@id": "fd:CancellationDate",
+      "@type": "xsd:dateTime"
+    },
+    "isManualPayout": {
+      "@id": "fd:IsManualPayout",
+      "@type": "xsd:boolean"
+    },
+    "onlineSalesIncludingTax": {
+      "@id": "fd:OnlineSalesIncludingTax",
+      "@type": "xsd:double"
+    },
+    "onlineSalesFeesBaseAmount": {
+      "@id": "fd:OnlineSalesFeesBaseAmount",
+      "@type": "xsd:double"
+    },
+    "cashSalesAmount": {
+      "@id": "fd:CashSalesAmount",
+      "@type": "xsd:double"
+    },
+    "cashSalesTax": {
+      "@id": "fd:CashSalesTax",
+      "@type": "xsd:double"
+    },
+    "cashSalesIncludingTax": {
+      "@id": "fd:CashSalesIncludingTax",
+      "@type": "xsd:double"
+    },
+    "cashSalesFeesBaseAmount": {
+      "@id": "fd:CashSalesFeesBaseAmount",
+      "@type": "xsd:double"
+    },
+    "totalSalesIncludingTax": {
+      "@id": "fd:TotalSalesIncludingTax",
+      "@type": "xsd:double"
+    },
+    "storeName": {
+      "@id": "fd:StoreName",
+      "@type": "xsd:string"
+    },
+    "onlineRevenue": {
+      "@id": "fd:OnlineRevenue",
+      "@type": "xsd:string"
+    },
+    "revenue": {
+      "@id": "fd:Revenue",
+      "@type": "xsd:string"
+    },
+    "revenueAdjustments": {
+      "@id": "fd:RevenueAdjustments",
+      "@type": "xsd:string"
+    },
+    "flipdishFees": {
+      "@id": "fd:FlipdishFees",
+      "@type": "xsd:string"
+    },
+    "otherCharges": {
+      "@id": "fd:OtherCharges",
+      "@type": "xsd:string"
+    },
+    "balance": {
+      "@id": "fd:Balance",
+      "@type": "xsd:string"
+    },
+    "posRevenue": {
+      "@id": "fd:PosRevenue",
+      "@type": "xsd:string"
+    },
+    "thirdPartyFees": {
+      "@id": "fd:ThirdPartyFees",
+      "@type": "xsd:string"
+    },
+    "refundDate": {
+      "@id": "fd:RefundDate",
+      "@type": "xsd:dateTime"
+    },
+    "totalRefund": {
+      "@id": "fd:TotalRefund",
+      "@type": "xsd:double"
+    },
+    "refundedFees": {
+      "@id": "fd:RefundedFees",
+      "@type": "xsd:double"
+    },
+    "refundedAmount": {
+      "@id": "fd:RefundedAmount",
+      "@type": "xsd:double"
+    },
+    "cashFeeRefundedToCustomer": {
+      "@id": "fd:CashFeeRefundedToCustomer",
+      "@type": "xsd:double"
+    },
+    "invoiceId": {
+      "@id": "fd:InvoiceId",
+      "@type": "xsd:string"
+    },
+    "number": {
+      "@id": "fd:Number",
+      "@type": "xsd:string"
+    },
+    "paidAt": {
+      "@id": "fd:PaidAt",
+      "@type": "xsd:dateTime"
+    },
+    "finalisedAt": {
+      "@id": "fd:FinalisedAt",
+      "@type": "xsd:dateTime"
+    },
+    "pdfLink": {
+      "@id": "fd:PdfLink",
+      "@type": "xsd:string"
+    },
+    "hostedUrl": {
+      "@id": "fd:HostedUrl",
+      "@type": "xsd:string"
+    },
+    "overdue": {
+      "@id": "fd:Overdue",
+      "@type": "xsd:boolean"
+    },
+    "previousOrder": {
+      "@id": "fd:PreviousOrder",
+      "@type": "xsd:string"
+    },
+    "depositReturnFeesSummary": {
+      "@id": "fd:DepositReturnFeesSummary",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "tsRequestedForLocal": {
+      "@id": "fd:TsRequestedForLocal",
+      "@type": "xsd:dateTime"
+    },
+    "tsOrderPlacedLocal": {
+      "@id": "fd:TsOrderPlacedLocal",
+      "@type": "xsd:dateTime"
+    },
+    "logoUrl": {
+      "@id": "fd:LogoUrl",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "fd:Address",
+      "@type": "xsd:string"
+    },
+    "paymentMethodDescription": {
+      "@id": "fd:PaymentMethodDescription",
+      "@type": "xsd:string"
+    },
+    "orgId": {
+      "@id": "fd:OrgId",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "fd:CountryCode",
+      "@type": "xsd:string"
+    },
+    "totalSalesFees": {
+      "@id": "fd:TotalSalesFees",
+      "@type": "xsd:double"
+    },
+    "posSalesRefundedFees": {
+      "@id": "fd:PosSalesRefundedFees",
+      "@type": "xsd:double"
+    },
+    "chargebackDate": {
+      "@id": "fd:ChargebackDate",
+      "@type": "xsd:dateTime"
+    },
+    "placedAtTime": {
+      "@id": "fd:PlacedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "modifiedAtTime": {
+      "@id": "fd:ModifiedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "type": {
+      "@id": "fd:Type",
+      "@type": "xsd:string"
+    },
+    "refundType": {
+      "@id": "fd:RefundType",
+      "@type": "xsd:string"
+    },
+    "chargeId": {
+      "@id": "fd:ChargeId",
+      "@type": "xsd:integer"
+    },
+    "chargeDate": {
+      "@id": "fd:ChargeDate",
+      "@type": "xsd:dateTime"
+    },
+    "chargeType": {
+      "@id": "fd:ChargeType",
+      "@type": "xsd:string"
+    },
+    "chargeDescription": {
+      "@id": "fd:ChargeDescription",
+      "@type": "xsd:string"
+    },
+    "grossSales": {
+      "@id": "fd:GrossSales",
+      "@type": "xsd:string"
+    },
+    "totalRevenue": {
+      "@id": "fd:TotalRevenue",
+      "@type": "xsd:string"
+    },
+    "revenueForFeeCalculations": {
+      "@id": "fd:RevenueForFeeCalculations",
+      "@type": "xsd:string"
+    },
+    "drsCharges": {
+      "@id": "fd:DrsCharges",
+      "@type": "xsd:string"
+    },
+    "revenueOfWhichCash": {
+      "@id": "fd:RevenueOfWhichCash",
+      "@type": "xsd:double"
+    },
+    "unpaidRevenue": {
+      "@id": "fd:UnpaidRevenue",
+      "@type": "xsd:double"
+    },
+    "adjustments": {
+      "@id": "fd:Adjustments",
+      "@type": "xsd:double"
+    },
+    "summaryTotalPayout": {
+      "@id": "fd:SummaryTotalPayout",
+      "@type": "xsd:double"
+    },
+    "summaryRevenue": {
+      "@id": "fd:SummaryRevenue",
+      "@type": "xsd:double"
+    },
+    "summaryCashRevenue": {
+      "@id": "fd:SummaryCashRevenue",
+      "@type": "xsd:double"
+    },
+    "summaryTotalFlipdishFees": {
+      "@id": "fd:SummaryTotalFlipdishFees",
+      "@type": "xsd:double"
+    },
+    "summaryAdjustments": {
+      "@id": "fd:SummaryAdjustments",
+      "@type": "xsd:double"
+    },
+    "cashSalesRefundedAmount": {
+      "@id": "fd:CashSalesRefundedAmount",
+      "@type": "xsd:double"
+    },
+    "refundsCount": {
+      "@id": "fd:RefundsCount",
+      "@type": "xsd:integer"
+    },
+    "payGreenProcessingFees": {
+      "@id": "fd:PayGreenProcessingFees",
+      "@type": "xsd:double"
+    },
+    "flipdishConnectedAccountId": {
+      "@id": "fd:FlipdishConnectedAccountId",
+      "@type": "xsd:integer"
+    },
+    "stripeId": {
+      "@id": "fd:StripeId",
+      "@type": "xsd:string"
+    },
+    "whitelabelConfigId": {
+      "@id": "fd:WhitelabelConfigId",
+      "@type": "xsd:integer"
+    },
+    "cardPaymentsStatus": {
+      "@id": "fd:CardPaymentsStatus",
+      "@type": "xsd:string"
+    },
+    "transfersStatus": {
+      "@id": "fd:TransfersStatus",
+      "@type": "xsd:string"
+    },
+    "accountStatus": {
+      "@id": "fd:AccountStatus",
+      "@type": "xsd:string"
+    },
+    "payoutsEnabled": {
+      "@id": "fd:PayoutsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "paymentsEnabled": {
+      "@id": "fd:PaymentsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "nextBillingDate": {
+      "@id": "fd:NextBillingDate",
+      "@type": "xsd:dateTime"
+    },
+    "subtotal": {
+      "@id": "fd:Subtotal",
+      "@type": "xsd:double"
+    },
+    "totalExcludingTax": {
+      "@id": "fd:TotalExcludingTax",
+      "@type": "xsd:double"
+    },
+    "amountDue": {
+      "@id": "fd:AmountDue",
+      "@type": "xsd:double"
+    },
+    "tax": {
+      "@id": "fd:Tax",
+      "@type": "xsd:double"
+    },
+    "discounts": {
+      "@id": "fd:Discounts",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "key": {
+      "@id": "fd:Key",
+      "@type": "xsd:string"
+    },
+    "displayName": {
+      "@id": "fd:DisplayName",
+      "@type": "xsd:string"
+    },
+    "minLength": {
+      "@id": "fd:MinLength",
+      "@type": "xsd:integer"
+    },
+    "maxLength": {
+      "@id": "fd:MaxLength",
+      "@type": "xsd:integer"
+    },
+    "digitsOnly": {
+      "@id": "fd:DigitsOnly",
+      "@type": "xsd:boolean"
+    },
+    "regex": {
+      "@id": "fd:Regex",
+      "@type": "xsd:string"
+    },
+    "menuSectionDisplayOrder": {
+      "@id": "fd:MenuSectionDisplayOrder",
+      "@type": "xsd:integer"
+    },
+    "menuSectionName": {
+      "@id": "fd:MenuSectionName",
+      "@type": "xsd:string"
+    },
+    "priceIncludingOptionSetItems": {
+      "@id": "fd:PriceIncludingOptionSetItems",
+      "@type": "xsd:double"
+    },
+    "depositReturnFee": {
+      "@id": "fd:DepositReturnFee",
+      "@type": "xsd:double"
+    },
+    "taxAmount": {
+      "@id": "fd:TaxAmount",
+      "@type": "xsd:double"
+    },
+    "previousOrderItemOptions": {
+      "@id": "fd:PreviousOrderItemOptions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "cardPaymentStatus": {
+      "@id": "fd:CardPaymentStatus",
+      "@type": "xsd:string"
+    },
+    "payoutScheduleInterval": {
+      "@id": "fd:PayoutScheduleInterval",
+      "@type": "xsd:string"
+    },
+    "payoutsPaused": {
+      "@id": "fd:PayoutsPaused",
+      "@type": "xsd:boolean"
+    }
+  }
+}

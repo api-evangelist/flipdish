@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/payments-payout-schema.json",
+  "title": "Payout",
+  "description": "Holds the information for a whitelabel payout.",
+  "type": "object",
+  "properties": {
+    "PayoutId": {
+      "format": "int32",
+      "description": "The id of the payout.",
+      "type": "integer",
+      "example": 500123
+    },
+    "PayeeBankAccountId": {
+      "format": "int32",
+      "description": "Bank account identifier",
+      "type": "integer",
+      "example": 500123
+    },
+    "AccountName": {
+      "description": "Account name of the payout destination",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "PayoutStatus": {
+      "description": "Status of the payout",
+      "enum": [
+        "Pending",
+        "InTransit",
+        "Paid",
+        "Failed",
+        "Cancelled"
+      ],
+      "type": "string",
+      "example": "Pending"
+    },
+    "CreatedDate": {
+      "format": "date-time",
+      "description": "Date payout was created",
+      "type": "string",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "PeriodStartTime": {
+      "format": "date-time",
+      "description": "This payout includes operations after at this date (inclusive)",
+      "type": "string",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "PeriodEndTime": {
+      "format": "date-time",
+      "description": "This payout includes operations before at this date (exclusive)",
+      "type": "string",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "DestinationBank": {
+      "description": "Destination bank name",
+      "type": "string",
+      "example": "string"
+    },
+    "DestinationAccount": {
+      "description": "Last 4 digits of the destination bank IBAN",
+      "type": "string",
+      "example": "string"
+    },
+    "Amount": {
+      "format": "double",
+      "description": "Payout amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "PayoutType": {
+      "description": "Type of payout source",
+      "enum": [
+        "Internal",
+        "Stripe"
+      ],
+      "type": "string",
+      "example": "Internal"
+    },
+    "Currency": {
+      "description": "Payout currency",
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CAD",
+        "AUD",
+        "DJF",
+        "ZAR",
+        "ETB",
+        "AED",
+        "BHD",
+        "DZD",
+        "EGP",
+        "IQD",
+        "JOD",
+        "KWD",
+        "LBP",
+        "LYD",
+        "MAD",
+        "OMR",
+        "QAR",
+        "SAR",
+        "SYP",
+        "TND",
+        "YER",
+        "CLP",
+        "INR",
+        "AZN",
+        "RUB",
+        "BYN",
+        "BGN",
+        "NGN",
+        "BDT",
+        "CNY",
+        "BAM",
+        "CZK",
+        "DKK",
+        "CHF",
+        "MVR",
+        "BTN",
+        "XCD",
+        "BZD",
+        "HKD",
+        "IDR",
+        "JMD",
+        "MYR",
+        "NZD",
+        "PHP",
+        "SGD",
+        "TTD",
+        "XDR",
+        "ARS",
+        "BOB",
+        "COP",
+        "CRC",
+        "CUP",
+        "DOP",
+        "GTQ",
+        "HNL",
+        "MXN",
+        "NIO",
+        "PAB",
+        "PEN",
+        "PYG",
+        "UYU",
+        "VEF",
+        "IRR",
+        "XOF",
+        "CDF",
+        "XAF",
+        "HTG",
+        "ILS",
+        "HRK",
+        "HUF",
+        "AMD",
+        "ISK",
+        "JPY",
+        "GEL",
+        "KZT",
+        "KHR",
+        "KRW",
+        "KGS",
+        "LAK",
+        "MKD",
+        "MNT",
+        "BND",
+        "MMK",
+        "NOK",
+        "NPR",
+        "PKR",
+        "PLN",
+        "AFN",
+        "BRL",
+        "MDL",
+        "RON",
+        "RWF",
+        "SEK",
+        "LKR",
+        "SOS",
+        "ALL",
+        "RSD",
+        "KES",
+        "TJS",
+        "THB",
+        "ERN",
+        "TMT",
+        "BWP",
+        "TRY",
+        "UAH",
+        "UZS",
+        "VND",
+        "MOP",
+        "TWD",
+        "BMD"
+      ],
+      "type": "string",
+      "example": "EUR"
+    },
+    "CutoffDate": {
+      "format": "date-time",
+      "description": "Payouts before this date do not have a details breakdown",
+      "type": "string",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "OnlineSalesAmount": {
+      "format": "double",
+      "description": "Payout online sales amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "OnlineSalesDeliveryCharges": {
+      "format": "double",
+      "description": "Payout online sales delivery charges",
+      "type": "number",
+      "example": 1.0
+    },
+    "OnlineSalesTips": {
+      "format": "double",
+      "description": "Payout online sales tips",
+      "type": "number",
+      "example": 1.0
+    },
+    "OnlineSalesServiceCharges": {
+      "format": "double",
+      "description": "Payout online sales service charges",
+      "type": "number",
+      "example": 1.0
+    },
+    "OnlineSalesRefundedFees": {
+      "format": "double",
+      "description": "Payout online sales refunded fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "OnlineSalesFees": {
+      "format": "double",
+      "description": "Payout online sales fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "PosSalesFees": {
+      "format": "double",
+      "description": "Payout online sales fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "OnlineSalesRefundedAmount": {
+      "format": "double",
+      "description": "Payout online sales refunded amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "PosSalesRefundedAmount": {
+      "format": "double",
+      "description": "POS Payout online sales refunded amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "OnlineSalesTax": {
+      "format": "double",
+      "description": "Payout online sales tax",
+      "type": "number",
+      "example": 1.0
+    },
+    "TotalOnlineRevenue": {
+      "format": "double",
+      "description": "Payout total online revenue",
+      "type": "number",
+      "example": 12.5
+    },
+    "CashSalesFees": {
+      "format": "double",
+      "description": "Payout cash sales fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "CashSalesRefundedFees": {
+      "format": "double",
+      "description": "Payout cash sales refunded fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "CustomerCashFees": {
+      "format": "double",
+      "description": "Payout cash fees charged to customer",
+      "type": "number",
+      "example": 12.5
+    },
+    "SalesFeesVat": {
+      "format": "double",
+      "description": "Payout sales fees vat",
+      "type": "number",
+      "example": 12.5
+    },
+    "TotalFees": {
+      "format": "double",
+      "description": "Payout total fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "TotalOnlineRevenueAdjustments": {
+      "format": "double",
+      "description": "Payout total online revenue adjustments",
+      "type": "number",
+      "example": 12.5
+    },
+    "ChargebackAmount": {
+      "format": "double",
+      "description": "Payout chargeback amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "PosSalesChargebackAmount": {
+      "format": "double",
+      "description": "POS Payout chargeback amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "ChargebackRefundedFees": {
+      "format": "double",
+      "description": "Payout chargeback refunded fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "TotalChargebackCost": {
+      "format": "double",
+      "description": "Payout chargebacks total cost",
+      "type": "number",
+      "example": 12.5
+    },
+    "TotalOtherCharges": {
+      "format": "double",
+      "description": "Payout other charges total",
+      "type": "number",
+      "example": 12.5
+    },
+    "OpeningBalance": {
+      "format": "double",
+      "description": "Payout opening balance",
+      "type": "number",
+      "example": 1.0
+    },
+    "ClosingBalance": {
+      "format": "double",
+      "description": "Payout closing balance",
+      "type": "number",
+      "example": 1.0
+    },
+    "PayGreenSalesAmount": {
+      "format": "double",
+      "description": "Amount of sales through PayGreen (restaurant vouchers)",
+      "type": "number",
+      "nullable": true,
+      "example": 12.5
+    },
+    "DeliveryIntegrationFee": {
+      "format": "double",
+      "description": "Third party integration delivery fee",
+      "type": "number",
+      "example": 12.5
+    },
+    "DeliveryIntegrationTipFee": {
+      "format": "double",
+      "description": "Third party integration delivery tip fee",
+      "type": "number",
+      "example": 12.5
+    },
+    "TotalThirdPartyFees": {
+      "format": "double",
+      "description": "Total third party integration fees",
+      "type": "number",
+      "example": 12.5
+    },
+    "PosSalesAmount": {
+      "format": "double",
+      "description": "POS sales amount",
+      "type": "number",
+      "example": 12.5
+    },
+    "PosSalesTax": {
+      "format": "double",
+      "description": "POS sales tax",
+      "type": "number",
+      "example": 1.0
+    },
+    "TipsOnPosSales": {
+      "format": "double",
+      "description": "Tips on POS sales",
+      "type": "number",
+      "example": 1.0
+    },
+    "BankAccountHasChanged": {
+      "description": "Indicates whether the bank account has changed since the previous payout",
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

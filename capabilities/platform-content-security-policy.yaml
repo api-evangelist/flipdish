@@ -1,0 +1,86 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — ContentSecurityPolicy"
+  description: >-
+    ContentSecurityPolicy operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Content Security Policy_Report. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Content Security Policy
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-content-security-policy"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — ContentSecurityPolicy business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "csp-report"
+          path: "/api/v1.0/csp/report"
+          operations:
+            - name: "ContentSecurityPolicy_Report"
+              method: POST
+              description: "Flipdish Content Security Policy_Report"
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-content-security-policy-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — ContentSecurityPolicy."
+      resources:
+        - path: "/v1/csp/report"
+          name: "csp-report"
+          description: "REST surface for ContentSecurityPolicy_Report."
+          operations:
+            - method: POST
+              name: "ContentSecurityPolicy_Report"
+              description: "Flipdish Content Security Policy_Report"
+              call: "platform-content-security-policy.ContentSecurityPolicy_Report"
+              with:
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-content-security-policy-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — ContentSecurityPolicy."
+      tools:
+        - name: "content-security-policy_report"
+          description: "Flipdish Content Security Policy_Report"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-content-security-policy.ContentSecurityPolicy_Report"
+          with:
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

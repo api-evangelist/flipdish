@@ -1,0 +1,240 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Stores — DeliveryZone"
+  description: >-
+    DeliveryZone operations on the Flipdish Open API v1.0 (4 operations).
+    Lead operation: Flipdish Get Delivery Zones. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Delivery Zone
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "stores-delivery-zone"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Stores — DeliveryZone business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "stores-store-id-deliveryzones"
+          path: "/api/v1.0/stores/{storeId}/deliveryzones"
+          operations:
+            - name: "GetDeliveryZones"
+              method: GET
+              description: "Flipdish Get Delivery Zones"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-deliveryzones"
+          path: "/api/v1.0/stores/{storeId}/deliveryzones"
+          operations:
+            - name: "AddDeliveryZone"
+              method: POST
+              description: "Flipdish Add Delivery Zone"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-deliveryzones-delivery-zone-id"
+          path: "/api/v1.0/stores/{storeId}/deliveryzones/{deliveryZoneId}"
+          operations:
+            - name: "UpdateDeliveryZone"
+              method: POST
+              description: "Flipdish Update Delivery Zone"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryZoneId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The delivery zone id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-deliveryzones-delivery-zone-id"
+          path: "/api/v1.0/stores/{storeId}/deliveryzones/{deliveryZoneId}"
+          operations:
+            - name: "RemoveDeliveryZone"
+              method: DELETE
+              description: "Flipdish Remove Delivery Zone"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryZoneId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The delivery zone id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "stores-delivery-zone-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Stores — DeliveryZone."
+      resources:
+        - path: "/v1/stores/{store-id}/deliveryzones"
+          name: "stores-store-id-deliveryzones"
+          description: "REST surface for GetDeliveryZones."
+          operations:
+            - method: GET
+              name: "GetDeliveryZones"
+              description: "Flipdish Get Delivery Zones"
+              call: "stores-delivery-zone.GetDeliveryZones"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/deliveryzones"
+          name: "stores-store-id-deliveryzones"
+          description: "REST surface for AddDeliveryZone."
+          operations:
+            - method: POST
+              name: "AddDeliveryZone"
+              description: "Flipdish Add Delivery Zone"
+              call: "stores-delivery-zone.AddDeliveryZone"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/deliveryzones/{delivery-zone-id}"
+          name: "stores-store-id-deliveryzones-delivery-zone-id"
+          description: "REST surface for UpdateDeliveryZone."
+          operations:
+            - method: POST
+              name: "UpdateDeliveryZone"
+              description: "Flipdish Update Delivery Zone"
+              call: "stores-delivery-zone.UpdateDeliveryZone"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryZoneId": "rest.deliveryZoneId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/deliveryzones/{delivery-zone-id}"
+          name: "stores-store-id-deliveryzones-delivery-zone-id"
+          description: "REST surface for RemoveDeliveryZone."
+          operations:
+            - method: DELETE
+              name: "RemoveDeliveryZone"
+              description: "Flipdish Remove Delivery Zone"
+              call: "stores-delivery-zone.RemoveDeliveryZone"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryZoneId": "rest.deliveryZoneId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "stores-delivery-zone-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Stores — DeliveryZone."
+      tools:
+        - name: "get-delivery-zones"
+          description: "Flipdish Get Delivery Zones"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-delivery-zone.GetDeliveryZones"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "add-delivery-zone"
+          description: "Flipdish Add Delivery Zone"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-delivery-zone.AddDeliveryZone"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-delivery-zone"
+          description: "Flipdish Update Delivery Zone"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-delivery-zone.UpdateDeliveryZone"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryZoneId": "tools.deliveryZoneId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "remove-delivery-zone"
+          description: "Flipdish Remove Delivery Zone"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "stores-delivery-zone.RemoveDeliveryZone"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryZoneId": "tools.deliveryZoneId"
+          outputParameters:
+            - type: object
+              mapping: "$."

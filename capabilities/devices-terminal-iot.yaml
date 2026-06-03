@@ -1,0 +1,76 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Devices — TerminalIot"
+  description: >-
+    TerminalIot operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Get Terminal Iot Connection. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Terminal Iot
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "devices-terminal-iot"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Devices — TerminalIot business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "terminaliot-connect"
+          path: "/api/v1.0/terminaliot/connect"
+          operations:
+            - name: "GetTerminalIotConnection"
+              method: POST
+              description: "Flipdish Get Terminal Iot Connection"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "devices-terminal-iot-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Devices — TerminalIot."
+      resources:
+        - path: "/v1/terminaliot/connect"
+          name: "terminaliot-connect"
+          description: "REST surface for GetTerminalIotConnection."
+          operations:
+            - method: POST
+              name: "GetTerminalIotConnection"
+              description: "Flipdish Get Terminal Iot Connection"
+              call: "devices-terminal-iot.GetTerminalIotConnection"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "devices-terminal-iot-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Devices — TerminalIot."
+      tools:
+        - name: "get-terminal-iot-connection"
+          description: "Flipdish Get Terminal Iot Connection"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: false
+          call: "devices-terminal-iot.GetTerminalIotConnection"
+          outputParameters:
+            - type: object
+              mapping: "$."

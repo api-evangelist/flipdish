@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/orders-update-tip-configuration-schema.json",
+  "title": "UpdateTipConfiguration",
+  "description": "Describes the configuration of tipping",
+  "type": "object",
+  "properties": {
+    "IsEnabled": {
+      "description": "Are tips enabled?",
+      "type": "boolean",
+      "example": true
+    },
+    "AllowCustomTips": {
+      "description": "Are custom tips allowed?",
+      "type": "boolean",
+      "example": true
+    },
+    "AllowRoundUp": {
+      "description": "Is round up allowed?",
+      "type": "boolean",
+      "example": true
+    },
+    "AllowEmojis": {
+      "description": "Are emojis allowed?",
+      "type": "boolean",
+      "example": true
+    },
+    "Percentages": {
+      "description": "Ordered list of tip breakpoints (smallest -&gt; largest)",
+      "type": "array",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "example": [
+        1.0
+      ]
+    },
+    "DefaultPercentage": {
+      "format": "double",
+      "description": "Defines a default percentage, it must be in the list of Percentages",
+      "type": "number",
+      "nullable": true,
+      "example": 1.0
+    }
+  }
+}

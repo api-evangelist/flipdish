@@ -1,0 +1,114 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Marketing — CrossSell"
+  description: >-
+    CrossSell operations on the Flipdish Open API v1.0 (1 operations).
+    Lead operation: Flipdish Get Cross Sell Menu Items. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Cross Sell
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "marketing-cross-sell"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Marketing — CrossSell business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-cross-sell-menu-items"
+          path: "/api/v1.0/{appId}/crossSell/menuItems"
+          operations:
+            - name: "GetCrossSellMenuItems"
+              method: GET
+              description: "Flipdish Get Cross Sell Menu Items"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "menuId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The menu id query parameter."
+                - name: "menuItemId"
+                  in: query
+                  type: array
+                  required: true
+                  description: "The menu item id query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The limit query parameter."
+                - name: "totalValue"
+                  in: query
+                  type: number
+                  required: true
+                  description: "The total value query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "marketing-cross-sell-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Marketing — CrossSell."
+      resources:
+        - path: "/v1/{app-id}/cross-sell/menu-items"
+          name: "app-id-cross-sell-menu-items"
+          description: "REST surface for GetCrossSellMenuItems."
+          operations:
+            - method: GET
+              name: "GetCrossSellMenuItems"
+              description: "Flipdish Get Cross Sell Menu Items"
+              call: "marketing-cross-sell.GetCrossSellMenuItems"
+              with:
+                "appId": "rest.appId"
+                "menuId": "rest.menuId"
+                "menuItemId": "rest.menuItemId"
+                "limit": "rest.limit"
+                "totalValue": "rest.totalValue"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "marketing-cross-sell-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Marketing — CrossSell."
+      tools:
+        - name: "get-cross-sell-menu-items"
+          description: "Flipdish Get Cross Sell Menu Items"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-cross-sell.GetCrossSellMenuItems"
+          with:
+            "appId": "tools.appId"
+            "menuId": "tools.menuId"
+            "menuItemId": "tools.menuItemId"
+            "limit": "tools.limit"
+            "totalValue": "tools.totalValue"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,156 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — AuthorizationTokens"
+  description: >-
+    AuthorizationTokens operations on the Flipdish Open API v1.0 (2 operations).
+    Lead operation: Flipdish Get Authorization Tokens. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Authorization Tokens
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-authorization-tokens"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — AuthorizationTokens business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-authorizationtokens-oauth-app-id"
+          path: "/api/v1.0/{appId}/authorizationtokens/{oauthAppId}"
+          operations:
+            - name: "GetAuthorizationTokens"
+              method: GET
+              description: "Flipdish Get Authorization Tokens"
+              inputParameters:
+                - name: "oauthAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The oauth app id path parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-authorizationtokens-key"
+          path: "/api/v1.0/{appId}/authorizationtokens/{key}"
+          operations:
+            - name: "RevokeToken"
+              method: DELETE
+              description: "Flipdish Revoke Token"
+              inputParameters:
+                - name: "key"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The key path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-authorization-tokens-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — AuthorizationTokens."
+      resources:
+        - path: "/v1/{app-id}/authorizationtokens/{oauth-app-id}"
+          name: "app-id-authorizationtokens-oauth-app-id"
+          description: "REST surface for GetAuthorizationTokens."
+          operations:
+            - method: GET
+              name: "GetAuthorizationTokens"
+              description: "Flipdish Get Authorization Tokens"
+              call: "platform-authorization-tokens.GetAuthorizationTokens"
+              with:
+                "oauthAppId": "rest.oauthAppId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/authorizationtokens/{key}"
+          name: "app-id-authorizationtokens-key"
+          description: "REST surface for RevokeToken."
+          operations:
+            - method: DELETE
+              name: "RevokeToken"
+              description: "Flipdish Revoke Token"
+              call: "platform-authorization-tokens.RevokeToken"
+              with:
+                "key": "rest.key"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-authorization-tokens-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — AuthorizationTokens."
+      tools:
+        - name: "get-authorization-tokens"
+          description: "Flipdish Get Authorization Tokens"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-authorization-tokens.GetAuthorizationTokens"
+          with:
+            "oauthAppId": "tools.oauthAppId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "revoke-token"
+          description: "Flipdish Revoke Token"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "platform-authorization-tokens.RevokeToken"
+          with:
+            "key": "tools.key"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."

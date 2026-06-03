@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/orders-update-fulfillment-states-configuration-structure.json",
+  "name": "UpdateFulfillmentStatesConfiguration",
+  "description": "Update fulfillment states configuration",
+  "type": "object",
+  "properties": {
+    "OverwriteSystemTemplate": {
+      "description": "Set to true if a system configuration template is to be updated (permissions also needed)",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    },
+    "StoreIds": {
+      "description": "Stores id's",
+      "type": "array",
+      "items": {
+        "type": "int32"
+      },
+      "example": [
+        1
+      ]
+    },
+    "StoreSelectorType": {
+      "description": "Store Selector Type",
+      "enum": [
+        "None",
+        "Single",
+        "Multiple"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "States": {
+      "description": "Settings",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FulfillmentStatusConfigurationItem"
+      },
+      "example": []
+    },
+    "AutomaticTransitionsEnabled": {
+      "description": "Enable automatic transitions",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    },
+    "Name": {
+      "description": "Name",
+      "type": "string",
+      "example": "Example Name"
+    }
+  }
+}

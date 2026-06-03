@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/payments-bank-account-detail-structure.json",
+  "name": "BankAccountDetail",
+  "description": "BankAccountDetail schema from Flipdish API - Payments.",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "description": "Id of this account",
+      "type": "int32",
+      "example": 500123
+    },
+    "StoreNames": {
+      "description": "Store Names that are attached to this account",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Example Name"
+      ]
+    },
+    "AccountState": {
+      "description": "Status of Account",
+      "enum": [
+        "Unverified",
+        "AwatingVerification",
+        "Verified",
+        "Grandfathered"
+      ],
+      "type": "string",
+      "example": "Unverified"
+    },
+    "StripeConnectedAccountInfo": {
+      "$ref": "#/components/schemas/StripeConnectedAccountInfo"
+    },
+    "BankAddress": {
+      "description": "Address lf the bank",
+      "type": "string",
+      "example": "string"
+    },
+    "BankCountryCode": {
+      "description": "CountryCode of the Bank Account",
+      "type": "string",
+      "example": "IE"
+    },
+    "AccountHolderAddress": {
+      "description": "Account Holders Address",
+      "type": "string",
+      "example": "string"
+    },
+    "AccountHolderCountryCode": {
+      "description": "Account Holders Country Code",
+      "type": "string",
+      "example": "IE"
+    },
+    "VatNumber": {
+      "description": "Account Holders Vat Number",
+      "type": "string",
+      "example": "string"
+    },
+    "CurrencyCode": {
+      "description": "Currency of Account",
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CAD",
+        "AUD",
+        "DJF",
+        "ZAR",
+        "ETB",
+        "AED",
+        "BHD",
+        "DZD",
+        "EGP",
+        "IQD",
+        "JOD",
+        "KWD",
+        "LBP",
+        "LYD",
+        "MAD",
+        "OMR",
+        "QAR",
+        "SAR",
+        "SYP",
+        "TND",
+        "YER",
+        "CLP",
+        "INR",
+        "AZN",
+        "RUB",
+        "BYN",
+        "BGN",
+        "NGN",
+        "BDT",
+        "CNY",
+        "BAM",
+        "CZK",
+        "DKK",
+        "CHF",
+        "MVR",
+        "BTN",
+        "XCD",
+        "BZD",
+        "HKD",
+        "IDR",
+        "JMD",
+        "MYR",
+        "NZD",
+        "PHP",
+        "SGD",
+        "TTD",
+        "XDR",
+        "ARS",
+        "BOB",
+        "COP",
+        "CRC",
+        "CUP",
+        "DOP",
+        "GTQ",
+        "HNL",
+        "MXN",
+        "NIO",
+        "PAB",
+        "PEN",
+        "PYG",
+        "UYU",
+        "VEF",
+        "IRR",
+        "XOF",
+        "CDF",
+        "XAF",
+        "HTG",
+        "ILS",
+        "HRK",
+        "HUF",
+        "AMD",
+        "ISK",
+        "JPY",
+        "GEL",
+        "KZT",
+        "KHR",
+        "KRW",
+        "KGS",
+        "LAK",
+        "MKD",
+        "MNT",
+        "BND",
+        "MMK",
+        "NOK",
+        "NPR",
+        "PKR",
+        "PLN",
+        "AFN",
+        "BRL",
+        "MDL",
+        "RON",
+        "RWF",
+        "SEK",
+        "LKR",
+        "SOS",
+        "ALL",
+        "RSD",
+        "KES",
+        "TJS",
+        "THB",
+        "ERN",
+        "TMT",
+        "BWP",
+        "TRY",
+        "UAH",
+        "UZS",
+        "VND",
+        "MOP",
+        "TWD",
+        "BMD"
+      ],
+      "type": "string",
+      "example": "EUR"
+    },
+    "StoreIds": {
+      "description": "List of stores to attach to Account",
+      "type": "array",
+      "items": {
+        "type": "int32"
+      },
+      "example": [
+        1
+      ]
+    },
+    "BankName": {
+      "description": "Name of Bank",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "AccountName": {
+      "description": "Name of this account",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Iban": {
+      "description": "IBAN of this account",
+      "type": "string",
+      "example": "string"
+    },
+    "Swift": {
+      "description": "SWIFT of this bank account",
+      "type": "string",
+      "example": "string"
+    },
+    "NationalClearingCode": {
+      "description": "National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)",
+      "type": "string",
+      "example": "string"
+    },
+    "PopulatedAccountFields": {
+      "description": "A list of one or more populated account fields (field key-value pairs).\r\nIf this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountFieldKeyValuePair"
+      },
+      "example": []
+    },
+    "RejectionReason": {
+      "description": "Reason for Rejection",
+      "type": "string",
+      "example": "string"
+    },
+    "BusinessType": {
+      "description": "Business Type",
+      "enum": [
+        "Individual",
+        "Company",
+        "NonProfit",
+        "GovernmentEntity"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Individual"
+    }
+  }
+}

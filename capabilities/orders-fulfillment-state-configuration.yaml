@@ -1,0 +1,331 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Orders — FulfillmentStateConfiguration"
+  description: >-
+    FulfillmentStateConfiguration operations on the Flipdish Open API v1.0 (6 operations).
+    Lead operation: Flipdish Search Fulfillment States Configurations. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Fulfillment State Configuration
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "orders-fulfillment-state-configuration"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Orders — FulfillmentStateConfiguration business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-fulfillment-configuration-states"
+          path: "/api/v1.0/{appId}/fulfillment/configuration/states"
+          operations:
+            - name: "SearchFulfillmentStatesConfigurations"
+              method: GET
+              description: "Flipdish Search Fulfillment States Configurations"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-fulfillment-configuration-states"
+          path: "/api/v1.0/{appId}/fulfillment/configuration/states"
+          operations:
+            - name: "CreateFulfillmentStatesConfig"
+              method: POST
+              description: "Flipdish Create Fulfillment States Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-fulfillment-configuration-states-template"
+          path: "/api/v1.0/{appId}/fulfillment/configuration/states_template"
+          operations:
+            - name: "GetFulfillmentStatesConfigurationTemplate"
+              method: GET
+              description: "Flipdish Get Fulfillment States Configuration Template"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-fulfillment-configuration-states-config-id"
+          path: "/api/v1.0/{appId}/fulfillment/configuration/states/{configId}"
+          operations:
+            - name: "GetFulfillmentStatesConfiguration"
+              method: GET
+              description: "Flipdish Get Fulfillment States Configuration"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-fulfillment-configuration-states-config-id"
+          path: "/api/v1.0/{appId}/fulfillment/configuration/states/{configId}"
+          operations:
+            - name: "UpdateFulfillmentStatesConfig"
+              method: POST
+              description: "Flipdish Update Fulfillment States Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-fulfillment-configuration-states-config-id"
+          path: "/api/v1.0/{appId}/fulfillment/configuration/states/{configId}"
+          operations:
+            - name: "DeleteFulfillmentStatesConfig"
+              method: DELETE
+              description: "Flipdish Delete Fulfillment States Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "orders-fulfillment-state-configuration-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Orders — FulfillmentStateConfiguration."
+      resources:
+        - path: "/v1/{app-id}/fulfillment/configuration/states"
+          name: "app-id-fulfillment-configuration-states"
+          description: "REST surface for SearchFulfillmentStatesConfigurations."
+          operations:
+            - method: GET
+              name: "SearchFulfillmentStatesConfigurations"
+              description: "Flipdish Search Fulfillment States Configurations"
+              call: "orders-fulfillment-state-configuration.SearchFulfillmentStatesConfigurations"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/fulfillment/configuration/states"
+          name: "app-id-fulfillment-configuration-states"
+          description: "REST surface for CreateFulfillmentStatesConfig."
+          operations:
+            - method: POST
+              name: "CreateFulfillmentStatesConfig"
+              description: "Flipdish Create Fulfillment States Config"
+              call: "orders-fulfillment-state-configuration.CreateFulfillmentStatesConfig"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/fulfillment/configuration/states-template"
+          name: "app-id-fulfillment-configuration-states-template"
+          description: "REST surface for GetFulfillmentStatesConfigurationTemplate."
+          operations:
+            - method: GET
+              name: "GetFulfillmentStatesConfigurationTemplate"
+              description: "Flipdish Get Fulfillment States Configuration Template"
+              call: "orders-fulfillment-state-configuration.GetFulfillmentStatesConfigurationTemplate"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/fulfillment/configuration/states/{config-id}"
+          name: "app-id-fulfillment-configuration-states-config-id"
+          description: "REST surface for GetFulfillmentStatesConfiguration."
+          operations:
+            - method: GET
+              name: "GetFulfillmentStatesConfiguration"
+              description: "Flipdish Get Fulfillment States Configuration"
+              call: "orders-fulfillment-state-configuration.GetFulfillmentStatesConfiguration"
+              with:
+                "appId": "rest.appId"
+                "configId": "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/fulfillment/configuration/states/{config-id}"
+          name: "app-id-fulfillment-configuration-states-config-id"
+          description: "REST surface for UpdateFulfillmentStatesConfig."
+          operations:
+            - method: POST
+              name: "UpdateFulfillmentStatesConfig"
+              description: "Flipdish Update Fulfillment States Config"
+              call: "orders-fulfillment-state-configuration.UpdateFulfillmentStatesConfig"
+              with:
+                "appId": "rest.appId"
+                "configId": "rest.configId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/fulfillment/configuration/states/{config-id}"
+          name: "app-id-fulfillment-configuration-states-config-id"
+          description: "REST surface for DeleteFulfillmentStatesConfig."
+          operations:
+            - method: DELETE
+              name: "DeleteFulfillmentStatesConfig"
+              description: "Flipdish Delete Fulfillment States Config"
+              call: "orders-fulfillment-state-configuration.DeleteFulfillmentStatesConfig"
+              with:
+                "appId": "rest.appId"
+                "configId": "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "orders-fulfillment-state-configuration-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Orders — FulfillmentStateConfiguration."
+      tools:
+        - name: "search-fulfillment-states-configurations"
+          description: "Flipdish Search Fulfillment States Configurations"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "orders-fulfillment-state-configuration.SearchFulfillmentStatesConfigurations"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-fulfillment-states-config"
+          description: "Flipdish Create Fulfillment States Config"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "orders-fulfillment-state-configuration.CreateFulfillmentStatesConfig"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-fulfillment-states-configuration-template"
+          description: "Flipdish Get Fulfillment States Configuration Template"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "orders-fulfillment-state-configuration.GetFulfillmentStatesConfigurationTemplate"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-fulfillment-states-configuration"
+          description: "Flipdish Get Fulfillment States Configuration"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "orders-fulfillment-state-configuration.GetFulfillmentStatesConfiguration"
+          with:
+            "appId": "tools.appId"
+            "configId": "tools.configId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-fulfillment-states-config"
+          description: "Flipdish Update Fulfillment States Config"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "orders-fulfillment-state-configuration.UpdateFulfillmentStatesConfig"
+          with:
+            "appId": "tools.appId"
+            "configId": "tools.configId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-fulfillment-states-config"
+          description: "Flipdish Delete Fulfillment States Config"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "orders-fulfillment-state-configuration.DeleteFulfillmentStatesConfig"
+          with:
+            "appId": "tools.appId"
+            "configId": "tools.configId"
+          outputParameters:
+            - type: object
+              mapping: "$."

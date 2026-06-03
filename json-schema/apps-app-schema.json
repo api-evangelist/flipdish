@@ -1,0 +1,394 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/apps-app-schema.json",
+  "title": "App",
+  "description": "App",
+  "type": "object",
+  "properties": {
+    "AppId": {
+      "description": "App Identifier",
+      "type": "string",
+      "example": "500123"
+    },
+    "HasIosApp": {
+      "description": "Has iOS app in Apple App Store. This is readonly.",
+      "type": "boolean",
+      "example": true
+    },
+    "IosAppStoreUrl": {
+      "description": "IOS App Store URL",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "HasAndroidApp": {
+      "description": "Has Android app in Google Play Store. This is readonly.",
+      "type": "boolean",
+      "example": true
+    },
+    "AndroidPlayStoreUrl": {
+      "description": "Android Play Store URL",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "DisplayDeliveryRestaurantScreen": {
+      "description": "Display delivery restaurant screen",
+      "type": "boolean",
+      "example": true
+    },
+    "LogoImageUrl": {
+      "description": "Application Logo.",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "Languages": {
+      "description": "Languages that have been selected to be available to customers.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Language"
+      },
+      "example": []
+    },
+    "AvailableAppLanguages": {
+      "description": "Lists all languages that are supported by Flipdish.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Language"
+      },
+      "example": []
+    },
+    "AppAccessLevel": {
+      "description": "App access level for the logged in user",
+      "enum": [
+        "None",
+        "Owner",
+        "StoreOwner",
+        "PropertyOwner",
+        "ManagedOwner",
+        "Integrator",
+        "PropertyManager",
+        "StoreManager",
+        "StoreStaff",
+        "StoreReadOnlyAccess",
+        "FinanceManger",
+        "Onboarding",
+        "Support"
+      ],
+      "type": "string",
+      "example": "None"
+    },
+    "AppResourceSet": {
+      "description": "Constitutes a list of available resources",
+      "type": "array",
+      "items": {
+        "enum": [
+          "ViewApp",
+          "CreateApp",
+          "UpdateApp",
+          "ViewAppName",
+          "EditAppAssets",
+          "EditAppFeatures",
+          "ViewTeammates",
+          "EditTeammates",
+          "CreateTeammateOwner",
+          "CreateTeammateManagedOwner",
+          "CreateTeammateStoreOwner",
+          "CreateTeammateStoreManager",
+          "CreateTeammateStoreStaff",
+          "CreateTeammateStoreReadAccess",
+          "CreateTeammateFinanceManager",
+          "CreateTeammateIntegrator",
+          "CreateTeammateOnboarding",
+          "CreateTeammatePropertyManager",
+          "CreateTeammatePropertyOwner",
+          "ViewApmConfigurations",
+          "EditApmConfigurations",
+          "ViewCampaignsConfigurations",
+          "CreateCampaignsConfigurations",
+          "UpdateCampaignsConfigurations",
+          "DeleteCampaignsConfigurations",
+          "StampLoyaltyCardAgainstCampaignsConfigurations",
+          "ViewDevelopersSettings",
+          "EditDevelopersSettings",
+          "ViewOrders",
+          "UpdateOrdersAccept",
+          "UpdateOrdersReject",
+          "UpdateOrdersRefund",
+          "UpdateOrdersDispatch",
+          "ViewStores",
+          "CreateStores",
+          "EditStores",
+          "ViewStoresOpeningHours",
+          "UpdateStoresOpenForCollectionOrDelivery",
+          "UpdateStoresOpeningHours",
+          "ViewStoresOpeningHoursOverride",
+          "EditStoresOpeningHoursOverride",
+          "EditStoresOpeningHoursOverrideTemporary",
+          "UpdateStoresName",
+          "EditStoreKioskSettings",
+          "EditStoreOrderCapacity",
+          "ArchiveStores",
+          "PublishStores",
+          "UpdatePrinterTerminalsAssign",
+          "UpdatePrinterTerminalsToggle",
+          "EditStoreNotifications",
+          "ViewStoreGroups",
+          "CreateStoreGroups",
+          "UpdateStoreGroups",
+          "DeleteStoreGroups",
+          "ViewDeliveryZones",
+          "CreateDeliveryZones",
+          "UpdateDeliveryZones",
+          "DeleteDeliveryZones",
+          "ViewMenu",
+          "CreateMenu",
+          "UpdateMenu",
+          "DeleteMenu",
+          "UpdateMenuLock",
+          "UpdateMenuItemsHideTemporarily",
+          "EditMenuImage",
+          "ViewVouchers",
+          "EditVouchers",
+          "ViewWebsiteContent",
+          "EditWebsiteContent",
+          "ViewWebsiteDnsVerified",
+          "ViewWebsiteCertificateCreated",
+          "ViewWebsiteCertificateRenewed",
+          "ViewBankAccounts",
+          "CreateBankAccounts",
+          "UpdateBankAccounts",
+          "UpdateBankAccountsAssign",
+          "ViewAssignedBankAccount",
+          "VerifyBankAccounts",
+          "ViewServiceChargeConfigurations",
+          "EditServiceChargeConfigurations",
+          "EditStoreDeliveryZoneFees",
+          "EditStoreDeliveryFeesLimited",
+          "ViewHydraConfig",
+          "UpdateHydraConfigManage",
+          "InitiateBluetoothPairingMode",
+          "DeleteTerminal",
+          "ViewKioskTelemetry",
+          "ViewCustomers",
+          "EditCustomers",
+          "CreateCustomers",
+          "CreateCatalogElements",
+          "UpdateCatalogElements",
+          "ViewCatalogElements",
+          "DeleteCatalogElements",
+          "ViewMetafieldDefinitions",
+          "CreateMetafieldDefinitions",
+          "UpdateMetafieldDefinitions",
+          "DeleteMetafieldDefinitions",
+          "UpdateMetafields",
+          "ViewCatalogMenuChanges",
+          "PublishCatalogMenuChanges",
+          "ViewAppStatistics",
+          "ViewApmStatistics",
+          "ViewCampaignsStatistics",
+          "ViewCustomerStatistics",
+          "ViewLiveStatistics",
+          "ViewOrderStatistics",
+          "ViewSalesStatistics",
+          "ViewSalesEndOfDayStatistics",
+          "ViewVouchersStatistics",
+          "DownloadCustomerCsvExport",
+          "ViewApmAuditLogs",
+          "ViewStoreAuditLogs",
+          "ViewMenuAuditLogs",
+          "ViewBankAccountAuditLogs",
+          "ViewFeeConfigurationsAuditLogs",
+          "ViewOrdersAuditLogs",
+          "ViewVouchersAuditLogs",
+          "ViewUserEventsAuditLogs",
+          "ViewCampaignsAuditLogs",
+          "ViewTeammatesAuditLogs",
+          "ViewAppAuditLogs",
+          "ViewCustomerAuditLogs",
+          "ViewPrinterAuditLogs",
+          "ViewHydraAuditLogs",
+          "ViewPushNotificationAuditLogs",
+          "ViewStripeCustomConnectedAccountAuditLogs",
+          "ViewKioskBluetoothDeviceAuditLogs",
+          "ViewExternalAuditLogs",
+          "CreateExternalAuditLogEvents",
+          "ViewCatalogAuditLogs",
+          "ViewOrderFulfillmentAuditLogs",
+          "ViewChannelAuditLogs",
+          "ViewAppStoreAuditLogs",
+          "SendPushNotificationToCustomer",
+          "InviteDriverToApp",
+          "GetDriverForApp",
+          "RemoveDriverFromApp",
+          "AssignDriverToOrder",
+          "UnassignDriverFromOrder",
+          "UpdateOrdersDeliveryTrackingStatus",
+          "UpdateOrderFulfillmentStatus",
+          "ViewFulfillmentStatesConfiguration",
+          "CreateFulfillmentStatesConfiguration",
+          "UpdateFulfillmentStatesConfiguration",
+          "DeleteFulfillmentStatesConfiguration",
+          "ViewPayouts",
+          "ViewChannels",
+          "ViewOnboarding",
+          "UpdateOnboarding",
+          "ViewClientDevices",
+          "UpdateClientDevices",
+          "EnrollClientDevices",
+          "AssignClientDevices",
+          "ViewClientAuditLogs",
+          "CreateAppStoreAppConfiguration",
+          "ViewAppStoreAppConfiguration",
+          "UpdateAppStoreAppConfiguration",
+          "DeleteAppStoreAppConfiguration",
+          "UpdateAppStoreAppConfigurationSettings",
+          "CreateAppStoreSubscription",
+          "UpdateAppStoreSubscription",
+          "DeleteAppStoreSubscription",
+          "ViewSalesChannels",
+          "EditSalesChannels",
+          "ViewPayGreenWhiteLabelConfiguration",
+          "CreatePayGreenWhiteLabelConfiguration",
+          "UpdatePayGreenWhiteLabelConfiguration",
+          "UpdatePayGreenStoreConfiguration",
+          "ViewSubscriptions",
+          "ViewInvoices",
+          "EditAccountsBills",
+          "ViewAccountsBills",
+          "EditAccountsCategories",
+          "ViewAccountsCategories",
+          "EditAccountsCreditAccounts",
+          "ViewAccountsCreditAccounts",
+          "EditAccountsCreditBooks",
+          "ViewAccountsCreditBooks",
+          "EditAccountsExpenses",
+          "ViewAccountsExpenses",
+          "EditAccountsTransactionAccounts",
+          "ViewAccountsTransactionAccounts",
+          "EditDocumentExplorer",
+          "ViewDocumentExplorer",
+          "ViewInventoryReports",
+          "EditInventoryPurchaseOrders",
+          "ViewInventoryPurchaseOrders",
+          "EditInventoryStockItems",
+          "ViewInventoryStockItems",
+          "EditInventorySupplier",
+          "ViewInventorySupplier",
+          "EditInventoryTrackingProfiles",
+          "ViewInventoryTrackingProfiles",
+          "ViewPayrollReports",
+          "EditPayrollHoliday",
+          "ViewPayrollHoliday",
+          "EditPayrollRota",
+          "ViewPayrollRota",
+          "EditPayrollStaff",
+          "ViewPayrollStaff",
+          "ViewSalesReports",
+          "ViewCostReports",
+          "ViewMenuReports"
+        ],
+        "type": "string"
+      },
+      "example": [
+        "ViewApp"
+      ]
+    },
+    "Features": {
+      "description": "Feature flags. These cannot be set by 3rd parties.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "string"
+      ]
+    },
+    "MapCenter": {
+      "$ref": "#/components/schemas/Coordinates"
+    },
+    "MapNorthEast": {
+      "$ref": "#/components/schemas/Coordinates"
+    },
+    "MapSouthWest": {
+      "$ref": "#/components/schemas/Coordinates"
+    },
+    "GoogleMapsApiKeyWeb": {
+      "description": "Key to be passed with Google Maps requests",
+      "type": "string",
+      "example": "string"
+    },
+    "OrgId": {
+      "description": "Org Id",
+      "type": "string",
+      "example": "500123"
+    },
+    "SmsRestaurantName": {
+      "description": "SMS Restaurant Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "WebToAppRedirect": {
+      "description": "Web to App Redirect settings",
+      "enum": [
+        "NoRedirect",
+        "RedirectOnce",
+        "RedirectAlways",
+        "SuggestPwa",
+        "ForcePwa"
+      ],
+      "type": "string",
+      "example": "NoRedirect"
+    },
+    "Name": {
+      "description": "App name. \r\nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites.",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "HostName": {
+      "description": "HostName on which the web-ordering system is allowed to be hosted or that a Flipdish website is hosted on.",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "MainColor": {
+      "description": "Main color of the web / Android / iOS applications",
+      "type": "string",
+      "example": "string"
+    },
+    "KioskPrimaryColour": {
+      "description": "Primary colour used on the Kiosk",
+      "type": "string",
+      "example": "string"
+    },
+    "ApplicationCategory": {
+      "description": "Application Category",
+      "enum": [
+        "Restaurant",
+        "Cafe",
+        "Convenience"
+      ],
+      "type": "string",
+      "example": "Restaurant"
+    },
+    "IsPanaceaEnabled": {
+      "description": "Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App's website is hosted on this domain.\r\nThe alternative to using Panacea websites is to use a custom domain.",
+      "type": "boolean",
+      "example": true
+    },
+    "PanaceaVanityUrl": {
+      "description": "In case of IsPanaceaEnabled is true, the app can be accessed via https://my.flipdish.com/{PanaceaVanityUrl}",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "CookieConsentPromptEnabled": {
+      "description": "Cookie Consent Prompt Enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "CountryId": {
+      "description": "Country identifier in ISO 3166-1 alpha-2 format. \r\nThis code is set automatically based on the locations of the Stores in the App. \r\n\r\nThe App Country is used \r\n - to determine how to parse mobile phone numbers that are entered in their local numbering format\r\n - to determine if country specific payment methods should be offered\r\n - in various fraud checks",
+      "maxLength": 2,
+      "minLength": 0,
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

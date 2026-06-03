@@ -1,0 +1,1253 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — Hydra"
+  description: >-
+    Hydra operations on the Flipdish Open API v1.0 (24 operations).
+    Lead operation: Flipdish Get Settings. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Hydra
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-hydra"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — Hydra business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "hydra-settings"
+          path: "/api/v1.0/hydra/settings"
+          operations:
+            - name: "GetSettings"
+              method: GET
+              description: "Flipdish Get Settings"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "hydra-ably-token"
+          path: "/api/v1.0/hydra/ably_token"
+          operations:
+            - name: "GetAblyToken"
+              method: GET
+              description: "Flipdish Get Ably Token"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "hydra-registration"
+          path: "/api/v1.0/hydra/registration"
+          operations:
+            - name: "GetRegistration"
+              method: GET
+              description: "Flipdish Get Registration"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-emvterminals"
+          path: "/api/v1.0/{appId}/emvterminals"
+          operations:
+            - name: "Hydra_GetEmvsForAppId"
+              method: GET
+              description: "Flipdish Hydra_Get Emvs for App Id"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-emvterminals"
+          path: "/api/v1.0/{appId}/emvterminals"
+          operations:
+            - name: "Hydra_CreateEmv"
+              method: POST
+              description: "Flipdish Hydra_Create Emv"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-emvterminal"
+          path: "/api/v1.0/{appId}/hydra/emvterminal"
+          operations:
+            - name: "GetEMVTerminalDetails"
+              method: GET
+              description: "Flipdish Get EMV Terminal Details"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-kiosksettings-device-id"
+          path: "/api/v1.0/{appId}/kiosksettings/{deviceId}"
+          operations:
+            - name: "GetKioskSettings"
+              method: GET
+              description: "Flipdish Get Kiosk Settings"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-kiosksettings-device-id"
+          path: "/api/v1.0/{appId}/kiosksettings/{deviceId}"
+          operations:
+            - name: "UpdateKioskSettings"
+              method: POST
+              description: "Flipdish Update Kiosk Settings"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-kioskcashsettings-device-id"
+          path: "/api/v1.0/{appId}/kioskcashsettings/{deviceId}"
+          operations:
+            - name: "GetKioskCashPaymentSettings"
+              method: GET
+              description: "Flipdish Get Kiosk Cash Payment Settings"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-emvorderstate-order-id"
+          path: "/api/v1.0/{appId}/hydra/emvorderstate/{orderId}"
+          operations:
+            - name: "GetEmvOrderState"
+              method: GET
+              description: "Flipdish Get Emv Order State"
+              inputParameters:
+                - name: "orderId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The order id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-device-type-device-id"
+          path: "/api/v1.0/{appId}/hydra/{deviceType}/{deviceId}"
+          operations:
+            - name: "GetAttachedDevice"
+              method: GET
+              description: "Flipdish Get Attached Device"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device type path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-device-type-list"
+          path: "/api/v1.0/{appId}/hydra/{deviceType}/list"
+          operations:
+            - name: "GetAttachedDevices"
+              method: GET
+              description: "Flipdish Get Attached Devices"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device type path parameter."
+                - name: "pageIndex"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page index query parameter."
+                - name: "pageSize"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page size query parameter."
+                - name: "storeId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The store id query parameter."
+                - name: "deviceName"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The device name query parameter."
+                - name: "deviceSerial"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The device serial query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-registration"
+          path: "/api/v1.0/{appId}/hydra/registration"
+          operations:
+            - name: "Register"
+              method: POST
+              description: "Flipdish Register"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-cancelemvpayment-order-id"
+          path: "/api/v1.0/{appId}/hydra/cancelemvpayment/{orderId}"
+          operations:
+            - name: "CancelEmvPayment"
+              method: POST
+              description: "Flipdish Cancel Emv Payment"
+              inputParameters:
+                - name: "orderId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The order id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-device-id-attach-store-id"
+          path: "/api/v1.0/{appId}/hydra/{deviceId}/attach/{storeId}"
+          operations:
+            - name: "AttachStoreToTerminal"
+              method: POST
+              description: "Flipdish Attach Store to Terminal"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-device-id-detach-store-id"
+          path: "/api/v1.0/{appId}/hydra/{deviceId}/detach/{storeId}"
+          operations:
+            - name: "DetachStoreFromTerminal"
+              method: POST
+              description: "Flipdish Detach Store from Terminal"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-emvterminal-unassign-hydra-config-id"
+          path: "/api/v1.0/{appId}/hydra/emvterminal/unassign/{hydraConfigId}"
+          operations:
+            - name: "UnassignEmv"
+              method: POST
+              description: "Flipdish Unassign Emv"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "hydraConfigId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The hydra config id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-attach-store-to-kiosk-device-id-store-store-id"
+          path: "/api/v1.0/{appId}/AttachStoreToKiosk/{deviceId}/store/{storeId}"
+          operations:
+            - name: "AttachStoreToKiosk"
+              method: POST
+              description: "Flipdish Attach Store to Kiosk"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-emvterminal-assign-hydra-config-id-emv-terminal-id"
+          path: "/api/v1.0/{appId}/hydra/emvterminal/assign/{hydraConfigId}/{emvTerminalId}"
+          operations:
+            - name: "AssignEmv"
+              method: POST
+              description: "Flipdish Assign Emv"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "hydraConfigId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The hydra config id path parameter."
+                - name: "emvTerminalId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The emv terminal id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "hydra-device-id-login"
+          path: "/api/v1.0/hydra/{deviceId}/login"
+          operations:
+            - name: "LoginWithDeviceId"
+              method: POST
+              description: "Flipdish Login with Device Id"
+              inputParameters:
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+                - name: "hydraUserType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The hydra user type query parameter."
+                - name: "serialNumber"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The serial number query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-kioskupdatecashsettings"
+          path: "/api/v1.0/{appId}/kioskupdatecashsettings"
+          operations:
+            - name: "UpdateKioskCashVisibilitySettings"
+              method: POST
+              description: "Flipdish Update Kiosk Cash Visibility Settings"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The device id query parameter."
+                - name: "isCashEnabled"
+                  in: query
+                  type: boolean
+                  required: true
+                  description: "The is cash enabled query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-emvterminals-id"
+          path: "/api/v1.0/{appId}/emvterminals/{id}"
+          operations:
+            - name: "Hydra_DeleteEmv"
+              method: DELETE
+              description: "Flipdish Hydra_Delete Emv"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-hydra-device-id-registration"
+          path: "/api/v1.0/{appId}/hydra/{deviceId}/registration"
+          operations:
+            - name: "UnAssign"
+              method: DELETE
+              description: "Flipdish Un Assign"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-detach-store-from-kiosk-device-id-store-store-id"
+          path: "/api/v1.0/{appId}/DetachStoreFromKiosk/{deviceId}/store/{storeId}"
+          operations:
+            - name: "Hydra_DetachStoreFromKiosk"
+              method: DELETE
+              description: "Flipdish Hydra_Detach Store from Kiosk"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deviceId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The device id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-hydra-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — Hydra."
+      resources:
+        - path: "/v1/hydra/settings"
+          name: "hydra-settings"
+          description: "REST surface for GetSettings."
+          operations:
+            - method: GET
+              name: "GetSettings"
+              description: "Flipdish Get Settings"
+              call: "platform-hydra.GetSettings"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/hydra/ably-token"
+          name: "hydra-ably-token"
+          description: "REST surface for GetAblyToken."
+          operations:
+            - method: GET
+              name: "GetAblyToken"
+              description: "Flipdish Get Ably Token"
+              call: "platform-hydra.GetAblyToken"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/hydra/registration"
+          name: "hydra-registration"
+          description: "REST surface for GetRegistration."
+          operations:
+            - method: GET
+              name: "GetRegistration"
+              description: "Flipdish Get Registration"
+              call: "platform-hydra.GetRegistration"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/emvterminals"
+          name: "app-id-emvterminals"
+          description: "REST surface for Hydra_GetEmvsForAppId."
+          operations:
+            - method: GET
+              name: "Hydra_GetEmvsForAppId"
+              description: "Flipdish Hydra_Get Emvs for App Id"
+              call: "platform-hydra.Hydra_GetEmvsForAppId"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/emvterminals"
+          name: "app-id-emvterminals"
+          description: "REST surface for Hydra_CreateEmv."
+          operations:
+            - method: POST
+              name: "Hydra_CreateEmv"
+              description: "Flipdish Hydra_Create Emv"
+              call: "platform-hydra.Hydra_CreateEmv"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/emvterminal"
+          name: "app-id-hydra-emvterminal"
+          description: "REST surface for GetEMVTerminalDetails."
+          operations:
+            - method: GET
+              name: "GetEMVTerminalDetails"
+              description: "Flipdish Get EMV Terminal Details"
+              call: "platform-hydra.GetEMVTerminalDetails"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/kiosksettings/{device-id}"
+          name: "app-id-kiosksettings-device-id"
+          description: "REST surface for GetKioskSettings."
+          operations:
+            - method: GET
+              name: "GetKioskSettings"
+              description: "Flipdish Get Kiosk Settings"
+              call: "platform-hydra.GetKioskSettings"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/kiosksettings/{device-id}"
+          name: "app-id-kiosksettings-device-id"
+          description: "REST surface for UpdateKioskSettings."
+          operations:
+            - method: POST
+              name: "UpdateKioskSettings"
+              description: "Flipdish Update Kiosk Settings"
+              call: "platform-hydra.UpdateKioskSettings"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/kioskcashsettings/{device-id}"
+          name: "app-id-kioskcashsettings-device-id"
+          description: "REST surface for GetKioskCashPaymentSettings."
+          operations:
+            - method: GET
+              name: "GetKioskCashPaymentSettings"
+              description: "Flipdish Get Kiosk Cash Payment Settings"
+              call: "platform-hydra.GetKioskCashPaymentSettings"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/emvorderstate/{order-id}"
+          name: "app-id-hydra-emvorderstate-order-id"
+          description: "REST surface for GetEmvOrderState."
+          operations:
+            - method: GET
+              name: "GetEmvOrderState"
+              description: "Flipdish Get Emv Order State"
+              call: "platform-hydra.GetEmvOrderState"
+              with:
+                "orderId": "rest.orderId"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/{device-type}/{device-id}"
+          name: "app-id-hydra-device-type-device-id"
+          description: "REST surface for GetAttachedDevice."
+          operations:
+            - method: GET
+              name: "GetAttachedDevice"
+              description: "Flipdish Get Attached Device"
+              call: "platform-hydra.GetAttachedDevice"
+              with:
+                "appId": "rest.appId"
+                "deviceType": "rest.deviceType"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/{device-type}/list"
+          name: "app-id-hydra-device-type-list"
+          description: "REST surface for GetAttachedDevices."
+          operations:
+            - method: GET
+              name: "GetAttachedDevices"
+              description: "Flipdish Get Attached Devices"
+              call: "platform-hydra.GetAttachedDevices"
+              with:
+                "appId": "rest.appId"
+                "deviceType": "rest.deviceType"
+                "pageIndex": "rest.pageIndex"
+                "pageSize": "rest.pageSize"
+                "storeId": "rest.storeId"
+                "deviceName": "rest.deviceName"
+                "deviceSerial": "rest.deviceSerial"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/registration"
+          name: "app-id-hydra-registration"
+          description: "REST surface for Register."
+          operations:
+            - method: POST
+              name: "Register"
+              description: "Flipdish Register"
+              call: "platform-hydra.Register"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/cancelemvpayment/{order-id}"
+          name: "app-id-hydra-cancelemvpayment-order-id"
+          description: "REST surface for CancelEmvPayment."
+          operations:
+            - method: POST
+              name: "CancelEmvPayment"
+              description: "Flipdish Cancel Emv Payment"
+              call: "platform-hydra.CancelEmvPayment"
+              with:
+                "orderId": "rest.orderId"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/{device-id}/attach/{store-id}"
+          name: "app-id-hydra-device-id-attach-store-id"
+          description: "REST surface for AttachStoreToTerminal."
+          operations:
+            - method: POST
+              name: "AttachStoreToTerminal"
+              description: "Flipdish Attach Store to Terminal"
+              call: "platform-hydra.AttachStoreToTerminal"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/{device-id}/detach/{store-id}"
+          name: "app-id-hydra-device-id-detach-store-id"
+          description: "REST surface for DetachStoreFromTerminal."
+          operations:
+            - method: POST
+              name: "DetachStoreFromTerminal"
+              description: "Flipdish Detach Store from Terminal"
+              call: "platform-hydra.DetachStoreFromTerminal"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/emvterminal/unassign/{hydra-config-id}"
+          name: "app-id-hydra-emvterminal-unassign-hydra-config-id"
+          description: "REST surface for UnassignEmv."
+          operations:
+            - method: POST
+              name: "UnassignEmv"
+              description: "Flipdish Unassign Emv"
+              call: "platform-hydra.UnassignEmv"
+              with:
+                "appId": "rest.appId"
+                "hydraConfigId": "rest.hydraConfigId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/attach-store-to-kiosk/{device-id}/store/{store-id}"
+          name: "app-id-attach-store-to-kiosk-device-id-store-store-id"
+          description: "REST surface for AttachStoreToKiosk."
+          operations:
+            - method: POST
+              name: "AttachStoreToKiosk"
+              description: "Flipdish Attach Store to Kiosk"
+              call: "platform-hydra.AttachStoreToKiosk"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/emvterminal/assign/{hydra-config-id}/{emv-terminal-id}"
+          name: "app-id-hydra-emvterminal-assign-hydra-config-id-emv-terminal-id"
+          description: "REST surface for AssignEmv."
+          operations:
+            - method: POST
+              name: "AssignEmv"
+              description: "Flipdish Assign Emv"
+              call: "platform-hydra.AssignEmv"
+              with:
+                "appId": "rest.appId"
+                "hydraConfigId": "rest.hydraConfigId"
+                "emvTerminalId": "rest.emvTerminalId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/hydra/{device-id}/login"
+          name: "hydra-device-id-login"
+          description: "REST surface for LoginWithDeviceId."
+          operations:
+            - method: POST
+              name: "LoginWithDeviceId"
+              description: "Flipdish Login with Device Id"
+              call: "platform-hydra.LoginWithDeviceId"
+              with:
+                "deviceId": "rest.deviceId"
+                "hydraUserType": "rest.hydraUserType"
+                "serialNumber": "rest.serialNumber"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/kioskupdatecashsettings"
+          name: "app-id-kioskupdatecashsettings"
+          description: "REST surface for UpdateKioskCashVisibilitySettings."
+          operations:
+            - method: POST
+              name: "UpdateKioskCashVisibilitySettings"
+              description: "Flipdish Update Kiosk Cash Visibility Settings"
+              call: "platform-hydra.UpdateKioskCashVisibilitySettings"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+                "isCashEnabled": "rest.isCashEnabled"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/emvterminals/{id}"
+          name: "app-id-emvterminals-id"
+          description: "REST surface for Hydra_DeleteEmv."
+          operations:
+            - method: DELETE
+              name: "Hydra_DeleteEmv"
+              description: "Flipdish Hydra_Delete Emv"
+              call: "platform-hydra.Hydra_DeleteEmv"
+              with:
+                "appId": "rest.appId"
+                "id": "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/hydra/{device-id}/registration"
+          name: "app-id-hydra-device-id-registration"
+          description: "REST surface for UnAssign."
+          operations:
+            - method: DELETE
+              name: "UnAssign"
+              description: "Flipdish Un Assign"
+              call: "platform-hydra.UnAssign"
+              with:
+                "appId": "rest.appId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/detach-store-from-kiosk/{device-id}/store/{store-id}"
+          name: "app-id-detach-store-from-kiosk-device-id-store-store-id"
+          description: "REST surface for Hydra_DetachStoreFromKiosk."
+          operations:
+            - method: DELETE
+              name: "Hydra_DetachStoreFromKiosk"
+              description: "Flipdish Hydra_Detach Store from Kiosk"
+              call: "platform-hydra.Hydra_DetachStoreFromKiosk"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                "deviceId": "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-hydra-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — Hydra."
+      tools:
+        - name: "get-settings"
+          description: "Flipdish Get Settings"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetSettings"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-ably-token"
+          description: "Flipdish Get Ably Token"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetAblyToken"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-registration"
+          description: "Flipdish Get Registration"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetRegistration"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "hydra_get-emvs-app-id"
+          description: "Flipdish Hydra_Get Emvs for App Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.Hydra_GetEmvsForAppId"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "hydra_create-emv"
+          description: "Flipdish Hydra_Create Emv"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.Hydra_CreateEmv"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-emv-terminal-details"
+          description: "Flipdish Get EMV Terminal Details"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetEMVTerminalDetails"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-kiosk-settings"
+          description: "Flipdish Get Kiosk Settings"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetKioskSettings"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-kiosk-settings"
+          description: "Flipdish Update Kiosk Settings"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.UpdateKioskSettings"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-kiosk-cash-payment-settings"
+          description: "Flipdish Get Kiosk Cash Payment Settings"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetKioskCashPaymentSettings"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-emv-order-state"
+          description: "Flipdish Get Emv Order State"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetEmvOrderState"
+          with:
+            "orderId": "tools.orderId"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-attached-device"
+          description: "Flipdish Get Attached Device"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetAttachedDevice"
+          with:
+            "appId": "tools.appId"
+            "deviceType": "tools.deviceType"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-attached-devices"
+          description: "Flipdish Get Attached Devices"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-hydra.GetAttachedDevices"
+          with:
+            "appId": "tools.appId"
+            "deviceType": "tools.deviceType"
+            "pageIndex": "tools.pageIndex"
+            "pageSize": "tools.pageSize"
+            "storeId": "tools.storeId"
+            "deviceName": "tools.deviceName"
+            "deviceSerial": "tools.deviceSerial"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "register"
+          description: "Flipdish Register"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.Register"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "cancel-emv-payment"
+          description: "Flipdish Cancel Emv Payment"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.CancelEmvPayment"
+          with:
+            "orderId": "tools.orderId"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "attach-store-terminal"
+          description: "Flipdish Attach Store to Terminal"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.AttachStoreToTerminal"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "detach-store-terminal"
+          description: "Flipdish Detach Store from Terminal"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.DetachStoreFromTerminal"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "unassign-emv"
+          description: "Flipdish Unassign Emv"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.UnassignEmv"
+          with:
+            "appId": "tools.appId"
+            "hydraConfigId": "tools.hydraConfigId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "attach-store-kiosk"
+          description: "Flipdish Attach Store to Kiosk"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.AttachStoreToKiosk"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "assign-emv"
+          description: "Flipdish Assign Emv"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.AssignEmv"
+          with:
+            "appId": "tools.appId"
+            "hydraConfigId": "tools.hydraConfigId"
+            "emvTerminalId": "tools.emvTerminalId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "login-device-id"
+          description: "Flipdish Login with Device Id"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.LoginWithDeviceId"
+          with:
+            "deviceId": "tools.deviceId"
+            "hydraUserType": "tools.hydraUserType"
+            "serialNumber": "tools.serialNumber"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-kiosk-cash-visibility-settings"
+          description: "Flipdish Update Kiosk Cash Visibility Settings"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-hydra.UpdateKioskCashVisibilitySettings"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+            "isCashEnabled": "tools.isCashEnabled"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "hydra_delete-emv"
+          description: "Flipdish Hydra_Delete Emv"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "platform-hydra.Hydra_DeleteEmv"
+          with:
+            "appId": "tools.appId"
+            "id": "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "un-assign"
+          description: "Flipdish Un Assign"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "platform-hydra.UnAssign"
+          with:
+            "appId": "tools.appId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "hydra_detach-store-kiosk"
+          description: "Flipdish Hydra_Detach Store from Kiosk"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "platform-hydra.Hydra_DetachStoreFromKiosk"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            "deviceId": "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."

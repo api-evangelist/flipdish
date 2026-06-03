@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/stores-location-area-with-locations-schema.json",
+  "title": "LocationAreaWithLocations",
+  "description": "Represents a LocationArea and its Location list",
+  "type": "object",
+  "properties": {
+    "LocationAreaId": {
+      "format": "int32",
+      "description": "Id of the LocationArea",
+      "type": "integer",
+      "example": 500123
+    },
+    "StoreId": {
+      "format": "int32",
+      "description": "Id of the Store that this LocationArea belongs to",
+      "type": "integer",
+      "example": 500123
+    },
+    "LocationAreaName": {
+      "description": "Descriptive LocationArea name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Locations": {
+      "description": "List of Locations that belongs to this Location Area",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LocationArea_Location"
+      },
+      "example": []
+    },
+    "IsDeleted": {
+      "description": "Returns if the LocationArea is deleted or not",
+      "type": "boolean",
+      "example": true
+    }
+  },
+  "required": [
+    "LocationAreaId",
+    "StoreId",
+    "LocationAreaName"
+  ]
+}

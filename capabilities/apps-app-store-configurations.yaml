@@ -1,0 +1,527 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Apps — AppStoreConfigurations"
+  description: >-
+    AppStoreConfigurations operations on the Flipdish Open API v1.0 (9 operations).
+    Lead operation: Flipdish Get Configured Apps. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - App Store Configurations
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "apps-app-store-configurations"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Apps — AppStoreConfigurations business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-appstore-apps"
+          path: "/api/v1.0/{appId}/appstore/apps"
+          operations:
+            - name: "GetConfiguredApps"
+              method: GET
+              description: "Flipdish Get Configured Apps"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}"
+          operations:
+            - name: "GetConfiguredAppSingleApp"
+              method: GET
+              description: "Flipdish Get Configured App Single App"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "appstore-oauthresponse-app-store-app-id-responsecode"
+          path: "/api/v1.0/appstore/oauthresponse/{appStoreAppId}/responsecode"
+          operations:
+            - name: "AppStoreConfigurations_AppStoreHandleOauthResponseCode"
+              method: GET
+              description: "Flipdish App Store Configurations_App Store Handle Oauth Response Code"
+              inputParameters:
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id-config-config-id"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}"
+          operations:
+            - name: "GetAppStoreConfig"
+              method: GET
+              description: "Flipdish Get App Store Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id-config-config-id"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}"
+          operations:
+            - name: "UpdateAppStoreConfig"
+              method: PUT
+              description: "Flipdish Update App Store Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id-config-config-id"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}"
+          operations:
+            - name: "DeleteAppStoreConfig"
+              method: DELETE
+              description: "Flipdish Delete App Store Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id-config"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config"
+          operations:
+            - name: "CreateAppStoreConfig"
+              method: POST
+              description: "Flipdish Create App Store Config"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id-config-config-id-action"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}/action"
+          operations:
+            - name: "ExecuteConfigurationAction"
+              method: POST
+              description: "Flipdish Execute Configuration Action"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-appstore-apps-app-store-app-id-config-config-id-updatesettings"
+          path: "/api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}/updatesettings"
+          operations:
+            - name: "UpdateAppStoreConfigSettingValues"
+              method: POST
+              description: "Flipdish Update App Store Config Setting Values"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "appStoreAppId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app store app id path parameter."
+                - name: "configId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The config id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "apps-app-store-configurations-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Apps — AppStoreConfigurations."
+      resources:
+        - path: "/v1/{app-id}/appstore/apps"
+          name: "app-id-appstore-apps"
+          description: "REST surface for GetConfiguredApps."
+          operations:
+            - method: GET
+              name: "GetConfiguredApps"
+              description: "Flipdish Get Configured Apps"
+              call: "apps-app-store-configurations.GetConfiguredApps"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}"
+          name: "app-id-appstore-apps-app-store-app-id"
+          description: "REST surface for GetConfiguredAppSingleApp."
+          operations:
+            - method: GET
+              name: "GetConfiguredAppSingleApp"
+              description: "Flipdish Get Configured App Single App"
+              call: "apps-app-store-configurations.GetConfiguredAppSingleApp"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/appstore/oauthresponse/{app-store-app-id}/responsecode"
+          name: "appstore-oauthresponse-app-store-app-id-responsecode"
+          description: "REST surface for AppStoreConfigurations_AppStoreHandleOauthResponseCode."
+          operations:
+            - method: GET
+              name: "AppStoreConfigurations_AppStoreHandleOauthResponseCode"
+              description: "Flipdish App Store Configurations_App Store Handle Oauth Response Code"
+              call: "apps-app-store-configurations.AppStoreConfigurations_AppStoreHandleOauthResponseCode"
+              with:
+                "appStoreAppId": "rest.appStoreAppId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/config/{config-id}"
+          name: "app-id-appstore-apps-app-store-app-id-config-config-id"
+          description: "REST surface for GetAppStoreConfig."
+          operations:
+            - method: GET
+              name: "GetAppStoreConfig"
+              description: "Flipdish Get App Store Config"
+              call: "apps-app-store-configurations.GetAppStoreConfig"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+                "configId": "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/config/{config-id}"
+          name: "app-id-appstore-apps-app-store-app-id-config-config-id"
+          description: "REST surface for UpdateAppStoreConfig."
+          operations:
+            - method: PUT
+              name: "UpdateAppStoreConfig"
+              description: "Flipdish Update App Store Config"
+              call: "apps-app-store-configurations.UpdateAppStoreConfig"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+                "configId": "rest.configId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/config/{config-id}"
+          name: "app-id-appstore-apps-app-store-app-id-config-config-id"
+          description: "REST surface for DeleteAppStoreConfig."
+          operations:
+            - method: DELETE
+              name: "DeleteAppStoreConfig"
+              description: "Flipdish Delete App Store Config"
+              call: "apps-app-store-configurations.DeleteAppStoreConfig"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+                "configId": "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/config"
+          name: "app-id-appstore-apps-app-store-app-id-config"
+          description: "REST surface for CreateAppStoreConfig."
+          operations:
+            - method: POST
+              name: "CreateAppStoreConfig"
+              description: "Flipdish Create App Store Config"
+              call: "apps-app-store-configurations.CreateAppStoreConfig"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/config/{config-id}/action"
+          name: "app-id-appstore-apps-app-store-app-id-config-config-id-action"
+          description: "REST surface for ExecuteConfigurationAction."
+          operations:
+            - method: POST
+              name: "ExecuteConfigurationAction"
+              description: "Flipdish Execute Configuration Action"
+              call: "apps-app-store-configurations.ExecuteConfigurationAction"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+                "configId": "rest.configId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/appstore/apps/{app-store-app-id}/config/{config-id}/updatesettings"
+          name: "app-id-appstore-apps-app-store-app-id-config-config-id-updatesettings"
+          description: "REST surface for UpdateAppStoreConfigSettingValues."
+          operations:
+            - method: POST
+              name: "UpdateAppStoreConfigSettingValues"
+              description: "Flipdish Update App Store Config Setting Values"
+              call: "apps-app-store-configurations.UpdateAppStoreConfigSettingValues"
+              with:
+                "appId": "rest.appId"
+                "appStoreAppId": "rest.appStoreAppId"
+                "configId": "rest.configId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "apps-app-store-configurations-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Apps — AppStoreConfigurations."
+      tools:
+        - name: "get-configured-apps"
+          description: "Flipdish Get Configured Apps"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-app-store-configurations.GetConfiguredApps"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-configured-app-single-app"
+          description: "Flipdish Get Configured App Single App"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-app-store-configurations.GetConfiguredAppSingleApp"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "app-store-configurations_app-store-handle"
+          description: "Flipdish App Store Configurations_App Store Handle Oauth Response Code"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-app-store-configurations.AppStoreConfigurations_AppStoreHandleOauthResponseCode"
+          with:
+            "appStoreAppId": "tools.appStoreAppId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-app-store-config"
+          description: "Flipdish Get App Store Config"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "apps-app-store-configurations.GetAppStoreConfig"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+            "configId": "tools.configId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-app-store-config"
+          description: "Flipdish Update App Store Config"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "apps-app-store-configurations.UpdateAppStoreConfig"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+            "configId": "tools.configId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-app-store-config"
+          description: "Flipdish Delete App Store Config"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "apps-app-store-configurations.DeleteAppStoreConfig"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+            "configId": "tools.configId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-app-store-config"
+          description: "Flipdish Create App Store Config"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-app-store-configurations.CreateAppStoreConfig"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "execute-configuration-action"
+          description: "Flipdish Execute Configuration Action"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-app-store-configurations.ExecuteConfigurationAction"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+            "configId": "tools.configId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-app-store-config-setting"
+          description: "Flipdish Update App Store Config Setting Values"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "apps-app-store-configurations.UpdateAppStoreConfigSettingValues"
+          with:
+            "appId": "tools.appId"
+            "appStoreAppId": "tools.appStoreAppId"
+            "configId": "tools.configId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,625 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Marketing — Vouchers"
+  description: >-
+    Vouchers operations on the Flipdish Open API v1.0 (10 operations).
+    Lead operation: Flipdish Get Voucher by Id. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Vouchers
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "marketing-vouchers"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Marketing — Vouchers business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "vouchers-voucher-id"
+          path: "/api/v1.0/vouchers/{voucherId}"
+          operations:
+            - name: "GetVoucherById"
+              method: GET
+              description: "Flipdish Get Voucher by Id"
+              inputParameters:
+                - name: "voucherId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The voucher id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "vouchers-voucher-id"
+          path: "/api/v1.0/vouchers/{voucherId}"
+          operations:
+            - name: "UpdateVoucher"
+              method: POST
+              description: "Flipdish Update Voucher"
+              inputParameters:
+                - name: "voucherId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The voucher id path parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store id query parameter."
+                - name: "percentValue"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The percent value query parameter."
+                - name: "lumpValue"
+                  in: query
+                  type: number
+                  required: false
+                  description: "The lump value query parameter."
+                - name: "maxDiscountAmount"
+                  in: query
+                  type: number
+                  required: false
+                  description: "The max discount amount query parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-vouchers-code-code"
+          path: "/api/v1.0/{appId}/vouchers/code/{code}"
+          operations:
+            - name: "GetVoucherByCode"
+              method: GET
+              description: "Flipdish Get Voucher by Code"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "code"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The code path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "vouchers-app-id-customer-customer-id"
+          path: "/api/v1.0/vouchers/{appId}/customer/{customerId}"
+          operations:
+            - name: "GetVouchersByCustomerForApp"
+              method: GET
+              description: "Flipdish Get Vouchers by Customer for App"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "customerId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The customer id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-vouchers-voucher-id-validity-periods"
+          path: "/api/v1.0/{appId}/vouchers/{voucherId}/validity-periods"
+          operations:
+            - name: "GetVoucherValidityPeriods"
+              method: GET
+              description: "Flipdish Get Voucher Validity Periods"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "voucherId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The voucher id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "vouchers-stats-voucher-id"
+          path: "/api/v1.0/vouchers/stats/{voucherId}"
+          operations:
+            - name: "GetVoucherStatsById"
+              method: GET
+              description: "Flipdish Get Voucher Stats by Id"
+              inputParameters:
+                - name: "voucherId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The voucher id path parameter."
+                - name: "aggregateDataBy"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The aggregate data by query parameter."
+                - name: "dataPointLimit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The data point limit query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-vouchers-summaries"
+          path: "/api/v1.0/{appId}/vouchers/summaries"
+          operations:
+            - name: "GetVouchers"
+              method: GET
+              description: "Flipdish Get Vouchers"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "pageIndex"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page index query parameter."
+                - name: "pageSize"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page size query parameter."
+                - name: "searchCodes"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The search codes query parameter."
+                - name: "statusSearch"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The status search query parameter."
+                - name: "typeSearch"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The type search query parameter."
+                - name: "subTypeSearch"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The sub type search query parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+                - name: "channelRestrictions"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The channel restrictions query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "vouchers-app-id"
+          path: "/api/v1.0/vouchers/{appId}"
+          operations:
+            - name: "CreateVoucher"
+              method: POST
+              description: "Flipdish Create Voucher"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-vouchers-voucher-id-usage"
+          path: "/api/v1.0/{appId}/vouchers/{voucherId}/usage"
+          operations:
+            - name: "UpdateVoucherUsage"
+              method: POST
+              description: "Flipdish Update Voucher Usage"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "voucherId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The voucher id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-vouchers-voucher-id-validity-periods-simplified"
+          path: "/api/v1.0/{appId}/vouchers/{voucherId}/validity-periods-simplified"
+          operations:
+            - name: "SetVoucherValidityPeriodsSimplified"
+              method: POST
+              description: "Flipdish Set Voucher Validity Periods Simplified"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "voucherId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The voucher id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "marketing-vouchers-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Marketing — Vouchers."
+      resources:
+        - path: "/v1/vouchers/{voucher-id}"
+          name: "vouchers-voucher-id"
+          description: "REST surface for GetVoucherById."
+          operations:
+            - method: GET
+              name: "GetVoucherById"
+              description: "Flipdish Get Voucher by Id"
+              call: "marketing-vouchers.GetVoucherById"
+              with:
+                "voucherId": "rest.voucherId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/vouchers/{voucher-id}"
+          name: "vouchers-voucher-id"
+          description: "REST surface for UpdateVoucher."
+          operations:
+            - method: POST
+              name: "UpdateVoucher"
+              description: "Flipdish Update Voucher"
+              call: "marketing-vouchers.UpdateVoucher"
+              with:
+                "voucherId": "rest.voucherId"
+                "storeId": "rest.storeId"
+                "percentValue": "rest.percentValue"
+                "lumpValue": "rest.lumpValue"
+                "maxDiscountAmount": "rest.maxDiscountAmount"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/vouchers/code/{code}"
+          name: "app-id-vouchers-code-code"
+          description: "REST surface for GetVoucherByCode."
+          operations:
+            - method: GET
+              name: "GetVoucherByCode"
+              description: "Flipdish Get Voucher by Code"
+              call: "marketing-vouchers.GetVoucherByCode"
+              with:
+                "appId": "rest.appId"
+                "code": "rest.code"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/vouchers/{app-id}/customer/{customer-id}"
+          name: "vouchers-app-id-customer-customer-id"
+          description: "REST surface for GetVouchersByCustomerForApp."
+          operations:
+            - method: GET
+              name: "GetVouchersByCustomerForApp"
+              description: "Flipdish Get Vouchers by Customer for App"
+              call: "marketing-vouchers.GetVouchersByCustomerForApp"
+              with:
+                "appId": "rest.appId"
+                "customerId": "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/vouchers/{voucher-id}/validity-periods"
+          name: "app-id-vouchers-voucher-id-validity-periods"
+          description: "REST surface for GetVoucherValidityPeriods."
+          operations:
+            - method: GET
+              name: "GetVoucherValidityPeriods"
+              description: "Flipdish Get Voucher Validity Periods"
+              call: "marketing-vouchers.GetVoucherValidityPeriods"
+              with:
+                "appId": "rest.appId"
+                "voucherId": "rest.voucherId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/vouchers/stats/{voucher-id}"
+          name: "vouchers-stats-voucher-id"
+          description: "REST surface for GetVoucherStatsById."
+          operations:
+            - method: GET
+              name: "GetVoucherStatsById"
+              description: "Flipdish Get Voucher Stats by Id"
+              call: "marketing-vouchers.GetVoucherStatsById"
+              with:
+                "voucherId": "rest.voucherId"
+                "aggregateDataBy": "rest.aggregateDataBy"
+                "dataPointLimit": "rest.dataPointLimit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/vouchers/summaries"
+          name: "app-id-vouchers-summaries"
+          description: "REST surface for GetVouchers."
+          operations:
+            - method: GET
+              name: "GetVouchers"
+              description: "Flipdish Get Vouchers"
+              call: "marketing-vouchers.GetVouchers"
+              with:
+                "appId": "rest.appId"
+                "pageIndex": "rest.pageIndex"
+                "pageSize": "rest.pageSize"
+                "searchCodes": "rest.searchCodes"
+                "statusSearch": "rest.statusSearch"
+                "typeSearch": "rest.typeSearch"
+                "subTypeSearch": "rest.subTypeSearch"
+                "storeIds": "rest.storeIds"
+                "channelRestrictions": "rest.channelRestrictions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/vouchers/{app-id}"
+          name: "vouchers-app-id"
+          description: "REST surface for CreateVoucher."
+          operations:
+            - method: POST
+              name: "CreateVoucher"
+              description: "Flipdish Create Voucher"
+              call: "marketing-vouchers.CreateVoucher"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/vouchers/{voucher-id}/usage"
+          name: "app-id-vouchers-voucher-id-usage"
+          description: "REST surface for UpdateVoucherUsage."
+          operations:
+            - method: POST
+              name: "UpdateVoucherUsage"
+              description: "Flipdish Update Voucher Usage"
+              call: "marketing-vouchers.UpdateVoucherUsage"
+              with:
+                "appId": "rest.appId"
+                "voucherId": "rest.voucherId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/vouchers/{voucher-id}/validity-periods-simplified"
+          name: "app-id-vouchers-voucher-id-validity-periods-simplified"
+          description: "REST surface for SetVoucherValidityPeriodsSimplified."
+          operations:
+            - method: POST
+              name: "SetVoucherValidityPeriodsSimplified"
+              description: "Flipdish Set Voucher Validity Periods Simplified"
+              call: "marketing-vouchers.SetVoucherValidityPeriodsSimplified"
+              with:
+                "appId": "rest.appId"
+                "voucherId": "rest.voucherId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "marketing-vouchers-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Marketing — Vouchers."
+      tools:
+        - name: "get-voucher-id"
+          description: "Flipdish Get Voucher by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-vouchers.GetVoucherById"
+          with:
+            "voucherId": "tools.voucherId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-voucher"
+          description: "Flipdish Update Voucher"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "marketing-vouchers.UpdateVoucher"
+          with:
+            "voucherId": "tools.voucherId"
+            "storeId": "tools.storeId"
+            "percentValue": "tools.percentValue"
+            "lumpValue": "tools.lumpValue"
+            "maxDiscountAmount": "tools.maxDiscountAmount"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-voucher-code"
+          description: "Flipdish Get Voucher by Code"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-vouchers.GetVoucherByCode"
+          with:
+            "appId": "tools.appId"
+            "code": "tools.code"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-vouchers-customer-app"
+          description: "Flipdish Get Vouchers by Customer for App"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-vouchers.GetVouchersByCustomerForApp"
+          with:
+            "appId": "tools.appId"
+            "customerId": "tools.customerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-voucher-validity-periods"
+          description: "Flipdish Get Voucher Validity Periods"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-vouchers.GetVoucherValidityPeriods"
+          with:
+            "appId": "tools.appId"
+            "voucherId": "tools.voucherId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-voucher-stats-id"
+          description: "Flipdish Get Voucher Stats by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-vouchers.GetVoucherStatsById"
+          with:
+            "voucherId": "tools.voucherId"
+            "aggregateDataBy": "tools.aggregateDataBy"
+            "dataPointLimit": "tools.dataPointLimit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-vouchers"
+          description: "Flipdish Get Vouchers"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "marketing-vouchers.GetVouchers"
+          with:
+            "appId": "tools.appId"
+            "pageIndex": "tools.pageIndex"
+            "pageSize": "tools.pageSize"
+            "searchCodes": "tools.searchCodes"
+            "statusSearch": "tools.statusSearch"
+            "typeSearch": "tools.typeSearch"
+            "subTypeSearch": "tools.subTypeSearch"
+            "storeIds": "tools.storeIds"
+            "channelRestrictions": "tools.channelRestrictions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-voucher"
+          description: "Flipdish Create Voucher"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "marketing-vouchers.CreateVoucher"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-voucher-usage"
+          description: "Flipdish Update Voucher Usage"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "marketing-vouchers.UpdateVoucherUsage"
+          with:
+            "appId": "tools.appId"
+            "voucherId": "tools.voucherId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-voucher-validity-periods-simplified"
+          description: "Flipdish Set Voucher Validity Periods Simplified"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "marketing-vouchers.SetVoucherValidityPeriodsSimplified"
+          with:
+            "appId": "tools.appId"
+            "voucherId": "tools.voucherId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

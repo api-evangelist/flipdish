@@ -1,0 +1,275 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Stores — Address"
+  description: >-
+    Address operations on the Flipdish Open API v1.0 (5 operations).
+    Lead operation: Flipdish Get Countries. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Address
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "stores-address"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Stores — Address business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "address-countries"
+          path: "/api/v1.0/address/countries"
+          operations:
+            - name: "GetCountries"
+              method: GET
+              description: "Flipdish Get Countries"
+              inputParameters:
+                - name: "language"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The language query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-app-id-address-form"
+          path: "/api/v1.0/app/{appId}/address/form"
+          operations:
+            - name: "FormByApp"
+              method: GET
+              description: "Flipdish Form by App"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "language"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The language query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "address-country-country-code-form"
+          path: "/api/v1.0/address/country/{countryCode}/form"
+          operations:
+            - name: "FormByCountry"
+              method: GET
+              description: "Flipdish Form by Country"
+              inputParameters:
+                - name: "countryCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The country code path parameter."
+                - name: "language"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The language query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "address-templates"
+          path: "/api/v1.0/address/templates"
+          operations:
+            - name: "AddressTemplates"
+              method: POST
+              description: "Flipdish Address Templates"
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "address-google"
+          path: "/api/v1.0/address/google"
+          operations:
+            - name: "FormatGoogleAddress"
+              method: POST
+              description: "Flipdish Format Google Address"
+              inputParameters:
+                - name: "language"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The language query parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "stores-address-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Stores — Address."
+      resources:
+        - path: "/v1/address/countries"
+          name: "address-countries"
+          description: "REST surface for GetCountries."
+          operations:
+            - method: GET
+              name: "GetCountries"
+              description: "Flipdish Get Countries"
+              call: "stores-address.GetCountries"
+              with:
+                "language": "rest.language"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/app/{app-id}/address/form"
+          name: "app-app-id-address-form"
+          description: "REST surface for FormByApp."
+          operations:
+            - method: GET
+              name: "FormByApp"
+              description: "Flipdish Form by App"
+              call: "stores-address.FormByApp"
+              with:
+                "appId": "rest.appId"
+                "language": "rest.language"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/address/country/{country-code}/form"
+          name: "address-country-country-code-form"
+          description: "REST surface for FormByCountry."
+          operations:
+            - method: GET
+              name: "FormByCountry"
+              description: "Flipdish Form by Country"
+              call: "stores-address.FormByCountry"
+              with:
+                "countryCode": "rest.countryCode"
+                "language": "rest.language"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/address/templates"
+          name: "address-templates"
+          description: "REST surface for AddressTemplates."
+          operations:
+            - method: POST
+              name: "AddressTemplates"
+              description: "Flipdish Address Templates"
+              call: "stores-address.AddressTemplates"
+              with:
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/address/google"
+          name: "address-google"
+          description: "REST surface for FormatGoogleAddress."
+          operations:
+            - method: POST
+              name: "FormatGoogleAddress"
+              description: "Flipdish Format Google Address"
+              call: "stores-address.FormatGoogleAddress"
+              with:
+                "language": "rest.language"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "stores-address-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Stores — Address."
+      tools:
+        - name: "get-countries"
+          description: "Flipdish Get Countries"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-address.GetCountries"
+          with:
+            "language": "tools.language"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "form-app"
+          description: "Flipdish Form by App"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-address.FormByApp"
+          with:
+            "appId": "tools.appId"
+            "language": "tools.language"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "form-country"
+          description: "Flipdish Form by Country"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-address.FormByCountry"
+          with:
+            "countryCode": "tools.countryCode"
+            "language": "tools.language"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "address-templates"
+          description: "Flipdish Address Templates"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-address.AddressTemplates"
+          with:
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "format-google-address"
+          description: "Flipdish Format Google Address"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-address.FormatGoogleAddress"
+          with:
+            "language": "tools.language"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

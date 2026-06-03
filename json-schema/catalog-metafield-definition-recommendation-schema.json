@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/catalog-metafield-definition-recommendation-schema.json",
+  "title": "MetafieldDefinitionRecommendation",
+  "description": "OwnerEntity Metafield Definition Recommendation",
+  "type": "object",
+  "properties": {
+    "OwnerEntity": {
+      "description": "The Metafield will extend the specified {Flipdish.Metafields.PublicModels.V1.MetafieldDefinitionBase.OwnerEntity}",
+      "enum": [
+        "CatalogItem",
+        "CatalogGroup",
+        "Menu"
+      ],
+      "type": "string",
+      "example": "CatalogItem"
+    },
+    "Key": {
+      "description": "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore",
+      "type": "string",
+      "example": "string"
+    },
+    "ValueType": {
+      "description": "The excepted type for the Value field",
+      "enum": [
+        "Boolean",
+        "Json",
+        "SingleLineString",
+        "MultiLineString"
+      ],
+      "type": "string",
+      "example": "Boolean"
+    },
+    "Name": {
+      "description": "Field Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Description": {
+      "description": "Field Description",
+      "type": "string",
+      "example": "string"
+    },
+    "Behaviors": {
+      "description": "Enable Metafield Behaviors",
+      "type": "array",
+      "items": {
+        "enum": [
+          "SendToOrder",
+          "SendToMenu"
+        ],
+        "type": "string"
+      },
+      "example": [
+        "SendToOrder"
+      ]
+    },
+    "MetafieldDefinitionRecommendationId": {
+      "format": "int32",
+      "description": "Metafield Recommendation Id",
+      "type": "integer",
+      "nullable": true,
+      "example": 500123
+    }
+  },
+  "required": [
+    "Key",
+    "Name"
+  ]
+}

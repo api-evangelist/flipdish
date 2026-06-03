@@ -1,0 +1,436 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fd": "https://developers.flipdish.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "VoucherWithStats": "fd:VoucherWithStats",
+    "Voucher": "fd:Voucher",
+    "CreateVoucher": "fd:CreateVoucher",
+    "UpdateVoucher": "fd:UpdateVoucher",
+    "LoyaltyCampaign": "fd:LoyaltyCampaign",
+    "RetentionCampaign": "fd:RetentionCampaign",
+    "VoucherSummary": "fd:VoucherSummary",
+    "StoreListItem": "fd:StoreListItem",
+    "CampaignStatistics": "fd:CampaignStatistics",
+    "PushNotificationResponse": "fd:PushNotificationResponse",
+    "CreatePayGreenConfigurationRequest": "fd:CreatePayGreenConfigurationRequest",
+    "RestaurantVoucherPayGreenConfiguration": "fd:RestaurantVoucherPayGreenConfiguration",
+    "RestaurantVoucherPayGreenStoreConfiguration": "fd:RestaurantVoucherPayGreenStoreConfiguration",
+    "PromotionDetails": "fd:PromotionDetails",
+    "RestaurantVoucherAssignedStore": "fd:RestaurantVoucherAssignedStore",
+    "SetVoucherValidityPeriodsSimplifiedRequest": "fd:SetVoucherValidityPeriodsSimplifiedRequest",
+    "UpdateVoucherUsage": "fd:UpdateVoucherUsage",
+    "ValidityPeriod": "fd:ValidityPeriod",
+    "VoucherDataPoint": "fd:VoucherDataPoint",
+    "CreatePromotion": "fd:CreatePromotion",
+    "PercentDiscountDetails": "fd:PercentDiscountDetails",
+    "PromotionAward": "fd:PromotionAward",
+    "RestaurantVoucherEligibleStore": "fd:RestaurantVoucherEligibleStore",
+    "RestaurantVoucherPayGreenConfigurationSummary": "fd:RestaurantVoucherPayGreenConfigurationSummary",
+    "StoreCampaignStartTime": "fd:StoreCampaignStartTime",
+    "UpdatePayGreenConfigurationRequest": "fd:UpdatePayGreenConfigurationRequest",
+    "UpdateStorePayGreenConfigurationRequest": "fd:UpdateStorePayGreenConfigurationRequest",
+    "totalUsed": {
+      "@id": "fd:TotalUsed",
+      "@type": "xsd:integer"
+    },
+    "totalCustomers": {
+      "@id": "fd:TotalCustomers",
+      "@type": "xsd:integer"
+    },
+    "totalAmountFromOrders": {
+      "@id": "fd:TotalAmountFromOrders",
+      "@type": "xsd:double"
+    },
+    "totalDiscounted": {
+      "@id": "fd:TotalDiscounted",
+      "@type": "xsd:double"
+    },
+    "averageOrderSize": {
+      "@id": "fd:AverageOrderSize",
+      "@type": "xsd:double"
+    },
+    "voucherId": {
+      "@id": "fd:VoucherId",
+      "@type": "xsd:integer"
+    },
+    "status": {
+      "@id": "fd:Status",
+      "@type": "xsd:string"
+    },
+    "voucherType": {
+      "@id": "fd:VoucherType",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "fd:Currency",
+      "@type": "xsd:string"
+    },
+    "storeNames": {
+      "@id": "fd:StoreNames",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "promotionDetails": {
+      "@id": "fd:PromotionDetails",
+      "@type": "xsd:string"
+    },
+    "creditNoteDetails": {
+      "@id": "fd:CreditNoteDetails",
+      "@type": "xsd:string"
+    },
+    "lumpDiscountDetails": {
+      "@id": "fd:LumpDiscountDetails",
+      "@type": "xsd:string"
+    },
+    "percentDiscountDetails": {
+      "@id": "fd:PercentDiscountDetails",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "fd:Code",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "stores": {
+      "@id": "fd:Stores",
+      "@container": "@set",
+      "@type": "xsd:integer"
+    },
+    "validOnOrdersOver": {
+      "@id": "fd:ValidOnOrdersOver",
+      "@type": "xsd:double"
+    },
+    "takesPriority": {
+      "@id": "fd:TakesPriority",
+      "@type": "xsd:boolean"
+    },
+    "isEnabled": {
+      "@id": "fd:IsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "isAutomaticallyApplied": {
+      "@id": "fd:IsAutomaticallyApplied",
+      "@type": "xsd:boolean"
+    },
+    "includeDeliveryFee": {
+      "@id": "fd:IncludeDeliveryFee",
+      "@type": "xsd:boolean"
+    },
+    "isValidForDeliveryOrders": {
+      "@id": "fd:IsValidForDeliveryOrders",
+      "@type": "xsd:boolean"
+    },
+    "isValidForPickupOrders": {
+      "@id": "fd:IsValidForPickupOrders",
+      "@type": "xsd:boolean"
+    },
+    "isValidForOrdersPayedOnline": {
+      "@id": "fd:IsValidForOrdersPayedOnline",
+      "@type": "xsd:boolean"
+    },
+    "isValidForOrdersPayedByCash": {
+      "@id": "fd:IsValidForOrdersPayedByCash",
+      "@type": "xsd:boolean"
+    },
+    "isValidForFirstOrderOnly": {
+      "@id": "fd:IsValidForFirstOrderOnly",
+      "@type": "xsd:boolean"
+    },
+    "isValidOncePerCustomer": {
+      "@id": "fd:IsValidOncePerCustomer",
+      "@type": "xsd:boolean"
+    },
+    "isValidOnlyOnce": {
+      "@id": "fd:IsValidOnlyOnce",
+      "@type": "xsd:boolean"
+    },
+    "isDiscoverable": {
+      "@id": "fd:IsDiscoverable",
+      "@type": "xsd:boolean"
+    },
+    "forceDiscount": {
+      "@id": "fd:ForceDiscount",
+      "@type": "xsd:boolean"
+    },
+    "startDate": {
+      "@id": "fd:StartDate",
+      "@type": "xsd:dateTime"
+    },
+    "expiryDate": {
+      "@id": "fd:ExpiryDate",
+      "@type": "xsd:dateTime"
+    },
+    "channelRestrictions": {
+      "@id": "fd:ChannelRestrictions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "validityPeriods": {
+      "@id": "fd:ValidityPeriods",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "voucherSubType": {
+      "@id": "fd:VoucherSubType",
+      "@type": "xsd:string"
+    },
+    "customerId": {
+      "@id": "fd:CustomerId",
+      "@type": "xsd:integer"
+    },
+    "maxRedemptions": {
+      "@id": "fd:MaxRedemptions",
+      "@type": "xsd:integer"
+    },
+    "promotion": {
+      "@id": "fd:Promotion",
+      "@type": "xsd:string"
+    },
+    "promotionId": {
+      "@id": "fd:PromotionId",
+      "@type": "xsd:integer"
+    },
+    "promotionName": {
+      "@id": "fd:PromotionName",
+      "@type": "xsd:string"
+    },
+    "promotionAwardMenuItemPublicIds": {
+      "@id": "fd:PromotionAwardMenuItemPublicIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "campaignId": {
+      "@id": "fd:CampaignId",
+      "@type": "xsd:integer"
+    },
+    "statistics": {
+      "@id": "fd:Statistics",
+      "@type": "xsd:string"
+    },
+    "publicId": {
+      "@id": "fd:PublicId",
+      "@type": "xsd:string"
+    },
+    "ordersBeforeReceivingVoucher": {
+      "@id": "fd:OrdersBeforeReceivingVoucher",
+      "@type": "xsd:integer"
+    },
+    "percentDiscountAmount": {
+      "@id": "fd:PercentDiscountAmount",
+      "@type": "xsd:integer"
+    },
+    "maxDiscount": {
+      "@id": "fd:MaxDiscount",
+      "@type": "xsd:double"
+    },
+    "roundingStrategy": {
+      "@id": "fd:RoundingStrategy",
+      "@type": "xsd:integer"
+    },
+    "shouldIncludeOrdersWithLoyaltyVoucher": {
+      "@id": "fd:ShouldIncludeOrdersWithLoyaltyVoucher",
+      "@type": "xsd:boolean"
+    },
+    "voucherValidPeriodDays": {
+      "@id": "fd:VoucherValidPeriodDays",
+      "@type": "xsd:integer"
+    },
+    "autoApplyResultingVouchers": {
+      "@id": "fd:AutoApplyResultingVouchers",
+      "@type": "xsd:boolean"
+    },
+    "includeExistingOrders": {
+      "@id": "fd:IncludeExistingOrders",
+      "@type": "xsd:boolean"
+    },
+    "storeIds": {
+      "@id": "fd:StoreIds",
+      "@container": "@set",
+      "@type": "xsd:integer"
+    },
+    "appId": {
+      "@id": "fd:AppId",
+      "@type": "xsd:string"
+    },
+    "notifyCustomerAfterMinutes": {
+      "@id": "fd:NotifyCustomerAfterMinutes",
+      "@type": "xsd:integer"
+    },
+    "lumpDiscountAmount": {
+      "@id": "fd:LumpDiscountAmount",
+      "@type": "xsd:double"
+    },
+    "isAvailableOnAllStores": {
+      "@id": "fd:IsAvailableOnAllStores",
+      "@type": "xsd:boolean"
+    },
+    "storeId": {
+      "@id": "fd:StoreId",
+      "@type": "xsd:integer"
+    },
+    "storeName": {
+      "@id": "fd:StoreName",
+      "@type": "xsd:string"
+    },
+    "storeGroupId": {
+      "@id": "fd:StoreGroupId",
+      "@type": "xsd:integer"
+    },
+    "storeGroupName": {
+      "@id": "fd:StoreGroupName",
+      "@type": "xsd:string"
+    },
+    "hasLoyaltyCampaign": {
+      "@id": "fd:HasLoyaltyCampaign",
+      "@type": "xsd:boolean"
+    },
+    "hasRetentionCampaign": {
+      "@id": "fd:HasRetentionCampaign",
+      "@type": "xsd:boolean"
+    },
+    "isPublished": {
+      "@id": "fd:IsPublished",
+      "@type": "xsd:boolean"
+    },
+    "vouchersIssued": {
+      "@id": "fd:VouchersIssued",
+      "@type": "xsd:integer"
+    },
+    "vouchersRedeemed": {
+      "@id": "fd:VouchersRedeemed",
+      "@type": "xsd:integer"
+    },
+    "conversion": {
+      "@id": "fd:Conversion",
+      "@type": "xsd:double"
+    },
+    "salesGenerated": {
+      "@id": "fd:SalesGenerated",
+      "@type": "xsd:double"
+    },
+    "returnOfInvestment": {
+      "@id": "fd:ReturnOfInvestment",
+      "@type": "xsd:double"
+    },
+    "sent": {
+      "@id": "fd:Sent",
+      "@type": "xsd:boolean"
+    },
+    "scheduledPushNotificationId": {
+      "@id": "fd:ScheduledPushNotificationId",
+      "@type": "xsd:integer"
+    },
+    "scheduledTime": {
+      "@id": "fd:ScheduledTime",
+      "@type": "xsd:dateTime"
+    },
+    "title": {
+      "@id": "fd:Title",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "fd:Message",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "payGreenId": {
+      "@id": "fd:PayGreenId",
+      "@type": "xsd:string"
+    },
+    "payGreenPrivateKey": {
+      "@id": "fd:PayGreenPrivateKey",
+      "@type": "xsd:string"
+    },
+    "assignedStores": {
+      "@id": "fd:AssignedStores",
+      "@container": "@set",
+      "@type": "xsd:integer"
+    },
+    "payGreenConfigurationId": {
+      "@id": "fd:PayGreenConfigurationId",
+      "@type": "xsd:integer"
+    },
+    "active": {
+      "@id": "fd:Active",
+      "@type": "xsd:boolean"
+    },
+    "promotionAwards": {
+      "@id": "fd:PromotionAwards",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "daysOfWeek": {
+      "@id": "fd:DaysOfWeek",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "fd:StartTime",
+      "@type": "xsd:string"
+    },
+    "endTime": {
+      "@id": "fd:EndTime",
+      "@type": "xsd:string"
+    },
+    "isUsed": {
+      "@id": "fd:IsUsed",
+      "@type": "xsd:boolean"
+    },
+    "usedByCustomerId": {
+      "@id": "fd:UsedByCustomerId",
+      "@type": "xsd:integer"
+    },
+    "transactionKey": {
+      "@id": "fd:TransactionKey",
+      "@type": "xsd:string"
+    },
+    "dayOfWeek": {
+      "@id": "fd:DayOfWeek",
+      "@type": "xsd:string"
+    },
+    "periodStart": {
+      "@id": "fd:PeriodStart",
+      "@type": "xsd:dateTime"
+    },
+    "periodLengthInDays": {
+      "@id": "fd:PeriodLengthInDays",
+      "@type": "xsd:integer"
+    },
+    "value": {
+      "@id": "fd:Value",
+      "@type": "xsd:integer"
+    },
+    "menuItemPublicIds": {
+      "@id": "fd:MenuItemPublicIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "percentageDiscount": {
+      "@id": "fd:PercentageDiscount",
+      "@type": "xsd:integer"
+    },
+    "maxDiscountAmount": {
+      "@id": "fd:MaxDiscountAmount",
+      "@type": "xsd:double"
+    },
+    "promotionAwardId": {
+      "@id": "fd:PromotionAwardId",
+      "@type": "xsd:integer"
+    },
+    "menuItemPublicId": {
+      "@id": "fd:MenuItemPublicId",
+      "@type": "xsd:string"
+    },
+    "tsStart": {
+      "@id": "fd:TsStart",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

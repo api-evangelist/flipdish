@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/menus-menu-tax-details-structure.json",
+  "name": "MenuTaxDetails",
+  "description": "Tax information for Menu",
+  "type": "object",
+  "properties": {
+    "TaxRates": {
+      "description": "Tax Rates",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MenuTaxRate"
+      },
+      "example": []
+    },
+    "DisplayTax": {
+      "description": "Display tax for Menu",
+      "type": "boolean",
+      "example": true
+    },
+    "TaxType": {
+      "description": "TaxType",
+      "enum": [
+        "IncludedInBasePrice",
+        "ExcludedFromBasePrice"
+      ],
+      "type": "string",
+      "example": "IncludedInBasePrice"
+    },
+    "ItemTaxes": {
+      "description": "ItemIds and TaxIds",
+      "type": "object",
+      "additionalProperties": {
+        "format": "int32",
+        "type": "integer"
+      }
+    },
+    "SetItemTaxes": {
+      "description": "SetItemIds and TaxIds",
+      "type": "object",
+      "additionalProperties": {
+        "format": "int32",
+        "type": "integer"
+      }
+    }
+  }
+}

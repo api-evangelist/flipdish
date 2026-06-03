@@ -1,0 +1,142 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — AuditLogs"
+  description: >-
+    AuditLogs operations on the Flipdish Open API v1.0 (2 operations).
+    Lead operation: Flipdish Add Order Audit Log. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Audit Logs
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-audit-logs"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — AuditLogs business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "auditlogs-orders-order-id"
+          path: "/api/v1.0/auditlogs/orders/{orderId}"
+          operations:
+            - name: "AddOrderAuditLog"
+              method: POST
+              description: "Flipdish Add Order Audit Log"
+              inputParameters:
+                - name: "orderId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The order id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "auditlogs-stores-store-id"
+          path: "/api/v1.0/auditlogs/stores/{storeId}"
+          operations:
+            - name: "AddStoreAuditLogEvent"
+              method: POST
+              description: "Flipdish Add Store Audit Log Event"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-audit-logs-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — AuditLogs."
+      resources:
+        - path: "/v1/auditlogs/orders/{order-id}"
+          name: "auditlogs-orders-order-id"
+          description: "REST surface for AddOrderAuditLog."
+          operations:
+            - method: POST
+              name: "AddOrderAuditLog"
+              description: "Flipdish Add Order Audit Log"
+              call: "platform-audit-logs.AddOrderAuditLog"
+              with:
+                "orderId": "rest.orderId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/auditlogs/stores/{store-id}"
+          name: "auditlogs-stores-store-id"
+          description: "REST surface for AddStoreAuditLogEvent."
+          operations:
+            - method: POST
+              name: "AddStoreAuditLogEvent"
+              description: "Flipdish Add Store Audit Log Event"
+              call: "platform-audit-logs.AddStoreAuditLogEvent"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-audit-logs-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — AuditLogs."
+      tools:
+        - name: "add-order-audit-log"
+          description: "Flipdish Add Order Audit Log"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-audit-logs.AddOrderAuditLog"
+          with:
+            "orderId": "tools.orderId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "add-store-audit-log-event"
+          description: "Flipdish Add Store Audit Log Event"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-audit-logs.AddStoreAuditLogEvent"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

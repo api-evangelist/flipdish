@@ -1,0 +1,156 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Orders — OrderBatches"
+  description: >-
+    OrderBatches operations on the Flipdish Open API v1.0 (2 operations).
+    Lead operation: Flipdish Get Order Batch. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Order Batches
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "orders-order-batches"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Orders — OrderBatches business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-order-batches-order-batch-id"
+          path: "/api/v1.0/{appId}/order-batches/{orderBatchId}"
+          operations:
+            - name: "GetOrderBatch"
+              method: GET
+              description: "Flipdish Get Order Batch"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "orderBatchId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The order batch id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-order-batches"
+          path: "/api/v1.0/{appId}/order-batches"
+          operations:
+            - name: "GetAllOrderBatches"
+              method: GET
+              description: "Flipdish Get All Order Batches"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeIds"
+                  in: query
+                  type: array
+                  required: false
+                  description: "The store ids query parameter."
+                - name: "createdFrom"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The created from query parameter."
+                - name: "createdTo"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The created to query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "orders-order-batches-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Orders — OrderBatches."
+      resources:
+        - path: "/v1/{app-id}/order-batches/{order-batch-id}"
+          name: "app-id-order-batches-order-batch-id"
+          description: "REST surface for GetOrderBatch."
+          operations:
+            - method: GET
+              name: "GetOrderBatch"
+              description: "Flipdish Get Order Batch"
+              call: "orders-order-batches.GetOrderBatch"
+              with:
+                "appId": "rest.appId"
+                "orderBatchId": "rest.orderBatchId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/order-batches"
+          name: "app-id-order-batches"
+          description: "REST surface for GetAllOrderBatches."
+          operations:
+            - method: GET
+              name: "GetAllOrderBatches"
+              description: "Flipdish Get All Order Batches"
+              call: "orders-order-batches.GetAllOrderBatches"
+              with:
+                "appId": "rest.appId"
+                "storeIds": "rest.storeIds"
+                "createdFrom": "rest.createdFrom"
+                "createdTo": "rest.createdTo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "orders-order-batches-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Orders — OrderBatches."
+      tools:
+        - name: "get-order-batch"
+          description: "Flipdish Get Order Batch"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "orders-order-batches.GetOrderBatch"
+          with:
+            "appId": "tools.appId"
+            "orderBatchId": "tools.orderBatchId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-all-order-batches"
+          description: "Flipdish Get All Order Batches"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "orders-order-batches.GetAllOrderBatches"
+          with:
+            "appId": "tools.appId"
+            "storeIds": "tools.storeIds"
+            "createdFrom": "tools.createdFrom"
+            "createdTo": "tools.createdTo"
+          outputParameters:
+            - type: object
+              mapping: "$."

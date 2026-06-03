@@ -1,0 +1,226 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Platform — Fpm"
+  description: >-
+    Fpm operations on the Flipdish Open API v1.0 (4 operations).
+    Lead operation: Flipdish Get Fpm for Store. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Fpm
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "platform-fpm"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Platform — Fpm business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "store-id-fpm"
+          path: "/api/v1.0/{storeId}/fpm"
+          operations:
+            - name: "GetFpmForStore"
+              method: GET
+              description: "Flipdish Get Fpm for Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "store-id-fpm"
+          path: "/api/v1.0/{storeId}/fpm"
+          operations:
+            - name: "CreateFpmForStore"
+              method: POST
+              description: "Flipdish Create Fpm for Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "phoneNumber"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The phone number query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "store-id-fpm"
+          path: "/api/v1.0/{storeId}/fpm"
+          operations:
+            - name: "DeleteFpmForStore"
+              method: DELETE
+              description: "Flipdish Delete Fpm for Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "store-id-fpm-edit"
+          path: "/api/v1.0/{storeId}/fpm/edit"
+          operations:
+            - name: "EditFpmForStore"
+              method: POST
+              description: "Flipdish Edit Fpm for Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "platform-fpm-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Platform — Fpm."
+      resources:
+        - path: "/v1/{store-id}/fpm"
+          name: "store-id-fpm"
+          description: "REST surface for GetFpmForStore."
+          operations:
+            - method: GET
+              name: "GetFpmForStore"
+              description: "Flipdish Get Fpm for Store"
+              call: "platform-fpm.GetFpmForStore"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{store-id}/fpm"
+          name: "store-id-fpm"
+          description: "REST surface for CreateFpmForStore."
+          operations:
+            - method: POST
+              name: "CreateFpmForStore"
+              description: "Flipdish Create Fpm for Store"
+              call: "platform-fpm.CreateFpmForStore"
+              with:
+                "storeId": "rest.storeId"
+                "phoneNumber": "rest.phoneNumber"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{store-id}/fpm"
+          name: "store-id-fpm"
+          description: "REST surface for DeleteFpmForStore."
+          operations:
+            - method: DELETE
+              name: "DeleteFpmForStore"
+              description: "Flipdish Delete Fpm for Store"
+              call: "platform-fpm.DeleteFpmForStore"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{store-id}/fpm/edit"
+          name: "store-id-fpm-edit"
+          description: "REST surface for EditFpmForStore."
+          operations:
+            - method: POST
+              name: "EditFpmForStore"
+              description: "Flipdish Edit Fpm for Store"
+              call: "platform-fpm.EditFpmForStore"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "platform-fpm-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Platform — Fpm."
+      tools:
+        - name: "get-fpm-store"
+          description: "Flipdish Get Fpm for Store"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "platform-fpm.GetFpmForStore"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-fpm-store"
+          description: "Flipdish Create Fpm for Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-fpm.CreateFpmForStore"
+          with:
+            "storeId": "tools.storeId"
+            "phoneNumber": "tools.phoneNumber"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-fpm-store"
+          description: "Flipdish Delete Fpm for Store"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "platform-fpm.DeleteFpmForStore"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "edit-fpm-store"
+          description: "Flipdish Edit Fpm for Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "platform-fpm.EditFpmForStore"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/payments-bank-account-summary-structure.json",
+  "name": "BankAccountSummary",
+  "description": "BankAccountSummary schema from Flipdish API - Payments.",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "description": "Id of this account",
+      "type": "int32",
+      "example": 500123
+    },
+    "StoreNames": {
+      "description": "Store Names that are attached to this account",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Example Name"
+      ]
+    },
+    "StoreIds": {
+      "description": "Store Ids that are attached to this account",
+      "type": "array",
+      "items": {
+        "type": "int32"
+      },
+      "example": [
+        1
+      ]
+    },
+    "AccountState": {
+      "description": "Status of Account",
+      "enum": [
+        "Unverified",
+        "AwatingVerification",
+        "Verified",
+        "Grandfathered"
+      ],
+      "type": "string",
+      "example": "Unverified"
+    },
+    "CurrencyCode": {
+      "description": "Currency of Account",
+      "type": "string",
+      "example": "EUR"
+    },
+    "VatNumber": {
+      "description": "Account Holders Vat Number",
+      "type": "string",
+      "example": "string"
+    },
+    "AccountHolderAddress": {
+      "description": "Account Holders Address",
+      "type": "string",
+      "example": "string"
+    },
+    "AccountHolderCountryCode": {
+      "description": "Account Holders Country Code",
+      "type": "string",
+      "example": "IE"
+    },
+    "StripeConnectedAccountInfo": {
+      "$ref": "#/components/schemas/StripeConnectedAccountInfo"
+    },
+    "AccountName": {
+      "description": "Name of this account",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Iban": {
+      "description": "IBAN of this account",
+      "type": "string",
+      "example": "string"
+    },
+    "Swift": {
+      "description": "SWIFT of this bank account",
+      "type": "string",
+      "example": "string"
+    },
+    "NationalClearingCode": {
+      "description": "National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)",
+      "type": "string",
+      "example": "string"
+    },
+    "PopulatedAccountFields": {
+      "description": "A list of one or more populated account fields (field key-value pairs).\r\nIf this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountFieldKeyValuePair"
+      },
+      "example": []
+    },
+    "RejectionReason": {
+      "description": "Reason for Rejection",
+      "type": "string",
+      "example": "string"
+    },
+    "BusinessType": {
+      "description": "Business Type",
+      "enum": [
+        "Individual",
+        "Company",
+        "NonProfit",
+        "GovernmentEntity"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Individual"
+    }
+  }
+}

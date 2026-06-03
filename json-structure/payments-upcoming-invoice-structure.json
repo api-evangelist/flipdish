@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/payments-upcoming-invoice-structure.json",
+  "name": "UpcomingInvoice",
+  "description": "UpcomingInvoice.",
+  "type": "object",
+  "properties": {
+    "Amount": {
+      "description": "Amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "NextBillingDate": {
+      "description": "Next billing date",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "Subtotal": {
+      "description": "Subtotal",
+      "type": "double",
+      "example": 12.5
+    },
+    "TotalExcludingTax": {
+      "description": "Total excluding tax",
+      "type": "double",
+      "nullable": true,
+      "example": 12.5
+    },
+    "AmountDue": {
+      "description": "Amount due",
+      "type": "double",
+      "example": 12.5
+    },
+    "Tax": {
+      "description": "Tax",
+      "type": "double",
+      "example": 1.0
+    },
+    "Items": {
+      "description": "Items",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/InvoiceItem"
+      },
+      "example": []
+    },
+    "Discounts": {
+      "description": "Discounts",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/InvoiceDiscount"
+      },
+      "example": []
+    }
+  },
+  "required": [
+    "Subtotal",
+    "AmountDue",
+    "Tax"
+  ]
+}

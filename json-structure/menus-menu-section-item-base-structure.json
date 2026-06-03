@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/menus-menu-section-item-base-structure.json",
+  "name": "MenuSectionItemBase",
+  "description": "Menu item",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "description": "Menu item name (like \"Korma\")",
+      "maxLength": 4000,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Description": {
+      "description": "Description (like \"A lovely dish from the east\")",
+      "maxLength": 4000,
+      "minLength": 0,
+      "type": "string",
+      "example": "string"
+    },
+    "SpicinessRating": {
+      "description": "Spiciness rating",
+      "enum": [
+        "NotRated",
+        "Mild",
+        "Medium",
+        "Hot"
+      ],
+      "type": "string",
+      "example": "NotRated"
+    },
+    "Price": {
+      "description": "Price - this is only used when there is no master option set and should be set to 0 if a master option set exists.",
+      "type": "double",
+      "example": 12.5
+    },
+    "DepositReturnFee": {
+      "description": "An optional fee that can be added to the price of the item.",
+      "type": "double",
+      "nullable": true,
+      "example": 12.5
+    },
+    "DisplayOrder": {
+      "description": "Display order",
+      "type": "int32",
+      "example": 1
+    },
+    "Alcohol": {
+      "description": "To be set true if the item or an option of the item contains an alcoholic drink.",
+      "type": "boolean",
+      "example": true
+    },
+    "IsAvailable": {
+      "description": "True if we accept orders for this item still",
+      "type": "boolean",
+      "example": true
+    },
+    "CellLayoutType": {
+      "description": "Small | Medium | Large\r\nAffects the layout of the menu.",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large",
+        "HiddenImage"
+      ],
+      "type": "string",
+      "example": "Small"
+    },
+    "DisableVouchers": {
+      "description": "If true, then vouchers won't be applied for this item",
+      "type": "boolean",
+      "example": true
+    },
+    "ImageName": {
+      "description": "Image url",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "ImageUrl": {
+      "description": "Image url",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "MenuItemId": {
+      "description": "Menu Item Id",
+      "type": "int32",
+      "example": 500123
+    },
+    "ExcludeFromVoucherDiscounting": {
+      "description": "If true, the item is excluded from voucher discount calculations",
+      "type": "boolean",
+      "example": true
+    },
+    "PublicId": {
+      "description": "Permanent reference to the item.",
+      "type": "uuid",
+      "example": "00000000-0000-0000-0000-000000000000"
+    }
+  }
+}

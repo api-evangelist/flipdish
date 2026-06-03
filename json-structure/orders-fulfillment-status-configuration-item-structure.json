@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/orders-fulfillment-status-configuration-item-structure.json",
+  "name": "FulfillmentStatusConfigurationItem",
+  "description": "Fulfillment Status Item",
+  "type": "object",
+  "properties": {
+    "StatusId": {
+      "description": "Status Id (no whitespaces)",
+      "type": "string",
+      "example": "500123"
+    },
+    "StatusName": {
+      "description": "Status name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Enabled": {
+      "description": "Is status enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "DisplayName": {
+      "description": "The short status string that is displayed to users in apps, portal. If empty then Order Status Name is displayed instead",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Icon": {
+      "description": "Icon/Image that represents that status visual",
+      "type": "string",
+      "example": "string"
+    },
+    "PublicDescription": {
+      "description": "A string which could be used in notification templates with a placeholder (SMS, email, push, web page with status)",
+      "type": "string",
+      "example": "string"
+    },
+    "Internal": {
+      "description": "Is internal state (internal states not shown to customers)",
+      "type": "boolean",
+      "example": true
+    },
+    "NextStatuses": {
+      "description": "list of statuses that this status can move to (can be back or forth)",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Active"
+      ]
+    },
+    "DefaultNextStatus": {
+      "description": "The default next status (on a dropdown or quick button on terminal or portal)",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/NextStatusWithOrderType"
+      },
+      "example": []
+    },
+    "ChangeType": {
+      "description": "How will state change (manually or automated, including timed)",
+      "enum": [
+        "Manual",
+        "Automated",
+        "Integrated"
+      ],
+      "type": "string",
+      "example": "Manual"
+    },
+    "IncludeInReports": {
+      "description": "Include in reports",
+      "type": "boolean",
+      "example": true
+    },
+    "IsCustom": {
+      "description": "Is custom state. If not, then it's a system state",
+      "type": "boolean",
+      "example": true
+    },
+    "OrderTypes": {
+      "description": "If empty then applies to all ordertypes, otherwise a list of order types this state applies to",
+      "type": "array",
+      "items": {
+        "enum": [
+          "All",
+          "Delivery",
+          "Collection",
+          "DineIn"
+        ],
+        "type": "string"
+      },
+      "example": [
+        "All"
+      ]
+    },
+    "Communication": {
+      "description": "Whether state should fire off a notification to the customer",
+      "type": "boolean",
+      "example": true
+    },
+    "Image": {
+      "description": "Image (image filename, relative, not absolute URL)",
+      "type": "string",
+      "example": "string"
+    }
+  }
+}

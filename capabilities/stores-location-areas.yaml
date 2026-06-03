@@ -1,0 +1,268 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Stores — LocationAreas"
+  description: >-
+    LocationAreas operations on the Flipdish Open API v1.0 (4 operations).
+    Lead operation: Flipdish Get Location Areas for Store. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Location Areas
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "stores-location-areas"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Stores — LocationAreas business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-stores-store-id-location-areas"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas"
+          operations:
+            - name: "GetLocationAreasForStore"
+              method: GET
+              description: "Flipdish Get Location Areas for Store"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas"
+          operations:
+            - name: "CreateLocationArea"
+              method: POST
+              description: "Flipdish Create Location Area"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas-location-area-id"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}"
+          operations:
+            - name: "GetLocationArea"
+              method: GET
+              description: "Flipdish Get Location Area"
+              inputParameters:
+                - name: "locationAreaId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location area id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas-location-area-id-update"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/update"
+          operations:
+            - name: "UpdateLocationArea"
+              method: POST
+              description: "Flipdish Update Location Area"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "locationAreaId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The location area id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "stores-location-areas-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Stores — LocationAreas."
+      resources:
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas"
+          name: "app-id-stores-store-id-location-areas"
+          description: "REST surface for GetLocationAreasForStore."
+          operations:
+            - method: GET
+              name: "GetLocationAreasForStore"
+              description: "Flipdish Get Location Areas for Store"
+              call: "stores-location-areas.GetLocationAreasForStore"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas"
+          name: "app-id-stores-store-id-location-areas"
+          description: "REST surface for CreateLocationArea."
+          operations:
+            - method: POST
+              name: "CreateLocationArea"
+              description: "Flipdish Create Location Area"
+              call: "stores-location-areas.CreateLocationArea"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}"
+          name: "app-id-stores-store-id-location-areas-location-area-id"
+          description: "REST surface for GetLocationArea."
+          operations:
+            - method: GET
+              name: "GetLocationArea"
+              description: "Flipdish Get Location Area"
+              call: "stores-location-areas.GetLocationArea"
+              with:
+                "locationAreaId": "rest.locationAreaId"
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}/update"
+          name: "app-id-stores-store-id-location-areas-location-area-id-update"
+          description: "REST surface for UpdateLocationArea."
+          operations:
+            - method: POST
+              name: "UpdateLocationArea"
+              description: "Flipdish Update Location Area"
+              call: "stores-location-areas.UpdateLocationArea"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                "locationAreaId": "rest.locationAreaId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "stores-location-areas-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Stores — LocationAreas."
+      tools:
+        - name: "get-location-areas-store"
+          description: "Flipdish Get Location Areas for Store"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-location-areas.GetLocationAreasForStore"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-location-area"
+          description: "Flipdish Create Location Area"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-location-areas.CreateLocationArea"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-location-area"
+          description: "Flipdish Get Location Area"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-location-areas.GetLocationArea"
+          with:
+            "locationAreaId": "tools.locationAreaId"
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-location-area"
+          description: "Flipdish Update Location Area"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-location-areas.UpdateLocationArea"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            "locationAreaId": "tools.locationAreaId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

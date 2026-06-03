@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/menus-menu-item-option-set-schema.json",
+  "title": "MenuItemOptionSet",
+  "description": "Menu item option set",
+  "type": "object",
+  "properties": {
+    "MenuItemOptionSetId": {
+      "format": "int32",
+      "description": "Menu item option set identifier",
+      "type": "integer",
+      "example": 500123
+    },
+    "ImageName": {
+      "description": "Image Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "ImageUrl": {
+      "description": "Image url",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "MenuItemOptionSetItems": {
+      "description": "Option set items",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MenuItemOptionSetItem"
+      },
+      "example": []
+    },
+    "PublicId": {
+      "format": "uuid",
+      "description": "Permanent reference to the item.",
+      "type": "string",
+      "example": "00000000-0000-0000-0000-000000000000"
+    },
+    "CatalogItemId": {
+      "description": "Catalog item Id when the OptionSet is associated to a Product",
+      "type": "string",
+      "example": "500123"
+    },
+    "Name": {
+      "description": "Menu item option set name",
+      "maxLength": 4000,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "IsMasterOptionSet": {
+      "description": "Is master option set. This can affect the layout of the options in the menu displayed to the customer. Usually it is true if the option could be considerd a standalone item as opposed to an addition (\"with ketchup\") or modifier (\"large\").",
+      "type": "boolean",
+      "example": true
+    },
+    "DisplayOrder": {
+      "format": "int32",
+      "description": "Display order. Displayed in ascending order.",
+      "type": "integer",
+      "example": 1
+    },
+    "MinSelectCount": {
+      "format": "int32",
+      "description": "Minimum items must be selected",
+      "type": "integer",
+      "example": 3
+    },
+    "MaxSelectCount": {
+      "format": "int32",
+      "description": "Maximum number of items can be selected",
+      "type": "integer",
+      "example": 3
+    },
+    "CellLayoutType": {
+      "description": "Small | Medium | Large\r\nAffects the layout of the menu.",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large",
+        "HiddenImage"
+      ],
+      "type": "string",
+      "example": "Small"
+    }
+  }
+}

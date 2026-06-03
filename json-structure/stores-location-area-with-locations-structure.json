@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/stores-location-area-with-locations-structure.json",
+  "name": "LocationAreaWithLocations",
+  "description": "Represents a LocationArea and its Location list",
+  "type": "object",
+  "properties": {
+    "LocationAreaId": {
+      "description": "Id of the LocationArea",
+      "type": "int32",
+      "example": 500123
+    },
+    "StoreId": {
+      "description": "Id of the Store that this LocationArea belongs to",
+      "type": "int32",
+      "example": 500123
+    },
+    "LocationAreaName": {
+      "description": "Descriptive LocationArea name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Locations": {
+      "description": "List of Locations that belongs to this Location Area",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LocationArea_Location"
+      },
+      "example": []
+    },
+    "IsDeleted": {
+      "description": "Returns if the LocationArea is deleted or not",
+      "type": "boolean",
+      "example": true
+    }
+  },
+  "required": [
+    "LocationAreaId",
+    "StoreId",
+    "LocationAreaName"
+  ]
+}

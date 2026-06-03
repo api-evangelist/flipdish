@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/platform-order-structure.json",
+  "name": "Order",
+  "description": "Order",
+  "type": "object",
+  "properties": {
+    "Store": {
+      "$ref": "#/components/schemas/StoreSummary"
+    },
+    "Customer": {
+      "$ref": "#/components/schemas/CustomerSummary"
+    },
+    "Voucher": {
+      "$ref": "#/components/schemas/OrderVoucherSummary"
+    },
+    "Fees": {
+      "$ref": "#/components/schemas/FeeSummary"
+    },
+    "OrderItems": {
+      "description": "Ordered items",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderItem"
+      },
+      "example": []
+    },
+    "DeliveryLocation": {
+      "$ref": "#/components/schemas/DeliveryLocation"
+    },
+    "CustomerLocation": {
+      "$ref": "#/components/schemas/Coordinates"
+    },
+    "MaskedPhoneNumber": {
+      "$ref": "#/components/schemas/MaskedPhoneNumber"
+    },
+    "DropOffLocationId": {
+      "description": "Represents table service drop off location",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "DropOffLocation": {
+      "description": "Represents table service drop off location",
+      "type": "string",
+      "example": "string"
+    },
+    "AcceptedFor": {
+      "description": "Time store has accepted the order for",
+      "type": "datetime",
+      "nullable": true,
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "InFraudZone": {
+      "description": "Was order made within a fraud zone",
+      "type": "boolean",
+      "example": true
+    },
+    "UnusualHighValueOrder": {
+      "description": "Is order of unusually high value",
+      "type": "boolean",
+      "example": true
+    },
+    "RejectedByUserId": {
+      "description": "Id of user who rejected order, if available",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "ChannelOrderId": {
+      "description": "ChannelOrderId from external channel",
+      "type": "string",
+      "example": "500123"
+    },
+    "ChannelOrderDisplayId": {
+      "description": "ChannelOrderDisplayId from external channel",
+      "type": "string",
+      "example": "500123"
+    },
+    "Channel": {
+      "$ref": "#/components/schemas/Channel"
+    },
+    "OrderDropOffLocation": {
+      "$ref": "#/components/schemas/OrderDropOffLocation"
+    },
+    "FulfillmentStatus": {
+      "$ref": "#/components/schemas/OrderFulfillmentStatusBase"
+    },
+    "OrderBatchInfo": {
+      "$ref": "#/components/schemas/OrderBatchSummary"
+    },
+    "TaxItems": {
+      "description": "A collection of tax items on the order.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TaxItem"
+      },
+      "example": []
+    },
+    "CreatedCampaignVoucherId": {
+      "description": "The id of the campaign voucher that was created from this order",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "OrderId": {
+      "description": "Order identifier",
+      "type": "int32",
+      "example": 500123
+    },
+    "LocalOrderId": {
+      "description": "Local order Id. This is used for displaying a \"shorter\" order ID for customers (eg. Kiosk orders)",
+      "type": "string",
+      "example": "500123"
+    },
+    "DeliveryType": {
+      "description": "Delivery type",
+      "enum": [
+        "Delivery",
+        "Pickup"
+      ],
+      "type": "string",
+      "example": "Delivery"
+    },
+    "PickupLocationType": {
+      "description": "Pickup location type",
+      "enum": [
+        "TakeOut",
+        "TableService",
+        "DineIn"
+      ],
+      "type": "string",
+      "example": "TakeOut"
+    },
+    "TableServiceCatagory": {
+      "description": "Pickup location type",
+      "enum": [
+        "Generic",
+        "Villa",
+        "House",
+        "Room",
+        "Area",
+        "Table",
+        "ParkingBay",
+        "Gate",
+        "DriveThrough",
+        "Team"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Generic"
+    },
+    "TipAmount": {
+      "description": "Tip amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "DeliveryAmount": {
+      "description": "Delivery amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "OrderItemsAmount": {
+      "description": "Ordered items amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "ServiceChargeAmount": {
+      "description": "Service Charge Amount",
+      "type": "double",
+      "example": 12.5
+    },
+    "ServiceChargePercentage": {
+      "description": "Service Charge Percentage",
+      "type": "double",
+      "example": 1.0
+    },
+    "Amount": {
+      "description": "This is the sum of the OrderItemsAmount, DeliveryAmount, TipAmount and Voucher.Amount (which is usually negative) and OnlineOrderingFee for cash orders.\r\nIt does not include the OnlineOrderingFee in the case of card orders as this fee is charged by Flipdish directly to the customer.",
+      "type": "double",
+      "example": 12.5
+    },
+    "ProcessingFee": {
+      "description": "This contains the online ordering processing fee. For card payments this is charged directly to the customer and for cash orders it is paid by the customer to the store. It is tax inclusive.",
+      "type": "double",
+      "example": 12.5
+    },
+    "PaymentAccountType": {
+      "description": "Payment account type",
+      "enum": [
+        "Card",
+        "Cash",
+        "Ideal",
+        "Bancontact",
+        "Giropay",
+        "Eps",
+        "Emv",
+        "PayPal",
+        "PayGreen",
+        "GoogleWalletToken"
+      ],
+      "type": "string",
+      "example": "Card"
+    },
+    "PaymentAccountDescription": {
+      "description": "Payment account description (like Visa ****2371 or Apple Pay. or Cash)",
+      "type": "string",
+      "example": "string"
+    },
+    "OrderState": {
+      "description": "Order state",
+      "enum": [
+        "Created",
+        "PlacedCanBeCancelled",
+        "ReadyToProcess",
+        "AcceptedByRestaurant",
+        "Dispatched",
+        "Delivered",
+        "Cancelled",
+        "ManualReview",
+        "RejectedByStore",
+        "RejectedByFlipdish",
+        "RejectedAutomatically",
+        "RejectedAfterBeingAccepted",
+        "AcceptedAndRefunded",
+        "PendingPayment"
+      ],
+      "type": "string",
+      "example": "Created"
+    },
+    "IsPreOrder": {
+      "description": "Is pre-order",
+      "type": "boolean",
+      "example": true
+    },
+    "PlacedTime": {
+      "description": "Order placed time",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "RequestedForTime": {
+      "description": "Order requested for",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "ChefNote": {
+      "description": "Chef note",
+      "type": "string",
+      "example": "string"
+    },
+    "AppType": {
+      "description": "Used app type",
+      "enum": [
+        "Unknown",
+        "Ios",
+        "Android",
+        "Web",
+        "Kiosk",
+        "Pos",
+        "TelephoneCall",
+        "Sms",
+        "PwaAndroid",
+        "PwaIos",
+        "Google"
+      ],
+      "type": "string",
+      "example": "Unknown"
+    },
+    "UserRating": {
+      "description": "User rating",
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    },
+    "PaymentStatus": {
+      "description": "Status of the payment",
+      "enum": [
+        "Paid",
+        "Unpaid",
+        "Refunded",
+        "PartiallyRefunded",
+        "Disputed"
+      ],
+      "type": "string",
+      "example": "Paid"
+    },
+    "RejectionReason": {
+      "description": "Rejection reason. Can have value if the order is rejected.",
+      "enum": [
+        "TooBusy",
+        "FoodUnavailable",
+        "UnableToDeliver",
+        "UnknownAddress",
+        "UnknownReason",
+        "TooSoon",
+        "TimeUnavailable",
+        "DontDeliverToArea",
+        "StoreUncontactable"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "TooBusy"
+    },
+    "RefundedAmount": {
+      "description": "Amount refunded to customer.",
+      "type": "double",
+      "nullable": true,
+      "example": 12.5
+    },
+    "DeliveryTrackingStatus": {
+      "description": "Delivery tracking status",
+      "enum": [
+        "Unassigned",
+        "Unaccepted",
+        "Accepted",
+        "Carrying",
+        "OnTheWay",
+        "ArrivedAtLocation",
+        "Delivered",
+        "CannotDeliver"
+      ],
+      "type": "string",
+      "nullable": true,
+      "example": "Unassigned"
+    },
+    "DriverId": {
+      "description": "Assigned driver identifier",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "TotalTax": {
+      "description": "Total tax applied to order",
+      "type": "double",
+      "example": 12.5
+    },
+    "OrderTrackingCode": {
+      "description": "Unique, 6 character long alpha numeric code for tracking.",
+      "type": "string",
+      "example": "string"
+    },
+    "DeliveryFeeAreaId": {
+      "description": "Delivery area identifier",
+      "type": "int32",
+      "nullable": true,
+      "example": 500123
+    },
+    "ReceiptCode": {
+      "description": "Code used to view the order's receipt",
+      "type": "string",
+      "example": "string"
+    },
+    "TotalDepositReturnFeeAmount": {
+      "description": "This contains the total deposit return fee amount for the order.",
+      "type": "double",
+      "example": 12.5
+    }
+  }
+}

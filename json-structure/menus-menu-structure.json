@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/menus-menu-structure.json",
+  "name": "Menu",
+  "description": "Menu",
+  "type": "object",
+  "properties": {
+    "MenuId": {
+      "description": "Menu identifier",
+      "type": "int32",
+      "example": 500123
+    },
+    "ModifiedTime": {
+      "description": "Last modified time",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "VersionNumber": {
+      "description": "Menu version",
+      "type": "int32",
+      "example": 3
+    },
+    "ImageName": {
+      "description": "Image Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "ImageUrl": {
+      "description": "Image url",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "Name": {
+      "description": "Name of Menu, only shown in portal",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Locked": {
+      "description": "Locked: is menu locked against modifcation",
+      "type": "boolean",
+      "example": true
+    },
+    "MenuSections": {
+      "description": "Menu sections (startes, main etc)",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MenuSection"
+      },
+      "example": []
+    },
+    "TaxRates": {
+      "description": "Menu tax rates",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MenuTaxRate"
+      },
+      "example": []
+    },
+    "AppId": {
+      "description": "Identifier of App the menu is attached to",
+      "type": "string",
+      "example": "500123"
+    },
+    "DisplaySectionLinks": {
+      "description": "Display menu section link on UI",
+      "type": "boolean",
+      "example": true
+    },
+    "MenuSectionBehaviour": {
+      "description": "Menu section behaviour",
+      "enum": [
+        "ExpandSingle",
+        "ExpandMultiple"
+      ],
+      "type": "string",
+      "example": "ExpandSingle"
+    },
+    "TaxType": {
+      "description": "Tax type",
+      "enum": [
+        "IncludedInBasePrice",
+        "ExcludedFromBasePrice"
+      ],
+      "type": "string",
+      "example": "IncludedInBasePrice"
+    },
+    "IsIntegrated": {
+      "description": "Flag to indicate if the menu is integrated (contains metadata)",
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/platform-bank-account-schema.json",
+  "title": "BankAccount",
+  "description": "BANK ACCOUNT",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "format": "int32",
+      "description": "Id of this account",
+      "type": "integer",
+      "example": 500123
+    },
+    "AccountName": {
+      "description": "Name of this account",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Iban": {
+      "description": "IBAN of this account",
+      "type": "string",
+      "example": "string"
+    },
+    "Swift": {
+      "description": "SWIFT of this bank account",
+      "type": "string",
+      "example": "string"
+    },
+    "PopulatedAccountFields": {
+      "description": "A list of one or more populated account fields (field key-value pairs).\r\nIf this list contains at least one item, the Iban, Swift and NationalClearingCode fields should be ignored.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountFieldKeyValuePair"
+      },
+      "example": []
+    },
+    "AccountState": {
+      "description": "Status of Account",
+      "enum": [
+        "Unverified",
+        "AwatingVerification",
+        "Verified",
+        "Grandfathered"
+      ],
+      "type": "string",
+      "example": "Unverified"
+    },
+    "StoreNames": {
+      "description": "Store Names that are attached to this account",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Example Name"
+      ]
+    },
+    "StoreIds": {
+      "description": "Store Ids that are attached to this account",
+      "type": "array",
+      "items": {
+        "format": "int32",
+        "type": "integer"
+      },
+      "example": [
+        1
+      ]
+    },
+    "BankAddress": {
+      "description": "Address lf the bank",
+      "type": "string",
+      "example": "string"
+    },
+    "BankCountryCode": {
+      "description": "CountryCode of the Bank Account",
+      "type": "string",
+      "example": "IE"
+    },
+    "AccountHolderAddress": {
+      "description": "Account Holders Address",
+      "type": "string",
+      "example": "string"
+    },
+    "AccountHolderCountryCode": {
+      "description": "Account Holders Country Code",
+      "type": "string",
+      "example": "IE"
+    },
+    "VatNumber": {
+      "description": "Account Holders Vat Number",
+      "type": "string",
+      "example": "string"
+    },
+    "StripeAccountId": {
+      "description": "Stripe Id of the connected account",
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

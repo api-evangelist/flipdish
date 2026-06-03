@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/payments-stripe-connected-account-info-schema.json",
+  "title": "StripeConnectedAccountInfo",
+  "description": "Represents information about a Stripe connected account associated with a bank account",
+  "type": "object",
+  "properties": {
+    "AccountStatus": {
+      "description": "Stripe connected account status",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "AdditionalInformationRequired",
+        "PendingVerification",
+        "Unverified",
+        "Rejected",
+        "UpdateExternalAccount",
+        "PlatformPaused"
+      ],
+      "type": "string",
+      "example": "Disabled"
+    },
+    "StripeId": {
+      "description": "Stripe connected account id",
+      "type": "string",
+      "example": "500123"
+    },
+    "CardPaymentStatus": {
+      "description": "Current status of the Card Payment capability of the account",
+      "enum": [
+        "Inactive",
+        "Pending",
+        "Active",
+        "Unrequested"
+      ],
+      "type": "string",
+      "example": "Inactive"
+    },
+    "PayoutScheduleInterval": {
+      "description": "Payouts Schedule Interval",
+      "enum": [
+        "Manual",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "type": "string",
+      "example": "Manual"
+    },
+    "PayoutsEnabled": {
+      "description": "Payouts Enabled status",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    },
+    "PayoutsPaused": {
+      "description": "Flag indicating if payouts are paused",
+      "type": "boolean",
+      "example": true
+    },
+    "PaymentsEnabled": {
+      "description": "Flag indicating if payments are enabled",
+      "type": "boolean",
+      "nullable": true,
+      "example": true
+    }
+  }
+}

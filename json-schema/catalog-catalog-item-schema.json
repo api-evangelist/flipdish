@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/catalog-catalog-item-schema.json",
+  "title": "CatalogItem",
+  "description": "CatalogItem",
+  "type": "object",
+  "properties": {
+    "CatalogItemId": {
+      "description": "Unique catalog Item id",
+      "maxLength": 30,
+      "minLength": 0,
+      "type": "string",
+      "example": "500123"
+    },
+    "IsArchived": {
+      "description": "Returns true if the item is archived",
+      "type": "boolean",
+      "example": true
+    },
+    "Groups": {
+      "description": "Collection of groups associated with this item",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CatalogGroupReference"
+      },
+      "example": []
+    },
+    "Metafields": {
+      "description": "Collection of metafields",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Metafield"
+      },
+      "example": []
+    },
+    "ItemType": {
+      "description": "Type of item (Product, Modifier, etc)",
+      "enum": [
+        "Product",
+        "Modifier"
+      ],
+      "type": "string",
+      "example": "Product"
+    },
+    "Sku": {
+      "description": "Stock Keeping Unit (SKU)",
+      "maxLength": 30,
+      "minLength": 0,
+      "type": "string",
+      "example": "string"
+    },
+    "Name": {
+      "description": "Item name",
+      "maxLength": 300,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Description": {
+      "description": "Item description",
+      "maxLength": 3000,
+      "minLength": 0,
+      "type": "string",
+      "example": "string"
+    },
+    "Price": {
+      "format": "double",
+      "description": "Item price",
+      "minimum": 0,
+      "type": "number",
+      "example": 12.5
+    },
+    "ImageFileName": {
+      "description": "Image File Name",
+      "maxLength": 512,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Alcohol": {
+      "description": "item contains alcohol",
+      "type": "boolean",
+      "example": true
+    }
+  },
+  "required": [
+    "ItemType",
+    "Sku",
+    "Name",
+    "Price"
+  ]
+}

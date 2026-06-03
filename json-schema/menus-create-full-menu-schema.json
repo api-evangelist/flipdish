@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-schema/menus-create-full-menu-schema.json",
+  "title": "CreateFullMenu",
+  "description": "Create menu object",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "description": "Name of Menu, only shown in portal",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string",
+      "example": "Example Name"
+    },
+    "ImageUrl": {
+      "description": "Image url",
+      "type": "string",
+      "example": "https://api.flipdish.co/example"
+    },
+    "MenuSections": {
+      "description": "Menu sections (starters, main etc)",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CreateFullMenuSection"
+      },
+      "example": []
+    },
+    "TaxRates": {
+      "description": "Menu tax rates",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CreateMenuTaxRate"
+      },
+      "example": []
+    },
+    "DisplaySectionLinks": {
+      "description": "Display menu section link on UI",
+      "type": "boolean",
+      "example": true
+    },
+    "MenuSectionBehaviour": {
+      "description": "Menu section behaviour",
+      "enum": [
+        "ExpandSingle",
+        "ExpandMultiple"
+      ],
+      "type": "string",
+      "example": "ExpandSingle"
+    },
+    "TaxType": {
+      "description": "Tax type",
+      "enum": [
+        "IncludedInBasePrice",
+        "ExcludedFromBasePrice"
+      ],
+      "type": "string",
+      "example": "IncludedInBasePrice"
+    },
+    "IsIntegrated": {
+      "description": "Flag to indicate if the menu is integrated (contains metadata)",
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

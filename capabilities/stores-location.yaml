@@ -1,0 +1,380 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Stores — Location"
+  description: >-
+    Location operations on the Flipdish Open API v1.0 (5 operations).
+    Lead operation: Flipdish Create Location. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Location
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "stores-location"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Stores — Location business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-stores-store-id-location-areas-location-area-id-location"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/location"
+          operations:
+            - name: "CreateLocation"
+              method: POST
+              description: "Flipdish Create Location"
+              inputParameters:
+                - name: "locationAreaId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location area id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-update"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/location/{locationId}/update"
+          operations:
+            - name: "UpdateLocation"
+              method: POST
+              description: "Flipdish Update Location"
+              inputParameters:
+                - name: "locationAreaId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location area id path parameter."
+                - name: "locationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-move"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/location/{locationId}/move"
+          operations:
+            - name: "MoveLocation"
+              method: POST
+              description: "Flipdish Move Location"
+              inputParameters:
+                - name: "locationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location id path parameter."
+                - name: "locationAreaId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location area id path parameter."
+                - name: "newLocationAreaId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The new location area id query parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-map-external"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/location/{locationId}/map-external"
+          operations:
+            - name: "MapLocationToExternalId"
+              method: POST
+              description: "Flipdish Map Location to External Id"
+              inputParameters:
+                - name: "locationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location id path parameter."
+                - name: "locationAreaId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location area id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "externalLocationId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The external location id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-delete"
+          path: "/api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/location/{locationId}/delete"
+          operations:
+            - name: "DeleteLocation"
+              method: DELETE
+              description: "Flipdish Delete Location"
+              inputParameters:
+                - name: "locationId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location id path parameter."
+                - name: "locationAreaId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The location area id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "stores-location-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Stores — Location."
+      resources:
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}/location"
+          name: "app-id-stores-store-id-location-areas-location-area-id-location"
+          description: "REST surface for CreateLocation."
+          operations:
+            - method: POST
+              name: "CreateLocation"
+              description: "Flipdish Create Location"
+              call: "stores-location.CreateLocation"
+              with:
+                "locationAreaId": "rest.locationAreaId"
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}/location/{location-id}/update"
+          name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-update"
+          description: "REST surface for UpdateLocation."
+          operations:
+            - method: POST
+              name: "UpdateLocation"
+              description: "Flipdish Update Location"
+              call: "stores-location.UpdateLocation"
+              with:
+                "locationAreaId": "rest.locationAreaId"
+                "locationId": "rest.locationId"
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}/location/{location-id}/move"
+          name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-move"
+          description: "REST surface for MoveLocation."
+          operations:
+            - method: POST
+              name: "MoveLocation"
+              description: "Flipdish Move Location"
+              call: "stores-location.MoveLocation"
+              with:
+                "locationId": "rest.locationId"
+                "locationAreaId": "rest.locationAreaId"
+                "newLocationAreaId": "rest.newLocationAreaId"
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}/location/{location-id}/map-external"
+          name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-map-external"
+          description: "REST surface for MapLocationToExternalId."
+          operations:
+            - method: POST
+              name: "MapLocationToExternalId"
+              description: "Flipdish Map Location to External Id"
+              call: "stores-location.MapLocationToExternalId"
+              with:
+                "locationId": "rest.locationId"
+                "locationAreaId": "rest.locationAreaId"
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+                "externalLocationId": "rest.externalLocationId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/{store-id}/location-areas/{location-area-id}/location/{location-id}/delete"
+          name: "app-id-stores-store-id-location-areas-location-area-id-location-location-id-delete"
+          description: "REST surface for DeleteLocation."
+          operations:
+            - method: DELETE
+              name: "DeleteLocation"
+              description: "Flipdish Delete Location"
+              call: "stores-location.DeleteLocation"
+              with:
+                "locationId": "rest.locationId"
+                "locationAreaId": "rest.locationAreaId"
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "stores-location-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Stores — Location."
+      tools:
+        - name: "create-location"
+          description: "Flipdish Create Location"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-location.CreateLocation"
+          with:
+            "locationAreaId": "tools.locationAreaId"
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-location"
+          description: "Flipdish Update Location"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-location.UpdateLocation"
+          with:
+            "locationAreaId": "tools.locationAreaId"
+            "locationId": "tools.locationId"
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "move-location"
+          description: "Flipdish Move Location"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-location.MoveLocation"
+          with:
+            "locationId": "tools.locationId"
+            "locationAreaId": "tools.locationAreaId"
+            "newLocationAreaId": "tools.newLocationAreaId"
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "map-location-external-id"
+          description: "Flipdish Map Location to External Id"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-location.MapLocationToExternalId"
+          with:
+            "locationId": "tools.locationId"
+            "locationAreaId": "tools.locationAreaId"
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+            "externalLocationId": "tools.externalLocationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-location"
+          description: "Flipdish Delete Location"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "stores-location.DeleteLocation"
+          with:
+            "locationId": "tools.locationId"
+            "locationAreaId": "tools.locationAreaId"
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."

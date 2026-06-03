@@ -1,0 +1,492 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Payments — BankAccount"
+  description: >-
+    BankAccount operations on the Flipdish Open API v1.0 (9 operations).
+    Lead operation: Flipdish Get Bank Accounts. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Bank Account
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "payments-bank-account"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Payments — BankAccount business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "app-id-bankaccounts"
+          path: "/api/v1.0/{appId}/bankaccounts"
+          operations:
+            - name: "GetBankAccounts"
+              method: GET
+              description: "Flipdish Get Bank Accounts"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts"
+          path: "/api/v1.0/{appId}/bankaccounts"
+          operations:
+            - name: "CreateBankAccount"
+              method: POST
+              description: "Flipdish Create Bank Account"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}"
+          operations:
+            - name: "GetBankAccountById"
+              method: GET
+              description: "Flipdish Get Bank Account by Id"
+              inputParameters:
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}"
+          operations:
+            - name: "UpdateBankAccount"
+              method: POST
+              description: "Flipdish Update Bank Account"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}"
+          operations:
+            - name: "DeleteBankAccount"
+              method: DELETE
+              description: "Flipdish Delete Bank Account"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-field-definitions"
+          path: "/api/v1.0/{appId}/bankaccounts/field-definitions"
+          operations:
+            - name: "GetFieldDefinitions"
+              method: GET
+              description: "Flipdish Get Field Definitions"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-countries-field-definitions"
+          path: "/api/v1.0/{appId}/bankaccounts/countries-field-definitions"
+          operations:
+            - name: "GetCountriesWithFieldDefinitions"
+              method: GET
+              description: "Flipdish Get Countries with Field Definitions"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id-state-state"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/state/{state}"
+          operations:
+            - name: "UpdateBankAccountState"
+              method: POST
+              description: "Flipdish Update Bank Account State"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "state"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The state path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-bankaccounts-bank-account-id-store-store-id"
+          path: "/api/v1.0/{appId}/bankaccounts/{bankAccountId}/store/{storeId}"
+          operations:
+            - name: "AttachBankAccountToStore"
+              method: POST
+              description: "Flipdish Attach Bank Account to Store"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "bankAccountId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The bank account id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "payments-bank-account-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Payments — BankAccount."
+      resources:
+        - path: "/v1/{app-id}/bankaccounts"
+          name: "app-id-bankaccounts"
+          description: "REST surface for GetBankAccounts."
+          operations:
+            - method: GET
+              name: "GetBankAccounts"
+              description: "Flipdish Get Bank Accounts"
+              call: "payments-bank-account.GetBankAccounts"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts"
+          name: "app-id-bankaccounts"
+          description: "REST surface for CreateBankAccount."
+          operations:
+            - method: POST
+              name: "CreateBankAccount"
+              description: "Flipdish Create Bank Account"
+              call: "payments-bank-account.CreateBankAccount"
+              with:
+                "appId": "rest.appId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}"
+          name: "app-id-bankaccounts-bank-account-id"
+          description: "REST surface for GetBankAccountById."
+          operations:
+            - method: GET
+              name: "GetBankAccountById"
+              description: "Flipdish Get Bank Account by Id"
+              call: "payments-bank-account.GetBankAccountById"
+              with:
+                "bankAccountId": "rest.bankAccountId"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}"
+          name: "app-id-bankaccounts-bank-account-id"
+          description: "REST surface for UpdateBankAccount."
+          operations:
+            - method: POST
+              name: "UpdateBankAccount"
+              description: "Flipdish Update Bank Account"
+              call: "payments-bank-account.UpdateBankAccount"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}"
+          name: "app-id-bankaccounts-bank-account-id"
+          description: "REST surface for DeleteBankAccount."
+          operations:
+            - method: DELETE
+              name: "DeleteBankAccount"
+              description: "Flipdish Delete Bank Account"
+              call: "payments-bank-account.DeleteBankAccount"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/field-definitions"
+          name: "app-id-bankaccounts-field-definitions"
+          description: "REST surface for GetFieldDefinitions."
+          operations:
+            - method: GET
+              name: "GetFieldDefinitions"
+              description: "Flipdish Get Field Definitions"
+              call: "payments-bank-account.GetFieldDefinitions"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/countries-field-definitions"
+          name: "app-id-bankaccounts-countries-field-definitions"
+          description: "REST surface for GetCountriesWithFieldDefinitions."
+          operations:
+            - method: GET
+              name: "GetCountriesWithFieldDefinitions"
+              description: "Flipdish Get Countries with Field Definitions"
+              call: "payments-bank-account.GetCountriesWithFieldDefinitions"
+              with:
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/state/{state}"
+          name: "app-id-bankaccounts-bank-account-id-state-state"
+          description: "REST surface for UpdateBankAccountState."
+          operations:
+            - method: POST
+              name: "UpdateBankAccountState"
+              description: "Flipdish Update Bank Account State"
+              call: "payments-bank-account.UpdateBankAccountState"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "state": "rest.state"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/bankaccounts/{bank-account-id}/store/{store-id}"
+          name: "app-id-bankaccounts-bank-account-id-store-store-id"
+          description: "REST surface for AttachBankAccountToStore."
+          operations:
+            - method: POST
+              name: "AttachBankAccountToStore"
+              description: "Flipdish Attach Bank Account to Store"
+              call: "payments-bank-account.AttachBankAccountToStore"
+              with:
+                "appId": "rest.appId"
+                "bankAccountId": "rest.bankAccountId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "payments-bank-account-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Payments — BankAccount."
+      tools:
+        - name: "get-bank-accounts"
+          description: "Flipdish Get Bank Accounts"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-bank-account.GetBankAccounts"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-bank-account"
+          description: "Flipdish Create Bank Account"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "payments-bank-account.CreateBankAccount"
+          with:
+            "appId": "tools.appId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-bank-account-id"
+          description: "Flipdish Get Bank Account by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-bank-account.GetBankAccountById"
+          with:
+            "bankAccountId": "tools.bankAccountId"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-bank-account"
+          description: "Flipdish Update Bank Account"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "payments-bank-account.UpdateBankAccount"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-bank-account"
+          description: "Flipdish Delete Bank Account"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "payments-bank-account.DeleteBankAccount"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-field-definitions"
+          description: "Flipdish Get Field Definitions"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-bank-account.GetFieldDefinitions"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-countries-field-definitions"
+          description: "Flipdish Get Countries with Field Definitions"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "payments-bank-account.GetCountriesWithFieldDefinitions"
+          with:
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-bank-account-state"
+          description: "Flipdish Update Bank Account State"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "payments-bank-account.UpdateBankAccountState"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "state": "tools.state"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "attach-bank-account-store"
+          description: "Flipdish Attach Bank Account to Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "payments-bank-account.AttachBankAccountToStore"
+          with:
+            "appId": "tools.appId"
+            "bankAccountId": "tools.bankAccountId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."

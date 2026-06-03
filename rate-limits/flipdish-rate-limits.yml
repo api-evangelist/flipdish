@@ -1,0 +1,55 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Flipdish
+providerId: flipdish
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Restaurant
+  - Online Ordering
+description: >-
+  Flipdish does not publish specific request-rate or concurrency numbers in its public developer
+  documentation. The Error Handling guide documents the approved HTTP status codes (400, 401, 403,
+  404, 409, 414, 500) and a JSON error object with errorMessage and errorCode, but does not document
+  a 429 (Too Many Requests) behavior, rate-limit headers, or backoff guidance. The values below are
+  therefore recorded as undocumented/string limits pending confirmation with Flipdish support; the
+  429 code is listed because it is an approved status code in Flipdish's own API Design Guide. Limits
+  are assumed to be scoped per OAuth client/application.
+sources:
+  - https://developers.flipdish.com/docs/error-handling
+  - https://developers.flipdish.com/docs/getting-started
+  - https://github.com/flipdishbytes/spectral-rules
+responseCodes:
+  throttled: 429
+  serverError: 500
+limits:
+  - name: API requests (per OAuth client)
+    scope: key
+    metric: requests_per_second
+    limit: 'not publicly documented — contact Flipdish support'
+    notes: >-
+      No per-second or per-minute number is published. The Flipdish API Design Guide lists 429 as an
+      approved status code, implying request throttling exists; the threshold is not disclosed.
+  - name: Webhook delivery and event subscriptions
+    scope: account
+    metric: varies
+    limit: 'not publicly documented'
+    notes: >-
+      Event subscriptions (v3) and webhook deliveries may be subject to provider-side delivery limits;
+      not quantified in public docs.
+policies:
+  - name: Exponential backoff on errors
+    description: >-
+      Treat 429 and 5xx responses as retryable. Apply exponential backoff with jitter; the public
+      docs do not specify a Retry-After value, so use conservative client-side defaults.
+  - name: Per-client scoping
+    description: >-
+      Limits are assumed to be enforced per OAuth client (Client ID), not per IP. Provision separate
+      App Store apps for independent workloads to isolate throttling.
+  - name: Confirm with support before high-volume use
+    description: >-
+      Because thresholds are undocumented, integration partners running high-volume polling or batch
+      operations should confirm acceptable rates with Flipdish support (help@flipdish.com) before scaling.

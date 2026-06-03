@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/payments-subscription-structure.json",
+  "name": "Subscription",
+  "description": "Subscription",
+  "type": "object",
+  "properties": {
+    "Products": {
+      "description": "Products",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SubscriptionProduct"
+      },
+      "example": []
+    },
+    "NextInvoiceAmount": {
+      "description": "Next invoice amount",
+      "type": "double",
+      "nullable": true,
+      "example": 12.5
+    },
+    "NextInvoiceBillingDate": {
+      "description": "Next invoice billing date",
+      "type": "datetime",
+      "nullable": true,
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "UpcomingInvoiceItems": {
+      "description": "Upcoming invoice items",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/InvoiceItem"
+      },
+      "example": []
+    },
+    "UpcomingInvoiceDiscounts": {
+      "description": "Upcoming invoice discounts",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/InvoiceDiscount"
+      },
+      "example": []
+    },
+    "UpcomingInvoice": {
+      "$ref": "#/components/schemas/UpcomingInvoice"
+    },
+    "SubscriptionId": {
+      "description": "The subscription identifier",
+      "type": "string",
+      "example": "500123"
+    },
+    "Name": {
+      "description": "Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "Status": {
+      "description": "Status",
+      "enum": [
+        "Incomplete",
+        "IncompleteExpired",
+        "Trialing",
+        "Active",
+        "PastDue",
+        "Canceled",
+        "Unpaid"
+      ],
+      "type": "string",
+      "example": "Incomplete"
+    },
+    "Currency": {
+      "description": "Currency",
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CAD",
+        "AUD",
+        "DJF",
+        "ZAR",
+        "ETB",
+        "AED",
+        "BHD",
+        "DZD",
+        "EGP",
+        "IQD",
+        "JOD",
+        "KWD",
+        "LBP",
+        "LYD",
+        "MAD",
+        "OMR",
+        "QAR",
+        "SAR",
+        "SYP",
+        "TND",
+        "YER",
+        "CLP",
+        "INR",
+        "AZN",
+        "RUB",
+        "BYN",
+        "BGN",
+        "NGN",
+        "BDT",
+        "CNY",
+        "BAM",
+        "CZK",
+        "DKK",
+        "CHF",
+        "MVR",
+        "BTN",
+        "XCD",
+        "BZD",
+        "HKD",
+        "IDR",
+        "JMD",
+        "MYR",
+        "NZD",
+        "PHP",
+        "SGD",
+        "TTD",
+        "XDR",
+        "ARS",
+        "BOB",
+        "COP",
+        "CRC",
+        "CUP",
+        "DOP",
+        "GTQ",
+        "HNL",
+        "MXN",
+        "NIO",
+        "PAB",
+        "PEN",
+        "PYG",
+        "UYU",
+        "VEF",
+        "IRR",
+        "XOF",
+        "CDF",
+        "XAF",
+        "HTG",
+        "ILS",
+        "HRK",
+        "HUF",
+        "AMD",
+        "ISK",
+        "JPY",
+        "GEL",
+        "KZT",
+        "KHR",
+        "KRW",
+        "KGS",
+        "LAK",
+        "MKD",
+        "MNT",
+        "BND",
+        "MMK",
+        "NOK",
+        "NPR",
+        "PKR",
+        "PLN",
+        "AFN",
+        "BRL",
+        "MDL",
+        "RON",
+        "RWF",
+        "SEK",
+        "LKR",
+        "SOS",
+        "ALL",
+        "RSD",
+        "KES",
+        "TJS",
+        "THB",
+        "ERN",
+        "TMT",
+        "BWP",
+        "TRY",
+        "UAH",
+        "UZS",
+        "VND",
+        "MOP",
+        "TWD",
+        "BMD"
+      ],
+      "type": "string",
+      "example": "EUR"
+    },
+    "User": {
+      "description": "User",
+      "type": "string",
+      "example": "string"
+    },
+    "DefaultPaymentDescription": {
+      "description": "Default payment description",
+      "type": "string",
+      "example": "string"
+    },
+    "CancellationRequestDate": {
+      "description": "Cancellation Date",
+      "type": "datetime",
+      "nullable": true,
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "CancellationDate": {
+      "description": "Cancel Date",
+      "type": "datetime",
+      "nullable": true,
+      "example": "2026-06-02T12:00:00Z"
+    }
+  },
+  "required": [
+    "Products",
+    "SubscriptionId",
+    "Name",
+    "Status",
+    "Currency",
+    "User"
+  ]
+}

@@ -1,0 +1,2165 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Flipdish API - Stores — Stores"
+  description: >-
+    Stores operations on the Flipdish Open API v1.0 (40 operations).
+    Lead operation: Flipdish Get Store by Id. Self-contained Naftiko capability covering one Flipdish business surface.
+  tags:
+    - Flipdish
+    - Online Ordering
+    - Stores
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      FLIPDISH_TOKEN: FLIPDISH_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "stores-stores"
+      baseUri: "https://api.flipdish.co"
+      description: "Flipdish API - Stores — Stores business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.FLIPDISH_TOKEN}}"
+      resources:
+        - name: "stores-store-id"
+          path: "/api/v1.0/stores/{storeId}"
+          operations:
+            - name: "GetStoreById"
+              method: GET
+              description: "Flipdish Get Store by Id"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id"
+          path: "/api/v1.0/stores/{storeId}"
+          operations:
+            - name: "UpdateStore"
+              method: POST
+              description: "Flipdish Update Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-fee-config"
+          path: "/api/v1.0/stores/{storeId}/feeConfig"
+          operations:
+            - name: "GetStoreFeeConfig"
+              method: GET
+              description: "Flipdish Get Store Fee Config"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-lead-times"
+          path: "/api/v1.0/stores/{storeId}/leadTimes"
+          operations:
+            - name: "GetStoreLeadTimes"
+              method: GET
+              description: "Flipdish Get Store Lead Times"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-lead-times"
+          path: "/api/v1.0/stores/{storeId}/leadTimes"
+          operations:
+            - name: "SetStoreLeadTimes"
+              method: POST
+              description: "Flipdish Set Store Lead Times"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-bankaccount"
+          path: "/api/v1.0/stores/{storeId}/bankaccount"
+          operations:
+            - name: "GetBankAccountForStore"
+              method: GET
+              description: "Flipdish Get Bank Account for Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-servicecharge"
+          path: "/api/v1.0/stores/{storeId}/servicecharge"
+          operations:
+            - name: "GetStoreServiceCharge"
+              method: GET
+              description: "Flipdish Get Store Service Charge"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-servicecharge"
+          path: "/api/v1.0/stores/{storeId}/servicecharge"
+          operations:
+            - name: "ConfigureStoreServiceCharge"
+              method: POST
+              description: "Flipdish Configure Store Service Charge"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-fee-config-delivery-zones"
+          path: "/api/v1.0/stores/{storeId}/feeConfig/deliveryZones"
+          operations:
+            - name: "GetStoreDeliveryFeeConfig"
+              method: GET
+              description: "Flipdish Get Store Delivery Fee Config"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-fee-config-delivery-zones"
+          path: "/api/v1.0/stores/{storeId}/feeConfig/deliveryZones"
+          operations:
+            - name: "PutStoreDeliveryFeeConfig"
+              method: PUT
+              description: "Flipdish Put Store Delivery Fee Config"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-endofdayreport"
+          path: "/api/v1.0/stores/{storeId}/endofdayreport"
+          operations:
+            - name: "GetEndOfDayReport"
+              method: GET
+              description: "Flipdish Get End of Day Report"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "date"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The date query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-availability-delivery-type"
+          path: "/api/v1.0/stores/{storeId}/availability/{deliveryType}"
+          operations:
+            - name: "GetBusinessHours"
+              method: GET
+              description: "Flipdish Get Business Hours"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The delivery type path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-availability-delivery-type"
+          path: "/api/v1.0/stores/{storeId}/availability/{deliveryType}"
+          operations:
+            - name: "SetBusinessHours"
+              method: POST
+              description: "Flipdish Set Business Hours"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The delivery type path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-preorderconfig-delivery-type"
+          path: "/api/v1.0/stores/{storeId}/preorderconfig/{deliveryType}"
+          operations:
+            - name: "GetPreOrderConfig"
+              method: GET
+              description: "Flipdish Get Pre Order Config"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The delivery type path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-preorderconfig-delivery-type"
+          path: "/api/v1.0/stores/{storeId}/preorderconfig/{deliveryType}"
+          operations:
+            - name: "UpdatePreOrderConfig"
+              method: POST
+              description: "Flipdish Update Pre Order Config"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The delivery type path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-preorderconfig-delivery-type-preview"
+          path: "/api/v1.0/stores/{storeId}/preorderconfig/{deliveryType}/preview"
+          operations:
+            - name: "GetPreOrderPreview"
+              method: GET
+              description: "Flipdish Get Pre Order Preview"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The delivery type path parameter."
+                - name: "preOrderConfig.leadTimeMinutes"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Lead Time in Minutes"
+                - name: "preOrderConfig.intervalMinutes"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Interval in minutes"
+                - name: "preOrderConfig.maxOrderAheadDays"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Max Days to order ahead"
+                - name: "preOrderConfig.includeAsap"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Show ASAP as option"
+                - name: "preOrderConfig.includeMoreGranularInitialTime"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Granual Init' Time"
+                - name: "preOrderConfig.cutOffTimePreviousDayBasic"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Cut off time previous day"
+                - name: "preOrderConfig.cutOffTimeCurrentDayBasic"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Cut off time current day"
+                - name: "preOrderConfig.preOrderTimeDisplayType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Type of time displayed."
+                - name: "preOrderConfig.alwaysAppearOpen"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Specifies whether a customer can pre-order outside the store opening hours or not."
+                - name: "preOrderConfig.requireExplicitSelectAlways"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Force customer to select collection time."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-processingfeeconfigs"
+          path: "/api/v1.0/stores/{storeId}/processingfeeconfigs"
+          operations:
+            - name: "GetProcessingFeeConfigsByStoreId"
+              method: GET
+              description: "Flipdish Get Processing Fee Configs by Store Id"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "appNameId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The app name id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-stats"
+          path: "/api/v1.0/{appId}/stores/stats"
+          operations:
+            - name: "GetStoreNetSales"
+              method: GET
+              description: "Flipdish Get Store Net Sales"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: true
+                  description: "The store id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-businesshoursoverrides"
+          path: "/api/v1.0/stores/{storeId}/businesshoursoverrides"
+          operations:
+            - name: "GetBusinessHoursOverrideByStoreId"
+              method: GET
+              description: "Flipdish Get Business Hours Override by Store Id"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "after"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The after query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-businesshoursoverrides"
+          path: "/api/v1.0/stores/{storeId}/businesshoursoverrides"
+          operations:
+            - name: "CreateBusinessHoursOverrideByStoreId"
+              method: POST
+              description: "Flipdish Create Business Hours Override by Store Id"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-processingfeeconfigs-payment-account-type"
+          path: "/api/v1.0/stores/{storeId}/processingfeeconfigs/{paymentAccountType}"
+          operations:
+            - name: "GetProcessingFeeConfigsByStoreIdAndPaymentAccountType"
+              method: GET
+              description: "Flipdish Get Processing Fee Configs by Store Id and Payment Account Type"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "paymentAccountType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The payment account type path parameter."
+                - name: "appNameId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The app name id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores"
+          path: "/api/v1.0/stores"
+          operations:
+            - name: "GetStores"
+              method: GET
+              description: "Flipdish Get Stores"
+              inputParameters:
+                - name: "searchQuery"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The search query query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The store group id query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores"
+          path: "/api/v1.0/stores"
+          operations:
+            - name: "CreateStore"
+              method: POST
+              description: "Flipdish Create Store"
+              inputParameters:
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The store group id query parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-storevalidation-kiosk"
+          path: "/api/v1.0/{appId}/storevalidation/kiosk"
+          operations:
+            - name: "GetStoresByStoreIdWithValidations"
+              method: GET
+              description: "Flipdish Get Stores by Store Id with Validations"
+              inputParameters:
+                - name: "storeId"
+                  in: query
+                  type: array
+                  required: true
+                  description: "The store id query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores-header"
+          path: "/api/v1.0/{appId}/stores/header"
+          operations:
+            - name: "GetStoreHeadersByAppId"
+              method: GET
+              description: "Flipdish Get Store Headers by App Id"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "storeNameQuery"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The store name query query parameter."
+                - name: "salesChannelType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The sales channel type query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "app-id-stores"
+          path: "/api/v1.0/{appId}/stores"
+          operations:
+            - name: "GetStoresByAppId"
+              method: GET
+              description: "Flipdish Get Stores by App Id"
+              inputParameters:
+                - name: "appId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The app id path parameter."
+                - name: "searchQuery"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The search query query parameter."
+                - name: "salesChannelType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The sales channel type query parameter."
+                - name: "excludeUnpublished"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The exclude unpublished query parameter."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page query parameter."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The limit query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-clone"
+          path: "/api/v1.0/stores/{storeId}/clone"
+          operations:
+            - name: "CloneStore"
+              method: POST
+              description: "Flipdish Clone Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-address"
+          path: "/api/v1.0/stores/{storeId}/address"
+          operations:
+            - name: "UpdateStoreAddress"
+              method: POST
+              description: "Flipdish Update Store Address"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-archive"
+          path: "/api/v1.0/stores/{storeId}/archive"
+          operations:
+            - name: "ArchiveStore"
+              method: POST
+              description: "Flipdish Archive Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-publish"
+          path: "/api/v1.0/stores/{storeId}/publish"
+          operations:
+            - name: "PublishStore"
+              method: POST
+              description: "Flipdish Publish Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-unpublish"
+          path: "/api/v1.0/stores/{storeId}/unpublish"
+          operations:
+            - name: "UnpublishStore"
+              method: POST
+              description: "Flipdish Unpublish Store"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-addressform"
+          path: "/api/v1.0/stores/{storeId}/addressform"
+          operations:
+            - name: "UpdateStoreAddressForm"
+              method: POST
+              description: "Flipdish Update Store Address Form"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-menu-menu-id"
+          path: "/api/v1.0/stores/{storeId}/menu/{menuId}"
+          operations:
+            - name: "AssignMenu"
+              method: POST
+              description: "Flipdish Assign Menu"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "menuId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The menu id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-property-id-property-id"
+          path: "/api/v1.0/stores/{storeId}/propertyId/{propertyId}"
+          operations:
+            - name: "Stores_SetPropertyId"
+              method: POST
+              description: "Flipdish Stores_Set Property Id"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "propertyId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The property id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-address-coordinates"
+          path: "/api/v1.0/stores/{storeId}/address/coordinates"
+          operations:
+            - name: "UpdateStoreAddressCoordinates"
+              method: POST
+              description: "Flipdish Update Store Address Coordinates"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "appNameId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "The app name id query parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "properties-property-id-stores-store-id-supported-sales-channels"
+          path: "/api/v1.0/properties/{propertyId}/stores/{storeId}/supportedSalesChannels"
+          operations:
+            - name: "SupportedSalesChannelsTypes"
+              method: POST
+              description: "Flipdish Supported Sales Channels Types"
+              inputParameters:
+                - name: "propertyId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The property id path parameter."
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-preorderconfig-delivery-type-enabled"
+          path: "/api/v1.0/stores/{storeId}/preorderconfig/{deliveryType}/enabled"
+          operations:
+            - name: "SetPreOrdeEnabled"
+              method: POST
+              description: "Flipdish Set Pre Orde Enabled"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "deliveryType"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The delivery type path parameter."
+                - name: "enabled"
+                  in: query
+                  type: boolean
+                  required: true
+                  description: "The enabled query parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-collectionsettings"
+          path: "/api/v1.0/stores/{storeId}/collectionsettings"
+          operations:
+            - name: "SetStoreCollectionSettings"
+              method: POST
+              description: "Flipdish Set Store Collection Settings"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "inheritFromProperty"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The inherit from property query parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "properties-property-id-stores"
+          path: "/api/v1.0/properties/{propertyId}/stores"
+          operations:
+            - name: "CreateStoreInProperty"
+              method: POST
+              description: "Flipdish Create Store in Property"
+              inputParameters:
+                - name: "storeGroupId"
+                  in: query
+                  type: integer
+                  required: true
+                  description: "The store group id query parameter."
+                - name: "propertyId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The property id path parameter."
+                - name: "autoAssignMenu"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "The auto assign menu query parameter."
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "stores-store-id-businesshoursoverrides-business-hours-override-id"
+          path: "/api/v1.0/stores/{storeId}/businesshoursoverrides/{businessHoursOverrideId}"
+          operations:
+            - name: "DeleteBusinessHoursOverride"
+              method: DELETE
+              description: "Flipdish Delete Business Hours Override"
+              inputParameters:
+                - name: "storeId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The store id path parameter."
+                - name: "businessHoursOverrideId"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The business hours override id path parameter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "stores-stores-rest"
+      port: 8080
+      description: "REST adapter for Flipdish API - Stores — Stores."
+      resources:
+        - path: "/v1/stores/{store-id}"
+          name: "stores-store-id"
+          description: "REST surface for GetStoreById."
+          operations:
+            - method: GET
+              name: "GetStoreById"
+              description: "Flipdish Get Store by Id"
+              call: "stores-stores.GetStoreById"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}"
+          name: "stores-store-id"
+          description: "REST surface for UpdateStore."
+          operations:
+            - method: POST
+              name: "UpdateStore"
+              description: "Flipdish Update Store"
+              call: "stores-stores.UpdateStore"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/fee-config"
+          name: "stores-store-id-fee-config"
+          description: "REST surface for GetStoreFeeConfig."
+          operations:
+            - method: GET
+              name: "GetStoreFeeConfig"
+              description: "Flipdish Get Store Fee Config"
+              call: "stores-stores.GetStoreFeeConfig"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/lead-times"
+          name: "stores-store-id-lead-times"
+          description: "REST surface for GetStoreLeadTimes."
+          operations:
+            - method: GET
+              name: "GetStoreLeadTimes"
+              description: "Flipdish Get Store Lead Times"
+              call: "stores-stores.GetStoreLeadTimes"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/lead-times"
+          name: "stores-store-id-lead-times"
+          description: "REST surface for SetStoreLeadTimes."
+          operations:
+            - method: POST
+              name: "SetStoreLeadTimes"
+              description: "Flipdish Set Store Lead Times"
+              call: "stores-stores.SetStoreLeadTimes"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/bankaccount"
+          name: "stores-store-id-bankaccount"
+          description: "REST surface for GetBankAccountForStore."
+          operations:
+            - method: GET
+              name: "GetBankAccountForStore"
+              description: "Flipdish Get Bank Account for Store"
+              call: "stores-stores.GetBankAccountForStore"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/servicecharge"
+          name: "stores-store-id-servicecharge"
+          description: "REST surface for GetStoreServiceCharge."
+          operations:
+            - method: GET
+              name: "GetStoreServiceCharge"
+              description: "Flipdish Get Store Service Charge"
+              call: "stores-stores.GetStoreServiceCharge"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/servicecharge"
+          name: "stores-store-id-servicecharge"
+          description: "REST surface for ConfigureStoreServiceCharge."
+          operations:
+            - method: POST
+              name: "ConfigureStoreServiceCharge"
+              description: "Flipdish Configure Store Service Charge"
+              call: "stores-stores.ConfigureStoreServiceCharge"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/fee-config/delivery-zones"
+          name: "stores-store-id-fee-config-delivery-zones"
+          description: "REST surface for GetStoreDeliveryFeeConfig."
+          operations:
+            - method: GET
+              name: "GetStoreDeliveryFeeConfig"
+              description: "Flipdish Get Store Delivery Fee Config"
+              call: "stores-stores.GetStoreDeliveryFeeConfig"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/fee-config/delivery-zones"
+          name: "stores-store-id-fee-config-delivery-zones"
+          description: "REST surface for PutStoreDeliveryFeeConfig."
+          operations:
+            - method: PUT
+              name: "PutStoreDeliveryFeeConfig"
+              description: "Flipdish Put Store Delivery Fee Config"
+              call: "stores-stores.PutStoreDeliveryFeeConfig"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/endofdayreport"
+          name: "stores-store-id-endofdayreport"
+          description: "REST surface for GetEndOfDayReport."
+          operations:
+            - method: GET
+              name: "GetEndOfDayReport"
+              description: "Flipdish Get End of Day Report"
+              call: "stores-stores.GetEndOfDayReport"
+              with:
+                "storeId": "rest.storeId"
+                "date": "rest.date"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/availability/{delivery-type}"
+          name: "stores-store-id-availability-delivery-type"
+          description: "REST surface for GetBusinessHours."
+          operations:
+            - method: GET
+              name: "GetBusinessHours"
+              description: "Flipdish Get Business Hours"
+              call: "stores-stores.GetBusinessHours"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryType": "rest.deliveryType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/availability/{delivery-type}"
+          name: "stores-store-id-availability-delivery-type"
+          description: "REST surface for SetBusinessHours."
+          operations:
+            - method: POST
+              name: "SetBusinessHours"
+              description: "Flipdish Set Business Hours"
+              call: "stores-stores.SetBusinessHours"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryType": "rest.deliveryType"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/preorderconfig/{delivery-type}"
+          name: "stores-store-id-preorderconfig-delivery-type"
+          description: "REST surface for GetPreOrderConfig."
+          operations:
+            - method: GET
+              name: "GetPreOrderConfig"
+              description: "Flipdish Get Pre Order Config"
+              call: "stores-stores.GetPreOrderConfig"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryType": "rest.deliveryType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/preorderconfig/{delivery-type}"
+          name: "stores-store-id-preorderconfig-delivery-type"
+          description: "REST surface for UpdatePreOrderConfig."
+          operations:
+            - method: POST
+              name: "UpdatePreOrderConfig"
+              description: "Flipdish Update Pre Order Config"
+              call: "stores-stores.UpdatePreOrderConfig"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryType": "rest.deliveryType"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/preorderconfig/{delivery-type}/preview"
+          name: "stores-store-id-preorderconfig-delivery-type-preview"
+          description: "REST surface for GetPreOrderPreview."
+          operations:
+            - method: GET
+              name: "GetPreOrderPreview"
+              description: "Flipdish Get Pre Order Preview"
+              call: "stores-stores.GetPreOrderPreview"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryType": "rest.deliveryType"
+                "preOrderConfig.leadTimeMinutes": "rest.preOrderConfig.leadTimeMinutes"
+                "preOrderConfig.intervalMinutes": "rest.preOrderConfig.intervalMinutes"
+                "preOrderConfig.maxOrderAheadDays": "rest.preOrderConfig.maxOrderAheadDays"
+                "preOrderConfig.includeAsap": "rest.preOrderConfig.includeAsap"
+                "preOrderConfig.includeMoreGranularInitialTime": "rest.preOrderConfig.includeMoreGranularInitialTime"
+                "preOrderConfig.cutOffTimePreviousDayBasic": "rest.preOrderConfig.cutOffTimePreviousDayBasic"
+                "preOrderConfig.cutOffTimeCurrentDayBasic": "rest.preOrderConfig.cutOffTimeCurrentDayBasic"
+                "preOrderConfig.preOrderTimeDisplayType": "rest.preOrderConfig.preOrderTimeDisplayType"
+                "preOrderConfig.alwaysAppearOpen": "rest.preOrderConfig.alwaysAppearOpen"
+                "preOrderConfig.requireExplicitSelectAlways": "rest.preOrderConfig.requireExplicitSelectAlways"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/processingfeeconfigs"
+          name: "stores-store-id-processingfeeconfigs"
+          description: "REST surface for GetProcessingFeeConfigsByStoreId."
+          operations:
+            - method: GET
+              name: "GetProcessingFeeConfigsByStoreId"
+              description: "Flipdish Get Processing Fee Configs by Store Id"
+              call: "stores-stores.GetProcessingFeeConfigsByStoreId"
+              with:
+                "storeId": "rest.storeId"
+                "appNameId": "rest.appNameId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/stats"
+          name: "app-id-stores-stats"
+          description: "REST surface for GetStoreNetSales."
+          operations:
+            - method: GET
+              name: "GetStoreNetSales"
+              description: "Flipdish Get Store Net Sales"
+              call: "stores-stores.GetStoreNetSales"
+              with:
+                "appId": "rest.appId"
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/businesshoursoverrides"
+          name: "stores-store-id-businesshoursoverrides"
+          description: "REST surface for GetBusinessHoursOverrideByStoreId."
+          operations:
+            - method: GET
+              name: "GetBusinessHoursOverrideByStoreId"
+              description: "Flipdish Get Business Hours Override by Store Id"
+              call: "stores-stores.GetBusinessHoursOverrideByStoreId"
+              with:
+                "storeId": "rest.storeId"
+                "after": "rest.after"
+                "page": "rest.page"
+                "limit": "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/businesshoursoverrides"
+          name: "stores-store-id-businesshoursoverrides"
+          description: "REST surface for CreateBusinessHoursOverrideByStoreId."
+          operations:
+            - method: POST
+              name: "CreateBusinessHoursOverrideByStoreId"
+              description: "Flipdish Create Business Hours Override by Store Id"
+              call: "stores-stores.CreateBusinessHoursOverrideByStoreId"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/processingfeeconfigs/{payment-account-type}"
+          name: "stores-store-id-processingfeeconfigs-payment-account-type"
+          description: "REST surface for GetProcessingFeeConfigsByStoreIdAndPaymentAccountType."
+          operations:
+            - method: GET
+              name: "GetProcessingFeeConfigsByStoreIdAndPaymentAccountType"
+              description: "Flipdish Get Processing Fee Configs by Store Id and Payment Account Type"
+              call: "stores-stores.GetProcessingFeeConfigsByStoreIdAndPaymentAccountType"
+              with:
+                "storeId": "rest.storeId"
+                "paymentAccountType": "rest.paymentAccountType"
+                "appNameId": "rest.appNameId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores"
+          name: "stores"
+          description: "REST surface for GetStores."
+          operations:
+            - method: GET
+              name: "GetStores"
+              description: "Flipdish Get Stores"
+              call: "stores-stores.GetStores"
+              with:
+                "searchQuery": "rest.searchQuery"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "storeGroupId": "rest.storeGroupId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores"
+          name: "stores"
+          description: "REST surface for CreateStore."
+          operations:
+            - method: POST
+              name: "CreateStore"
+              description: "Flipdish Create Store"
+              call: "stores-stores.CreateStore"
+              with:
+                "storeGroupId": "rest.storeGroupId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/storevalidation/kiosk"
+          name: "app-id-storevalidation-kiosk"
+          description: "REST surface for GetStoresByStoreIdWithValidations."
+          operations:
+            - method: GET
+              name: "GetStoresByStoreIdWithValidations"
+              description: "Flipdish Get Stores by Store Id with Validations"
+              call: "stores-stores.GetStoresByStoreIdWithValidations"
+              with:
+                "storeId": "rest.storeId"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "appId": "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores/header"
+          name: "app-id-stores-header"
+          description: "REST surface for GetStoreHeadersByAppId."
+          operations:
+            - method: GET
+              name: "GetStoreHeadersByAppId"
+              description: "Flipdish Get Store Headers by App Id"
+              call: "stores-stores.GetStoreHeadersByAppId"
+              with:
+                "appId": "rest.appId"
+                "storeNameQuery": "rest.storeNameQuery"
+                "salesChannelType": "rest.salesChannelType"
+                "page": "rest.page"
+                "limit": "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/{app-id}/stores"
+          name: "app-id-stores"
+          description: "REST surface for GetStoresByAppId."
+          operations:
+            - method: GET
+              name: "GetStoresByAppId"
+              description: "Flipdish Get Stores by App Id"
+              call: "stores-stores.GetStoresByAppId"
+              with:
+                "appId": "rest.appId"
+                "searchQuery": "rest.searchQuery"
+                "salesChannelType": "rest.salesChannelType"
+                "excludeUnpublished": "rest.excludeUnpublished"
+                "page": "rest.page"
+                "limit": "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/clone"
+          name: "stores-store-id-clone"
+          description: "REST surface for CloneStore."
+          operations:
+            - method: POST
+              name: "CloneStore"
+              description: "Flipdish Clone Store"
+              call: "stores-stores.CloneStore"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/address"
+          name: "stores-store-id-address"
+          description: "REST surface for UpdateStoreAddress."
+          operations:
+            - method: POST
+              name: "UpdateStoreAddress"
+              description: "Flipdish Update Store Address"
+              call: "stores-stores.UpdateStoreAddress"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/archive"
+          name: "stores-store-id-archive"
+          description: "REST surface for ArchiveStore."
+          operations:
+            - method: POST
+              name: "ArchiveStore"
+              description: "Flipdish Archive Store"
+              call: "stores-stores.ArchiveStore"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/publish"
+          name: "stores-store-id-publish"
+          description: "REST surface for PublishStore."
+          operations:
+            - method: POST
+              name: "PublishStore"
+              description: "Flipdish Publish Store"
+              call: "stores-stores.PublishStore"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/unpublish"
+          name: "stores-store-id-unpublish"
+          description: "REST surface for UnpublishStore."
+          operations:
+            - method: POST
+              name: "UnpublishStore"
+              description: "Flipdish Unpublish Store"
+              call: "stores-stores.UnpublishStore"
+              with:
+                "storeId": "rest.storeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/addressform"
+          name: "stores-store-id-addressform"
+          description: "REST surface for UpdateStoreAddressForm."
+          operations:
+            - method: POST
+              name: "UpdateStoreAddressForm"
+              description: "Flipdish Update Store Address Form"
+              call: "stores-stores.UpdateStoreAddressForm"
+              with:
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/menu/{menu-id}"
+          name: "stores-store-id-menu-menu-id"
+          description: "REST surface for AssignMenu."
+          operations:
+            - method: POST
+              name: "AssignMenu"
+              description: "Flipdish Assign Menu"
+              call: "stores-stores.AssignMenu"
+              with:
+                "storeId": "rest.storeId"
+                "menuId": "rest.menuId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/property-id/{property-id}"
+          name: "stores-store-id-property-id-property-id"
+          description: "REST surface for Stores_SetPropertyId."
+          operations:
+            - method: POST
+              name: "Stores_SetPropertyId"
+              description: "Flipdish Stores_Set Property Id"
+              call: "stores-stores.Stores_SetPropertyId"
+              with:
+                "storeId": "rest.storeId"
+                "propertyId": "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/address/coordinates"
+          name: "stores-store-id-address-coordinates"
+          description: "REST surface for UpdateStoreAddressCoordinates."
+          operations:
+            - method: POST
+              name: "UpdateStoreAddressCoordinates"
+              description: "Flipdish Update Store Address Coordinates"
+              call: "stores-stores.UpdateStoreAddressCoordinates"
+              with:
+                "storeId": "rest.storeId"
+                "appNameId": "rest.appNameId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/properties/{property-id}/stores/{store-id}/supported-sales-channels"
+          name: "properties-property-id-stores-store-id-supported-sales-channels"
+          description: "REST surface for SupportedSalesChannelsTypes."
+          operations:
+            - method: POST
+              name: "SupportedSalesChannelsTypes"
+              description: "Flipdish Supported Sales Channels Types"
+              call: "stores-stores.SupportedSalesChannelsTypes"
+              with:
+                "propertyId": "rest.propertyId"
+                "storeId": "rest.storeId"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/preorderconfig/{delivery-type}/enabled"
+          name: "stores-store-id-preorderconfig-delivery-type-enabled"
+          description: "REST surface for SetPreOrdeEnabled."
+          operations:
+            - method: POST
+              name: "SetPreOrdeEnabled"
+              description: "Flipdish Set Pre Orde Enabled"
+              call: "stores-stores.SetPreOrdeEnabled"
+              with:
+                "storeId": "rest.storeId"
+                "deliveryType": "rest.deliveryType"
+                "enabled": "rest.enabled"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/collectionsettings"
+          name: "stores-store-id-collectionsettings"
+          description: "REST surface for SetStoreCollectionSettings."
+          operations:
+            - method: POST
+              name: "SetStoreCollectionSettings"
+              description: "Flipdish Set Store Collection Settings"
+              call: "stores-stores.SetStoreCollectionSettings"
+              with:
+                "storeId": "rest.storeId"
+                "inheritFromProperty": "rest.inheritFromProperty"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/properties/{property-id}/stores"
+          name: "properties-property-id-stores"
+          description: "REST surface for CreateStoreInProperty."
+          operations:
+            - method: POST
+              name: "CreateStoreInProperty"
+              description: "Flipdish Create Store in Property"
+              call: "stores-stores.CreateStoreInProperty"
+              with:
+                "storeGroupId": "rest.storeGroupId"
+                "propertyId": "rest.propertyId"
+                "autoAssignMenu": "rest.autoAssignMenu"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/stores/{store-id}/businesshoursoverrides/{business-hours-override-id}"
+          name: "stores-store-id-businesshoursoverrides-business-hours-override-id"
+          description: "REST surface for DeleteBusinessHoursOverride."
+          operations:
+            - method: DELETE
+              name: "DeleteBusinessHoursOverride"
+              description: "Flipdish Delete Business Hours Override"
+              call: "stores-stores.DeleteBusinessHoursOverride"
+              with:
+                "storeId": "rest.storeId"
+                "businessHoursOverrideId": "rest.businessHoursOverrideId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "stores-stores-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Flipdish API - Stores — Stores."
+      tools:
+        - name: "get-store-id"
+          description: "Flipdish Get Store by Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreById"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-store"
+          description: "Flipdish Update Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.UpdateStore"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-fee-config"
+          description: "Flipdish Get Store Fee Config"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreFeeConfig"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-lead-times"
+          description: "Flipdish Get Store Lead Times"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreLeadTimes"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-store-lead-times"
+          description: "Flipdish Set Store Lead Times"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.SetStoreLeadTimes"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-bank-account-store"
+          description: "Flipdish Get Bank Account for Store"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetBankAccountForStore"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-service-charge"
+          description: "Flipdish Get Store Service Charge"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreServiceCharge"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "configure-store-service-charge"
+          description: "Flipdish Configure Store Service Charge"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.ConfigureStoreServiceCharge"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-delivery-fee-config"
+          description: "Flipdish Get Store Delivery Fee Config"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreDeliveryFeeConfig"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "put-store-delivery-fee-config"
+          description: "Flipdish Put Store Delivery Fee Config"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "stores-stores.PutStoreDeliveryFeeConfig"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-end-day-report"
+          description: "Flipdish Get End of Day Report"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetEndOfDayReport"
+          with:
+            "storeId": "tools.storeId"
+            "date": "tools.date"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-business-hours"
+          description: "Flipdish Get Business Hours"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetBusinessHours"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryType": "tools.deliveryType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-business-hours"
+          description: "Flipdish Set Business Hours"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.SetBusinessHours"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryType": "tools.deliveryType"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-pre-order-config"
+          description: "Flipdish Get Pre Order Config"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetPreOrderConfig"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryType": "tools.deliveryType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-pre-order-config"
+          description: "Flipdish Update Pre Order Config"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.UpdatePreOrderConfig"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryType": "tools.deliveryType"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-pre-order-preview"
+          description: "Flipdish Get Pre Order Preview"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetPreOrderPreview"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryType": "tools.deliveryType"
+            "preOrderConfig.leadTimeMinutes": "tools.preOrderConfig.leadTimeMinutes"
+            "preOrderConfig.intervalMinutes": "tools.preOrderConfig.intervalMinutes"
+            "preOrderConfig.maxOrderAheadDays": "tools.preOrderConfig.maxOrderAheadDays"
+            "preOrderConfig.includeAsap": "tools.preOrderConfig.includeAsap"
+            "preOrderConfig.includeMoreGranularInitialTime": "tools.preOrderConfig.includeMoreGranularInitialTime"
+            "preOrderConfig.cutOffTimePreviousDayBasic": "tools.preOrderConfig.cutOffTimePreviousDayBasic"
+            "preOrderConfig.cutOffTimeCurrentDayBasic": "tools.preOrderConfig.cutOffTimeCurrentDayBasic"
+            "preOrderConfig.preOrderTimeDisplayType": "tools.preOrderConfig.preOrderTimeDisplayType"
+            "preOrderConfig.alwaysAppearOpen": "tools.preOrderConfig.alwaysAppearOpen"
+            "preOrderConfig.requireExplicitSelectAlways": "tools.preOrderConfig.requireExplicitSelectAlways"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-processing-fee-configs-store"
+          description: "Flipdish Get Processing Fee Configs by Store Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetProcessingFeeConfigsByStoreId"
+          with:
+            "storeId": "tools.storeId"
+            "appNameId": "tools.appNameId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-net-sales"
+          description: "Flipdish Get Store Net Sales"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreNetSales"
+          with:
+            "appId": "tools.appId"
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-business-hours-override-store"
+          description: "Flipdish Get Business Hours Override by Store Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetBusinessHoursOverrideByStoreId"
+          with:
+            "storeId": "tools.storeId"
+            "after": "tools.after"
+            "page": "tools.page"
+            "limit": "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-business-hours-override-store"
+          description: "Flipdish Create Business Hours Override by Store Id"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.CreateBusinessHoursOverrideByStoreId"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-processing-fee-configs-store-2"
+          description: "Flipdish Get Processing Fee Configs by Store Id and Payment Account Type"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetProcessingFeeConfigsByStoreIdAndPaymentAccountType"
+          with:
+            "storeId": "tools.storeId"
+            "paymentAccountType": "tools.paymentAccountType"
+            "appNameId": "tools.appNameId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-stores"
+          description: "Flipdish Get Stores"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStores"
+          with:
+            "searchQuery": "tools.searchQuery"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "storeGroupId": "tools.storeGroupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-store"
+          description: "Flipdish Create Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.CreateStore"
+          with:
+            "storeGroupId": "tools.storeGroupId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-stores-store-id-validations"
+          description: "Flipdish Get Stores by Store Id with Validations"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoresByStoreIdWithValidations"
+          with:
+            "storeId": "tools.storeId"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "appId": "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-store-headers-app-id"
+          description: "Flipdish Get Store Headers by App Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoreHeadersByAppId"
+          with:
+            "appId": "tools.appId"
+            "storeNameQuery": "tools.storeNameQuery"
+            "salesChannelType": "tools.salesChannelType"
+            "page": "tools.page"
+            "limit": "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-stores-app-id"
+          description: "Flipdish Get Stores by App Id"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stores-stores.GetStoresByAppId"
+          with:
+            "appId": "tools.appId"
+            "searchQuery": "tools.searchQuery"
+            "salesChannelType": "tools.salesChannelType"
+            "excludeUnpublished": "tools.excludeUnpublished"
+            "page": "tools.page"
+            "limit": "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "clone-store"
+          description: "Flipdish Clone Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.CloneStore"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-store-address"
+          description: "Flipdish Update Store Address"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.UpdateStoreAddress"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "archive-store"
+          description: "Flipdish Archive Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.ArchiveStore"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "publish-store"
+          description: "Flipdish Publish Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.PublishStore"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "unpublish-store"
+          description: "Flipdish Unpublish Store"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.UnpublishStore"
+          with:
+            "storeId": "tools.storeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-store-address-form"
+          description: "Flipdish Update Store Address Form"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.UpdateStoreAddressForm"
+          with:
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "assign-menu"
+          description: "Flipdish Assign Menu"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.AssignMenu"
+          with:
+            "storeId": "tools.storeId"
+            "menuId": "tools.menuId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "stores_set-property-id"
+          description: "Flipdish Stores_Set Property Id"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.Stores_SetPropertyId"
+          with:
+            "storeId": "tools.storeId"
+            "propertyId": "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-store-address-coordinates"
+          description: "Flipdish Update Store Address Coordinates"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.UpdateStoreAddressCoordinates"
+          with:
+            "storeId": "tools.storeId"
+            "appNameId": "tools.appNameId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "supported-sales-channels-types"
+          description: "Flipdish Supported Sales Channels Types"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.SupportedSalesChannelsTypes"
+          with:
+            "propertyId": "tools.propertyId"
+            "storeId": "tools.storeId"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-pre-orde-enabled"
+          description: "Flipdish Set Pre Orde Enabled"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.SetPreOrdeEnabled"
+          with:
+            "storeId": "tools.storeId"
+            "deliveryType": "tools.deliveryType"
+            "enabled": "tools.enabled"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "set-store-collection-settings"
+          description: "Flipdish Set Store Collection Settings"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.SetStoreCollectionSettings"
+          with:
+            "storeId": "tools.storeId"
+            "inheritFromProperty": "tools.inheritFromProperty"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-store-property"
+          description: "Flipdish Create Store in Property"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stores-stores.CreateStoreInProperty"
+          with:
+            "storeGroupId": "tools.storeGroupId"
+            "propertyId": "tools.propertyId"
+            "autoAssignMenu": "tools.autoAssignMenu"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-business-hours-override"
+          description: "Flipdish Delete Business Hours Override"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "stores-stores.DeleteBusinessHoursOverride"
+          with:
+            "storeId": "tools.storeId"
+            "businessHoursOverrideId": "tools.businessHoursOverrideId"
+          outputParameters:
+            - type: object
+              mapping: "$."

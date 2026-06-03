@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flipdish/refs/heads/main/json-structure/customers-user-search-structure.json",
+  "name": "UserSearch",
+  "description": "User Search Result",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "description": "User Id",
+      "type": "int32",
+      "example": 500123
+    },
+    "PhoneNumber": {
+      "description": "Phone Number",
+      "type": "string",
+      "example": "+353000000000"
+    },
+    "Email": {
+      "description": "Email",
+      "type": "string",
+      "example": "owner@example.com"
+    },
+    "CustomerName": {
+      "description": "Customer Name",
+      "type": "string",
+      "example": "Example Name"
+    },
+    "HasLoggedIn": {
+      "description": "Has Logged In",
+      "type": "boolean",
+      "example": true
+    },
+    "UserDiscriminator": {
+      "description": "User Discriminator",
+      "enum": [
+        "All",
+        "ApplicationUsers",
+        "RestaurantUsers",
+        "HydraUsers"
+      ],
+      "type": "string",
+      "example": "All"
+    },
+    "TsCreate": {
+      "description": "Timestamp Created",
+      "type": "datetime",
+      "example": "2026-06-02T12:00:00Z"
+    },
+    "WhiteLabelConfigs": {
+      "description": "WhiteLabel Configs",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/UserWhiteLabelConfig"
+      },
+      "example": []
+    },
+    "UserType": {
+      "description": "User Type",
+      "type": "string",
+      "readOnly": true,
+      "example": "string"
+    }
+  }
+}
