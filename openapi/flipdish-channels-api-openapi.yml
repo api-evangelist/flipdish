@@ -1,0 +1,1509 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Channels API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Channels
+  description: Operations for Channels.
+paths:
+  /api/v1.0/{appId}/channels:
+    get:
+      tags:
+      - Channels
+      operationId: GetChannels
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: List of enabled Channels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_Channel_'
+              examples:
+                GetChannels200Example:
+                  summary: Default GetChannels 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannels400Example:
+                  summary: Default GetChannels 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannels401Example:
+                  summary: Default GetChannels 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannels403Example:
+                  summary: Default GetChannels 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannels500Example:
+                  summary: Default GetChannels 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Channels
+      description: Get Channels via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/channels).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/{id}:
+    get:
+      tags:
+      - Channels
+      operationId: GetChannel
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: A representation of a Channel object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Channel_'
+              examples:
+                GetChannel200Example:
+                  summary: Default GetChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ChannelId: 500123
+                      TranslationKey: string
+                      Source: Internal
+                      LogoUri: https://api.flipdish.co/example
+                      Available: true
+                      MaintainedExternally: true
+        '400':
+          description: Data not found with the given ids
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannel400Example:
+                  summary: Default GetChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannel401Example:
+                  summary: Default GetChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannel403Example:
+                  summary: Default GetChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: Data not found with the given ids
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannel404Example:
+                  summary: Default GetChannel 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Unidentified error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetChannel500Example:
+                  summary: Default GetChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Channel
+      description: Get Channel via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/channels/{id}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/assigned-channels:
+    get:
+      tags:
+      - Channels
+      operationId: GetAssignedChannels
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_Channel_'
+              examples:
+                GetAssignedChannels200Example:
+                  summary: Default GetAssignedChannels 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: AppId information was not provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAssignedChannels400Example:
+                  summary: Default GetAssignedChannels 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAssignedChannels401Example:
+                  summary: Default GetAssignedChannels 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAssignedChannels403Example:
+                  summary: Default GetAssignedChannels 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Unidentified error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAssignedChannels500Example:
+                  summary: Default GetAssignedChannels 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Assigned Channels
+      description: Get Assigned Channels via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/channels/assigned-channels).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/available-channels:
+    get:
+      tags:
+      - Channels
+      operationId: GetAvailableChannels
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: The lisf of available channels for that AppId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_Channel_'
+              examples:
+                GetAvailableChannels200Example:
+                  summary: Default GetAvailableChannels 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: AppId information was not provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAvailableChannels400Example:
+                  summary: Default GetAvailableChannels 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAvailableChannels401Example:
+                  summary: Default GetAvailableChannels 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAvailableChannels403Example:
+                  summary: Default GetAvailableChannels 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Unidentified error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAvailableChannels500Example:
+                  summary: Default GetAvailableChannels 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Available Channels
+      description: Get Available Channels via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/channels/available-channels).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/{channelId}/stores:
+    get:
+      tags:
+      - Channels
+      operationId: GetStoresBySalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                GetStoresBySalesChannel200Example:
+                  summary: Default GetStoresBySalesChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    Stores: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresBySalesChannel400Example:
+                  summary: Default GetStoresBySalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresBySalesChannel401Example:
+                  summary: Default GetStoresBySalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresBySalesChannel403Example:
+                  summary: Default GetStoresBySalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresBySalesChannel500Example:
+                  summary: Default GetStoresBySalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Stores by Sales Channel
+      description: Get Stores by Sales Channel via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/channels/{channelId}/stores).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Channels
+      operationId: DetachAllStoresFromSalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DetachAllStoresFromSalesChannel200Example:
+                  summary: Default DetachAllStoresFromSalesChannel 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachAllStoresFromSalesChannel400Example:
+                  summary: Default DetachAllStoresFromSalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachAllStoresFromSalesChannel401Example:
+                  summary: Default DetachAllStoresFromSalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachAllStoresFromSalesChannel403Example:
+                  summary: Default DetachAllStoresFromSalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachAllStoresFromSalesChannel500Example:
+                  summary: Default DetachAllStoresFromSalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Detach All Stores from Sales Channel
+      description: Detach All Stores from Sales Channel via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/channels/{channelId}/stores).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/{channelId}/assigned-stores:
+    get:
+      tags:
+      - Channels
+      operationId: GetStoresAssignedToChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_StoreChannelAssignment_'
+              examples:
+                GetStoresAssignedToChannel200Example:
+                  summary: Default GetStoresAssignedToChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresAssignedToChannel400Example:
+                  summary: Default GetStoresAssignedToChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresAssignedToChannel401Example:
+                  summary: Default GetStoresAssignedToChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresAssignedToChannel403Example:
+                  summary: Default GetStoresAssignedToChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoresAssignedToChannel500Example:
+                  summary: Default GetStoresAssignedToChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      deprecated: true
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Stores Assigned to Channel
+      description: Get Stores Assigned to Channel via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/channels/{channelId}/assigned-stores).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/{channelId}/assign-appId:
+    post:
+      tags:
+      - Channels
+      operationId: AssignAppIdToSalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AssignAppIdToSalesChannel200Example:
+                  summary: Default AssignAppIdToSalesChannel 200 response
+                  x-microcks-default: true
+                  value: {}
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppChannelAssignment_'
+              examples:
+                AssignAppIdToSalesChannel201Example:
+                  summary: Default AssignAppIdToSalesChannel 201 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ChannelId: 500123
+                      AppId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignAppIdToSalesChannel400Example:
+                  summary: Default AssignAppIdToSalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignAppIdToSalesChannel401Example:
+                  summary: Default AssignAppIdToSalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignAppIdToSalesChannel403Example:
+                  summary: Default AssignAppIdToSalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignAppIdToSalesChannel404Example:
+                  summary: Default AssignAppIdToSalesChannel 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignAppIdToSalesChannel500Example:
+                  summary: Default AssignAppIdToSalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Assign App Id to Sales Channel
+      description: Assign App Id to Sales Channel via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/channels/{channelId}/assign-appId).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/{channelId}/stores/{storeId}:
+    post:
+      tags:
+      - Channels
+      operationId: AttachStoreToSalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id path parameter.
+        example: 500123
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AttachStoreToSalesChannel200Example:
+                  summary: Default AttachStoreToSalesChannel 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachStoreToSalesChannel400Example:
+                  summary: Default AttachStoreToSalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachStoreToSalesChannel401Example:
+                  summary: Default AttachStoreToSalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachStoreToSalesChannel403Example:
+                  summary: Default AttachStoreToSalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachStoreToSalesChannel500Example:
+                  summary: Default AttachStoreToSalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Attach Store to Sales Channel
+      description: Attach Store to Sales Channel via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/channels/{channelId}/stores/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Channels
+      operationId: DetachStoreFromSalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id path parameter.
+        example: 500123
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DetachStoreFromSalesChannel200Example:
+                  summary: Default DetachStoreFromSalesChannel 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachStoreFromSalesChannel400Example:
+                  summary: Default DetachStoreFromSalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachStoreFromSalesChannel401Example:
+                  summary: Default DetachStoreFromSalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachStoreFromSalesChannel403Example:
+                  summary: Default DetachStoreFromSalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DetachStoreFromSalesChannel500Example:
+                  summary: Default DetachStoreFromSalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Detach Store from Sales Channel
+      description: Detach Store from Sales Channel via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/channels/{channelId}/stores/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/assign-store:
+    post:
+      tags:
+      - Channels
+      operationId: AssignStoreToChannel
+      parameters:
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id query parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id query parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AssignStoreToChannel200Example:
+                  summary: Default AssignStoreToChannel 200 response
+                  x-microcks-default: true
+                  value: {}
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StoreChannelAssignment_'
+              examples:
+                AssignStoreToChannel201Example:
+                  summary: Default AssignStoreToChannel 201 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ChannelId: 500123
+                      StoreId: 500123
+                      StoreName: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignStoreToChannel400Example:
+                  summary: Default AssignStoreToChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignStoreToChannel401Example:
+                  summary: Default AssignStoreToChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignStoreToChannel403Example:
+                  summary: Default AssignStoreToChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignStoreToChannel404Example:
+                  summary: Default AssignStoreToChannel 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignStoreToChannel500Example:
+                  summary: Default AssignStoreToChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      deprecated: true
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Assign Store to Channel
+      description: Assign Store to Channel via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/channels/assign-store).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/channels/unassign-store:
+    delete:
+      tags:
+      - Channels
+      operationId: UnassignStoreFromChannel
+      parameters:
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id query parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: channelId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The channel id query parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UnassignStoreFromChannel200Example:
+                  summary: Default UnassignStoreFromChannel 200 response
+                  x-microcks-default: true
+                  value: {}
+        '204':
+          description: NoContent
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnassignStoreFromChannel400Example:
+                  summary: Default UnassignStoreFromChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnassignStoreFromChannel401Example:
+                  summary: Default UnassignStoreFromChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnassignStoreFromChannel403Example:
+                  summary: Default UnassignStoreFromChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnassignStoreFromChannel404Example:
+                  summary: Default UnassignStoreFromChannel 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnassignStoreFromChannel500Example:
+                  summary: Default UnassignStoreFromChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      deprecated: true
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Unassign Store from Channel
+      description: Unassign Store from Channel via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/channels/unassign-store).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    StoreItemHeader:
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          type: integer
+          example: 500123
+        Name:
+          type: string
+          example: Example Name
+    Response:
+      type: object
+      properties:
+        Stores:
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreItemHeader'
+          example: []
+    Channel:
+      description: Channel.
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Channel Id
+          type: integer
+          example: 500123
+        TranslationKey:
+          description: Channel TranslationKey
+          type: string
+          example: string
+        Source:
+          description: Channel Source
+          enum:
+          - Internal
+          - External
+          type: string
+          example: Internal
+        LogoUri:
+          description: Channel Logo URl
+          type: string
+          example: https://api.flipdish.co/example
+        Available:
+          description: Channel is Available or not
+          type: boolean
+          example: true
+        MaintainedExternally:
+          description: Channel is Maintained Externally or not
+          type: boolean
+          example: true
+    StoreChannelAssignment:
+      description: Represents a store that is assigned to a Sales Channel
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Channel ID
+          type: integer
+          example: 500123
+        StoreId:
+          format: int32
+          description: Store ID
+          type: integer
+          example: 500123
+        StoreName:
+          description: Store Name
+          type: string
+          example: Example Name
+    RestApiArrayResult_Channel_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+          example: []
+    RestApiResult_Channel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Channel'
+    RestApiResult_StoreChannelAssignment_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreChannelAssignment'
+    RestApiArrayResult_StoreChannelAssignment_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreChannelAssignment'
+          example: []
+    RestApiResult_AppChannelAssignment_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppChannelAssignment'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    AppChannelAssignment:
+      description: "Describes a ChannelAssignment which is \r\nwhen a AppId is assigned to a Sales Channel"
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Id of the channel on the assignment
+          type: integer
+          example: 500123
+        AppId:
+          description: AppId of the assignment
+          type: string
+          example: '500123'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

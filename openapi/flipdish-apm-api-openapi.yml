@@ -1,0 +1,1244 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Apm API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Apm
+  description: Operations for Apm.
+paths:
+  /api/v1.0/{appId}/apm/status:
+    get:
+      tags:
+      - Apm
+      operationId: GetApmStatus
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ApmStatus_'
+              examples:
+                GetApmStatus200Example:
+                  summary: Default GetApmStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      IsApmEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApmStatus400Example:
+                  summary: Default GetApmStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApmStatus401Example:
+                  summary: Default GetApmStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApmStatus403Example:
+                  summary: Default GetApmStatus 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApmStatus500Example:
+                  summary: Default GetApmStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Apm Status
+      description: Get Apm Status via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/apm/status).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/apm/statistics:
+    get:
+      tags:
+      - Apm
+      operationId: GetBasicStatistics
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ApmStatistics_'
+              examples:
+                GetBasicStatistics200Example:
+                  summary: Default GetBasicStatistics 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      EstimatedMinutesSaved: 1
+                      EstimatedMinutesCouldSaved: 1
+                      CurrencyData: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBasicStatistics400Example:
+                  summary: Default GetBasicStatistics 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBasicStatistics401Example:
+                  summary: Default GetBasicStatistics 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBasicStatistics403Example:
+                  summary: Default GetBasicStatistics 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBasicStatistics500Example:
+                  summary: Default GetBasicStatistics 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Basic Statistics
+      description: Get Basic Statistics via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/apm/statistics).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/apm/statistics/calendar:
+    get:
+      tags:
+      - Apm
+      operationId: GetCalendarWeekStatistics
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_ApmHourlyDataPoint_'
+              examples:
+                GetCalendarWeekStatistics200Example:
+                  summary: Default GetCalendarWeekStatistics 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCalendarWeekStatistics400Example:
+                  summary: Default GetCalendarWeekStatistics 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCalendarWeekStatistics401Example:
+                  summary: Default GetCalendarWeekStatistics 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCalendarWeekStatistics403Example:
+                  summary: Default GetCalendarWeekStatistics 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCalendarWeekStatistics500Example:
+                  summary: Default GetCalendarWeekStatistics 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Calendar Week Statistics
+      description: Get Calendar Week Statistics via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/apm/statistics/calendar).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/apm/calls:
+    get:
+      tags:
+      - Apm
+      operationId: GetPaginatedCallList
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PhoneCall_'
+              examples:
+                GetPaginatedCallList200Example:
+                  summary: Default GetPaginatedCallList 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaginatedCallList400Example:
+                  summary: Default GetPaginatedCallList 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaginatedCallList401Example:
+                  summary: Default GetPaginatedCallList 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaginatedCallList403Example:
+                  summary: Default GetPaginatedCallList 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaginatedCallList500Example:
+                  summary: Default GetPaginatedCallList 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Paginated Call List
+      description: Get Paginated Call List via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/apm/calls).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/apm/statistics/calls/{aggregateDataBy}:
+    get:
+      tags:
+      - Apm
+      operationId: GetCallsStatistics
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: aggregateDataBy
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Monthly
+        description: The aggregate data by path parameter.
+        example: Daily
+      - name: dataPointLimit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The data point limit query parameter.
+        example: 1
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_ApmDataPoint_'
+              examples:
+                GetCallsStatistics200Example:
+                  summary: Default GetCallsStatistics 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCallsStatistics400Example:
+                  summary: Default GetCallsStatistics 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCallsStatistics401Example:
+                  summary: Default GetCallsStatistics 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCallsStatistics403Example:
+                  summary: Default GetCallsStatistics 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCallsStatistics500Example:
+                  summary: Default GetCallsStatistics 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Calls Statistics
+      description: Get Calls Statistics via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/apm/statistics/calls/{aggregateDataBy}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/apm/statistics/orders/{aggregateDataBy}:
+    get:
+      tags:
+      - Apm
+      operationId: GetOrderStatistics
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: aggregateDataBy
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Monthly
+        description: The aggregate data by path parameter.
+        example: Daily
+      - name: dataPointLimit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The data point limit query parameter.
+        example: 1
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_ApmCurrencyDataPoint_'
+              examples:
+                GetOrderStatistics200Example:
+                  summary: Default GetOrderStatistics 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOrderStatistics400Example:
+                  summary: Default GetOrderStatistics 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOrderStatistics401Example:
+                  summary: Default GetOrderStatistics 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOrderStatistics403Example:
+                  summary: Default GetOrderStatistics 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOrderStatistics500Example:
+                  summary: Default GetOrderStatistics 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Order Statistics
+      description: Get Order Statistics via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/apm/statistics/orders/{aggregateDataBy}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ApmStatus:
+      description: APM status
+      type: object
+      properties:
+        IsApmEnabled:
+          description: Indicates if APM is active or otherwise
+          type: boolean
+          example: true
+    PhoneCall:
+      description: Phone call
+      type: object
+      properties:
+        PhoneCallId:
+          format: int32
+          description: Phone call id
+          type: integer
+          example: 500123
+        CallSid:
+          description: Twilio Call SID
+          type: string
+          example: '500123'
+        TimeOfCall:
+          format: date-time
+          description: Time of the call
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        TimeOfCallLocal:
+          format: date-time
+          description: Time of the call, local to the store to which the call was made
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        StoreId:
+          format: int32
+          description: ID of the store that the call was TO
+          type: integer
+          example: 500123
+        StoreName:
+          description: Name of the store that the call was TO
+          type: string
+          example: Example Name
+        CallerName:
+          description: Name of the caller
+          type: string
+          example: Example Name
+        CallerUserId:
+          format: int32
+          description: UserID of the caller
+          type: integer
+          example: 500123
+        CallerNumber:
+          description: Phone number of the caller
+          type: string
+          example: string
+        CallLengthInSeconds:
+          format: int32
+          description: The amount of time the call took
+          type: integer
+          example: 1
+        CallStatus:
+          description: The status of the call
+          enum:
+          - Queued
+          - Ringing
+          - InProgress
+          - Completed
+          - Failed
+          - Busy
+          - NoAnswer
+          - Unknown
+          - Canceled
+          type: string
+          example: Queued
+    CurrencyData:
+      description: A single currency data piece, with no date
+      type: object
+      properties:
+        Currency:
+          description: Currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        Value:
+          format: double
+          description: Value
+          type: number
+          example: 1.0
+    ApmHourlyDataPoint:
+      description: Provides an average value for a single hour of day of the week
+      type: object
+      properties:
+        Day:
+          description: Day of the week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        Hour:
+          format: int32
+          description: Hour in the day
+          type: integer
+          example: 1
+        TotalValue:
+          format: int32
+          description: Total Value
+          type: integer
+          example: 12.5
+    RestApiArrayResult_ApmHourlyDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ApmHourlyDataPoint'
+          example: []
+    RestApiArrayResult_ApmDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ApmDataPoint'
+          example: []
+    RestApiPaginationResult_PhoneCall_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneCall'
+          example: []
+    RestApiResult_ApmStatistics_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ApmStatistics'
+    RestApiArrayResult_ApmCurrencyDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ApmCurrencyDataPoint'
+          example: []
+    ApmStatistics:
+      description: APM Statistics
+      type: object
+      properties:
+        EstimatedMinutesSaved:
+          format: int32
+          description: Total amount of time spent with APM
+          type: integer
+          example: 1
+        EstimatedMinutesCouldSaved:
+          format: int32
+          description: Total amount of time that could be saved
+          type: integer
+          example: 1
+        CurrencyData:
+          description: Currency based data
+          type: array
+          items:
+            $ref: '#/components/schemas/StatisticsCurrencyDataPoint'
+          example: []
+    ApmDataPoint:
+      description: A single data point in timeline graphs related to APM
+      type: object
+      properties:
+        PeriodStart:
+          format: date-time
+          description: Date from which the data point starts
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodLengthInDays:
+          format: int32
+          description: The length in days that this data point covers
+          type: integer
+          example: 1
+        Value:
+          format: int32
+          description: The value of this data point
+          type: integer
+          example: 1
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    StatisticsCurrencyDataPoint:
+      description: A single currency data point, with no date
+      type: object
+      properties:
+        Currency:
+          description: Currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        UserCount:
+          format: int32
+          description: Amount of users for this currency
+          type: integer
+          example: 3
+        OrderCount:
+          format: int32
+          description: Amount of orders for this currency
+          type: integer
+          example: 3
+        OrderValue:
+          format: double
+          description: Value of orders for this currency
+          type: number
+          example: 1.0
+    RestApiResult_ApmStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ApmStatus'
+    ApmCurrencyDataPoint:
+      description: A single data point in timeline graphs related to APM
+      type: object
+      properties:
+        PeriodStart:
+          format: date-time
+          description: Date from which the data point starts
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodLengthInDays:
+          format: int32
+          description: The length in days that this data point covers
+          type: integer
+          example: 1
+        CurrencyData:
+          description: The values of this data point
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyData'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

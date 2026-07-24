@@ -1,0 +1,201 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts ProcessingFeeConfigs API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: ProcessingFeeConfigs
+  description: Operations for Processing Fee Configs.
+paths:
+  /api/v1.0/processingfeeconfigs:
+    get:
+      tags:
+      - ProcessingFeeConfigs
+      operationId: GetProcessingFeeConfigsByStoreIds
+      parameters:
+      - name: storeIds
+        in: query
+        required: true
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_ProcessingFeeConfig_'
+              examples:
+                GetProcessingFeeConfigsByStoreIds200Example:
+                  summary: Default GetProcessingFeeConfigsByStoreIds 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetProcessingFeeConfigsByStoreIds400Example:
+                  summary: Default GetProcessingFeeConfigsByStoreIds 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetProcessingFeeConfigsByStoreIds401Example:
+                  summary: Default GetProcessingFeeConfigsByStoreIds 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetProcessingFeeConfigsByStoreIds403Example:
+                  summary: Default GetProcessingFeeConfigsByStoreIds 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetProcessingFeeConfigsByStoreIds500Example:
+                  summary: Default GetProcessingFeeConfigsByStoreIds 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Processing Fee Configs by Store Ids
+      description: Get Processing Fee Configs by Store Ids via the Flipdish Open API v1.0 (GET /api/v1.0/processingfeeconfigs).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ProcessingFeeConfig:
+      description: Processing fee config
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        PaymentAccountType:
+          description: Payment account type
+          enum:
+          - Card
+          - Cash
+          - Ideal
+          - Bancontact
+          - Giropay
+          - Eps
+          - Emv
+          - PayPal
+          - PayGreen
+          - GoogleWalletToken
+          type: string
+          example: Card
+        PercentFee:
+          format: double
+          description: Percent fee to customer, including VAT
+          type: number
+          example: 12.5
+        FixedFee:
+          format: double
+          description: Fixed fee to customer, including VAT
+          type: number
+          example: 12.5
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_ProcessingFeeConfig_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessingFeeConfig'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

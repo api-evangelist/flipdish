@@ -1,0 +1,365 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts FirebaseApps API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: FirebaseApps
+  description: Operations for Firebase Apps.
+paths:
+  /api/v1.0/FirebaseApp/{whitelabelId}:
+    get:
+      tags:
+      - FirebaseApps
+      operationId: FirebaseApps_GetFirebaseApp
+      parameters:
+      - name: whitelabelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The whitelabel id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                FirebaseApps_GetFirebaseApp200Example:
+                  summary: Default FirebaseApps_GetFirebaseApp 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_GetFirebaseApp400Example:
+                  summary: Default FirebaseApps_GetFirebaseApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_GetFirebaseApp401Example:
+                  summary: Default FirebaseApps_GetFirebaseApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_GetFirebaseApp403Example:
+                  summary: Default FirebaseApps_GetFirebaseApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_GetFirebaseApp500Example:
+                  summary: Default FirebaseApps_GetFirebaseApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Firebase Apps_Get Firebase App
+      description: Firebase Apps_Get Firebase App via the Flipdish Open API v1.0 (GET /api/v1.0/FirebaseApp/{whitelabelId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/FirebaseApp:
+    post:
+      tags:
+      - FirebaseApps
+      operationId: FirebaseApps_AddFirebaseApp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirebaseApp'
+            examples:
+              FirebaseApps_AddFirebaseAppRequestExample:
+                summary: Default FirebaseApps_AddFirebaseApp request
+                x-microcks-default: true
+                value:
+                  WhitelabelId: 500123
+                  PackageId: '500123'
+                  FirebaseAppId: '500123'
+                  FirebaseProjectId: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                FirebaseApps_AddFirebaseApp200Example:
+                  summary: Default FirebaseApps_AddFirebaseApp 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_AddFirebaseApp400Example:
+                  summary: Default FirebaseApps_AddFirebaseApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_AddFirebaseApp401Example:
+                  summary: Default FirebaseApps_AddFirebaseApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_AddFirebaseApp403Example:
+                  summary: Default FirebaseApps_AddFirebaseApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_AddFirebaseApp500Example:
+                  summary: Default FirebaseApps_AddFirebaseApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Firebase Apps_Add Firebase App
+      description: Firebase Apps_Add Firebase App via the Flipdish Open API v1.0 (POST /api/v1.0/FirebaseApp).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/FirebaseApp/{whiteLabelId}:
+    delete:
+      tags:
+      - FirebaseApps
+      operationId: FirebaseApps_DeleteFirebaseApp
+      parameters:
+      - name: whiteLabelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The white label id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                FirebaseApps_DeleteFirebaseApp200Example:
+                  summary: Default FirebaseApps_DeleteFirebaseApp 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_DeleteFirebaseApp400Example:
+                  summary: Default FirebaseApps_DeleteFirebaseApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_DeleteFirebaseApp401Example:
+                  summary: Default FirebaseApps_DeleteFirebaseApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_DeleteFirebaseApp403Example:
+                  summary: Default FirebaseApps_DeleteFirebaseApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FirebaseApps_DeleteFirebaseApp500Example:
+                  summary: Default FirebaseApps_DeleteFirebaseApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Firebase Apps_Delete Firebase App
+      description: Firebase Apps_Delete Firebase App via the Flipdish Open API v1.0 (DELETE /api/v1.0/FirebaseApp/{whiteLabelId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    FirebaseApp:
+      description: FirebaseApp.
+      type: object
+      properties:
+        WhitelabelId:
+          format: int32
+          description: WhitelabelId.
+          type: integer
+          example: 500123
+        PackageId:
+          description: PackageId.
+          type: string
+          example: '500123'
+        FirebaseAppId:
+          description: FirebaseAppId.
+          type: string
+          example: '500123'
+        FirebaseProjectId:
+          description: FirebaseProjectId.
+          type: string
+          example: '500123'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

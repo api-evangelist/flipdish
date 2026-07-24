@@ -1,0 +1,1399 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Teammates API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Teammates
+  description: Operations for Teammates.
+paths:
+  /api/v1.0/{appId}/teammates:
+    get:
+      tags:
+      - Teammates
+      operationId: GetTeammatesByAppId
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_Teammate_'
+              examples:
+                GetTeammatesByAppId200Example:
+                  summary: Default GetTeammatesByAppId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammatesByAppId400Example:
+                  summary: Default GetTeammatesByAppId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammatesByAppId401Example:
+                  summary: Default GetTeammatesByAppId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammatesByAppId403Example:
+                  summary: Default GetTeammatesByAppId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammatesByAppId404Example:
+                  summary: Default GetTeammatesByAppId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammatesByAppId500Example:
+                  summary: Default GetTeammatesByAppId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Teammates by App Id
+      description: Get Teammates by App Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/teammates).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Teammates
+      operationId: CreateTeammate
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Teammate_'
+              examples:
+                CreateTeammate200Example:
+                  summary: Default CreateTeammate 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TeammateId: '500123'
+                      UserId: 500123
+                      Name: Example Name
+                      LastActivity: '2026-06-02T12:00:00Z'
+                      AppId: '500123'
+                      InvitationStatus: Pending
+                      Email: owner@example.com
+                      AppAccessLevel: None
+                      HasAccessToAllStores: true
+                      StoreIds:
+                      - 1
+                      PropertyIds:
+                      - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateTeammate400Example:
+                  summary: Default CreateTeammate 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateTeammate401Example:
+                  summary: Default CreateTeammate 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateTeammate403Example:
+                  summary: Default CreateTeammate 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateTeammate404Example:
+                  summary: Default CreateTeammate 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateTeammate500Example:
+                  summary: Default CreateTeammate 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Teammate
+      description: Create Teammate via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/teammates).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/teammates/{id}:
+    get:
+      tags:
+      - Teammates
+      operationId: GetTeammateByAppIdAndTeammateId
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Teammate_'
+              examples:
+                GetTeammateByAppIdAndTeammateId200Example:
+                  summary: Default GetTeammateByAppIdAndTeammateId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TeammateId: '500123'
+                      UserId: 500123
+                      Name: Example Name
+                      LastActivity: '2026-06-02T12:00:00Z'
+                      AppId: '500123'
+                      InvitationStatus: Pending
+                      Email: owner@example.com
+                      AppAccessLevel: None
+                      HasAccessToAllStores: true
+                      StoreIds:
+                      - 1
+                      PropertyIds:
+                      - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammateByAppIdAndTeammateId400Example:
+                  summary: Default GetTeammateByAppIdAndTeammateId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammateByAppIdAndTeammateId401Example:
+                  summary: Default GetTeammateByAppIdAndTeammateId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammateByAppIdAndTeammateId403Example:
+                  summary: Default GetTeammateByAppIdAndTeammateId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammateByAppIdAndTeammateId404Example:
+                  summary: Default GetTeammateByAppIdAndTeammateId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetTeammateByAppIdAndTeammateId500Example:
+                  summary: Default GetTeammateByAppIdAndTeammateId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Teammate by App Id and Teammate Id
+      description: Get Teammate by App Id and Teammate Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/teammates/{id}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Teammates
+      operationId: UpdateTeammate
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeammateBase'
+            examples:
+              UpdateTeammateRequestExample:
+                summary: Default UpdateTeammate request
+                x-microcks-default: true
+                value:
+                  AppAccessLevel: None
+                  HasAccessToAllStores: true
+                  StoreIds:
+                  - 1
+                  PropertyIds:
+                  - string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Teammate_'
+              examples:
+                UpdateTeammate200Example:
+                  summary: Default UpdateTeammate 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TeammateId: '500123'
+                      UserId: 500123
+                      Name: Example Name
+                      LastActivity: '2026-06-02T12:00:00Z'
+                      AppId: '500123'
+                      InvitationStatus: Pending
+                      Email: owner@example.com
+                      AppAccessLevel: None
+                      HasAccessToAllStores: true
+                      StoreIds:
+                      - 1
+                      PropertyIds:
+                      - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateTeammate400Example:
+                  summary: Default UpdateTeammate 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateTeammate401Example:
+                  summary: Default UpdateTeammate 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateTeammate403Example:
+                  summary: Default UpdateTeammate 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateTeammate404Example:
+                  summary: Default UpdateTeammate 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateTeammate500Example:
+                  summary: Default UpdateTeammate 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Teammate
+      description: Update Teammate via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/teammates/{id}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Teammates
+      operationId: DeleteTeammate
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTeammate400Example:
+                  summary: Default DeleteTeammate 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTeammate401Example:
+                  summary: Default DeleteTeammate 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTeammate403Example:
+                  summary: Default DeleteTeammate 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTeammate404Example:
+                  summary: Default DeleteTeammate 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTeammate500Example:
+                  summary: Default DeleteTeammate 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Teammate
+      description: Delete Teammate via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/teammates/{id}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/teammates/pending-invitations:
+    get:
+      tags:
+      - Teammates
+      operationId: Teammates_PendingInvitations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_PendingInvitation_'
+              examples:
+                Teammates_PendingInvitations200Example:
+                  summary: Default Teammates_PendingInvitations 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_PendingInvitations400Example:
+                  summary: Default Teammates_PendingInvitations 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_PendingInvitations401Example:
+                  summary: Default Teammates_PendingInvitations 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_PendingInvitations403Example:
+                  summary: Default Teammates_PendingInvitations 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_PendingInvitations500Example:
+                  summary: Default Teammates_PendingInvitations 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Teammates_Pending Invitations
+      description: Teammates_Pending Invitations via the Flipdish Open API v1.0 (GET /api/v1.0/teammates/pending-invitations).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/teammates/accept/{otc}:
+    get:
+      tags:
+      - Teammates
+      operationId: Teammates_AcceptInvitation
+      parameters:
+      - name: otc
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The otc path parameter.
+        example: string
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AcceptInvitationResult_'
+              examples:
+                Teammates_AcceptInvitation200Example:
+                  summary: Default Teammates_AcceptInvitation 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      IsNewUser: true
+                      InvitedEmailAddress: owner@example.com
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitation400Example:
+                  summary: Default Teammates_AcceptInvitation 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitation401Example:
+                  summary: Default Teammates_AcceptInvitation 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitation403Example:
+                  summary: Default Teammates_AcceptInvitation 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitation500Example:
+                  summary: Default Teammates_AcceptInvitation 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Teammates_Accept Invitation
+      description: Teammates_Accept Invitation via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/teammates/accept/{otc}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/teammates/redeem/{otc}:
+    get:
+      tags:
+      - Teammates
+      operationId: RedeemInvitation
+      parameters:
+      - name: otc
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The otc path parameter.
+        example: string
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RedeemInvitationResult_'
+              examples:
+                RedeemInvitation200Example:
+                  summary: Default RedeemInvitation 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AppId: '500123'
+                      InvitationStatus: Pending
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RedeemInvitation400Example:
+                  summary: Default RedeemInvitation 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RedeemInvitation401Example:
+                  summary: Default RedeemInvitation 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RedeemInvitation403Example:
+                  summary: Default RedeemInvitation 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RedeemInvitation404Example:
+                  summary: Default RedeemInvitation 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RedeemInvitation500Example:
+                  summary: Default RedeemInvitation 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Redeem Invitation
+      description: Redeem Invitation via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/teammates/redeem/{otc}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/teammates/acceptInvitations:
+    post:
+      tags:
+      - Teammates
+      operationId: Teammates_AcceptInvitations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RedeemInvitationResult_'
+              examples:
+                Teammates_AcceptInvitations200Example:
+                  summary: Default Teammates_AcceptInvitations 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitations400Example:
+                  summary: Default Teammates_AcceptInvitations 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitations401Example:
+                  summary: Default Teammates_AcceptInvitations 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitations403Example:
+                  summary: Default Teammates_AcceptInvitations 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Teammates_AcceptInvitations500Example:
+                  summary: Default Teammates_AcceptInvitations 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Teammates_Accept Invitations
+      description: Teammates_Accept Invitations via the Flipdish Open API v1.0 (POST /api/v1.0/teammates/acceptInvitations).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/teammates/grantaccess:
+    post:
+      tags:
+      - Teammates
+      operationId: grantaccess
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                grantaccess200Example:
+                  summary: Default grantaccess 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                grantaccess400Example:
+                  summary: Default grantaccess 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                grantaccess401Example:
+                  summary: Default grantaccess 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                grantaccess403Example:
+                  summary: Default grantaccess 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                grantaccess409Example:
+                  summary: Default grantaccess 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                grantaccess500Example:
+                  summary: Default grantaccess 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Grantaccess
+      description: Grantaccess via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/teammates/grantaccess).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiResult_RedeemInvitationResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RedeemInvitationResult'
+    RestApiResult_AcceptInvitationResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AcceptInvitationResult'
+    Teammate:
+      description: ''
+      type: object
+      properties:
+        TeammateId:
+          description: Unique indentifier
+          type: string
+          example: '500123'
+        UserId:
+          format: int32
+          description: User ID of the teammate
+          type: integer
+          nullable: true
+          example: 500123
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        LastActivity:
+          format: date-time
+          description: Last activity
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        AppId:
+          description: Access level is for this App
+          type: string
+          example: '500123'
+        InvitationStatus:
+          description: Invitation status
+          enum:
+          - Pending
+          - Accepted
+          - Expired
+          type: string
+          example: Pending
+        Email:
+          description: Email address
+          type: string
+          example: owner@example.com
+        AppAccessLevel:
+          description: App access level
+          enum:
+          - None
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          - Onboarding
+          - Support
+          type: string
+          example: None
+        HasAccessToAllStores:
+          description: The user has access to all stores for the app (including new stores that added later)
+          type: boolean
+          example: true
+        StoreIds:
+          description: Store IDs the user has access to (if HasAccessToAllStores is false)
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        PropertyIds:
+          description: Property Ids the user has access to (if HasAccessToAllStores is false)
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    RestApiArrayResult_PendingInvitation_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingInvitation'
+          example: []
+    TeammateBase:
+      description: ''
+      type: object
+      properties:
+        AppAccessLevel:
+          description: App access level
+          enum:
+          - None
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          - Onboarding
+          - Support
+          type: string
+          example: None
+        HasAccessToAllStores:
+          description: The user has access to all stores for the app (including new stores that added later)
+          type: boolean
+          example: true
+        StoreIds:
+          description: Store IDs the user has access to (if HasAccessToAllStores is false)
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        PropertyIds:
+          description: Property Ids the user has access to (if HasAccessToAllStores is false)
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    RestApiArrayResult_Teammate_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Teammate'
+          example: []
+    PendingInvitation:
+      description: An invitation to join a team at Flipdish.
+      type: object
+      properties:
+        AppName:
+          description: The name of the brand that you have been invited to join.
+          type: string
+          example: Example Name
+        Email:
+          description: The email address that the invitation was sent to.
+          type: string
+          example: owner@example.com
+        Otc:
+          description: The one-time code that can be used to accept the invitation.
+          type: string
+          example: string
+        CreatedAt:
+          format: date-time
+          description: The time that the invitation was created.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_Teammate_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Teammate'
+    RestApiArrayResult_RedeemInvitationResult_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/RedeemInvitationResult'
+          example: []
+    AcceptInvitationResult:
+      description: ''
+      type: object
+      properties:
+        IsNewUser:
+          description: Bool indicating if the user accepting the invitation is a new user
+          type: boolean
+          example: true
+        InvitedEmailAddress:
+          description: The email address that was invited.
+          type: string
+          example: owner@example.com
+    RedeemInvitationResult:
+      description: ''
+      type: object
+      properties:
+        AppId:
+          description: Access level is for this App
+          type: string
+          example: '500123'
+        InvitationStatus:
+          description: Invitation status
+          enum:
+          - Pending
+          - Accepted
+          - Expired
+          type: string
+          example: Pending
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

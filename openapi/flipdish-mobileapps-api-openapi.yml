@@ -1,0 +1,1783 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts MobileApps API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: MobileApps
+  description: Operations for Mobile Apps.
+paths:
+  /api/v1.0/mobileapps/{appId}/submission/details:
+    get:
+      tags:
+      - MobileApps
+      operationId: GetSubmissionDetails
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MobileAppsSubmissionDetails_'
+              examples:
+                GetSubmissionDetails200Example:
+                  summary: Default GetSubmissionDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MobileAppsSubmissionId: 500123
+                      AppName: Example Name
+                      AppDescription: string
+                      AppShortDescription: string
+                      Keywords:
+                      - string
+                      AppLogoUrl: https://api.flipdish.co/example
+                      AutoPublish: true
+                      Status: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionDetails400Example:
+                  summary: Default GetSubmissionDetails 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionDetails401Example:
+                  summary: Default GetSubmissionDetails 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionDetails403Example:
+                  summary: Default GetSubmissionDetails 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionDetails404Example:
+                  summary: Default GetSubmissionDetails 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionDetails500Example:
+                  summary: Default GetSubmissionDetails 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Submission Details
+      description: Get Submission Details via the Flipdish Open API v1.0 (GET /api/v1.0/mobileapps/{appId}/submission/details).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/saleschannel/details:
+    get:
+      tags:
+      - MobileApps
+      operationId: GetAppConfigSalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppConfigSalesChannel_'
+              examples:
+                GetAppConfigSalesChannel200Example:
+                  summary: Default GetAppConfigSalesChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      EmailRequestMode: DoNotRequest
+                      WebToAppRedirect: NoRedirect
+                      AddressEntryType: MapFirst
+                      DisplayDeliveryRestaurantListScreen: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppConfigSalesChannel400Example:
+                  summary: Default GetAppConfigSalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppConfigSalesChannel401Example:
+                  summary: Default GetAppConfigSalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppConfigSalesChannel403Example:
+                  summary: Default GetAppConfigSalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppConfigSalesChannel404Example:
+                  summary: Default GetAppConfigSalesChannel 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppConfigSalesChannel500Example:
+                  summary: Default GetAppConfigSalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App Config Sales Channel
+      description: Get App Config Sales Channel via the Flipdish Open API v1.0 (GET /api/v1.0/mobileapps/{appId}/saleschannel/details).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/submission/{submissionId}/status:
+    get:
+      tags:
+      - MobileApps
+      operationId: GetSubmissionStatus
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The submission id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MobileAppsSubmissionStatus_'
+              examples:
+                GetSubmissionStatus200Example:
+                  summary: Default GetSubmissionStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MobileAppsSubmissionStatusId: 500123
+                      MobileAppsSubmissionId: 500123
+                      Type: None
+                      AppStatus: None
+                      UpdateStatus: None
+                      LastUpdateStatusTime: '2026-06-02T12:00:00Z'
+                      CreateTime: '2026-06-02T12:00:00Z'
+                      UpdateTime: '2026-06-02T12:00:00Z'
+                      Notes: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionStatus400Example:
+                  summary: Default GetSubmissionStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionStatus401Example:
+                  summary: Default GetSubmissionStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionStatus403Example:
+                  summary: Default GetSubmissionStatus 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionStatus404Example:
+                  summary: Default GetSubmissionStatus 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSubmissionStatus500Example:
+                  summary: Default GetSubmissionStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Submission Status
+      description: Get Submission Status via the Flipdish Open API v1.0 (GET /api/v1.0/mobileapps/{appId}/submission/{submissionId}/status).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - MobileApps
+      operationId: UpdateSubmissionStatus
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The submission id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMobileAppsSubmissionStatus'
+            examples:
+              UpdateSubmissionStatusRequestExample:
+                summary: Default UpdateSubmissionStatus request
+                x-microcks-default: true
+                value:
+                  MobileAppsSubmissionStatusId: 500123
+                  Type: None
+                  AppStatus: None
+                  UpdateStatus: None
+                  LastUpdateStatusTime: '2026-06-02T12:00:00Z'
+                  Notes: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_UpdateMobileAppsSubmissionStatus_'
+              examples:
+                UpdateSubmissionStatus200Example:
+                  summary: Default UpdateSubmissionStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MobileAppsSubmissionStatusId: 500123
+                      Type: None
+                      AppStatus: None
+                      UpdateStatus: None
+                      LastUpdateStatusTime: '2026-06-02T12:00:00Z'
+                      Notes: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateSubmissionStatus400Example:
+                  summary: Default UpdateSubmissionStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateSubmissionStatus401Example:
+                  summary: Default UpdateSubmissionStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateSubmissionStatus403Example:
+                  summary: Default UpdateSubmissionStatus 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateSubmissionStatus404Example:
+                  summary: Default UpdateSubmissionStatus 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateSubmissionStatus500Example:
+                  summary: Default UpdateSubmissionStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Submission Status
+      description: Update Submission Status via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/submission/{submissionId}/status).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/statistics:
+    get:
+      tags:
+      - MobileApps
+      operationId: GetStatistics
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: platformTypes
+        in: query
+        required: true
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - Android
+            - IOS
+        description: The platform types query parameter.
+        example:
+        - None
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_MobileAppsStatistics_'
+              examples:
+                GetStatistics200Example:
+                  summary: Default GetStatistics 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStatistics400Example:
+                  summary: Default GetStatistics 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStatistics401Example:
+                  summary: Default GetStatistics 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStatistics403Example:
+                  summary: Default GetStatistics 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStatistics404Example:
+                  summary: Default GetStatistics 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStatistics500Example:
+                  summary: Default GetStatistics 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Statistics
+      description: Get Statistics via the Flipdish Open API v1.0 (GET /api/v1.0/mobileapps/{appId}/statistics).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/submission:
+    post:
+      tags:
+      - MobileApps
+      operationId: Submission
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MobileAppsSubmission_'
+              examples:
+                Submission200Example:
+                  summary: Default Submission 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      SubmissionId: 500123
+                      AppName: Example Name
+                      AppDescription: string
+                      AppShortDescription: string
+                      Keywords:
+                      - string
+                      AutoPublish: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Submission400Example:
+                  summary: Default Submission 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Submission401Example:
+                  summary: Default Submission 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Submission403Example:
+                  summary: Default Submission 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Submission404Example:
+                  summary: Default Submission 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Submission500Example:
+                  summary: Default Submission 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Submission
+      description: Submission via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/submission).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/resubmission:
+    post:
+      tags:
+      - MobileApps
+      operationId: Resubmission
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MobileAppsSubmission_'
+              examples:
+                Resubmission200Example:
+                  summary: Default Resubmission 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      SubmissionId: 500123
+                      AppName: Example Name
+                      AppDescription: string
+                      AppShortDescription: string
+                      Keywords:
+                      - string
+                      AutoPublish: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Resubmission400Example:
+                  summary: Default Resubmission 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Resubmission401Example:
+                  summary: Default Resubmission 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Resubmission403Example:
+                  summary: Default Resubmission 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Resubmission404Example:
+                  summary: Default Resubmission 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Resubmission500Example:
+                  summary: Default Resubmission 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Resubmission
+      description: Resubmission via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/resubmission).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/saleschannel:
+    post:
+      tags:
+      - MobileApps
+      operationId: UpdateAppConfigSalesChannel
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppConfigSalesChannel'
+            examples:
+              UpdateAppConfigSalesChannelRequestExample:
+                summary: Default UpdateAppConfigSalesChannel request
+                x-microcks-default: true
+                value:
+                  EmailRequestMode: DoNotRequest
+                  WebToAppRedirect: NoRedirect
+                  AddressEntryType: MapFirst
+                  DisplayDeliveryRestaurantListScreen: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppConfigSalesChannel_'
+              examples:
+                UpdateAppConfigSalesChannel200Example:
+                  summary: Default UpdateAppConfigSalesChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      EmailRequestMode: DoNotRequest
+                      WebToAppRedirect: NoRedirect
+                      AddressEntryType: MapFirst
+                      DisplayDeliveryRestaurantListScreen: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppConfigSalesChannel400Example:
+                  summary: Default UpdateAppConfigSalesChannel 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppConfigSalesChannel401Example:
+                  summary: Default UpdateAppConfigSalesChannel 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppConfigSalesChannel403Example:
+                  summary: Default UpdateAppConfigSalesChannel 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppConfigSalesChannel404Example:
+                  summary: Default UpdateAppConfigSalesChannel 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppConfigSalesChannel500Example:
+                  summary: Default UpdateAppConfigSalesChannel 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update App Config Sales Channel
+      description: Update App Config Sales Channel via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/saleschannel).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/submission/image:
+    post:
+      tags:
+      - MobileApps
+      operationId: UploadImage
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Image:
+                  description: Mobile Apps image
+                  type: string
+                  format: binary
+              required:
+              - Image
+            examples:
+              UploadImageRequestExample:
+                summary: Default UploadImage request
+                x-microcks-default: true
+                value:
+                  Image: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MobileAppsImage_'
+              examples:
+                UploadImage200Example:
+                  summary: Default UploadImage 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ImageUri: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadImage400Example:
+                  summary: Default UploadImage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadImage401Example:
+                  summary: Default UploadImage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadImage403Example:
+                  summary: Default UploadImage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadImage404Example:
+                  summary: Default UploadImage 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadImage500Example:
+                  summary: Default UploadImage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Upload Image
+      description: Upload Image via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/submission/image).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/submission/{submissionId}/publish:
+    post:
+      tags:
+      - MobileApps
+      operationId: Publish
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The submission id path parameter.
+        example: 500123
+      - name: platformType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Android
+          - IOS
+        description: The platform type query parameter.
+        example: None
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestApiIntegerResult_'
+              examples:
+                Publish200Example:
+                  summary: Default Publish 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Data: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Publish400Example:
+                  summary: Default Publish 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Publish401Example:
+                  summary: Default Publish 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Publish403Example:
+                  summary: Default Publish 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Publish404Example:
+                  summary: Default Publish 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Publish500Example:
+                  summary: Default Publish 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Publish
+      description: Publish via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/submission/{submissionId}/publish).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/mobileapps/{appId}/submission/{submissionId}/unpublish:
+    post:
+      tags:
+      - MobileApps
+      operationId: Unpublish
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The submission id path parameter.
+        example: 500123
+      - name: platformType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - None
+          - Android
+          - IOS
+        description: The platform type query parameter.
+        example: None
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiIntegerResult'
+              examples:
+                Unpublish200Example:
+                  summary: Default Unpublish 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Unpublish400Example:
+                  summary: Default Unpublish 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Unpublish401Example:
+                  summary: Default Unpublish 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Unpublish403Example:
+                  summary: Default Unpublish 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Unpublish404Example:
+                  summary: Default Unpublish 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Unpublish500Example:
+                  summary: Default Unpublish 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Unpublish
+      description: Unpublish via the Flipdish Open API v1.0 (POST /api/v1.0/mobileapps/{appId}/submission/{submissionId}/unpublish).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MobileAppsSubmissionStatus:
+      description: Mobile Apps Status
+      type: object
+      properties:
+        MobileAppsSubmissionStatusId:
+          format: int32
+          description: Mobile Apps Submission Status Id
+          type: integer
+          example: 500123
+        MobileAppsSubmissionId:
+          format: int32
+          description: Mobile Apps Submission Id
+          type: integer
+          example: 500123
+        Type:
+          description: Mobile Type
+          enum:
+          - None
+          - Android
+          - IOS
+          type: string
+          example: None
+        AppStatus:
+          description: Mobile App Status
+          enum:
+          - None
+          - Published
+          - Unpublished
+          type: string
+          example: None
+        UpdateStatus:
+          description: Mobile App Status
+          enum:
+          - None
+          - Submitted
+          - InReview
+          - Rejected
+          - Approved
+          - Published
+          type: string
+          example: None
+        LastUpdateStatusTime:
+          format: date-time
+          description: Mobile LastUpdateStatusTime
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        CreateTime:
+          format: date-time
+          description: Mobile CreateTime
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        UpdateTime:
+          format: date-time
+          description: Mobile UpdateTime
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        Notes:
+          description: Mobile Notes
+          type: string
+          example: string
+    MobileAppsImage:
+      description: Mobile Apps Image
+      type: object
+      properties:
+        ImageUri:
+          description: Unique catalog Item id
+          type: string
+          example: https://api.flipdish.co/example
+    MobileAppsSubmissionDetails:
+      description: Mobile Apps form submission
+      type: object
+      properties:
+        MobileAppsSubmissionId:
+          format: int32
+          description: Mobile Apps Submission Id
+          type: integer
+          example: 500123
+        AppName:
+          description: App Name
+          type: string
+          example: Example Name
+        AppDescription:
+          description: App Description
+          type: string
+          example: string
+        AppShortDescription:
+          description: App Description
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        AppLogoUrl:
+          description: Logo URL
+          type: string
+          example: https://api.flipdish.co/example
+        AutoPublish:
+          description: Publish automatically
+          type: boolean
+          example: true
+        Status:
+          description: Mobile App Status
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileAppsSubmissionStatus'
+          example: []
+    RestApiResult_MobileAppsSubmissionDetails_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmissionDetails'
+    RestApiArrayResult_MobileAppsStatistics_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileAppsStatistics'
+          example: []
+    RestApiIntegerResult:
+      description: Rest api integer result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          format: int32
+          description: Data integer
+          type: integer
+          example: 1
+    UpdateMobileAppsSubmissionStatus:
+      description: Update Mobile Apps Status
+      type: object
+      properties:
+        MobileAppsSubmissionStatusId:
+          format: int32
+          description: Mobile Apps Submission Status Id
+          type: integer
+          nullable: true
+          example: 500123
+        Type:
+          description: Mobile Type
+          enum:
+          - None
+          - Android
+          - IOS
+          type: string
+          example: None
+        AppStatus:
+          description: Mobile App Status
+          enum:
+          - None
+          - Published
+          - Unpublished
+          type: string
+          example: None
+        UpdateStatus:
+          description: Mobile App Status
+          enum:
+          - None
+          - Submitted
+          - InReview
+          - Rejected
+          - Approved
+          - Published
+          type: string
+          example: None
+        LastUpdateStatusTime:
+          format: date-time
+          description: Mobile LastUpdateStatusTime
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        Notes:
+          description: Mobile Notes
+          type: string
+          example: string
+    RestApiResult_AppConfigSalesChannel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppConfigSalesChannel'
+    RestApiResult_UpdateMobileAppsSubmissionStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UpdateMobileAppsSubmissionStatus'
+    MobileAppsSubmission:
+      description: Mobile Apps form submission
+      required:
+      - AppName
+      - AppDescription
+      - AppShortDescription
+      type: object
+      properties:
+        SubmissionId:
+          format: int32
+          description: Mobile Apps Submission Id
+          type: integer
+          example: 500123
+        AppName:
+          description: App Name
+          type: string
+          example: Example Name
+        AppDescription:
+          description: App Description
+          type: string
+          example: string
+        AppShortDescription:
+          description: App Description
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        AutoPublish:
+          description: Publish automatically
+          type: boolean
+          example: true
+    RestApiResult_MobileAppsSubmissionStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmissionStatus'
+    RestApiResult_MobileAppsSubmission_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmission'
+    AppConfigSalesChannel:
+      description: App Config Sales Channel
+      type: object
+      properties:
+        EmailRequestMode:
+          description: Display a popup to users requesting their email address
+          enum:
+          - DoNotRequest
+          - Request
+          - Require
+          type: string
+          example: DoNotRequest
+        WebToAppRedirect:
+          description: Sends users to their native apps or request them to install the pwa
+          enum:
+          - NoRedirect
+          - RedirectOnce
+          - RedirectAlways
+          - SuggestPwa
+          - ForcePwa
+          type: string
+          example: NoRedirect
+        AddressEntryType:
+          description: Address entry type - TextEntryManualDisallowed is the only supported configuration
+          enum:
+          - MapFirst
+          - TextEntryManualAllowed
+          - TextEntryManualDisallowed
+          type: string
+          example: MapFirst
+        DisplayDeliveryRestaurantListScreen:
+          description: Display Pickup Restaurant List Screen
+          type: boolean
+          example: true
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_MobileAppsImage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsImage'
+    RestApiResult_RestApiIntegerResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RestApiIntegerResult'
+    MobileAppsStatistics:
+      description: Mobile Apps Statistics
+      type: object
+      properties:
+        NumberDownload:
+          format: int32
+          description: Number Download
+          type: integer
+          example: 3
+        CurrentRate:
+          format: int32
+          description: Current Rate
+          type: integer
+          example: 1
+        CurrentVersion:
+          description: Current Version
+          type: string
+          example: string
+        PlayStoreLink:
+          description: Play Store Link
+          type: string
+          example: https://api.flipdish.co/example
+        AppBundleId:
+          description: App Bundle Id
+          type: string
+          example: '500123'
+        LastUpdated:
+          format: date-time
+          description: Last Updated
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Notes:
+          description: Last Updated
+          type: string
+          example: string
+        Published:
+          description: Published
+          type: boolean
+          example: true
+        PlatformType:
+          description: Platform Type
+          enum:
+          - None
+          - Android
+          - IOS
+          type: string
+          example: None
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,2827 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Vouchers API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Vouchers
+  description: Operations for Vouchers.
+paths:
+  /api/v1.0/vouchers/{voucherId}:
+    get:
+      tags:
+      - Vouchers
+      operationId: GetVoucherById
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The voucher id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_VoucherWithStats_'
+              examples:
+                GetVoucherById200Example:
+                  summary: Default GetVoucherById 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TotalUsed: 12.5
+                      TotalCustomers: 12.5
+                      TotalAmountFromOrders: 12.5
+                      TotalDiscounted: 12.5
+                      AverageOrderSize: 1.0
+                      VoucherId: 500123
+                      Status: Valid
+                      VoucherType: PercentageDiscount
+                      Currency: EUR
+                      StoreNames:
+                      - Example Name
+                      PromotionDetails:
+                        PromotionId: 500123
+                        Name: Example Name
+                        PromotionAwards: []
+                      CreditNoteDetails:
+                        RemainingCredit: 1.0
+                      LumpDiscountDetails:
+                        DiscountAmount: 12.5
+                      PercentDiscountDetails:
+                        PercentageDiscount: 3
+                        MaxDiscountAmount: 12.5
+                      Code: string
+                      Description: string
+                      Stores:
+                      - 1
+                      ValidOnOrdersOver: 1.0
+                      TakesPriority: true
+                      IsEnabled: true
+                      IsAutomaticallyApplied: true
+                      IncludeDeliveryFee: true
+                      IsValidForDeliveryOrders: true
+                      IsValidForPickupOrders: true
+                      IsValidForOrdersPayedOnline: true
+                      IsValidForOrdersPayedByCash: true
+                      IsValidForFirstOrderOnly: true
+                      IsValidOncePerCustomer: true
+                      IsValidOnlyOnce: true
+                      IsDiscoverable: true
+                      ForceDiscount: true
+                      StartDate: '2026-06-02T12:00:00Z'
+                      ExpiryDate: '2026-06-02T12:00:00Z'
+                      ChannelRestrictions:
+                      - Ios
+                      ValidityPeriods: []
+                      VoucherSubType: None
+                      CustomerId: 500123
+                      MaxRedemptions: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherById400Example:
+                  summary: Default GetVoucherById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherById401Example:
+                  summary: Default GetVoucherById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherById403Example:
+                  summary: Default GetVoucherById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherById404Example:
+                  summary: Default GetVoucherById 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherById500Example:
+                  summary: Default GetVoucherById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Voucher by Id
+      description: Get Voucher by Id via the Flipdish Open API v1.0 (GET /api/v1.0/vouchers/{voucherId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Vouchers
+      operationId: UpdateVoucher
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The voucher id path parameter.
+        example: 500123
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      - name: percentValue
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The percent value query parameter.
+        example: 1
+      - name: lumpValue
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+        description: The lump value query parameter.
+        example: 1.0
+      - name: maxDiscountAmount
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+        description: The max discount amount query parameter.
+        example: 12.5
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVoucher'
+            examples:
+              UpdateVoucherRequestExample:
+                summary: Default UpdateVoucher request
+                x-microcks-default: true
+                value:
+                  PromotionId: 500123
+                  PromotionName: Example Name
+                  PromotionAwardMenuItemPublicIds:
+                  - 00000000-0000-0000-0000-000000000000
+                  Code: string
+                  Description: string
+                  Stores:
+                  - 1
+                  ValidOnOrdersOver: 1.0
+                  TakesPriority: true
+                  IsEnabled: true
+                  IsAutomaticallyApplied: true
+                  IncludeDeliveryFee: true
+                  IsValidForDeliveryOrders: true
+                  IsValidForPickupOrders: true
+                  IsValidForOrdersPayedOnline: true
+                  IsValidForOrdersPayedByCash: true
+                  IsValidForFirstOrderOnly: true
+                  IsValidOncePerCustomer: true
+                  IsValidOnlyOnce: true
+                  IsDiscoverable: true
+                  ForceDiscount: true
+                  StartDate: '2026-06-02T12:00:00Z'
+                  ExpiryDate: '2026-06-02T12:00:00Z'
+                  ChannelRestrictions:
+                  - Ios
+                  ValidityPeriods: []
+                  VoucherSubType: None
+                  CustomerId: 500123
+                  MaxRedemptions: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_VoucherWithStats_'
+              examples:
+                UpdateVoucher200Example:
+                  summary: Default UpdateVoucher 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TotalUsed: 12.5
+                      TotalCustomers: 12.5
+                      TotalAmountFromOrders: 12.5
+                      TotalDiscounted: 12.5
+                      AverageOrderSize: 1.0
+                      VoucherId: 500123
+                      Status: Valid
+                      VoucherType: PercentageDiscount
+                      Currency: EUR
+                      StoreNames:
+                      - Example Name
+                      PromotionDetails:
+                        PromotionId: 500123
+                        Name: Example Name
+                        PromotionAwards: []
+                      CreditNoteDetails:
+                        RemainingCredit: 1.0
+                      LumpDiscountDetails:
+                        DiscountAmount: 12.5
+                      PercentDiscountDetails:
+                        PercentageDiscount: 3
+                        MaxDiscountAmount: 12.5
+                      Code: string
+                      Description: string
+                      Stores:
+                      - 1
+                      ValidOnOrdersOver: 1.0
+                      TakesPriority: true
+                      IsEnabled: true
+                      IsAutomaticallyApplied: true
+                      IncludeDeliveryFee: true
+                      IsValidForDeliveryOrders: true
+                      IsValidForPickupOrders: true
+                      IsValidForOrdersPayedOnline: true
+                      IsValidForOrdersPayedByCash: true
+                      IsValidForFirstOrderOnly: true
+                      IsValidOncePerCustomer: true
+                      IsValidOnlyOnce: true
+                      IsDiscoverable: true
+                      ForceDiscount: true
+                      StartDate: '2026-06-02T12:00:00Z'
+                      ExpiryDate: '2026-06-02T12:00:00Z'
+                      ChannelRestrictions:
+                      - Ios
+                      ValidityPeriods: []
+                      VoucherSubType: None
+                      CustomerId: 500123
+                      MaxRedemptions: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucher400Example:
+                  summary: Default UpdateVoucher 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucher401Example:
+                  summary: Default UpdateVoucher 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucher403Example:
+                  summary: Default UpdateVoucher 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucher404Example:
+                  summary: Default UpdateVoucher 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucher500Example:
+                  summary: Default UpdateVoucher 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Voucher
+      description: Update Voucher via the Flipdish Open API v1.0 (POST /api/v1.0/vouchers/{voucherId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/vouchers/code/{code}:
+    get:
+      tags:
+      - Vouchers
+      operationId: GetVoucherByCode
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The code path parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Voucher_'
+              examples:
+                GetVoucherByCode200Example:
+                  summary: Default GetVoucherByCode 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      VoucherId: 500123
+                      Status: Valid
+                      VoucherType: PercentageDiscount
+                      Currency: EUR
+                      StoreNames:
+                      - Example Name
+                      PromotionDetails:
+                        PromotionId: 500123
+                        Name: Example Name
+                        PromotionAwards: []
+                      CreditNoteDetails:
+                        RemainingCredit: 1.0
+                      LumpDiscountDetails:
+                        DiscountAmount: 12.5
+                      PercentDiscountDetails:
+                        PercentageDiscount: 3
+                        MaxDiscountAmount: 12.5
+                      Code: string
+                      Description: string
+                      Stores:
+                      - 1
+                      ValidOnOrdersOver: 1.0
+                      TakesPriority: true
+                      IsEnabled: true
+                      IsAutomaticallyApplied: true
+                      IncludeDeliveryFee: true
+                      IsValidForDeliveryOrders: true
+                      IsValidForPickupOrders: true
+                      IsValidForOrdersPayedOnline: true
+                      IsValidForOrdersPayedByCash: true
+                      IsValidForFirstOrderOnly: true
+                      IsValidOncePerCustomer: true
+                      IsValidOnlyOnce: true
+                      IsDiscoverable: true
+                      ForceDiscount: true
+                      StartDate: '2026-06-02T12:00:00Z'
+                      ExpiryDate: '2026-06-02T12:00:00Z'
+                      ChannelRestrictions:
+                      - Ios
+                      ValidityPeriods: []
+                      VoucherSubType: None
+                      CustomerId: 500123
+                      MaxRedemptions: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherByCode400Example:
+                  summary: Default GetVoucherByCode 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherByCode401Example:
+                  summary: Default GetVoucherByCode 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherByCode403Example:
+                  summary: Default GetVoucherByCode 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherByCode404Example:
+                  summary: Default GetVoucherByCode 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherByCode500Example:
+                  summary: Default GetVoucherByCode 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Voucher by Code
+      description: Get Voucher by Code via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/vouchers/code/{code}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/vouchers/{appId}/customer/{customerId}:
+    get:
+      tags:
+      - Vouchers
+      operationId: GetVouchersByCustomerForApp
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The customer id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_VoucherSummary_'
+              examples:
+                GetVouchersByCustomerForApp200Example:
+                  summary: Default GetVouchersByCustomerForApp 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchersByCustomerForApp400Example:
+                  summary: Default GetVouchersByCustomerForApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchersByCustomerForApp401Example:
+                  summary: Default GetVouchersByCustomerForApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchersByCustomerForApp403Example:
+                  summary: Default GetVouchersByCustomerForApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchersByCustomerForApp404Example:
+                  summary: Default GetVouchersByCustomerForApp 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchersByCustomerForApp500Example:
+                  summary: Default GetVouchersByCustomerForApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Vouchers by Customer for App
+      description: Get Vouchers by Customer for App via the Flipdish Open API v1.0 (GET /api/v1.0/vouchers/{appId}/customer/{customerId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/vouchers/{voucherId}/validity-periods:
+    get:
+      tags:
+      - Vouchers
+      operationId: GetVoucherValidityPeriods
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The voucher id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherValidityPeriods400Example:
+                  summary: Default GetVoucherValidityPeriods 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherValidityPeriods401Example:
+                  summary: Default GetVoucherValidityPeriods 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherValidityPeriods403Example:
+                  summary: Default GetVoucherValidityPeriods 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherValidityPeriods404Example:
+                  summary: Default GetVoucherValidityPeriods 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherValidityPeriods500Example:
+                  summary: Default GetVoucherValidityPeriods 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Voucher Validity Periods
+      description: Get Voucher Validity Periods via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/vouchers/{voucherId}/validity-periods).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/vouchers/stats/{voucherId}:
+    get:
+      tags:
+      - Vouchers
+      operationId: GetVoucherStatsById
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The voucher id path parameter.
+        example: 500123
+      - name: aggregateDataBy
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Monthly
+        description: The aggregate data by query parameter.
+        example: Daily
+      - name: dataPointLimit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The data point limit query parameter.
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_VoucherDataPoint_'
+              examples:
+                GetVoucherStatsById200Example:
+                  summary: Default GetVoucherStatsById 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherStatsById400Example:
+                  summary: Default GetVoucherStatsById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherStatsById401Example:
+                  summary: Default GetVoucherStatsById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherStatsById403Example:
+                  summary: Default GetVoucherStatsById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherStatsById404Example:
+                  summary: Default GetVoucherStatsById 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVoucherStatsById500Example:
+                  summary: Default GetVoucherStatsById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Voucher Stats by Id
+      description: Get Voucher Stats by Id via the Flipdish Open API v1.0 (GET /api/v1.0/vouchers/stats/{voucherId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/vouchers/summaries:
+    get:
+      tags:
+      - Vouchers
+      operationId: GetVouchers
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: pageIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page index query parameter.
+        example: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page size query parameter.
+        example: 1
+      - name: searchCodes
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: The search codes query parameter.
+        example:
+        - string
+      - name: statusSearch
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Valid
+            - NotYetValid
+            - Expired
+            - Used
+            - Disabled
+        description: The status search query parameter.
+        example:
+        - Valid
+      - name: typeSearch
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PercentageDiscount
+            - LumpDiscount
+            - AddItem
+            - CreditNote
+            - FreeDelivery
+        description: The type search query parameter.
+        example:
+        - PercentageDiscount
+      - name: subTypeSearch
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - None
+            - SignUp
+            - Loyalty
+            - Loyalty25
+            - Retention
+            - SecondaryRetention
+            - Custom
+        description: The sub type search query parameter.
+        example:
+        - None
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      - name: channelRestrictions
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Ios
+            - Android
+            - Web
+            - Kiosk
+            - Pos
+            - Google
+        description: The channel restrictions query parameter.
+        example:
+        - Ios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_VoucherSummary_'
+              examples:
+                GetVouchers200Example:
+                  summary: Default GetVouchers 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchers400Example:
+                  summary: Default GetVouchers 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchers401Example:
+                  summary: Default GetVouchers 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchers403Example:
+                  summary: Default GetVouchers 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetVouchers500Example:
+                  summary: Default GetVouchers 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Vouchers
+      description: Get Vouchers via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/vouchers/summaries).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/vouchers/{appId}:
+    post:
+      tags:
+      - Vouchers
+      operationId: CreateVoucher
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVoucher'
+            examples:
+              CreateVoucherRequestExample:
+                summary: Default CreateVoucher request
+                x-microcks-default: true
+                value:
+                  VoucherType: PercentageDiscount
+                  Promotion:
+                    Name: Example Name
+                    MenuItemPublicIds:
+                    - 00000000-0000-0000-0000-000000000000
+                  CreditNoteDetails:
+                    RemainingCredit: 1.0
+                  LumpDiscountDetails:
+                    DiscountAmount: 12.5
+                  PercentDiscountDetails:
+                    PercentageDiscount: 3
+                    MaxDiscountAmount: 12.5
+                  Code: string
+                  Description: string
+                  Stores:
+                  - 1
+                  ValidOnOrdersOver: 1.0
+                  TakesPriority: true
+                  IsEnabled: true
+                  IsAutomaticallyApplied: true
+                  IncludeDeliveryFee: true
+                  IsValidForDeliveryOrders: true
+                  IsValidForPickupOrders: true
+                  IsValidForOrdersPayedOnline: true
+                  IsValidForOrdersPayedByCash: true
+                  IsValidForFirstOrderOnly: true
+                  IsValidOncePerCustomer: true
+                  IsValidOnlyOnce: true
+                  IsDiscoverable: true
+                  ForceDiscount: true
+                  StartDate: '2026-06-02T12:00:00Z'
+                  ExpiryDate: '2026-06-02T12:00:00Z'
+                  ChannelRestrictions:
+                  - Ios
+                  ValidityPeriods: []
+                  VoucherSubType: None
+                  CustomerId: 500123
+                  MaxRedemptions: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_VoucherWithStats_'
+              examples:
+                CreateVoucher200Example:
+                  summary: Default CreateVoucher 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TotalUsed: 12.5
+                      TotalCustomers: 12.5
+                      TotalAmountFromOrders: 12.5
+                      TotalDiscounted: 12.5
+                      AverageOrderSize: 1.0
+                      VoucherId: 500123
+                      Status: Valid
+                      VoucherType: PercentageDiscount
+                      Currency: EUR
+                      StoreNames:
+                      - Example Name
+                      PromotionDetails:
+                        PromotionId: 500123
+                        Name: Example Name
+                        PromotionAwards: []
+                      CreditNoteDetails:
+                        RemainingCredit: 1.0
+                      LumpDiscountDetails:
+                        DiscountAmount: 12.5
+                      PercentDiscountDetails:
+                        PercentageDiscount: 3
+                        MaxDiscountAmount: 12.5
+                      Code: string
+                      Description: string
+                      Stores:
+                      - 1
+                      ValidOnOrdersOver: 1.0
+                      TakesPriority: true
+                      IsEnabled: true
+                      IsAutomaticallyApplied: true
+                      IncludeDeliveryFee: true
+                      IsValidForDeliveryOrders: true
+                      IsValidForPickupOrders: true
+                      IsValidForOrdersPayedOnline: true
+                      IsValidForOrdersPayedByCash: true
+                      IsValidForFirstOrderOnly: true
+                      IsValidOncePerCustomer: true
+                      IsValidOnlyOnce: true
+                      IsDiscoverable: true
+                      ForceDiscount: true
+                      StartDate: '2026-06-02T12:00:00Z'
+                      ExpiryDate: '2026-06-02T12:00:00Z'
+                      ChannelRestrictions:
+                      - Ios
+                      ValidityPeriods: []
+                      VoucherSubType: None
+                      CustomerId: 500123
+                      MaxRedemptions: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateVoucher400Example:
+                  summary: Default CreateVoucher 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateVoucher401Example:
+                  summary: Default CreateVoucher 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateVoucher403Example:
+                  summary: Default CreateVoucher 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateVoucher404Example:
+                  summary: Default CreateVoucher 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateVoucher500Example:
+                  summary: Default CreateVoucher 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Voucher
+      description: Create Voucher via the Flipdish Open API v1.0 (POST /api/v1.0/vouchers/{appId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/vouchers/{voucherId}/usage:
+    post:
+      tags:
+      - Vouchers
+      operationId: UpdateVoucherUsage
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The voucher id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVoucherUsage'
+            examples:
+              UpdateVoucherUsageRequestExample:
+                summary: Default UpdateVoucherUsage request
+                x-microcks-default: true
+                value:
+                  IsUsed: true
+                  UsedByCustomerId: 500123
+                  TransactionKey: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucherUsage400Example:
+                  summary: Default UpdateVoucherUsage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucherUsage401Example:
+                  summary: Default UpdateVoucherUsage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucherUsage403Example:
+                  summary: Default UpdateVoucherUsage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucherUsage404Example:
+                  summary: Default UpdateVoucherUsage 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateVoucherUsage500Example:
+                  summary: Default UpdateVoucherUsage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Voucher Usage
+      description: Update Voucher Usage via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/vouchers/{voucherId}/usage).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/vouchers/{voucherId}/validity-periods-simplified:
+    post:
+      tags:
+      - Vouchers
+      operationId: SetVoucherValidityPeriodsSimplified
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The voucher id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetVoucherValidityPeriodsSimplifiedRequest'
+            examples:
+              SetVoucherValidityPeriodsSimplifiedRequestExample:
+                summary: Default SetVoucherValidityPeriodsSimplified request
+                x-microcks-default: true
+                value:
+                  DaysOfWeek:
+                  - Sunday
+                  StartTime: '2026-06-02T12:00:00Z'
+                  EndTime: '2026-06-02T12:00:00Z'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetVoucherValidityPeriodsSimplified400Example:
+                  summary: Default SetVoucherValidityPeriodsSimplified 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetVoucherValidityPeriodsSimplified401Example:
+                  summary: Default SetVoucherValidityPeriodsSimplified 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetVoucherValidityPeriodsSimplified403Example:
+                  summary: Default SetVoucherValidityPeriodsSimplified 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetVoucherValidityPeriodsSimplified404Example:
+                  summary: Default SetVoucherValidityPeriodsSimplified 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetVoucherValidityPeriodsSimplified500Example:
+                  summary: Default SetVoucherValidityPeriodsSimplified 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Voucher Validity Periods Simplified
+      description: Set Voucher Validity Periods Simplified via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/vouchers/{voucherId}/validity-periods-simplified).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VoucherSummary:
+      description: Voucher Summary
+      type: object
+      properties:
+        VoucherId:
+          format: int32
+          description: Voucher Id
+          type: integer
+          example: 500123
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Status:
+          description: Voucher Status
+          enum:
+          - Valid
+          - NotYetValid
+          - Expired
+          - Used
+          - Disabled
+          type: string
+          example: Valid
+        VoucherType:
+          description: Voucher Type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        VoucherSubType:
+          description: Voucher Sub Type
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        StoreNames:
+          description: Store names associated with this voucher
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        IsAvailableOnAllStores:
+          description: True if the voucher is available on all active stores in the app
+          type: boolean
+          example: true
+    RestApiArrayResult_VoucherSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherSummary'
+          example: []
+    RestApiArrayResult_VoucherDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherDataPoint'
+          example: []
+    PercentDiscountDetails:
+      description: Percent discount details
+      type: object
+      properties:
+        PercentageDiscount:
+          format: int32
+          description: Percentage discount
+          type: integer
+          example: 3
+        MaxDiscountAmount:
+          format: double
+          description: "The maximum amount that the percentage discount value can be.\r\nIf not set then there is no maximum.\r\nIf set to e.g. 20 euro, and the percentage discount is 25%, and the order total is 100 euro, then the discount will be 20 euro (not 25 euro)."
+          type: number
+          nullable: true
+          example: 12.5
+    PromotionDetails:
+      description: Promotion
+      type: object
+      properties:
+        PromotionId:
+          format: int32
+          description: Promotion Id
+          type: integer
+          example: 500123
+        Name:
+          description: The name of the promotion
+          type: string
+          example: Example Name
+        PromotionAwards:
+          description: The items that this promotion will award
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionAward'
+          example: []
+    SetVoucherValidityPeriodsSimplifiedRequest:
+      description: Set the validity periods of a voucher.
+      type: object
+      properties:
+        DaysOfWeek:
+          description: Days of week when the voucher is valid
+          type: array
+          items:
+            enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+            type: string
+          example:
+          - Sunday
+        StartTime:
+          description: Start time of the day when the voucher is valid
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndTime:
+          description: "End time of the day when the voucher is valid.\r\nIf the end time is before the start time, the end time is assumed to be the next day."
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_Voucher_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Voucher'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_VoucherWithStats_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/VoucherWithStats'
+    ValidityPeriod:
+      description: ValidityPeriod.
+      type: object
+      properties:
+        DayOfWeek:
+          description: DayOfWeek.
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        StartTime:
+          description: StartTime.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndTime:
+          description: EndTime.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    CreateVoucher:
+      description: Create Voucher
+      type: object
+      properties:
+        VoucherType:
+          description: Voucher Type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        Promotion:
+          $ref: '#/components/schemas/CreatePromotion'
+        CreditNoteDetails:
+          $ref: '#/components/schemas/CreditNoteDetails'
+        LumpDiscountDetails:
+          $ref: '#/components/schemas/LumpDiscountDetails'
+        PercentDiscountDetails:
+          $ref: '#/components/schemas/PercentDiscountDetails'
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        Stores:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        ValidOnOrdersOver:
+          format: double
+          description: Valid on orders on or above
+          type: number
+          example: 1.0
+        TakesPriority:
+          description: Takes priority
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        IsAutomaticallyApplied:
+          description: Is voucher automatically applied
+          type: boolean
+          example: true
+        IncludeDeliveryFee:
+          description: Include delivery fees
+          type: boolean
+          example: true
+        IsValidForDeliveryOrders:
+          description: Valid for delivery orders
+          type: boolean
+          example: true
+        IsValidForPickupOrders:
+          description: Valid for pickup orders
+          type: boolean
+          example: true
+        IsValidForOrdersPayedOnline:
+          description: Valid for orders payed online
+          type: boolean
+          example: true
+        IsValidForOrdersPayedByCash:
+          description: Valid for orders payed in cash
+          type: boolean
+          example: true
+        IsValidForFirstOrderOnly:
+          description: Valid only on the first order by the customer
+          type: boolean
+          example: true
+        IsValidOncePerCustomer:
+          description: Valid once per customer
+          type: boolean
+          example: true
+        IsValidOnlyOnce:
+          description: Valid only once, by any customer (once used cannot be used again by any other customer)
+          type: boolean
+          example: true
+        IsDiscoverable:
+          description: Enables the voucher to be offered in the Voucher Discoverability feature
+          type: boolean
+          example: true
+        ForceDiscount:
+          description: Force the discount to be applied which bypasses some menu restrictions
+          type: boolean
+          example: true
+        StartDate:
+          format: date-time
+          description: Voucher Starts On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ExpiryDate:
+          format: date-time
+          description: Voucher Expires On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChannelRestrictions:
+          description: Limit the channels this voucher can be used on
+          type: array
+          items:
+            enum:
+            - Ios
+            - Android
+            - Web
+            - Kiosk
+            - Pos
+            - Google
+            type: string
+          example:
+          - Ios
+        ValidityPeriods:
+          description: "Periods in which the voucher is valid.\r\nAn empty list means the voucher is valid at all times.\r\nWhen updating the voucher, if this is set to null, the validity periods won't be updated."
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidityPeriod'
+          example: []
+        VoucherSubType:
+          description: Voucher Subtype
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        CustomerId:
+          format: int32
+          description: Customer UserID
+          type: integer
+          nullable: true
+          example: 500123
+        MaxRedemptions:
+          format: int32
+          description: Maximum number of times the voucher can be redeemed (used)
+          type: integer
+          nullable: true
+          example: 1
+    VoucherWithStats:
+      description: Voucher With Statistics
+      type: object
+      properties:
+        TotalUsed:
+          format: int32
+          description: Total times the voucher was used
+          type: integer
+          nullable: true
+          example: 12.5
+        TotalCustomers:
+          format: int32
+          description: Total amount of customers who used this voucher
+          type: integer
+          nullable: true
+          example: 12.5
+        TotalAmountFromOrders:
+          format: double
+          description: Total amount of money from orders
+          type: number
+          nullable: true
+          example: 12.5
+        TotalDiscounted:
+          format: double
+          description: Total amount of money given away
+          type: number
+          nullable: true
+          example: 12.5
+        AverageOrderSize:
+          format: double
+          description: Average Order Size
+          type: number
+          nullable: true
+          example: 1.0
+        VoucherId:
+          format: int32
+          description: Voucher Id
+          type: integer
+          example: 500123
+        Status:
+          description: Voucher Status
+          enum:
+          - Valid
+          - NotYetValid
+          - Expired
+          - Used
+          - Disabled
+          type: string
+          example: Valid
+        VoucherType:
+          description: Voucher Type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        Currency:
+          description: Currency of the voucher
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        StoreNames:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        PromotionDetails:
+          $ref: '#/components/schemas/PromotionDetails'
+        CreditNoteDetails:
+          $ref: '#/components/schemas/CreditNoteDetails'
+        LumpDiscountDetails:
+          $ref: '#/components/schemas/LumpDiscountDetails'
+        PercentDiscountDetails:
+          $ref: '#/components/schemas/PercentDiscountDetails'
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        Stores:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        ValidOnOrdersOver:
+          format: double
+          description: Valid on orders on or above
+          type: number
+          example: 1.0
+        TakesPriority:
+          description: Takes priority
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        IsAutomaticallyApplied:
+          description: Is voucher automatically applied
+          type: boolean
+          example: true
+        IncludeDeliveryFee:
+          description: Include delivery fees
+          type: boolean
+          example: true
+        IsValidForDeliveryOrders:
+          description: Valid for delivery orders
+          type: boolean
+          example: true
+        IsValidForPickupOrders:
+          description: Valid for pickup orders
+          type: boolean
+          example: true
+        IsValidForOrdersPayedOnline:
+          description: Valid for orders payed online
+          type: boolean
+          example: true
+        IsValidForOrdersPayedByCash:
+          description: Valid for orders payed in cash
+          type: boolean
+          example: true
+        IsValidForFirstOrderOnly:
+          description: Valid only on the first order by the customer
+          type: boolean
+          example: true
+        IsValidOncePerCustomer:
+          description: Valid once per customer
+          type: boolean
+          example: true
+        IsValidOnlyOnce:
+          description: Valid only once, by any customer (once used cannot be used again by any other customer)
+          type: boolean
+          example: true
+        IsDiscoverable:
+          description: Enables the voucher to be offered in the Voucher Discoverability feature
+          type: boolean
+          example: true
+        ForceDiscount:
+          description: Force the discount to be applied which bypasses some menu restrictions
+          type: boolean
+          example: true
+        StartDate:
+          format: date-time
+          description: Voucher Starts On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ExpiryDate:
+          format: date-time
+          description: Voucher Expires On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChannelRestrictions:
+          description: Limit the channels this voucher can be used on
+          type: array
+          items:
+            enum:
+            - Ios
+            - Android
+            - Web
+            - Kiosk
+            - Pos
+            - Google
+            type: string
+          example:
+          - Ios
+        ValidityPeriods:
+          description: "Periods in which the voucher is valid.\r\nAn empty list means the voucher is valid at all times.\r\nWhen updating the voucher, if this is set to null, the validity periods won't be updated."
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidityPeriod'
+          example: []
+        VoucherSubType:
+          description: Voucher Subtype
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        CustomerId:
+          format: int32
+          description: Customer UserID
+          type: integer
+          nullable: true
+          example: 500123
+        MaxRedemptions:
+          format: int32
+          description: Maximum number of times the voucher can be redeemed (used)
+          type: integer
+          nullable: true
+          example: 1
+    CreatePromotion:
+      description: Create Promotion
+      type: object
+      properties:
+        Name:
+          description: Promotion Name
+          type: string
+          example: Example Name
+        MenuItemPublicIds:
+          description: Promotion Menu Item Awards
+          type: array
+          items:
+            format: uuid
+            type: string
+            example: 00000000-0000-0000-0000-000000000000
+          example:
+          - 00000000-0000-0000-0000-000000000000
+    VoucherDataPoint:
+      description: A single data point in timeline graphs related to Vouchers
+      type: object
+      properties:
+        PeriodStart:
+          format: date-time
+          description: Date from which the data point starts
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodLengthInDays:
+          format: int32
+          description: The length in days that this data point covers
+          type: integer
+          example: 1
+        Value:
+          format: int32
+          description: The value of this data point
+          type: integer
+          example: 1
+    UpdateVoucher:
+      description: Update Voucher
+      type: object
+      properties:
+        PromotionId:
+          format: int32
+          description: Promotion ID to update
+          type: integer
+          example: 500123
+        PromotionName:
+          description: The updated name of the promotion
+          type: string
+          example: Example Name
+        PromotionAwardMenuItemPublicIds:
+          description: The updated menu items that the promotion awards
+          type: array
+          items:
+            format: uuid
+            type: string
+            example: 00000000-0000-0000-0000-000000000000
+          example:
+          - 00000000-0000-0000-0000-000000000000
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        Stores:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        ValidOnOrdersOver:
+          format: double
+          description: Valid on orders on or above
+          type: number
+          example: 1.0
+        TakesPriority:
+          description: Takes priority
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        IsAutomaticallyApplied:
+          description: Is voucher automatically applied
+          type: boolean
+          example: true
+        IncludeDeliveryFee:
+          description: Include delivery fees
+          type: boolean
+          example: true
+        IsValidForDeliveryOrders:
+          description: Valid for delivery orders
+          type: boolean
+          example: true
+        IsValidForPickupOrders:
+          description: Valid for pickup orders
+          type: boolean
+          example: true
+        IsValidForOrdersPayedOnline:
+          description: Valid for orders payed online
+          type: boolean
+          example: true
+        IsValidForOrdersPayedByCash:
+          description: Valid for orders payed in cash
+          type: boolean
+          example: true
+        IsValidForFirstOrderOnly:
+          description: Valid only on the first order by the customer
+          type: boolean
+          example: true
+        IsValidOncePerCustomer:
+          description: Valid once per customer
+          type: boolean
+          example: true
+        IsValidOnlyOnce:
+          description: Valid only once, by any customer (once used cannot be used again by any other customer)
+          type: boolean
+          example: true
+        IsDiscoverable:
+          description: Enables the voucher to be offered in the Voucher Discoverability feature
+          type: boolean
+          example: true
+        ForceDiscount:
+          description: Force the discount to be applied which bypasses some menu restrictions
+          type: boolean
+          example: true
+        StartDate:
+          format: date-time
+          description: Voucher Starts On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ExpiryDate:
+          format: date-time
+          description: Voucher Expires On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChannelRestrictions:
+          description: Limit the channels this voucher can be used on
+          type: array
+          items:
+            enum:
+            - Ios
+            - Android
+            - Web
+            - Kiosk
+            - Pos
+            - Google
+            type: string
+          example:
+          - Ios
+        ValidityPeriods:
+          description: "Periods in which the voucher is valid.\r\nAn empty list means the voucher is valid at all times.\r\nWhen updating the voucher, if this is set to null, the validity periods won't be updated."
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidityPeriod'
+          example: []
+        VoucherSubType:
+          description: Voucher Subtype
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        CustomerId:
+          format: int32
+          description: Customer UserID
+          type: integer
+          nullable: true
+          example: 500123
+        MaxRedemptions:
+          format: int32
+          description: Maximum number of times the voucher can be redeemed (used)
+          type: integer
+          nullable: true
+          example: 1
+    LumpDiscountDetails:
+      description: Lump discount details
+      type: object
+      properties:
+        DiscountAmount:
+          format: double
+          description: Discount amount
+          type: number
+          example: 12.5
+    CreditNoteDetails:
+      description: Credit note details
+      type: object
+      properties:
+        RemainingCredit:
+          format: double
+          description: Remaining credit
+          type: number
+          example: 1.0
+    RestApiPaginationResult_VoucherSummary_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherSummary'
+          example: []
+    PromotionAward:
+      description: Promotion
+      type: object
+      properties:
+        PromotionAwardId:
+          format: int32
+          description: Promotion Award Id
+          type: integer
+          example: 500123
+        MenuItemPublicId:
+          format: uuid
+          description: The public id of the menu item that will be awarded
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    UpdateVoucherUsage:
+      description: Update Voucher Usage
+      type: object
+      properties:
+        IsUsed:
+          description: Flag indicating whether the voucher is used
+          type: boolean
+          example: true
+        UsedByCustomerId:
+          format: int32
+          description: Indicates Customer that used the voucher.
+          type: integer
+          nullable: true
+          example: 500123
+        TransactionKey:
+          description: "An opaque string, to ensure idempotency. This allows for safely retrying requests without accidentally performing the same stamp operation twice. \r\nThis will typically contain the the ID of the sale order."
+          type: string
+          example: string
+    Voucher:
+      description: Voucher
+      type: object
+      properties:
+        VoucherId:
+          format: int32
+          description: Voucher Id
+          type: integer
+          example: 500123
+        Status:
+          description: Voucher Status
+          enum:
+          - Valid
+          - NotYetValid
+          - Expired
+          - Used
+          - Disabled
+          type: string
+          example: Valid
+        VoucherType:
+          description: Voucher Type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        Currency:
+          description: Currency of the voucher
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        StoreNames:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        PromotionDetails:
+          $ref: '#/components/schemas/PromotionDetails'
+        CreditNoteDetails:
+          $ref: '#/components/schemas/CreditNoteDetails'
+        LumpDiscountDetails:
+          $ref: '#/components/schemas/LumpDiscountDetails'
+        PercentDiscountDetails:
+          $ref: '#/components/schemas/PercentDiscountDetails'
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        Stores:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        ValidOnOrdersOver:
+          format: double
+          description: Valid on orders on or above
+          type: number
+          example: 1.0
+        TakesPriority:
+          description: Takes priority
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        IsAutomaticallyApplied:
+          description: Is voucher automatically applied
+          type: boolean
+          example: true
+        IncludeDeliveryFee:
+          description: Include delivery fees
+          type: boolean
+          example: true
+        IsValidForDeliveryOrders:
+          description: Valid for delivery orders
+          type: boolean
+          example: true
+        IsValidForPickupOrders:
+          description: Valid for pickup orders
+          type: boolean
+          example: true
+        IsValidForOrdersPayedOnline:
+          description: Valid for orders payed online
+          type: boolean
+          example: true
+        IsValidForOrdersPayedByCash:
+          description: Valid for orders payed in cash
+          type: boolean
+          example: true
+        IsValidForFirstOrderOnly:
+          description: Valid only on the first order by the customer
+          type: boolean
+          example: true
+        IsValidOncePerCustomer:
+          description: Valid once per customer
+          type: boolean
+          example: true
+        IsValidOnlyOnce:
+          description: Valid only once, by any customer (once used cannot be used again by any other customer)
+          type: boolean
+          example: true
+        IsDiscoverable:
+          description: Enables the voucher to be offered in the Voucher Discoverability feature
+          type: boolean
+          example: true
+        ForceDiscount:
+          description: Force the discount to be applied which bypasses some menu restrictions
+          type: boolean
+          example: true
+        StartDate:
+          format: date-time
+          description: Voucher Starts On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ExpiryDate:
+          format: date-time
+          description: Voucher Expires On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChannelRestrictions:
+          description: Limit the channels this voucher can be used on
+          type: array
+          items:
+            enum:
+            - Ios
+            - Android
+            - Web
+            - Kiosk
+            - Pos
+            - Google
+            type: string
+          example:
+          - Ios
+        ValidityPeriods:
+          description: "Periods in which the voucher is valid.\r\nAn empty list means the voucher is valid at all times.\r\nWhen updating the voucher, if this is set to null, the validity periods won't be updated."
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidityPeriod'
+          example: []
+        VoucherSubType:
+          description: Voucher Subtype
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        CustomerId:
+          format: int32
+          description: Customer UserID
+          type: integer
+          nullable: true
+          example: 500123
+        MaxRedemptions:
+          format: int32
+          description: Maximum number of times the voucher can be redeemed (used)
+          type: integer
+          nullable: true
+          example: 1
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

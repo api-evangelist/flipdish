@@ -1,0 +1,552 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Lightspeed API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Lightspeed
+  description: Operations for Lightspeed.
+paths:
+  /api/v1.0/lightspeed/{storeId}/settings:
+    get:
+      tags:
+      - Lightspeed
+      operationId: Lightspeed_GetStoreSettings
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LightspeedSettings_'
+              examples:
+                Lightspeed_GetStoreSettings200Example:
+                  summary: Default Lightspeed_GetStoreSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CompanyId: '500123'
+                      UseOAuth: true
+                      Enabled: true
+                      EstimatedMinutesForDelivery: 1
+                      EstimatedMinutesForCollection: 1
+                      GeographicLocation: string
+                      Establishment: true
+                      VoucherId: '500123'
+                      DeliveryFeeId: '500123'
+                      ProcessingFeeId: '500123'
+                      PriceType: Default
+                      MenuId: 500123
+                      CollectionTableId: 500123
+                      DeliveryTableId: 500123
+                      CollectionTableIds: {}
+                      DeliveryTableIds: {}
+                      UseTaxInclusivePrices: true
+                      SkipStatusCheckAndAcceptOrderAfterSending: true
+                      SendTableNumberToTableId: true
+                      AddChefNoteToProduct: true
+                      ChefNoteItemId: '500123'
+                      ChefNoteModifierId: '500123'
+                      ServiceChargeId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GetStoreSettings400Example:
+                  summary: Default Lightspeed_GetStoreSettings 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GetStoreSettings401Example:
+                  summary: Default Lightspeed_GetStoreSettings 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GetStoreSettings403Example:
+                  summary: Default Lightspeed_GetStoreSettings 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GetStoreSettings404Example:
+                  summary: Default Lightspeed_GetStoreSettings 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GetStoreSettings500Example:
+                  summary: Default Lightspeed_GetStoreSettings 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Lightspeed_Get Store Settings
+      description: Lightspeed_Get Store Settings via the Flipdish Open API v1.0 (GET /api/v1.0/lightspeed/{storeId}/settings).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Lightspeed
+      operationId: Lightspeed_SaveStoreSettings
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LightspeedSettings'
+            examples:
+              Lightspeed_SaveStoreSettingsRequestExample:
+                summary: Default Lightspeed_SaveStoreSettings request
+                x-microcks-default: true
+                value:
+                  CompanyId: '500123'
+                  UseOAuth: true
+                  Enabled: true
+                  EstimatedMinutesForDelivery: 1
+                  EstimatedMinutesForCollection: 1
+                  GeographicLocation: string
+                  Establishment: true
+                  VoucherId: '500123'
+                  DeliveryFeeId: '500123'
+                  ProcessingFeeId: '500123'
+                  PriceType: Default
+                  MenuId: 500123
+                  CollectionTableId: 500123
+                  DeliveryTableId: 500123
+                  CollectionTableIds: {}
+                  DeliveryTableIds: {}
+                  UseTaxInclusivePrices: true
+                  SkipStatusCheckAndAcceptOrderAfterSending: true
+                  SendTableNumberToTableId: true
+                  AddChefNoteToProduct: true
+                  ChefNoteItemId: '500123'
+                  ChefNoteModifierId: '500123'
+                  ServiceChargeId: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LightspeedSettings_'
+              examples:
+                Lightspeed_SaveStoreSettings200Example:
+                  summary: Default Lightspeed_SaveStoreSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CompanyId: '500123'
+                      UseOAuth: true
+                      Enabled: true
+                      EstimatedMinutesForDelivery: 1
+                      EstimatedMinutesForCollection: 1
+                      GeographicLocation: string
+                      Establishment: true
+                      VoucherId: '500123'
+                      DeliveryFeeId: '500123'
+                      ProcessingFeeId: '500123'
+                      PriceType: Default
+                      MenuId: 500123
+                      CollectionTableId: 500123
+                      DeliveryTableId: 500123
+                      CollectionTableIds: {}
+                      DeliveryTableIds: {}
+                      UseTaxInclusivePrices: true
+                      SkipStatusCheckAndAcceptOrderAfterSending: true
+                      SendTableNumberToTableId: true
+                      AddChefNoteToProduct: true
+                      ChefNoteItemId: '500123'
+                      ChefNoteModifierId: '500123'
+                      ServiceChargeId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_SaveStoreSettings400Example:
+                  summary: Default Lightspeed_SaveStoreSettings 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_SaveStoreSettings401Example:
+                  summary: Default Lightspeed_SaveStoreSettings 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_SaveStoreSettings403Example:
+                  summary: Default Lightspeed_SaveStoreSettings 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_SaveStoreSettings500Example:
+                  summary: Default Lightspeed_SaveStoreSettings 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Lightspeed_Save Store Settings
+      description: Lightspeed_Save Store Settings via the Flipdish Open API v1.0 (POST /api/v1.0/lightspeed/{storeId}/settings).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/lightspeed/{storeId}/menu/generate:
+    post:
+      tags:
+      - Lightspeed
+      operationId: Lightspeed_GenerateMenu
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Lightspeed_GenerateMenu200Example:
+                  summary: Default Lightspeed_GenerateMenu 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GenerateMenu400Example:
+                  summary: Default Lightspeed_GenerateMenu 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GenerateMenu401Example:
+                  summary: Default Lightspeed_GenerateMenu 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GenerateMenu403Example:
+                  summary: Default Lightspeed_GenerateMenu 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Lightspeed_GenerateMenu500Example:
+                  summary: Default Lightspeed_GenerateMenu 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Lightspeed_Generate Menu
+      description: Lightspeed_Generate Menu via the Flipdish Open API v1.0 (POST /api/v1.0/lightspeed/{storeId}/menu/generate).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_LightspeedSettings_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/LightspeedSettings'
+    LightspeedSettings:
+      description: Ligthspeed store settings
+      type: object
+      properties:
+        CompanyId:
+          description: Company Id
+          type: string
+          example: '500123'
+        UseOAuth:
+          description: Use OAuth for authentication
+          type: boolean
+          example: true
+        Enabled:
+          description: Enabled
+          type: boolean
+          example: true
+        EstimatedMinutesForDelivery:
+          format: int32
+          description: Estimated minutes for delivery
+          type: integer
+          example: 1
+        EstimatedMinutesForCollection:
+          format: int32
+          description: Estimated minutes for collection
+          type: integer
+          example: 1
+        GeographicLocation:
+          description: Geographic location (euc1, nae1, euw2, ....))
+          type: string
+          example: string
+        Establishment:
+          description: Is the CompanyId an establishment (kind of the store of a group of store)
+          type: boolean
+          example: true
+        VoucherId:
+          description: The Lightspeed voucher identifier to map with our
+          type: string
+          example: '500123'
+        DeliveryFeeId:
+          description: The Lightspeed delivery fee identifier to map with our
+          type: string
+          example: '500123'
+        ProcessingFeeId:
+          description: The Lightspeed processing fee identifier to map with our
+          type: string
+          example: '500123'
+        PriceType:
+          description: Which price to choose from Lightspeed menu
+          enum:
+          - Default
+          - Takeaway
+          - Delivery
+          type: string
+          nullable: true
+          example: Default
+        MenuId:
+          format: int32
+          description: The menu id of the store
+          type: integer
+          example: 500123
+        CollectionTableId:
+          format: int32
+          description: Collection Table ID to send orders
+          type: integer
+          nullable: true
+          example: 500123
+        DeliveryTableId:
+          format: int32
+          description: Delivery Table ID to send orders
+          type: integer
+          nullable: true
+          example: 500123
+        CollectionTableIds:
+          description: Collection Table IDs to send orders to
+          type: object
+          additionalProperties:
+            type: string
+        DeliveryTableIds:
+          description: Delivery Table IDs to send orders to
+          type: object
+          additionalProperties:
+            type: string
+        UseTaxInclusivePrices:
+          description: Exclude tax
+          type: boolean
+          example: true
+        SkipStatusCheckAndAcceptOrderAfterSending:
+          description: 'WARNING: only use this option if the Liteserver is not synchronizing within max 5 minutes with Lightspeed cloud!'
+          type: boolean
+          example: true
+        SendTableNumberToTableId:
+          description: Send Table Number to Table Id
+          type: boolean
+          example: true
+        AddChefNoteToProduct:
+          description: Add ChefNote To Product
+          type: boolean
+          example: true
+        ChefNoteItemId:
+          description: The Lightspeed Chef Note Item Id to map
+          type: string
+          example: '500123'
+        ChefNoteModifierId:
+          description: The Lightspeed Chef Note Modifier Id to map
+          type: string
+          example: '500123'
+        ServiceChargeId:
+          description: The Lightspeed Service Charge Id to map
+          type: string
+          example: '500123'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

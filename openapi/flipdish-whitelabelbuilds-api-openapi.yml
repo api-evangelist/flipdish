@@ -1,0 +1,615 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts WhiteLabelBuilds API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: WhiteLabelBuilds
+  description: Operations for White Label Builds.
+paths:
+  /api/v1.0/whitelabelbuilds/health:
+    get:
+      tags:
+      - WhiteLabelBuilds
+      operationId: HealthCheck
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                HealthCheck200Example:
+                  summary: Default HealthCheck 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck400Example:
+                  summary: Default HealthCheck 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck401Example:
+                  summary: Default HealthCheck 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck403Example:
+                  summary: Default HealthCheck 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck500Example:
+                  summary: Default HealthCheck 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Health Check
+      description: Health Check via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelbuilds/health).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelbuilds/{appId}/android:
+    post:
+      tags:
+      - WhiteLabelBuilds
+      operationId: SubmitAndroidBuild
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: branch
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The branch query parameter.
+        example: string
+      - name: lane
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The lane query parameter.
+        example: string
+      - name: buildType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The build type query parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BuildResultModel_'
+              examples:
+                SubmitAndroidBuild200Example:
+                  summary: Default SubmitAndroidBuild 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Message: string
+                      BuildId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidBuild400Example:
+                  summary: Default SubmitAndroidBuild 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidBuild401Example:
+                  summary: Default SubmitAndroidBuild 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidBuild403Example:
+                  summary: Default SubmitAndroidBuild 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidBuild500Example:
+                  summary: Default SubmitAndroidBuild 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Submit Android Build
+      description: Submit Android Build via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelbuilds/{appId}/android).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelbuilds/ios/multiple:
+    post:
+      tags:
+      - WhiteLabelBuilds
+      operationId: SubmitIosApps
+      parameters:
+      - name: whiteLabelIds
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The white label ids query parameter.
+        example: string
+      - name: branch
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The branch query parameter.
+        example: string
+      - name: buildType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The build type query parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BuildResultModel_'
+              examples:
+                SubmitIosApps200Example:
+                  summary: Default SubmitIosApps 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Message: string
+                      BuildId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosApps400Example:
+                  summary: Default SubmitIosApps 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosApps401Example:
+                  summary: Default SubmitIosApps 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosApps403Example:
+                  summary: Default SubmitIosApps 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosApps500Example:
+                  summary: Default SubmitIosApps 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Submit Ios Apps
+      description: Submit Ios Apps via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelbuilds/ios/multiple).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelbuilds/{appId}/ios:
+    post:
+      tags:
+      - WhiteLabelBuilds
+      operationId: SubmitIosBuild
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: buildType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The build type query parameter.
+        example: string
+      - name: branch
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The branch query parameter.
+        example: string
+      - name: submitForReview
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The submit for review query parameter.
+        example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BuildResultModel_'
+              examples:
+                SubmitIosBuild200Example:
+                  summary: Default SubmitIosBuild 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Message: string
+                      BuildId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosBuild400Example:
+                  summary: Default SubmitIosBuild 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosBuild401Example:
+                  summary: Default SubmitIosBuild 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosBuild403Example:
+                  summary: Default SubmitIosBuild 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitIosBuild500Example:
+                  summary: Default SubmitIosBuild 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Submit Ios Build
+      description: Submit Ios Build via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelbuilds/{appId}/ios).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelbuilds/android/multiple:
+    post:
+      tags:
+      - WhiteLabelBuilds
+      operationId: SubmitAndroidApps
+      parameters:
+      - name: whiteLabelIds
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The white label ids query parameter.
+        example: string
+      - name: branch
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The branch query parameter.
+        example: string
+      - name: buildType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The build type query parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BuildResultModel_'
+              examples:
+                SubmitAndroidApps200Example:
+                  summary: Default SubmitAndroidApps 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Message: string
+                      BuildId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidApps400Example:
+                  summary: Default SubmitAndroidApps 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidApps401Example:
+                  summary: Default SubmitAndroidApps 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidApps403Example:
+                  summary: Default SubmitAndroidApps 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SubmitAndroidApps500Example:
+                  summary: Default SubmitAndroidApps 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Submit Android Apps
+      description: Submit Android Apps via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelbuilds/android/multiple).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    BuildResultModel:
+      description: Build result model
+      type: object
+      properties:
+        Message:
+          description: Build result message
+          type: string
+          example: string
+        BuildId:
+          description: Build ID or reference
+          type: string
+          example: '500123'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_BuildResultModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BuildResultModel'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

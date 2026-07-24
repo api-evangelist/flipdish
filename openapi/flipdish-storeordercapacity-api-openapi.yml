@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts StoreOrderCapacity API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: StoreOrderCapacity
+  description: Operations for Store Order Capacity.
+paths:
+  /api/v1.0/{appId}/storeordercapacity/{storeId}/{deliveryType}:
+    get:
+      tags:
+      - StoreOrderCapacity
+      operationId: GetStoreOrderCapacity
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      - name: deliveryType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - Delivery
+          - Pickup
+        description: The delivery type path parameter.
+        example: Delivery
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StoreOrderCapacityConfig_'
+              examples:
+                GetStoreOrderCapacity200Example:
+                  summary: Default GetStoreOrderCapacity 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      StoreId: 500123
+                      DeliveryType: Delivery
+                      StoreIntervalInMinutes: 1
+                      OrderCapacityPeriods: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreOrderCapacity400Example:
+                  summary: Default GetStoreOrderCapacity 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreOrderCapacity401Example:
+                  summary: Default GetStoreOrderCapacity 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreOrderCapacity403Example:
+                  summary: Default GetStoreOrderCapacity 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreOrderCapacity500Example:
+                  summary: Default GetStoreOrderCapacity 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Store Order Capacity
+      description: Get Store Order Capacity via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/storeordercapacity/{storeId}/{deliveryType}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/storeordercapacity/{storeId}:
+    post:
+      tags:
+      - StoreOrderCapacity
+      operationId: UpdateStoreOrderCapacityConfig
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      - name: deliveryType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Delivery
+          - Pickup
+        description: The delivery type query parameter.
+        example: Delivery
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreOrderCapacityConfigEditModel'
+            examples:
+              UpdateStoreOrderCapacityConfigRequestExample:
+                summary: Default UpdateStoreOrderCapacityConfig request
+                x-microcks-default: true
+                value:
+                  OrderCapacityPeriods: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateStoreOrderCapacityConfig400Example:
+                  summary: Default UpdateStoreOrderCapacityConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateStoreOrderCapacityConfig401Example:
+                  summary: Default UpdateStoreOrderCapacityConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateStoreOrderCapacityConfig403Example:
+                  summary: Default UpdateStoreOrderCapacityConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateStoreOrderCapacityConfig404Example:
+                  summary: Default UpdateStoreOrderCapacityConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateStoreOrderCapacityConfig500Example:
+                  summary: Default UpdateStoreOrderCapacityConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Store Order Capacity Config
+      description: Update Store Order Capacity Config via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/storeordercapacity/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    StoreOrderCapacityConfigEditModel:
+      description: Represents one store's order capacity configuration edit
+      type: object
+      properties:
+        OrderCapacityPeriods:
+          description: Order capacity periods
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreOrderCapacityPeriod'
+          example: []
+    StoreOrderCapacityPeriod:
+      description: Represents a single order capacity period
+      type: object
+      properties:
+        MaxOrderNumberPerStoreInterval:
+          format: int32
+          description: "The maximum number of orders per each store order interval in this order capacity period.\r\nE.g. for a period from 9:00 till 11:00, if the store's interval is 10 minutes, and MaxOrderNumberPerStoreInterval is set to 5,\r\nit means that within each 10-minute interval between 9:00 and 11:00 (i.e. 9:00-9:10, 9:10-9:20, .. , 10:50-11:00) it will be possible to\r\nrequest at most 5 orders."
+          type: integer
+          example: 3
+        DayOfTheWeek:
+          description: Day of the week the period pertains to
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        PeriodStartHour:
+          format: int32
+          description: The hour the period starts at
+          type: integer
+          example: 1
+        PeriodStartMinutes:
+          format: int32
+          description: The minutes after the hour the period starts at
+          type: integer
+          example: 1
+        PeriodEndHour:
+          format: int32
+          description: The hour the period ends at
+          type: integer
+          example: 1
+        PeriodEndMinutes:
+          format: int32
+          description: The minutes after the hour the period ends at
+          type: integer
+          example: 1
+    RestApiResult_StoreOrderCapacityConfig_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreOrderCapacityConfig'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    StoreOrderCapacityConfig:
+      description: Represents one store's order capacity configuration
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        DeliveryType:
+          description: Signifies whether the order capacity configuration is for Delivery / Pickup
+          enum:
+          - Delivery
+          - Pickup
+          type: string
+          example: Delivery
+        StoreIntervalInMinutes:
+          format: int32
+          description: Store Interval - time between orders, e.g. 10 minutes between each order time available to customer
+          type: integer
+          example: 1
+        OrderCapacityPeriods:
+          description: Order capacity periods
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreOrderCapacityPeriod'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

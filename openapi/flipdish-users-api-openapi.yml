@@ -1,0 +1,5534 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Users API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Users
+  description: Operations for Users.
+paths:
+  /api/v1.0/users/roles:
+    get:
+      tags:
+      - Users
+      operationId: GetRoles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringArrayResult'
+              examples:
+                GetRoles200Example:
+                  summary: Default GetRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                    - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRoles400Example:
+                  summary: Default GetRoles 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRoles401Example:
+                  summary: Default GetRoles 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRoles403Example:
+                  summary: Default GetRoles 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRoles500Example:
+                  summary: Default GetRoles 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Roles
+      description: Get Roles via the Flipdish Open API v1.0 (GET /api/v1.0/users/roles).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}:
+    get:
+      tags:
+      - Users
+      operationId: GetUserById
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_UserInfo_'
+              examples:
+                GetUserById200Example:
+                  summary: Default GetUserById 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      PhoneNumber: '+353000000000'
+                      Email: owner@example.com
+                      EmailConfirmed: true
+                      PreventFromUsingCards: true
+                      IsUserPhoneNumberBlocked: true
+                      UserWhiteLabels: []
+                      UserId: 500123
+                      UserName: Example Name
+                      CustomerName: Example Name
+                      HasLoggedIn: true
+                      DisableAppRatingControl: true
+                      GloballyOptedOut: true
+                      CompletedOrderCount: 3
+                      CancelledOrderCount: 3
+                      OrderTotalValue: 12.5
+                      TsMostRecentOrder: '2026-06-02T12:00:00Z'
+                      TsFirstOrder: '2026-06-02T12:00:00Z'
+                      IsRestaurantUser: true
+                      Installs: []
+                      DeliveryLocations: []
+                      PaymentAccounts: []
+                      LanguageId: '500123'
+                      CurrentLanguageName: Example Name
+                      Languages: []
+                      SalesForceContactId: '500123'
+                      StripeCustomerId: '500123'
+                      UserMonthlyCommissions: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserById400Example:
+                  summary: Default GetUserById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserById401Example:
+                  summary: Default GetUserById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserById403Example:
+                  summary: Default GetUserById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserById500Example:
+                  summary: Default GetUserById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get User by Id
+      description: Get User by Id via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/roles:
+    get:
+      tags:
+      - Users
+      operationId: GetRolesAndUnassignedRoles
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_UserRole_'
+              examples:
+                GetRolesAndUnassignedRoles200Example:
+                  summary: Default GetRolesAndUnassignedRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      RolesUserIn:
+                      - string
+                      RolesUserNotIn:
+                      - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRolesAndUnassignedRoles400Example:
+                  summary: Default GetRolesAndUnassignedRoles 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRolesAndUnassignedRoles401Example:
+                  summary: Default GetRolesAndUnassignedRoles 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRolesAndUnassignedRoles403Example:
+                  summary: Default GetRolesAndUnassignedRoles 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRolesAndUnassignedRoles500Example:
+                  summary: Default GetRolesAndUnassignedRoles 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Roles and Unassigned Roles
+      description: Get Roles and Unassigned Roles via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/roles).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/UserNotes:
+    get:
+      tags:
+      - Users
+      operationId: GetUserNotes
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_UserNote_'
+              examples:
+                GetUserNotes200Example:
+                  summary: Default GetUserNotes 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserNotes400Example:
+                  summary: Default GetUserNotes 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserNotes401Example:
+                  summary: Default GetUserNotes 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserNotes403Example:
+                  summary: Default GetUserNotes 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserNotes500Example:
+                  summary: Default GetUserNotes 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get User Notes
+      description: Get User Notes via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/UserNotes).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/orders/{orderId}:
+    get:
+      tags:
+      - Users
+      operationId: GetUserOrderByIdForAdmin
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The order id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Order_'
+              examples:
+                GetUserOrderByIdForAdmin200Example:
+                  summary: Default GetUserOrderByIdForAdmin 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Store:
+                        Id: 500123
+                        Name: Example Name
+                        MenuId: 500123
+                        MenuPublishId: 00000000-0000-0000-0000-000000000000
+                        Metadata: {}
+                        Currency: EUR
+                        Coordinates: {}
+                        StoreTimezone: string
+                        StoreIanaTimezone: string
+                        StoreGroupId: 500123
+                        TaxId: '500123'
+                        PrettyAddress: string
+                        CountryCode: IE
+                        PropertyId: '500123'
+                      Customer:
+                        Id: 500123
+                        Name: Example Name
+                        EmailAddress: owner@example.com
+                        PhoneNumberLocalFormat: '2026-06-02T12:00:00Z'
+                        PhoneNumber: '+353000000000'
+                        LanguagePreference: string
+                      Voucher:
+                        VoucherId: 500123
+                        Name: Example Name
+                        Description: string
+                        Code: string
+                        Amount: 12.5
+                        Type: PercentageDiscount
+                        SubType: None
+                      Fees:
+                        FeeAmount: 12.5
+                        PercentageRate: 1.0
+                        PerTransactionFee: 12.5
+                      OrderItems: []
+                      DeliveryLocation:
+                        Coordinates: {}
+                        Building: string
+                        Street: string
+                        Town: string
+                        PostCode: string
+                        DeliveryInstructions: string
+                        PrettyAddressString: string
+                      CustomerLocation:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MaskedPhoneNumber:
+                        IsEnabled: true
+                        PhoneNumber: '+353000000000'
+                        Code: string
+                      DropOffLocationId: 500123
+                      DropOffLocation: string
+                      AcceptedFor: '2026-06-02T12:00:00Z'
+                      InFraudZone: true
+                      UnusualHighValueOrder: true
+                      RejectedByUserId: 500123
+                      ChannelOrderId: '500123'
+                      ChannelOrderDisplayId: '500123'
+                      Channel:
+                        ChannelId: 500123
+                        TranslationKey: string
+                        Source: Internal
+                        LogoUri: https://api.flipdish.co/example
+                        Available: true
+                        MaintainedExternally: true
+                      OrderDropOffLocation:
+                        OrderId: 500123
+                        LocationName: Example Name
+                        LocationAreaName: Example Name
+                        LocationId: 500123
+                        LocationAreaId: 500123
+                        ExternalLocationId: '500123'
+                      FulfillmentStatus:
+                        StatusId: '500123'
+                        StatusName: Example Name
+                        Icon: string
+                      OrderBatchInfo:
+                        Id: 500123
+                        DisplayCode: string
+                        CreateTime: '2026-06-02T12:00:00Z'
+                        IsPublished: true
+                      TaxItems: []
+                      CreatedCampaignVoucherId: 500123
+                      OrderId: 500123
+                      LocalOrderId: '500123'
+                      DeliveryType: Delivery
+                      PickupLocationType: TakeOut
+                      TableServiceCatagory: Generic
+                      TipAmount: 12.5
+                      DeliveryAmount: 12.5
+                      OrderItemsAmount: 12.5
+                      ServiceChargeAmount: 12.5
+                      ServiceChargePercentage: 1.0
+                      Amount: 12.5
+                      ProcessingFee: 12.5
+                      PaymentAccountType: Card
+                      PaymentAccountDescription: string
+                      OrderState: Created
+                      IsPreOrder: true
+                      PlacedTime: '2026-06-02T12:00:00Z'
+                      RequestedForTime: '2026-06-02T12:00:00Z'
+                      ChefNote: string
+                      AppType: Unknown
+                      UserRating: 1
+                      PaymentStatus: Paid
+                      RejectionReason: TooBusy
+                      RefundedAmount: 12.5
+                      DeliveryTrackingStatus: Unassigned
+                      DriverId: 500123
+                      TotalTax: 12.5
+                      OrderTrackingCode: string
+                      DeliveryFeeAreaId: 500123
+                      ReceiptCode: string
+                      TotalDepositReturnFeeAmount: 12.5
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrderByIdForAdmin400Example:
+                  summary: Default GetUserOrderByIdForAdmin 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrderByIdForAdmin401Example:
+                  summary: Default GetUserOrderByIdForAdmin 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrderByIdForAdmin403Example:
+                  summary: Default GetUserOrderByIdForAdmin 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrderByIdForAdmin404Example:
+                  summary: Default GetUserOrderByIdForAdmin 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrderByIdForAdmin500Example:
+                  summary: Default GetUserOrderByIdForAdmin 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get User Order by Id for Admin
+      description: Get User Order by Id for Admin via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/orders/{orderId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/RestaurantUserStores:
+    get:
+      tags:
+      - Users
+      operationId: GetRestaurantUserStores
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_UserStoreInfo_'
+              examples:
+                GetRestaurantUserStores200Example:
+                  summary: Default GetRestaurantUserStores 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserStores400Example:
+                  summary: Default GetRestaurantUserStores 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserStores401Example:
+                  summary: Default GetRestaurantUserStores 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserStores403Example:
+                  summary: Default GetRestaurantUserStores 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserStores500Example:
+                  summary: Default GetRestaurantUserStores 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Restaurant User Stores
+      description: Get Restaurant User Stores via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/RestaurantUserStores).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/RestaurantUserAccounts:
+    get:
+      tags:
+      - Users
+      operationId: GetRestaurantUserAccounts
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_UserFlipdishAccount_'
+              examples:
+                GetRestaurantUserAccounts200Example:
+                  summary: Default GetRestaurantUserAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserAccounts400Example:
+                  summary: Default GetRestaurantUserAccounts 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserAccounts401Example:
+                  summary: Default GetRestaurantUserAccounts 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserAccounts403Example:
+                  summary: Default GetRestaurantUserAccounts 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRestaurantUserAccounts500Example:
+                  summary: Default GetRestaurantUserAccounts 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Restaurant User Accounts
+      description: Get Restaurant User Accounts via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/RestaurantUserAccounts).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/previousordercount/{storeId}:
+    get:
+      tags:
+      - Users
+      operationId: GetPreviousOrderCountForStore
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                GetPreviousOrderCountForStore200Example:
+                  summary: Default GetPreviousOrderCountForStore 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPreviousOrderCountForStore400Example:
+                  summary: Default GetPreviousOrderCountForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPreviousOrderCountForStore401Example:
+                  summary: Default GetPreviousOrderCountForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPreviousOrderCountForStore403Example:
+                  summary: Default GetPreviousOrderCountForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPreviousOrderCountForStore500Example:
+                  summary: Default GetPreviousOrderCountForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Previous Order Count for Store
+      description: Get Previous Order Count for Store via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/previousordercount/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/searchFlipdishAccounts:
+    get:
+      tags:
+      - Users
+      operationId: SearchFlipdishAccounts
+      parameters:
+      - name: searchPattern
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The search pattern query parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_FlipdishAccountName_'
+              examples:
+                SearchFlipdishAccounts200Example:
+                  summary: Default SearchFlipdishAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFlipdishAccounts400Example:
+                  summary: Default SearchFlipdishAccounts 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFlipdishAccounts401Example:
+                  summary: Default SearchFlipdishAccounts 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFlipdishAccounts403Example:
+                  summary: Default SearchFlipdishAccounts 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFlipdishAccounts500Example:
+                  summary: Default SearchFlipdishAccounts 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Search Flipdish Accounts
+      description: Search Flipdish Accounts via the Flipdish Open API v1.0 (GET /api/v1.0/users/searchFlipdishAccounts).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/deliveryLocations:
+    get:
+      tags:
+      - Users
+      operationId: GetUserDeliveryLocationsForAdmin
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: whiteLabelId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The white label id query parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_UserDeliveryLocationAdmin_'
+              examples:
+                GetUserDeliveryLocationsForAdmin200Example:
+                  summary: Default GetUserDeliveryLocationsForAdmin 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserDeliveryLocationsForAdmin400Example:
+                  summary: Default GetUserDeliveryLocationsForAdmin 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserDeliveryLocationsForAdmin401Example:
+                  summary: Default GetUserDeliveryLocationsForAdmin 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserDeliveryLocationsForAdmin403Example:
+                  summary: Default GetUserDeliveryLocationsForAdmin 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserDeliveryLocationsForAdmin404Example:
+                  summary: Default GetUserDeliveryLocationsForAdmin 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserDeliveryLocationsForAdmin500Example:
+                  summary: Default GetUserDeliveryLocationsForAdmin 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get User Delivery Locations for Admin
+      description: Get User Delivery Locations for Admin via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/deliveryLocations).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Users
+      operationId: CreateUserDeliveryLocation
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDeliveryLocationRequest'
+            examples:
+              CreateUserDeliveryLocationRequestExample:
+                summary: Default CreateUserDeliveryLocation request
+                x-microcks-default: true
+                value:
+                  Building: string
+                  Street: string
+                  Town: string
+                  PostCode: string
+                  FullAddressJson: string
+                  DeliveryInstructions: string
+                  Coordinates:
+                    Latitude: 1.0
+                    Longitude: 1.0
+                  IsDisplayed: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                CreateUserDeliveryLocation200Example:
+                  summary: Default CreateUserDeliveryLocation 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateUserDeliveryLocation400Example:
+                  summary: Default CreateUserDeliveryLocation 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateUserDeliveryLocation401Example:
+                  summary: Default CreateUserDeliveryLocation 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateUserDeliveryLocation403Example:
+                  summary: Default CreateUserDeliveryLocation 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateUserDeliveryLocation404Example:
+                  summary: Default CreateUserDeliveryLocation 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateUserDeliveryLocation500Example:
+                  summary: Default CreateUserDeliveryLocation 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create User Delivery Location
+      description: Create User Delivery Location via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/deliveryLocations).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/orders:
+    get:
+      tags:
+      - Users
+      operationId: GetUserOrdersForAdmin
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The skip query parameter.
+        example: 1
+      - name: take
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The take query parameter.
+        example: 1
+      - name: brandId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The brand id query parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_UserOrderSummary_'
+              examples:
+                GetUserOrdersForAdmin200Example:
+                  summary: Default GetUserOrdersForAdmin 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrdersForAdmin400Example:
+                  summary: Default GetUserOrdersForAdmin 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrdersForAdmin401Example:
+                  summary: Default GetUserOrdersForAdmin 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrdersForAdmin403Example:
+                  summary: Default GetUserOrdersForAdmin 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrdersForAdmin404Example:
+                  summary: Default GetUserOrdersForAdmin 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserOrdersForAdmin500Example:
+                  summary: Default GetUserOrdersForAdmin 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get User Orders for Admin
+      description: Get User Orders for Admin via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/orders).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/smsConversationItems:
+    get:
+      tags:
+      - Users
+      operationId: GetUserSmsConversationItems
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: mostRecentCount
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The most recent count query parameter.
+        example: 3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_UserSmsChatItem_'
+              examples:
+                GetUserSmsConversationItems200Example:
+                  summary: Default GetUserSmsConversationItems 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserSmsConversationItems400Example:
+                  summary: Default GetUserSmsConversationItems 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserSmsConversationItems401Example:
+                  summary: Default GetUserSmsConversationItems 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserSmsConversationItems403Example:
+                  summary: Default GetUserSmsConversationItems 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserSmsConversationItems404Example:
+                  summary: Default GetUserSmsConversationItems 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetUserSmsConversationItems500Example:
+                  summary: Default GetUserSmsConversationItems 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get User Sms Conversation Items
+      description: Get User Sms Conversation Items via the Flipdish Open API v1.0 (GET /api/v1.0/users/{userId}/smsConversationItems).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/search:
+    get:
+      tags:
+      - Users
+      operationId: SearchUsers
+      parameters:
+      - name: searchQuery
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The search query query parameter.
+        example: string
+      - name: hasUserLoggedIn
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The has user logged in query parameter.
+        example: true
+      - name: userDiscriminator
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - All
+          - ApplicationUsers
+          - RestaurantUsers
+          - HydraUsers
+        description: The user discriminator query parameter.
+        example: All
+      - name: searchIn
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Generic
+          - Id
+          - Email
+          - Phone
+          - CustomerName
+          - IdOrPhone
+          - IdOrCustomerName
+        description: The search in query parameter.
+        example: Generic
+      - name: pageIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page index query parameter.
+        example: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page size query parameter.
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_UserSearch_'
+              examples:
+                SearchUsers200Example:
+                  summary: Default SearchUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchUsers400Example:
+                  summary: Default SearchUsers 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchUsers401Example:
+                  summary: Default SearchUsers 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchUsers403Example:
+                  summary: Default SearchUsers 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchUsers500Example:
+                  summary: Default SearchUsers 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Search Users
+      description: Search Users via the Flipdish Open API v1.0 (GET /api/v1.0/users/search).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/sms:
+    post:
+      tags:
+      - Users
+      operationId: SendUserSms
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendUserSmsRequest'
+            examples:
+              SendUserSmsRequestExample:
+                summary: Default SendUserSms request
+                x-microcks-default: true
+                value:
+                  Message: string
+                  WhiteLabelId: 500123
+                  FromNumber: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                SendUserSms200Example:
+                  summary: Default SendUserSms 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserSms400Example:
+                  summary: Default SendUserSms 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserSms401Example:
+                  summary: Default SendUserSms 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserSms403Example:
+                  summary: Default SendUserSms 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserSms404Example:
+                  summary: Default SendUserSms 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserSms500Example:
+                  summary: Default SendUserSms 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Send User Sms
+      description: Send User Sms via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/sms).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/ResetMfa:
+    post:
+      tags:
+      - Users
+      operationId: ResetMfa
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                ResetMfa200Example:
+                  summary: Default ResetMfa 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ResetMfa400Example:
+                  summary: Default ResetMfa 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ResetMfa401Example:
+                  summary: Default ResetMfa 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ResetMfa403Example:
+                  summary: Default ResetMfa 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ResetMfa500Example:
+                  summary: Default ResetMfa 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Reset Mfa
+      description: Reset Mfa via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/ResetMfa).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/AddUserNote:
+    post:
+      tags:
+      - Users
+      operationId: AddUserNote
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                AddUserNote200Example:
+                  summary: Default AddUserNote 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserNote400Example:
+                  summary: Default AddUserNote 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserNote401Example:
+                  summary: Default AddUserNote 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserNote403Example:
+                  summary: Default AddUserNote 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserNote500Example:
+                  summary: Default AddUserNote 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Add User Note
+      description: Add User Note via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/AddUserNote).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/AnonymizeUser:
+    post:
+      tags:
+      - Users
+      operationId: AnonymizeUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                AnonymizeUser200Example:
+                  summary: Default AnonymizeUser 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AnonymizeUser400Example:
+                  summary: Default AnonymizeUser 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AnonymizeUser401Example:
+                  summary: Default AnonymizeUser 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AnonymizeUser403Example:
+                  summary: Default AnonymizeUser 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AnonymizeUser500Example:
+                  summary: Default AnonymizeUser 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Anonymize User
+      description: Anonymize User via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/AnonymizeUser).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/SetCustomerName:
+    post:
+      tags:
+      - Users
+      operationId: SetCustomerName
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                SetCustomerName200Example:
+                  summary: Default SetCustomerName 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCustomerName400Example:
+                  summary: Default SetCustomerName 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCustomerName401Example:
+                  summary: Default SetCustomerName 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCustomerName403Example:
+                  summary: Default SetCustomerName 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCustomerName500Example:
+                  summary: Default SetCustomerName 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Customer Name
+      description: Set Customer Name via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/SetCustomerName).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/pushNotifications:
+    post:
+      tags:
+      - Users
+      operationId: SendUserPushNotification
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendUserPushNotificationRequest'
+            examples:
+              SendUserPushNotificationRequestExample:
+                summary: Default SendUserPushNotification request
+                x-microcks-default: true
+                value:
+                  WhiteLabelId: 500123
+                  Message: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_UserPushNotificationSentResult_'
+              examples:
+                SendUserPushNotification200Example:
+                  summary: Default SendUserPushNotification 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TokenCount: 3
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserPushNotification400Example:
+                  summary: Default SendUserPushNotification 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserPushNotification401Example:
+                  summary: Default SendUserPushNotification 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserPushNotification403Example:
+                  summary: Default SendUserPushNotification 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserPushNotification404Example:
+                  summary: Default SendUserPushNotification 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendUserPushNotification500Example:
+                  summary: Default SendUserPushNotification 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Send User Push Notification
+      description: Send User Push Notification via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/pushNotifications).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/BlockUserPhoneNumber:
+    post:
+      tags:
+      - Users
+      operationId: BlockUserPhoneNumber
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                BlockUserPhoneNumber200Example:
+                  summary: Default BlockUserPhoneNumber 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                BlockUserPhoneNumber400Example:
+                  summary: Default BlockUserPhoneNumber 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                BlockUserPhoneNumber401Example:
+                  summary: Default BlockUserPhoneNumber 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                BlockUserPhoneNumber403Example:
+                  summary: Default BlockUserPhoneNumber 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                BlockUserPhoneNumber500Example:
+                  summary: Default BlockUserPhoneNumber 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Block User Phone Number
+      description: Block User Phone Number via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/BlockUserPhoneNumber).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/MarkUserAsFraudulent:
+    post:
+      tags:
+      - Users
+      operationId: MarkUserAsFraudulent
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                MarkUserAsFraudulent200Example:
+                  summary: Default MarkUserAsFraudulent 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsFraudulent400Example:
+                  summary: Default MarkUserAsFraudulent 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsFraudulent401Example:
+                  summary: Default MarkUserAsFraudulent 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsFraudulent403Example:
+                  summary: Default MarkUserAsFraudulent 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsFraudulent500Example:
+                  summary: Default MarkUserAsFraudulent 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Mark User as Fraudulent
+      description: Mark User as Fraudulent via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/MarkUserAsFraudulent).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/MarkUserAsSuspicious:
+    post:
+      tags:
+      - Users
+      operationId: MarkUserAsSuspicious
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                MarkUserAsSuspicious200Example:
+                  summary: Default MarkUserAsSuspicious 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsSuspicious400Example:
+                  summary: Default MarkUserAsSuspicious 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsSuspicious401Example:
+                  summary: Default MarkUserAsSuspicious 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsSuspicious403Example:
+                  summary: Default MarkUserAsSuspicious 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                MarkUserAsSuspicious500Example:
+                  summary: Default MarkUserAsSuspicious 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Mark User as Suspicious
+      description: Mark User as Suspicious via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/MarkUserAsSuspicious).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/UnblockUserPhoneNumber:
+    post:
+      tags:
+      - Users
+      operationId: UnblockUserPhoneNumber
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                UnblockUserPhoneNumber200Example:
+                  summary: Default UnblockUserPhoneNumber 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnblockUserPhoneNumber400Example:
+                  summary: Default UnblockUserPhoneNumber 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnblockUserPhoneNumber401Example:
+                  summary: Default UnblockUserPhoneNumber 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnblockUserPhoneNumber403Example:
+                  summary: Default UnblockUserPhoneNumber 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UnblockUserPhoneNumber500Example:
+                  summary: Default UnblockUserPhoneNumber 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Unblock User Phone Number
+      description: Unblock User Phone Number via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/UnblockUserPhoneNumber).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/AddUserToRole/{roleName}:
+    post:
+      tags:
+      - Users
+      operationId: AddUserToRole
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: roleName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The role name path parameter.
+        example: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_UserRole_'
+              examples:
+                AddUserToRole200Example:
+                  summary: Default AddUserToRole 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      RolesUserIn:
+                      - string
+                      RolesUserNotIn:
+                      - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserToRole400Example:
+                  summary: Default AddUserToRole 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserToRole401Example:
+                  summary: Default AddUserToRole 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserToRole403Example:
+                  summary: Default AddUserToRole 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddUserToRole500Example:
+                  summary: Default AddUserToRole 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Add User to Role
+      description: Add User to Role via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/AddUserToRole/{roleName}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/SetLanguage/{languageId}:
+    post:
+      tags:
+      - Users
+      operationId: SetUserLanguage
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: languageId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The language id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                SetUserLanguage200Example:
+                  summary: Default SetUserLanguage 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserLanguage400Example:
+                  summary: Default SetUserLanguage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserLanguage401Example:
+                  summary: Default SetUserLanguage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserLanguage403Example:
+                  summary: Default SetUserLanguage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserLanguage500Example:
+                  summary: Default SetUserLanguage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set User Language
+      description: Set User Language via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/SetLanguage/{languageId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/RemoveUserFromRole/{roleName}:
+    post:
+      tags:
+      - Users
+      operationId: RemoveUserFromRole
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: roleName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The role name path parameter.
+        example: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_UserRole_'
+              examples:
+                RemoveUserFromRole200Example:
+                  summary: Default RemoveUserFromRole 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      RolesUserIn:
+                      - string
+                      RolesUserNotIn:
+                      - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveUserFromRole400Example:
+                  summary: Default RemoveUserFromRole 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveUserFromRole401Example:
+                  summary: Default RemoveUserFromRole 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveUserFromRole403Example:
+                  summary: Default RemoveUserFromRole 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveUserFromRole500Example:
+                  summary: Default RemoveUserFromRole 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Remove User from Role
+      description: Remove User from Role via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/RemoveUserFromRole/{roleName}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/SetFlipdishAccountId/{accountId}:
+    post:
+      tags:
+      - Users
+      operationId: SetFlipdishAccountIdForUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The account id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                SetFlipdishAccountIdForUser200Example:
+                  summary: Default SetFlipdishAccountIdForUser 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetFlipdishAccountIdForUser400Example:
+                  summary: Default SetFlipdishAccountIdForUser 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetFlipdishAccountIdForUser401Example:
+                  summary: Default SetFlipdishAccountIdForUser 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetFlipdishAccountIdForUser403Example:
+                  summary: Default SetFlipdishAccountIdForUser 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetFlipdishAccountIdForUser500Example:
+                  summary: Default SetFlipdishAccountIdForUser 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Flipdish Account Id for User
+      description: Set Flipdish Account Id for User via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/SetFlipdishAccountId/{accountId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/RemoveFlipdishAccountId/{accountId}:
+    post:
+      tags:
+      - Users
+      operationId: RemoveFlipdishAccountIdForUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The account id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                RemoveFlipdishAccountIdForUser200Example:
+                  summary: Default RemoveFlipdishAccountIdForUser 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveFlipdishAccountIdForUser400Example:
+                  summary: Default RemoveFlipdishAccountIdForUser 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveFlipdishAccountIdForUser401Example:
+                  summary: Default RemoveFlipdishAccountIdForUser 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveFlipdishAccountIdForUser403Example:
+                  summary: Default RemoveFlipdishAccountIdForUser 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveFlipdishAccountIdForUser500Example:
+                  summary: Default RemoveFlipdishAccountIdForUser 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Remove Flipdish Account Id for User
+      description: Remove Flipdish Account Id for User via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/RemoveFlipdishAccountId/{accountId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/hide:
+    post:
+      tags:
+      - Users
+      operationId: HideUserDeliveryLocation
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: deliveryLocationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The delivery location id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                HideUserDeliveryLocation200Example:
+                  summary: Default HideUserDeliveryLocation 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HideUserDeliveryLocation400Example:
+                  summary: Default HideUserDeliveryLocation 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HideUserDeliveryLocation401Example:
+                  summary: Default HideUserDeliveryLocation 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HideUserDeliveryLocation403Example:
+                  summary: Default HideUserDeliveryLocation 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HideUserDeliveryLocation404Example:
+                  summary: Default HideUserDeliveryLocation 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HideUserDeliveryLocation500Example:
+                  summary: Default HideUserDeliveryLocation 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Hide User Delivery Location
+      description: Hide User Delivery Location via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/hide).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/fields:
+    post:
+      tags:
+      - Users
+      operationId: SetUserDeliveryLocationField
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: deliveryLocationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The delivery location id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUserDeliveryLocationFieldRequest'
+            examples:
+              SetUserDeliveryLocationFieldRequestExample:
+                summary: Default SetUserDeliveryLocationField request
+                x-microcks-default: true
+                value:
+                  Field: DeliveryInstructions
+                  Value: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                SetUserDeliveryLocationField200Example:
+                  summary: Default SetUserDeliveryLocationField 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationField400Example:
+                  summary: Default SetUserDeliveryLocationField 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationField401Example:
+                  summary: Default SetUserDeliveryLocationField 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationField403Example:
+                  summary: Default SetUserDeliveryLocationField 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationField404Example:
+                  summary: Default SetUserDeliveryLocationField 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationField500Example:
+                  summary: Default SetUserDeliveryLocationField 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set User Delivery Location Field
+      description: Set User Delivery Location Field via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/fields).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/coordinates:
+    post:
+      tags:
+      - Users
+      operationId: SetUserDeliveryLocationCoordinates
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The user id path parameter.
+        example: 500123
+      - name: deliveryLocationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The delivery location id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUserDeliveryLocationCoordinatesRequest'
+            examples:
+              SetUserDeliveryLocationCoordinatesRequestExample:
+                summary: Default SetUserDeliveryLocationCoordinates request
+                x-microcks-default: true
+                value:
+                  Latitude: 1.0
+                  Longitude: 1.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiDefaultResponse'
+              examples:
+                SetUserDeliveryLocationCoordinates200Example:
+                  summary: Default SetUserDeliveryLocationCoordinates 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationCoordinates400Example:
+                  summary: Default SetUserDeliveryLocationCoordinates 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationCoordinates401Example:
+                  summary: Default SetUserDeliveryLocationCoordinates 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationCoordinates403Example:
+                  summary: Default SetUserDeliveryLocationCoordinates 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationCoordinates404Example:
+                  summary: Default SetUserDeliveryLocationCoordinates 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetUserDeliveryLocationCoordinates500Example:
+                  summary: Default SetUserDeliveryLocationCoordinates 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set User Delivery Location Coordinates
+      description: Set User Delivery Location Coordinates via the Flipdish Open API v1.0 (POST /api/v1.0/users/{userId}/deliveryLocations/{deliveryLocationId}/coordinates).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FlipdishAccountName:
+      description: Flipdish Account Name
+      type: object
+      properties:
+        PayeeBankAccountDataId:
+          format: int32
+          description: Payee Bank Account Data Id
+          type: integer
+          nullable: true
+          example: 500123
+        FlipdishAccountId:
+          format: int32
+          description: Flipdish Account Id
+          type: integer
+          example: 500123
+        Name:
+          description: Account Name
+          type: string
+          example: Example Name
+    RestApiDefaultResponse:
+      description: Rest api default response
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          readOnly: true
+          example: string
+    RestApiResult_Order_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Order'
+    PaymentAccount:
+      description: Payment Account information
+      type: object
+      properties:
+        UserId:
+          format: int32
+          description: The user ID associated with the payment account.
+          type: integer
+          example: 500123
+        PaymentAccountId:
+          format: int32
+          description: Unique identifier for the payment account.
+          type: integer
+          example: 500123
+        CanRemoveFromCustomerView:
+          description: Indicates if the payment account can be removed from the customer view.
+          type: boolean
+          example: true
+        Bin:
+          description: Bank Identification Number (BIN) of the payment method.
+          type: string
+          example: string
+        IsDefaultPaymentMethod:
+          description: Indicates if this is the default payment method.
+          type: boolean
+          example: true
+        IsVisibleToCustomer:
+          description: Indicates if the payment account is visible to the customer.
+          type: boolean
+          example: true
+        PaymentAccountType:
+          description: The type of payment account (e.g., card, PayPal).
+          type: string
+          example: string
+        Description:
+          description: Description of the payment account.
+          type: string
+          example: string
+        CustomerId:
+          description: The customer ID associated with the payment account.
+          type: string
+          example: '500123'
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_FlipdishAccountName_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/FlipdishAccountName'
+          example: []
+    FeeSummary:
+      description: Fee Summary
+      type: object
+      properties:
+        FeeAmount:
+          format: double
+          description: Fee amount
+          type: number
+          example: 12.5
+        PercentageRate:
+          format: double
+          description: Percentage rate
+          type: number
+          example: 1.0
+        PerTransactionFee:
+          format: double
+          description: Per transaction fee
+          type: number
+          example: 12.5
+    CreateUserDeliveryLocationRequest:
+      description: Create a delivery location for a user (admin).
+      type: object
+      properties:
+        Building:
+          description: Building.
+          type: string
+          example: string
+        Street:
+          description: Street.
+          type: string
+          example: string
+        Town:
+          description: Town.
+          type: string
+          example: string
+        PostCode:
+          description: PostCode.
+          type: string
+          example: string
+        FullAddressJson:
+          description: FullAddressJson.
+          type: string
+          example: string
+        DeliveryInstructions:
+          description: DeliveryInstructions.
+          type: string
+          example: string
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        IsDisplayed:
+          description: Passed through to the same parameter position as legacy admin MVC (maps to IsCustomAddress in map service).
+          type: boolean
+          example: true
+    RestApiArrayResult_UserFlipdishAccount_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFlipdishAccount'
+          example: []
+    CustomerSummary:
+      description: Customer summary
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Customer identifier
+          type: integer
+          example: 500123
+        Name:
+          description: Customer name
+          type: string
+          example: Example Name
+        EmailAddress:
+          description: Customer email address
+          type: string
+          example: owner@example.com
+        PhoneNumberLocalFormat:
+          description: Customer local phone number
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PhoneNumber:
+          description: Customer phone number
+          type: string
+          example: '+353000000000'
+        LanguagePreference:
+          description: Preferred language of the consumer
+          type: string
+          example: string
+    RestApiResult_UserInfo_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UserInfo'
+    RestApiArrayResult_UserDeliveryLocationAdmin_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDeliveryLocationAdmin'
+          example: []
+    Order:
+      description: Order
+      type: object
+      properties:
+        Store:
+          $ref: '#/components/schemas/StoreSummary'
+        Customer:
+          $ref: '#/components/schemas/CustomerSummary'
+        Voucher:
+          $ref: '#/components/schemas/OrderVoucherSummary'
+        Fees:
+          $ref: '#/components/schemas/FeeSummary'
+        OrderItems:
+          description: Ordered items
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+          example: []
+        DeliveryLocation:
+          $ref: '#/components/schemas/DeliveryLocation'
+        CustomerLocation:
+          $ref: '#/components/schemas/Coordinates'
+        MaskedPhoneNumber:
+          $ref: '#/components/schemas/MaskedPhoneNumber'
+        DropOffLocationId:
+          format: int32
+          description: Represents table service drop off location
+          type: integer
+          nullable: true
+          example: 500123
+        DropOffLocation:
+          description: Represents table service drop off location
+          type: string
+          example: string
+        AcceptedFor:
+          format: date-time
+          description: Time store has accepted the order for
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        InFraudZone:
+          description: Was order made within a fraud zone
+          type: boolean
+          example: true
+        UnusualHighValueOrder:
+          description: Is order of unusually high value
+          type: boolean
+          example: true
+        RejectedByUserId:
+          format: int32
+          description: Id of user who rejected order, if available
+          type: integer
+          nullable: true
+          example: 500123
+        ChannelOrderId:
+          description: ChannelOrderId from external channel
+          type: string
+          example: '500123'
+        ChannelOrderDisplayId:
+          description: ChannelOrderDisplayId from external channel
+          type: string
+          example: '500123'
+        Channel:
+          $ref: '#/components/schemas/Channel'
+        OrderDropOffLocation:
+          $ref: '#/components/schemas/OrderDropOffLocation'
+        FulfillmentStatus:
+          $ref: '#/components/schemas/OrderFulfillmentStatusBase'
+        OrderBatchInfo:
+          $ref: '#/components/schemas/OrderBatchSummary'
+        TaxItems:
+          description: A collection of tax items on the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxItem'
+          example: []
+        CreatedCampaignVoucherId:
+          format: int32
+          description: The id of the campaign voucher that was created from this order
+          type: integer
+          nullable: true
+          example: 500123
+        OrderId:
+          format: int32
+          description: Order identifier
+          type: integer
+          example: 500123
+        LocalOrderId:
+          description: Local order Id. This is used for displaying a "shorter" order ID for customers (eg. Kiosk orders)
+          type: string
+          example: '500123'
+        DeliveryType:
+          description: Delivery type
+          enum:
+          - Delivery
+          - Pickup
+          type: string
+          example: Delivery
+        PickupLocationType:
+          description: Pickup location type
+          enum:
+          - TakeOut
+          - TableService
+          - DineIn
+          type: string
+          example: TakeOut
+        TableServiceCatagory:
+          description: Pickup location type
+          enum:
+          - Generic
+          - Villa
+          - House
+          - Room
+          - Area
+          - Table
+          - ParkingBay
+          - Gate
+          - DriveThrough
+          - Team
+          type: string
+          nullable: true
+          example: Generic
+        TipAmount:
+          format: double
+          description: Tip amount
+          type: number
+          example: 12.5
+        DeliveryAmount:
+          format: double
+          description: Delivery amount
+          type: number
+          example: 12.5
+        OrderItemsAmount:
+          format: double
+          description: Ordered items amount
+          type: number
+          example: 12.5
+        ServiceChargeAmount:
+          format: double
+          description: Service Charge Amount
+          type: number
+          example: 12.5
+        ServiceChargePercentage:
+          format: double
+          description: Service Charge Percentage
+          type: number
+          example: 1.0
+        Amount:
+          format: double
+          description: "This is the sum of the OrderItemsAmount, DeliveryAmount, TipAmount and Voucher.Amount (which is usually negative) and OnlineOrderingFee for cash orders.\r\nIt does not include the OnlineOrderingFee in the case of card orders as this fee is charged by Flipdish directly to the customer."
+          type: number
+          example: 12.5
+        ProcessingFee:
+          format: double
+          description: This contains the online ordering processing fee. For card payments this is charged directly to the customer and for cash orders it is paid by the customer to the store. It is tax inclusive.
+          type: number
+          example: 12.5
+        PaymentAccountType:
+          description: Payment account type
+          enum:
+          - Card
+          - Cash
+          - Ideal
+          - Bancontact
+          - Giropay
+          - Eps
+          - Emv
+          - PayPal
+          - PayGreen
+          - GoogleWalletToken
+          type: string
+          example: Card
+        PaymentAccountDescription:
+          description: Payment account description (like Visa ****2371 or Apple Pay. or Cash)
+          type: string
+          example: string
+        OrderState:
+          description: Order state
+          enum:
+          - Created
+          - PlacedCanBeCancelled
+          - ReadyToProcess
+          - AcceptedByRestaurant
+          - Dispatched
+          - Delivered
+          - Cancelled
+          - ManualReview
+          - RejectedByStore
+          - RejectedByFlipdish
+          - RejectedAutomatically
+          - RejectedAfterBeingAccepted
+          - AcceptedAndRefunded
+          - PendingPayment
+          type: string
+          example: Created
+        IsPreOrder:
+          description: Is pre-order
+          type: boolean
+          example: true
+        PlacedTime:
+          format: date-time
+          description: Order placed time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        RequestedForTime:
+          format: date-time
+          description: Order requested for
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChefNote:
+          description: Chef note
+          type: string
+          example: string
+        AppType:
+          description: Used app type
+          enum:
+          - Unknown
+          - Ios
+          - Android
+          - Web
+          - Kiosk
+          - Pos
+          - TelephoneCall
+          - Sms
+          - PwaAndroid
+          - PwaIos
+          - Google
+          type: string
+          example: Unknown
+        UserRating:
+          format: int32
+          description: User rating
+          type: integer
+          nullable: true
+          example: 1
+        PaymentStatus:
+          description: Status of the payment
+          enum:
+          - Paid
+          - Unpaid
+          - Refunded
+          - PartiallyRefunded
+          - Disputed
+          type: string
+          example: Paid
+        RejectionReason:
+          description: Rejection reason. Can have value if the order is rejected.
+          enum:
+          - TooBusy
+          - FoodUnavailable
+          - UnableToDeliver
+          - UnknownAddress
+          - UnknownReason
+          - TooSoon
+          - TimeUnavailable
+          - DontDeliverToArea
+          - StoreUncontactable
+          type: string
+          nullable: true
+          example: TooBusy
+        RefundedAmount:
+          format: double
+          description: Amount refunded to customer.
+          type: number
+          nullable: true
+          example: 12.5
+        DeliveryTrackingStatus:
+          description: Delivery tracking status
+          enum:
+          - Unassigned
+          - Unaccepted
+          - Accepted
+          - Carrying
+          - OnTheWay
+          - ArrivedAtLocation
+          - Delivered
+          - CannotDeliver
+          type: string
+          nullable: true
+          example: Unassigned
+        DriverId:
+          format: int32
+          description: Assigned driver identifier
+          type: integer
+          nullable: true
+          example: 500123
+        TotalTax:
+          format: double
+          description: Total tax applied to order
+          type: number
+          example: 12.5
+        OrderTrackingCode:
+          description: Unique, 6 character long alpha numeric code for tracking.
+          type: string
+          example: string
+        DeliveryFeeAreaId:
+          format: int32
+          description: Delivery area identifier
+          type: integer
+          nullable: true
+          example: 500123
+        ReceiptCode:
+          description: Code used to view the order's receipt
+          type: string
+          example: string
+        TotalDepositReturnFeeAmount:
+          format: double
+          description: This contains the total deposit return fee amount for the order.
+          type: number
+          example: 12.5
+    UserNote:
+      description: User Note
+      type: object
+      properties:
+        UserNoteId:
+          format: int32
+          description: Identifier for the user note.
+          type: integer
+          example: 500123
+        UserId:
+          format: int32
+          description: User identifier associated with the note.
+          type: integer
+          example: 500123
+        Note:
+          description: Note content.
+          type: string
+          example: string
+        TsCreate:
+          format: date-time
+          description: Creation timestamp of the note.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        CreatedByUserId:
+          format: int32
+          description: Identifier of the user who created the note.
+          type: integer
+          example: 500123
+        CreatedByUserName:
+          description: Name of the user who created the note.
+          type: string
+          example: Example Name
+        CreatedByUserEmail:
+          description: Email of the user who created the note.
+          type: string
+          example: owner@example.com
+    UserMonthlyCommission:
+      description: User Monthly Commission
+      type: object
+      properties:
+        UserId:
+          format: int32
+          description: The unique identifier of the user.
+          type: integer
+          example: 500123
+        MonthStart:
+          format: date-time
+          description: The start date of the month for which the commission is calculated.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        CommissionAmount:
+          format: double
+          description: The total commission amount for the user in the specified month.
+          type: number
+          example: 12.5
+        Currency:
+          description: The currency in which the commission is paid.
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        IsoCurrency:
+          description: The ISO currency code for the commission currency.
+          type: string
+          example: EUR
+    OrderItem:
+      description: Order item
+      type: object
+      properties:
+        OrderItemOptions:
+          description: Option list
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemOption'
+          example: []
+        Metadata:
+          description: Metadata
+          type: object
+          additionalProperties:
+            type: string
+        MenuItemPublicId:
+          format: uuid
+          description: Public id of the Menu Item
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        MenuSectionName:
+          description: Menu section name
+          type: string
+          example: Example Name
+        MenuSectionDisplayOrder:
+          format: int32
+          description: Menu section display order
+          type: integer
+          example: 1
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Description:
+          description: Description
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax currency amount
+          type: number
+          example: 12.5
+        PriceIncludingOptionSetItems:
+          format: double
+          description: Price including option set items
+          type: number
+          example: 12.5
+        MenuItemId:
+          format: int32
+          description: Menu item identifier
+          type: integer
+          example: 500123
+        MenuItemDisplayOrder:
+          format: int32
+          description: Menu item display order
+          type: integer
+          example: 1
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DepositReturnFee:
+          format: double
+          description: Deposit return fee
+          type: number
+          nullable: true
+          example: 12.5
+    RestApiArrayResult_UserOrderSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderSummary'
+          example: []
+    Coordinates:
+      description: Coordinates
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    RestApiArrayResult_UserSmsChatItem_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSmsChatItem'
+          example: []
+    UserStoreInfo:
+      description: Stores that the user is associated with
+      type: object
+      properties:
+        PropertyId:
+          description: Property Id
+          type: string
+          example: '500123'
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        StoreName:
+          description: Store Name
+          type: string
+          example: Example Name
+    SendUserSmsRequest:
+      description: Send an SMS to a user from admin.
+      type: object
+      properties:
+        Message:
+          description: Message.
+          type: string
+          example: string
+        WhiteLabelId:
+          format: int32
+          description: WhiteLabelId.
+          type: integer
+          example: 500123
+        FromNumber:
+          description: FromNumber.
+          type: string
+          example: string
+    RestApiStringArrayResult:
+      description: Rest api string array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string array
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    UserDeliveryLocationAdmin:
+      description: Delivery location with identifiers for admin user management.
+      type: object
+      properties:
+        DeliveryLocationId:
+          format: int32
+          description: DeliveryLocationId.
+          type: integer
+          example: 500123
+        Building:
+          description: Building.
+          type: string
+          example: string
+        Street:
+          description: Street.
+          type: string
+          example: string
+        Town:
+          description: Town.
+          type: string
+          example: string
+        PostCode:
+          description: PostCode.
+          type: string
+          example: string
+        DeliveryInstructions:
+          description: DeliveryInstructions.
+          type: string
+          example: string
+        AutoSelectThisLocation:
+          description: AutoSelectThisLocation.
+          type: boolean
+          example: true
+        IsDisplayed:
+          description: IsDisplayed.
+          type: boolean
+          example: true
+        IsConfirmed:
+          description: IsConfirmed.
+          type: boolean
+          nullable: true
+          example: true
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+    StoreSummary:
+      description: Store summary
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        Name:
+          description: Store name
+          type: string
+          example: Example Name
+        MenuId:
+          format: int32
+          description: Stores menu identifier
+          type: integer
+          example: 500123
+        MenuPublishId:
+          format: uuid
+          description: Stores menu publish GUID
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Metadata:
+          description: Store metadata
+          type: object
+          additionalProperties:
+            type: string
+        Currency:
+          description: Currency which used by the Store
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        StoreTimezone:
+          description: Timezone of store
+          type: string
+          example: string
+        StoreIanaTimezone:
+          description: IANA Timezone of store
+          type: string
+          example: string
+        StoreGroupId:
+          format: int32
+          description: Store group id of store
+          type: integer
+          example: 500123
+        TaxId:
+          description: VAT number or generic Tax ID of the store
+          type: string
+          example: '500123'
+        PrettyAddress:
+          description: Address of the store
+          type: string
+          example: string
+        CountryCode:
+          description: Country code of the store address (ISO 3166-1 alpha-2)
+          type: string
+          example: IE
+        PropertyId:
+          description: Property identifier
+          type: string
+          example: '500123'
+    OrderVoucherSummary:
+      description: Voucher summary
+      type: object
+      properties:
+        VoucherId:
+          format: int32
+          description: Voucher ID
+          type: integer
+          example: 500123
+        Name:
+          description: Voucher name
+          type: string
+          example: Example Name
+        Description:
+          description: Voucher description
+          type: string
+          example: string
+        Code:
+          description: Voucher code
+          type: string
+          example: string
+        Amount:
+          format: double
+          description: Voucher amount
+          type: number
+          example: 12.5
+        Type:
+          description: Voucher type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        SubType:
+          description: Voucher sub type
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+    OrderFulfillmentStatusBase:
+      description: Fulfillment Status Information
+      type: object
+      properties:
+        StatusId:
+          description: Fulfillment Status Id
+          type: string
+          example: '500123'
+        StatusName:
+          description: Fulfillment Status Name
+          type: string
+          example: Example Name
+        Icon:
+          description: Status Icon
+          type: string
+          example: string
+    DeliveryLocation:
+      description: Delivery location
+      type: object
+      properties:
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        Building:
+          description: Building
+          type: string
+          example: string
+        Street:
+          description: Street
+          type: string
+          example: string
+        Town:
+          description: Town
+          type: string
+          example: string
+        PostCode:
+          description: Post code
+          type: string
+          example: string
+        DeliveryInstructions:
+          description: Delivery instructions
+          type: string
+          example: string
+        PrettyAddressString:
+          description: Formatted, pretty address string
+          type: string
+          example: string
+    OrderDropOffLocation:
+      description: OrderDropOffLocation.
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: OrderId.
+          type: integer
+          example: 500123
+        LocationName:
+          description: LocationName.
+          type: string
+          example: Example Name
+        LocationAreaName:
+          description: LocationAreaName.
+          type: string
+          example: Example Name
+        LocationId:
+          format: int32
+          description: LocationId.
+          type: integer
+          example: 500123
+        LocationAreaId:
+          format: int32
+          description: LocationAreaId.
+          type: integer
+          example: 500123
+        ExternalLocationId:
+          description: ExternalLocationId.
+          type: string
+          example: '500123'
+    UserInfo:
+      description: User information
+      type: object
+      properties:
+        PhoneNumber:
+          description: The user's phone number.
+          type: string
+          example: '+353000000000'
+        Email:
+          description: The user's email address.
+          type: string
+          example: owner@example.com
+        EmailConfirmed:
+          description: Indicates if the user's email address has been confirmed.
+          type: boolean
+          example: true
+        PreventFromUsingCards:
+          description: Indicates if the user is prevented from using cards.
+          type: boolean
+          example: true
+        IsUserPhoneNumberBlocked:
+          description: Indicates if the user's phone number is blocked.
+          type: boolean
+          example: true
+        UserWhiteLabels:
+          description: List of white label information associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserWhiteLabelInfo'
+          example: []
+        UserId:
+          format: int32
+          description: The unique identifier for the user.
+          type: integer
+          example: 500123
+        UserName:
+          description: The user's username.
+          type: string
+          example: Example Name
+        CustomerName:
+          description: The customer's name.
+          type: string
+          example: Example Name
+        HasLoggedIn:
+          description: Indicates if the user has logged in.
+          type: boolean
+          example: true
+        DisableAppRatingControl:
+          description: Indicates if the app rating control is disabled for the user.
+          type: boolean
+          example: true
+        GloballyOptedOut:
+          description: Indicates if the user has globally opted out.
+          type: boolean
+          example: true
+        CompletedOrderCount:
+          format: int32
+          description: The number of completed orders by the user.
+          type: integer
+          example: 3
+        CancelledOrderCount:
+          format: int32
+          description: The number of cancelled orders by the user.
+          type: integer
+          example: 3
+        OrderTotalValue:
+          format: double
+          description: The total value of orders placed by the user.
+          type: number
+          example: 12.5
+        TsMostRecentOrder:
+          format: date-time
+          description: The timestamp of the user's most recent order.
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        TsFirstOrder:
+          format: date-time
+          description: The timestamp of the user's first order.
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        IsRestaurantUser:
+          description: Indicates if the user is a restaurant user.
+          type: boolean
+          example: true
+        Installs:
+          description: List of app installs associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppInstall'
+          example: []
+        DeliveryLocations:
+          description: List of delivery locations associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveryLocation'
+          example: []
+        PaymentAccounts:
+          description: List of payment accounts associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentAccount'
+          example: []
+        LanguageId:
+          description: The language identifier for the user.
+          type: string
+          example: '500123'
+        CurrentLanguageName:
+          description: Current language name for the user.
+          type: string
+          example: Example Name
+        Languages:
+          description: Available languages that the user can choose from.
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          example: []
+        SalesForceContactId:
+          description: The Salesforce contact ID for the user.
+          type: string
+          example: '500123'
+        StripeCustomerId:
+          description: The Stripe customer ID for the user.
+          type: string
+          example: '500123'
+        UserMonthlyCommissions:
+          description: User's monthly commissions.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMonthlyCommission'
+          example: []
+    UserRole:
+      description: User Role
+      type: object
+      properties:
+        RolesUserIn:
+          description: Roles the user is in
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        RolesUserNotIn:
+          description: Roles the user is not in
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    SendUserPushNotificationRequest:
+      description: Send a push notification to a user.
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: WhiteLabelId.
+          type: integer
+          example: 500123
+        Message:
+          description: Message.
+          type: string
+          example: string
+    UserWhiteLabelConfig:
+      description: User WhiteLabelConfig
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Identifier
+          type: integer
+          example: 500123
+        ConfigId:
+          format: int32
+          description: WlConfigId
+          type: integer
+          example: 500123
+        AppId:
+          description: Brand Id
+          type: string
+          example: '500123'
+        Name:
+          description: WhiteLabel Name
+          type: string
+          example: Example Name
+        Level:
+          description: WhiteLabel Access Level
+          enum:
+          - None
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManager
+          - Support
+          type: string
+          example: None
+    Channel:
+      description: Channel.
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Channel Id
+          type: integer
+          example: 500123
+        TranslationKey:
+          description: Channel TranslationKey
+          type: string
+          example: string
+        Source:
+          description: Channel Source
+          enum:
+          - Internal
+          - External
+          type: string
+          example: Internal
+        LogoUri:
+          description: Channel Logo URl
+          type: string
+          example: https://api.flipdish.co/example
+        Available:
+          description: Channel is Available or not
+          type: boolean
+          example: true
+        MaintainedExternally:
+          description: Channel is Maintained Externally or not
+          type: boolean
+          example: true
+    RestApiResult_UserRole_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UserRole'
+    RestApiResult_UserPushNotificationSentResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UserPushNotificationSentResult'
+    RestApiPaginationResult_UserSearch_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSearch'
+          example: []
+    UserWhiteLabelInfo:
+      description: User WhiteLabel information
+      type: object
+      properties:
+        WlConfigId:
+          format: int32
+          description: WhiteLabelConfig Id
+          type: integer
+          example: 500123
+        AppId:
+          description: Brand Id (AppId)
+          type: string
+          example: '500123'
+        WhiteLabelName:
+          description: WhiteLabel Name
+          type: string
+          example: Example Name
+    UserFlipdishAccount:
+      description: Flipdish account information associated with a user
+      type: object
+      properties:
+        PayeeBankAccountDataId:
+          format: int32
+          description: Payee Bank Account Data Id
+          type: integer
+          nullable: true
+          example: 500123
+        FlipdishAccountId:
+          format: int32
+          description: Flipdish Account Id
+          type: integer
+          example: 500123
+        Name:
+          description: Flipdish Account Name
+          type: string
+          example: Example Name
+    SetUserDeliveryLocationCoordinatesRequest:
+      description: Set delivery location coordinates.
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude.
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude.
+          type: number
+          example: 1.0
+    SetUserDeliveryLocationFieldRequest:
+      description: Update a single delivery location field (matches legacy SetDeliveryLocationInfo names).
+      type: object
+      properties:
+        Field:
+          description: Which field to update. Omit or set to null for a validation error.
+          enum:
+          - DeliveryInstructions
+          - IsDisplayed
+          - BuildingString
+          - StreetString
+          - TownString
+          type: string
+          nullable: true
+          example: DeliveryInstructions
+        Value:
+          description: Value.
+          type: string
+          example: string
+    RestApiArrayResult_UserStoreInfo_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserStoreInfo'
+          example: []
+    OrderItemOption:
+      description: Order item option
+      type: object
+      properties:
+        Metadata:
+          description: Metadata
+          type: object
+          additionalProperties:
+            type: string
+        MenuItemOptionPublicId:
+          format: uuid
+          description: Public id of the Menu Item Option
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        MenuItemOptionId:
+          format: int32
+          description: Menu item option identifier
+          type: integer
+          example: 500123
+        IsMasterOptionSetItem:
+          description: Is master option set item
+          type: boolean
+          example: true
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax currency amount
+          type: number
+          example: 12.5
+        MenuItemOptionDisplayOrder:
+          format: int32
+          description: Menu item option display order
+          type: integer
+          example: 1
+        MenuItemOptionSetDisplayOrder:
+          format: int32
+          description: Menu item option set display order
+          type: integer
+          example: 1
+        DepositReturnFee:
+          format: double
+          description: Deposit return fee
+          type: number
+          nullable: true
+          example: 12.5
+    OrderBatchSummary:
+      description: Order batch info
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Order batch id
+          type: integer
+          example: 500123
+        DisplayCode:
+          description: Order batch 6-sign human readable code
+          type: string
+          example: string
+        CreateTime:
+          format: date-time
+          description: Batch creation date and time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        IsPublished:
+          description: If the batch is already published
+          type: boolean
+          example: true
+    TaxItem:
+      description: A collection of tax items on the order.
+      type: object
+      properties:
+        Name:
+          description: The name of the tax item.
+          type: string
+          example: Example Name
+        Rate:
+          format: double
+          description: The tax rate applied to the item.
+          type: number
+          example: 1.0
+        Amount:
+          format: double
+          description: The amount of tax applied to the item.
+          type: number
+          example: 12.5
+    RestApiArrayResult_UserNote_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserNote'
+          example: []
+    Language:
+      description: Sorted Language
+      type: object
+      properties:
+        LanguageId:
+          description: ISO 639-1 Language Code
+          type: string
+          example: '500123'
+        DisplayOrder:
+          format: int32
+          description: Display Order
+          type: integer
+          example: 1
+        Name:
+          description: Language Name
+          type: string
+          example: Example Name
+        Enabled:
+          description: Is the language enabled for use.
+          type: boolean
+          example: true
+    MaskedPhoneNumber:
+      description: Represents a masked phone number
+      type: object
+      properties:
+        IsEnabled:
+          description: Defines if the feature is enabled
+          type: boolean
+          example: true
+        PhoneNumber:
+          description: Defines the phone number to call
+          type: string
+          example: '+353000000000'
+        Code:
+          description: Defines the code to enter
+          type: string
+          example: string
+    UserSmsChatItem:
+      description: An SMS conversation item for admin user chat.
+      type: object
+      properties:
+        SmsConversationItemId:
+          format: int32
+          description: SmsConversationItemId.
+          type: integer
+          example: 500123
+        Direction:
+          description: Direction.
+          type: string
+          example: string
+        From:
+          description: From.
+          type: string
+          example: string
+        Text:
+          description: Text.
+          type: string
+          example: string
+        TsSentReceivedUtc:
+          format: date-time
+          description: TsSentReceivedUtc.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    UserOrderSummary:
+      description: A previous order row for admin user management (structured; no HTML).
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: OrderId.
+          type: integer
+          example: 500123
+        TsOrderPlacedUtc:
+          format: date-time
+          description: TsOrderPlacedUtc.
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        TsUpdateUtc:
+          format: date-time
+          description: TsUpdateUtc.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        RestaurantName:
+          description: RestaurantName.
+          type: string
+          example: Example Name
+        FoodAmount:
+          format: double
+          description: FoodAmount.
+          type: number
+          example: 12.5
+        TipAmount:
+          format: double
+          description: TipAmount.
+          type: number
+          example: 12.5
+        TotalRestaurantAmount:
+          format: double
+          description: TotalRestaurantAmount.
+          type: number
+          example: 12.5
+        IsoCurrency:
+          description: IsoCurrency.
+          type: string
+          example: EUR
+        DeliveryType:
+          description: DeliveryType.
+          type: string
+          example: string
+        OrderState:
+          description: OrderState.
+          type: string
+          example: string
+        PaymentAccountDescription:
+          description: PaymentAccountDescription.
+          type: string
+          example: string
+    AppInstall:
+      description: App Install information
+      type: object
+      properties:
+        Name:
+          description: Name of the installed application.
+          type: string
+          example: Example Name
+        FirstLogin:
+          format: date-time
+          description: Date and time of the user's first login to the app.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        FirstLoginHuman:
+          description: Human-readable representation of the first login date.
+          type: string
+          example: string
+        LastActivity:
+          format: date-time
+          description: Date and time of the user's last activity in the app.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        LastActivityHuman:
+          description: Human-readable representation of the last activity date.
+          type: string
+          example: string
+        GoogleTokens:
+          format: int32
+          description: Number of Google push notification tokens associated with the app install.
+          type: integer
+          example: 1
+        AppleTokens:
+          format: int32
+          description: Number of Apple push notification tokens associated with the app install.
+          type: integer
+          example: 1
+        OrderCount:
+          format: int32
+          description: Number of orders placed by the user through this app install.
+          type: integer
+          example: 3
+        UserAgentAtSignup:
+          description: User agent string at the time of signup.
+          type: string
+          example: string
+        UserAgentMostRecent:
+          description: Most recent user agent string used by the user.
+          type: string
+          example: string
+    UserSearch:
+      description: User Search Result
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: User Id
+          type: integer
+          example: 500123
+        PhoneNumber:
+          description: Phone Number
+          type: string
+          example: '+353000000000'
+        Email:
+          description: Email
+          type: string
+          example: owner@example.com
+        CustomerName:
+          description: Customer Name
+          type: string
+          example: Example Name
+        HasLoggedIn:
+          description: Has Logged In
+          type: boolean
+          example: true
+        UserDiscriminator:
+          description: User Discriminator
+          enum:
+          - All
+          - ApplicationUsers
+          - RestaurantUsers
+          - HydraUsers
+          type: string
+          example: All
+        TsCreate:
+          format: date-time
+          description: Timestamp Created
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        WhiteLabelConfigs:
+          description: WhiteLabel Configs
+          type: array
+          items:
+            $ref: '#/components/schemas/UserWhiteLabelConfig'
+          example: []
+        UserType:
+          description: User Type
+          type: string
+          readOnly: true
+          example: string
+    UserPushNotificationSentResult:
+      description: Result of sending push notification.
+      type: object
+      properties:
+        TokenCount:
+          format: int32
+          description: TokenCount.
+          type: integer
+          example: 3
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

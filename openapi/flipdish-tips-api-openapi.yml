@@ -1,0 +1,360 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Tips API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Tips
+  description: Operations for Tips.
+paths:
+  /api/v1.0/stores/{storeId}/tipconfig:
+    get:
+      tags:
+      - Tips
+      operationId: TipConfig.Get
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_TipConfiguration_'
+              examples:
+                TipConfig.Get200Example:
+                  summary: Default TipConfig.Get 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      StoreId: 500123
+                      IsEnabled: true
+                      AllowCustomTips: true
+                      AllowRoundUp: true
+                      AllowEmojis: true
+                      Percentages:
+                      - 1.0
+                      DefaultPercentage: 1.0
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Get400Example:
+                  summary: Default TipConfig.Get 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Get401Example:
+                  summary: Default TipConfig.Get 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Get403Example:
+                  summary: Default TipConfig.Get 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Get500Example:
+                  summary: Default TipConfig.Get 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Tip Config.Get
+      description: Tip Config.Get via the Flipdish Open API v1.0 (GET /api/v1.0/stores/{storeId}/tipconfig).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Tips
+      operationId: TipConfig.Upsert
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTipConfiguration'
+            examples:
+              TipConfig.UpsertRequestExample:
+                summary: Default TipConfig.Upsert request
+                x-microcks-default: true
+                value:
+                  IsEnabled: true
+                  AllowCustomTips: true
+                  AllowRoundUp: true
+                  AllowEmojis: true
+                  Percentages:
+                  - 1.0
+                  DefaultPercentage: 1.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_TipConfiguration_'
+              examples:
+                TipConfig.Upsert200Example:
+                  summary: Default TipConfig.Upsert 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      StoreId: 500123
+                      IsEnabled: true
+                      AllowCustomTips: true
+                      AllowRoundUp: true
+                      AllowEmojis: true
+                      Percentages:
+                      - 1.0
+                      DefaultPercentage: 1.0
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Upsert400Example:
+                  summary: Default TipConfig.Upsert 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Upsert401Example:
+                  summary: Default TipConfig.Upsert 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Upsert403Example:
+                  summary: Default TipConfig.Upsert 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                TipConfig.Upsert500Example:
+                  summary: Default TipConfig.Upsert 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Tip Config.Upsert
+      description: Tip Config.Upsert via the Flipdish Open API v1.0 (POST /api/v1.0/stores/{storeId}/tipconfig).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TipConfiguration:
+      description: Describes the configuration of tipping
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Configuration is for this StoreId
+          type: integer
+          example: 500123
+        IsEnabled:
+          description: Are tips enabled?
+          type: boolean
+          example: true
+        AllowCustomTips:
+          description: Are custom tips allowed?
+          type: boolean
+          example: true
+        AllowRoundUp:
+          description: Is round up allowed?
+          type: boolean
+          example: true
+        AllowEmojis:
+          description: Are emojis allowed?
+          type: boolean
+          example: true
+        Percentages:
+          description: Ordered list of tip breakpoints (smallest -&gt; largest)
+          type: array
+          items:
+            format: double
+            type: number
+          example:
+          - 1.0
+        DefaultPercentage:
+          format: double
+          description: Defines a default percentage, it must be in the list of Percentages
+          type: number
+          nullable: true
+          example: 1.0
+    RestApiResult_TipConfiguration_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/TipConfiguration'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    UpdateTipConfiguration:
+      description: Describes the configuration of tipping
+      type: object
+      properties:
+        IsEnabled:
+          description: Are tips enabled?
+          type: boolean
+          example: true
+        AllowCustomTips:
+          description: Are custom tips allowed?
+          type: boolean
+          example: true
+        AllowRoundUp:
+          description: Is round up allowed?
+          type: boolean
+          example: true
+        AllowEmojis:
+          description: Are emojis allowed?
+          type: boolean
+          example: true
+        Percentages:
+          description: Ordered list of tip breakpoints (smallest -&gt; largest)
+          type: array
+          items:
+            format: double
+            type: number
+          example:
+          - 1.0
+        DefaultPercentage:
+          format: double
+          description: Defines a default percentage, it must be in the list of Percentages
+          type: number
+          nullable: true
+          example: 1.0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

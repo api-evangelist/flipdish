@@ -1,0 +1,571 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts DeliveryZone API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: DeliveryZone
+  description: Operations for Delivery Zone.
+paths:
+  /api/v1.0/stores/{storeId}/deliveryzones:
+    get:
+      tags:
+      - DeliveryZone
+      operationId: GetDeliveryZones
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_DeliveryZone_'
+              examples:
+                GetDeliveryZones200Example:
+                  summary: Default GetDeliveryZones 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeliveryZones400Example:
+                  summary: Default GetDeliveryZones 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeliveryZones401Example:
+                  summary: Default GetDeliveryZones 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeliveryZones403Example:
+                  summary: Default GetDeliveryZones 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeliveryZones404Example:
+                  summary: Default GetDeliveryZones 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeliveryZones500Example:
+                  summary: Default GetDeliveryZones 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Delivery Zones
+      description: Get Delivery Zones via the Flipdish Open API v1.0 (GET /api/v1.0/stores/{storeId}/deliveryzones).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - DeliveryZone
+      operationId: AddDeliveryZone
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_DeliveryZone_'
+              examples:
+                AddDeliveryZone200Example:
+                  summary: Default AddDeliveryZone 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: 500123
+                      FeeChargedToStore: 12.5
+                      DeliveryFee: 12.5
+                      MinimumDeliveryOrderAmount: 12.5
+                      WellKnownText: string
+                      IsEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddDeliveryZone400Example:
+                  summary: Default AddDeliveryZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddDeliveryZone401Example:
+                  summary: Default AddDeliveryZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddDeliveryZone403Example:
+                  summary: Default AddDeliveryZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddDeliveryZone404Example:
+                  summary: Default AddDeliveryZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddDeliveryZone500Example:
+                  summary: Default AddDeliveryZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Add Delivery Zone
+      description: Add Delivery Zone via the Flipdish Open API v1.0 (POST /api/v1.0/stores/{storeId}/deliveryzones).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/stores/{storeId}/deliveryzones/{deliveryZoneId}:
+    post:
+      tags:
+      - DeliveryZone
+      operationId: UpdateDeliveryZone
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      - name: deliveryZoneId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The delivery zone id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_DeliveryZone_'
+              examples:
+                UpdateDeliveryZone200Example:
+                  summary: Default UpdateDeliveryZone 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: 500123
+                      FeeChargedToStore: 12.5
+                      DeliveryFee: 12.5
+                      MinimumDeliveryOrderAmount: 12.5
+                      WellKnownText: string
+                      IsEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateDeliveryZone400Example:
+                  summary: Default UpdateDeliveryZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateDeliveryZone401Example:
+                  summary: Default UpdateDeliveryZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateDeliveryZone403Example:
+                  summary: Default UpdateDeliveryZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateDeliveryZone404Example:
+                  summary: Default UpdateDeliveryZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateDeliveryZone500Example:
+                  summary: Default UpdateDeliveryZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Delivery Zone
+      description: Update Delivery Zone via the Flipdish Open API v1.0 (POST /api/v1.0/stores/{storeId}/deliveryzones/{deliveryZoneId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - DeliveryZone
+      operationId: RemoveDeliveryZone
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      - name: deliveryZoneId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The delivery zone id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveDeliveryZone400Example:
+                  summary: Default RemoveDeliveryZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveDeliveryZone401Example:
+                  summary: Default RemoveDeliveryZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveDeliveryZone403Example:
+                  summary: Default RemoveDeliveryZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveDeliveryZone404Example:
+                  summary: Default RemoveDeliveryZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveDeliveryZone500Example:
+                  summary: Default RemoveDeliveryZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Remove Delivery Zone
+      description: Remove Delivery Zone via the Flipdish Open API v1.0 (DELETE /api/v1.0/stores/{storeId}/deliveryzones/{deliveryZoneId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiArrayResult_DeliveryZone_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveryZone'
+          example: []
+    RestApiResult_DeliveryZone_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/DeliveryZone'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    DeliveryZone:
+      description: Delivery Zone
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Delivery Fee Area Id
+          type: integer
+          example: 500123
+        FeeChargedToStore:
+          format: double
+          description: Delivery Fee charged to store
+          type: number
+          nullable: true
+          example: 12.5
+        DeliveryFee:
+          format: double
+          description: Delivery fee (will not be set below 0)
+          type: number
+          example: 12.5
+        MinimumDeliveryOrderAmount:
+          format: double
+          description: Minimum delivery order amount (will not be set below 0)
+          type: number
+          example: 12.5
+        WellKnownText:
+          description: "Spatial data in Well Known Text format\r\nWe also support CIRCLE((0 0, 200)) - (centerLong centerLat, radius in m)"
+          type: string
+          example: string
+        IsEnabled:
+          description: Is delivery zone enabled
+          type: boolean
+          example: true
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,2914 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Payouts API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Payouts
+  description: Operations for Payouts.
+paths:
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayout
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutDetail'
+              examples:
+                GetPayout200Example:
+                  summary: Default GetPayout 200 response
+                  x-microcks-default: true
+                  value:
+                    PayoutId: 500123
+                    BankAccountId: 500123
+                    AccountName: Example Name
+                    PayoutStatus: Pending
+                    CreatedDate: '2026-06-02T12:00:00Z'
+                    PeriodStartTime: '2026-06-02T12:00:00Z'
+                    PeriodEndTime: '2026-06-02T12:00:00Z'
+                    DestinationBank: string
+                    DestinationAccount: string
+                    PayoutType: Internal
+                    Currency: EUR
+                    PayoutStores: []
+                    Amount: 12.5
+                    CutoffDate: '2026-06-02T12:00:00Z'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayout400Example:
+                  summary: Default GetPayout 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayout401Example:
+                  summary: Default GetPayout 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayout403Example:
+                  summary: Default GetPayout 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayout500Example:
+                  summary: Default GetPayout 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payout
+      description: Get Payout via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/payouts/summaries:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayoutSummaries
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The start date query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The end date query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: payoutRequestIds.bankAccountIds
+        in: query
+        description: List of bank account ids to search for
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        example:
+        - 3
+      - name: payoutRequestIds.states
+        in: query
+        description: List of {Flipdish.PublicModels.V1.Payouts.PayoutStatus} so search for
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Pending
+            - InTransit
+            - Paid
+            - Failed
+            - Cancelled
+        example:
+        - Pending
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_PayoutSummary_'
+              examples:
+                GetPayoutSummaries200Example:
+                  summary: Default GetPayoutSummaries 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutSummaries400Example:
+                  summary: Default GetPayoutSummaries 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutSummaries401Example:
+                  summary: Default GetPayoutSummaries 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutSummaries403Example:
+                  summary: Default GetPayoutSummaries 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutSummaries500Example:
+                  summary: Default GetPayoutSummaries 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payout Summaries
+      description: Get Payout Summaries via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/payouts/summaries).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/payouts:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayouts
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The start date query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The end date query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: payoutRequestIds.bankAccountIds
+        in: query
+        description: List of bank account ids to search for
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        example:
+        - 3
+      - name: payoutRequestIds.states
+        in: query
+        description: List of {Flipdish.PublicModels.V1.Payouts.PayoutStatus} so search for
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Pending
+            - InTransit
+            - Paid
+            - Failed
+            - Cancelled
+        example:
+        - Pending
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_Payout_'
+              examples:
+                GetPayouts200Example:
+                  summary: Default GetPayouts 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayouts400Example:
+                  summary: Default GetPayouts 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayouts401Example:
+                  summary: Default GetPayouts 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayouts403Example:
+                  summary: Default GetPayouts 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayouts500Example:
+                  summary: Default GetPayouts 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payouts
+      description: Get Payouts via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/payouts).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/orders:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayoutOrders
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PayoutOrder_'
+              examples:
+                GetPayoutOrders200Example:
+                  summary: Default GetPayoutOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOrders400Example:
+                  summary: Default GetPayoutOrders 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOrders401Example:
+                  summary: Default GetPayoutOrders 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOrders403Example:
+                  summary: Default GetPayoutOrders 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOrders500Example:
+                  summary: Default GetPayoutOrders 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payout Orders
+      description: Get Payout Orders via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/orders).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/refunds:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayoutRefunds
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PayoutRefund_'
+              examples:
+                GetPayoutRefunds200Example:
+                  summary: Default GetPayoutRefunds 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutRefunds400Example:
+                  summary: Default GetPayoutRefunds 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutRefunds401Example:
+                  summary: Default GetPayoutRefunds 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutRefunds403Example:
+                  summary: Default GetPayoutRefunds 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutRefunds500Example:
+                  summary: Default GetPayoutRefunds 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payout Refunds
+      description: Get Payout Refunds via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/refunds).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/chargebacks:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayoutChargebacks
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PayoutChargeback_'
+              examples:
+                GetPayoutChargebacks200Example:
+                  summary: Default GetPayoutChargebacks 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutChargebacks400Example:
+                  summary: Default GetPayoutChargebacks 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutChargebacks401Example:
+                  summary: Default GetPayoutChargebacks 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutChargebacks403Example:
+                  summary: Default GetPayoutChargebacks 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutChargebacks500Example:
+                  summary: Default GetPayoutChargebacks 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payout Chargebacks
+      description: Get Payout Chargebacks via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/chargebacks).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/othercharges:
+    get:
+      tags:
+      - Payouts
+      operationId: GetPayoutOtherCharges
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PayoutOtherCharge_'
+              examples:
+                GetPayoutOtherCharges200Example:
+                  summary: Default GetPayoutOtherCharges 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOtherCharges400Example:
+                  summary: Default GetPayoutOtherCharges 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOtherCharges401Example:
+                  summary: Default GetPayoutOtherCharges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOtherCharges403Example:
+                  summary: Default GetPayoutOtherCharges 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPayoutOtherCharges500Example:
+                  summary: Default GetPayoutOtherCharges 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payout Other Charges
+      description: Get Payout Other Charges via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/othercharges).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RevenueDetail:
+      description: Sales information
+      type: object
+      properties:
+        OnlineSalesAmount:
+          format: double
+          description: Online sales amount
+          type: number
+          example: 12.5
+        OnlineSalesTax:
+          format: double
+          description: Online sales tax
+          type: number
+          example: 1.0
+        OnlineSalesIncludingTax:
+          format: double
+          description: Online sales amount plus online sales tax
+          type: number
+          example: 1.0
+        OnlineSalesFeesBaseAmount:
+          format: double
+          description: Online sales base amount to calculate fees
+          type: number
+          example: 12.5
+        CashSalesAmount:
+          format: double
+          description: Cash sales amount
+          type: number
+          example: 12.5
+        CashSalesTax:
+          format: double
+          description: Cash sales tax
+          type: number
+          example: 1.0
+        CashSalesIncludingTax:
+          format: double
+          description: Cash sales amount plus online sales tax
+          type: number
+          example: 1.0
+        CashSalesFeesBaseAmount:
+          format: double
+          description: Online sales base amount to calculate fees
+          type: number
+          example: 12.5
+        TotalSalesIncludingTax:
+          format: double
+          description: Total Sales (online and cash) including tax
+          type: number
+          example: 12.5
+        OnlineSalesDeliveryCharges:
+          format: double
+          description: Delivery charges on online sales
+          type: number
+          example: 1.0
+        OnlineSalesTips:
+          format: double
+          description: Tips for online sales
+          type: number
+          example: 1.0
+        TotalOnlineRevenue:
+          format: double
+          description: Online sales plus online delivery charges and tips
+          type: number
+          example: 12.5
+        OnlineSalesServiceCharges:
+          format: double
+          description: Service charge on online sales
+          type: number
+          example: 1.0
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    PayoutChargeback:
+      description: Holds the information for a chargeback related to a payout
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: The id of the order the chargeback was for
+          type: integer
+          example: 500123
+        OrderCurrency:
+          description: Order currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutId:
+          format: int32
+          description: The id of the payout the order is related to
+          type: integer
+          example: 500123
+        OrderDate:
+          format: date-time
+          description: The date the order was placed
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        OrderType:
+          description: Order type (online or cash)
+          enum:
+          - Cash
+          - Online
+          type: string
+          example: Cash
+        ChargebackDate:
+          format: date-time
+          description: The date the chargeback was done
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+        ChargebackAmount:
+          format: double
+          description: Chargeback amount
+          type: number
+          example: 12.5
+        RefundedFees:
+          format: double
+          description: Amount of refunded fees
+          type: number
+          example: 12.5
+    ThirdPartyFeesDetails:
+      description: Breakdown of third party integration fees
+      type: object
+      properties:
+        DeliveryIntegrationFee:
+          format: double
+          description: Third party integration delivery fee
+          type: number
+          example: 12.5
+        DeliveryTipFee:
+          format: double
+          description: Third party integration delivery tip fee
+          type: number
+          example: 12.5
+        TotalThirdPartyFees:
+          format: double
+          description: Total third party integration fees
+          type: number
+          example: 12.5
+    PayoutStore:
+      description: Payout details for a single store
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: The id of the Store.
+          type: integer
+          example: 500123
+        StoreName:
+          description: Name of the store
+          type: string
+          example: Example Name
+        Amount:
+          format: double
+          description: Amount of the payout for this Store
+          type: number
+          nullable: true
+          example: 12.5
+        OnlineRevenue:
+          $ref: '#/components/schemas/RevenueDetail'
+        Revenue:
+          $ref: '#/components/schemas/RevenueDetail'
+        RevenueAdjustments:
+          $ref: '#/components/schemas/RevenueAdjustmentsDetails'
+        FlipdishFees:
+          $ref: '#/components/schemas/FlipdishFeesDetails'
+        Chargebacks:
+          $ref: '#/components/schemas/ChargebackDetails'
+        OtherCharges:
+          $ref: '#/components/schemas/OtherChargesDetails'
+        Balance:
+          $ref: '#/components/schemas/BalanceDetails'
+        PosRevenue:
+          $ref: '#/components/schemas/PosRevenueDetails'
+        ThirdPartyFees:
+          $ref: '#/components/schemas/ThirdPartyFeesDetails'
+    RestApiPaginationResult_PayoutChargeback_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutChargeback'
+          example: []
+    RestApiPaginationResult_PayoutOrder_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutOrder'
+          example: []
+    PosRevenueDetails:
+      description: Breakdown of POS charges
+      type: object
+      properties:
+        PosSalesAmount:
+          format: double
+          description: POS sale amount for the store
+          type: number
+          example: 12.5
+        PosSalesTax:
+          format: double
+          description: POS sale Tax for the store
+          type: number
+          example: 1.0
+        PosSalesTips:
+          format: double
+          description: POS sale tips for the store
+          type: number
+          example: 1.0
+        TotalPosRevenue:
+          format: double
+          description: POS Total Revenue for the store
+          type: number
+          example: 12.5
+    RestApiPaginationResult_Payout_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Payout'
+          example: []
+    Payout:
+      description: Holds the information for a whitelabel payout.
+      type: object
+      properties:
+        PayoutId:
+          format: int32
+          description: The id of the payout.
+          type: integer
+          example: 500123
+        PayeeBankAccountId:
+          format: int32
+          description: Bank account identifier
+          type: integer
+          example: 500123
+        AccountName:
+          description: Account name of the payout destination
+          type: string
+          example: Example Name
+        PayoutStatus:
+          description: Status of the payout
+          enum:
+          - Pending
+          - InTransit
+          - Paid
+          - Failed
+          - Cancelled
+          type: string
+          example: Pending
+        CreatedDate:
+          format: date-time
+          description: Date payout was created
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodStartTime:
+          format: date-time
+          description: This payout includes operations after at this date (inclusive)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodEndTime:
+          format: date-time
+          description: This payout includes operations before at this date (exclusive)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        DestinationBank:
+          description: Destination bank name
+          type: string
+          example: string
+        DestinationAccount:
+          description: Last 4 digits of the destination bank IBAN
+          type: string
+          example: string
+        Amount:
+          format: double
+          description: Payout amount
+          type: number
+          example: 12.5
+        PayoutType:
+          description: Type of payout source
+          enum:
+          - Internal
+          - Stripe
+          type: string
+          example: Internal
+        Currency:
+          description: Payout currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        CutoffDate:
+          format: date-time
+          description: Payouts before this date do not have a details breakdown
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        OnlineSalesAmount:
+          format: double
+          description: Payout online sales amount
+          type: number
+          example: 12.5
+        OnlineSalesDeliveryCharges:
+          format: double
+          description: Payout online sales delivery charges
+          type: number
+          example: 1.0
+        OnlineSalesTips:
+          format: double
+          description: Payout online sales tips
+          type: number
+          example: 1.0
+        OnlineSalesServiceCharges:
+          format: double
+          description: Payout online sales service charges
+          type: number
+          example: 1.0
+        OnlineSalesRefundedFees:
+          format: double
+          description: Payout online sales refunded fees
+          type: number
+          example: 12.5
+        OnlineSalesFees:
+          format: double
+          description: Payout online sales fees
+          type: number
+          example: 12.5
+        PosSalesFees:
+          format: double
+          description: Payout online sales fees
+          type: number
+          example: 12.5
+        OnlineSalesRefundedAmount:
+          format: double
+          description: Payout online sales refunded amount
+          type: number
+          example: 12.5
+        PosSalesRefundedAmount:
+          format: double
+          description: POS Payout online sales refunded amount
+          type: number
+          example: 12.5
+        OnlineSalesTax:
+          format: double
+          description: Payout online sales tax
+          type: number
+          example: 1.0
+        TotalOnlineRevenue:
+          format: double
+          description: Payout total online revenue
+          type: number
+          example: 12.5
+        CashSalesFees:
+          format: double
+          description: Payout cash sales fees
+          type: number
+          example: 12.5
+        CashSalesRefundedFees:
+          format: double
+          description: Payout cash sales refunded fees
+          type: number
+          example: 12.5
+        CustomerCashFees:
+          format: double
+          description: Payout cash fees charged to customer
+          type: number
+          example: 12.5
+        SalesFeesVat:
+          format: double
+          description: Payout sales fees vat
+          type: number
+          example: 12.5
+        TotalFees:
+          format: double
+          description: Payout total fees
+          type: number
+          example: 12.5
+        TotalOnlineRevenueAdjustments:
+          format: double
+          description: Payout total online revenue adjustments
+          type: number
+          example: 12.5
+        ChargebackAmount:
+          format: double
+          description: Payout chargeback amount
+          type: number
+          example: 12.5
+        PosSalesChargebackAmount:
+          format: double
+          description: POS Payout chargeback amount
+          type: number
+          example: 12.5
+        ChargebackRefundedFees:
+          format: double
+          description: Payout chargeback refunded fees
+          type: number
+          example: 12.5
+        TotalChargebackCost:
+          format: double
+          description: Payout chargebacks total cost
+          type: number
+          example: 12.5
+        TotalOtherCharges:
+          format: double
+          description: Payout other charges total
+          type: number
+          example: 12.5
+        OpeningBalance:
+          format: double
+          description: Payout opening balance
+          type: number
+          example: 1.0
+        ClosingBalance:
+          format: double
+          description: Payout closing balance
+          type: number
+          example: 1.0
+        PayGreenSalesAmount:
+          format: double
+          description: Amount of sales through PayGreen (restaurant vouchers)
+          type: number
+          nullable: true
+          example: 12.5
+        DeliveryIntegrationFee:
+          format: double
+          description: Third party integration delivery fee
+          type: number
+          example: 12.5
+        DeliveryIntegrationTipFee:
+          format: double
+          description: Third party integration delivery tip fee
+          type: number
+          example: 12.5
+        TotalThirdPartyFees:
+          format: double
+          description: Total third party integration fees
+          type: number
+          example: 12.5
+        PosSalesAmount:
+          format: double
+          description: POS sales amount
+          type: number
+          example: 12.5
+        PosSalesTax:
+          format: double
+          description: POS sales tax
+          type: number
+          example: 1.0
+        TipsOnPosSales:
+          format: double
+          description: Tips on POS sales
+          type: number
+          example: 1.0
+        BankAccountHasChanged:
+          description: Indicates whether the bank account has changed since the previous payout
+          type: boolean
+          example: true
+    RestApiArrayResult_PayoutSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutSummary'
+          example: []
+    PayoutOtherCharge:
+      description: Holds the information for a charge related to a payout
+      type: object
+      properties:
+        ChargeId:
+          format: int32
+          description: The id of the charge
+          type: integer
+          example: 500123
+        Amount:
+          format: double
+          description: Charge amount
+          type: number
+          example: 12.5
+        Currency:
+          description: Currency of the charge
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutId:
+          format: int32
+          description: The id of the payout the order is related to
+          type: integer
+          example: 500123
+        ChargeDate:
+          format: date-time
+          description: The date the order was placed
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChargeType:
+          description: Charge type
+          enum:
+          - Other
+          - Fees
+          - Chargeback
+          - TipFailure
+          - ExternalDisbursement
+          - Goods
+          - RestaurantSales
+          - Tips
+          type: string
+          example: Other
+        ChargeDescription:
+          description: Charge description
+          type: string
+          example: string
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+    PayoutOrder:
+      description: Holds the information for an order related to a payout
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: The id of the order
+          type: integer
+          example: 500123
+        PayoutId:
+          format: int32
+          description: The id of the payout the order is related to
+          type: integer
+          example: 500123
+        OrderDate:
+          format: date-time
+          description: The date the order was placed
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        OrderType:
+          description: Order type (online or cash)
+          enum:
+          - Cash
+          - Online
+          type: string
+          example: Cash
+        OrderCurrency:
+          description: Order currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        Sales:
+          format: double
+          description: Order sales amount
+          type: number
+          example: 1.0
+        SalesTax:
+          format: double
+          description: Order sales tax amount
+          type: number
+          example: 1.0
+        DeliveryCharges:
+          format: double
+          description: Order delivery charges
+          type: number
+          example: 1.0
+        Tips:
+          format: double
+          description: Order tips amount
+          type: number
+          example: 1.0
+        Voucher:
+          format: double
+          description: Order voucher amount
+          type: number
+          example: 1.0
+        FlatFeeExcludingVat:
+          format: double
+          description: Order flat fee amount excluding VAT
+          type: number
+          example: 12.5
+        FlatFeeExcludingVAT:
+          format: double
+          description: Order flat fee amount excluding VAT
+          type: number
+          example: 12.5
+        FlatFeeIncludingVat:
+          format: double
+          description: Order flat fee amount including VAT
+          type: number
+          example: 12.5
+        PercentageFeeExcludingVat:
+          format: double
+          description: Order percentage fee excluding VAT
+          type: number
+          example: 12.5
+        PercentageFeeExcludingVAT:
+          format: double
+          description: Order percentage fee excluding VAT
+          type: number
+          example: 12.5
+        Vat:
+          format: double
+          description: Order VAT amount
+          type: number
+          example: 1.0
+        TotalFees:
+          format: double
+          description: Total order fees amount
+          type: number
+          example: 12.5
+        CashFeeChargedToCustomer:
+          format: double
+          description: Cash fee charged to customer
+          type: number
+          example: 12.5
+        NetSales:
+          format: double
+          description: Order net sales amount
+          type: number
+          example: 1.0
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+        ServiceChargeAmount:
+          format: double
+          description: Order ServiceChargeAmount amount
+          type: number
+          example: 12.5
+        ServiceChargePercentage:
+          format: double
+          description: Order ServiceChargePercentage amount
+          type: number
+          example: 1.0
+    PayoutDetail:
+      description: Holds the information for a whitelabel payout with details broken down by Store
+      type: object
+      properties:
+        PayoutId:
+          format: int32
+          description: The id of the payout.
+          type: integer
+          example: 500123
+        BankAccountId:
+          format: int32
+          description: Bank account identifier
+          type: integer
+          example: 500123
+        AccountName:
+          description: Account name of the payout destination
+          type: string
+          example: Example Name
+        PayoutStatus:
+          description: Status of the payout
+          enum:
+          - Pending
+          - InTransit
+          - Paid
+          - Failed
+          - Cancelled
+          type: string
+          example: Pending
+        CreatedDate:
+          format: date-time
+          description: Date payout was created
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodStartTime:
+          format: date-time
+          description: This payout includes operations after at this date (inclusive)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodEndTime:
+          format: date-time
+          description: This payout includes operations before at this date (exclusive)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        DestinationBank:
+          description: Destination bank name
+          type: string
+          example: string
+        DestinationAccount:
+          description: Last 4 digits of the destination bank IBAN
+          type: string
+          example: string
+        PayoutType:
+          description: Type of payout source
+          enum:
+          - Internal
+          - Stripe
+          type: string
+          example: Internal
+        Currency:
+          description: Payout currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutStores:
+          description: Payout information broken down by Store
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutStore'
+          example: []
+        Amount:
+          format: double
+          description: Payout amount
+          type: number
+          example: 12.5
+        CutoffDate:
+          format: date-time
+          description: Payouts before this date do not have a details breakdown
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    FlipdishFeesDetails:
+      description: Fees breakdown
+      type: object
+      properties:
+        OnlineSalesFees:
+          format: double
+          description: Fees on online sales
+          type: number
+          example: 12.5
+        CashSalesFees:
+          format: double
+          description: Fees on cash sales
+          type: number
+          example: 12.5
+        PosSalesFees:
+          format: double
+          description: Fees of POS sales
+          type: number
+          example: 12.5
+        TotalSalesFees:
+          format: double
+          description: Total online and cash sales
+          type: number
+          example: 12.5
+        OnlineSalesRefundedFees:
+          format: double
+          description: Fees on refunds for online sales
+          type: number
+          example: 12.5
+        CashSalesRefundedFees:
+          format: double
+          description: Fees on refunds for cash sales
+          type: number
+          example: 12.5
+        PosSalesRefundedFees:
+          format: double
+          description: Fees on refunds for POS sales
+          type: number
+          example: 12.5
+        SalesFeesVat:
+          format: double
+          description: VAT on sales fees
+          type: number
+          example: 12.5
+        TotalFees:
+          format: double
+          description: Total fees
+          type: number
+          example: 12.5
+    OtherChargesDetails:
+      description: Breakdown of other charges
+      type: object
+      properties:
+        TotalOtherCharges:
+          format: double
+          description: Total amount of other charges
+          type: number
+          example: 12.5
+        ChargesCount:
+          format: int32
+          description: Number of other charges
+          type: integer
+          example: 3
+    RestApiPaginationResult_PayoutOtherCharge_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutOtherCharge'
+          example: []
+    RestApiPaginationResult_PayoutRefund_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutRefund'
+          example: []
+    PayoutRefund:
+      description: Holds the information for a refund related to a payout
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: The id of the order the refund was for
+          type: integer
+          example: 500123
+        OrderCurrency:
+          description: Order currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutId:
+          format: int32
+          description: The id of the payout the order is related to
+          type: integer
+          example: 500123
+        OrderDate:
+          format: date-time
+          description: The date the order was placed
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        OrderType:
+          description: Order type (online or cash)
+          enum:
+          - Cash
+          - Online
+          type: string
+          example: Cash
+        RefundDate:
+          format: date-time
+          description: The date the refund was done
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+        TotalRefund:
+          format: double
+          description: Total refund amount
+          type: number
+          example: 12.5
+        RefundedFees:
+          format: double
+          description: Refunded fees amount
+          type: number
+          example: 12.5
+        RefundedAmount:
+          format: double
+          description: Refunded amount
+          type: number
+          example: 12.5
+        CashFeeRefundedToCustomer:
+          format: double
+          description: Cash fee refunded to customer
+          type: number
+          example: 12.5
+    PayoutSummary:
+      description: Holds the information for a whitelabel payouts summary.
+      type: object
+      properties:
+        PayoutStatus:
+          description: Status of the payout
+          enum:
+          - Pending
+          - InTransit
+          - Paid
+          - Failed
+          - Cancelled
+          type: string
+          example: Pending
+        TotalAmount:
+          format: double
+          description: Total payouts amount
+          type: number
+          example: 12.5
+        Currency:
+          description: Payout currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        TotalCount:
+          format: int32
+          description: Total payouts count
+          type: integer
+          example: 12.5
+    ChargebackDetails:
+      description: Chargebacks breakdown
+      type: object
+      properties:
+        ChargebackAmount:
+          format: double
+          description: Chargeback amount
+          type: number
+          example: 12.5
+        PosSalesChargebackAmount:
+          format: double
+          description: POS Chargeback amount
+          type: number
+          example: 12.5
+        ChargebackRefundedFees:
+          format: double
+          description: Chargeback refunded feeds
+          type: number
+          example: 12.5
+        ChargebacksCount:
+          format: int32
+          description: Number of chargebacks
+          type: integer
+          example: 3
+        TotalChargebackCost:
+          format: double
+          description: Total amount
+          type: number
+          example: 12.5
+    RevenueAdjustmentsDetails:
+      description: Revenue Adjustments breakdown
+      type: object
+      properties:
+        OnlineSalesRefundedAmount:
+          format: double
+          description: Online sales refunds
+          type: number
+          example: 12.5
+        PosSalesRefundedAmount:
+          format: double
+          description: POS Online sales refunds
+          type: number
+          example: 12.5
+        CashSalesRefundedAmount:
+          format: double
+          description: Cash sales refunds
+          type: number
+          example: 12.5
+        CustomerCashFees:
+          format: double
+          description: Customer cash fees
+          type: number
+          example: 12.5
+        RefundsCount:
+          format: int32
+          description: Number of refunds
+          type: integer
+          example: 3
+        PayGreenSalesAmount:
+          format: double
+          description: PayGreen sales
+          type: number
+          nullable: true
+          example: 12.5
+        PayGreenProcessingFees:
+          format: double
+          description: PayGreen processing fees charged to end-user
+          type: number
+          nullable: true
+          example: 12.5
+        TotalOnlineRevenueAdjustments:
+          format: double
+          description: Total revenue adjustments
+          type: number
+          example: 12.5
+    BalanceDetails:
+      description: Period opening and closing balance
+      type: object
+      properties:
+        OpeningBalance:
+          format: double
+          description: OpeningBalance.
+          type: number
+          example: 1.0
+        ClosingBalance:
+          format: double
+          description: ClosingBalance.
+          type: number
+          example: 1.0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

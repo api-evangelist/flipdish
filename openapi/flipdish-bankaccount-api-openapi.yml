@@ -1,0 +1,1486 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts BankAccount API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: BankAccount
+  description: Operations for Bank Account.
+paths:
+  /api/v1.0/{appId}/bankaccounts:
+    get:
+      tags:
+      - BankAccount
+      operationId: GetBankAccounts
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_BankAccountSummary_'
+              examples:
+                GetBankAccounts200Example:
+                  summary: Default GetBankAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccounts400Example:
+                  summary: Default GetBankAccounts 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccounts401Example:
+                  summary: Default GetBankAccounts 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccounts403Example:
+                  summary: Default GetBankAccounts 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccounts500Example:
+                  summary: Default GetBankAccounts 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Bank Accounts
+      description: Get Bank Accounts via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - BankAccount
+      operationId: CreateBankAccount
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail_'
+              examples:
+                CreateBankAccount200Example:
+                  summary: Default CreateBankAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: 500123
+                      StoreNames:
+                      - Example Name
+                      AccountState: Unverified
+                      StripeConnectedAccountInfo:
+                        AccountStatus: Disabled
+                        StripeId: '500123'
+                        CardPaymentStatus: Inactive
+                        PayoutScheduleInterval: Manual
+                        PayoutsEnabled: true
+                        PayoutsPaused: true
+                        PaymentsEnabled: true
+                      BankAddress: string
+                      BankCountryCode: IE
+                      AccountHolderAddress: string
+                      AccountHolderCountryCode: IE
+                      VatNumber: string
+                      CurrencyCode: EUR
+                      StoreIds:
+                      - 1
+                      BankName: Example Name
+                      AccountName: Example Name
+                      Iban: string
+                      Swift: string
+                      NationalClearingCode: string
+                      PopulatedAccountFields: []
+                      RejectionReason: string
+                      BusinessType: Individual
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateBankAccount400Example:
+                  summary: Default CreateBankAccount 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateBankAccount401Example:
+                  summary: Default CreateBankAccount 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateBankAccount403Example:
+                  summary: Default CreateBankAccount 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateBankAccount500Example:
+                  summary: Default CreateBankAccount 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Bank Account
+      description: Create Bank Account via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/bankaccounts).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}:
+    get:
+      tags:
+      - BankAccount
+      operationId: GetBankAccountById
+      parameters:
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail_'
+              examples:
+                GetBankAccountById200Example:
+                  summary: Default GetBankAccountById 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: 500123
+                      StoreNames:
+                      - Example Name
+                      AccountState: Unverified
+                      StripeConnectedAccountInfo:
+                        AccountStatus: Disabled
+                        StripeId: '500123'
+                        CardPaymentStatus: Inactive
+                        PayoutScheduleInterval: Manual
+                        PayoutsEnabled: true
+                        PayoutsPaused: true
+                        PaymentsEnabled: true
+                      BankAddress: string
+                      BankCountryCode: IE
+                      AccountHolderAddress: string
+                      AccountHolderCountryCode: IE
+                      VatNumber: string
+                      CurrencyCode: EUR
+                      StoreIds:
+                      - 1
+                      BankName: Example Name
+                      AccountName: Example Name
+                      Iban: string
+                      Swift: string
+                      NationalClearingCode: string
+                      PopulatedAccountFields: []
+                      RejectionReason: string
+                      BusinessType: Individual
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccountById400Example:
+                  summary: Default GetBankAccountById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccountById401Example:
+                  summary: Default GetBankAccountById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccountById403Example:
+                  summary: Default GetBankAccountById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetBankAccountById500Example:
+                  summary: Default GetBankAccountById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Bank Account by Id
+      description: Get Bank Account by Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - BankAccount
+      operationId: UpdateBankAccount
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccount400Example:
+                  summary: Default UpdateBankAccount 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccount401Example:
+                  summary: Default UpdateBankAccount 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccount403Example:
+                  summary: Default UpdateBankAccount 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccount500Example:
+                  summary: Default UpdateBankAccount 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Bank Account
+      description: Update Bank Account via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/bankaccounts/{bankAccountId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - BankAccount
+      operationId: DeleteBankAccount
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteBankAccount400Example:
+                  summary: Default DeleteBankAccount 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteBankAccount401Example:
+                  summary: Default DeleteBankAccount 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteBankAccount403Example:
+                  summary: Default DeleteBankAccount 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteBankAccount500Example:
+                  summary: Default DeleteBankAccount 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Bank Account
+      description: Delete Bank Account via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/bankaccounts/{bankAccountId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/field-definitions:
+    get:
+      tags:
+      - BankAccount
+      operationId: GetFieldDefinitions
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AccountFieldsDefinitions_'
+              examples:
+                GetFieldDefinitions200Example:
+                  summary: Default GetFieldDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      DefinitionsPerCountry: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFieldDefinitions400Example:
+                  summary: Default GetFieldDefinitions 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFieldDefinitions401Example:
+                  summary: Default GetFieldDefinitions 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFieldDefinitions403Example:
+                  summary: Default GetFieldDefinitions 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFieldDefinitions500Example:
+                  summary: Default GetFieldDefinitions 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Field Definitions
+      description: Get Field Definitions via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/field-definitions).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/countries-field-definitions:
+    get:
+      tags:
+      - BankAccount
+      operationId: GetCountriesWithFieldDefinitions
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_CountryWithAccountFieldsDefinitions_'
+              examples:
+                GetCountriesWithFieldDefinitions200Example:
+                  summary: Default GetCountriesWithFieldDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCountriesWithFieldDefinitions400Example:
+                  summary: Default GetCountriesWithFieldDefinitions 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCountriesWithFieldDefinitions401Example:
+                  summary: Default GetCountriesWithFieldDefinitions 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCountriesWithFieldDefinitions403Example:
+                  summary: Default GetCountriesWithFieldDefinitions 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCountriesWithFieldDefinitions500Example:
+                  summary: Default GetCountriesWithFieldDefinitions 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Countries with Field Definitions
+      description: Get Countries with Field Definitions via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/countries-field-definitions).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/state/{state}:
+    post:
+      tags:
+      - BankAccount
+      operationId: UpdateBankAccountState
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: state
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The state path parameter.
+        example: string
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccountState400Example:
+                  summary: Default UpdateBankAccountState 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccountState401Example:
+                  summary: Default UpdateBankAccountState 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccountState403Example:
+                  summary: Default UpdateBankAccountState 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateBankAccountState500Example:
+                  summary: Default UpdateBankAccountState 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      deprecated: true
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Bank Account State
+      description: Update Bank Account State via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/bankaccounts/{bankAccountId}/state/{state}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/store/{storeId}:
+    post:
+      tags:
+      - BankAccount
+      operationId: AttachBankAccountToStore
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachBankAccountToStore400Example:
+                  summary: Default AttachBankAccountToStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachBankAccountToStore401Example:
+                  summary: Default AttachBankAccountToStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachBankAccountToStore403Example:
+                  summary: Default AttachBankAccountToStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AttachBankAccountToStore500Example:
+                  summary: Default AttachBankAccountToStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Attach Bank Account to Store
+      description: Attach Bank Account to Store via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/bankaccounts/{bankAccountId}/store/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AccountFieldDefinition:
+      description: Represents the format of a bank account field
+      type: object
+      properties:
+        Key:
+          description: Depending on the Key, the field's value will be stored in a different field in PayeeBankAccountData
+          enum:
+          - Iban
+          - AccountNumber
+          - RoutingNumber
+          - BSB
+          - BranchCode
+          - BankCode
+          - InstitutionNumber
+          - TransitNumber
+          - ClearingCode
+          - IfscCode
+          - Clabe
+          - SortCode
+          - Swift
+          type: string
+          example: Iban
+        DisplayName:
+          description: Display name of the field
+          type: string
+          example: Example Name
+        Type:
+          description: There are some fields that are of type known to the frontend (IBAN, Swift) -- for those frontend should use its own validation library, e.g. ibantools
+          enum:
+          - None
+          - Iban
+          type: string
+          example: None
+        MinLength:
+          format: int32
+          description: Minimum length of the field
+          type: integer
+          nullable: true
+          example: 1
+        MaxLength:
+          format: int32
+          description: Maximum length of the field
+          type: integer
+          nullable: true
+          example: 1
+        DigitsOnly:
+          description: Is the field digits (numeric) only
+          type: boolean
+          example: true
+        Regex:
+          description: Regex for validating the field (if specified)
+          type: string
+          example: string
+    StripeConnectedAccountInfo:
+      description: Represents information about a Stripe connected account associated with a bank account
+      type: object
+      properties:
+        AccountStatus:
+          description: Stripe connected account status
+          enum:
+          - Disabled
+          - Enabled
+          - AdditionalInformationRequired
+          - PendingVerification
+          - Unverified
+          - Rejected
+          - UpdateExternalAccount
+          - PlatformPaused
+          type: string
+          example: Disabled
+        StripeId:
+          description: Stripe connected account id
+          type: string
+          example: '500123'
+        CardPaymentStatus:
+          description: Current status of the Card Payment capability of the account
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+          example: Inactive
+        PayoutScheduleInterval:
+          description: Payouts Schedule Interval
+          enum:
+          - Manual
+          - Daily
+          - Weekly
+          - Monthly
+          type: string
+          example: Manual
+        PayoutsEnabled:
+          description: Payouts Enabled status
+          type: boolean
+          nullable: true
+          example: true
+        PayoutsPaused:
+          description: Flag indicating if payouts are paused
+          type: boolean
+          example: true
+        PaymentsEnabled:
+          description: Flag indicating if payments are enabled
+          type: boolean
+          nullable: true
+          example: true
+    BankAccountSummary:
+      description: ''
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id of this account
+          type: integer
+          example: 500123
+        StoreNames:
+          description: Store Names that are attached to this account
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        StoreIds:
+          description: Store Ids that are attached to this account
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        AccountState:
+          description: Status of Account
+          enum:
+          - Unverified
+          - AwatingVerification
+          - Verified
+          - Grandfathered
+          type: string
+          example: Unverified
+        CurrencyCode:
+          description: Currency of Account
+          type: string
+          example: EUR
+        VatNumber:
+          description: Account Holders Vat Number
+          type: string
+          example: string
+        AccountHolderAddress:
+          description: Account Holders Address
+          type: string
+          example: string
+        AccountHolderCountryCode:
+          description: Account Holders Country Code
+          type: string
+          example: IE
+        StripeConnectedAccountInfo:
+          $ref: '#/components/schemas/StripeConnectedAccountInfo'
+        AccountName:
+          description: Name of this account
+          type: string
+          example: Example Name
+        Iban:
+          description: IBAN of this account
+          type: string
+          example: string
+        Swift:
+          description: SWIFT of this bank account
+          type: string
+          example: string
+        NationalClearingCode:
+          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
+          type: string
+          example: string
+        PopulatedAccountFields:
+          description: "A list of one or more populated account fields (field key-value pairs).\r\nIf this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored."
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldKeyValuePair'
+          example: []
+        RejectionReason:
+          description: Reason for Rejection
+          type: string
+          example: string
+        BusinessType:
+          description: Business Type
+          enum:
+          - Individual
+          - Company
+          - NonProfit
+          - GovernmentEntity
+          type: string
+          nullable: true
+          example: Individual
+    RestApiArrayResult_BankAccountSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccountSummary'
+          example: []
+    CountryWithAccountFieldsDefinitions:
+      description: List of field definitions per country
+      type: object
+      properties:
+        CountryCode:
+          description: Country 2-letter ISO code
+          type: string
+          example: IE
+        DisplayName:
+          description: Display name of the country
+          type: string
+          example: Example Name
+        SupportType:
+          description: Country support type (supported-by-stripe-cc, supported-by-flipdish,not-supported)
+          type: string
+          example: string
+        FieldDefinitions:
+          description: Bank Account field definitions
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldDefinition'
+          example: []
+    AccountFieldsDefinitions:
+      description: List of field definitions per country
+      type: object
+      properties:
+        DefinitionsPerCountry:
+          description: List of field definitions per country
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountFieldDefinition'
+    AccountFieldKeyValuePair:
+      description: Represents one populated account field (its key and value)
+      type: object
+      properties:
+        Key:
+          description: Depending on the Key, the field's value will be stored in a different field in PayeeBankAccountData
+          enum:
+          - Iban
+          - AccountNumber
+          - RoutingNumber
+          - BSB
+          - BranchCode
+          - BankCode
+          - InstitutionNumber
+          - TransitNumber
+          - ClearingCode
+          - IfscCode
+          - Clabe
+          - SortCode
+          - Swift
+          type: string
+          example: Iban
+        Value:
+          description: The value of the field
+          type: string
+          example: string
+    BankAccountDetail:
+      description: ''
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id of this account
+          type: integer
+          example: 500123
+        StoreNames:
+          description: Store Names that are attached to this account
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        AccountState:
+          description: Status of Account
+          enum:
+          - Unverified
+          - AwatingVerification
+          - Verified
+          - Grandfathered
+          type: string
+          example: Unverified
+        StripeConnectedAccountInfo:
+          $ref: '#/components/schemas/StripeConnectedAccountInfo'
+        BankAddress:
+          description: Address lf the bank
+          type: string
+          example: string
+        BankCountryCode:
+          description: CountryCode of the Bank Account
+          type: string
+          example: IE
+        AccountHolderAddress:
+          description: Account Holders Address
+          type: string
+          example: string
+        AccountHolderCountryCode:
+          description: Account Holders Country Code
+          type: string
+          example: IE
+        VatNumber:
+          description: Account Holders Vat Number
+          type: string
+          example: string
+        CurrencyCode:
+          description: Currency of Account
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        StoreIds:
+          description: List of stores to attach to Account
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        BankName:
+          description: Name of Bank
+          type: string
+          example: Example Name
+        AccountName:
+          description: Name of this account
+          type: string
+          example: Example Name
+        Iban:
+          description: IBAN of this account
+          type: string
+          example: string
+        Swift:
+          description: SWIFT of this bank account
+          type: string
+          example: string
+        NationalClearingCode:
+          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
+          type: string
+          example: string
+        PopulatedAccountFields:
+          description: "A list of one or more populated account fields (field key-value pairs).\r\nIf this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored."
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldKeyValuePair'
+          example: []
+        RejectionReason:
+          description: Reason for Rejection
+          type: string
+          example: string
+        BusinessType:
+          description: Business Type
+          enum:
+          - Individual
+          - Company
+          - NonProfit
+          - GovernmentEntity
+          type: string
+          nullable: true
+          example: Individual
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_AccountFieldsDefinitions_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AccountFieldsDefinitions'
+    RestApiResult_BankAccountDetail_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BankAccountDetail'
+    RestApiArrayResult_CountryWithAccountFieldsDefinitions_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryWithAccountFieldsDefinitions'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

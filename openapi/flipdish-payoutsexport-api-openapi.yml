@@ -1,0 +1,799 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts PayoutsExport API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: PayoutsExport
+  description: Operations for Payouts Export.
+paths:
+  /api/v1.0/{appId}/payouts/export:
+    get:
+      tags:
+      - PayoutsExport
+      operationId: ExportPayouts
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The start date query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The end date query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: payoutRequestIds.bankAccountIds
+        in: query
+        description: List of bank account ids to search for
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        example:
+        - 3
+      - name: payoutRequestIds.states
+        in: query
+        description: List of {Flipdish.PublicModels.V1.Payouts.PayoutStatus} so search for
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Pending
+            - InTransit
+            - Paid
+            - Failed
+            - Cancelled
+        example:
+        - Pending
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                ExportPayouts200Example:
+                  summary: Default ExportPayouts 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayouts400Example:
+                  summary: Default ExportPayouts 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayouts401Example:
+                  summary: Default ExportPayouts 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayouts403Example:
+                  summary: Default ExportPayouts 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayouts500Example:
+                  summary: Default ExportPayouts 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Export Payouts
+      description: Export Payouts via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/payouts/export).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/export:
+    get:
+      tags:
+      - PayoutsExport
+      operationId: ExportPayoutStores
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                ExportPayoutStores200Example:
+                  summary: Default ExportPayoutStores 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutStores400Example:
+                  summary: Default ExportPayoutStores 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutStores401Example:
+                  summary: Default ExportPayoutStores 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutStores403Example:
+                  summary: Default ExportPayoutStores 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutStores500Example:
+                  summary: Default ExportPayoutStores 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Export Payout Stores
+      description: Export Payout Stores via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/export).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/orders/export:
+    get:
+      tags:
+      - PayoutsExport
+      operationId: ExportPayoutOrders
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                ExportPayoutOrders200Example:
+                  summary: Default ExportPayoutOrders 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOrders400Example:
+                  summary: Default ExportPayoutOrders 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOrders401Example:
+                  summary: Default ExportPayoutOrders 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOrders403Example:
+                  summary: Default ExportPayoutOrders 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOrders500Example:
+                  summary: Default ExportPayoutOrders 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Export Payout Orders
+      description: Export Payout Orders via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/orders/export).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/refunds/export:
+    get:
+      tags:
+      - PayoutsExport
+      operationId: ExportPayoutRefunds
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                ExportPayoutRefunds200Example:
+                  summary: Default ExportPayoutRefunds 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutRefunds400Example:
+                  summary: Default ExportPayoutRefunds 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutRefunds401Example:
+                  summary: Default ExportPayoutRefunds 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutRefunds403Example:
+                  summary: Default ExportPayoutRefunds 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutRefunds500Example:
+                  summary: Default ExportPayoutRefunds 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Export Payout Refunds
+      description: Export Payout Refunds via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/refunds/export).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/chargebacks/export:
+    get:
+      tags:
+      - PayoutsExport
+      operationId: ExportPayoutChargebacks
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                ExportPayoutChargebacks200Example:
+                  summary: Default ExportPayoutChargebacks 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutChargebacks400Example:
+                  summary: Default ExportPayoutChargebacks 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutChargebacks401Example:
+                  summary: Default ExportPayoutChargebacks 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutChargebacks403Example:
+                  summary: Default ExportPayoutChargebacks 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutChargebacks500Example:
+                  summary: Default ExportPayoutChargebacks 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Export Payout Chargebacks
+      description: Export Payout Chargebacks via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/chargebacks/export).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/othercharges/export:
+    get:
+      tags:
+      - PayoutsExport
+      operationId: ExportPayoutOtherCharges
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The bank account id path parameter.
+        example: 500123
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The payout id path parameter.
+        example: 500123
+      - name: storeIds
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store ids query parameter.
+        example:
+        - 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                ExportPayoutOtherCharges200Example:
+                  summary: Default ExportPayoutOtherCharges 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOtherCharges400Example:
+                  summary: Default ExportPayoutOtherCharges 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOtherCharges401Example:
+                  summary: Default ExportPayoutOtherCharges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOtherCharges403Example:
+                  summary: Default ExportPayoutOtherCharges 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ExportPayoutOtherCharges500Example:
+                  summary: Default ExportPayoutOtherCharges 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Export Payout Other Charges
+      description: Export Payout Other Charges via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/bankaccounts/{bankAccountId}/payouts/{payoutId}/othercharges/export).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

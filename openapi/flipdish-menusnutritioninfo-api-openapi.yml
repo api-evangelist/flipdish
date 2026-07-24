@@ -1,0 +1,962 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts MenusNutritionInfo API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: MenusNutritionInfo
+  description: Operations for Menus Nutrition Info.
+paths:
+  /api/v1.0/menus/{menuId}/nutrition:
+    get:
+      tags:
+      - MenusNutritionInfo
+      summary: Flipdish Get Menu Nutrition Info by Menu Id
+      operationId: GetMenuNutritionInfoByMenuId
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_NutritionInfo_'
+              examples:
+                GetMenuNutritionInfoByMenuId200Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Version: string
+                      MenuItems: []
+                      MenuItemOptionSetItems: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuNutritionInfoByMenuId400Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuNutritionInfoByMenuId401Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuNutritionInfoByMenuId403Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuNutritionInfoByMenuId404Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuNutritionInfoByMenuId409Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuNutritionInfoByMenuId500Example:
+                  summary: Default GetMenuNutritionInfoByMenuId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Get Menu Nutrition Info by Menu Id via the Flipdish Open API v1.0 (GET /api/v1.0/menus/{menuId}/nutrition).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - MenusNutritionInfo
+      summary: Flipdish Add or Update Menu Nutrition Info by Menu Id
+      operationId: AddOrUpdateMenuNutritionInfoByMenuId
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuNutritionInfoHeader_'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId200Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MenuId: 500123
+                      NutritionInfoVersionGuid: 00000000-0000-0000-0000-000000000000
+                      AbsoluteUrl: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId400Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId401Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId403Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId404Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId409Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuNutritionInfoByMenuId500Example:
+                  summary: Default AddOrUpdateMenuNutritionInfoByMenuId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Add or Update Menu Nutrition Info by Menu Id via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/nutrition).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - MenusNutritionInfo
+      summary: Flipdish Delete Menu Nutrition Info by Menu Id
+      operationId: DeleteMenuNutritionInfoByMenuId
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DeleteMenuNutritionInfoByMenuId200Example:
+                  summary: Default DeleteMenuNutritionInfoByMenuId 200 response
+                  x-microcks-default: true
+                  value: {}
+        '204':
+          description: NoContent
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuNutritionInfoByMenuId400Example:
+                  summary: Default DeleteMenuNutritionInfoByMenuId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuNutritionInfoByMenuId401Example:
+                  summary: Default DeleteMenuNutritionInfoByMenuId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuNutritionInfoByMenuId403Example:
+                  summary: Default DeleteMenuNutritionInfoByMenuId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuNutritionInfoByMenuId409Example:
+                  summary: Default DeleteMenuNutritionInfoByMenuId 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuNutritionInfoByMenuId500Example:
+                  summary: Default DeleteMenuNutritionInfoByMenuId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Delete Menu Nutrition Info by Menu Id via the Flipdish Open API v1.0 (DELETE /api/v1.0/menus/{menuId}/nutrition).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/menus/nutrition/allergens:
+    get:
+      tags:
+      - MenusNutritionInfo
+      summary: Flipdish Get Allergens
+      operationId: GetAllergens
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: languageId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The language id query parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_Allergen_'
+              examples:
+                GetAllergens200Example:
+                  summary: Default GetAllergens 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAllergens400Example:
+                  summary: Default GetAllergens 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAllergens401Example:
+                  summary: Default GetAllergens 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAllergens403Example:
+                  summary: Default GetAllergens 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAllergens404Example:
+                  summary: Default GetAllergens 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAllergens409Example:
+                  summary: Default GetAllergens 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAllergens500Example:
+                  summary: Default GetAllergens 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Get Allergens via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/menus/nutrition/allergens).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/menuItem/{publicId}/nutrition:
+    post:
+      tags:
+      - MenusNutritionInfo
+      summary: Flipdish Add or Update Menu Item Nutrition Info
+      operationId: AddOrUpdateMenuItemNutritionInfo
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: publicId
+        in: path
+        description: Menu item's publicId
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuNutritionInfoHeader_'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo200Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MenuId: 500123
+                      NutritionInfoVersionGuid: 00000000-0000-0000-0000-000000000000
+                      AbsoluteUrl: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo400Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo401Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo403Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo404Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo409Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemNutritionInfo500Example:
+                  summary: Default AddOrUpdateMenuItemNutritionInfo 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Add or Update Menu Item Nutrition Info via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/menuItem/{publicId}/nutrition).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/menuItemOption/{publicId}/nutrition:
+    post:
+      tags:
+      - MenusNutritionInfo
+      summary: Flipdish Add or Update Menu Item Option Set Item Nutrition Info
+      operationId: AddOrUpdateMenuItemOptionSetItemNutritionInfo
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: publicId
+        in: path
+        description: Menu item's publicId
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuNutritionInfoHeader_'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo200Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MenuId: 500123
+                      NutritionInfoVersionGuid: 00000000-0000-0000-0000-000000000000
+                      AbsoluteUrl: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo400Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo401Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo403Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo404Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo409Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddOrUpdateMenuItemOptionSetItemNutritionInfo500Example:
+                  summary: Default AddOrUpdateMenuItemOptionSetItemNutritionInfo 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Add or Update Menu Item Option Set Item Nutrition Info via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/menuItemOption/{publicId}/nutrition).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    NutritionInfoMenuOptionSetItem:
+      description: NutritionInfoMenuOptionSetItem.
+      type: object
+      properties:
+        PublicId:
+          format: uuid
+          description: Menu item option set item public id
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Labels:
+          description: List of Nutrition Info Labels for this menu item option set item
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoLabel'
+          example: []
+    RestApiResult_NutritionInfo_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/NutritionInfo'
+    NutritionInfoLabel:
+      description: NutritionInfoLabel.
+      type: object
+      properties:
+        Name:
+          description: Name of the allergen / ingredient
+          type: string
+          example: Example Name
+        Values:
+          description: Optional list of values for the allergen / ingredient
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        IconUrl:
+          description: Url to the icon for the allergen / ingredient
+          type: string
+          example: https://api.flipdish.co/example
+    Allergen:
+      description: Allergen.
+      type: object
+      properties:
+        AllergenId:
+          description: A unique identifier for the allergen
+          type: string
+          example: '500123'
+        LocalizedName:
+          description: Localized name of the allergen
+          type: string
+          example: Example Name
+        IconUrl:
+          description: Url to the icon for the allergen
+          type: string
+          example: https://api.flipdish.co/example
+    NutritionInfoMenuItem:
+      description: NutritionInfoMenuItem.
+      type: object
+      properties:
+        PublicId:
+          format: uuid
+          description: Menu item public id
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Labels:
+          description: List of Nutrition Info Labels for this menu item
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoLabel'
+          example: []
+    MenuNutritionInfoHeader:
+      description: MenuNutritionInfoHeader.
+      type: object
+      properties:
+        MenuId:
+          format: int32
+          description: Menu Id
+          type: integer
+          example: 500123
+        NutritionInfoVersionGuid:
+          format: uuid
+          description: Nutrition information version guid (generated every time the nutrition information is updated)
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AbsoluteUrl:
+          description: Absolute URL of the nutrition information json file
+          type: string
+          example: https://api.flipdish.co/example
+    NutritionInfo:
+      description: Menu Nutrition Information
+      type: object
+      properties:
+        Version:
+          description: Version of the nutrition information model
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        MenuItems:
+          description: List of menu item nutrition infos
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoMenuItem'
+          example: []
+        MenuItemOptionSetItems:
+          description: List of menu item option set nutrition infos
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoMenuOptionSetItem'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_MenuNutritionInfoHeader_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuNutritionInfoHeader'
+    RestApiArrayResult_Allergen_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Allergen'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,507 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Receipts API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Receipts
+  description: Operations for Receipts.
+paths:
+  /api/v1.0/receipts/{orderId}:
+    get:
+      tags:
+      - Receipts
+      operationId: GetReceipt
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The order id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReceiptByOrderIdQueryResponse'
+              examples:
+                GetReceipt200Example:
+                  summary: Default GetReceipt 200 response
+                  x-microcks-default: true
+                  value:
+                    PreviousOrder:
+                      DeliveryType: string
+                      DeliveryLocationAddressString: string
+                      PaymentAccountType: string
+                      OrderId: 500123
+                      ReceiptCode: string
+                      RestaurantName: Example Name
+                      LocalOrderId: '500123'
+                      TableServiceCategory: string
+                      PickupLocationOptionValue: string
+                      CustomerName: Example Name
+                      PhoneNumberInternationalFormatString: '+353000000000'
+                      DeliveryInstructions: string
+                      Currency: EUR
+                      ProcessingFee: 12.5
+                      ServiceChargePercentage: 1.0
+                      ServiceChargeAmount: 12.5
+                      TipAmount: 12.5
+                      DeliveryAmount: 12.5
+                      DepositReturnFeeAmount: 12.5
+                      TotalTax: 12.5
+                      TotalAmount: 12.5
+                      Items: []
+                      TaxRates: []
+                      WhiteLabelId: 500123
+                    DepositReturnFeesSummary: []
+                    TsRequestedForLocal: '2026-06-02T12:00:00Z'
+                    TsOrderPlacedLocal: '2026-06-02T12:00:00Z'
+                    LogoUrl: https://api.flipdish.co/example
+                    Address: string
+                    VatNumber: string
+                    PaymentMethodDescription: string
+                    OrgId: '500123'
+                    CountryCode: IE
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetReceipt400Example:
+                  summary: Default GetReceipt 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetReceipt401Example:
+                  summary: Default GetReceipt 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetReceipt403Example:
+                  summary: Default GetReceipt 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetReceipt404Example:
+                  summary: Default GetReceipt 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetReceipt500Example:
+                  summary: Default GetReceipt 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Receipt
+      description: Get Receipt via the Flipdish Open API v1.0 (GET /api/v1.0/receipts/{orderId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PreviousOrder:
+      type: object
+      properties:
+        DeliveryType:
+          type: string
+          example: string
+        DeliveryLocationAddressString:
+          type: string
+          example: string
+        PaymentAccountType:
+          type: string
+          example: string
+        OrderId:
+          format: int32
+          type: integer
+          example: 500123
+        ReceiptCode:
+          type: string
+          example: string
+        RestaurantName:
+          type: string
+          example: Example Name
+        LocalOrderId:
+          type: string
+          example: '500123'
+        TableServiceCategory:
+          type: string
+          example: string
+        PickupLocationOptionValue:
+          type: string
+          example: string
+        CustomerName:
+          type: string
+          example: Example Name
+        PhoneNumberInternationalFormatString:
+          type: string
+          example: '+353000000000'
+        DeliveryInstructions:
+          type: string
+          example: string
+        Currency:
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        ProcessingFee:
+          format: double
+          type: number
+          example: 12.5
+        ServiceChargePercentage:
+          format: double
+          type: number
+          example: 1.0
+        ServiceChargeAmount:
+          format: double
+          type: number
+          example: 12.5
+        TipAmount:
+          format: double
+          type: number
+          example: 12.5
+        DeliveryAmount:
+          format: double
+          type: number
+          example: 12.5
+        DepositReturnFeeAmount:
+          format: double
+          type: number
+          example: 12.5
+        TotalTax:
+          format: double
+          type: number
+          example: 12.5
+        TotalAmount:
+          format: double
+          type: number
+          example: 12.5
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousOrderItem'
+          example: []
+        TaxRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxRate'
+          example: []
+        WhiteLabelId:
+          format: int32
+          type: integer
+          example: 500123
+    GetReceiptByOrderIdQueryResponse:
+      type: object
+      properties:
+        PreviousOrder:
+          $ref: '#/components/schemas/PreviousOrder'
+        DepositReturnFeesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/DepositReturnFeesSummary'
+          example: []
+        TsRequestedForLocal:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        TsOrderPlacedLocal:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        LogoUrl:
+          type: string
+          example: https://api.flipdish.co/example
+        Address:
+          type: string
+          example: string
+        VatNumber:
+          type: string
+          example: string
+        PaymentMethodDescription:
+          type: string
+          example: string
+        OrgId:
+          type: string
+          example: '500123'
+        CountryCode:
+          type: string
+          example: IE
+    PreviousOrderItemOption:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+    TaxRate:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Percentage:
+          format: double
+          type: number
+          example: 1.0
+        Total:
+          format: double
+          type: number
+          example: 12.5
+    PreviousOrderItem:
+      type: object
+      properties:
+        MenuSectionDisplayOrder:
+          format: int32
+          type: integer
+          example: 1
+        MenuSectionName:
+          type: string
+          example: Example Name
+        Name:
+          type: string
+          example: Example Name
+        PriceIncludingOptionSetItems:
+          format: double
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          type: number
+          example: 12.5
+        PreviousOrderItemOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousOrderItemOption'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    DepositReturnFeesSummary:
+      type: object
+      properties:
+        Count:
+          format: int32
+          type: integer
+          example: 3
+        Fee:
+          format: double
+          type: number
+          example: 12.5
+        Total:
+          format: double
+          type: number
+          example: 12.5
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

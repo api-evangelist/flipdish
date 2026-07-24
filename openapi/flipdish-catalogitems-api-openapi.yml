@@ -1,0 +1,1274 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts CatalogItems API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: CatalogItems
+  description: Operations for Catalog Items.
+paths:
+  /api/v1.0/{appId}/catalog/items/{catalogItemId}:
+    get:
+      tags:
+      - CatalogItems
+      summary: Flipdish Get Catalog Item by Id
+      description: Get Catalog Item by Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/catalog/items/{catalogItemId}).
+      operationId: GetCatalogItemById
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      - name: catalogItemId
+        in: path
+        description: The catalog item id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogItem'
+              examples:
+                GetCatalogItemById200Example:
+                  summary: Default GetCatalogItemById 200 response
+                  x-microcks-default: true
+                  value:
+                    CatalogItemId: '500123'
+                    IsArchived: true
+                    Groups: []
+                    Metafields: []
+                    ItemType: Product
+                    Sku: string
+                    Name: Example Name
+                    Description: string
+                    Price: 12.5
+                    ImageFileName: Example Name
+                    Alcohol: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCatalogItemById400Example:
+                  summary: Default GetCatalogItemById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCatalogItemById401Example:
+                  summary: Default GetCatalogItemById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCatalogItemById403Example:
+                  summary: Default GetCatalogItemById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCatalogItemById500Example:
+                  summary: Default GetCatalogItemById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - CatalogItems
+      summary: Flipdish Update Catalog Item
+      description: Update Catalog Item via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/catalog/items/{catalogItemId}).
+      operationId: UpdateCatalogItem
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      - name: catalogItemId
+        in: path
+        description: The catalog item id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCatalogItem'
+            examples:
+              UpdateCatalogItemRequestExample:
+                summary: Default UpdateCatalogItem request
+                x-microcks-default: true
+                value:
+                  Sku: string
+                  Name: Example Name
+                  Description: string
+                  Price: 12.5
+                  ImageFileName: Example Name
+                  Alcohol: true
+                  Groups: []
+                  Metafields: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCatalogItem400Example:
+                  summary: Default UpdateCatalogItem 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCatalogItem401Example:
+                  summary: Default UpdateCatalogItem 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCatalogItem403Example:
+                  summary: Default UpdateCatalogItem 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCatalogItem404Example:
+                  summary: Default UpdateCatalogItem 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCatalogItem500Example:
+                  summary: Default UpdateCatalogItem 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/catalog/items:
+    get:
+      tags:
+      - CatalogItems
+      summary: Flipdish Get Items
+      description: Get Items via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/catalog/items).
+      operationId: GetItems
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      - name: itemTypes
+        in: query
+        description: The item types query parameter.
+        required: true
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Product
+            - Modifier
+        example:
+        - Product
+      - name: searchTerm
+        in: query
+        description: The search term query parameter.
+        required: false
+        schema:
+          type: string
+        example: string
+      - name: page
+        in: query
+        description: The page query parameter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: limit
+        in: query
+        description: The limit query parameter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_CatalogItem_'
+              examples:
+                GetItems200Example:
+                  summary: Default GetItems 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetItems400Example:
+                  summary: Default GetItems 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetItems401Example:
+                  summary: Default GetItems 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetItems403Example:
+                  summary: Default GetItems 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetItems500Example:
+                  summary: Default GetItems 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - CatalogItems
+      summary: Flipdish Create Catalog Item
+      description: Create Catalog Item via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/catalog/items).
+      operationId: CreateCatalogItem
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCatalogItem'
+            examples:
+              CreateCatalogItemRequestExample:
+                summary: Default CreateCatalogItem request
+                x-microcks-default: true
+                value:
+                  Groups: []
+                  Metafields: []
+                  ItemType: Product
+                  Sku: string
+                  Name: Example Name
+                  Description: string
+                  Price: 12.5
+                  ImageFileName: Example Name
+                  Alcohol: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_CatalogItem_'
+              examples:
+                CreateCatalogItem200Example:
+                  summary: Default CreateCatalogItem 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CatalogItemId: '500123'
+                      IsArchived: true
+                      Groups: []
+                      Metafields: []
+                      ItemType: Product
+                      Sku: string
+                      Name: Example Name
+                      Description: string
+                      Price: 12.5
+                      ImageFileName: Example Name
+                      Alcohol: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCatalogItem400Example:
+                  summary: Default CreateCatalogItem 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCatalogItem401Example:
+                  summary: Default CreateCatalogItem 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCatalogItem403Example:
+                  summary: Default CreateCatalogItem 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCatalogItem500Example:
+                  summary: Default CreateCatalogItem 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/catalog/items/{catalogItemId}/archive:
+    post:
+      tags:
+      - CatalogItems
+      summary: Flipdish Archive Catalog Item
+      description: Archive Catalog Item via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/catalog/items/{catalogItemId}/archive).
+      operationId: ArchiveCatalogItem
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      - name: catalogItemId
+        in: path
+        description: The catalog item id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ArchiveCatalogItem400Example:
+                  summary: Default ArchiveCatalogItem 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ArchiveCatalogItem401Example:
+                  summary: Default ArchiveCatalogItem 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ArchiveCatalogItem403Example:
+                  summary: Default ArchiveCatalogItem 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ArchiveCatalogItem404Example:
+                  summary: Default ArchiveCatalogItem 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ArchiveCatalogItem500Example:
+                  summary: Default ArchiveCatalogItem 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/catalog/items/{catalogItemId}/duplicate:
+    post:
+      tags:
+      - CatalogItems
+      summary: Flipdish Duplicate Catalog Item
+      description: Duplicate Catalog Item via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/catalog/items/{catalogItemId}/duplicate).
+      operationId: DuplicateCatalogItem
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      - name: catalogItemId
+        in: path
+        description: The catalog item id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DuplicateCatalogItem400Example:
+                  summary: Default DuplicateCatalogItem 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DuplicateCatalogItem401Example:
+                  summary: Default DuplicateCatalogItem 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DuplicateCatalogItem403Example:
+                  summary: Default DuplicateCatalogItem 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DuplicateCatalogItem404Example:
+                  summary: Default DuplicateCatalogItem 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DuplicateCatalogItem500Example:
+                  summary: Default DuplicateCatalogItem 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GroupReference:
+      description: Reference to an existing {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
+      required:
+      - CatalogItemId
+      - GroupType
+      type: object
+      properties:
+        Group:
+          $ref: '#/components/schemas/Group'
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    RestApiPaginationResult_CatalogItem_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItem'
+          example: []
+    UpdateCatalogItem:
+      description: Update Catalog Item
+      type: object
+      properties:
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Product name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Product description
+          maxLength: 3000
+          minLength: 0
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Product price
+          minimum: 0
+          type: number
+          nullable: true
+          example: 12.5
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+        Alcohol:
+          description: Product contains alcohol
+          type: boolean
+          nullable: true
+          example: true
+        Groups:
+          description: Collection of groups associated with this item
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateCatalogGroupReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+    Product:
+      description: Product
+      required:
+      - ProductType
+      - Sku
+      - Name
+      - Price
+      type: object
+      properties:
+        CatalogItemId:
+          description: Unique catalog Item id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        IsArchived:
+          description: Returns true if the item is archived
+          type: boolean
+          example: true
+        Groups:
+          description: Collection of groups associated with this item
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+        ProductType:
+          description: Type of item (Product, Modifier, etc)
+          enum:
+          - Product
+          - Modifier
+          type: string
+          example: Product
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Product name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Product description
+          maxLength: 3000
+          minLength: 0
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Product price
+          minimum: 0
+          type: number
+          example: 12.5
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+        Alcohol:
+          description: Product contains alcohol
+          type: boolean
+          example: true
+    UpdateCatalogGroupReference:
+      description: Data to update a {Flipdish.Menus.PublicModels.V1.Catalog.Items.CatalogGroupReference}
+      required:
+      - CatalogGroupId
+      - GroupType
+      type: object
+      properties:
+        CatalogGroupId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    CatalogItem:
+      description: CatalogItem
+      required:
+      - ItemType
+      - Sku
+      - Name
+      - Price
+      type: object
+      properties:
+        CatalogItemId:
+          description: Unique catalog Item id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        IsArchived:
+          description: Returns true if the item is archived
+          type: boolean
+          example: true
+        Groups:
+          description: Collection of groups associated with this item
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogGroupReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+        ItemType:
+          description: Type of item (Product, Modifier, etc)
+          enum:
+          - Product
+          - Modifier
+          type: string
+          example: Product
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Item name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Item description
+          maxLength: 3000
+          minLength: 0
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Item price
+          minimum: 0
+          type: number
+          example: 12.5
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+        Alcohol:
+          description: item contains alcohol
+          type: boolean
+          example: true
+    ProductReference:
+      description: Catalog Item associated
+      required:
+      - CatalogItemId
+      - ProductType
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/Product'
+        Product:
+          $ref: '#/components/schemas/Product'
+        CatalogItemId:
+          description: Identifier of the CatalogItemId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        ProductType:
+          description: Type of the SupProduct
+          enum:
+          - Product
+          - Modifier
+          type: string
+          example: Product
+        PreselectedQuantity:
+          format: int32
+          description: Quantity of the modifier that will be set when the parent product is placed in the basket
+          type: integer
+          example: 3
+    CatalogGroupReference:
+      description: Reference to an existing {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
+      required:
+      - CatalogGroupId
+      - GroupType
+      type: object
+      properties:
+        Group:
+          $ref: '#/components/schemas/Group'
+        CatalogGroupId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    Metafield:
+      description: Metafield
+      required:
+      - Key
+      - Value
+      type: object
+      properties:
+        Key:
+          description: "Key of the metafield.\r\nAllowed characters: lowercase letters, numbers, hyphen, underscore and dot"
+          type: string
+          example: string
+        Value:
+          description: Value of the metafield.
+          type: string
+          example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    CreateCatalogItem:
+      description: Create a Catalog Item
+      required:
+      - ItemType
+      - Sku
+      - Name
+      - Price
+      type: object
+      properties:
+        Groups:
+          description: Collection of groups associated with this item
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateCatalogGroupReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+        ItemType:
+          description: Type of item (Product, Modifier, etc)
+          enum:
+          - Product
+          - Modifier
+          type: string
+          example: Product
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Item name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Item description
+          maxLength: 3000
+          minLength: 0
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Item price
+          minimum: 0
+          type: number
+          example: 12.5
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+        Alcohol:
+          description: item contains alcohol
+          type: boolean
+          example: true
+    CreateCatalogGroupReference:
+      description: Information to create a reference to a {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
+      required:
+      - CatalogGroupId
+      - GroupType
+      type: object
+      properties:
+        CatalogGroupId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    Group:
+      description: CatalogGroup
+      required:
+      - GroupType
+      - Sku
+      - Name
+      type: object
+      properties:
+        CatalogGroupId:
+          description: Unique catalog group id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        CatalogItemId:
+          description: Unique catalog item id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        IsArchived:
+          description: Returns true if the group is archived
+          type: boolean
+          example: true
+        MinSelectCount:
+          format: int32
+          description: Minimum number of items that the user has to select
+          type: integer
+          example: 3
+        MaxSelectCount:
+          format: int32
+          description: Maximum number of items that the user has to select
+          type: integer
+          nullable: true
+          example: 3
+        Products:
+          description: Collection of items associated with this product
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+        GroupType:
+          description: Type of group (ModifierGroup, etc)
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Group name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        AutogenerateDisplayText:
+          description: Autogenerate display text in ordering applications
+          type: boolean
+          example: true
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+    RestApiResult_CatalogItem_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/CatalogItem'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

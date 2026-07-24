@@ -1,0 +1,589 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Device API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Device
+  description: Operations for Device.
+paths:
+  /api/v1.0/{appId}/devices/device/{deviceModel}/{deviceId}:
+    get:
+      tags:
+      - Device
+      operationId: GetDeviceDetails
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: deviceModel
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The device model path parameter.
+        example: string
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The device id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ClientDevice_'
+              examples:
+                GetDeviceDetails200Example:
+                  summary: Default GetDeviceDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      DeviceModel: string
+                      DeviceId: '500123'
+                      DeviceName: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeviceDetails400Example:
+                  summary: Default GetDeviceDetails 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeviceDetails401Example:
+                  summary: Default GetDeviceDetails 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeviceDetails403Example:
+                  summary: Default GetDeviceDetails 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetDeviceDetails500Example:
+                  summary: Default GetDeviceDetails 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Device Details
+      description: Get Device Details via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/devices/device/{deviceModel}/{deviceId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/devices/search:
+    get:
+      tags:
+      - Device
+      operationId: SearchDevices
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The store id query parameter.
+        example: 500123
+      - name: deviceModel
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The device model query parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_ClientDeviceSummary_'
+              examples:
+                SearchDevices200Example:
+                  summary: Default SearchDevices 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchDevices400Example:
+                  summary: Default SearchDevices 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchDevices401Example:
+                  summary: Default SearchDevices 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchDevices403Example:
+                  summary: Default SearchDevices 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchDevices500Example:
+                  summary: Default SearchDevices 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Search Devices
+      description: Search Devices via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/devices/search).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/devices/assign:
+    post:
+      tags:
+      - Device
+      operationId: AssignDevice
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientDeviceAssignEnrolledDevice'
+            examples:
+              AssignDeviceRequestExample:
+                summary: Default AssignDevice request
+                x-microcks-default: true
+                value:
+                  DeviceModel: string
+                  PinCode: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ClientDeviceEnrollmentResult_'
+              examples:
+                AssignDevice200Example:
+                  summary: Default AssignDevice 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      PinCode: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignDevice400Example:
+                  summary: Default AssignDevice 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignDevice401Example:
+                  summary: Default AssignDevice 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignDevice403Example:
+                  summary: Default AssignDevice 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AssignDevice500Example:
+                  summary: Default AssignDevice 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Assign Device
+      description: Assign Device via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/devices/assign).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/devices/enroll:
+    post:
+      tags:
+      - Device
+      operationId: EnrollDevice
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientDeviceEnroll'
+            examples:
+              EnrollDeviceRequestExample:
+                summary: Default EnrollDevice request
+                x-microcks-default: true
+                value:
+                  DeviceModel: string
+                  DeviceId: '500123'
+                  DeviceName: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ClientDeviceEnrollmentResult_'
+              examples:
+                EnrollDevice200Example:
+                  summary: Default EnrollDevice 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      PinCode: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EnrollDevice400Example:
+                  summary: Default EnrollDevice 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EnrollDevice401Example:
+                  summary: Default EnrollDevice 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EnrollDevice403Example:
+                  summary: Default EnrollDevice 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EnrollDevice500Example:
+                  summary: Default EnrollDevice 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Enroll Device
+      description: Enroll Device via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/devices/enroll).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ClientDevice:
+      description: Client Device
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
+    ClientDeviceAssignEnrolledDevice:
+      description: Assign enrolled device to AppId
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        PinCode:
+          description: Pin Code
+          type: string
+          example: string
+    ClientDeviceEnrollmentResult:
+      description: Device enrollment result
+      type: object
+      properties:
+        PinCode:
+          description: PIN Code for assigning
+          type: string
+          example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_ClientDeviceSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientDeviceSummary'
+          example: []
+    ClientDeviceEnroll:
+      description: Enroll a client device
+      type: object
+      properties:
+        DeviceModel:
+          description: Device model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
+    ClientDeviceSummary:
+      description: Client Device summary (header fields)
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
+    RestApiResult_ClientDevice_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ClientDevice'
+    RestApiResult_ClientDeviceEnrollmentResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ClientDeviceEnrollmentResult'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

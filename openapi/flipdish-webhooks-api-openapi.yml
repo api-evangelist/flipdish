@@ -1,0 +1,1433 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Webhooks API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Webhooks
+  description: Operations for Webhooks.
+paths:
+  /api/v1.0/{appId}/webhooks/events:
+    get:
+      tags:
+      - Webhooks
+      operationId: GetWebhookEventNames
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringArrayResult'
+              examples:
+                GetWebhookEventNames200Example:
+                  summary: Default GetWebhookEventNames 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                    - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNames400Example:
+                  summary: Default GetWebhookEventNames 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNames401Example:
+                  summary: Default GetWebhookEventNames 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNames403Example:
+                  summary: Default GetWebhookEventNames 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNames500Example:
+                  summary: Default GetWebhookEventNames 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Webhook Event Names
+      description: Get Webhook Event Names via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/webhooks/events).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions:
+    get:
+      tags:
+      - Webhooks
+      operationId: GetWebhookSubscriptions
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_WebhookSubscription_'
+              examples:
+                GetWebhookSubscriptions200Example:
+                  summary: Default GetWebhookSubscriptions 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookSubscriptions400Example:
+                  summary: Default GetWebhookSubscriptions 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookSubscriptions401Example:
+                  summary: Default GetWebhookSubscriptions 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookSubscriptions403Example:
+                  summary: Default GetWebhookSubscriptions 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookSubscriptions500Example:
+                  summary: Default GetWebhookSubscriptions 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Webhook Subscriptions
+      description: Get Webhook Subscriptions via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Webhooks
+      operationId: CreateWebhookSubscription
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: Created WebhookSubscription identifier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiIntegerResult'
+              examples:
+                CreateWebhookSubscription200Example:
+                  summary: Default CreateWebhookSubscription 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscription400Example:
+                  summary: Default CreateWebhookSubscription 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscription401Example:
+                  summary: Default CreateWebhookSubscription 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscription403Example:
+                  summary: Default CreateWebhookSubscription 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscription500Example:
+                  summary: Default CreateWebhookSubscription 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Webhook Subscription
+      description: Create Webhook Subscription via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events:
+    get:
+      tags:
+      - Webhooks
+      operationId: GetWebhookEventNamesBySubscriptionId
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The webhook subscription id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringArrayResult'
+              examples:
+                GetWebhookEventNamesBySubscriptionId200Example:
+                  summary: Default GetWebhookEventNamesBySubscriptionId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                    - string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNamesBySubscriptionId400Example:
+                  summary: Default GetWebhookEventNamesBySubscriptionId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNamesBySubscriptionId401Example:
+                  summary: Default GetWebhookEventNamesBySubscriptionId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNamesBySubscriptionId403Example:
+                  summary: Default GetWebhookEventNamesBySubscriptionId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventNamesBySubscriptionId500Example:
+                  summary: Default GetWebhookEventNamesBySubscriptionId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Webhook Event Names by Subscription Id
+      description: Get Webhook Event Names by Subscription Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events/{eventName}/test:
+    get:
+      tags:
+      - Webhooks
+      operationId: GetWebhookEventSample
+      parameters:
+      - name: eventName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The event name path parameter.
+        example: Example Name
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The version query parameter.
+        example: string
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The webhook subscription id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookEventSample'
+              examples:
+                GetWebhookEventSample200Example:
+                  summary: Default GetWebhookEventSample 200 response
+                  x-microcks-default: true
+                  value:
+                    Type: string
+                    CreateTime: '2026-06-02T12:00:00Z'
+                    Body:
+                      EventName: Example Name
+                      FlipdishEventId: 00000000-0000-0000-0000-000000000000
+                      CreateTime: '2026-06-02T12:00:00Z'
+                      Position: 1
+                      AppId: '500123'
+                      OrgId: '500123'
+                      IpAddress: string
+                      ActivityId: '500123'
+                      ActivityType: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventSample400Example:
+                  summary: Default GetWebhookEventSample 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventSample401Example:
+                  summary: Default GetWebhookEventSample 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventSample403Example:
+                  summary: Default GetWebhookEventSample 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookEventSample500Example:
+                  summary: Default GetWebhookEventSample 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Webhook Event Sample
+      description: Get Webhook Event Sample via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events/{eventName}/test).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/logs:
+    get:
+      tags:
+      - Webhooks
+      operationId: GetWebhookLogs
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The webhook subscription id path parameter.
+        example: 500123
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+        description: The start query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+        description: The end query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_WebhookLog_'
+              examples:
+                GetWebhookLogs200Example:
+                  summary: Default GetWebhookLogs 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookLogs400Example:
+                  summary: Default GetWebhookLogs 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookLogs401Example:
+                  summary: Default GetWebhookLogs 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookLogs403Example:
+                  summary: Default GetWebhookLogs 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWebhookLogs500Example:
+                  summary: Default GetWebhookLogs 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Webhook Logs
+      description: Get Webhook Logs via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/logs).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}:
+    put:
+      tags:
+      - Webhooks
+      operationId: UpdateWebhookSubscription
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The webhook subscription id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateWebhookSubscription400Example:
+                  summary: Default UpdateWebhookSubscription 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateWebhookSubscription401Example:
+                  summary: Default UpdateWebhookSubscription 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateWebhookSubscription403Example:
+                  summary: Default UpdateWebhookSubscription 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateWebhookSubscription500Example:
+                  summary: Default UpdateWebhookSubscription 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Webhook Subscription
+      description: Update Webhook Subscription via the Flipdish Open API v1.0 (PUT /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Webhooks
+      operationId: DeleteWebhookSubscription
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The webhook subscription id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscription400Example:
+                  summary: Default DeleteWebhookSubscription 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscription401Example:
+                  summary: Default DeleteWebhookSubscription 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscription403Example:
+                  summary: Default DeleteWebhookSubscription 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscription500Example:
+                  summary: Default DeleteWebhookSubscription 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Webhook Subscription
+      description: Delete Webhook Subscription via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events/{eventName}:
+    post:
+      tags:
+      - Webhooks
+      operationId: CreateWebhookSubscriptionEventNames
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The webhook subscription id path parameter.
+        example: 500123
+      - name: eventName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The event name path parameter.
+        example: Example Name
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscriptionEventNames400Example:
+                  summary: Default CreateWebhookSubscriptionEventNames 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscriptionEventNames401Example:
+                  summary: Default CreateWebhookSubscriptionEventNames 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscriptionEventNames403Example:
+                  summary: Default CreateWebhookSubscriptionEventNames 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscriptionEventNames409Example:
+                  summary: Default CreateWebhookSubscriptionEventNames 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateWebhookSubscriptionEventNames500Example:
+                  summary: Default CreateWebhookSubscriptionEventNames 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Webhook Subscription Event Names
+      description: Create Webhook Subscription Event Names via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events/{eventName}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Webhooks
+      operationId: DeleteWebhookSubscriptionEventName
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The webhook subscription id path parameter.
+        example: 500123
+      - name: eventName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The event name path parameter.
+        example: Example Name
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscriptionEventName400Example:
+                  summary: Default DeleteWebhookSubscriptionEventName 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscriptionEventName401Example:
+                  summary: Default DeleteWebhookSubscriptionEventName 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscriptionEventName403Example:
+                  summary: Default DeleteWebhookSubscriptionEventName 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebhookSubscriptionEventName500Example:
+                  summary: Default DeleteWebhookSubscriptionEventName 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Webhook Subscription Event Name
+      description: Delete Webhook Subscription Event Name via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/webhooks/{oauthAppId}/subscriptions/{webhookSubscriptionId}/events/{eventName}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WebhookLog:
+      description: Webhook log
+      type: object
+      properties:
+        WebhookSubscriptionOwnerUserId:
+          format: int32
+          description: Webhook subscription owner user identifier
+          type: integer
+          example: 500123
+        EventCreated:
+          description: Event created
+          type: string
+          example: string
+        WebhookTriggered:
+          description: Webhook triggered
+          type: string
+          example: string
+        WebhookEventName:
+          description: Webhook event name
+          type: string
+          example: Example Name
+        WebhookSubscriptionCallbackUrl:
+          description: Webhook subscription callback url
+          type: string
+          example: https://api.flipdish.co/example
+        HttpResponseStatusCode:
+          description: Received HTTP repsonse status HTTP code
+          type: string
+          example: Active
+        HttpResponseStatus:
+          description: Received HTTP repsonse status
+          type: string
+          example: Active
+        RequestHeaders:
+          description: Request headers
+          type: string
+          example: string
+        RequestBody:
+          description: Request body
+          type: string
+          example: string
+        ResponseHeaders:
+          description: Received response headers
+          type: string
+          example: string
+        ResponseBody:
+          description: Received response body
+          type: string
+          example: string
+        Duration:
+          description: Duration of HTTP request
+          type: string
+          example: string
+        RetryCount:
+          format: int32
+          description: Retry count
+          type: integer
+          example: 3
+        FlipdishWebhookId:
+          format: uuid
+          description: Flipdish webhook identifier
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Version:
+          description: Flipdish webhook version
+          type: string
+          example: string
+    RestApiStringArrayResult:
+      description: Rest api string array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string array
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    WebhookEventSample:
+      description: Sample payload of a webhook event
+      type: object
+      properties:
+        Type:
+          description: Event name
+          type: string
+          example: string
+        CreateTime:
+          format: date-time
+          description: Sample event creation date and time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Body:
+          $ref: '#/components/schemas/FlipdishEventBase'
+    RestApiPaginationResult_WebhookSubscription_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookSubscription'
+          example: []
+    RestApiIntegerResult:
+      description: Rest api integer result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          format: int32
+          description: Data integer
+          type: integer
+          example: 1
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    FlipdishEventBase:
+      description: Base Event
+      type: object
+      properties:
+        EventName:
+          description: The event name
+          type: string
+          example: Example Name
+        FlipdishEventId:
+          format: uuid
+          description: The identitfier of the event
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        CreateTime:
+          format: date-time
+          description: The time of creation of the event
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Position:
+          format: int32
+          description: Position
+          type: integer
+          example: 1
+        AppId:
+          description: App id
+          type: string
+          example: '500123'
+        OrgId:
+          description: Org id
+          type: string
+          example: '500123'
+        IpAddress:
+          description: Ip Address
+          type: string
+          example: string
+        ActivityId:
+          description: Activity Id
+          type: string
+          example: '500123'
+        ActivityType:
+          description: Activity Type
+          type: string
+          example: string
+    RestApiPaginationResult_WebhookLog_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookLog'
+          example: []
+    WebhookSubscription:
+      description: Webhook subscription
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Webhook subscription identifier
+          type: integer
+          example: 500123
+        OwnerUserId:
+          format: int32
+          description: Webhook subscription owner user identifier
+          type: integer
+          example: 500123
+        Version:
+          description: Webhook subscription owner user identifier
+          type: string
+          example: string
+        EventNames:
+          description: Webhook subscription event names
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        CallbackUrl:
+          description: Callback url. Flipdish system POST messages to this url.
+          type: string
+          example: https://api.flipdish.co/example
+        Enabled:
+          description: Is webhook subscription enabled.
+          type: boolean
+          example: true
+        VerifyToken:
+          description: 'This is your token which will be in the Header of each POST request from Flipdish with name: X-Verify-Token.'
+          type: string
+          example: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

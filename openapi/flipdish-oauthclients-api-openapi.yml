@@ -1,0 +1,1316 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts OAuthClients API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: OAuthClients
+  description: Operations for OAuth Clients.
+paths:
+  /api/v1.0/{appId}/oauthclients/appnames:
+    get:
+      tags:
+      - OAuthClients
+      operationId: OAuthClients_GetApplications
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OAuthClients_GetApplications200Example:
+                  summary: Default OAuthClients_GetApplications 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                OAuthClients_GetApplications400Example:
+                  summary: Default OAuthClients_GetApplications 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                OAuthClients_GetApplications401Example:
+                  summary: Default OAuthClients_GetApplications 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                OAuthClients_GetApplications403Example:
+                  summary: Default OAuthClients_GetApplications 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                OAuthClients_GetApplications500Example:
+                  summary: Default OAuthClients_GetApplications 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish O Auth Clients_Get Applications
+      description: O Auth Clients_Get Applications via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/oauthclients/appnames).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/oauthclients/{oauthAppId}:
+    get:
+      tags:
+      - OAuthClients
+      operationId: GetOAuthClientByClientId
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_OAuthApp_'
+              examples:
+                GetOAuthClientByClientId200Example:
+                  summary: Default GetOAuthClientByClientId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      OauthAppId: '6364835077453070787486'
+                      OauthAppName: My OAuth App
+                      OwnerUserId: 12345
+                      LogoUri: https://domain.com/mylogo.png
+                      Flow: 2
+                      AccessTokenLifetime: 3600
+                      AbsoluteRefreshTokenLifetime: 2592000
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientByClientId400Example:
+                  summary: Default GetOAuthClientByClientId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientByClientId401Example:
+                  summary: Default GetOAuthClientByClientId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientByClientId403Example:
+                  summary: Default GetOAuthClientByClientId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientByClientId404Example:
+                  summary: Default GetOAuthClientByClientId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientByClientId500Example:
+                  summary: Default GetOAuthClientByClientId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get O Auth Client by Client Id
+      description: Get O Auth Client by Client Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/oauthclients/{oauthAppId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - OAuthClients
+      operationId: UpdateOAuthApp
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateOAuthApp400Example:
+                  summary: Default UpdateOAuthApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateOAuthApp401Example:
+                  summary: Default UpdateOAuthApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateOAuthApp403Example:
+                  summary: Default UpdateOAuthApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateOAuthApp404Example:
+                  summary: Default UpdateOAuthApp 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateOAuthApp500Example:
+                  summary: Default UpdateOAuthApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update O Auth App
+      description: Update O Auth App via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/oauthclients/{oauthAppId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - OAuthClients
+      operationId: DeleteOAuthApp
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteOAuthApp400Example:
+                  summary: Default DeleteOAuthApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteOAuthApp401Example:
+                  summary: Default DeleteOAuthApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteOAuthApp403Example:
+                  summary: Default DeleteOAuthApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteOAuthApp500Example:
+                  summary: Default DeleteOAuthApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete O Auth App
+      description: Delete O Auth App via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/oauthclients/{oauthAppId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/oauthclients/{oauthAppId}/secret:
+    get:
+      tags:
+      - OAuthClients
+      operationId: GetOAuthClientSecret
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                GetOAuthClientSecret200Example:
+                  summary: Default GetOAuthClientSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientSecret400Example:
+                  summary: Default GetOAuthClientSecret 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientSecret401Example:
+                  summary: Default GetOAuthClientSecret 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientSecret403Example:
+                  summary: Default GetOAuthClientSecret 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientSecret404Example:
+                  summary: Default GetOAuthClientSecret 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthClientSecret500Example:
+                  summary: Default GetOAuthClientSecret 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get O Auth Client Secret
+      description: Get O Auth Client Secret via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/oauthclients/{oauthAppId}/secret).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/oauthclients/{oauthAppId}/accesstoken:
+    get:
+      tags:
+      - OAuthClients
+      operationId: GetOauthAccessToken
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                GetOauthAccessToken200Example:
+                  summary: Default GetOauthAccessToken 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOauthAccessToken400Example:
+                  summary: Default GetOauthAccessToken 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOauthAccessToken401Example:
+                  summary: Default GetOauthAccessToken 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOauthAccessToken403Example:
+                  summary: Default GetOauthAccessToken 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOauthAccessToken500Example:
+                  summary: Default GetOauthAccessToken 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Oauth Access Token
+      description: Get Oauth Access Token via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/oauthclients/{oauthAppId}/accesstoken).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis:
+    get:
+      tags:
+      - OAuthClients
+      operationId: GetRedirectUris
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_OauthClientRedirectUri_'
+              examples:
+                GetRedirectUris200Example:
+                  summary: Default GetRedirectUris 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRedirectUris400Example:
+                  summary: Default GetRedirectUris 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRedirectUris401Example:
+                  summary: Default GetRedirectUris 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRedirectUris403Example:
+                  summary: Default GetRedirectUris 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRedirectUris500Example:
+                  summary: Default GetRedirectUris 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Redirect Uris
+      description: Get Redirect Uris via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - OAuthClients
+      operationId: AddRedirectUri
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_OauthClientRedirectUri_'
+              examples:
+                AddRedirectUri200Example:
+                  summary: Default AddRedirectUri 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: 500123
+                      Uri: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddRedirectUri400Example:
+                  summary: Default AddRedirectUri 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddRedirectUri401Example:
+                  summary: Default AddRedirectUri 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddRedirectUri403Example:
+                  summary: Default AddRedirectUri 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddRedirectUri500Example:
+                  summary: Default AddRedirectUri 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Add Redirect Uri
+      description: Add Redirect Uri via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/oauthclients:
+    get:
+      tags:
+      - OAuthClients
+      operationId: GetOAuthApps
+      parameters:
+      - name: oauthAppName
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The oauth app name query parameter.
+        example: Example Name
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_OAuthApp_'
+              examples:
+                GetOAuthApps200Example:
+                  summary: Default GetOAuthApps 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthApps400Example:
+                  summary: Default GetOAuthApps 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthApps401Example:
+                  summary: Default GetOAuthApps 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthApps403Example:
+                  summary: Default GetOAuthApps 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthApps404Example:
+                  summary: Default GetOAuthApps 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOAuthApps500Example:
+                  summary: Default GetOAuthApps 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get O Auth Apps
+      description: Get O Auth Apps via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/oauthclients).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - OAuthClients
+      operationId: CreateOAuthApp
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateOAuthApp400Example:
+                  summary: Default CreateOAuthApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateOAuthApp401Example:
+                  summary: Default CreateOAuthApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateOAuthApp403Example:
+                  summary: Default CreateOAuthApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateOAuthApp500Example:
+                  summary: Default CreateOAuthApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create O Auth App
+      description: Create O Auth App via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/oauthclients).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis/{uriId}:
+    delete:
+      tags:
+      - OAuthClients
+      operationId: RemoveRedirectUri
+      parameters:
+      - name: oauthAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: uriId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The uri id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveRedirectUri400Example:
+                  summary: Default RemoveRedirectUri 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveRedirectUri401Example:
+                  summary: Default RemoveRedirectUri 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveRedirectUri403Example:
+                  summary: Default RemoveRedirectUri 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveRedirectUri500Example:
+                  summary: Default RemoveRedirectUri 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Remove Redirect Uri
+      description: Remove Redirect Uri via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis/{uriId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiArrayResult_OAuthApp_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OAuthApp'
+          example: []
+    RestApiArrayResult_OauthClientRedirectUri_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OauthClientRedirectUri'
+          example: []
+    OAuthApp:
+      description: Oauth client (also knowns as 'app')
+      type: object
+      properties:
+        OauthAppId:
+          description: OAuth App Identifier
+          type: string
+          example: '500123'
+        OauthAppName:
+          description: OAuth App Name
+          type: string
+          example: Example Name
+        OwnerUserId:
+          format: int32
+          description: OAuth App owner user identifier
+          type: integer
+          example: 500123
+        LogoUri:
+          description: OAuth App logo uri
+          type: string
+          example: https://api.flipdish.co/example
+        Flow:
+          description: Supported OpenID Connect flows
+          enum:
+          - AuthorizationCode
+          - Implicit
+          - Hybrid
+          - ClientCredentials
+          type: string
+          nullable: true
+          example: AuthorizationCode
+        RefreshTokenUsage:
+          description: "ReUse: the refresh token handle will stay the same when refreshing tokens \r\nOneTime: the refresh token handle will be updated when refreshing tokens"
+          enum:
+          - ReUse
+          - OneTimeOnly
+          type: string
+          nullable: true
+          example: ReUse
+        AccessTokenLifetime:
+          format: int32
+          description: Timem it takes for the IdentityToken to expire in seconds
+          type: integer
+          nullable: true
+          example: 1
+        AbsoluteRefreshTokenLifetime:
+          format: int32
+          description: Maximum lifetime of a refresh token in seconds
+          type: integer
+          nullable: true
+          example: 1
+      example:
+        OauthAppId: '6364835077453070787486'
+        OauthAppName: My OAuth App
+        OwnerUserId: 12345
+        LogoUri: https://domain.com/mylogo.png
+        Flow: 2
+        AccessTokenLifetime: 3600
+        AbsoluteRefreshTokenLifetime: 2592000
+    OauthClientRedirectUri:
+      description: OAuth client redirect uri
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Redirect uri identifier
+          type: integer
+          example: 500123
+        Uri:
+          description: Redirect uri
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_OauthClientRedirectUri_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OauthClientRedirectUri'
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_OAuthApp_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OAuthApp'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

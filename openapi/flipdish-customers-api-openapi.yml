@@ -1,0 +1,607 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Customers API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Customers
+  description: Operations for Customers.
+paths:
+  /api/v1.0/{appId}/customers/{customerId}:
+    get:
+      tags:
+      - Customers
+      operationId: GetCustomerById
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The customer id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Customer_'
+              examples:
+                GetCustomerById200Example:
+                  summary: Default GetCustomerById 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CustomerId: 500123
+                      Name: Example Name
+                      RegistrationDate: '2026-06-02T12:00:00Z'
+                      PhoneNumber: '+353000000000'
+                      CashOrdersEnabled: true
+                      CardOrdersEnabled: true
+                      MarketingEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomerById400Example:
+                  summary: Default GetCustomerById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomerById401Example:
+                  summary: Default GetCustomerById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomerById403Example:
+                  summary: Default GetCustomerById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomerById500Example:
+                  summary: Default GetCustomerById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Customer by Id
+      description: Get Customer by Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/customers/{customerId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Customers
+      operationId: UpdateCustomerById
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The customer id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdateModel'
+            examples:
+              UpdateCustomerByIdRequestExample:
+                summary: Default UpdateCustomerById request
+                x-microcks-default: true
+                value:
+                  CashOrdersEnabled: true
+                  CardOrdersEnabled: true
+                  MarketingEnabled: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Customer_'
+              examples:
+                UpdateCustomerById200Example:
+                  summary: Default UpdateCustomerById 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CustomerId: 500123
+                      Name: Example Name
+                      RegistrationDate: '2026-06-02T12:00:00Z'
+                      PhoneNumber: '+353000000000'
+                      CashOrdersEnabled: true
+                      CardOrdersEnabled: true
+                      MarketingEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCustomerById400Example:
+                  summary: Default UpdateCustomerById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCustomerById401Example:
+                  summary: Default UpdateCustomerById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCustomerById403Example:
+                  summary: Default UpdateCustomerById 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateCustomerById500Example:
+                  summary: Default UpdateCustomerById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Customer by Id
+      description: Update Customer by Id via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customers/{customerId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/customers:
+    get:
+      tags:
+      - Customers
+      operationId: GetCustomers
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: phoneNumber
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The phone number query parameter.
+        example: '+353000000000'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Customers_'
+              examples:
+                GetCustomers200Example:
+                  summary: Default GetCustomers 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Items: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomers400Example:
+                  summary: Default GetCustomers 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomers401Example:
+                  summary: Default GetCustomers 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomers403Example:
+                  summary: Default GetCustomers 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCustomers500Example:
+                  summary: Default GetCustomers 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Customers
+      description: Get Customers via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/customers).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Customers
+      operationId: CreateCustomer
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreateModel'
+            examples:
+              CreateCustomerRequestExample:
+                summary: Default CreateCustomer request
+                x-microcks-default: true
+                value:
+                  PhoneNumber: '+353000000000'
+                  AppType: Unknown
+                  Name: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_Customer_'
+              examples:
+                CreateCustomer200Example:
+                  summary: Default CreateCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CustomerId: 500123
+                      Name: Example Name
+                      RegistrationDate: '2026-06-02T12:00:00Z'
+                      PhoneNumber: '+353000000000'
+                      CashOrdersEnabled: true
+                      CardOrdersEnabled: true
+                      MarketingEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCustomer400Example:
+                  summary: Default CreateCustomer 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCustomer401Example:
+                  summary: Default CreateCustomer 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCustomer403Example:
+                  summary: Default CreateCustomer 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateCustomer500Example:
+                  summary: Default CreateCustomer 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Customer
+      description: Create Customer via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customers).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Customer:
+      description: Defines a customer
+      type: object
+      properties:
+        CustomerId:
+          format: int32
+          description: Id of the customer
+          type: integer
+          example: 500123
+        Name:
+          description: Customer name
+          type: string
+          example: Example Name
+        RegistrationDate:
+          format: date-time
+          description: Customer registration date
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PhoneNumber:
+          description: Phone Number in international format
+          type: string
+          example: '+353000000000'
+        CashOrdersEnabled:
+          description: Customer can place cash orders
+          type: boolean
+          example: true
+        CardOrdersEnabled:
+          description: Customer can place card orders
+          type: boolean
+          example: true
+        MarketingEnabled:
+          description: Customer can receive marketing
+          type: boolean
+          example: true
+    RestApiResult_Customer_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Customer'
+    Customers:
+      description: Defines a list of customers
+      type: object
+      properties:
+        Items:
+          description: List of customers
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+          example: []
+    CustomerCreateModel:
+      description: Defines a customer create model
+      type: object
+      properties:
+        PhoneNumber:
+          description: Customer Phone Number
+          type: string
+          example: '+353000000000'
+        AppType:
+          description: Customer AppType
+          enum:
+          - Unknown
+          - Ios
+          - Android
+          - Web
+          - Kiosk
+          - Pos
+          - TelephoneCall
+          - Sms
+          - PwaAndroid
+          - PwaIos
+          - Google
+          type: string
+          example: Unknown
+        Name:
+          description: Customer Name
+          type: string
+          example: Example Name
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_Customers_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Customers'
+    CustomerUpdateModel:
+      description: Defines a customer update model
+      type: object
+      properties:
+        CashOrdersEnabled:
+          description: Customer can place cash orders
+          type: boolean
+          example: true
+        CardOrdersEnabled:
+          description: Customer can place card orders
+          type: boolean
+          example: true
+        MarketingEnabled:
+          description: Customer can receive marketing
+          type: boolean
+          example: true
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

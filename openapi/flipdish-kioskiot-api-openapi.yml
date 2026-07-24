@@ -1,0 +1,358 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts KioskIot API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: KioskIot
+  description: Operations for Kiosk Iot.
+paths:
+  /api/v1.0/kioskiot/connect:
+    post:
+      tags:
+      - KioskIot
+      operationId: GetKioskIotConnection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_KioskIotConnectionParameters_'
+              examples:
+                GetKioskIotConnection200Example:
+                  summary: Default GetKioskIotConnection 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ConnectionString: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetKioskIotConnection400Example:
+                  summary: Default GetKioskIotConnection 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetKioskIotConnection401Example:
+                  summary: Default GetKioskIotConnection 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetKioskIotConnection403Example:
+                  summary: Default GetKioskIotConnection 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetKioskIotConnection500Example:
+                  summary: Default GetKioskIotConnection 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Kiosk Iot Connection
+      description: Get Kiosk Iot Connection via the Flipdish Open API v1.0 (POST /api/v1.0/kioskiot/connect).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/kioskiot/timeseries/query:
+    post:
+      tags:
+      - KioskIot
+      operationId: QueryTelemetrySeries
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelemetrySeriesQueryParameters'
+            examples:
+              QueryTelemetrySeriesRequestExample:
+                summary: Default QueryTelemetrySeries request
+                x-microcks-default: true
+                value:
+                  KioskId: '500123'
+                  Variables:
+                  - string
+                  StartDate: '2026-06-02T12:00:00Z'
+                  EndDate: '2026-06-02T12:00:00Z'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_TelemetrySeriesResult_'
+              examples:
+                QueryTelemetrySeries200Example:
+                  summary: Default QueryTelemetrySeries 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Timestamps:
+                      - '2026-06-02T12:00:00Z'
+                      Properties: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                QueryTelemetrySeries400Example:
+                  summary: Default QueryTelemetrySeries 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                QueryTelemetrySeries401Example:
+                  summary: Default QueryTelemetrySeries 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                QueryTelemetrySeries403Example:
+                  summary: Default QueryTelemetrySeries 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                QueryTelemetrySeries500Example:
+                  summary: Default QueryTelemetrySeries 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Query Telemetry Series
+      description: Query Telemetry Series via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/kioskiot/timeseries/query).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    KioskIotConnectionParameters:
+      description: Connection parameters to IoT
+      type: object
+      properties:
+        ConnectionString:
+          description: The device connection string to the IoT server
+          type: string
+          example: string
+    RestApiResult_KioskIotConnectionParameters_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/KioskIotConnectionParameters'
+    TelemetrySeriesQueryParameters:
+      description: TelemetrySeriesQueryParameters.
+      type: object
+      properties:
+        KioskId:
+          description: KioskId.
+          type: string
+          example: '500123'
+        Variables:
+          description: Variables.
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        StartDate:
+          format: date-time
+          description: StartDate.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndDate:
+          format: date-time
+          description: EndDate.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    TelemetrySeriesProperty:
+      description: TelemetrySeriesProperty.
+      type: object
+      properties:
+        Name:
+          description: Name.
+          type: string
+          example: Example Name
+        Type:
+          description: Type.
+          type: string
+          example: string
+        IntValues:
+          description: IntValues.
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        StringValues:
+          description: StringValues.
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        DoubleValues:
+          description: DoubleValues.
+          type: array
+          items:
+            format: double
+            type: number
+          example:
+          - 1.0
+    RestApiResult_TelemetrySeriesResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/TelemetrySeriesResult'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    TelemetrySeriesResult:
+      description: TelemetrySeriesResult.
+      type: object
+      properties:
+        Timestamps:
+          description: Timestamps.
+          type: array
+          items:
+            format: date-time
+            type: string
+          example:
+          - '2026-06-02T12:00:00Z'
+        Properties:
+          description: Properties.
+          type: array
+          items:
+            $ref: '#/components/schemas/TelemetrySeriesProperty'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

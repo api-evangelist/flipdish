@@ -1,0 +1,3092 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Accounts Apps API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Apps
+  description: Operations for Apps.
+paths:
+  /api/v1.0/apps/{appId}:
+    get:
+      tags:
+      - Apps
+      operationId: GetApp
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_App_'
+              examples:
+                GetApp200Example:
+                  summary: Default GetApp 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AppId: '500123'
+                      HasIosApp: true
+                      IosAppStoreUrl: https://api.flipdish.co/example
+                      HasAndroidApp: true
+                      AndroidPlayStoreUrl: https://api.flipdish.co/example
+                      DisplayDeliveryRestaurantScreen: true
+                      LogoImageUrl: https://api.flipdish.co/example
+                      Languages: []
+                      AvailableAppLanguages: []
+                      AppAccessLevel: None
+                      AppResourceSet:
+                      - ViewApp
+                      Features:
+                      - string
+                      MapCenter:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MapNorthEast:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MapSouthWest:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      GoogleMapsApiKeyWeb: string
+                      OrgId: '500123'
+                      SmsRestaurantName: Example Name
+                      WebToAppRedirect: NoRedirect
+                      Name: Example Name
+                      HostName: Example Name
+                      MainColor: string
+                      KioskPrimaryColour: string
+                      ApplicationCategory: Restaurant
+                      IsPanaceaEnabled: true
+                      PanaceaVanityUrl: https://api.flipdish.co/example
+                      CookieConsentPromptEnabled: true
+                      CountryId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApp400Example:
+                  summary: Default GetApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApp401Example:
+                  summary: Default GetApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApp403Example:
+                  summary: Default GetApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApp404Example:
+                  summary: Default GetApp 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApp500Example:
+                  summary: Default GetApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App
+      description: Get App via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{appId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/name:
+    get:
+      tags:
+      - Apps
+      operationId: GetAppName
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                GetAppName200Example:
+                  summary: Default GetAppName 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppName400Example:
+                  summary: Default GetAppName 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppName401Example:
+                  summary: Default GetAppName 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppName403Example:
+                  summary: Default GetAppName 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppName404Example:
+                  summary: Default GetAppName 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppName500Example:
+                  summary: Default GetAppName 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App Name
+      description: Get App Name via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{appId}/name).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/supportedcountries:
+    get:
+      tags:
+      - Apps
+      operationId: GetSupportedCountries
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_SupportedCountry_'
+              examples:
+                GetSupportedCountries200Example:
+                  summary: Default GetSupportedCountries 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSupportedCountries400Example:
+                  summary: Default GetSupportedCountries 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSupportedCountries401Example:
+                  summary: Default GetSupportedCountries 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSupportedCountries403Example:
+                  summary: Default GetSupportedCountries 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetSupportedCountries500Example:
+                  summary: Default GetSupportedCountries 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Supported Countries
+      description: Get Supported Countries via the Flipdish Open API v1.0 (GET /api/v1.0/apps/supportedcountries).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/compliance:
+    get:
+      tags:
+      - Apps
+      operationId: GetCompliance
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppCompliance_'
+              examples:
+                GetCompliance200Example:
+                  summary: Default GetCompliance 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AppId: '500123'
+                      ComplianceType: Default
+                      AllowDisablingOfGdpr: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCompliance400Example:
+                  summary: Default GetCompliance 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCompliance401Example:
+                  summary: Default GetCompliance 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCompliance403Example:
+                  summary: Default GetCompliance 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetCompliance500Example:
+                  summary: Default GetCompliance 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Compliance
+      description: Get Compliance via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{appId}/compliance).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Apps
+      operationId: SetCompliance
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: complianceType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Default
+          - GdprCompliance
+        description: The compliance type query parameter.
+        example: Default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppCompliance_'
+              examples:
+                SetCompliance200Example:
+                  summary: Default SetCompliance 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AppId: '500123'
+                      ComplianceType: Default
+                      AllowDisablingOfGdpr: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCompliance400Example:
+                  summary: Default SetCompliance 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCompliance401Example:
+                  summary: Default SetCompliance 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCompliance403Example:
+                  summary: Default SetCompliance 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetCompliance500Example:
+                  summary: Default SetCompliance 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Compliance
+      description: Set Compliance via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/compliance).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/panacea/url:
+    get:
+      tags:
+      - Apps
+      operationId: GetPanaceaVanityUrl
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                GetPanaceaVanityUrl200Example:
+                  summary: Default GetPanaceaVanityUrl 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPanaceaVanityUrl400Example:
+                  summary: Default GetPanaceaVanityUrl 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPanaceaVanityUrl401Example:
+                  summary: Default GetPanaceaVanityUrl 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPanaceaVanityUrl403Example:
+                  summary: Default GetPanaceaVanityUrl 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPanaceaVanityUrl404Example:
+                  summary: Default GetPanaceaVanityUrl 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPanaceaVanityUrl500Example:
+                  summary: Default GetPanaceaVanityUrl 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Panacea Vanity Url
+      description: Get Panacea Vanity Url via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{appId}/panacea/url).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Apps
+      operationId: SetPanaceaVanityUrl
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: vanityUrl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The vanity url query parameter.
+        example: https://api.flipdish.co/example
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                SetPanaceaVanityUrl200Example:
+                  summary: Default SetPanaceaVanityUrl 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetPanaceaVanityUrl400Example:
+                  summary: Default SetPanaceaVanityUrl 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetPanaceaVanityUrl401Example:
+                  summary: Default SetPanaceaVanityUrl 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetPanaceaVanityUrl403Example:
+                  summary: Default SetPanaceaVanityUrl 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetPanaceaVanityUrl404Example:
+                  summary: Default SetPanaceaVanityUrl 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetPanaceaVanityUrl500Example:
+                  summary: Default SetPanaceaVanityUrl 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Panacea Vanity Url
+      description: Set Panacea Vanity Url via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/panacea/url).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{whitelabelId}/lookup:
+    get:
+      tags:
+      - Apps
+      operationId: LookupByWhitelabelId
+      parameters:
+      - name: whitelabelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The whitelabel id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppLookup'
+              examples:
+                LookupByWhitelabelId200Example:
+                  summary: Default LookupByWhitelabelId 200 response
+                  x-microcks-default: true
+                  value:
+                    AppId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                LookupByWhitelabelId400Example:
+                  summary: Default LookupByWhitelabelId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                LookupByWhitelabelId401Example:
+                  summary: Default LookupByWhitelabelId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                LookupByWhitelabelId403Example:
+                  summary: Default LookupByWhitelabelId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                LookupByWhitelabelId404Example:
+                  summary: Default LookupByWhitelabelId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                LookupByWhitelabelId500Example:
+                  summary: Default LookupByWhitelabelId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Lookup by Whitelabel Id
+      description: Lookup by Whitelabel Id via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{whitelabelId}/lookup).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/hostnamestatus:
+    get:
+      tags:
+      - Apps
+      operationId: GetAppHostnameStatus
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_DnsRecordInformation_'
+              examples:
+                GetAppHostnameStatus200Example:
+                  summary: Default GetAppHostnameStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      IsCNameReady: true
+                      IsAReady: true
+                      IsApiCNameReady: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppHostnameStatus400Example:
+                  summary: Default GetAppHostnameStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppHostnameStatus401Example:
+                  summary: Default GetAppHostnameStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppHostnameStatus403Example:
+                  summary: Default GetAppHostnameStatus 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: Either the App Config was not found or there is no hostname associated to it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppHostnameStatus404Example:
+                  summary: Default GetAppHostnameStatus 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppHostnameStatus500Example:
+                  summary: Default GetAppHostnameStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App Hostname Status
+      description: Get App Hostname Status via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{appId}/hostnamestatus).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps:
+    get:
+      tags:
+      - Apps
+      operationId: GetApps
+      parameters:
+      - name: nameFilter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The name filter query parameter.
+        example: Example Name
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_App_'
+              examples:
+                GetApps200Example:
+                  summary: Default GetApps 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApps400Example:
+                  summary: Default GetApps 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApps401Example:
+                  summary: Default GetApps 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApps403Example:
+                  summary: Default GetApps 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetApps500Example:
+                  summary: Default GetApps 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Apps
+      description: Get Apps via the Flipdish Open API v1.0 (GET /api/v1.0/apps).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Apps
+      operationId: CreateApp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppParameters'
+            examples:
+              CreateAppRequestExample:
+                summary: Default CreateApp request
+                x-microcks-default: true
+                value:
+                  Name: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                CreateApp200Example:
+                  summary: Default CreateApp 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateApp400Example:
+                  summary: Default CreateApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateApp401Example:
+                  summary: Default CreateApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateApp403Example:
+                  summary: Default CreateApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateApp500Example:
+                  summary: Default CreateApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create App
+      description: Create App via the Flipdish Open API v1.0 (POST /api/v1.0/apps).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/panacea/url/available:
+    get:
+      tags:
+      - Apps
+      operationId: IsPanaceaVanityUrlAvailable
+      parameters:
+      - name: vanityUrl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The vanity url query parameter.
+        example: https://api.flipdish.co/example
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                IsPanaceaVanityUrlAvailable200Example:
+                  summary: Default IsPanaceaVanityUrlAvailable 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                IsPanaceaVanityUrlAvailable400Example:
+                  summary: Default IsPanaceaVanityUrlAvailable 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                IsPanaceaVanityUrlAvailable401Example:
+                  summary: Default IsPanaceaVanityUrlAvailable 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                IsPanaceaVanityUrlAvailable403Example:
+                  summary: Default IsPanaceaVanityUrlAvailable 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                IsPanaceaVanityUrlAvailable404Example:
+                  summary: Default IsPanaceaVanityUrlAvailable 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                IsPanaceaVanityUrlAvailable500Example:
+                  summary: Default IsPanaceaVanityUrlAvailable 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Is Panacea Vanity Url Available
+      description: Is Panacea Vanity Url Available via the Flipdish Open API v1.0 (GET /api/v1.0/apps/{appId}/panacea/url/available).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/logo:
+    post:
+      tags:
+      - Apps
+      operationId: UploadAppLogo
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppLogo400Example:
+                  summary: Default UploadAppLogo 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppLogo401Example:
+                  summary: Default UploadAppLogo 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppLogo403Example:
+                  summary: Default UploadAppLogo 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppLogo404Example:
+                  summary: Default UploadAppLogo 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppLogo500Example:
+                  summary: Default UploadAppLogo 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Upload App Logo
+      description: Upload App Logo via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/logo).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/config:
+    post:
+      tags:
+      - Apps
+      operationId: SetAppConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppConfigUpdateModel'
+            examples:
+              SetAppConfigRequestExample:
+                summary: Default SetAppConfig request
+                x-microcks-default: true
+                value:
+                  Name: Example Name
+                  HostName: Example Name
+                  MainColor: string
+                  KioskPrimaryColour: string
+                  ApplicationCategory: Restaurant
+                  IsPanaceaEnabled: true
+                  PanaceaVanityUrl: https://api.flipdish.co/example
+                  CookieConsentPromptEnabled: true
+                  LogoImageUrl: https://api.flipdish.co/example
+                  CountryId: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_App_'
+              examples:
+                SetAppConfig200Example:
+                  summary: Default SetAppConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AppId: '500123'
+                      HasIosApp: true
+                      IosAppStoreUrl: https://api.flipdish.co/example
+                      HasAndroidApp: true
+                      AndroidPlayStoreUrl: https://api.flipdish.co/example
+                      DisplayDeliveryRestaurantScreen: true
+                      LogoImageUrl: https://api.flipdish.co/example
+                      Languages: []
+                      AvailableAppLanguages: []
+                      AppAccessLevel: None
+                      AppResourceSet:
+                      - ViewApp
+                      Features:
+                      - string
+                      MapCenter:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MapNorthEast:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MapSouthWest:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      GoogleMapsApiKeyWeb: string
+                      OrgId: '500123'
+                      SmsRestaurantName: Example Name
+                      WebToAppRedirect: NoRedirect
+                      Name: Example Name
+                      HostName: Example Name
+                      MainColor: string
+                      KioskPrimaryColour: string
+                      ApplicationCategory: Restaurant
+                      IsPanaceaEnabled: true
+                      PanaceaVanityUrl: https://api.flipdish.co/example
+                      CookieConsentPromptEnabled: true
+                      CountryId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppConfig400Example:
+                  summary: Default SetAppConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppConfig401Example:
+                  summary: Default SetAppConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppConfig403Example:
+                  summary: Default SetAppConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppConfig404Example:
+                  summary: Default SetAppConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppConfig500Example:
+                  summary: Default SetAppConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set App Config
+      description: Set App Config via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/config).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/appstorename:
+    post:
+      tags:
+      - Apps
+      operationId: SetAppStoreName
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppStoreName400Example:
+                  summary: Default SetAppStoreName 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppStoreName401Example:
+                  summary: Default SetAppStoreName 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppStoreName403Example:
+                  summary: Default SetAppStoreName 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppStoreName404Example:
+                  summary: Default SetAppStoreName 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppStoreName500Example:
+                  summary: Default SetAppStoreName 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set App Store Name
+      description: Set App Store Name via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/appstorename).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/orgId/{orgId}:
+    post:
+      tags:
+      - Apps
+      operationId: Apps_SetPropertyId
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: orgId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The org id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Apps_SetPropertyId200Example:
+                  summary: Default Apps_SetPropertyId 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Apps_SetPropertyId400Example:
+                  summary: Default Apps_SetPropertyId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Apps_SetPropertyId401Example:
+                  summary: Default Apps_SetPropertyId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Apps_SetPropertyId403Example:
+                  summary: Default Apps_SetPropertyId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Apps_SetPropertyId500Example:
+                  summary: Default Apps_SetPropertyId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Apps_Set Property Id
+      description: Apps_Set Property Id via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/orgId/{orgId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/config/languages:
+    post:
+      tags:
+      - Apps
+      operationId: SetAppLanguages
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Language'
+            examples:
+              SetAppLanguagesRequestExample:
+                summary: Default SetAppLanguages request
+                x-microcks-default: true
+                value:
+                - LanguageId: '500123'
+                  DisplayOrder: 1
+                  Name: Example Name
+                  Enabled: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_App_'
+              examples:
+                SetAppLanguages200Example:
+                  summary: Default SetAppLanguages 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AppId: '500123'
+                      HasIosApp: true
+                      IosAppStoreUrl: https://api.flipdish.co/example
+                      HasAndroidApp: true
+                      AndroidPlayStoreUrl: https://api.flipdish.co/example
+                      DisplayDeliveryRestaurantScreen: true
+                      LogoImageUrl: https://api.flipdish.co/example
+                      Languages: []
+                      AvailableAppLanguages: []
+                      AppAccessLevel: None
+                      AppResourceSet:
+                      - ViewApp
+                      Features:
+                      - string
+                      MapCenter:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MapNorthEast:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      MapSouthWest:
+                        Latitude: 1.0
+                        Longitude: 1.0
+                      GoogleMapsApiKeyWeb: string
+                      OrgId: '500123'
+                      SmsRestaurantName: Example Name
+                      WebToAppRedirect: NoRedirect
+                      Name: Example Name
+                      HostName: Example Name
+                      MainColor: string
+                      KioskPrimaryColour: string
+                      ApplicationCategory: Restaurant
+                      IsPanaceaEnabled: true
+                      PanaceaVanityUrl: https://api.flipdish.co/example
+                      CookieConsentPromptEnabled: true
+                      CountryId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppLanguages400Example:
+                  summary: Default SetAppLanguages 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppLanguages401Example:
+                  summary: Default SetAppLanguages 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppLanguages403Example:
+                  summary: Default SetAppLanguages 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppLanguages404Example:
+                  summary: Default SetAppLanguages 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppLanguages500Example:
+                  summary: Default SetAppLanguages 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set App Languages
+      description: Set App Languages via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/config/languages).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/SendPushNotification/{customerId}:
+    post:
+      tags:
+      - Apps
+      operationId: SendPushNotification
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The customer id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendPushNotification400Example:
+                  summary: Default SendPushNotification 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendPushNotification401Example:
+                  summary: Default SendPushNotification 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendPushNotification403Example:
+                  summary: Default SendPushNotification 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendPushNotification404Example:
+                  summary: Default SendPushNotification 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SendPushNotification500Example:
+                  summary: Default SendPushNotification 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Send Push Notification
+      description: Send Push Notification via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/SendPushNotification/{customerId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/third-party-integrations:
+    post:
+      tags:
+      - Apps
+      operationId: SetThirdPartyIntegrations
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: enabled
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: The enabled query parameter.
+        example: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetThirdPartyIntegrations400Example:
+                  summary: Default SetThirdPartyIntegrations 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetThirdPartyIntegrations401Example:
+                  summary: Default SetThirdPartyIntegrations 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetThirdPartyIntegrations403Example:
+                  summary: Default SetThirdPartyIntegrations 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetThirdPartyIntegrations404Example:
+                  summary: Default SetThirdPartyIntegrations 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetThirdPartyIntegrations500Example:
+                  summary: Default SetThirdPartyIntegrations 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Third Party Integrations
+      description: Set Third Party Integrations via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/third-party-integrations).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/hostname:
+    post:
+      tags:
+      - Apps
+      operationId: SetAppHostname
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: hostname
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The hostname query parameter.
+        example: Example Name
+      - name: isEmbed
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The is embed query parameter.
+        example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                SetAppHostname200Example:
+                  summary: Default SetAppHostname 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppHostname400Example:
+                  summary: Default SetAppHostname 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppHostname401Example:
+                  summary: Default SetAppHostname 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppHostname403Example:
+                  summary: Default SetAppHostname 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppHostname404Example:
+                  summary: Default SetAppHostname 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetAppHostname500Example:
+                  summary: Default SetAppHostname 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set App Hostname
+      description: Set App Hostname via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/hostname).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/apps/{appId}/nextgenweb:
+    post:
+      tags:
+      - Apps
+      operationId: ToggleNextGenWeb
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: hostname
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The hostname query parameter.
+        example: Example Name
+      - name: vanityUrl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The vanity url query parameter.
+        example: https://api.flipdish.co/example
+      - name: isNextGenWeb
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: The is next gen web query parameter.
+        example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                ToggleNextGenWeb200Example:
+                  summary: Default ToggleNextGenWeb 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ToggleNextGenWeb400Example:
+                  summary: Default ToggleNextGenWeb 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ToggleNextGenWeb401Example:
+                  summary: Default ToggleNextGenWeb 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ToggleNextGenWeb403Example:
+                  summary: Default ToggleNextGenWeb 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ToggleNextGenWeb404Example:
+                  summary: Default ToggleNextGenWeb 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ToggleNextGenWeb500Example:
+                  summary: Default ToggleNextGenWeb 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Toggle Next Gen Web
+      description: Toggle Next Gen Web via the Flipdish Open API v1.0 (POST /api/v1.0/apps/{appId}/nextgenweb).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AppLookup:
+      description: App lookup model
+      type: object
+      properties:
+        AppId:
+          description: App id
+          type: string
+          example: '500123'
+    Coordinates:
+      description: Coordinates
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    AppCompliance:
+      description: Application compliance model
+      type: object
+      properties:
+        AppId:
+          description: App ID
+          type: string
+          example: '500123'
+        ComplianceType:
+          description: "Type of compliance.\r\nThis controls if the Flipdish websites and apps display cookie consent banners and adjust cookies to be inline with various regulations. \r\nYou should set this correctly based on your region."
+          enum:
+          - Default
+          - GdprCompliance
+          type: string
+          example: Default
+        AllowDisablingOfGdpr:
+          description: For EU countries, we should not allow to change the option to “Default banner”, but all other countries should be able to do so.
+          type: boolean
+          example: true
+    RestApiResult_DnsRecordInformation_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/DnsRecordInformation'
+    RestApiResult_App_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/App'
+    AppConfigUpdateModel:
+      description: Application configuration
+      type: object
+      properties:
+        Name:
+          description: "App name. \r\nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites."
+          type: string
+          example: Example Name
+        HostName:
+          description: HostName on which the web-ordering system is allowed to be hosted or that a Flipdish website is hosted on.
+          type: string
+          example: Example Name
+        MainColor:
+          description: Main color of the web / Android / iOS applications
+          type: string
+          example: string
+        KioskPrimaryColour:
+          description: Primary colour used on the Kiosk
+          type: string
+          example: string
+        ApplicationCategory:
+          description: Application Category
+          enum:
+          - Restaurant
+          - Cafe
+          - Convenience
+          type: string
+          example: Restaurant
+        IsPanaceaEnabled:
+          description: "Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App's website is hosted on this domain.\r\nThe alternative to using Panacea websites is to use a custom domain."
+          type: boolean
+          example: true
+        PanaceaVanityUrl:
+          description: In case of IsPanaceaEnabled is true, the app can be accessed via https://my.flipdish.com/{PanaceaVanityUrl}
+          type: string
+          example: https://api.flipdish.co/example
+        CookieConsentPromptEnabled:
+          description: Cookie Consent Prompt Enabled
+          type: boolean
+          example: true
+        LogoImageUrl:
+          description: Logo image URL
+          type: string
+          example: https://api.flipdish.co/example
+        CountryId:
+          description: "Country identifier in ISO 3166-1 alpha-2 format. \r\nThis code is set automatically based on the locations of the Stores in the App. \r\n\r\nThe App Country is used \r\n - to determine how to parse mobile phone numbers that are entered in their local numbering format\r\n - to determine if country specific payment methods should be offered\r\n - in various fraud checks"
+          maxLength: 2
+          minLength: 0
+          type: string
+          example: '500123'
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    DnsRecordInformation:
+      description: Holds the information for the A and CNAME Records of a domain.
+      type: object
+      properties:
+        IsCNameReady:
+          description: indicates whether the CNAME record is ready or not.
+          type: boolean
+          example: true
+        IsAReady:
+          description: indicates whether the A record is ready or not.
+          type: boolean
+          example: true
+        IsApiCNameReady:
+          description: indicates whether the API CNAME record is ready or not.
+          type: boolean
+          example: true
+    Language:
+      description: Sorted Language
+      type: object
+      properties:
+        LanguageId:
+          description: ISO 639-1 Language Code
+          type: string
+          example: '500123'
+        DisplayOrder:
+          format: int32
+          description: Display Order
+          type: integer
+          example: 1
+        Name:
+          description: Language Name
+          type: string
+          example: Example Name
+        Enabled:
+          description: Is the language enabled for use.
+          type: boolean
+          example: true
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_AppCompliance_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppCompliance'
+    RestApiArrayResult_SupportedCountry_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedCountry'
+          example: []
+    RestApiPaginationResult_App_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+          example: []
+    CreateAppParameters:
+      description: The parameters required to create a new app.
+      type: object
+      properties:
+        Name:
+          description: The name of the brand that this app/white-label represents.
+          type: string
+          example: Example Name
+    SupportedCountry:
+      description: Describes a supported country
+      type: object
+      properties:
+        CountryCode:
+          description: Country code
+          type: string
+          example: IE
+        Name:
+          description: Nice display name for a country
+          type: string
+          example: Example Name
+        PhoneCode:
+          format: int32
+          description: Country internatinoal phone code prefix
+          type: integer
+          example: 1
+        LanguageCode:
+          description: Language code
+          type: string
+          example: string
+        LanguageName:
+          description: Language name
+          type: string
+          example: Example Name
+        OtpNumber:
+          description: The phone number provided to Store staff which, in conjunction with a one-time-code, will connect them to the customer.
+          type: string
+          example: string
+        SupportNumber:
+          description: The store's support phone number, displayed to customers.
+          type: string
+          example: string
+        AddressLayout:
+          description: Address layout format. This changes the layout of address entry forms on the web app, iOS and Android app and should be set based on local custom.
+          enum:
+          - BuildingFirst
+          - AddressFirst
+          - FullStreetAddressFirst
+          type: string
+          example: BuildingFirst
+        PostCodeType:
+          description: Post code type
+          enum:
+          - None
+          - PostCode
+          - Zip
+          type: string
+          example: None
+        SupportRegion:
+          description: Supported region. This is not used.
+          enum:
+          - Default
+          - Spain
+          - Benelux
+          type: string
+          example: Default
+    App:
+      description: App
+      type: object
+      properties:
+        AppId:
+          description: App Identifier
+          type: string
+          example: '500123'
+        HasIosApp:
+          description: Has iOS app in Apple App Store. This is readonly.
+          type: boolean
+          example: true
+        IosAppStoreUrl:
+          description: IOS App Store URL
+          type: string
+          example: https://api.flipdish.co/example
+        HasAndroidApp:
+          description: Has Android app in Google Play Store. This is readonly.
+          type: boolean
+          example: true
+        AndroidPlayStoreUrl:
+          description: Android Play Store URL
+          type: string
+          example: https://api.flipdish.co/example
+        DisplayDeliveryRestaurantScreen:
+          description: Display delivery restaurant screen
+          type: boolean
+          example: true
+        LogoImageUrl:
+          description: Application Logo.
+          type: string
+          example: https://api.flipdish.co/example
+        Languages:
+          description: Languages that have been selected to be available to customers.
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          example: []
+        AvailableAppLanguages:
+          description: Lists all languages that are supported by Flipdish.
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          example: []
+        AppAccessLevel:
+          description: App access level for the logged in user
+          enum:
+          - None
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          - Onboarding
+          - Support
+          type: string
+          example: None
+        AppResourceSet:
+          description: Constitutes a list of available resources
+          type: array
+          items:
+            enum:
+            - ViewApp
+            - CreateApp
+            - UpdateApp
+            - ViewAppName
+            - EditAppAssets
+            - EditAppFeatures
+            - ViewTeammates
+            - EditTeammates
+            - CreateTeammateOwner
+            - CreateTeammateManagedOwner
+            - CreateTeammateStoreOwner
+            - CreateTeammateStoreManager
+            - CreateTeammateStoreStaff
+            - CreateTeammateStoreReadAccess
+            - CreateTeammateFinanceManager
+            - CreateTeammateIntegrator
+            - CreateTeammateOnboarding
+            - CreateTeammatePropertyManager
+            - CreateTeammatePropertyOwner
+            - ViewApmConfigurations
+            - EditApmConfigurations
+            - ViewCampaignsConfigurations
+            - CreateCampaignsConfigurations
+            - UpdateCampaignsConfigurations
+            - DeleteCampaignsConfigurations
+            - StampLoyaltyCardAgainstCampaignsConfigurations
+            - ViewDevelopersSettings
+            - EditDevelopersSettings
+            - ViewOrders
+            - UpdateOrdersAccept
+            - UpdateOrdersReject
+            - UpdateOrdersRefund
+            - UpdateOrdersDispatch
+            - ViewStores
+            - CreateStores
+            - EditStores
+            - ViewStoresOpeningHours
+            - UpdateStoresOpenForCollectionOrDelivery
+            - UpdateStoresOpeningHours
+            - ViewStoresOpeningHoursOverride
+            - EditStoresOpeningHoursOverride
+            - EditStoresOpeningHoursOverrideTemporary
+            - UpdateStoresName
+            - EditStoreKioskSettings
+            - EditStoreOrderCapacity
+            - ArchiveStores
+            - PublishStores
+            - UpdatePrinterTerminalsAssign
+            - UpdatePrinterTerminalsToggle
+            - EditStoreNotifications
+            - ViewStoreGroups
+            - CreateStoreGroups
+            - UpdateStoreGroups
+            - DeleteStoreGroups
+            - ViewDeliveryZones
+            - CreateDeliveryZones
+            - UpdateDeliveryZones
+            - DeleteDeliveryZones
+            - ViewMenu
+            - CreateMenu
+            - UpdateMenu
+            - DeleteMenu
+            - UpdateMenuLock
+            - UpdateMenuItemsHideTemporarily
+            - EditMenuImage
+            - ViewVouchers
+            - EditVouchers
+            - ViewWebsiteContent
+            - EditWebsiteContent
+            - ViewWebsiteDnsVerified
+            - ViewWebsiteCertificateCreated
+            - ViewWebsiteCertificateRenewed
+            - ViewBankAccounts
+            - CreateBankAccounts
+            - UpdateBankAccounts
+            - UpdateBankAccountsAssign
+            - ViewAssignedBankAccount
+            - VerifyBankAccounts
+            - ViewServiceChargeConfigurations
+            - EditServiceChargeConfigurations
+            - EditStoreDeliveryZoneFees
+            - EditStoreDeliveryFeesLimited
+            - ViewHydraConfig
+            - UpdateHydraConfigManage
+            - InitiateBluetoothPairingMode
+            - DeleteTerminal
+            - ViewKioskTelemetry
+            - ViewCustomers
+            - EditCustomers
+            - CreateCustomers
+            - CreateCatalogElements
+            - UpdateCatalogElements
+            - ViewCatalogElements
+            - DeleteCatalogElements
+            - ViewMetafieldDefinitions
+            - CreateMetafieldDefinitions
+            - UpdateMetafieldDefinitions
+            - DeleteMetafieldDefinitions
+            - UpdateMetafields
+            - ViewCatalogMenuChanges
+            - PublishCatalogMenuChanges
+            - ViewAppStatistics
+            - ViewApmStatistics
+            - ViewCampaignsStatistics
+            - ViewCustomerStatistics
+            - ViewLiveStatistics
+            - ViewOrderStatistics
+            - ViewSalesStatistics
+            - ViewSalesEndOfDayStatistics
+            - ViewVouchersStatistics
+            - DownloadCustomerCsvExport
+            - ViewApmAuditLogs
+            - ViewStoreAuditLogs
+            - ViewMenuAuditLogs
+            - ViewBankAccountAuditLogs
+            - ViewFeeConfigurationsAuditLogs
+            - ViewOrdersAuditLogs
+            - ViewVouchersAuditLogs
+            - ViewUserEventsAuditLogs
+            - ViewCampaignsAuditLogs
+            - ViewTeammatesAuditLogs
+            - ViewAppAuditLogs
+            - ViewCustomerAuditLogs
+            - ViewPrinterAuditLogs
+            - ViewHydraAuditLogs
+            - ViewPushNotificationAuditLogs
+            - ViewStripeCustomConnectedAccountAuditLogs
+            - ViewKioskBluetoothDeviceAuditLogs
+            - ViewExternalAuditLogs
+            - CreateExternalAuditLogEvents
+            - ViewCatalogAuditLogs
+            - ViewOrderFulfillmentAuditLogs
+            - ViewChannelAuditLogs
+            - ViewAppStoreAuditLogs
+            - SendPushNotificationToCustomer
+            - InviteDriverToApp
+            - GetDriverForApp
+            - RemoveDriverFromApp
+            - AssignDriverToOrder
+            - UnassignDriverFromOrder
+            - UpdateOrdersDeliveryTrackingStatus
+            - UpdateOrderFulfillmentStatus
+            - ViewFulfillmentStatesConfiguration
+            - CreateFulfillmentStatesConfiguration
+            - UpdateFulfillmentStatesConfiguration
+            - DeleteFulfillmentStatesConfiguration
+            - ViewPayouts
+            - ViewChannels
+            - ViewOnboarding
+            - UpdateOnboarding
+            - ViewClientDevices
+            - UpdateClientDevices
+            - EnrollClientDevices
+            - AssignClientDevices
+            - ViewClientAuditLogs
+            - CreateAppStoreAppConfiguration
+            - ViewAppStoreAppConfiguration
+            - UpdateAppStoreAppConfiguration
+            - DeleteAppStoreAppConfiguration
+            - UpdateAppStoreAppConfigurationSettings
+            - CreateAppStoreSubscription
+            - UpdateAppStoreSubscription
+            - DeleteAppStoreSubscription
+            - ViewSalesChannels
+            - EditSalesChannels
+            - ViewPayGreenWhiteLabelConfiguration
+            - CreatePayGreenWhiteLabelConfiguration
+            - UpdatePayGreenWhiteLabelConfiguration
+            - UpdatePayGreenStoreConfiguration
+            - ViewSubscriptions
+            - ViewInvoices
+            - EditAccountsBills
+            - ViewAccountsBills
+            - EditAccountsCategories
+            - ViewAccountsCategories
+            - EditAccountsCreditAccounts
+            - ViewAccountsCreditAccounts
+            - EditAccountsCreditBooks
+            - ViewAccountsCreditBooks
+            - EditAccountsExpenses
+            - ViewAccountsExpenses
+            - EditAccountsTransactionAccounts
+            - ViewAccountsTransactionAccounts
+            - EditDocumentExplorer
+            - ViewDocumentExplorer
+            - ViewInventoryReports
+            - EditInventoryPurchaseOrders
+            - ViewInventoryPurchaseOrders
+            - EditInventoryStockItems
+            - ViewInventoryStockItems
+            - EditInventorySupplier
+            - ViewInventorySupplier
+            - EditInventoryTrackingProfiles
+            - ViewInventoryTrackingProfiles
+            - ViewPayrollReports
+            - EditPayrollHoliday
+            - ViewPayrollHoliday
+            - EditPayrollRota
+            - ViewPayrollRota
+            - EditPayrollStaff
+            - ViewPayrollStaff
+            - ViewSalesReports
+            - ViewCostReports
+            - ViewMenuReports
+            type: string
+          example:
+          - ViewApp
+        Features:
+          description: Feature flags. These cannot be set by 3rd parties.
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        MapCenter:
+          $ref: '#/components/schemas/Coordinates'
+        MapNorthEast:
+          $ref: '#/components/schemas/Coordinates'
+        MapSouthWest:
+          $ref: '#/components/schemas/Coordinates'
+        GoogleMapsApiKeyWeb:
+          description: Key to be passed with Google Maps requests
+          type: string
+          example: string
+        OrgId:
+          description: Org Id
+          type: string
+          example: '500123'
+        SmsRestaurantName:
+          description: SMS Restaurant Name
+          type: string
+          example: Example Name
+        WebToAppRedirect:
+          description: Web to App Redirect settings
+          enum:
+          - NoRedirect
+          - RedirectOnce
+          - RedirectAlways
+          - SuggestPwa
+          - ForcePwa
+          type: string
+          example: NoRedirect
+        Name:
+          description: "App name. \r\nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites."
+          type: string
+          example: Example Name
+        HostName:
+          description: HostName on which the web-ordering system is allowed to be hosted or that a Flipdish website is hosted on.
+          type: string
+          example: Example Name
+        MainColor:
+          description: Main color of the web / Android / iOS applications
+          type: string
+          example: string
+        KioskPrimaryColour:
+          description: Primary colour used on the Kiosk
+          type: string
+          example: string
+        ApplicationCategory:
+          description: Application Category
+          enum:
+          - Restaurant
+          - Cafe
+          - Convenience
+          type: string
+          example: Restaurant
+        IsPanaceaEnabled:
+          description: "Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App's website is hosted on this domain.\r\nThe alternative to using Panacea websites is to use a custom domain."
+          type: boolean
+          example: true
+        PanaceaVanityUrl:
+          description: In case of IsPanaceaEnabled is true, the app can be accessed via https://my.flipdish.com/{PanaceaVanityUrl}
+          type: string
+          example: https://api.flipdish.co/example
+        CookieConsentPromptEnabled:
+          description: Cookie Consent Prompt Enabled
+          type: boolean
+          example: true
+        CountryId:
+          description: "Country identifier in ISO 3166-1 alpha-2 format. \r\nThis code is set automatically based on the locations of the Stores in the App. \r\n\r\nThe App Country is used \r\n - to determine how to parse mobile phone numbers that are entered in their local numbering format\r\n - to determine if country specific payment methods should be offered\r\n - in various fraud checks"
+          maxLength: 2
+          minLength: 0
+          type: string
+          example: '500123'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,1197 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Website API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Website
+  description: Operations for Website.
+paths:
+  /api/v1.0/{appId}/website/index:
+    get:
+      tags:
+      - Website
+      operationId: GetIndexConfiguration
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_IndexPage_'
+              examples:
+                GetIndexConfiguration200Example:
+                  summary: Default GetIndexConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Testimonials: []
+                      Images: []
+                      AboutSectionEnabled: true
+                      AboutSectionTitle: string
+                      AboutSectionSubtitle: string
+                      AboutSectionLeftTitle: string
+                      AboutSectionLeftBody: string
+                      AboutSectionRightTitle: string
+                      AboutSectionRightBody: string
+                      OpeningHoursEnabled: true
+                      MenuPreviewEnabled: true
+                      GalleryEnabled: true
+                      TestimonialsEnabled: true
+                      ContactFormEnabled: true
+                      ContactFormEmail: owner@example.com
+                      MapEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetIndexConfiguration400Example:
+                  summary: Default GetIndexConfiguration 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetIndexConfiguration401Example:
+                  summary: Default GetIndexConfiguration 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetIndexConfiguration403Example:
+                  summary: Default GetIndexConfiguration 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetIndexConfiguration404Example:
+                  summary: Default GetIndexConfiguration 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetIndexConfiguration500Example:
+                  summary: Default GetIndexConfiguration 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Index Configuration
+      description: Get Index Configuration via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/website/index).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Website
+      operationId: SetIndexConfiguration
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexPageBase'
+            examples:
+              SetIndexConfigurationRequestExample:
+                summary: Default SetIndexConfiguration request
+                x-microcks-default: true
+                value:
+                  AboutSectionEnabled: true
+                  AboutSectionTitle: string
+                  AboutSectionSubtitle: string
+                  AboutSectionLeftTitle: string
+                  AboutSectionLeftBody: string
+                  AboutSectionRightTitle: string
+                  AboutSectionRightBody: string
+                  OpeningHoursEnabled: true
+                  MenuPreviewEnabled: true
+                  GalleryEnabled: true
+                  TestimonialsEnabled: true
+                  ContactFormEnabled: true
+                  ContactFormEmail: owner@example.com
+                  MapEnabled: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_IndexPageBase_'
+              examples:
+                SetIndexConfiguration200Example:
+                  summary: Default SetIndexConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      AboutSectionEnabled: true
+                      AboutSectionTitle: string
+                      AboutSectionSubtitle: string
+                      AboutSectionLeftTitle: string
+                      AboutSectionLeftBody: string
+                      AboutSectionRightTitle: string
+                      AboutSectionRightBody: string
+                      OpeningHoursEnabled: true
+                      MenuPreviewEnabled: true
+                      GalleryEnabled: true
+                      TestimonialsEnabled: true
+                      ContactFormEnabled: true
+                      ContactFormEmail: owner@example.com
+                      MapEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetIndexConfiguration400Example:
+                  summary: Default SetIndexConfiguration 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetIndexConfiguration401Example:
+                  summary: Default SetIndexConfiguration 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetIndexConfiguration403Example:
+                  summary: Default SetIndexConfiguration 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetIndexConfiguration404Example:
+                  summary: Default SetIndexConfiguration 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetIndexConfiguration500Example:
+                  summary: Default SetIndexConfiguration 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Set Index Configuration
+      description: Set Index Configuration via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/website/index).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/website/dnscheck:
+    get:
+      tags:
+      - Website
+      operationId: Website_CheckNow
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Website_CheckNow400Example:
+                  summary: Default Website_CheckNow 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Website_CheckNow401Example:
+                  summary: Default Website_CheckNow 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Website_CheckNow403Example:
+                  summary: Default Website_CheckNow 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Website_CheckNow500Example:
+                  summary: Default Website_CheckNow 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Website_Check Now
+      description: Website_Check Now via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/website/dnscheck).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/website/testimonial:
+    post:
+      tags:
+      - Website
+      operationId: AddTestimonial
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_WebsiteTestimonial_'
+              examples:
+                AddTestimonial200Example:
+                  summary: Default AddTestimonial 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TestimonialId: 500123
+                      Author: string
+                      Message: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddTestimonial400Example:
+                  summary: Default AddTestimonial 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddTestimonial401Example:
+                  summary: Default AddTestimonial 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddTestimonial403Example:
+                  summary: Default AddTestimonial 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddTestimonial404Example:
+                  summary: Default AddTestimonial 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddTestimonial500Example:
+                  summary: Default AddTestimonial 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Add Testimonial
+      description: Add Testimonial via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/website/testimonial).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/website/image/{imageLocation}:
+    post:
+      tags:
+      - Website
+      operationId: UploadWebsiteImage
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: imageLocation
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - IndexHeader
+          - IndexAboutSectionLeft
+          - IndexAboutSectionRight
+          - IndexGallery
+          - IndexOpeningHoursHeader
+          - IndexTestimonialsHeader
+        description: The image location path parameter.
+        example: IndexHeader
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_WebsiteImage_'
+              examples:
+                UploadWebsiteImage200Example:
+                  summary: Default UploadWebsiteImage 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ImageId: 500123
+                      ImageLocation: IndexHeader
+                      ImageUrl: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadWebsiteImage400Example:
+                  summary: Default UploadWebsiteImage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadWebsiteImage401Example:
+                  summary: Default UploadWebsiteImage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadWebsiteImage403Example:
+                  summary: Default UploadWebsiteImage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadWebsiteImage404Example:
+                  summary: Default UploadWebsiteImage 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadWebsiteImage500Example:
+                  summary: Default UploadWebsiteImage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Upload Website Image
+      description: Upload Website Image via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/website/image/{imageLocation}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/website/testimonial/{testimonialId}:
+    post:
+      tags:
+      - Website
+      operationId: EditTestimonial
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: testimonialId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The testimonial id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_WebsiteTestimonial_'
+              examples:
+                EditTestimonial200Example:
+                  summary: Default EditTestimonial 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      TestimonialId: 500123
+                      Author: string
+                      Message: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditTestimonial400Example:
+                  summary: Default EditTestimonial 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditTestimonial401Example:
+                  summary: Default EditTestimonial 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditTestimonial403Example:
+                  summary: Default EditTestimonial 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditTestimonial404Example:
+                  summary: Default EditTestimonial 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditTestimonial500Example:
+                  summary: Default EditTestimonial 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Edit Testimonial
+      description: Edit Testimonial via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/website/testimonial/{testimonialId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Website
+      operationId: DeleteTestimonial
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: testimonialId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The testimonial id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTestimonial400Example:
+                  summary: Default DeleteTestimonial 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTestimonial401Example:
+                  summary: Default DeleteTestimonial 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTestimonial403Example:
+                  summary: Default DeleteTestimonial 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTestimonial404Example:
+                  summary: Default DeleteTestimonial 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteTestimonial500Example:
+                  summary: Default DeleteTestimonial 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Testimonial
+      description: Delete Testimonial via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/website/testimonial/{testimonialId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/website/image/{imageId}:
+    delete:
+      tags:
+      - Website
+      operationId: DeleteWebsiteImage
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The image id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebsiteImage400Example:
+                  summary: Default DeleteWebsiteImage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebsiteImage401Example:
+                  summary: Default DeleteWebsiteImage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebsiteImage403Example:
+                  summary: Default DeleteWebsiteImage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebsiteImage404Example:
+                  summary: Default DeleteWebsiteImage 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteWebsiteImage500Example:
+                  summary: Default DeleteWebsiteImage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Website Image
+      description: Delete Website Image via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/website/image/{imageId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WebsiteTestimonial:
+      description: Represents a testimonial
+      type: object
+      properties:
+        TestimonialId:
+          format: int32
+          description: Id of the testimonial
+          type: integer
+          example: 500123
+        Author:
+          description: Author of the testimonial
+          type: string
+          example: string
+        Message:
+          description: Message of the testimonial
+          type: string
+          example: string
+    IndexPage:
+      description: Index Page
+      type: object
+      properties:
+        Testimonials:
+          description: Testimonials
+          type: array
+          items:
+            $ref: '#/components/schemas/WebsiteTestimonial'
+          example: []
+        Images:
+          description: Images
+          type: array
+          items:
+            $ref: '#/components/schemas/WebsiteImage'
+          example: []
+        AboutSectionEnabled:
+          description: About section enabled
+          type: boolean
+          example: true
+        AboutSectionTitle:
+          description: About section title
+          type: string
+          example: string
+        AboutSectionSubtitle:
+          description: About section sub-title
+          type: string
+          example: string
+        AboutSectionLeftTitle:
+          description: About section title left
+          type: string
+          example: string
+        AboutSectionLeftBody:
+          description: About section text left
+          type: string
+          example: string
+        AboutSectionRightTitle:
+          description: About section title right
+          type: string
+          example: string
+        AboutSectionRightBody:
+          description: About section text right
+          type: string
+          example: string
+        OpeningHoursEnabled:
+          description: Opening hours section Enabled
+          type: boolean
+          example: true
+        MenuPreviewEnabled:
+          description: Menu Preview section Enabled
+          type: boolean
+          example: true
+        GalleryEnabled:
+          description: Gallery section enabled
+          type: boolean
+          example: true
+        TestimonialsEnabled:
+          description: Testimonials section Enabled
+          type: boolean
+          example: true
+        ContactFormEnabled:
+          description: Contact Form section Enabled
+          type: boolean
+          example: true
+        ContactFormEmail:
+          description: Contact Form Email
+          type: string
+          example: owner@example.com
+        MapEnabled:
+          description: Map section Enabled
+          type: boolean
+          example: true
+    RestApiResult_WebsiteImage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WebsiteImage'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    IndexPageBase:
+      description: Base of Index Page
+      type: object
+      properties:
+        AboutSectionEnabled:
+          description: About section enabled
+          type: boolean
+          example: true
+        AboutSectionTitle:
+          description: About section title
+          type: string
+          example: string
+        AboutSectionSubtitle:
+          description: About section sub-title
+          type: string
+          example: string
+        AboutSectionLeftTitle:
+          description: About section title left
+          type: string
+          example: string
+        AboutSectionLeftBody:
+          description: About section text left
+          type: string
+          example: string
+        AboutSectionRightTitle:
+          description: About section title right
+          type: string
+          example: string
+        AboutSectionRightBody:
+          description: About section text right
+          type: string
+          example: string
+        OpeningHoursEnabled:
+          description: Opening hours section Enabled
+          type: boolean
+          example: true
+        MenuPreviewEnabled:
+          description: Menu Preview section Enabled
+          type: boolean
+          example: true
+        GalleryEnabled:
+          description: Gallery section enabled
+          type: boolean
+          example: true
+        TestimonialsEnabled:
+          description: Testimonials section Enabled
+          type: boolean
+          example: true
+        ContactFormEnabled:
+          description: Contact Form section Enabled
+          type: boolean
+          example: true
+        ContactFormEmail:
+          description: Contact Form Email
+          type: string
+          example: owner@example.com
+        MapEnabled:
+          description: Map section Enabled
+          type: boolean
+          example: true
+    RestApiResult_IndexPageBase_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/IndexPageBase'
+    WebsiteImage:
+      description: Represents a website image
+      type: object
+      properties:
+        ImageId:
+          format: int32
+          description: Represents the id of the image
+          type: integer
+          example: 500123
+        ImageLocation:
+          description: Represents the location of the image
+          enum:
+          - IndexHeader
+          - IndexAboutSectionLeft
+          - IndexAboutSectionRight
+          - IndexGallery
+          - IndexOpeningHoursHeader
+          - IndexTestimonialsHeader
+          type: string
+          example: IndexHeader
+        ImageUrl:
+          description: Represents the image url
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_IndexPage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/IndexPage'
+    RestApiResult_WebsiteTestimonial_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WebsiteTestimonial'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

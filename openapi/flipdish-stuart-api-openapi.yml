@@ -1,0 +1,969 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Stuart API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Stuart
+  description: Operations for Stuart.
+paths:
+  /api/v1.0/stuart/settings/{storeId}:
+    get:
+      tags:
+      - Stuart
+      operationId: Stuart_GetStuartSettings
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StuartSettings_'
+              examples:
+                Stuart_GetStuartSettings200Example:
+                  summary: Default Stuart_GetStuartSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ClientId: '500123'
+                      ClientSecret: string
+                      Enabled: true
+                      WebhookUrlBasicAuthentication: string
+                      OverrideWebhookUrl: true
+                      MinutesToPickupBeforeThanDeliveryTime: 1
+                      PackageType: Xsmall
+                      TransportType: Bike
+                      CancelOrderIfStuartCancelDelivery: true
+                      TransportPrices:
+                        Bike: 1.0
+                        Cargobike: 1.0
+                        Cargobikexl: 1.0
+                        Motorbike: 1.0
+                        Motorbikexl: 1.0
+                        Car: 1.0
+                        Van: 1.0
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetStuartSettings400Example:
+                  summary: Default Stuart_GetStuartSettings 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetStuartSettings401Example:
+                  summary: Default Stuart_GetStuartSettings 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetStuartSettings403Example:
+                  summary: Default Stuart_GetStuartSettings 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetStuartSettings404Example:
+                  summary: Default Stuart_GetStuartSettings 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetStuartSettings500Example:
+                  summary: Default Stuart_GetStuartSettings 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Stuart_Get Stuart Settings
+      description: Stuart_Get Stuart Settings via the Flipdish Open API v1.0 (GET /api/v1.0/stuart/settings/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Stuart
+      operationId: Stuart_PostStuartSettings
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StuartSettings'
+            examples:
+              Stuart_PostStuartSettingsRequestExample:
+                summary: Default Stuart_PostStuartSettings request
+                x-microcks-default: true
+                value:
+                  ClientId: '500123'
+                  ClientSecret: string
+                  Enabled: true
+                  WebhookUrlBasicAuthentication: string
+                  OverrideWebhookUrl: true
+                  MinutesToPickupBeforeThanDeliveryTime: 1
+                  PackageType: Xsmall
+                  TransportType: Bike
+                  CancelOrderIfStuartCancelDelivery: true
+                  TransportPrices:
+                    Bike: 1.0
+                    Cargobike: 1.0
+                    Cargobikexl: 1.0
+                    Motorbike: 1.0
+                    Motorbikexl: 1.0
+                    Car: 1.0
+                    Van: 1.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Stuart_PostStuartSettings200Example:
+                  summary: Default Stuart_PostStuartSettings 200 response
+                  x-microcks-default: true
+                  value: {}
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StuartSettings_'
+              examples:
+                Stuart_PostStuartSettings201Example:
+                  summary: Default Stuart_PostStuartSettings 201 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      ClientId: '500123'
+                      ClientSecret: string
+                      Enabled: true
+                      WebhookUrlBasicAuthentication: string
+                      OverrideWebhookUrl: true
+                      MinutesToPickupBeforeThanDeliveryTime: 1
+                      PackageType: Xsmall
+                      TransportType: Bike
+                      CancelOrderIfStuartCancelDelivery: true
+                      TransportPrices:
+                        Bike: 1.0
+                        Cargobike: 1.0
+                        Cargobikexl: 1.0
+                        Motorbike: 1.0
+                        Motorbikexl: 1.0
+                        Car: 1.0
+                        Van: 1.0
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_PostStuartSettings400Example:
+                  summary: Default Stuart_PostStuartSettings 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_PostStuartSettings401Example:
+                  summary: Default Stuart_PostStuartSettings 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_PostStuartSettings403Example:
+                  summary: Default Stuart_PostStuartSettings 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_PostStuartSettings500Example:
+                  summary: Default Stuart_PostStuartSettings 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Stuart_Post Stuart Settings
+      description: Stuart_Post Stuart Settings via the Flipdish Open API v1.0 (POST /api/v1.0/stuart/settings/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/stuart/jobs/{jobId}:
+    get:
+      tags:
+      - Stuart
+      operationId: Stuart_GetJob
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The job id path parameter.
+        example: 500123
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id query parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_JobResponse_'
+              examples:
+                Stuart_GetJob200Example:
+                  summary: Default Stuart_GetJob 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: 500123
+                      CreatedAt: '2026-06-02T12:00:00Z'
+                      Status: Active
+                      PackageType: string
+                      TransportType: string
+                      AssignmentCode: string
+                      PickupAt: '2026-06-02T12:00:00Z'
+                      DropoffAt: '2026-06-02T12:00:00Z'
+                      Comment: string
+                      Distance: 1.0
+                      Duration: 1
+                      Deliveries: []
+                      Pricing:
+                        Currency: EUR
+                        TaxPercentage: 1.0
+                        PriceTaxIncluded: 12.5
+                        PriceTaxExcluded: 12.5
+                        TaxAmount: 12.5
+                        InvoiceUrl: https://api.flipdish.co/example
+                      Driver:
+                        Id: 500123
+                        DisplayName: Example Name
+                        Phone: '+353000000000'
+                        PictureUrl: https://api.flipdish.co/example
+                        TransportType: string
+                        Latitude: 1.0
+                        Longitude: 1.0
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetJob400Example:
+                  summary: Default Stuart_GetJob 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetJob401Example:
+                  summary: Default Stuart_GetJob 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetJob403Example:
+                  summary: Default Stuart_GetJob 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_GetJob500Example:
+                  summary: Default Stuart_GetJob 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Stuart_Get Job
+      description: Stuart_Get Job via the Flipdish Open API v1.0 (GET /api/v1.0/stuart/jobs/{jobId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Stuart
+      operationId: Stuart_CancelJob
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The job id path parameter.
+        example: 500123
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id query parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Stuart_CancelJob200Example:
+                  summary: Default Stuart_CancelJob 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_CancelJob400Example:
+                  summary: Default Stuart_CancelJob 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_CancelJob401Example:
+                  summary: Default Stuart_CancelJob 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_CancelJob403Example:
+                  summary: Default Stuart_CancelJob 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                Stuart_CancelJob500Example:
+                  summary: Default Stuart_CancelJob 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Stuart_Cancel Job
+      description: Stuart_Cancel Job via the Flipdish Open API v1.0 (DELETE /api/v1.0/stuart/jobs/{jobId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    JobCancellation:
+      description: Job Cancellation
+      type: object
+      properties:
+        CanceledBy:
+          description: Canceled By
+          type: string
+          example: string
+        ReasonKey:
+          description: Reason Key
+          type: string
+          example: string
+        Comment:
+          description: Comment
+          type: string
+          example: string
+    JobDelivery:
+      description: Job Delivery
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        Status:
+          description: Status
+          type: string
+          example: Active
+        PickedAt:
+          description: Picked At
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        DeliveredAt:
+          description: Delivered At
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        TrackingUrl:
+          description: Tracking Url
+          type: string
+          example: https://api.flipdish.co/example
+        ClientReference:
+          description: Client Reference
+          type: string
+          example: string
+        PackageDescription:
+          description: Package Description
+          type: string
+          example: string
+        PackageType:
+          description: Package Type
+          type: string
+          example: string
+        Pickup:
+          $ref: '#/components/schemas/JobDeliveryDetail'
+        Dropoff:
+          $ref: '#/components/schemas/JobDeliveryDetail'
+        Eta:
+          $ref: '#/components/schemas/JobEta'
+        Cancellation:
+          $ref: '#/components/schemas/JobCancellation'
+        Proof:
+          $ref: '#/components/schemas/JobProof'
+    JobResponse:
+      description: Job Response
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        CreatedAt:
+          format: date-time
+          description: Created At
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        Status:
+          description: Status
+          type: string
+          example: Active
+        PackageType:
+          description: Package Type
+          type: string
+          example: string
+        TransportType:
+          description: Transport Type
+          type: string
+          example: string
+        AssignmentCode:
+          description: Assignment Code
+          type: string
+          example: string
+        PickupAt:
+          description: Pickup At
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        DropoffAt:
+          description: Dropoff At
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Comment:
+          description: Comment
+          type: string
+          example: string
+        Distance:
+          format: double
+          description: Distance
+          type: number
+          nullable: true
+          example: 1.0
+        Duration:
+          format: int32
+          description: Duration
+          type: integer
+          nullable: true
+          example: 1
+        Deliveries:
+          description: Deliveries
+          type: array
+          items:
+            $ref: '#/components/schemas/JobDelivery'
+          example: []
+        Pricing:
+          $ref: '#/components/schemas/JobPricing'
+        Driver:
+          $ref: '#/components/schemas/JobDriver'
+    JobEta:
+      description: Job Eta
+      type: object
+      properties:
+        Pickup:
+          description: Pickup
+          type: string
+          example: string
+        Dropoff:
+          description: Dropoff
+          type: string
+          example: string
+    StuartSettings:
+      description: Stuart settings
+      type: object
+      properties:
+        ClientId:
+          description: Client Id
+          type: string
+          example: '500123'
+        ClientSecret:
+          description: Client Secret
+          type: string
+          example: string
+        Enabled:
+          description: Enabled
+          type: boolean
+          example: true
+        WebhookUrlBasicAuthentication:
+          description: Webhook url to settle in the Stuart portal
+          type: string
+          example: string
+        OverrideWebhookUrl:
+          description: Override Flipdish Webhook Url
+          type: boolean
+          example: true
+        MinutesToPickupBeforeThanDeliveryTime:
+          format: int32
+          description: MinutesToPickupBeforeThanDeliveryTime
+          type: integer
+          nullable: true
+          example: 1
+        PackageType:
+          description: Package type
+          enum:
+          - Xsmall
+          - Small
+          - Medium
+          - Large
+          - Xlarge
+          type: string
+          nullable: true
+          example: Xsmall
+        TransportType:
+          description: Transport type
+          enum:
+          - Bike
+          - Cargobike
+          - Cargobikexl
+          - Motorbike
+          - Motorbikexl
+          - Car
+          - Van
+          type: string
+          nullable: true
+          example: Bike
+        CancelOrderIfStuartCancelDelivery:
+          description: Determines if Flipdish order should be cancel when Stuart cancels delivery
+          type: boolean
+          example: true
+        TransportPrices:
+          description: If the order exceeds are certain amount this configuration will determine a new vehicle type
+          type: object
+          properties:
+            Bike:
+              format: double
+              type: number
+            Cargobike:
+              format: double
+              type: number
+            Cargobikexl:
+              format: double
+              type: number
+            Motorbike:
+              format: double
+              type: number
+            Motorbikexl:
+              format: double
+              type: number
+            Car:
+              format: double
+              type: number
+            Van:
+              format: double
+              type: number
+    JobContact:
+      description: Job Contact
+      type: object
+      properties:
+        Firstname:
+          description: Firstname
+          type: string
+          example: Example Name
+        Lastname:
+          description: Lastname
+          type: string
+          example: Example Name
+        Phone:
+          description: Phone
+          type: string
+          example: '+353000000000'
+        Email:
+          description: Email
+          type: string
+          example: owner@example.com
+        Company:
+          description: Company
+          type: string
+          example: string
+        CompanyName:
+          description: Company Name
+          type: string
+          example: Example Name
+    JobPricing:
+      description: Job Pricing
+      type: object
+      properties:
+        Currency:
+          description: Currency
+          type: string
+          example: EUR
+        TaxPercentage:
+          format: double
+          description: Tax Percentage
+          type: number
+          nullable: true
+          example: 1.0
+        PriceTaxIncluded:
+          format: double
+          description: Price Tax Included
+          type: number
+          nullable: true
+          example: 12.5
+        PriceTaxExcluded:
+          format: double
+          description: Price Tax Excluded
+          type: number
+          nullable: true
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax Amount
+          type: number
+          nullable: true
+          example: 12.5
+        InvoiceUrl:
+          description: Invoice Url
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_StuartSettings_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StuartSettings'
+    JobProof:
+      description: Job Proof
+      type: object
+      properties:
+        SignatureUrl:
+          description: Signature Url
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_JobResponse_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/JobResponse'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    JobDriver:
+      description: Job Driver
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        DisplayName:
+          description: Display Name
+          type: string
+          example: Example Name
+        Phone:
+          description: Phone
+          type: string
+          example: '+353000000000'
+        PictureUrl:
+          description: Picture Url
+          type: string
+          example: https://api.flipdish.co/example
+        TransportType:
+          description: Transport Type
+          type: string
+          example: string
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          nullable: true
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          nullable: true
+          example: 1.0
+    JobAddress:
+      description: Job Address
+      type: object
+      properties:
+        Street:
+          description: Street
+          type: string
+          example: string
+        Postcode:
+          description: Postcode
+          type: string
+          example: string
+        City:
+          description: City
+          type: string
+          example: string
+        Country:
+          description: Country
+          type: string
+          example: IE
+        Zone:
+          description: Zone
+          type: string
+          example: string
+        FormattedAddress:
+          description: Formatted Address
+          type: string
+          example: string
+    JobDeliveryDetail:
+      description: Job Delivery Detail
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          nullable: true
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          nullable: true
+          example: 1.0
+        Comment:
+          description: Comment
+          type: string
+          example: string
+        Address:
+          $ref: '#/components/schemas/JobAddress'
+        Contact:
+          $ref: '#/components/schemas/JobContact'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,702 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts AppStore API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: AppStore
+  description: Operations for App Store.
+paths:
+  /api/v1.0/appstore/apps/{appStoreAppId}:
+    get:
+      tags:
+      - AppStore
+      operationId: GetAppStoreApp
+      parameters:
+      - name: appStoreAppId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app store app id path parameter.
+        example: '500123'
+      - name: appId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The app id query parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreApp_'
+              examples:
+                GetAppStoreApp200Example:
+                  summary: Default GetAppStoreApp 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: '500123'
+                      VerificationStatus: Draft
+                      Logo: string
+                      OAuthAppId: '500123'
+                      Internal: true
+                      Details: string
+                      ConfigurationType: ExternalLink
+                      StoreSelectorType: None
+                      FieldGroups: []
+                      SetupInstructions: string
+                      ExternalSetupLink: https://api.flipdish.co/example
+                      TeammateAppAccessLevel: Owner
+                      PermissionsType: Teammate
+                      Support:
+                        PrivacyPolicy: string
+                        TermsOfUse: string
+                        CompanyWebsite: string
+                        LearnMore: string
+                        InstallationMessage: string
+                        SupportEmail: owner@example.com
+                      ExternalFunctionActionUrl: https://api.flipdish.co/example
+                      ExternalFunctionSignatureKey: string
+                      IsPaid: true
+                      Name: Example Name
+                      Description: string
+                      IsEnabled: true
+                      Categories:
+                      - PointOfSale
+                      Countries:
+                      - GB
+                      DeveloperName: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApp400Example:
+                  summary: Default GetAppStoreApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApp401Example:
+                  summary: Default GetAppStoreApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApp403Example:
+                  summary: Default GetAppStoreApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApp404Example:
+                  summary: Default GetAppStoreApp 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApp500Example:
+                  summary: Default GetAppStoreApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App Store App
+      description: Get App Store App via the Flipdish Open API v1.0 (GET /api/v1.0/appstore/apps/{appStoreAppId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/appstore/apps:
+    get:
+      tags:
+      - AppStore
+      operationId: GetAppStoreApps
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The search query parameter.
+        example: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: excludeNotOwned
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The exclude not owned query parameter.
+        example: true
+      - name: showOnlyVerified
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The show only verified query parameter.
+        example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_AppStoreAppSummary_'
+              examples:
+                GetAppStoreApps200Example:
+                  summary: Default GetAppStoreApps 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApps400Example:
+                  summary: Default GetAppStoreApps 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApps401Example:
+                  summary: Default GetAppStoreApps 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApps403Example:
+                  summary: Default GetAppStoreApps 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreApps500Example:
+                  summary: Default GetAppStoreApps 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App Store Apps
+      description: Get App Store Apps via the Flipdish Open API v1.0 (GET /api/v1.0/appstore/apps).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FieldGroup:
+      required:
+      - Name
+      - Position
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        Fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
+    AppStoreApp:
+      required:
+      - Id
+      - VerificationStatus
+      - OAuthAppId
+      - Internal
+      - Details
+      - ConfigurationType
+      - StoreSelectorType
+      - PermissionsType
+      - Name
+      - Description
+      - Categories
+      - Countries
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '500123'
+        VerificationStatus:
+          enum:
+          - Draft
+          - Submitted
+          - Verified
+          type: string
+          example: Draft
+        Logo:
+          type: string
+          example: string
+        OAuthAppId:
+          type: string
+          example: '500123'
+        Internal:
+          type: boolean
+          example: true
+        Details:
+          type: string
+          example: string
+        ConfigurationType:
+          enum:
+          - ExternalLink
+          - FlipdishHosted
+          type: string
+          example: ExternalLink
+        StoreSelectorType:
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        FieldGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldGroup'
+          example: []
+        SetupInstructions:
+          type: string
+          example: string
+        ExternalSetupLink:
+          type: string
+          example: https://api.flipdish.co/example
+        TeammateAppAccessLevel:
+          enum:
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          type: string
+          example: Owner
+        PermissionsType:
+          enum:
+          - Teammate
+          type: string
+          example: Teammate
+        Support:
+          $ref: '#/components/schemas/AppStoreAppSupportInfo'
+        ExternalFunctionActionUrl:
+          type: string
+          example: https://api.flipdish.co/example
+        ExternalFunctionSignatureKey:
+          type: string
+          example: string
+        IsPaid:
+          type: boolean
+          example: true
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        IsEnabled:
+          type: boolean
+          example: true
+        Categories:
+          type: array
+          items:
+            enum:
+            - PointOfSale
+            - DeliveryAndLogistics
+            - CRM
+            - GiftCard
+            - Accounting
+            - LoyaltyAndMarketing
+            - Other
+            type: string
+          example:
+          - PointOfSale
+        Countries:
+          type: array
+          items:
+            enum:
+            - GB
+            - IE
+            - FR
+            - ES
+            - PT
+            - IT
+            - DE
+            - PL
+            - BE
+            - LU
+            - NL
+            - US
+            - CA
+            - BG
+            - MX
+            - AU
+            - NZ
+            type: string
+          example:
+          - GB
+        DeveloperName:
+          type: string
+          example: Example Name
+    AppStoreAppSupportInfo:
+      type: object
+      properties:
+        PrivacyPolicy:
+          type: string
+          example: string
+        TermsOfUse:
+          type: string
+          example: string
+        CompanyWebsite:
+          type: string
+          example: string
+        LearnMore:
+          type: string
+          example: string
+        InstallationMessage:
+          type: string
+          example: string
+        SupportEmail:
+          type: string
+          example: owner@example.com
+    AppStoreAppSummary:
+      required:
+      - Id
+      - VerificationStatus
+      - Internal
+      - Name
+      - Description
+      - Categories
+      - Countries
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '500123'
+        VerificationStatus:
+          enum:
+          - Draft
+          - Submitted
+          - Verified
+          type: string
+          example: Draft
+        Logo:
+          type: string
+          example: string
+        Internal:
+          type: boolean
+          example: true
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        IsEnabled:
+          type: boolean
+          example: true
+        Categories:
+          type: array
+          items:
+            enum:
+            - PointOfSale
+            - DeliveryAndLogistics
+            - CRM
+            - GiftCard
+            - Accounting
+            - LoyaltyAndMarketing
+            - Other
+            type: string
+          example:
+          - PointOfSale
+        Countries:
+          type: array
+          items:
+            enum:
+            - GB
+            - IE
+            - FR
+            - ES
+            - PT
+            - IT
+            - DE
+            - PL
+            - BE
+            - LU
+            - NL
+            - US
+            - CA
+            - BG
+            - MX
+            - AU
+            - NZ
+            type: string
+          example:
+          - GB
+        DeveloperName:
+          type: string
+          example: Example Name
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Key:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        DefaultValue:
+          type: string
+          example: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+          example: []
+        ValidationRegex:
+          type: string
+          example: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+          example: Text
+        IsFlipdishRestricted:
+          type: boolean
+          nullable: true
+          example: true
+    RestApiPaginationResult_AppStoreAppSummary_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppStoreAppSummary'
+          example: []
+    RestApiResult_AppStoreApp_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreApp'
+    ValidValue:
+      required:
+      - Code
+      - Name
+      type: object
+      properties:
+        Code:
+          type: string
+          example: string
+        Name:
+          type: string
+          example: Example Name
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,1597 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Campaigns API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Campaigns
+  description: Operations for Campaigns.
+paths:
+  /api/v1.0/{appId}/campaigns/loyalty:
+    get:
+      tags:
+      - Campaigns
+      operationId: GetLoyaltyCampaignsForApp
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_LoyaltyCampaign_'
+              examples:
+                GetLoyaltyCampaignsForApp200Example:
+                  summary: Default GetLoyaltyCampaignsForApp 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForApp400Example:
+                  summary: Default GetLoyaltyCampaignsForApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForApp401Example:
+                  summary: Default GetLoyaltyCampaignsForApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForApp403Example:
+                  summary: Default GetLoyaltyCampaignsForApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForApp404Example:
+                  summary: Default GetLoyaltyCampaignsForApp 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForApp500Example:
+                  summary: Default GetLoyaltyCampaignsForApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Loyalty Campaigns for App
+      description: Get Loyalty Campaigns for App via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/campaigns/loyalty).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Campaigns
+      operationId: CreateLoyaltyCampaign
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LoyaltyCampaign_'
+              examples:
+                CreateLoyaltyCampaign200Example:
+                  summary: Default CreateLoyaltyCampaign 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CampaignId: 500123
+                      Statistics:
+                        VouchersIssued: 1
+                        VouchersRedeemed: 1
+                        Conversion: 1.0
+                        SalesGenerated: 1.0
+                        ReturnOfInvestment: 1.0
+                      Stores: []
+                      PublicId: 00000000-0000-0000-0000-000000000000
+                      OrdersBeforeReceivingVoucher: 1
+                      PercentDiscountAmount: 12.5
+                      MaxDiscount: 3
+                      RoundingStrategy: 1
+                      ShouldIncludeOrdersWithLoyaltyVoucher: true
+                      VoucherValidPeriodDays: 1
+                      IncludeDeliveryFee: true
+                      AutoApplyResultingVouchers: true
+                      IncludeExistingOrders: true
+                      IsEnabled: true
+                      StoreIds:
+                      - 1
+                      AppId: '500123'
+                      ForceDiscount: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLoyaltyCampaign400Example:
+                  summary: Default CreateLoyaltyCampaign 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLoyaltyCampaign401Example:
+                  summary: Default CreateLoyaltyCampaign 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLoyaltyCampaign403Example:
+                  summary: Default CreateLoyaltyCampaign 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLoyaltyCampaign404Example:
+                  summary: Default CreateLoyaltyCampaign 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLoyaltyCampaign500Example:
+                  summary: Default CreateLoyaltyCampaign 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Loyalty Campaign
+      description: Create Loyalty Campaign via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/campaigns/loyalty).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/retention:
+    get:
+      tags:
+      - Campaigns
+      operationId: GetRetentionCampaignsForApp
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RetentionCampaign_'
+              examples:
+                GetRetentionCampaignsForApp200Example:
+                  summary: Default GetRetentionCampaignsForApp 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForApp400Example:
+                  summary: Default GetRetentionCampaignsForApp 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForApp401Example:
+                  summary: Default GetRetentionCampaignsForApp 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForApp403Example:
+                  summary: Default GetRetentionCampaignsForApp 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForApp404Example:
+                  summary: Default GetRetentionCampaignsForApp 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForApp500Example:
+                  summary: Default GetRetentionCampaignsForApp 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Retention Campaigns for App
+      description: Get Retention Campaigns for App via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/campaigns/retention).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Campaigns
+      operationId: CreateRetentionCampaign
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RetentionCampaign_'
+              examples:
+                CreateRetentionCampaign200Example:
+                  summary: Default CreateRetentionCampaign 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CampaignId: 500123
+                      Statistics:
+                        VouchersIssued: 1
+                        VouchersRedeemed: 1
+                        Conversion: 1.0
+                        SalesGenerated: 1.0
+                        ReturnOfInvestment: 1.0
+                      Stores: []
+                      PublicId: 00000000-0000-0000-0000-000000000000
+                      NotifyCustomerAfterMinutes: 1
+                      PercentDiscountAmount: 12.5
+                      MaxDiscount: 3
+                      LumpDiscountAmount: 12.5
+                      VoucherValidPeriodDays: 1
+                      IncludeDeliveryFee: true
+                      AutoApplyResultingVouchers: true
+                      IncludeExistingOrders: true
+                      IsEnabled: true
+                      StoreIds:
+                      - 1
+                      AppId: '500123'
+                      ForceDiscount: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateRetentionCampaign400Example:
+                  summary: Default CreateRetentionCampaign 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateRetentionCampaign401Example:
+                  summary: Default CreateRetentionCampaign 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateRetentionCampaign403Example:
+                  summary: Default CreateRetentionCampaign 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateRetentionCampaign404Example:
+                  summary: Default CreateRetentionCampaign 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateRetentionCampaign500Example:
+                  summary: Default CreateRetentionCampaign 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Retention Campaign
+      description: Create Retention Campaign via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/campaigns/retention).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/loyalty/{storeId}:
+    get:
+      tags:
+      - Campaigns
+      operationId: GetLoyaltyCampaignsForStore
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_LoyaltyCampaign_'
+              examples:
+                GetLoyaltyCampaignsForStore200Example:
+                  summary: Default GetLoyaltyCampaignsForStore 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForStore400Example:
+                  summary: Default GetLoyaltyCampaignsForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForStore401Example:
+                  summary: Default GetLoyaltyCampaignsForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForStore403Example:
+                  summary: Default GetLoyaltyCampaignsForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForStore404Example:
+                  summary: Default GetLoyaltyCampaignsForStore 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLoyaltyCampaignsForStore500Example:
+                  summary: Default GetLoyaltyCampaignsForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Loyalty Campaigns for Store
+      description: Get Loyalty Campaigns for Store via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/campaigns/loyalty/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/retention/{storeId}:
+    get:
+      tags:
+      - Campaigns
+      operationId: GetRetentionCampaignsForStore
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RetentionCampaign_'
+              examples:
+                GetRetentionCampaignsForStore200Example:
+                  summary: Default GetRetentionCampaignsForStore 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForStore400Example:
+                  summary: Default GetRetentionCampaignsForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForStore401Example:
+                  summary: Default GetRetentionCampaignsForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForStore403Example:
+                  summary: Default GetRetentionCampaignsForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForStore404Example:
+                  summary: Default GetRetentionCampaignsForStore 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetRetentionCampaignsForStore500Example:
+                  summary: Default GetRetentionCampaignsForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Retention Campaigns for Store
+      description: Get Retention Campaigns for Store via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/campaigns/retention/{storeId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/stores:
+    get:
+      tags:
+      - Campaigns
+      operationId: GetStoreList
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: onlyPublished
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The only published query parameter.
+        example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_StoreListItem_'
+              examples:
+                GetStoreList200Example:
+                  summary: Default GetStoreList 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreList400Example:
+                  summary: Default GetStoreList 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreList401Example:
+                  summary: Default GetStoreList 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreList403Example:
+                  summary: Default GetStoreList 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreList404Example:
+                  summary: Default GetStoreList 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetStoreList500Example:
+                  summary: Default GetStoreList 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Store List
+      description: Get Store List via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/campaigns/stores).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/loyalty/{campaignId}:
+    post:
+      tags:
+      - Campaigns
+      operationId: UpdateLoyaltyCampaign
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: campaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The campaign id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LoyaltyCampaign_'
+              examples:
+                UpdateLoyaltyCampaign200Example:
+                  summary: Default UpdateLoyaltyCampaign 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CampaignId: 500123
+                      Statistics:
+                        VouchersIssued: 1
+                        VouchersRedeemed: 1
+                        Conversion: 1.0
+                        SalesGenerated: 1.0
+                        ReturnOfInvestment: 1.0
+                      Stores: []
+                      PublicId: 00000000-0000-0000-0000-000000000000
+                      OrdersBeforeReceivingVoucher: 1
+                      PercentDiscountAmount: 12.5
+                      MaxDiscount: 3
+                      RoundingStrategy: 1
+                      ShouldIncludeOrdersWithLoyaltyVoucher: true
+                      VoucherValidPeriodDays: 1
+                      IncludeDeliveryFee: true
+                      AutoApplyResultingVouchers: true
+                      IncludeExistingOrders: true
+                      IsEnabled: true
+                      StoreIds:
+                      - 1
+                      AppId: '500123'
+                      ForceDiscount: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLoyaltyCampaign400Example:
+                  summary: Default UpdateLoyaltyCampaign 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLoyaltyCampaign401Example:
+                  summary: Default UpdateLoyaltyCampaign 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLoyaltyCampaign403Example:
+                  summary: Default UpdateLoyaltyCampaign 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLoyaltyCampaign404Example:
+                  summary: Default UpdateLoyaltyCampaign 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLoyaltyCampaign500Example:
+                  summary: Default UpdateLoyaltyCampaign 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Loyalty Campaign
+      description: Update Loyalty Campaign via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/campaigns/loyalty/{campaignId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/retention/{campaignId}:
+    post:
+      tags:
+      - Campaigns
+      operationId: UpdateRetentionCampaign
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: campaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The campaign id path parameter.
+        example: 500123
+      requestBody:
+        required: false
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RetentionCampaign_'
+              examples:
+                UpdateRetentionCampaign200Example:
+                  summary: Default UpdateRetentionCampaign 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      CampaignId: 500123
+                      Statistics:
+                        VouchersIssued: 1
+                        VouchersRedeemed: 1
+                        Conversion: 1.0
+                        SalesGenerated: 1.0
+                        ReturnOfInvestment: 1.0
+                      Stores: []
+                      PublicId: 00000000-0000-0000-0000-000000000000
+                      NotifyCustomerAfterMinutes: 1
+                      PercentDiscountAmount: 12.5
+                      MaxDiscount: 3
+                      LumpDiscountAmount: 12.5
+                      VoucherValidPeriodDays: 1
+                      IncludeDeliveryFee: true
+                      AutoApplyResultingVouchers: true
+                      IncludeExistingOrders: true
+                      IsEnabled: true
+                      StoreIds:
+                      - 1
+                      AppId: '500123'
+                      ForceDiscount: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateRetentionCampaign400Example:
+                  summary: Default UpdateRetentionCampaign 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateRetentionCampaign401Example:
+                  summary: Default UpdateRetentionCampaign 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateRetentionCampaign403Example:
+                  summary: Default UpdateRetentionCampaign 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateRetentionCampaign404Example:
+                  summary: Default UpdateRetentionCampaign 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateRetentionCampaign500Example:
+                  summary: Default UpdateRetentionCampaign 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Retention Campaign
+      description: Update Retention Campaign via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/campaigns/retention/{campaignId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/campaigns/{campaignId}:
+    delete:
+      tags:
+      - Campaigns
+      operationId: RemoveCampaign
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: campaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The campaign id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveCampaign400Example:
+                  summary: Default RemoveCampaign 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveCampaign401Example:
+                  summary: Default RemoveCampaign 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveCampaign403Example:
+                  summary: Default RemoveCampaign 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveCampaign404Example:
+                  summary: Default RemoveCampaign 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RemoveCampaign500Example:
+                  summary: Default RemoveCampaign 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Remove Campaign
+      description: Remove Campaign via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/campaigns/{campaignId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiArrayResult_StoreListItem_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreListItem'
+          example: []
+    RestApiResult_RetentionCampaign_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RetentionCampaign'
+    CampaignStatistics:
+      description: Campaign statistics
+      type: object
+      properties:
+        VouchersIssued:
+          format: int32
+          description: "Deprecated. Number of issued vouchers.\r\nThis field is always zero."
+          type: integer
+          example: 1
+        VouchersRedeemed:
+          format: int32
+          description: "Deprecated. Number of redeemed vouchers. This field is always zero.\r\nThis field is always zero."
+          type: integer
+          example: 1
+        Conversion:
+          format: double
+          description: "Deprecated. Conversion of campaign (VouchersIssued / VouchersRedeemed).\r\nThis field is always zero."
+          type: number
+          example: 1.0
+        SalesGenerated:
+          format: double
+          description: "Deprecated.\r\nSales generated by campaign (TotalAmount - FeeChargedToCustomer ie. the discounted sale value).\r\nThis field is always zero."
+          type: number
+          example: 1.0
+        ReturnOfInvestment:
+          format: double
+          description: "Deprecated.\r\nReturn of investment of campaign (TotalAmount / DiscountAmount).\r\nThis field is always zero."
+          type: number
+          example: 1.0
+    RetentionCampaign:
+      description: Retention campaign
+      type: object
+      properties:
+        CampaignId:
+          format: int32
+          description: Id of campaign
+          type: integer
+          example: 500123
+        Statistics:
+          $ref: '#/components/schemas/CampaignStatistics'
+        Stores:
+          description: Stores this campaign applies to with campaign start time in Utc
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreCampaignStartTime'
+          example: []
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        NotifyCustomerAfterMinutes:
+          format: int32
+          description: Time in minutes, after which customer will receive retention voucher if he/she does not order
+          maximum: 2147483647
+          minimum: 1440
+          type: integer
+          example: 1
+        PercentDiscountAmount:
+          format: int32
+          description: Discount amount in percents
+          maximum: 100
+          minimum: 1
+          type: integer
+          nullable: true
+          example: 12.5
+        MaxDiscount:
+          format: double
+          description: Maximum discount for percentage discounts
+          minimum: 0
+          type: number
+          nullable: true
+          example: 3
+        LumpDiscountAmount:
+          format: double
+          description: Discount amount in sum of money
+          maximum: 2147483647
+          minimum: 0
+          type: number
+          nullable: true
+          example: 12.5
+        VoucherValidPeriodDays:
+          format: int32
+          description: Number of days for which the voucher will be valid.
+          maximum: 300
+          minimum: 1
+          type: integer
+          example: 1
+        IncludeDeliveryFee:
+          description: Discount will include delivery fee
+          type: boolean
+          example: true
+        AutoApplyResultingVouchers:
+          description: Automatically apply resulting vouchers
+          type: boolean
+          example: true
+        IncludeExistingOrders:
+          description: Campaign will apply to existing orders
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is campaign enabled
+          type: boolean
+          example: true
+        StoreIds:
+          description: Ids of stores this campaign applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        AppId:
+          description: The app that this campaign belongs to.
+          type: string
+          example: '500123'
+        ForceDiscount:
+          description: Controls whether the voucher generated from this campaign will override discount exclusions
+          type: boolean
+          example: true
+    RestApiArrayResult_RetentionCampaign_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/RetentionCampaign'
+          example: []
+    RestApiResult_LoyaltyCampaign_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/LoyaltyCampaign'
+    StoreCampaignStartTime:
+      description: Store campaign start time
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        TsStart:
+          format: date-time
+          description: Campaign start time in Utc
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    LoyaltyCampaign:
+      description: Loyalty campaign
+      type: object
+      properties:
+        CampaignId:
+          format: int32
+          description: Id of campaign
+          type: integer
+          example: 500123
+        Statistics:
+          $ref: '#/components/schemas/CampaignStatistics'
+        Stores:
+          description: Stores this campaign applies to with campaign start time in Utc
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreCampaignStartTime'
+          example: []
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        OrdersBeforeReceivingVoucher:
+          format: int32
+          description: Number of orders customer needs to make, before receiving voucher
+          type: integer
+          example: 1
+        PercentDiscountAmount:
+          format: int32
+          description: Discount amount in percents
+          maximum: 100
+          minimum: 1
+          type: integer
+          nullable: true
+          example: 12.5
+        MaxDiscount:
+          format: double
+          description: Maximum discount for percentage discounts
+          minimum: 0
+          type: number
+          nullable: true
+          example: 3
+        RoundingStrategy:
+          format: int32
+          description: Controls how the loyalty voucher's amount is rounded
+          maximum: 2
+          minimum: 0
+          type: integer
+          nullable: true
+          example: 1
+        ShouldIncludeOrdersWithLoyaltyVoucher:
+          description: Controls whether we should include orders with loyalty vouchers in the campaign calculation
+          type: boolean
+          nullable: true
+          example: true
+        VoucherValidPeriodDays:
+          format: int32
+          description: Number of days for which the voucher will be valid.
+          maximum: 300
+          minimum: 1
+          type: integer
+          example: 1
+        IncludeDeliveryFee:
+          description: Discount will include delivery fee
+          type: boolean
+          example: true
+        AutoApplyResultingVouchers:
+          description: Automatically apply resulting vouchers
+          type: boolean
+          example: true
+        IncludeExistingOrders:
+          description: Campaign will apply to existing orders
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is campaign enabled
+          type: boolean
+          example: true
+        StoreIds:
+          description: Ids of stores this campaign applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        AppId:
+          description: The app that this campaign belongs to.
+          type: string
+          example: '500123'
+        ForceDiscount:
+          description: Controls whether the voucher generated from this campaign will override discount exclusions
+          type: boolean
+          example: true
+    RestApiArrayResult_LoyaltyCampaign_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/LoyaltyCampaign'
+          example: []
+    StoreListItem:
+      description: Store id and name
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        StoreName:
+          description: Store Name
+          type: string
+          example: Example Name
+        StoreGroupId:
+          format: int32
+          description: Store Group Id
+          type: integer
+          example: 500123
+        StoreGroupName:
+          description: Store Group Name
+          type: string
+          example: Example Name
+        HasLoyaltyCampaign:
+          description: Store has loyalty campaign
+          type: boolean
+          example: true
+        HasRetentionCampaign:
+          description: Store has retention campaign
+          type: boolean
+          example: true
+        IsPublished:
+          description: Is Published store
+          type: boolean
+          example: true
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,709 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts LocationAreas API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: LocationAreas
+  description: Operations for Location Areas.
+paths:
+  /api/v1.0/{appId}/stores/{storeId}/location-areas:
+    get:
+      tags:
+      - LocationAreas
+      operationId: GetLocationAreasForStore
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_LocationAreaWithLocations_'
+              examples:
+                GetLocationAreasForStore200Example:
+                  summary: Default GetLocationAreasForStore 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationAreasForStore400Example:
+                  summary: Default GetLocationAreasForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationAreasForStore401Example:
+                  summary: Default GetLocationAreasForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationAreasForStore403Example:
+                  summary: Default GetLocationAreasForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationAreasForStore500Example:
+                  summary: Default GetLocationAreasForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Location Areas for Store
+      description: Get Location Areas for Store via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/stores/{storeId}/location-areas).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - LocationAreas
+      operationId: CreateLocationArea
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLocationArea'
+            examples:
+              CreateLocationAreaRequestExample:
+                summary: Default CreateLocationArea request
+                x-microcks-default: true
+                value:
+                  LocationAreaName: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CreateLocationArea200Example:
+                  summary: Default CreateLocationArea 200 response
+                  x-microcks-default: true
+                  value: {}
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LocationArea_'
+              examples:
+                CreateLocationArea201Example:
+                  summary: Default CreateLocationArea 201 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      LocationAreaId: 500123
+                      StoreId: 500123
+                      LocationAreaName: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLocationArea400Example:
+                  summary: Default CreateLocationArea 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLocationArea401Example:
+                  summary: Default CreateLocationArea 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLocationArea403Example:
+                  summary: Default CreateLocationArea 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLocationArea404Example:
+                  summary: Default CreateLocationArea 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateLocationArea500Example:
+                  summary: Default CreateLocationArea 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Location Area
+      description: Create Location Area via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/stores/{storeId}/location-areas).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}:
+    get:
+      tags:
+      - LocationAreas
+      operationId: GetLocationArea
+      parameters:
+      - name: locationAreaId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The location area id path parameter.
+        example: 500123
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LocationAreaWithLocations_'
+              examples:
+                GetLocationArea200Example:
+                  summary: Default GetLocationArea 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      LocationAreaId: 500123
+                      StoreId: 500123
+                      LocationAreaName: Example Name
+                      Locations: []
+                      IsDeleted: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationArea400Example:
+                  summary: Default GetLocationArea 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationArea401Example:
+                  summary: Default GetLocationArea 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationArea403Example:
+                  summary: Default GetLocationArea 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationArea404Example:
+                  summary: Default GetLocationArea 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetLocationArea500Example:
+                  summary: Default GetLocationArea 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Location Area
+      description: Get Location Area via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/update:
+    post:
+      tags:
+      - LocationAreas
+      operationId: UpdateLocationArea
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      - name: locationAreaId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The location area id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLocationArea'
+            examples:
+              UpdateLocationAreaRequestExample:
+                summary: Default UpdateLocationArea request
+                x-microcks-default: true
+                value:
+                  LocationAreaId: 500123
+                  LocationAreaName: Example Name
+                  IsDeleted: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_LocationArea_'
+              examples:
+                UpdateLocationArea200Example:
+                  summary: Default UpdateLocationArea 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      LocationAreaId: 500123
+                      StoreId: 500123
+                      LocationAreaName: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLocationArea400Example:
+                  summary: Default UpdateLocationArea 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLocationArea401Example:
+                  summary: Default UpdateLocationArea 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLocationArea403Example:
+                  summary: Default UpdateLocationArea 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLocationArea404Example:
+                  summary: Default UpdateLocationArea 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateLocationArea500Example:
+                  summary: Default UpdateLocationArea 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Location Area
+      description: Update Location Area via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/stores/{storeId}/location-areas/{locationAreaId}/update).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiResult_LocationAreaWithLocations_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/LocationAreaWithLocations'
+    LocationArea_Location:
+      description: 'Representation of a Location i.e: (Table, Hotel Room, Car Park, etc )'
+      required:
+      - LocationId
+      - LocationName
+      - DisplayOrder
+      type: object
+      properties:
+        LocationId:
+          format: int32
+          description: Id of the Location
+          type: integer
+          example: 500123
+        LocationName:
+          description: Name of the Location
+          type: string
+          example: Example Name
+        DisplayOrder:
+          format: int32
+          description: The order that the Location should be displayed on the screen
+          type: integer
+          example: 1
+        ExternalLocationId:
+          description: Id of the Location on an external system
+          type: string
+          example: '500123'
+        IsDeleted:
+          description: Shows if the Location is deleted or not
+          type: boolean
+          example: true
+    RestApiResult_LocationArea_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/LocationArea'
+    CreateLocationArea:
+      description: Input model for creating a LocationArea
+      required:
+      - LocationAreaName
+      type: object
+      properties:
+        LocationAreaName:
+          description: Descriptive LocationArea name
+          type: string
+          example: Example Name
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    LocationAreaWithLocations:
+      description: Represents a LocationArea and its Location list
+      required:
+      - LocationAreaId
+      - StoreId
+      - LocationAreaName
+      type: object
+      properties:
+        LocationAreaId:
+          format: int32
+          description: Id of the LocationArea
+          type: integer
+          example: 500123
+        StoreId:
+          format: int32
+          description: Id of the Store that this LocationArea belongs to
+          type: integer
+          example: 500123
+        LocationAreaName:
+          description: Descriptive LocationArea name
+          type: string
+          example: Example Name
+        Locations:
+          description: List of Locations that belongs to this Location Area
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationArea_Location'
+          example: []
+        IsDeleted:
+          description: Returns if the LocationArea is deleted or not
+          type: boolean
+          example: true
+    UpdateLocationArea:
+      description: Input model for updating a LocationArea
+      required:
+      - LocationAreaId
+      - LocationAreaName
+      type: object
+      properties:
+        LocationAreaId:
+          format: int32
+          description: Location Area Id
+          type: integer
+          example: 500123
+        LocationAreaName:
+          description: Descriptive LocationArea name
+          type: string
+          example: Example Name
+        IsDeleted:
+          description: Sets if the Location Area should be soft deleted or not
+          type: boolean
+          example: true
+    LocationArea:
+      description: Represents a LocationArea
+      type: object
+      properties:
+        LocationAreaId:
+          format: int32
+          description: Id of the LocationArea
+          type: integer
+          example: 500123
+        StoreId:
+          format: int32
+          description: Id of the Store that this LocationArea belongs to
+          type: integer
+          example: 500123
+        LocationAreaName:
+          description: Descriptive LocationArea name
+          type: string
+          example: Example Name
+    RestApiArrayResult_LocationAreaWithLocations_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationAreaWithLocations'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

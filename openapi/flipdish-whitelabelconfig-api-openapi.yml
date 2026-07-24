@@ -1,0 +1,2402 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts WhiteLabelConfig API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: WhiteLabelConfig
+  description: Operations for White Label Config.
+paths:
+  /api/v1.0/whitelabelconfig/health:
+    get:
+      tags:
+      - WhiteLabelConfig
+      operationId: HealthCheck
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                HealthCheck200Example:
+                  summary: Default HealthCheck 200 response
+                  x-microcks-default: true
+                  value: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck400Example:
+                  summary: Default HealthCheck 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck401Example:
+                  summary: Default HealthCheck 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck403Example:
+                  summary: Default HealthCheck 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                HealthCheck500Example:
+                  summary: Default HealthCheck 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Health Check
+      description: Health Check via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelconfig/health).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelconfig/id/{wlid}:
+    get:
+      tags:
+      - WhiteLabelConfig
+      operationId: GetWhiteLabelConfig
+      parameters:
+      - name: wlid
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The wlid path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_WhiteLabelConfigModel_'
+              examples:
+                GetWhiteLabelConfig200Example:
+                  summary: Default GetWhiteLabelConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelLanguages: []
+                      WhiteLabelAssets: []
+                      ColorScheme:
+                        WhiteLabelColorSchemeId: 500123
+                        Font: string
+                        Color: string
+                        Color2: string
+                        Color3: string
+                        Color4: string
+                        Color5: string
+                        Color6: string
+                        Color7: string
+                        Color8: string
+                        Color9: string
+                        Color10: string
+                        Color11: string
+                        Color12: string
+                      WhiteLabelConfigId: 500123
+                      WhiteLabelId: 500123
+                      WhiteLabelName: Example Name
+                      AppNameId: '500123'
+                      OrgId: '500123'
+                      SmsRestaurantName: Example Name
+                      DeepLinkUrlScheme: https://api.flipdish.co/example
+                      HostName: Example Name
+                      NexmoSupportSmsNumber: string
+                      TwilioSupportSmsNumber: string
+                      MixpanelToken: string
+                      IntercomAppId: '500123'
+                      ShareMessageEmailSubject: owner@example.com
+                      ShareMessageEmailMessage: owner@example.com
+                      ShareMessageSmsMessage: string
+                      ShareMessageWhatsAppMessage: string
+                      ShareMessageFacebookMessage: string
+                      ShareMessageTwitterMessage: string
+                      ShareMessageGenericMessage: string
+                      DisplayDeliveryRestaurantListScreen: true
+                      ContactFormType: 1
+                      ContactPhoneNumber: '+353000000000'
+                      DisplayBumpSideMenuItem: true
+                      DisplayFreeCokeSideMenuItem: true
+                      AppStoreUrl: https://api.flipdish.co/example
+                      DeliveryEnabled: true
+                      PickupEnabled: true
+                      DisplayPickupRestaurantListScreen: true
+                      DisplayCuisineTypeListAndRestaurantSearchBar: true
+                      DisplayUserRestaurantRatings: true
+                      ReadyToPublishWeb: true
+                      ReadyToPublishIos: true
+                      ReadyToPublishAndroid: true
+                      DisplayFooterLinksToOtherSites: true
+                      DisplayOnlineOrderingMenu: true
+                      HideAppConfigFromAdminList: true
+                      ComplianceType: Default
+                      IsMenuMigratedToRms: true
+                      MapBoundryMaxLongitude: 1.0
+                      MapBoundryMinLongitude: 1.0
+                      MapBoundryMaxLatitude: 1.0
+                      MapBoundryMinLatitude: 1.0
+                      AppStoreAppleId: '500123'
+                      AppStoreToken: string
+                      WebsiteDisplayStaticMenuPage: true
+                      IsEmbed: true
+                      DisplayTipOptionToUsersByDefault: true
+                      EmailRequestMode: 1
+                      AddressEntryType: 1
+                      AddressLayout: 1
+                      Category: 1
+                      MapCenterLatitude: 1.0
+                      MapCenterLongitude: 1.0
+                      IntercomTokenIos: string
+                      IntercomTokenAndroid: '500123'
+                      GoogleAnalyticsTokensCsv: string
+                      FacebookTokensCsv: string
+                      ShareMessageGenericUrl: https://api.flipdish.co/example
+                      PrivateSupportEmailAddress: owner@example.com
+                      AppStoreId: '500123'
+                      PlayConsoleAccount: 3
+                      ApnCertificateValidAfter: '2026-06-02T12:00:00Z'
+                      ApnCertificateValidBefore: '2026-06-02T12:00:00Z'
+                      DineInEnabled: true
+                      AppFont: string
+                      WhiteLabelColorSchemeId: 500123
+                      WhiteLabelImagesId: 500123
+                      AppStoreCopyright: string
+                      AppStoreDescription: string
+                      AppStoreShortDescription: string
+                      AppStoreKeywords: string
+                      AppStoreMarketingUrl: https://api.flipdish.co/example
+                      AppStoreName: Example Name
+                      AppStorePrivacyUrl: https://api.flipdish.co/example
+                      AppStoreSupportUrl: https://api.flipdish.co/example
+                      AppStoreReleaseNotes: string
+                      AppStoreIconUrl: https://api.flipdish.co/example
+                      AppStoreIconThumbnail100Url: https://api.flipdish.co/example
+                      TransparentLogoUrl: https://api.flipdish.co/example
+                      LogoImageName: Example Name
+                      KioskNameScreenImage: Example Name
+                      WebToAppRedirect: 1
+                      FeaturesCsv: string
+                      AppStorePassword: string
+                      AppStoreTeamId: '500123'
+                      AppStoreAppGroup: string
+                      AppStoreSigningIdentity: string
+                      AppStoreItcTeamId: '500123'
+                      HeadHtml: string
+                      SocialTwitterUrl: https://api.flipdish.co/example
+                      SocialFacebookUrl: https://api.flipdish.co/example
+                      SocialInstagramUrl: https://api.flipdish.co/example
+                      SocialPintrestUrl: https://api.flipdish.co/example
+                      SocialTripAdvisorUrl: https://api.flipdish.co/example
+                      SocialGooglePlusUrl: https://api.flipdish.co/example
+                      SocialFourSquareUrl: https://api.flipdish.co/example
+                      SocialYelpUrl: https://api.flipdish.co/example
+                      WebsiteType: 1
+                      ExternalOrderingPageUrl: https://api.flipdish.co/example
+                      PanaceaEnabled: true
+                      CookieConsentPromptEnabled: true
+                      PanaceaVanityUrl: https://api.flipdish.co/example
+                      CountryId: '500123'
+                      ReferralUserId: 500123
+                      ReferralCampaignId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfig400Example:
+                  summary: Default GetWhiteLabelConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfig401Example:
+                  summary: Default GetWhiteLabelConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfig403Example:
+                  summary: Default GetWhiteLabelConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfig404Example:
+                  summary: Default GetWhiteLabelConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfig500Example:
+                  summary: Default GetWhiteLabelConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get White Label Config
+      description: Get White Label Config via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelconfig/id/{wlid}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelconfig/name/{appId}:
+    get:
+      tags:
+      - WhiteLabelConfig
+      operationId: GetWhiteLabelConfigByAppNameId
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_WhiteLabelConfigModel_'
+              examples:
+                GetWhiteLabelConfigByAppNameId200Example:
+                  summary: Default GetWhiteLabelConfigByAppNameId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelLanguages: []
+                      WhiteLabelAssets: []
+                      ColorScheme:
+                        WhiteLabelColorSchemeId: 500123
+                        Font: string
+                        Color: string
+                        Color2: string
+                        Color3: string
+                        Color4: string
+                        Color5: string
+                        Color6: string
+                        Color7: string
+                        Color8: string
+                        Color9: string
+                        Color10: string
+                        Color11: string
+                        Color12: string
+                      WhiteLabelConfigId: 500123
+                      WhiteLabelId: 500123
+                      WhiteLabelName: Example Name
+                      AppNameId: '500123'
+                      OrgId: '500123'
+                      SmsRestaurantName: Example Name
+                      DeepLinkUrlScheme: https://api.flipdish.co/example
+                      HostName: Example Name
+                      NexmoSupportSmsNumber: string
+                      TwilioSupportSmsNumber: string
+                      MixpanelToken: string
+                      IntercomAppId: '500123'
+                      ShareMessageEmailSubject: owner@example.com
+                      ShareMessageEmailMessage: owner@example.com
+                      ShareMessageSmsMessage: string
+                      ShareMessageWhatsAppMessage: string
+                      ShareMessageFacebookMessage: string
+                      ShareMessageTwitterMessage: string
+                      ShareMessageGenericMessage: string
+                      DisplayDeliveryRestaurantListScreen: true
+                      ContactFormType: 1
+                      ContactPhoneNumber: '+353000000000'
+                      DisplayBumpSideMenuItem: true
+                      DisplayFreeCokeSideMenuItem: true
+                      AppStoreUrl: https://api.flipdish.co/example
+                      DeliveryEnabled: true
+                      PickupEnabled: true
+                      DisplayPickupRestaurantListScreen: true
+                      DisplayCuisineTypeListAndRestaurantSearchBar: true
+                      DisplayUserRestaurantRatings: true
+                      ReadyToPublishWeb: true
+                      ReadyToPublishIos: true
+                      ReadyToPublishAndroid: true
+                      DisplayFooterLinksToOtherSites: true
+                      DisplayOnlineOrderingMenu: true
+                      HideAppConfigFromAdminList: true
+                      ComplianceType: Default
+                      IsMenuMigratedToRms: true
+                      MapBoundryMaxLongitude: 1.0
+                      MapBoundryMinLongitude: 1.0
+                      MapBoundryMaxLatitude: 1.0
+                      MapBoundryMinLatitude: 1.0
+                      AppStoreAppleId: '500123'
+                      AppStoreToken: string
+                      WebsiteDisplayStaticMenuPage: true
+                      IsEmbed: true
+                      DisplayTipOptionToUsersByDefault: true
+                      EmailRequestMode: 1
+                      AddressEntryType: 1
+                      AddressLayout: 1
+                      Category: 1
+                      MapCenterLatitude: 1.0
+                      MapCenterLongitude: 1.0
+                      IntercomTokenIos: string
+                      IntercomTokenAndroid: '500123'
+                      GoogleAnalyticsTokensCsv: string
+                      FacebookTokensCsv: string
+                      ShareMessageGenericUrl: https://api.flipdish.co/example
+                      PrivateSupportEmailAddress: owner@example.com
+                      AppStoreId: '500123'
+                      PlayConsoleAccount: 3
+                      ApnCertificateValidAfter: '2026-06-02T12:00:00Z'
+                      ApnCertificateValidBefore: '2026-06-02T12:00:00Z'
+                      DineInEnabled: true
+                      AppFont: string
+                      WhiteLabelColorSchemeId: 500123
+                      WhiteLabelImagesId: 500123
+                      AppStoreCopyright: string
+                      AppStoreDescription: string
+                      AppStoreShortDescription: string
+                      AppStoreKeywords: string
+                      AppStoreMarketingUrl: https://api.flipdish.co/example
+                      AppStoreName: Example Name
+                      AppStorePrivacyUrl: https://api.flipdish.co/example
+                      AppStoreSupportUrl: https://api.flipdish.co/example
+                      AppStoreReleaseNotes: string
+                      AppStoreIconUrl: https://api.flipdish.co/example
+                      AppStoreIconThumbnail100Url: https://api.flipdish.co/example
+                      TransparentLogoUrl: https://api.flipdish.co/example
+                      LogoImageName: Example Name
+                      KioskNameScreenImage: Example Name
+                      WebToAppRedirect: 1
+                      FeaturesCsv: string
+                      AppStorePassword: string
+                      AppStoreTeamId: '500123'
+                      AppStoreAppGroup: string
+                      AppStoreSigningIdentity: string
+                      AppStoreItcTeamId: '500123'
+                      HeadHtml: string
+                      SocialTwitterUrl: https://api.flipdish.co/example
+                      SocialFacebookUrl: https://api.flipdish.co/example
+                      SocialInstagramUrl: https://api.flipdish.co/example
+                      SocialPintrestUrl: https://api.flipdish.co/example
+                      SocialTripAdvisorUrl: https://api.flipdish.co/example
+                      SocialGooglePlusUrl: https://api.flipdish.co/example
+                      SocialFourSquareUrl: https://api.flipdish.co/example
+                      SocialYelpUrl: https://api.flipdish.co/example
+                      WebsiteType: 1
+                      ExternalOrderingPageUrl: https://api.flipdish.co/example
+                      PanaceaEnabled: true
+                      CookieConsentPromptEnabled: true
+                      PanaceaVanityUrl: https://api.flipdish.co/example
+                      CountryId: '500123'
+                      ReferralUserId: 500123
+                      ReferralCampaignId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfigByAppNameId400Example:
+                  summary: Default GetWhiteLabelConfigByAppNameId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfigByAppNameId401Example:
+                  summary: Default GetWhiteLabelConfigByAppNameId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfigByAppNameId403Example:
+                  summary: Default GetWhiteLabelConfigByAppNameId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfigByAppNameId404Example:
+                  summary: Default GetWhiteLabelConfigByAppNameId 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetWhiteLabelConfigByAppNameId500Example:
+                  summary: Default GetWhiteLabelConfigByAppNameId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get White Label Config by App Name Id
+      description: Get White Label Config by App Name Id via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelconfig/name/{appId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelconfig/{appId}/general:
+    get:
+      tags:
+      - WhiteLabelConfig
+      operationId: GetAppGeneralConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppGeneralConfigModel_'
+              examples:
+                GetAppGeneralConfig200Example:
+                  summary: Default GetAppGeneralConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelId: 500123
+                      DeepLinkUrlScheme: https://api.flipdish.co/example
+                      SmsRestaurantName: Example Name
+                      NexmoSupportSmsNumber: string
+                      TwilioSupportSmsNumber: string
+                      FallbackPhoneNumberPrefix: '+353000000000'
+                      AutocompletePhoneNumberLength: 3
+                      ContactFormType: string
+                      PrivateSupportEmailAddress: owner@example.com
+                      ContactPhoneNumber: '+353000000000'
+                      DeliveryEnabled: true
+                      PickupEnabled: true
+                      DineInEnabled: true
+                      DisplayDeliveryRestaurantListScreen: true
+                      DisplayPickupRestaurantListScreen: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppGeneralConfig400Example:
+                  summary: Default GetAppGeneralConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppGeneralConfig401Example:
+                  summary: Default GetAppGeneralConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppGeneralConfig403Example:
+                  summary: Default GetAppGeneralConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppGeneralConfig404Example:
+                  summary: Default GetAppGeneralConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppGeneralConfig500Example:
+                  summary: Default GetAppGeneralConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App General Config
+      description: Get App General Config via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelconfig/{appId}/general).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - WhiteLabelConfig
+      operationId: UpdateAppGeneralConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppGeneralConfigModel'
+            examples:
+              UpdateAppGeneralConfigRequestExample:
+                summary: Default UpdateAppGeneralConfig request
+                x-microcks-default: true
+                value:
+                  WhiteLabelId: 500123
+                  DeepLinkUrlScheme: https://api.flipdish.co/example
+                  SmsRestaurantName: Example Name
+                  NexmoSupportSmsNumber: string
+                  TwilioSupportSmsNumber: string
+                  FallbackPhoneNumberPrefix: '+353000000000'
+                  AutocompletePhoneNumberLength: 3
+                  ContactFormType: string
+                  PrivateSupportEmailAddress: owner@example.com
+                  ContactPhoneNumber: '+353000000000'
+                  DeliveryEnabled: true
+                  PickupEnabled: true
+                  DineInEnabled: true
+                  DisplayDeliveryRestaurantListScreen: true
+                  DisplayPickupRestaurantListScreen: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppGeneralConfigModel_'
+              examples:
+                UpdateAppGeneralConfig200Example:
+                  summary: Default UpdateAppGeneralConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelId: 500123
+                      DeepLinkUrlScheme: https://api.flipdish.co/example
+                      SmsRestaurantName: Example Name
+                      NexmoSupportSmsNumber: string
+                      TwilioSupportSmsNumber: string
+                      FallbackPhoneNumberPrefix: '+353000000000'
+                      AutocompletePhoneNumberLength: 3
+                      ContactFormType: string
+                      PrivateSupportEmailAddress: owner@example.com
+                      ContactPhoneNumber: '+353000000000'
+                      DeliveryEnabled: true
+                      PickupEnabled: true
+                      DineInEnabled: true
+                      DisplayDeliveryRestaurantListScreen: true
+                      DisplayPickupRestaurantListScreen: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppGeneralConfig400Example:
+                  summary: Default UpdateAppGeneralConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppGeneralConfig401Example:
+                  summary: Default UpdateAppGeneralConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppGeneralConfig403Example:
+                  summary: Default UpdateAppGeneralConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppGeneralConfig404Example:
+                  summary: Default UpdateAppGeneralConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppGeneralConfig500Example:
+                  summary: Default UpdateAppGeneralConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update App General Config
+      description: Update App General Config via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelconfig/{appId}/general).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelconfig/{appId}/appstore:
+    get:
+      tags:
+      - WhiteLabelConfig
+      operationId: GetAppStoreConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreConfigModel_'
+              examples:
+                GetAppStoreConfig200Example:
+                  summary: Default GetAppStoreConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelId: 500123
+                      ReadyToPublishToAppStore: true
+                      AppStoreName: Example Name
+                      AppStoreAppleId: '500123'
+                      AppStoreUrl: https://api.flipdish.co/example
+                      AppStoreId: '500123'
+                      AppStorePassword: string
+                      TeamId: '500123'
+                      AppGroupId: '500123'
+                      BundleId: '500123'
+                      AppStoreSigningIdentity: string
+                      AppStoreToken: string
+                      AppStoreMerchantId: '500123'
+                      P8PrivateKey: string
+                      P8PrivateKeyId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreConfig400Example:
+                  summary: Default GetAppStoreConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreConfig401Example:
+                  summary: Default GetAppStoreConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreConfig403Example:
+                  summary: Default GetAppStoreConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreConfig404Example:
+                  summary: Default GetAppStoreConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAppStoreConfig500Example:
+                  summary: Default GetAppStoreConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get App Store Config
+      description: Get App Store Config via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelconfig/{appId}/appstore).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - WhiteLabelConfig
+      operationId: UpdateAppStoreConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppStoreConfigModel'
+            examples:
+              UpdateAppStoreConfigRequestExample:
+                summary: Default UpdateAppStoreConfig request
+                x-microcks-default: true
+                value:
+                  WhiteLabelId: 500123
+                  ReadyToPublishToAppStore: true
+                  AppStoreName: Example Name
+                  AppStoreAppleId: '500123'
+                  AppStoreUrl: https://api.flipdish.co/example
+                  AppStoreId: '500123'
+                  AppStorePassword: string
+                  TeamId: '500123'
+                  AppGroupId: '500123'
+                  BundleId: '500123'
+                  AppStoreSigningIdentity: string
+                  AppStoreToken: string
+                  AppStoreMerchantId: '500123'
+                  P8PrivateKey: string
+                  P8PrivateKeyId: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreConfigModel_'
+              examples:
+                UpdateAppStoreConfig200Example:
+                  summary: Default UpdateAppStoreConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelId: 500123
+                      ReadyToPublishToAppStore: true
+                      AppStoreName: Example Name
+                      AppStoreAppleId: '500123'
+                      AppStoreUrl: https://api.flipdish.co/example
+                      AppStoreId: '500123'
+                      AppStorePassword: string
+                      TeamId: '500123'
+                      AppGroupId: '500123'
+                      BundleId: '500123'
+                      AppStoreSigningIdentity: string
+                      AppStoreToken: string
+                      AppStoreMerchantId: '500123'
+                      P8PrivateKey: string
+                      P8PrivateKeyId: '500123'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppStoreConfig400Example:
+                  summary: Default UpdateAppStoreConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppStoreConfig401Example:
+                  summary: Default UpdateAppStoreConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppStoreConfig403Example:
+                  summary: Default UpdateAppStoreConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppStoreConfig404Example:
+                  summary: Default UpdateAppStoreConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateAppStoreConfig500Example:
+                  summary: Default UpdateAppStoreConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update App Store Config
+      description: Update App Store Config via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelconfig/{appId}/appstore).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelconfig/{appId}/playstore:
+    get:
+      tags:
+      - WhiteLabelConfig
+      operationId: GetPlayStoreConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PlayStoreConfigModel_'
+              examples:
+                GetPlayStoreConfig200Example:
+                  summary: Default GetPlayStoreConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelId: 500123
+                      BundleId: '500123'
+                      Description: string
+                      ShortDescription: string
+                      Copyright: string
+                      Keywords: string
+                      MarketingUrl: https://api.flipdish.co/example
+                      PrivacyUrl: https://api.flipdish.co/example
+                      SupportUrl: https://api.flipdish.co/example
+                      PlayConsoleAccount: 3
+                      ReleaseNotes: string
+                      StoreIcon: string
+                      ReadyToPublishAndroid: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPlayStoreConfig400Example:
+                  summary: Default GetPlayStoreConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPlayStoreConfig401Example:
+                  summary: Default GetPlayStoreConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPlayStoreConfig403Example:
+                  summary: Default GetPlayStoreConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPlayStoreConfig404Example:
+                  summary: Default GetPlayStoreConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPlayStoreConfig500Example:
+                  summary: Default GetPlayStoreConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Play Store Config
+      description: Get Play Store Config via the Flipdish Open API v1.0 (GET /api/v1.0/whitelabelconfig/{appId}/playstore).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - WhiteLabelConfig
+      operationId: UpdatePlayStoreConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayStoreConfigModel'
+            examples:
+              UpdatePlayStoreConfigRequestExample:
+                summary: Default UpdatePlayStoreConfig request
+                x-microcks-default: true
+                value:
+                  WhiteLabelId: 500123
+                  BundleId: '500123'
+                  Description: string
+                  ShortDescription: string
+                  Copyright: string
+                  Keywords: string
+                  MarketingUrl: https://api.flipdish.co/example
+                  PrivacyUrl: https://api.flipdish.co/example
+                  SupportUrl: https://api.flipdish.co/example
+                  PlayConsoleAccount: 3
+                  ReleaseNotes: string
+                  StoreIcon: string
+                  ReadyToPublishAndroid: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PlayStoreConfigModel_'
+              examples:
+                UpdatePlayStoreConfig200Example:
+                  summary: Default UpdatePlayStoreConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      WhiteLabelId: 500123
+                      BundleId: '500123'
+                      Description: string
+                      ShortDescription: string
+                      Copyright: string
+                      Keywords: string
+                      MarketingUrl: https://api.flipdish.co/example
+                      PrivacyUrl: https://api.flipdish.co/example
+                      SupportUrl: https://api.flipdish.co/example
+                      PlayConsoleAccount: 3
+                      ReleaseNotes: string
+                      StoreIcon: string
+                      ReadyToPublishAndroid: true
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdatePlayStoreConfig400Example:
+                  summary: Default UpdatePlayStoreConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdatePlayStoreConfig401Example:
+                  summary: Default UpdatePlayStoreConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdatePlayStoreConfig403Example:
+                  summary: Default UpdatePlayStoreConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdatePlayStoreConfig404Example:
+                  summary: Default UpdatePlayStoreConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdatePlayStoreConfig500Example:
+                  summary: Default UpdatePlayStoreConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Play Store Config
+      description: Update Play Store Config via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelconfig/{appId}/playstore).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/whitelabelconfig/{appId}/app-store-icon:
+    post:
+      tags:
+      - WhiteLabelConfig
+      operationId: UploadAppStoreIcon
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpPostedFileBase'
+            examples:
+              UploadAppStoreIconRequestExample:
+                summary: Default UploadAppStoreIcon request
+                x-microcks-default: true
+                value:
+                  ContentLength: 1
+                  ContentType: string
+                  FileName: Example Name
+                  InputStream:
+                    CanRead: true
+                    CanSeek: true
+                    CanTimeout: true
+                    CanWrite: true
+                    Length: 1
+                    Position: 1
+                    ReadTimeout: 1
+                    WriteTimeout: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AssetResultModel_'
+              examples:
+                UploadAppStoreIcon200Example:
+                  summary: Default UploadAppStoreIcon 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Message: string
+                      AssetUrl: https://api.flipdish.co/example
+                      AssetName: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppStoreIcon400Example:
+                  summary: Default UploadAppStoreIcon 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppStoreIcon401Example:
+                  summary: Default UploadAppStoreIcon 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppStoreIcon403Example:
+                  summary: Default UploadAppStoreIcon 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadAppStoreIcon500Example:
+                  summary: Default UploadAppStoreIcon 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Upload App Store Icon
+      description: Upload App Store Icon via the Flipdish Open API v1.0 (POST /api/v1.0/whitelabelconfig/{appId}/app-store-icon).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AppGeneralConfigModel:
+      description: App general configuration model
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: White label ID
+          type: integer
+          example: 500123
+        DeepLinkUrlScheme:
+          description: Deep link URL scheme
+          type: string
+          example: https://api.flipdish.co/example
+        SmsRestaurantName:
+          description: SMS restaurant name
+          type: string
+          example: Example Name
+        NexmoSupportSmsNumber:
+          description: Nexmo support SMS number
+          type: string
+          example: string
+        TwilioSupportSmsNumber:
+          description: Twilio support SMS number
+          type: string
+          example: string
+        FallbackPhoneNumberPrefix:
+          description: Fallback phone number prefix
+          type: string
+          example: '+353000000000'
+        AutocompletePhoneNumberLength:
+          format: int32
+          description: Autocomplete phone number length
+          type: integer
+          example: 3
+        ContactFormType:
+          description: "Contact form type\r\nNone = 0,\r\nEmail = 1,\r\nIntercom = 2,\r\nWebView = 3,\r\nFlipdishMessages = 4"
+          type: string
+          example: string
+        PrivateSupportEmailAddress:
+          description: Private support email address
+          type: string
+          example: owner@example.com
+        ContactPhoneNumber:
+          description: Contact phone number
+          type: string
+          example: '+353000000000'
+        DeliveryEnabled:
+          description: Delivery enabled
+          type: boolean
+          example: true
+        PickupEnabled:
+          description: Pickup enabled
+          type: boolean
+          example: true
+        DineInEnabled:
+          description: Dine in enabled
+          type: boolean
+          example: true
+        DisplayDeliveryRestaurantListScreen:
+          description: Display delivery restaurant list screen
+          type: boolean
+          example: true
+        DisplayPickupRestaurantListScreen:
+          description: Display pickup restaurant list screen
+          type: boolean
+          example: true
+    RestApiResult_AppGeneralConfigModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppGeneralConfigModel'
+    WhiteLabelLanguageModel:
+      description: White label language model
+      type: object
+      properties:
+        LanguageId:
+          description: Language ID
+          type: string
+          example: '500123'
+    AssetResultModel:
+      description: Asset result model
+      type: object
+      properties:
+        Message:
+          description: Asset result message
+          type: string
+          example: string
+        AssetUrl:
+          description: Asset URL or path
+          type: string
+          example: https://api.flipdish.co/example
+        AssetName:
+          description: Asset name
+          type: string
+          example: Example Name
+    WhiteLabelConfigModel:
+      description: WhiteLabelConfig model
+      type: object
+      properties:
+        WhiteLabelLanguages:
+          description: White label languages
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteLabelLanguageModel'
+          example: []
+        WhiteLabelAssets:
+          description: White label assets
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteLabelAssetModel'
+          example: []
+        ColorScheme:
+          $ref: '#/components/schemas/WhiteLabelColorSchemeModel'
+        WhiteLabelConfigId:
+          format: int32
+          description: White label configuration ID
+          type: integer
+          example: 500123
+        WhiteLabelId:
+          format: int32
+          description: White label ID
+          type: integer
+          example: 500123
+        WhiteLabelName:
+          description: White label name
+          type: string
+          example: Example Name
+        AppNameId:
+          description: App name ID (Bundle ID Suffix)
+          type: string
+          example: '500123'
+        OrgId:
+          description: Organization ID
+          type: string
+          example: '500123'
+        SmsRestaurantName:
+          description: SMS restaurant name
+          type: string
+          example: Example Name
+        DeepLinkUrlScheme:
+          description: Deep link URL scheme
+          type: string
+          example: https://api.flipdish.co/example
+        HostName:
+          description: Host name
+          type: string
+          example: Example Name
+        NexmoSupportSmsNumber:
+          description: Nexmo support SMS number
+          type: string
+          example: string
+        TwilioSupportSmsNumber:
+          description: Twilio support SMS number
+          type: string
+          example: string
+        MixpanelToken:
+          description: Mixpanel token
+          type: string
+          example: string
+        IntercomAppId:
+          description: Intercom app ID
+          type: string
+          example: '500123'
+        ShareMessageEmailSubject:
+          description: Share message email subject
+          type: string
+          example: owner@example.com
+        ShareMessageEmailMessage:
+          description: Share message email message
+          type: string
+          example: owner@example.com
+        ShareMessageSmsMessage:
+          description: Share message SMS message
+          type: string
+          example: string
+        ShareMessageWhatsAppMessage:
+          description: Share message WhatsApp message
+          type: string
+          example: string
+        ShareMessageFacebookMessage:
+          description: Share message Facebook message
+          type: string
+          example: string
+        ShareMessageTwitterMessage:
+          description: Share message Twitter message
+          type: string
+          example: string
+        ShareMessageGenericMessage:
+          description: Share message generic message
+          type: string
+          example: string
+        DisplayDeliveryRestaurantListScreen:
+          description: Display delivery restaurant list screen
+          type: boolean
+          example: true
+        ContactFormType:
+          format: int32
+          description: Contact form type
+          type: integer
+          example: 1
+        ContactPhoneNumber:
+          description: Contact phone number
+          type: string
+          example: '+353000000000'
+        DisplayBumpSideMenuItem:
+          description: Display bump side menu item
+          type: boolean
+          example: true
+        DisplayFreeCokeSideMenuItem:
+          description: Display free coke side menu item
+          type: boolean
+          example: true
+        AppStoreUrl:
+          description: App store URL
+          type: string
+          example: https://api.flipdish.co/example
+        DeliveryEnabled:
+          description: Delivery enabled
+          type: boolean
+          example: true
+        PickupEnabled:
+          description: Pickup enabled
+          type: boolean
+          example: true
+        DisplayPickupRestaurantListScreen:
+          description: Display pickup restaurant list screen
+          type: boolean
+          example: true
+        DisplayCuisineTypeListAndRestaurantSearchBar:
+          description: Display cuisine type list and restaurant search bar
+          type: boolean
+          example: true
+        DisplayUserRestaurantRatings:
+          description: Display user restaurant ratings
+          type: boolean
+          example: true
+        ReadyToPublishWeb:
+          description: Ready to publish web
+          type: boolean
+          example: true
+        ReadyToPublishIos:
+          description: Ready to publish iOS
+          type: boolean
+          example: true
+        ReadyToPublishAndroid:
+          description: Ready to publish Android
+          type: boolean
+          example: true
+        DisplayFooterLinksToOtherSites:
+          description: Display footer links to other sites
+          type: boolean
+          example: true
+        DisplayOnlineOrderingMenu:
+          description: Display online ordering menu
+          type: boolean
+          example: true
+        HideAppConfigFromAdminList:
+          description: Hide app config from admin list
+          type: boolean
+          example: true
+        ComplianceType:
+          description: Compliance type
+          enum:
+          - Default
+          - GdprCompliance
+          type: string
+          example: Default
+        IsMenuMigratedToRms:
+          description: Is menu migrated to RMS
+          type: boolean
+          example: true
+        MapBoundryMaxLongitude:
+          format: double
+          description: Map boundary max longitude
+          type: number
+          nullable: true
+          example: 1.0
+        MapBoundryMinLongitude:
+          format: double
+          description: Map boundary min longitude
+          type: number
+          nullable: true
+          example: 1.0
+        MapBoundryMaxLatitude:
+          format: double
+          description: Map boundary max latitude
+          type: number
+          nullable: true
+          example: 1.0
+        MapBoundryMinLatitude:
+          format: double
+          description: Map boundary min latitude
+          type: number
+          nullable: true
+          example: 1.0
+        AppStoreAppleId:
+          description: App store Apple ID
+          type: string
+          example: '500123'
+        AppStoreToken:
+          description: App store token
+          type: string
+          example: string
+        WebsiteDisplayStaticMenuPage:
+          description: Website display static menu page
+          type: boolean
+          example: true
+        IsEmbed:
+          description: Is embed
+          type: boolean
+          nullable: true
+          example: true
+        DisplayTipOptionToUsersByDefault:
+          description: Display tip option to users by default
+          type: boolean
+          example: true
+        EmailRequestMode:
+          format: int32
+          description: Email request mode
+          type: integer
+          example: 1
+        AddressEntryType:
+          format: int32
+          description: Address entry type
+          type: integer
+          example: 1
+        AddressLayout:
+          format: int32
+          description: Address layout
+          type: integer
+          example: 1
+        Category:
+          format: int32
+          description: Category
+          type: integer
+          example: 1
+        MapCenterLatitude:
+          format: double
+          description: Map center latitude
+          type: number
+          example: 1.0
+        MapCenterLongitude:
+          format: double
+          description: Map center longitude
+          type: number
+          example: 1.0
+        IntercomTokenIos:
+          description: Intercom token iOS
+          type: string
+          example: string
+        IntercomTokenAndroid:
+          description: Intercom token Android
+          type: string
+          example: '500123'
+        GoogleAnalyticsTokensCsv:
+          description: Google Analytics tokens CSV
+          type: string
+          example: string
+        FacebookTokensCsv:
+          description: Facebook tokens CSV
+          type: string
+          example: string
+        ShareMessageGenericUrl:
+          description: Share message generic URL
+          type: string
+          example: https://api.flipdish.co/example
+        PrivateSupportEmailAddress:
+          description: Private support email address
+          type: string
+          example: owner@example.com
+        AppStoreId:
+          description: App store ID
+          type: string
+          example: '500123'
+        PlayConsoleAccount:
+          format: int32
+          description: Play console account
+          type: integer
+          example: 3
+        ApnCertificateValidAfter:
+          format: date-time
+          description: APN certificate valid after
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        ApnCertificateValidBefore:
+          format: date-time
+          description: APN certificate valid before
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        DineInEnabled:
+          description: Dine in enabled
+          type: boolean
+          example: true
+        AppFont:
+          description: App font
+          type: string
+          example: string
+        WhiteLabelColorSchemeId:
+          format: int32
+          description: White label color scheme ID
+          type: integer
+          example: 500123
+        WhiteLabelImagesId:
+          format: int32
+          description: White label images ID
+          type: integer
+          example: 500123
+        AppStoreCopyright:
+          description: App store copyright
+          type: string
+          example: string
+        AppStoreDescription:
+          description: App store description
+          type: string
+          example: string
+        AppStoreShortDescription:
+          description: App store short description
+          type: string
+          example: string
+        AppStoreKeywords:
+          description: App store keywords
+          type: string
+          example: string
+        AppStoreMarketingUrl:
+          description: App store marketing URL
+          type: string
+          example: https://api.flipdish.co/example
+        AppStoreName:
+          description: App store name
+          type: string
+          example: Example Name
+        AppStorePrivacyUrl:
+          description: App store privacy URL
+          type: string
+          example: https://api.flipdish.co/example
+        AppStoreSupportUrl:
+          description: App store support URL
+          type: string
+          example: https://api.flipdish.co/example
+        AppStoreReleaseNotes:
+          description: App store release notes
+          type: string
+          example: string
+        AppStoreIconUrl:
+          description: App store icon URL
+          type: string
+          example: https://api.flipdish.co/example
+        AppStoreIconThumbnail100Url:
+          description: App store icon thumbnail 100 URL
+          type: string
+          example: https://api.flipdish.co/example
+        TransparentLogoUrl:
+          description: Transparent logo URL
+          type: string
+          example: https://api.flipdish.co/example
+        LogoImageName:
+          description: Logo image name
+          type: string
+          example: Example Name
+        KioskNameScreenImage:
+          description: Kiosk name screen image
+          type: string
+          example: Example Name
+        WebToAppRedirect:
+          format: int32
+          description: Web to app redirect
+          type: integer
+          example: 1
+        FeaturesCsv:
+          description: Features CSV
+          type: string
+          example: string
+        AppStorePassword:
+          description: App store password
+          type: string
+          example: string
+        AppStoreTeamId:
+          description: App store team ID
+          type: string
+          example: '500123'
+        AppStoreAppGroup:
+          description: App store app group
+          type: string
+          example: string
+        AppStoreSigningIdentity:
+          description: App store signing identity
+          type: string
+          example: string
+        AppStoreItcTeamId:
+          description: App store ITC team ID
+          type: string
+          example: '500123'
+        HeadHtml:
+          description: Head HTML
+          type: string
+          example: string
+        SocialTwitterUrl:
+          description: Social Twitter URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialFacebookUrl:
+          description: Social Facebook URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialInstagramUrl:
+          description: Social Instagram URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialPintrestUrl:
+          description: Social Pinterest URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialTripAdvisorUrl:
+          description: Social TripAdvisor URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialGooglePlusUrl:
+          description: Social Google Plus URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialFourSquareUrl:
+          description: Social FourSquare URL
+          type: string
+          example: https://api.flipdish.co/example
+        SocialYelpUrl:
+          description: Social Yelp URL
+          type: string
+          example: https://api.flipdish.co/example
+        WebsiteType:
+          format: int32
+          description: Website type
+          type: integer
+          example: 1
+        ExternalOrderingPageUrl:
+          description: External ordering page URL
+          type: string
+          example: https://api.flipdish.co/example
+        PanaceaEnabled:
+          description: Panacea enabled
+          type: boolean
+          example: true
+        CookieConsentPromptEnabled:
+          description: Cookie consent prompt enabled
+          type: boolean
+          example: true
+        PanaceaVanityUrl:
+          description: Panacea vanity URL
+          type: string
+          example: https://api.flipdish.co/example
+        CountryId:
+          description: Country ID
+          type: string
+          example: '500123'
+        ReferralUserId:
+          format: int32
+          description: Referral user ID
+          type: integer
+          nullable: true
+          example: 500123
+        ReferralCampaignId:
+          description: Referral campaign ID
+          type: string
+          example: '500123'
+    RestApiResult_PlayStoreConfigModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PlayStoreConfigModel'
+    PlayStoreConfigModel:
+      description: Play Store configuration model
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: White label ID
+          type: integer
+          example: 500123
+        BundleId:
+          description: Bundle ID
+          type: string
+          example: '500123'
+        Description:
+          description: Description
+          type: string
+          example: string
+        ShortDescription:
+          description: Short description
+          type: string
+          example: string
+        Copyright:
+          description: Copyright
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: string
+          example: string
+        MarketingUrl:
+          description: Marketing URL
+          type: string
+          example: https://api.flipdish.co/example
+        PrivacyUrl:
+          description: Privacy URL
+          type: string
+          example: https://api.flipdish.co/example
+        SupportUrl:
+          description: Support URL
+          type: string
+          example: https://api.flipdish.co/example
+        PlayConsoleAccount:
+          format: int32
+          description: "Play Console account\r\n0: UK, 1: IE"
+          type: integer
+          example: 3
+        ReleaseNotes:
+          description: Release notes
+          type: string
+          example: string
+        StoreIcon:
+          description: Store icon URL
+          type: string
+          example: string
+        ReadyToPublishAndroid:
+          description: Ready to publish Android
+          type: boolean
+          example: true
+    Stream:
+      type: object
+      properties:
+        CanRead:
+          type: boolean
+          readOnly: true
+          example: true
+        CanSeek:
+          type: boolean
+          readOnly: true
+          example: true
+        CanTimeout:
+          type: boolean
+          readOnly: true
+          example: true
+        CanWrite:
+          type: boolean
+          readOnly: true
+          example: true
+        Length:
+          format: int64
+          type: integer
+          readOnly: true
+          example: 1
+        Position:
+          format: int64
+          type: integer
+          example: 1
+        ReadTimeout:
+          format: int32
+          type: integer
+          example: 1
+        WriteTimeout:
+          format: int32
+          type: integer
+          example: 1
+    WhiteLabelAssetModel:
+      description: White label asset model
+      type: object
+      properties:
+        WhiteLabelAssetId:
+          format: int32
+          description: White label asset ID
+          type: integer
+          example: 500123
+        WhiteLabelConfigId:
+          format: int32
+          description: White label configuration ID
+          type: integer
+          example: 500123
+        FilePath:
+          description: File path
+          type: string
+          example: string
+        Url:
+          description: Asset URL
+          type: string
+          example: https://api.flipdish.co/example
+        TsUpdate:
+          format: date-time
+          description: Timestamp update
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_AssetResultModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AssetResultModel'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_WhiteLabelConfigModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WhiteLabelConfigModel'
+    RestApiResult_AppStoreConfigModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreConfigModel'
+    AppStoreConfigModel:
+      description: App Store configuration model
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: White label ID
+          type: integer
+          example: 500123
+        ReadyToPublishToAppStore:
+          description: Ready to publish to app store
+          type: boolean
+          example: true
+        AppStoreName:
+          description: App store name
+          type: string
+          example: Example Name
+        AppStoreAppleId:
+          description: App Store Apple ID
+          type: string
+          example: '500123'
+        AppStoreUrl:
+          description: App Store URL
+          type: string
+          example: https://api.flipdish.co/example
+        AppStoreId:
+          description: App Store ID
+          type: string
+          example: '500123'
+        AppStorePassword:
+          description: App Store password
+          type: string
+          example: string
+        TeamId:
+          description: Team ID
+          type: string
+          example: '500123'
+        AppGroupId:
+          description: App Group ID
+          type: string
+          example: '500123'
+        BundleId:
+          description: Bundle ID
+          type: string
+          example: '500123'
+        AppStoreSigningIdentity:
+          description: App Store signing identity
+          type: string
+          example: string
+        AppStoreToken:
+          description: App Store token
+          type: string
+          example: string
+        AppStoreMerchantId:
+          description: App Store merchant ID
+          type: string
+          example: '500123'
+        P8PrivateKey:
+          description: P8 private key
+          type: string
+          example: string
+        P8PrivateKeyId:
+          description: P8 private key ID
+          type: string
+          example: '500123'
+    WhiteLabelColorSchemeModel:
+      description: White label color scheme model
+      type: object
+      properties:
+        WhiteLabelColorSchemeId:
+          format: int32
+          description: White label color scheme ID
+          type: integer
+          example: 500123
+        Font:
+          description: Font
+          type: string
+          example: string
+        Color:
+          description: Color
+          type: string
+          example: string
+        Color2:
+          description: Color 2
+          type: string
+          example: string
+        Color3:
+          description: Color 3
+          type: string
+          example: string
+        Color4:
+          description: Color 4
+          type: string
+          example: string
+        Color5:
+          description: Color 5
+          type: string
+          example: string
+        Color6:
+          description: Color 6
+          type: string
+          example: string
+        Color7:
+          description: Color 7
+          type: string
+          example: string
+        Color8:
+          description: Color 8
+          type: string
+          example: string
+        Color9:
+          description: Color 9
+          type: string
+          example: string
+        Color10:
+          description: Color 10
+          type: string
+          example: string
+        Color11:
+          description: Color 11
+          type: string
+          example: string
+        Color12:
+          description: Color 12 (Kiosk Primary Colour)
+          type: string
+          example: string
+    HttpPostedFileBase:
+      type: object
+      properties:
+        ContentLength:
+          format: int32
+          type: integer
+          readOnly: true
+          example: 1
+        ContentType:
+          type: string
+          readOnly: true
+          example: string
+        FileName:
+          type: string
+          readOnly: true
+          example: Example Name
+        InputStream:
+          $ref: '#/components/schemas/Stream'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

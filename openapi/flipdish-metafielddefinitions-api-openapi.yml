@@ -1,0 +1,1087 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts MetafieldDefinitions API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: MetafieldDefinitions
+  description: Operations for Metafield Definitions.
+paths:
+  /api/v1.0/{appId}/metafields/definitions:
+    get:
+      tags:
+      - MetafieldDefinitions
+      operationId: GetOwnerEntityConfigurations
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerEntityConfigurations'
+              examples:
+                GetOwnerEntityConfigurations200Example:
+                  summary: Default GetOwnerEntityConfigurations 200 response
+                  x-microcks-default: true
+                  value:
+                    Configurations: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityConfigurations400Example:
+                  summary: Default GetOwnerEntityConfigurations 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityConfigurations401Example:
+                  summary: Default GetOwnerEntityConfigurations 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityConfigurations403Example:
+                  summary: Default GetOwnerEntityConfigurations 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityConfigurations500Example:
+                  summary: Default GetOwnerEntityConfigurations 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Owner Entity Configurations
+      description: Get Owner Entity Configurations via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/metafields/definitions).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/metafields/definitions/{ownerEntity}/{key}:
+    get:
+      tags:
+      - MetafieldDefinitions
+      operationId: GetMetafieldDefinitionByKey
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: ownerEntity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+        description: The owner entity path parameter.
+        example: CatalogItem
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The key path parameter.
+        example: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MetafieldDefinition_'
+              examples:
+                GetMetafieldDefinitionByKey200Example:
+                  summary: Default GetMetafieldDefinitionByKey 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      IsReadOnly: true
+                      OwnerEntity: CatalogItem
+                      Key: string
+                      ValueType: Boolean
+                      Name: Example Name
+                      Description: string
+                      Behaviors:
+                      - SendToOrder
+                      MetafieldDefinitionRecommendationId: 500123
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitionByKey400Example:
+                  summary: Default GetMetafieldDefinitionByKey 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitionByKey401Example:
+                  summary: Default GetMetafieldDefinitionByKey 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitionByKey403Example:
+                  summary: Default GetMetafieldDefinitionByKey 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitionByKey500Example:
+                  summary: Default GetMetafieldDefinitionByKey 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Metafield Definition by Key
+      description: Get Metafield Definition by Key via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/metafields/definitions/{ownerEntity}/{key}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - MetafieldDefinitions
+      operationId: UpdateMetafieldDefinition
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: ownerEntity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+        description: The owner entity path parameter.
+        example: CatalogItem
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The key path parameter.
+        example: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMetafieldDefinition'
+            examples:
+              UpdateMetafieldDefinitionRequestExample:
+                summary: Default UpdateMetafieldDefinition request
+                x-microcks-default: true
+                value:
+                  Name: Example Name
+                  Description: string
+                  Behaviors:
+                  - SendToOrder
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MetafieldDefinition_'
+              examples:
+                UpdateMetafieldDefinition200Example:
+                  summary: Default UpdateMetafieldDefinition 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      IsReadOnly: true
+                      OwnerEntity: CatalogItem
+                      Key: string
+                      ValueType: Boolean
+                      Name: Example Name
+                      Description: string
+                      Behaviors:
+                      - SendToOrder
+                      MetafieldDefinitionRecommendationId: 500123
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMetafieldDefinition400Example:
+                  summary: Default UpdateMetafieldDefinition 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMetafieldDefinition401Example:
+                  summary: Default UpdateMetafieldDefinition 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMetafieldDefinition403Example:
+                  summary: Default UpdateMetafieldDefinition 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMetafieldDefinition500Example:
+                  summary: Default UpdateMetafieldDefinition 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Metafield Definition
+      description: Update Metafield Definition via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/metafields/definitions/{ownerEntity}/{key}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/metafields/definitions/{ownerEntity}:
+    get:
+      tags:
+      - MetafieldDefinitions
+      operationId: GetMetafieldDefinitions
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: ownerEntity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+        description: The owner entity path parameter.
+        example: CatalogItem
+      - name: searchTerm
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The search term query parameter.
+        example: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_MetafieldDefinition_'
+              examples:
+                GetMetafieldDefinitions200Example:
+                  summary: Default GetMetafieldDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitions400Example:
+                  summary: Default GetMetafieldDefinitions 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitions401Example:
+                  summary: Default GetMetafieldDefinitions 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitions403Example:
+                  summary: Default GetMetafieldDefinitions 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMetafieldDefinitions500Example:
+                  summary: Default GetMetafieldDefinitions 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Metafield Definitions
+      description: Get Metafield Definitions via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/metafields/definitions/{ownerEntity}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - MetafieldDefinitions
+      operationId: CreateMetafieldDefinition
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: ownerEntity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+        description: The owner entity path parameter.
+        example: CatalogItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMetafieldDefinition'
+            examples:
+              CreateMetafieldDefinitionRequestExample:
+                summary: Default CreateMetafieldDefinition request
+                x-microcks-default: true
+                value:
+                  IsReadOnly: true
+                  OwnerEntity: CatalogItem
+                  Key: string
+                  ValueType: Boolean
+                  Name: Example Name
+                  Description: string
+                  Behaviors:
+                  - SendToOrder
+                  MetafieldDefinitionRecommendationId: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MetafieldDefinition_'
+              examples:
+                CreateMetafieldDefinition200Example:
+                  summary: Default CreateMetafieldDefinition 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      IsReadOnly: true
+                      OwnerEntity: CatalogItem
+                      Key: string
+                      ValueType: Boolean
+                      Name: Example Name
+                      Description: string
+                      Behaviors:
+                      - SendToOrder
+                      MetafieldDefinitionRecommendationId: 500123
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateMetafieldDefinition400Example:
+                  summary: Default CreateMetafieldDefinition 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateMetafieldDefinition401Example:
+                  summary: Default CreateMetafieldDefinition 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateMetafieldDefinition403Example:
+                  summary: Default CreateMetafieldDefinition 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateMetafieldDefinition500Example:
+                  summary: Default CreateMetafieldDefinition 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Metafield Definition
+      description: Create Metafield Definition via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/metafields/definitions/{ownerEntity}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/metafields/definitions/recommendations/{ownerEntity}:
+    get:
+      tags:
+      - MetafieldDefinitions
+      operationId: GetOwnerEntityRecommendations
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: ownerEntity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+        description: The owner entity path parameter.
+        example: CatalogItem
+      - name: searchTerm
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The search term query parameter.
+        example: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_MetafieldDefinitionRecommendation_'
+              examples:
+                GetOwnerEntityRecommendations200Example:
+                  summary: Default GetOwnerEntityRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityRecommendations400Example:
+                  summary: Default GetOwnerEntityRecommendations 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityRecommendations401Example:
+                  summary: Default GetOwnerEntityRecommendations 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityRecommendations403Example:
+                  summary: Default GetOwnerEntityRecommendations 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetOwnerEntityRecommendations500Example:
+                  summary: Default GetOwnerEntityRecommendations 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Owner Entity Recommendations
+      description: Get Owner Entity Recommendations via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/metafields/definitions/recommendations/{ownerEntity}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MetafieldDefinitionRecommendation:
+      description: OwnerEntity Metafield Definition Recommendation
+      required:
+      - Key
+      - Name
+      type: object
+      properties:
+        OwnerEntity:
+          description: The Metafield will extend the specified {Flipdish.Metafields.PublicModels.V1.MetafieldDefinitionBase.OwnerEntity}
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+          type: string
+          example: CatalogItem
+        Key:
+          description: "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore"
+          type: string
+          example: string
+        ValueType:
+          description: The excepted type for the Value field
+          enum:
+          - Boolean
+          - Json
+          - SingleLineString
+          - MultiLineString
+          type: string
+          example: Boolean
+        Name:
+          description: Field Name
+          type: string
+          example: Example Name
+        Description:
+          description: Field Description
+          type: string
+          example: string
+        Behaviors:
+          description: Enable Metafield Behaviors
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+        MetafieldDefinitionRecommendationId:
+          format: int32
+          description: Metafield Recommendation Id
+          type: integer
+          nullable: true
+          example: 500123
+    CreateMetafieldDefinition:
+      description: Information to create a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
+      required:
+      - Key
+      - Name
+      type: object
+      properties:
+        IsReadOnly:
+          description: Indicates if a definition can be edited or not
+          type: boolean
+          example: true
+        OwnerEntity:
+          description: The Metafield will extend the specified {Flipdish.Metafields.PublicModels.V1.MetafieldDefinitionBase.OwnerEntity}
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+          type: string
+          example: CatalogItem
+        Key:
+          description: "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore"
+          type: string
+          example: string
+        ValueType:
+          description: The excepted type for the Value field
+          enum:
+          - Boolean
+          - Json
+          - SingleLineString
+          - MultiLineString
+          type: string
+          example: Boolean
+        Name:
+          description: Field Name
+          type: string
+          example: Example Name
+        Description:
+          description: Field Description
+          type: string
+          example: string
+        Behaviors:
+          description: Enable Metafield Behaviors
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+        MetafieldDefinitionRecommendationId:
+          format: int32
+          description: Metafield Recommendation Id
+          type: integer
+          nullable: true
+          example: 500123
+    RestApiPaginationResult_MetafieldDefinition_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MetafieldDefinition'
+          example: []
+    RestApiPaginationResult_MetafieldDefinitionRecommendation_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MetafieldDefinitionRecommendation'
+          example: []
+    RestApiResult_MetafieldDefinition_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MetafieldDefinition'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    MetafieldDefinition:
+      description: Metafield Definition
+      required:
+      - Key
+      - Name
+      type: object
+      properties:
+        IsReadOnly:
+          description: Indicates if a definition can be edited or not
+          type: boolean
+          example: true
+        OwnerEntity:
+          description: The Metafield will extend the specified {Flipdish.Metafields.PublicModels.V1.MetafieldDefinitionBase.OwnerEntity}
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+          type: string
+          example: CatalogItem
+        Key:
+          description: "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore"
+          type: string
+          example: string
+        ValueType:
+          description: The excepted type for the Value field
+          enum:
+          - Boolean
+          - Json
+          - SingleLineString
+          - MultiLineString
+          type: string
+          example: Boolean
+        Name:
+          description: Field Name
+          type: string
+          example: Example Name
+        Description:
+          description: Field Description
+          type: string
+          example: string
+        Behaviors:
+          description: Enable Metafield Behaviors
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+        MetafieldDefinitionRecommendationId:
+          format: int32
+          description: Metafield Recommendation Id
+          type: integer
+          nullable: true
+          example: 500123
+    OwnerEntityConfigurations:
+      description: Owner Entity Configurations
+      type: object
+      properties:
+        Configurations:
+          description: Owner Entity Configuration
+          type: array
+          items:
+            $ref: '#/components/schemas/OwnerEntityConfiguration'
+          example: []
+    OwnerEntityConfiguration:
+      description: OwnerEntity information to configure its {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}s
+      type: object
+      properties:
+        OwnerEntity:
+          description: Owner Entity
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+          type: string
+          example: CatalogItem
+        AllowedBehaviors:
+          description: ''
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+    UpdateMetafieldDefinition:
+      description: Information to update a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
+      type: object
+      properties:
+        Name:
+          description: Field Name
+          type: string
+          example: Example Name
+        Description:
+          description: Field Description
+          type: string
+          example: string
+        Behaviors:
+          description: Enable Metafield Behaviors
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

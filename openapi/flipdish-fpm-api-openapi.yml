@@ -1,0 +1,565 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Fpm API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Fpm
+  description: Operations for Fpm.
+paths:
+  /api/v1.0/{storeId}/fpm:
+    get:
+      tags:
+      - Fpm
+      operationId: GetFpmForStore
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyConfig'
+              examples:
+                GetFpmForStore200Example:
+                  summary: Default GetFpmForStore 200 response
+                  x-microcks-default: true
+                  value:
+                    TelephonyConfigId: 500123
+                    ApmEnabled: true
+                    Type: PreRecorded
+                    ConsentEnabled: true
+                    PhoneNumber: '+353000000000'
+                    SendAppLinkSms: true
+                    UseCustomAppLinkSmsMessage: true
+                    UseCustomVoiceMessage: true
+                    AppLinkSmsMessage: https://api.flipdish.co/example
+                    ResendApmMessageAfterDays: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFpmForStore400Example:
+                  summary: Default GetFpmForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFpmForStore401Example:
+                  summary: Default GetFpmForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFpmForStore403Example:
+                  summary: Default GetFpmForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFpmForStore404Example:
+                  summary: Default GetFpmForStore 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFpmForStore500Example:
+                  summary: Default GetFpmForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Fpm for Store
+      description: Get Fpm for Store via the Flipdish Open API v1.0 (GET /api/v1.0/{storeId}/fpm).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Fpm
+      operationId: CreateFpmForStore
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      - name: phoneNumber
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The phone number query parameter.
+        example: '+353000000000'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CreateFpmForStore200Example:
+                  summary: Default CreateFpmForStore 200 response
+                  x-microcks-default: true
+                  value: {}
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyConfig'
+              examples:
+                CreateFpmForStore201Example:
+                  summary: Default CreateFpmForStore 201 response
+                  x-microcks-default: true
+                  value:
+                    TelephonyConfigId: 500123
+                    ApmEnabled: true
+                    Type: PreRecorded
+                    ConsentEnabled: true
+                    PhoneNumber: '+353000000000'
+                    SendAppLinkSms: true
+                    UseCustomAppLinkSmsMessage: true
+                    UseCustomVoiceMessage: true
+                    AppLinkSmsMessage: https://api.flipdish.co/example
+                    ResendApmMessageAfterDays: 1
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFpmForStore400Example:
+                  summary: Default CreateFpmForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFpmForStore401Example:
+                  summary: Default CreateFpmForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFpmForStore403Example:
+                  summary: Default CreateFpmForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFpmForStore500Example:
+                  summary: Default CreateFpmForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Fpm for Store
+      description: Create Fpm for Store via the Flipdish Open API v1.0 (POST /api/v1.0/{storeId}/fpm).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Fpm
+      operationId: DeleteFpmForStore
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFpmForStore400Example:
+                  summary: Default DeleteFpmForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFpmForStore401Example:
+                  summary: Default DeleteFpmForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFpmForStore403Example:
+                  summary: Default DeleteFpmForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFpmForStore404Example:
+                  summary: Default DeleteFpmForStore 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFpmForStore500Example:
+                  summary: Default DeleteFpmForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Fpm for Store
+      description: Delete Fpm for Store via the Flipdish Open API v1.0 (DELETE /api/v1.0/{storeId}/fpm).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{storeId}/fpm/edit:
+    post:
+      tags:
+      - Fpm
+      operationId: EditFpmForStore
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id path parameter.
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelephonyConfig'
+            examples:
+              EditFpmForStoreRequestExample:
+                summary: Default EditFpmForStore request
+                x-microcks-default: true
+                value:
+                  TelephonyConfigId: 500123
+                  ApmEnabled: true
+                  Type: PreRecorded
+                  ConsentEnabled: true
+                  PhoneNumber: '+353000000000'
+                  SendAppLinkSms: true
+                  UseCustomAppLinkSmsMessage: true
+                  UseCustomVoiceMessage: true
+                  AppLinkSmsMessage: https://api.flipdish.co/example
+                  ResendApmMessageAfterDays: 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditFpmForStore400Example:
+                  summary: Default EditFpmForStore 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditFpmForStore401Example:
+                  summary: Default EditFpmForStore 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditFpmForStore403Example:
+                  summary: Default EditFpmForStore 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditFpmForStore404Example:
+                  summary: Default EditFpmForStore 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                EditFpmForStore500Example:
+                  summary: Default EditFpmForStore 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Edit Fpm for Store
+      description: Edit Fpm for Store via the Flipdish Open API v1.0 (POST /api/v1.0/{storeId}/fpm/edit).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TelephonyConfig:
+      description: Phone call
+      type: object
+      properties:
+        TelephonyConfigId:
+          format: int32
+          description: ID of the phone call
+          type: integer
+          example: 500123
+        ApmEnabled:
+          description: APM enabled flag
+          type: boolean
+          example: true
+        Type:
+          description: Type of telephony service
+          enum:
+          - PreRecorded
+          - VoiceAI
+          type: string
+          example: PreRecorded
+        ConsentEnabled:
+          description: Consent enabled flag
+          type: boolean
+          example: true
+        PhoneNumber:
+          description: APM phone number of the store
+          type: string
+          example: '+353000000000'
+        SendAppLinkSms:
+          description: Send app link SMS flag
+          type: boolean
+          example: true
+        UseCustomAppLinkSmsMessage:
+          description: Use custom app link SMS message flag
+          type: boolean
+          example: true
+        UseCustomVoiceMessage:
+          description: Use custom voice message flag
+          type: boolean
+          example: true
+        AppLinkSmsMessage:
+          description: App link SMS message
+          type: string
+          example: https://api.flipdish.co/example
+        ResendApmMessageAfterDays:
+          format: int32
+          description: Amount of days to resend APM message
+          type: integer
+          example: 1
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

@@ -1,0 +1,1051 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts FulfillmentStateConfiguration API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: FulfillmentStateConfiguration
+  description: Operations for Fulfillment State Configuration.
+paths:
+  /api/v1.0/{appId}/fulfillment/configuration/states:
+    get:
+      tags:
+      - FulfillmentStateConfiguration
+      operationId: SearchFulfillmentStatesConfigurations
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_FulfillmentStatesConfigurationSummary_'
+              examples:
+                SearchFulfillmentStatesConfigurations200Example:
+                  summary: Default SearchFulfillmentStatesConfigurations 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFulfillmentStatesConfigurations400Example:
+                  summary: Default SearchFulfillmentStatesConfigurations 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFulfillmentStatesConfigurations401Example:
+                  summary: Default SearchFulfillmentStatesConfigurations 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFulfillmentStatesConfigurations403Example:
+                  summary: Default SearchFulfillmentStatesConfigurations 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SearchFulfillmentStatesConfigurations500Example:
+                  summary: Default SearchFulfillmentStatesConfigurations 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Search Fulfillment States Configurations
+      description: Search Fulfillment States Configurations via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/fulfillment/configuration/states).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - FulfillmentStateConfiguration
+      operationId: CreateFulfillmentStatesConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFulfillmentStatesConfiguration'
+            examples:
+              CreateFulfillmentStatesConfigRequestExample:
+                summary: Default CreateFulfillmentStatesConfig request
+                x-microcks-default: true
+                value:
+                  StoreIds:
+                  - 1
+                  StoreSelectorType: None
+                  States: []
+                  AutomaticTransitionsEnabled: true
+                  Name: Example Name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_FulfillmentStatesConfiguration_'
+              examples:
+                CreateFulfillmentStatesConfig200Example:
+                  summary: Default CreateFulfillmentStatesConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      States: []
+                      AutomaticTransitionsEnabled: true
+                      AppId: '500123'
+                      ConfigurationUid: '500123'
+                      StoreSelectorType: None
+                      StoreIds:
+                      - 1
+                      Name: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFulfillmentStatesConfig400Example:
+                  summary: Default CreateFulfillmentStatesConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFulfillmentStatesConfig401Example:
+                  summary: Default CreateFulfillmentStatesConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFulfillmentStatesConfig403Example:
+                  summary: Default CreateFulfillmentStatesConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFulfillmentStatesConfig404Example:
+                  summary: Default CreateFulfillmentStatesConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                CreateFulfillmentStatesConfig500Example:
+                  summary: Default CreateFulfillmentStatesConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Create Fulfillment States Config
+      description: Create Fulfillment States Config via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/fulfillment/configuration/states).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/fulfillment/configuration/states_template:
+    get:
+      tags:
+      - FulfillmentStateConfiguration
+      operationId: GetFulfillmentStatesConfigurationTemplate
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FulfillmentStatesConfiguration'
+              examples:
+                GetFulfillmentStatesConfigurationTemplate200Example:
+                  summary: Default GetFulfillmentStatesConfigurationTemplate 200 response
+                  x-microcks-default: true
+                  value:
+                    States: []
+                    AutomaticTransitionsEnabled: true
+                    AppId: '500123'
+                    ConfigurationUid: '500123'
+                    StoreSelectorType: None
+                    StoreIds:
+                    - 1
+                    Name: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfigurationTemplate400Example:
+                  summary: Default GetFulfillmentStatesConfigurationTemplate 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfigurationTemplate401Example:
+                  summary: Default GetFulfillmentStatesConfigurationTemplate 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfigurationTemplate403Example:
+                  summary: Default GetFulfillmentStatesConfigurationTemplate 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfigurationTemplate404Example:
+                  summary: Default GetFulfillmentStatesConfigurationTemplate 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfigurationTemplate500Example:
+                  summary: Default GetFulfillmentStatesConfigurationTemplate 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Fulfillment States Configuration Template
+      description: Get Fulfillment States Configuration Template via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/fulfillment/configuration/states_template).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/fulfillment/configuration/states/{configId}:
+    get:
+      tags:
+      - FulfillmentStateConfiguration
+      operationId: GetFulfillmentStatesConfiguration
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: configId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The config id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FulfillmentStatesConfiguration'
+              examples:
+                GetFulfillmentStatesConfiguration200Example:
+                  summary: Default GetFulfillmentStatesConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    States: []
+                    AutomaticTransitionsEnabled: true
+                    AppId: '500123'
+                    ConfigurationUid: '500123'
+                    StoreSelectorType: None
+                    StoreIds:
+                    - 1
+                    Name: Example Name
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfiguration400Example:
+                  summary: Default GetFulfillmentStatesConfiguration 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfiguration401Example:
+                  summary: Default GetFulfillmentStatesConfiguration 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfiguration403Example:
+                  summary: Default GetFulfillmentStatesConfiguration 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfiguration404Example:
+                  summary: Default GetFulfillmentStatesConfiguration 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetFulfillmentStatesConfiguration500Example:
+                  summary: Default GetFulfillmentStatesConfiguration 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Fulfillment States Configuration
+      description: Get Fulfillment States Configuration via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/fulfillment/configuration/states/{configId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - FulfillmentStateConfiguration
+      operationId: UpdateFulfillmentStatesConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: configId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The config id path parameter.
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFulfillmentStatesConfiguration'
+            examples:
+              UpdateFulfillmentStatesConfigRequestExample:
+                summary: Default UpdateFulfillmentStatesConfig request
+                x-microcks-default: true
+                value:
+                  OverwriteSystemTemplate: true
+                  StoreIds:
+                  - 1
+                  StoreSelectorType: None
+                  States: []
+                  AutomaticTransitionsEnabled: true
+                  Name: Example Name
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateFulfillmentStatesConfig400Example:
+                  summary: Default UpdateFulfillmentStatesConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateFulfillmentStatesConfig401Example:
+                  summary: Default UpdateFulfillmentStatesConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateFulfillmentStatesConfig403Example:
+                  summary: Default UpdateFulfillmentStatesConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateFulfillmentStatesConfig404Example:
+                  summary: Default UpdateFulfillmentStatesConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateFulfillmentStatesConfig500Example:
+                  summary: Default UpdateFulfillmentStatesConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Update Fulfillment States Config
+      description: Update Fulfillment States Config via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/fulfillment/configuration/states/{configId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - FulfillmentStateConfiguration
+      operationId: DeleteFulfillmentStatesConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: configId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The config id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+              examples:
+                DeleteFulfillmentStatesConfig200Example:
+                  summary: Default DeleteFulfillmentStatesConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFulfillmentStatesConfig400Example:
+                  summary: Default DeleteFulfillmentStatesConfig 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFulfillmentStatesConfig401Example:
+                  summary: Default DeleteFulfillmentStatesConfig 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFulfillmentStatesConfig403Example:
+                  summary: Default DeleteFulfillmentStatesConfig 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFulfillmentStatesConfig404Example:
+                  summary: Default DeleteFulfillmentStatesConfig 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteFulfillmentStatesConfig500Example:
+                  summary: Default DeleteFulfillmentStatesConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Delete Fulfillment States Config
+      description: Delete Fulfillment States Config via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/fulfillment/configuration/states/{configId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FulfillmentStatesConfigurationSummary:
+      description: Fulfillment configuration header information
+      required:
+      - AppId
+      type: object
+      properties:
+        AppId:
+          description: AppId
+          type: string
+          example: '500123'
+        ConfigurationUid:
+          description: Configuration Uid
+          type: string
+          example: '500123'
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        StoreSelectorType:
+          description: Store selector type
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        Stores:
+          description: Stores
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatesConfiguredStore'
+          example: []
+    FulfillmentStatesConfiguredStore:
+      description: Configured stores
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+        Name:
+          description: Name of store
+          type: string
+          example: Example Name
+    CreateFulfillmentStatesConfiguration:
+      description: Create fulfillment states configuration
+      type: object
+      properties:
+        StoreIds:
+          description: Stores id's
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        StoreSelectorType:
+          description: Store Selector Type
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        States:
+          description: Settings
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatusConfigurationItem'
+          example: []
+        AutomaticTransitionsEnabled:
+          description: Enable automatic transitions
+          type: boolean
+          nullable: true
+          example: true
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+    RestApiResult_FulfillmentStatesConfiguration_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/FulfillmentStatesConfiguration'
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    NextStatusWithOrderType:
+      description: Next status by order type
+      type: object
+      properties:
+        OrderType:
+          description: Order type
+          enum:
+          - All
+          - Delivery
+          - Collection
+          - DineIn
+          type: string
+          example: All
+        NextStatus:
+          description: Next status id
+          type: string
+          example: Active
+    RestApiArrayResult_FulfillmentStatesConfigurationSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatesConfigurationSummary'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    FulfillmentStatesConfiguration:
+      description: Fulfillment States Configuration
+      type: object
+      properties:
+        States:
+          description: States
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatusConfigurationItem'
+          example: []
+        AutomaticTransitionsEnabled:
+          description: Enable automatic transitions
+          type: boolean
+          nullable: true
+          example: true
+        AppId:
+          description: AppId
+          type: string
+          example: '500123'
+        ConfigurationUid:
+          description: Configuration Uid
+          type: string
+          example: '500123'
+        StoreSelectorType:
+          description: Store Selector Type
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        StoreIds:
+          description: Store Ids
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+    FulfillmentStatusConfigurationItem:
+      description: Fulfillment Status Item
+      type: object
+      properties:
+        StatusId:
+          description: Status Id (no whitespaces)
+          type: string
+          example: '500123'
+        StatusName:
+          description: Status name
+          type: string
+          example: Example Name
+        Enabled:
+          description: Is status enabled
+          type: boolean
+          example: true
+        DisplayName:
+          description: The short status string that is displayed to users in apps, portal. If empty then Order Status Name is displayed instead
+          type: string
+          example: Example Name
+        Icon:
+          description: Icon/Image that represents that status visual
+          type: string
+          example: string
+        PublicDescription:
+          description: A string which could be used in notification templates with a placeholder (SMS, email, push, web page with status)
+          type: string
+          example: string
+        Internal:
+          description: Is internal state (internal states not shown to customers)
+          type: boolean
+          example: true
+        NextStatuses:
+          description: list of statuses that this status can move to (can be back or forth)
+          type: array
+          items:
+            type: string
+          example:
+          - Active
+        DefaultNextStatus:
+          description: The default next status (on a dropdown or quick button on terminal or portal)
+          type: array
+          items:
+            $ref: '#/components/schemas/NextStatusWithOrderType'
+          example: []
+        ChangeType:
+          description: How will state change (manually or automated, including timed)
+          enum:
+          - Manual
+          - Automated
+          - Integrated
+          type: string
+          example: Manual
+        IncludeInReports:
+          description: Include in reports
+          type: boolean
+          example: true
+        IsCustom:
+          description: Is custom state. If not, then it's a system state
+          type: boolean
+          example: true
+        OrderTypes:
+          description: If empty then applies to all ordertypes, otherwise a list of order types this state applies to
+          type: array
+          items:
+            enum:
+            - All
+            - Delivery
+            - Collection
+            - DineIn
+            type: string
+          example:
+          - All
+        Communication:
+          description: Whether state should fire off a notification to the customer
+          type: boolean
+          example: true
+        Image:
+          description: Image (image filename, relative, not absolute URL)
+          type: string
+          example: string
+    UpdateFulfillmentStatesConfiguration:
+      description: Update fulfillment states configuration
+      type: object
+      properties:
+        OverwriteSystemTemplate:
+          description: Set to true if a system configuration template is to be updated (permissions also needed)
+          type: boolean
+          nullable: true
+          example: true
+        StoreIds:
+          description: Stores id's
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        StoreSelectorType:
+          description: Store Selector Type
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        States:
+          description: Settings
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatusConfigurationItem'
+          example: []
+        AutomaticTransitionsEnabled:
+          description: Enable automatic transitions
+          type: boolean
+          nullable: true
+          example: true
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

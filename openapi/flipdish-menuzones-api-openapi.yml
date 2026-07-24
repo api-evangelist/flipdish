@@ -1,0 +1,1427 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts MenuZones API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: MenuZones
+  description: Operations for Menu Zones.
+paths:
+  /api/v1.0/menus/{menuId}/zones:
+    get:
+      tags:
+      - MenuZones
+      summary: Flipdish Get Menu Zones for Menu Id
+      operationId: GetMenuZonesForMenuId
+      parameters:
+      - name: menuId
+        in: path
+        description: The menu id to load zones for
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_MenuZone_'
+              examples:
+                GetMenuZonesForMenuId200Example:
+                  summary: Default GetMenuZonesForMenuId 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZonesForMenuId400Example:
+                  summary: Default GetMenuZonesForMenuId 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZonesForMenuId401Example:
+                  summary: Default GetMenuZonesForMenuId 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZonesForMenuId403Example:
+                  summary: Default GetMenuZonesForMenuId 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZonesForMenuId500Example:
+                  summary: Default GetMenuZonesForMenuId 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Get Menu Zones for Menu Id via the Flipdish Open API v1.0 (GET /api/v1.0/menus/{menuId}/zones).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - MenuZones
+      summary: Flipdish Add Menu Zone
+      operationId: AddMenuZone
+      parameters:
+      - name: menuId
+        in: path
+        description: The menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuZone'
+            examples:
+              AddMenuZoneRequestExample:
+                summary: Default AddMenuZone request
+                x-microcks-default: true
+                value:
+                  MenuZoneId: 500123
+                  MenuId: 500123
+                  Name: Example Name
+                  Description: string
+                  ImageName: Example Name
+                  DisplayOrder: 1
+                  ImageUrl: https://api.flipdish.co/example
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuZone_'
+              examples:
+                AddMenuZone200Example:
+                  summary: Default AddMenuZone 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MenuZoneId: 500123
+                      MenuId: 500123
+                      Name: Example Name
+                      Description: string
+                      ImageName: Example Name
+                      DisplayOrder: 1
+                      ImageUrl: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddMenuZone400Example:
+                  summary: Default AddMenuZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddMenuZone401Example:
+                  summary: Default AddMenuZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddMenuZone403Example:
+                  summary: Default AddMenuZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                AddMenuZone500Example:
+                  summary: Default AddMenuZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Add Menu Zone via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/zones).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/zones/{menuZoneId}:
+    get:
+      tags:
+      - MenuZones
+      summary: Flipdish Get Menu Zone
+      operationId: GetMenuZone
+      parameters:
+      - name: menuId
+        in: path
+        description: The menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The menu zone id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuZone_'
+              examples:
+                GetMenuZone200Example:
+                  summary: Default GetMenuZone 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      MenuZoneId: 500123
+                      MenuId: 500123
+                      Name: Example Name
+                      Description: string
+                      ImageName: Example Name
+                      DisplayOrder: 1
+                      ImageUrl: https://api.flipdish.co/example
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZone400Example:
+                  summary: Default GetMenuZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZone401Example:
+                  summary: Default GetMenuZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZone403Example:
+                  summary: Default GetMenuZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZone404Example:
+                  summary: Default GetMenuZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetMenuZone500Example:
+                  summary: Default GetMenuZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Get Menu Zone via the Flipdish Open API v1.0 (GET /api/v1.0/menus/{menuId}/zones/{menuZoneId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags:
+      - MenuZones
+      summary: Flipdish Update Menu Zone
+      operationId: UpdateMenuZone
+      parameters:
+      - name: menuId
+        in: path
+        description: The menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The menu zone id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuZone'
+            examples:
+              UpdateMenuZoneRequestExample:
+                summary: Default UpdateMenuZone request
+                x-microcks-default: true
+                value:
+                  MenuZoneId: 500123
+                  MenuId: 500123
+                  Name: Example Name
+                  Description: string
+                  ImageName: Example Name
+                  DisplayOrder: 1
+                  ImageUrl: https://api.flipdish.co/example
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMenuZone400Example:
+                  summary: Default UpdateMenuZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMenuZone401Example:
+                  summary: Default UpdateMenuZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMenuZone403Example:
+                  summary: Default UpdateMenuZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMenuZone404Example:
+                  summary: Default UpdateMenuZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UpdateMenuZone500Example:
+                  summary: Default UpdateMenuZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Update Menu Zone via the Flipdish Open API v1.0 (PUT /api/v1.0/menus/{menuId}/zones/{menuZoneId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - MenuZones
+      summary: Flipdish Delete Menu Zone
+      operationId: DeleteMenuZone
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The menu zone id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZone400Example:
+                  summary: Default DeleteMenuZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZone401Example:
+                  summary: Default DeleteMenuZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZone403Example:
+                  summary: Default DeleteMenuZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZone404Example:
+                  summary: Default DeleteMenuZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZone500Example:
+                  summary: Default DeleteMenuZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Delete Menu Zone via the Flipdish Open API v1.0 (DELETE /api/v1.0/menus/{menuId}/zones/{menuZoneId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/zones/{menuZoneId}/description:
+    put:
+      tags:
+      - MenuZones
+      summary: Flipdish Set Menu Zone Description
+      operationId: SetMenuZoneDescription
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The zone id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              SetMenuZoneDescriptionRequestExample:
+                summary: Default SetMenuZoneDescription request
+                x-microcks-default: true
+                value: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneDescription400Example:
+                  summary: Default SetMenuZoneDescription 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneDescription401Example:
+                  summary: Default SetMenuZoneDescription 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneDescription403Example:
+                  summary: Default SetMenuZoneDescription 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneDescription404Example:
+                  summary: Default SetMenuZoneDescription 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneDescription500Example:
+                  summary: Default SetMenuZoneDescription 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Set Menu Zone Description via the Flipdish Open API v1.0 (PUT /api/v1.0/menus/{menuId}/zones/{menuZoneId}/description).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/zones/{menuZoneId}/flip/{menuZoneI2}:
+    put:
+      tags:
+      - MenuZones
+      summary: Flipdish Flip Menu Zones
+      operationId: FlipMenuZones
+      parameters:
+      - name: menuId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The menu id path parameter.
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: Source.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneI2
+        in: path
+        description: Destination.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FlipMenuZones400Example:
+                  summary: Default FlipMenuZones 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FlipMenuZones401Example:
+                  summary: Default FlipMenuZones 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FlipMenuZones403Example:
+                  summary: Default FlipMenuZones 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FlipMenuZones404Example:
+                  summary: Default FlipMenuZones 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                FlipMenuZones500Example:
+                  summary: Default FlipMenuZones 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Flip Menu Zones via the Flipdish Open API v1.0 (PUT /api/v1.0/menus/{menuId}/zones/{menuZoneId}/flip/{menuZoneI2}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/zones/{menuZoneId}/name/{menuZoneName}:
+    put:
+      tags:
+      - MenuZones
+      summary: Flipdish Set Menu Zone Name
+      operationId: SetMenuZoneName
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The menu zone id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneName
+        in: path
+        description: The new name.
+        required: true
+        schema:
+          type: string
+        example: Example Name
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneName400Example:
+                  summary: Default SetMenuZoneName 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneName401Example:
+                  summary: Default SetMenuZoneName 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneName403Example:
+                  summary: Default SetMenuZoneName 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneName404Example:
+                  summary: Default SetMenuZoneName 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuZoneName500Example:
+                  summary: Default SetMenuZoneName 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Set Menu Zone Name via the Flipdish Open API v1.0 (PUT /api/v1.0/menus/{menuId}/zones/{menuZoneId}/name/{menuZoneName}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/zones/{menuZoneId}/section/{menuSectionId}:
+    put:
+      tags:
+      - MenuZones
+      summary: Flipdish Set Menu Section Menu Zone
+      operationId: SetMenuSectionMenuZone
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuSectionId
+        in: path
+        description: The menu section id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuSectionMenuZone400Example:
+                  summary: Default SetMenuSectionMenuZone 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuSectionMenuZone401Example:
+                  summary: Default SetMenuSectionMenuZone 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuSectionMenuZone403Example:
+                  summary: Default SetMenuSectionMenuZone 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuSectionMenuZone404Example:
+                  summary: Default SetMenuSectionMenuZone 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                SetMenuSectionMenuZone500Example:
+                  summary: Default SetMenuSectionMenuZone 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Set Menu Section Menu Zone via the Flipdish Open API v1.0 (PUT /api/v1.0/menus/{menuId}/zones/{menuZoneId}/section/{menuSectionId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/menus/{menuId}/zones/{menuZoneId}/image:
+    post:
+      tags:
+      - MenuZones
+      summary: Flipdish Upload Menu Zone Image
+      operationId: UploadMenuZoneImage
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The zone id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/HttpPostedFileBase'
+            examples:
+              UploadMenuZoneImageRequestExample:
+                summary: Default UploadMenuZoneImage request
+                x-microcks-default: true
+                value:
+                - ContentLength: 1
+                  ContentType: string
+                  FileName: Example Name
+                  InputStream:
+                    CanRead: true
+                    CanSeek: true
+                    CanTimeout: true
+                    CanWrite: true
+                    Length: 1
+                    Position: 1
+                    ReadTimeout: 1
+                    WriteTimeout: 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadMenuZoneImage400Example:
+                  summary: Default UploadMenuZoneImage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadMenuZoneImage401Example:
+                  summary: Default UploadMenuZoneImage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadMenuZoneImage403Example:
+                  summary: Default UploadMenuZoneImage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                UploadMenuZoneImage500Example:
+                  summary: Default UploadMenuZoneImage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Upload Menu Zone Image via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/zones/{menuZoneId}/image).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - MenuZones
+      summary: Flipdish Delete Menu Zone Image
+      operationId: DeleteMenuZoneImage
+      parameters:
+      - name: menuId
+        in: path
+        description: Menu id.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: menuZoneId
+        in: path
+        description: The zone Id/
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZoneImage400Example:
+                  summary: Default DeleteMenuZoneImage 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZoneImage401Example:
+                  summary: Default DeleteMenuZoneImage 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZoneImage403Example:
+                  summary: Default DeleteMenuZoneImage 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZoneImage404Example:
+                  summary: Default DeleteMenuZoneImage 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                DeleteMenuZoneImage500Example:
+                  summary: Default DeleteMenuZoneImage 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Delete Menu Zone Image via the Flipdish Open API v1.0 (DELETE /api/v1.0/menus/{menuId}/zones/{menuZoneId}/image).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiResult_MenuZone_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuZone'
+    Stream:
+      type: object
+      properties:
+        CanRead:
+          type: boolean
+          readOnly: true
+          example: true
+        CanSeek:
+          type: boolean
+          readOnly: true
+          example: true
+        CanTimeout:
+          type: boolean
+          readOnly: true
+          example: true
+        CanWrite:
+          type: boolean
+          readOnly: true
+          example: true
+        Length:
+          format: int64
+          type: integer
+          readOnly: true
+          example: 1
+        Position:
+          format: int64
+          type: integer
+          example: 1
+        ReadTimeout:
+          format: int32
+          type: integer
+          example: 1
+        WriteTimeout:
+          format: int32
+          type: integer
+          example: 1
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_MenuZone_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuZone'
+          example: []
+    MenuZone:
+      description: MenuZone.
+      type: object
+      properties:
+        MenuZoneId:
+          format: int32
+          description: MenuZoneId.
+          type: integer
+          example: 500123
+        MenuId:
+          format: int32
+          description: MenuId.
+          type: integer
+          example: 500123
+        Name:
+          description: Name.
+          type: string
+          example: Example Name
+        Description:
+          description: Description.
+          type: string
+          example: string
+        ImageName:
+          description: ImageName.
+          type: string
+          example: Example Name
+        DisplayOrder:
+          format: int32
+          description: DisplayOrder.
+          type: integer
+          example: 1
+        ImageUrl:
+          description: ImageUrl.
+          type: string
+          example: https://api.flipdish.co/example
+    HttpPostedFileBase:
+      type: object
+      properties:
+        ContentLength:
+          format: int32
+          type: integer
+          readOnly: true
+          example: 1
+        ContentType:
+          type: string
+          readOnly: true
+          example: string
+        FileName:
+          type: string
+          readOnly: true
+          example: Example Name
+        InputStream:
+          $ref: '#/components/schemas/Stream'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

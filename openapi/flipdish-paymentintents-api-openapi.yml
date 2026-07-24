@@ -1,0 +1,210 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts PaymentIntents API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: PaymentIntents
+  description: Operations for Payment Intents.
+paths:
+  /api/v1.0/payment_intents/{paymentIntentId}:
+    get:
+      tags:
+      - PaymentIntents
+      operationId: GetPaymentIntent
+      parameters:
+      - name: paymentIntentId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The payment intent id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentIntent_'
+              examples:
+                GetPaymentIntent200Example:
+                  summary: Default GetPaymentIntent 200 response
+                  x-microcks-default: true
+                  value:
+                    Data:
+                      Id: '500123'
+                      Description: string
+                      Currency: EUR
+                      Status: Active
+                      Created: '2026-06-02T12:00:00Z'
+                      LastPaymentError:
+                        Code: string
+                        DeclineCode: string
+                        Message: string
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaymentIntent400Example:
+                  summary: Default GetPaymentIntent 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaymentIntent401Example:
+                  summary: Default GetPaymentIntent 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaymentIntent403Example:
+                  summary: Default GetPaymentIntent 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPaymentIntent500Example:
+                  summary: Default GetPaymentIntent 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Payment Intent
+      description: Get Payment Intent via the Flipdish Open API v1.0 (GET /api/v1.0/payment_intents/{paymentIntentId}).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PaymentIntent:
+      description: Represents stripe PaymentIntent
+      type: object
+      properties:
+        Id:
+          description: Id of payment intent
+          type: string
+          example: '500123'
+        Description:
+          description: An arbitrary string attached to the object. Often useful for displaying to users.
+          type: string
+          example: string
+        Currency:
+          description: "Three-letter <a href=\"https://www.iso.org/iso-4217-currency-codes.html\">ISO currency\r\ncode</a>, in lowercase. Must be a <a href=\"https://stripe.com/docs/currencies\">supported\r\ncurrency</a>."
+          type: string
+          example: EUR
+        Status:
+          description: "Status of this PaymentIntent, one of requires_payment_method,\r\nrequires_confirmation, requires_action, processing,\r\nrequires_capture, canceled, or succeeded. Read more about each\r\nPaymentIntent <a href=\"https://stripe.com/docs/payments/intents#intent-statuses\">status</a>.\r\nOne of: canceled, processing, requires_action,\r\nrequires_capture, requires_confirmation, requires_payment_method,\r\nor succeeded."
+          type: string
+          example: Active
+        Created:
+          format: date-time
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        LastPaymentError:
+          $ref: '#/components/schemas/LastPaymentError'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    LastPaymentError:
+      description: List's the issues with the last failed payment intent
+      type: object
+      properties:
+        Code:
+          description: For some errors that could be handled programmatically, a short string indicating the error code reported.
+          type: string
+          example: string
+        DeclineCode:
+          description: For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one.
+          type: string
+          example: string
+        Message:
+          description: A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
+          type: string
+          example: string
+    RestApiResult_PaymentIntent_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PaymentIntent'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

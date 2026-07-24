@@ -1,0 +1,480 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts CatalogChanges API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: CatalogChanges
+  description: Operations for Catalog Changes.
+paths:
+  /api/v1.0/{appId}/menus/catalog-changes/summaries:
+    get:
+      tags:
+      - CatalogChanges
+      summary: Flipdish Get Pending Menu Changes Summaries
+      operationId: GetPendingMenuChangesSummaries
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_PendingMenuChangesSummaries_'
+              examples:
+                GetPendingMenuChangesSummaries200Example:
+                  summary: Default GetPendingMenuChangesSummaries 200 response
+                  x-microcks-default: true
+                  value:
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChangesSummaries400Example:
+                  summary: Default GetPendingMenuChangesSummaries 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChangesSummaries401Example:
+                  summary: Default GetPendingMenuChangesSummaries 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChangesSummaries403Example:
+                  summary: Default GetPendingMenuChangesSummaries 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChangesSummaries500Example:
+                  summary: Default GetPendingMenuChangesSummaries 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      description: Get Pending Menu Changes Summaries via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/menus/catalog-changes/summaries).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/menus/catalog-changes:
+    get:
+      tags:
+      - CatalogChanges
+      summary: Flipdish Get Pending Menu Changes
+      description: Get Pending Menu Changes via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/menus/catalog-changes).
+      operationId: GetPendingMenuChanges
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      - name: menuId
+        in: query
+        description: The menu id query parameter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 500123
+      - name: catalogItemId
+        in: query
+        description: The catalog item id query parameter.
+        required: false
+        schema:
+          type: string
+        example: '500123'
+      - name: page
+        in: query
+        description: The page query parameter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: limit
+        in: query
+        description: The limit query parameter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PendingMenuChanges_'
+              examples:
+                GetPendingMenuChanges200Example:
+                  summary: Default GetPendingMenuChanges 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChanges400Example:
+                  summary: Default GetPendingMenuChanges 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChanges401Example:
+                  summary: Default GetPendingMenuChanges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChanges403Example:
+                  summary: Default GetPendingMenuChanges 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetPendingMenuChanges500Example:
+                  summary: Default GetPendingMenuChanges 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/menus/catalog-changes/publish:
+    post:
+      tags:
+      - CatalogChanges
+      summary: Flipdish Publish Pending Menu Changes
+      description: Publish Pending Menu Changes via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/menus/catalog-changes/publish).
+      operationId: PublishPendingMenuChanges
+      parameters:
+      - name: appId
+        in: path
+        description: The app id path parameter.
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMenuChanges'
+            examples:
+              PublishPendingMenuChangesRequestExample:
+                summary: Default PublishPendingMenuChanges request
+                x-microcks-default: true
+                value:
+                  CatalogItemId: '500123'
+                  MenuIds:
+                  - 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                PublishPendingMenuChanges400Example:
+                  summary: Default PublishPendingMenuChanges 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                PublishPendingMenuChanges401Example:
+                  summary: Default PublishPendingMenuChanges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                PublishPendingMenuChanges403Example:
+                  summary: Default PublishPendingMenuChanges 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                PublishPendingMenuChanges404Example:
+                  summary: Default PublishPendingMenuChanges 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                PublishPendingMenuChanges500Example:
+                  summary: Default PublishPendingMenuChanges 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiArrayResult_PendingMenuChangesSummaries_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingMenuChangesSummaries'
+          example: []
+    PublishMenuChanges:
+      description: Publish Menu Changes
+      type: object
+      properties:
+        CatalogItemId:
+          description: Optional Catalog item id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        MenuIds:
+          description: Optional Collection of Menu id
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+    RestApiPaginationResult_PendingMenuChanges_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingMenuChanges'
+          example: []
+    PendingMenuChanges:
+      description: Pending Menu Changes
+      type: object
+      properties:
+        CatalogItemId:
+          description: Unique catalog item id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        MenuId:
+          format: int32
+          description: Unique menu id
+          type: integer
+          example: 500123
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    PendingMenuChangesSummaries:
+      description: Pending menu changes summaries
+      type: object
+      properties:
+        MenuId:
+          format: int32
+          description: Menu id
+          type: integer
+          example: 500123
+        TotalPendingChanges:
+          format: int32
+          description: Sum of pending changes per menu id
+          type: integer
+          example: 12.5
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API

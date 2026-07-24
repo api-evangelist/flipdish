@@ -1,0 +1,917 @@
+openapi: 3.0.3
+info:
+  title: Flipdish API - Apps Accounts Invoices API
+  version: v1.0
+  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  contact:
+    name: Flipdish Support
+    email: help@flipdish.com
+    url: https://help.flipdish.com
+  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.flipdish.co
+  description: Flipdish production API
+security:
+- oauth2:
+  - api
+tags:
+- name: Invoices
+  description: Operations for Invoices.
+paths:
+  /api/v1.0/{appId}/invoices/InvoicePdf:
+    get:
+      tags:
+      - Invoices
+      operationId: InvoicePdf
+      parameters:
+      - name: invoiceNumber
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The invoice number query parameter.
+        example: string
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: NoContent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+              examples:
+                InvoicePdf204Example:
+                  summary: Default InvoicePdf 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    ErrorCode: 1
+                    StackTrace: string
+                    Errors: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                InvoicePdf400Example:
+                  summary: Default InvoicePdf 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                InvoicePdf401Example:
+                  summary: Default InvoicePdf 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                InvoicePdf403Example:
+                  summary: Default InvoicePdf 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                InvoicePdf500Example:
+                  summary: Default InvoicePdf 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Invoice Pdf
+      description: Invoice Pdf via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/invoices/InvoicePdf).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/invoices/ListInvoices:
+    get:
+      tags:
+      - Invoices
+      operationId: ListInvoices
+      parameters:
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: The store id query parameter.
+        example: 500123
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The page query parameter.
+        example: 1
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiFinanceSearchPaginationResult_Invoice_'
+              examples:
+                ListInvoices200Example:
+                  summary: Default ListInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    NextPage: string
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '204':
+          description: NoContent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiFinanceSearchPaginationResult_Invoice_'
+              examples:
+                ListInvoices204Example:
+                  summary: Default ListInvoices 204 response
+                  x-microcks-default: true
+                  value:
+                    NextPage: string
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListInvoices400Example:
+                  summary: Default ListInvoices 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListInvoices401Example:
+                  summary: Default ListInvoices 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListInvoices403Example:
+                  summary: Default ListInvoices 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListInvoices500Example:
+                  summary: Default ListInvoices 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish List Invoices
+      description: List Invoices via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/invoices/ListInvoices).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/invoices:
+    get:
+      tags:
+      - Invoices
+      operationId: GetInvoices
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: subscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The subscription id query parameter.
+        example: '500123'
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: pageId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The page id query parameter.
+        example: '500123'
+      - name: excludeNotOwnedInvoices
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The exclude not owned invoices query parameter.
+        example: true
+      - name: dateFrom
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The date from query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: dateTo
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The date to query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: invoiceNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The invoice number query parameter.
+        example: string
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiFinanceSearchPaginationResult_SubscriptionInvoice_'
+              examples:
+                GetInvoices200Example:
+                  summary: Default GetInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    NextPage: string
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetInvoices400Example:
+                  summary: Default GetInvoices 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetInvoices401Example:
+                  summary: Default GetInvoices 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetInvoices403Example:
+                  summary: Default GetInvoices 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetInvoices500Example:
+                  summary: Default GetInvoices 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish Get Invoices
+      description: Get Invoices via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/invoices).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1.0/{appId}/invoices/ListSubscriptionInvoices:
+    get:
+      tags:
+      - Invoices
+      operationId: ListSubscriptionInvoices
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
+      - name: subscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The subscription id query parameter.
+        example: '500123'
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: pageId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The page id query parameter.
+        example: '500123'
+      - name: excludeNotOwnedInvoices
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: The exclude not owned invoices query parameter.
+        example: true
+      - name: dateFrom
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The date from query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: dateTo
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: The date to query parameter.
+        example: '2026-06-02T12:00:00Z'
+      - name: invoiceNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The invoice number query parameter.
+        example: string
+      - name: storeId
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+        description: The store id query parameter.
+        example:
+        - 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiFinanceSearchPaginationResult_SubscriptionInvoice_'
+              examples:
+                ListSubscriptionInvoices200Example:
+                  summary: Default ListSubscriptionInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    NextPage: string
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListSubscriptionInvoices400Example:
+                  summary: Default ListSubscriptionInvoices 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListSubscriptionInvoices401Example:
+                  summary: Default ListSubscriptionInvoices 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListSubscriptionInvoices403Example:
+                  summary: Default ListSubscriptionInvoices 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                ListSubscriptionInvoices500Example:
+                  summary: Default ListSubscriptionInvoices 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+      security:
+      - oauth2:
+        - api
+      summary: Flipdish List Subscription Invoices
+      description: List Subscription Invoices via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/invoices/ListSubscriptionInvoices).
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RestApiFinanceSearchPaginationResult_SubscriptionInvoice_:
+      description: Rest api finance search pagination result
+      required:
+      - NextPage
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        NextPage:
+          description: Next page
+          type: string
+          example: string
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionInvoice'
+          example: []
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+          example: Example Name
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    Invoice:
+      description: Represents an ordering invoice for a period of time.
+      type: object
+      properties:
+        InvoiceNumber:
+          description: Invoice Number
+          type: string
+          example: string
+        StartDay:
+          format: date-time
+          description: The start day of the invoice period.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndDay:
+          format: date-time
+          description: The end day of the invoice period.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiFinanceSearchPaginationResult_Invoice_:
+      description: Rest api finance search pagination result
+      required:
+      - NextPage
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        NextPage:
+          description: Next page
+          type: string
+          example: string
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+          example: []
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+          example: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+          example: 1
+        StackTrace:
+          description: Stack trace
+          type: string
+          example: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    SubscriptionInvoice:
+      description: Invoice
+      required:
+      - InvoiceId
+      - Number
+      - Currency
+      - Status
+      - PdfLink
+      - HostedUrl
+      - Overdue
+      type: object
+      properties:
+        InvoiceId:
+          description: The invoice identifier
+          type: string
+          example: '500123'
+        Number:
+          description: Invoice number
+          type: string
+          example: string
+        Total:
+          format: double
+          description: Total
+          type: number
+          example: 12.5
+        Currency:
+          description: Currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        Status:
+          description: Status
+          enum:
+          - Draft
+          - Open
+          - Paid
+          - UnCollectible
+          - Void
+          type: string
+          example: Draft
+        SubscriptionId:
+          description: The subscription identifier
+          type: string
+          example: '500123'
+        PaidAt:
+          format: date-time
+          description: Paid At
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        FinalisedAt:
+          format: date-time
+          description: Finalised At
+          type: string
+          nullable: true
+          example: '2026-06-02T12:00:00Z'
+        PdfLink:
+          description: Pdf Link
+          type: string
+          example: https://api.flipdish.co/example
+        HostedUrl:
+          description: Hosted Url
+          type: string
+          example: https://api.flipdish.co/example
+        Overdue:
+          description: Overdue
+          type: boolean
+          example: true
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
+      flows:
+        implicit:
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+          scopes:
+            api: Access to the Flipdish API
+        clientCredentials:
+          tokenUrl: https://api.flipdish.co/identity/connect/token
+          scopes:
+            api: Access to the Flipdish API
