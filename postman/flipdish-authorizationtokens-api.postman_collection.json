@@ -1,0 +1,955 @@
+{
+  "info": {
+    "_postman_id": "cf1aabbc-0372-4e68-94d8-38bbd031813f",
+    "name": "Flipdish API - Apps Accounts AuthorizationTokens API",
+    "description": "Flipdish Open API v1.0 \u2014 Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.\n\nContact Support:\n Name: Flipdish Support\n Email: help@flipdish.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:40:45.000Z",
+    "updatedAt": "2026-07-28T01:40:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cf1aabbc-0372-4e68-94d8-38bbd031813f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1.0",
+          "item": [
+            {
+              "name": "{appId}",
+              "item": [
+                {
+                  "name": "authorizationtokens",
+                  "item": [
+                    {
+                      "name": "{oauthAppId}",
+                      "item": [
+                        {
+                          "name": "Flipdish Get Authorization Tokens",
+                          "id": "27f9512c-f5de-40c0-af18-266b11f0de2f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "api",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://api.flipdish.co/identity/connect/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "implicit",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "authorizationtokens",
+                                ":oauthAppId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The page query parameter.",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The limit query parameter.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5087d5c9-2634-474d-bcba-85f06f4966cf",
+                                  "key": "appId",
+                                  "value": "<string>",
+                                  "description": "(Required) The app id path parameter."
+                                },
+                                {
+                                  "id": "24baaaa2-a8fc-4ecb-ba11-675148b81456",
+                                  "key": "oauthAppId",
+                                  "value": "<string>",
+                                  "description": "(Required) The oauth app id path parameter."
+                                }
+                              ]
+                            },
+                            "description": "Get Authorization Tokens via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/authorizationtokens/{oauthAppId})."
+                          },
+                          "response": [
+                            {
+                              "id": "21da81be-4f6b-4278-9461-4be9fdea0fd1",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":oauthAppId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The page query parameter.",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The limit query parameter.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "oauthAppId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Page\": \"<integer>\",\n  \"Limit\": \"<integer>\",\n  \"TotalRecordCount\": \"<integer>\",\n  \"Data\": [\n    {\n      \"Key\": \"<string>\",\n      \"TokenType\": \"<string>\",\n      \"SubjectId\": \"<string>\",\n      \"ClientId\": \"<string>\",\n      \"Expiry\": \"<dateTime>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"TokenType\": \"<string>\",\n      \"SubjectId\": \"<string>\",\n      \"ClientId\": \"<string>\",\n      \"Expiry\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-21da81be-4f6b-4278-9461-4be9fdea0fd1"
+                            },
+                            {
+                              "id": "038630c7-99d9-4bb9-8151-5bfd65b2f5cf",
+                              "name": "BadRequest",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":oauthAppId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The page query parameter.",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The limit query parameter.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "oauthAppId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-038630c7-99d9-4bb9-8151-5bfd65b2f5cf"
+                            },
+                            {
+                              "id": "a4eaa04d-49ae-405f-924f-53a1ec5e1a86",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":oauthAppId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The page query parameter.",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The limit query parameter.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "oauthAppId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-a4eaa04d-49ae-405f-924f-53a1ec5e1a86"
+                            },
+                            {
+                              "id": "fa401d35-dd5e-49f6-987d-6f96944a77ef",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":oauthAppId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The page query parameter.",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The limit query parameter.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "oauthAppId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-fa401d35-dd5e-49f6-987d-6f96944a77ef"
+                            },
+                            {
+                              "id": "95083cfa-a6e7-482f-8ae1-3475142eabf7",
+                              "name": "NotFound",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":oauthAppId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The page query parameter.",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The limit query parameter.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "oauthAppId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-95083cfa-a6e7-482f-8ae1-3475142eabf7"
+                            },
+                            {
+                              "id": "35278852-fe8c-4cd7-a122-c6c2506eabb7",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:oauthAppId?page=<integer>&limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":oauthAppId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The page query parameter.",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The limit query parameter.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "oauthAppId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-35278852-fe8c-4cd7-a122-c6c2506eabb7"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:40:46.000Z",
+                          "updatedAt": "2026-07-28T01:40:46.000Z",
+                          "uid": "35240-27f9512c-f5de-40c0-af18-266b11f0de2f"
+                        }
+                      ],
+                      "id": "44f7f83d-541d-4ca6-b33f-7c8ca1e4bad8",
+                      "createdAt": "2026-07-28T01:40:46.000Z",
+                      "updatedAt": "2026-07-28T01:40:46.000Z",
+                      "uid": "35240-44f7f83d-541d-4ca6-b33f-7c8ca1e4bad8"
+                    },
+                    {
+                      "name": "{key}",
+                      "item": [
+                        {
+                          "name": "Flipdish Revoke Token",
+                          "id": "55c428b8-43ed-40cd-a30e-7ff9b2605df7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "api",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://api.flipdish.co/identity/connect/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "implicit",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "authorizationtokens",
+                                ":key"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4528c28f-95de-42d6-b440-0543b734824d",
+                                  "key": "appId",
+                                  "value": "<string>",
+                                  "description": "(Required) The app id path parameter."
+                                },
+                                {
+                                  "id": "5d31c455-8bbd-4ad6-adb9-92db2467073a",
+                                  "key": "key",
+                                  "value": "<string>",
+                                  "description": "(Required) The key path parameter."
+                                }
+                              ]
+                            },
+                            "description": "Revoke Token via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/authorizationtokens/{key})."
+                          },
+                          "response": [
+                            {
+                              "id": "bf166d16-56de-4e51-83d6-dce23a7d4df9",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-bf166d16-56de-4e51-83d6-dce23a7d4df9"
+                            },
+                            {
+                              "id": "2f707014-bc37-40f9-a789-8bc3a926a9a8",
+                              "name": "BadRequest",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-2f707014-bc37-40f9-a789-8bc3a926a9a8"
+                            },
+                            {
+                              "id": "8f78119e-e09a-4ac0-9d63-2546e9d9cf8d",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-8f78119e-e09a-4ac0-9d63-2546e9d9cf8d"
+                            },
+                            {
+                              "id": "be4eacad-4008-4c86-96c8-2f6c48107564",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-be4eacad-4008-4c86-96c8-2f6c48107564"
+                            },
+                            {
+                              "id": "ffd59254-1fc5-4355-af97-b9026cfce834",
+                              "name": "NotFound",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-ffd59254-1fc5-4355-af97-b9026cfce834"
+                            },
+                            {
+                              "id": "8a034631-f193-472f-8999-a6150efb5149",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/authorizationtokens/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "authorizationtokens",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:40:46.000Z",
+                              "updatedAt": "2026-07-28T01:40:46.000Z",
+                              "uid": "35240-8a034631-f193-472f-8999-a6150efb5149"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:40:46.000Z",
+                          "updatedAt": "2026-07-28T01:40:46.000Z",
+                          "uid": "35240-55c428b8-43ed-40cd-a30e-7ff9b2605df7"
+                        }
+                      ],
+                      "id": "8dc4c868-2087-4357-87c4-54c26acac41e",
+                      "createdAt": "2026-07-28T01:40:46.000Z",
+                      "updatedAt": "2026-07-28T01:40:46.000Z",
+                      "uid": "35240-8dc4c868-2087-4357-87c4-54c26acac41e"
+                    }
+                  ],
+                  "id": "7c1306ba-a490-41e9-8719-4008f848db31",
+                  "createdAt": "2026-07-28T01:40:46.000Z",
+                  "updatedAt": "2026-07-28T01:40:46.000Z",
+                  "uid": "35240-7c1306ba-a490-41e9-8719-4008f848db31"
+                }
+              ],
+              "id": "1c085610-df58-4dcc-8e21-cd377cb82ab7",
+              "createdAt": "2026-07-28T01:40:46.000Z",
+              "updatedAt": "2026-07-28T01:40:46.000Z",
+              "uid": "35240-1c085610-df58-4dcc-8e21-cd377cb82ab7"
+            }
+          ],
+          "id": "e51e5bbf-bae3-4209-a635-df2f891afe79",
+          "createdAt": "2026-07-28T01:40:46.000Z",
+          "updatedAt": "2026-07-28T01:40:46.000Z",
+          "uid": "35240-e51e5bbf-bae3-4209-a635-df2f891afe79"
+        }
+      ],
+      "id": "b4a135ce-b532-4d48-be9f-d48059d04c57",
+      "createdAt": "2026-07-28T01:40:46.000Z",
+      "updatedAt": "2026-07-28T01:40:46.000Z",
+      "uid": "35240-b4a135ce-b532-4d48-be9f-d48059d04c57"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.flipdish.co/identity/connect/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "implicit",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.flipdish.co"
+    }
+  ]
+}

@@ -1,0 +1,991 @@
+{
+  "info": {
+    "_postman_id": "b659b676-e489-464b-86be-cebc5cf4452e",
+    "name": "Flipdish API - Apps Accounts StoreOrderCapacity API",
+    "description": "Flipdish Open API v1.0 \u2014 Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.\n\nContact Support:\n Name: Flipdish Support\n Email: help@flipdish.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:43:34.000Z",
+    "updatedAt": "2026-07-28T01:43:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b659b676-e489-464b-86be-cebc5cf4452e"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1.0",
+          "item": [
+            {
+              "name": "{appId}",
+              "item": [
+                {
+                  "name": "storeordercapacity",
+                  "item": [
+                    {
+                      "name": "{storeId}",
+                      "item": [
+                        {
+                          "name": "{deliveryType}",
+                          "item": [
+                            {
+                              "name": "Flipdish Get Store Order Capacity",
+                              "id": "c5674799-a2a6-4f81-b8b7-8003557bdc64",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "oauth2",
+                                  "oauth2": [
+                                    {
+                                      "key": "scope",
+                                      "value": "api",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "authUrl",
+                                      "value": "https://api.flipdish.co/identity/connect/authorize",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "grant_type",
+                                      "value": "implicit",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId/:deliveryType",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId",
+                                    ":deliveryType"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "57f35f90-9a8b-4ba3-990f-994da2c02263",
+                                      "key": "appId",
+                                      "value": "<string>",
+                                      "description": "(Required) The app id path parameter."
+                                    },
+                                    {
+                                      "id": "a4fb98fd-aa05-4c86-9156-3b81d8a09b2d",
+                                      "key": "storeId",
+                                      "value": "<integer>",
+                                      "description": "(Required) The store id path parameter."
+                                    },
+                                    {
+                                      "id": "15290a5a-3966-4b80-a187-4c7c83717e35",
+                                      "key": "deliveryType",
+                                      "value": "Delivery",
+                                      "description": "(Required) The delivery type path parameter."
+                                    }
+                                  ]
+                                },
+                                "description": "Get Store Order Capacity via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/storeordercapacity/{storeId}/{deliveryType})."
+                              },
+                              "response": [
+                                {
+                                  "id": "123bcb0e-2067-4b9d-bfa6-e9b7ee8a2e0a",
+                                  "name": "OK",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId/:deliveryType",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1.0",
+                                        ":appId",
+                                        "storeordercapacity",
+                                        ":storeId",
+                                        ":deliveryType"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "appId"
+                                        },
+                                        {
+                                          "key": "storeId"
+                                        },
+                                        {
+                                          "key": "deliveryType"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"Data\": {\n    \"StoreId\": \"<integer>\",\n    \"DeliveryType\": \"Pickup\",\n    \"StoreIntervalInMinutes\": \"<integer>\",\n    \"OrderCapacityPeriods\": [\n      {\n        \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n        \"DayOfTheWeek\": \"Thursday\",\n        \"PeriodStartHour\": \"<integer>\",\n        \"PeriodStartMinutes\": \"<integer>\",\n        \"PeriodEndHour\": \"<integer>\",\n        \"PeriodEndMinutes\": \"<integer>\"\n      },\n      {\n        \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n        \"DayOfTheWeek\": \"Monday\",\n        \"PeriodStartHour\": \"<integer>\",\n        \"PeriodStartMinutes\": \"<integer>\",\n        \"PeriodEndHour\": \"<integer>\",\n        \"PeriodEndMinutes\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                                  "createdAt": "2026-07-28T01:43:35.000Z",
+                                  "updatedAt": "2026-07-28T01:43:35.000Z",
+                                  "uid": "35240-123bcb0e-2067-4b9d-bfa6-e9b7ee8a2e0a"
+                                },
+                                {
+                                  "id": "5787a5f9-a39f-438b-9bce-89caf000e79a",
+                                  "name": "BadRequest",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId/:deliveryType",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1.0",
+                                        ":appId",
+                                        "storeordercapacity",
+                                        ":storeId",
+                                        ":deliveryType"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "appId"
+                                        },
+                                        {
+                                          "key": "storeId"
+                                        },
+                                        {
+                                          "key": "deliveryType"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:43:35.000Z",
+                                  "updatedAt": "2026-07-28T01:43:35.000Z",
+                                  "uid": "35240-5787a5f9-a39f-438b-9bce-89caf000e79a"
+                                },
+                                {
+                                  "id": "eed8b46b-671d-43e5-83e2-831c45c92c7e",
+                                  "name": "Authentication has been denied for this request.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId/:deliveryType",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1.0",
+                                        ":appId",
+                                        "storeordercapacity",
+                                        ":storeId",
+                                        ":deliveryType"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "appId"
+                                        },
+                                        {
+                                          "key": "storeId"
+                                        },
+                                        {
+                                          "key": "deliveryType"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:43:35.000Z",
+                                  "updatedAt": "2026-07-28T01:43:35.000Z",
+                                  "uid": "35240-eed8b46b-671d-43e5-83e2-831c45c92c7e"
+                                },
+                                {
+                                  "id": "7d717e89-7125-4536-a749-33dc1e0d2e89",
+                                  "name": "Successful authentication, but authorization has been denied for this request.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId/:deliveryType",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1.0",
+                                        ":appId",
+                                        "storeordercapacity",
+                                        ":storeId",
+                                        ":deliveryType"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "appId"
+                                        },
+                                        {
+                                          "key": "storeId"
+                                        },
+                                        {
+                                          "key": "deliveryType"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:43:35.000Z",
+                                  "updatedAt": "2026-07-28T01:43:35.000Z",
+                                  "uid": "35240-7d717e89-7125-4536-a749-33dc1e0d2e89"
+                                },
+                                {
+                                  "id": "0baaa02f-4efa-4741-a402-721d5885704c",
+                                  "name": "Internal Server Error",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId/:deliveryType",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1.0",
+                                        ":appId",
+                                        "storeordercapacity",
+                                        ":storeId",
+                                        ":deliveryType"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "appId"
+                                        },
+                                        {
+                                          "key": "storeId"
+                                        },
+                                        {
+                                          "key": "deliveryType"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:43:35.000Z",
+                                  "updatedAt": "2026-07-28T01:43:35.000Z",
+                                  "uid": "35240-0baaa02f-4efa-4741-a402-721d5885704c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:43:34.000Z",
+                              "updatedAt": "2026-07-28T01:43:34.000Z",
+                              "uid": "35240-c5674799-a2a6-4f81-b8b7-8003557bdc64"
+                            }
+                          ],
+                          "id": "6831e9e6-fc37-4067-b926-2537e09d47db",
+                          "createdAt": "2026-07-28T01:43:34.000Z",
+                          "updatedAt": "2026-07-28T01:43:34.000Z",
+                          "uid": "35240-6831e9e6-fc37-4067-b926-2537e09d47db"
+                        },
+                        {
+                          "name": "Flipdish Update Store Order Capacity Config",
+                          "id": "d58dd0f1-49be-4b70-b605-423c1171da0e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "api",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://api.flipdish.co/identity/connect/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "implicit",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "storeordercapacity",
+                                ":storeId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The delivery type query parameter.",
+                                  "key": "deliveryType",
+                                  "value": "Delivery"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "866c979f-d846-4fc1-a923-a7c8bc437eeb",
+                                  "key": "appId",
+                                  "value": "<string>",
+                                  "description": "(Required) The app id path parameter."
+                                },
+                                {
+                                  "id": "0a515885-0272-4045-baec-be73e1c57263",
+                                  "key": "storeId",
+                                  "value": "<integer>",
+                                  "description": "(Required) The store id path parameter."
+                                }
+                              ]
+                            },
+                            "description": "Update Store Order Capacity Config via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/storeordercapacity/{storeId})."
+                          },
+                          "response": [
+                            {
+                              "id": "40f8d050-ceab-4d28-9408-8fba23538a13",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) The delivery type query parameter.",
+                                      "key": "deliveryType",
+                                      "value": "Delivery"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "storeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:43:35.000Z",
+                              "updatedAt": "2026-07-28T01:43:35.000Z",
+                              "uid": "35240-40f8d050-ceab-4d28-9408-8fba23538a13"
+                            },
+                            {
+                              "id": "e2247da5-a75d-4e1a-89fc-2d3a8adaa125",
+                              "name": "BadRequest",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) The delivery type query parameter.",
+                                      "key": "deliveryType",
+                                      "value": "Delivery"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "storeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:35.000Z",
+                              "updatedAt": "2026-07-28T01:43:35.000Z",
+                              "uid": "35240-e2247da5-a75d-4e1a-89fc-2d3a8adaa125"
+                            },
+                            {
+                              "id": "dc7113b1-290d-46fc-ad9d-ce05701e8380",
+                              "name": "Authentication has been denied for this request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) The delivery type query parameter.",
+                                      "key": "deliveryType",
+                                      "value": "Delivery"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "storeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:35.000Z",
+                              "updatedAt": "2026-07-28T01:43:35.000Z",
+                              "uid": "35240-dc7113b1-290d-46fc-ad9d-ce05701e8380"
+                            },
+                            {
+                              "id": "99a37797-a8ec-4c07-8669-eb6596ecc7d5",
+                              "name": "Successful authentication, but authorization has been denied for this request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) The delivery type query parameter.",
+                                      "key": "deliveryType",
+                                      "value": "Delivery"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "storeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:35.000Z",
+                              "updatedAt": "2026-07-28T01:43:35.000Z",
+                              "uid": "35240-99a37797-a8ec-4c07-8669-eb6596ecc7d5"
+                            },
+                            {
+                              "id": "f26d4ae7-264f-4310-b766-74d3d44d2533",
+                              "name": "NotFound",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) The delivery type query parameter.",
+                                      "key": "deliveryType",
+                                      "value": "Delivery"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "storeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:35.000Z",
+                              "updatedAt": "2026-07-28T01:43:35.000Z",
+                              "uid": "35240-f26d4ae7-264f-4310-b766-74d3d44d2533"
+                            },
+                            {
+                              "id": "29663fd3-d4d9-4be7-a418-df87de82b686",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"OrderCapacityPeriods\": [\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Sunday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    },\n    {\n      \"MaxOrderNumberPerStoreInterval\": \"<integer>\",\n      \"DayOfTheWeek\": \"Saturday\",\n      \"PeriodStartHour\": \"<integer>\",\n      \"PeriodStartMinutes\": \"<integer>\",\n      \"PeriodEndHour\": \"<integer>\",\n      \"PeriodEndMinutes\": \"<integer>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/storeordercapacity/:storeId?deliveryType=Delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "storeordercapacity",
+                                    ":storeId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) The delivery type query parameter.",
+                                      "key": "deliveryType",
+                                      "value": "Delivery"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "storeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:35.000Z",
+                              "updatedAt": "2026-07-28T01:43:35.000Z",
+                              "uid": "35240-29663fd3-d4d9-4be7-a418-df87de82b686"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:43:34.000Z",
+                          "updatedAt": "2026-07-28T01:43:34.000Z",
+                          "uid": "35240-d58dd0f1-49be-4b70-b605-423c1171da0e"
+                        }
+                      ],
+                      "id": "14e24b7f-f9da-4b39-935a-6eaa9978530b",
+                      "createdAt": "2026-07-28T01:43:34.000Z",
+                      "updatedAt": "2026-07-28T01:43:34.000Z",
+                      "uid": "35240-14e24b7f-f9da-4b39-935a-6eaa9978530b"
+                    }
+                  ],
+                  "id": "56f6b536-2d75-40ee-8700-b6c6b1fe2b2f",
+                  "createdAt": "2026-07-28T01:43:34.000Z",
+                  "updatedAt": "2026-07-28T01:43:34.000Z",
+                  "uid": "35240-56f6b536-2d75-40ee-8700-b6c6b1fe2b2f"
+                }
+              ],
+              "id": "07391478-edb7-4b97-8b25-844222202e44",
+              "createdAt": "2026-07-28T01:43:34.000Z",
+              "updatedAt": "2026-07-28T01:43:34.000Z",
+              "uid": "35240-07391478-edb7-4b97-8b25-844222202e44"
+            }
+          ],
+          "id": "1a1bb6e8-fced-448e-bce9-edac609e63b3",
+          "createdAt": "2026-07-28T01:43:34.000Z",
+          "updatedAt": "2026-07-28T01:43:34.000Z",
+          "uid": "35240-1a1bb6e8-fced-448e-bce9-edac609e63b3"
+        }
+      ],
+      "id": "297945d0-a9fa-492c-a87e-75e12ee1c17d",
+      "createdAt": "2026-07-28T01:43:34.000Z",
+      "updatedAt": "2026-07-28T01:43:34.000Z",
+      "uid": "35240-297945d0-a9fa-492c-a87e-75e12ee1c17d"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.flipdish.co/identity/connect/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "implicit",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.flipdish.co"
+    }
+  ]
+}

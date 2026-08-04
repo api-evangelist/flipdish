@@ -1,0 +1,1266 @@
+{
+  "info": {
+    "_postman_id": "4632d802-852a-4996-bb62-1c6a64cc2323",
+    "name": "Flipdish API - Apps Accounts Subscriptions API",
+    "description": "Flipdish Open API v1.0 \u2014 Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.\n\nContact Support:\n Name: Flipdish Support\n Email: help@flipdish.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:43:52.000Z",
+    "updatedAt": "2026-07-28T01:43:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4632d802-852a-4996-bb62-1c6a64cc2323"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1.0",
+          "item": [
+            {
+              "name": "{appId}",
+              "item": [
+                {
+                  "name": "subscriptions",
+                  "item": [
+                    {
+                      "name": "{subscriptionId}",
+                      "item": [
+                        {
+                          "name": "Flipdish Get Subscription by Id",
+                          "id": "efc027b8-4753-4330-a22c-9f0f175c94b5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "api",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://api.flipdish.co/identity/connect/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "implicit",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions",
+                                ":subscriptionId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d67dcc9f-c71d-497b-939a-d6d12f56d2f1",
+                                  "key": "appId",
+                                  "value": "<string>",
+                                  "description": "(Required) The app id path parameter."
+                                },
+                                {
+                                  "id": "5555299e-089b-4aef-9a82-2b598e3ce534",
+                                  "key": "subscriptionId",
+                                  "value": "<string>",
+                                  "description": "(Required) The subscription id path parameter."
+                                }
+                              ]
+                            },
+                            "description": "Get Subscription by Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/subscriptions/{subscriptionId})."
+                          },
+                          "response": [
+                            {
+                              "id": "6100b6ee-1aef-4a42-9c4e-ed283dc3a2be",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    ":subscriptionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Data\": {\n    \"Products\": [\n      {\n        \"ProductId\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Quantity\": \"<long>\",\n        \"PaymentFrequency\": \"week\",\n        \"PricePerUnit\": \"<double>\",\n        \"PriceTotal\": \"<double>\",\n        \"Stores\": [\n          {\n            \"Id\": \"<integer>\",\n            \"Name\": \"<string>\"\n          },\n          {\n            \"Id\": \"<integer>\",\n            \"Name\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"ProductId\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Quantity\": \"<long>\",\n        \"PaymentFrequency\": \"year\",\n        \"PricePerUnit\": \"<double>\",\n        \"PriceTotal\": \"<double>\",\n        \"Stores\": [\n          {\n            \"Id\": \"<integer>\",\n            \"Name\": \"<string>\"\n          },\n          {\n            \"Id\": \"<integer>\",\n            \"Name\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"SubscriptionId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Status\": \"Unpaid\",\n    \"Currency\": \"AMD\",\n    \"User\": \"<string>\",\n    \"NextInvoiceAmount\": \"<double>\",\n    \"NextInvoiceBillingDate\": \"<dateTime>\",\n    \"UpcomingInvoiceItems\": [\n      {\n        \"Description\": \"<string>\",\n        \"Quantity\": \"<long>\",\n        \"UnitAmountExcludingTax\": \"<double>\",\n        \"Tax\": \"<double>\",\n        \"Amount\": \"<double>\",\n        \"Period\": {\n          \"Start\": \"<dateTime>\",\n          \"End\": \"<dateTime>\"\n        }\n      },\n      {\n        \"Description\": \"<string>\",\n        \"Quantity\": \"<long>\",\n        \"UnitAmountExcludingTax\": \"<double>\",\n        \"Tax\": \"<double>\",\n        \"Amount\": \"<double>\",\n        \"Period\": {\n          \"Start\": \"<dateTime>\",\n          \"End\": \"<dateTime>\"\n        }\n      }\n    ],\n    \"UpcomingInvoiceDiscounts\": [\n      {\n        \"Name\": \"<string>\",\n        \"Amount\": \"<double>\"\n      },\n      {\n        \"Name\": \"<string>\",\n        \"Amount\": \"<double>\"\n      }\n    ],\n    \"UpcomingInvoice\": {\n      \"Subtotal\": \"<double>\",\n      \"AmountDue\": \"<double>\",\n      \"Tax\": \"<double>\",\n      \"Amount\": \"<double>\",\n      \"NextBillingDate\": \"<dateTime>\",\n      \"TotalExcludingTax\": \"<double>\",\n      \"Items\": [\n        {\n          \"Description\": \"<string>\",\n          \"Quantity\": \"<long>\",\n          \"UnitAmountExcludingTax\": \"<double>\",\n          \"Tax\": \"<double>\",\n          \"Amount\": \"<double>\",\n          \"Period\": {\n            \"Start\": \"<dateTime>\",\n            \"End\": \"<dateTime>\"\n          }\n        },\n        {\n          \"Description\": \"<string>\",\n          \"Quantity\": \"<long>\",\n          \"UnitAmountExcludingTax\": \"<double>\",\n          \"Tax\": \"<double>\",\n          \"Amount\": \"<double>\",\n          \"Period\": {\n            \"Start\": \"<dateTime>\",\n            \"End\": \"<dateTime>\"\n          }\n        }\n      ],\n      \"Discounts\": [\n        {\n          \"Name\": \"<string>\",\n          \"Amount\": \"<double>\"\n        },\n        {\n          \"Name\": \"<string>\",\n          \"Amount\": \"<double>\"\n        }\n      ]\n    },\n    \"DefaultPaymentDescription\": \"<string>\",\n    \"CancellationRequestDate\": \"<dateTime>\",\n    \"CancellationDate\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-6100b6ee-1aef-4a42-9c4e-ed283dc3a2be"
+                            },
+                            {
+                              "id": "fe6e683e-c269-409f-82bd-4e8f1370e560",
+                              "name": "BadRequest",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    ":subscriptionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-fe6e683e-c269-409f-82bd-4e8f1370e560"
+                            },
+                            {
+                              "id": "a98e51f3-dce6-4aa8-94ba-dd8973ca25a5",
+                              "name": "Authentication has been denied for this request.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    ":subscriptionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-a98e51f3-dce6-4aa8-94ba-dd8973ca25a5"
+                            },
+                            {
+                              "id": "2795b1ec-b68b-4c72-9b26-c0cdef14e927",
+                              "name": "Successful authentication, but authorization has been denied for this request.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    ":subscriptionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-2795b1ec-b68b-4c72-9b26-c0cdef14e927"
+                            },
+                            {
+                              "id": "dd414f9f-1bff-405c-9e83-f2bd0f956dfe",
+                              "name": "NotFound",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    ":subscriptionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-dd414f9f-1bff-405c-9e83-f2bd0f956dfe"
+                            },
+                            {
+                              "id": "8c2307ae-a66e-4ff9-90d5-4eaad9b88071",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/:subscriptionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    ":subscriptionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-8c2307ae-a66e-4ff9-90d5-4eaad9b88071"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-efc027b8-4753-4330-a22c-9f0f175c94b5"
+                        }
+                      ],
+                      "id": "2438d2cf-08fd-4b6d-8274-4b154431ba26",
+                      "createdAt": "2026-07-28T01:43:52.000Z",
+                      "updatedAt": "2026-07-28T01:43:52.000Z",
+                      "uid": "35240-2438d2cf-08fd-4b6d-8274-4b154431ba26"
+                    },
+                    {
+                      "name": "hasPaymentMethod",
+                      "item": [
+                        {
+                          "name": "Flipdish Has Customer Got Payment Method on File",
+                          "id": "09ef89b0-ebe6-4a22-9910-8ccd6e397bf6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "api",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://api.flipdish.co/identity/connect/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "implicit",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/hasPaymentMethod?email=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions",
+                                "hasPaymentMethod"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The email query parameter.",
+                                  "key": "email",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4d585af3-dd04-4fae-b416-9d171c8d4914",
+                                  "key": "appId",
+                                  "value": "<string>",
+                                  "description": "(Required) The app id path parameter."
+                                }
+                              ]
+                            },
+                            "description": "Has Customer Got Payment Method on File via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/subscriptions/hasPaymentMethod)."
+                          },
+                          "response": [
+                            {
+                              "id": "5180bffb-5ca1-4330-a8f9-95fa9850233c",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/hasPaymentMethod?email=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    "hasPaymentMethod"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The email query parameter.",
+                                      "key": "email",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Data\": {\n    \"HasPaymentMethod\": \"<boolean>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-5180bffb-5ca1-4330-a8f9-95fa9850233c"
+                            },
+                            {
+                              "id": "fe77ca2e-ffc4-402b-aeeb-619167b40114",
+                              "name": "BadRequest",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/hasPaymentMethod?email=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    "hasPaymentMethod"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The email query parameter.",
+                                      "key": "email",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-fe77ca2e-ffc4-402b-aeeb-619167b40114"
+                            },
+                            {
+                              "id": "e7198fc7-63c0-453e-a97e-b2f02b5f10af",
+                              "name": "Authentication has been denied for this request.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/hasPaymentMethod?email=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    "hasPaymentMethod"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The email query parameter.",
+                                      "key": "email",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-e7198fc7-63c0-453e-a97e-b2f02b5f10af"
+                            },
+                            {
+                              "id": "62d4d0d3-abcf-4517-b217-b86ac1c4e476",
+                              "name": "Successful authentication, but authorization has been denied for this request.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/hasPaymentMethod?email=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    "hasPaymentMethod"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The email query parameter.",
+                                      "key": "email",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-62d4d0d3-abcf-4517-b217-b86ac1c4e476"
+                            },
+                            {
+                              "id": "72d6c1c3-feb8-4153-8eb3-8bd606bfc89b",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions/hasPaymentMethod?email=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1.0",
+                                    ":appId",
+                                    "subscriptions",
+                                    "hasPaymentMethod"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The email query parameter.",
+                                      "key": "email",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "appId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:43:52.000Z",
+                              "updatedAt": "2026-07-28T01:43:52.000Z",
+                              "uid": "35240-72d6c1c3-feb8-4153-8eb3-8bd606bfc89b"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-09ef89b0-ebe6-4a22-9910-8ccd6e397bf6"
+                        }
+                      ],
+                      "id": "d630736e-7d90-4b73-88ca-fd8f715cfb63",
+                      "createdAt": "2026-07-28T01:43:52.000Z",
+                      "updatedAt": "2026-07-28T01:43:52.000Z",
+                      "uid": "35240-d630736e-7d90-4b73-88ca-fd8f715cfb63"
+                    },
+                    {
+                      "name": "Flipdish Get Subscriptions for App",
+                      "id": "ea1a86f5-7ef5-4c33-a227-b2dd0c38806a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "api",
+                              "type": "string"
+                            },
+                            {
+                              "key": "authUrl",
+                              "value": "https://api.flipdish.co/identity/connect/authorize",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "implicit",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions?excludeNotOwnedSubscriptions=<boolean>&storeId=<integer>&storeId=<integer>&excludeCancelledSubscriptions=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1.0",
+                            ":appId",
+                            "subscriptions"
+                          ],
+                          "query": [
+                            {
+                              "description": "The exclude not owned subscriptions query parameter.",
+                              "key": "excludeNotOwnedSubscriptions",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "The store id query parameter.",
+                              "key": "storeId",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The store id query parameter.",
+                              "key": "storeId",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The exclude cancelled subscriptions query parameter.",
+                              "key": "excludeCancelledSubscriptions",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5b421b2f-8074-4459-ad4f-61510730979e",
+                              "key": "appId",
+                              "value": "<string>",
+                              "description": "(Required) The app id path parameter."
+                            }
+                          ]
+                        },
+                        "description": "Get Subscriptions for App via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/subscriptions)."
+                      },
+                      "response": [
+                        {
+                          "id": "452363b6-2885-497f-9cce-5c7dfd1ba568",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions?excludeNotOwnedSubscriptions=<boolean>&storeId=<integer>&excludeCancelledSubscriptions=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The exclude not owned subscriptions query parameter.",
+                                  "key": "excludeNotOwnedSubscriptions",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "The store id query parameter.",
+                                  "key": "storeId",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The exclude cancelled subscriptions query parameter.",
+                                  "key": "excludeCancelledSubscriptions",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "appId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"Data\": [\n    {\n      \"SubscriptionId\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Status\": \"IncompleteExpired\",\n      \"Currency\": \"HNL\",\n      \"User\": \"<string>\",\n      \"NextInvoiceAmount\": \"<double>\",\n      \"NextInvoiceBillingDate\": \"<dateTime>\",\n      \"DefaultPaymentDescription\": \"<string>\",\n      \"CancellationRequestDate\": \"<dateTime>\",\n      \"CancellationDate\": \"<dateTime>\"\n    },\n    {\n      \"SubscriptionId\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Status\": \"IncompleteExpired\",\n      \"Currency\": \"SYP\",\n      \"User\": \"<string>\",\n      \"NextInvoiceAmount\": \"<double>\",\n      \"NextInvoiceBillingDate\": \"<dateTime>\",\n      \"DefaultPaymentDescription\": \"<string>\",\n      \"CancellationRequestDate\": \"<dateTime>\",\n      \"CancellationDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-452363b6-2885-497f-9cce-5c7dfd1ba568"
+                        },
+                        {
+                          "id": "acb11547-3115-41d1-8b9f-29100d0c3051",
+                          "name": "BadRequest",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions?excludeNotOwnedSubscriptions=<boolean>&storeId=<integer>&excludeCancelledSubscriptions=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The exclude not owned subscriptions query parameter.",
+                                  "key": "excludeNotOwnedSubscriptions",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "The store id query parameter.",
+                                  "key": "storeId",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The exclude cancelled subscriptions query parameter.",
+                                  "key": "excludeCancelledSubscriptions",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "appId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-acb11547-3115-41d1-8b9f-29100d0c3051"
+                        },
+                        {
+                          "id": "5757d0cb-0e3a-4f07-8654-b2c2953b0beb",
+                          "name": "Authentication has been denied for this request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions?excludeNotOwnedSubscriptions=<boolean>&storeId=<integer>&excludeCancelledSubscriptions=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The exclude not owned subscriptions query parameter.",
+                                  "key": "excludeNotOwnedSubscriptions",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "The store id query parameter.",
+                                  "key": "storeId",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The exclude cancelled subscriptions query parameter.",
+                                  "key": "excludeCancelledSubscriptions",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "appId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-5757d0cb-0e3a-4f07-8654-b2c2953b0beb"
+                        },
+                        {
+                          "id": "43e1dcf2-85bd-4ffd-8e43-a7059faa3fa2",
+                          "name": "Successful authentication, but authorization has been denied for this request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions?excludeNotOwnedSubscriptions=<boolean>&storeId=<integer>&excludeCancelledSubscriptions=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The exclude not owned subscriptions query parameter.",
+                                  "key": "excludeNotOwnedSubscriptions",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "The store id query parameter.",
+                                  "key": "storeId",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The exclude cancelled subscriptions query parameter.",
+                                  "key": "excludeCancelledSubscriptions",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "appId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-43e1dcf2-85bd-4ffd-8e43-a7059faa3fa2"
+                        },
+                        {
+                          "id": "57874d08-2d62-4532-9256-50678b8fca43",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1.0/:appId/subscriptions?excludeNotOwnedSubscriptions=<boolean>&storeId=<integer>&excludeCancelledSubscriptions=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1.0",
+                                ":appId",
+                                "subscriptions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The exclude not owned subscriptions query parameter.",
+                                  "key": "excludeNotOwnedSubscriptions",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "The store id query parameter.",
+                                  "key": "storeId",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The exclude cancelled subscriptions query parameter.",
+                                  "key": "excludeCancelledSubscriptions",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "appId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"errorMessage\": \"<string>\",\n    \"errorCode\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:43:52.000Z",
+                          "updatedAt": "2026-07-28T01:43:52.000Z",
+                          "uid": "35240-57874d08-2d62-4532-9256-50678b8fca43"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:43:52.000Z",
+                      "updatedAt": "2026-07-28T01:43:52.000Z",
+                      "uid": "35240-ea1a86f5-7ef5-4c33-a227-b2dd0c38806a"
+                    }
+                  ],
+                  "id": "d05fc4e9-7a50-4a21-b44e-d8592bd6427d",
+                  "createdAt": "2026-07-28T01:43:52.000Z",
+                  "updatedAt": "2026-07-28T01:43:52.000Z",
+                  "uid": "35240-d05fc4e9-7a50-4a21-b44e-d8592bd6427d"
+                }
+              ],
+              "id": "378362bb-9585-490b-9b1b-47b029641f43",
+              "createdAt": "2026-07-28T01:43:52.000Z",
+              "updatedAt": "2026-07-28T01:43:52.000Z",
+              "uid": "35240-378362bb-9585-490b-9b1b-47b029641f43"
+            }
+          ],
+          "id": "cea7456b-c128-4508-ae95-8be5874b77e7",
+          "createdAt": "2026-07-28T01:43:52.000Z",
+          "updatedAt": "2026-07-28T01:43:52.000Z",
+          "uid": "35240-cea7456b-c128-4508-ae95-8be5874b77e7"
+        }
+      ],
+      "id": "7cd26a69-be47-4d63-ba3d-a3b2ed5d4161",
+      "createdAt": "2026-07-28T01:43:52.000Z",
+      "updatedAt": "2026-07-28T01:43:52.000Z",
+      "uid": "35240-7cd26a69-be47-4d63-ba3d-a3b2ed5d4161"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.flipdish.co/identity/connect/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "implicit",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.flipdish.co"
+    }
+  ]
+}
