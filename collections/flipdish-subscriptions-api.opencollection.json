@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipdish API - Apps Accounts Subscriptions API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Flipdish Get Subscription by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flipdish.co/api/v1.0/:appId/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The app id path parameter."
+              },
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path",
+                "description": "The subscription id path parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Subscription by Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/subscriptions/{subscriptionId})."
+        },
+        {
+          "info": {
+            "name": "Flipdish Has Customer Got Payment Method on File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flipdish.co/api/v1.0/:appId/subscriptions/hasPaymentMethod",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The app id path parameter."
+              },
+              {
+                "name": "email",
+                "value": "owner@example.com",
+                "type": "query",
+                "description": "The email query parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Has Customer Got Payment Method on File via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/subscriptions/hasPaymentMethod)."
+        },
+        {
+          "info": {
+            "name": "Flipdish Get Subscriptions for App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flipdish.co/api/v1.0/:appId/subscriptions",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The app id path parameter."
+              },
+              {
+                "name": "excludeNotOwnedSubscriptions",
+                "value": "true",
+                "type": "query",
+                "description": "The exclude not owned subscriptions query parameter."
+              },
+              {
+                "name": "storeId",
+                "value": "500123",
+                "type": "query",
+                "description": "The store id query parameter."
+              },
+              {
+                "name": "excludeCancelledSubscriptions",
+                "value": "true",
+                "type": "query",
+                "description": "The exclude cancelled subscriptions query parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Subscriptions for App via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/subscriptions)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

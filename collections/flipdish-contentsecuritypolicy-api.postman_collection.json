@@ -1,0 +1,386 @@
+{
+  "item": [
+    {
+      "id": "ff24f53e-bd86-4951-b954-3cb7d273593b",
+      "name": "ContentSecurityPolicy",
+      "description": {
+        "content": "Operations for Content Security Policy.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0a14b8c-b860-4904-9c59-e2d8974d08dc",
+          "name": "Flipdish Content Security Policy_Report",
+          "request": {
+            "name": "Flipdish Content Security Policy_Report",
+            "description": {
+              "content": "Content Security Policy_Report via the Flipdish Open API v1.0 (POST /api/v1.0/csp/report).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1.0",
+                "csp",
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "api"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.flipdish.co/identity/connect/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "implicit"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Csp-report\": {\n    \"Document-uri\": \"<string>\",\n    \"Referrer\": \"<string>\",\n    \"Violated-directive\": \"<string>\",\n    \"Effective-directive\": \"<string>\",\n    \"Original-policy\": \"<string>\",\n    \"Blocked-uri\": \"<string>\",\n    \"Status-code\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b76ea0cf-190d-4a97-99c0-6a51cb6e910c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1.0",
+                    "csp",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Csp-report\": {\n    \"Document-uri\": \"https://api.flipdish.co/example\",\n    \"Referrer\": \"string\",\n    \"Violated-directive\": \"string\",\n    \"Effective-directive\": \"string\",\n    \"Original-policy\": \"string\",\n    \"Blocked-uri\": \"https://api.flipdish.co/example\",\n    \"Status-code\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d2440a8-f7ca-43d2-ba65-a4842c0f2c01",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1.0",
+                    "csp",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Csp-report\": {\n    \"Document-uri\": \"https://api.flipdish.co/example\",\n    \"Referrer\": \"string\",\n    \"Violated-directive\": \"string\",\n    \"Effective-directive\": \"string\",\n    \"Original-policy\": \"string\",\n    \"Blocked-uri\": \"https://api.flipdish.co/example\",\n    \"Status-code\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"errorMessage\": \"Invalid or missing parameters.\",\n    \"errorCode\": \"BadRequest\",\n    \"details\": \"Validation failed for field 'storeId'.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fc3932a-264d-41fd-b988-86f0f28da253",
+              "name": "Authentication has been denied for this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1.0",
+                    "csp",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Csp-report\": {\n    \"Document-uri\": \"https://api.flipdish.co/example\",\n    \"Referrer\": \"string\",\n    \"Violated-directive\": \"string\",\n    \"Effective-directive\": \"string\",\n    \"Original-policy\": \"string\",\n    \"Blocked-uri\": \"https://api.flipdish.co/example\",\n    \"Status-code\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"errorMessage\": \"Invalid or missing parameters.\",\n    \"errorCode\": \"BadRequest\",\n    \"details\": \"Validation failed for field 'storeId'.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40949002-3500-4c3f-a8aa-bc96762f1c5f",
+              "name": "Successful authentication, but authorization has been denied for this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1.0",
+                    "csp",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Csp-report\": {\n    \"Document-uri\": \"https://api.flipdish.co/example\",\n    \"Referrer\": \"string\",\n    \"Violated-directive\": \"string\",\n    \"Effective-directive\": \"string\",\n    \"Original-policy\": \"string\",\n    \"Blocked-uri\": \"https://api.flipdish.co/example\",\n    \"Status-code\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"errorMessage\": \"Invalid or missing parameters.\",\n    \"errorCode\": \"BadRequest\",\n    \"details\": \"Validation failed for field 'storeId'.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "299ed07b-a741-4246-b8a0-f9ab428f3371",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1.0",
+                    "csp",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Csp-report\": {\n    \"Document-uri\": \"https://api.flipdish.co/example\",\n    \"Referrer\": \"string\",\n    \"Violated-directive\": \"string\",\n    \"Effective-directive\": \"string\",\n    \"Original-policy\": \"string\",\n    \"Blocked-uri\": \"https://api.flipdish.co/example\",\n    \"Status-code\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"errorMessage\": \"Invalid or missing parameters.\",\n    \"errorCode\": \"BadRequest\",\n    \"details\": \"Validation failed for field 'storeId'.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flipdish.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.flipdish.co/identity/connect/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "implicit"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "072ccbf0-cbc7-467e-b773-eab48231d251",
+    "name": "Flipdish API - Apps Accounts ContentSecurityPolicy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.\n\nContact Support:\n Name: Flipdish Support\n Email: help@flipdish.com",
+      "type": "text/plain"
+    }
+  }
+}

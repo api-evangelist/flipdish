@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipdish API - Apps Accounts Files API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Flipdish Download File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flipdish.co/api/v1.0/:appId/files/download/:fileId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The app id path parameter."
+              },
+              {
+                "name": "fileId",
+                "value": "500123",
+                "type": "path",
+                "description": "The file id path parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Download File via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/files/download/{fileId})."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

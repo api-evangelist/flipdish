@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipdish API - Apps Accounts KioskEntitlements API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KioskEntitlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Flipdish Query Kiosk Entitlements by Org Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flipdish.co/api/v1.0/orgs/:orgId/kiosk/entitlements",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "500123",
+                "type": "path",
+                "description": "The org id path parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Query Kiosk Entitlements by Org Id via the Flipdish Open API v1.0 (GET /api/v1.0/orgs/{orgId}/kiosk/entitlements)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

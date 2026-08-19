@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipdish API - Apps Accounts AuditLogs API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AuditLogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Flipdish Add Order Audit Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flipdish.co/api/v1.0/auditlogs/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "500123",
+                "type": "path",
+                "description": "The order id path parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add Order Audit Log via the Flipdish Open API v1.0 (POST /api/v1.0/auditlogs/orders/{orderId})."
+        },
+        {
+          "info": {
+            "name": "Flipdish Add Store Audit Log Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flipdish.co/api/v1.0/auditlogs/stores/:storeId",
+            "params": [
+              {
+                "name": "storeId",
+                "value": "500123",
+                "type": "path",
+                "description": "The store id path parameter."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flipdish.co/identity/connect/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add Store Audit Log Event via the Flipdish Open API v1.0 (POST /api/v1.0/auditlogs/stores/{storeId})."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
