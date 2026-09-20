@@ -1,0 +1,117 @@
+slug: flipdish
+provider: Flipdish
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Campaigns
+  spec_file: flipdish-campaigns-api-openapi.yml
+  capability_id: BC-420.40
+  capability_id_l1: BC-420
+  capability_name: Loyalty & Retention Management
+  confidence: 0.88
+  evidence: POST /api/v1.0/{appId}/campaigns/loyalty  CreateLoyaltyCampaign; POST /api/v1.0/{appId}/campaigns/retention  CreateRetentionCampaign;
+    schemas LoyaltyCampaign, RetentionCampaign
+  reason: Operations explicitly create, update and remove loyalty and retention campaigns per store —
+    squarely loyalty and retention programme management.
+- tag: Customers
+  spec_file: flipdish-customers-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.85
+  evidence: POST /api/v1.0/{appId}/customers  CreateCustomer; schemas Customer, CustomerCreateModel, CustomerUpdateModel
+  reason: Straightforward create/read/update of customer records for the merchant's app — maintenance
+    of the customer master record.
+- tag: OAuthClients
+  spec_file: flipdish-oauthclients-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.85
+  evidence: CreateOAuthApp; GetOAuthClientSecret; GetOauthAccessToken; AddRedirectUri; schemas OAuthApp,
+    OauthClientRedirectUri
+  reason: Issuance and lifecycle of OAuth client applications, secrets, tokens and redirect URIs for integration
+    partners — squarely developer identity and credential management on the API platform.
+- tag: Vouchers
+  spec_file: flipdish-vouchers-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.85
+  evidence: CreateVoucher; UpdateVoucherUsage; SetVoucherValidityPeriodsSimplified; schemas PercentDiscountDetails,
+    LumpDiscountDetails, PromotionDetails, PromotionAward
+  reason: Full lifecycle of discount vouchers and promotions including percent/lump discount definitions,
+    validity periods and usage/stats — discount and promotion management.
+- tag: Webhooks
+  spec_file: flipdish-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.82
+  evidence: CreateWebhookSubscription; GetWebhookEventNames; GetWebhookEventSample; GetWebhookLogs; schema
+    WebhookSubscription
+  reason: Lifecycle of outbound webhook subscriptions, event-name catalogue, sample payloads and delivery
+    logs for external integrators — exactly the webhook/event subscription capability in the developer-platform
+    L1.
+- tag: Orders
+  spec_file: flipdish-orders-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.8
+  evidence: POST /api/v1.0/orders/{orderId}/fulfillment/state UpdateFulfillmentState; GET .../deliveryinfo
+    GetDeliveryInformation; POST /api/v1.0/orders/{id}/accept AcceptOrder; GetReadyToProcess
+  reason: Operations accept orders, track and update fulfilment state, and manage delivery information
+    — order promising and fulfilment orchestration for customer orders.
+- tag: Invoices
+  spec_file: flipdish-invoices-api-openapi.yml
+  capability_id: BC-4250.30
+  capability_id_l1: BC-4250
+  capability_name: Invoicing & Statement Management
+  confidence: 0.78
+  evidence: GET /api/v1.0/{appId}/invoices/ListSubscriptionInvoices  ListSubscriptionInvoices; schemas
+    'SubscriptionInvoice', 'Invoice'
+  reason: Retrieval and PDF delivery of invoices, including subscription invoices, to the account holder
+    — invoicing and statement management within the subscription billing lifecycle.
+- tag: AppStoreDeveloper
+  spec_file: flipdish-appstoredeveloper-api-openapi.yml
+  capability_id: BC-4270.60
+  capability_id_l1: BC-4270
+  capability_name: Partner App Programme Management
+  confidence: 0.75
+  evidence: POST /api/v1.0/oauthclients/{oauthAppId}/appstore/apps  CreateAppStoreApp; PUT .../verification  AppVerificationUpdate;
+    UploadAppStoreAppLogo
+  reason: Developer-side lifecycle of a partner app listing in the marketplace — create/update/delete
+    the listing, upload logo, app verification, external product linkage. That is partner app programme
+    stewardship including listing and certification.
+- tag: Menus
+  spec_file: flipdish-menus-api-openapi.yml
+  capability_id: BC-820
+  capability_id_l1: BC-820
+  capability_name: Product Lifecycle Management
+  confidence: 0.7
+  evidence: POST /api/v1.0/{appId}/menus  CreateNewMenuForApp; GET /api/v1.0/menus/{menuId}/tax  GetMenuTaxDetails;
+    Menus_GetMenuBulkShowHide
+  reason: 'Core menu lifecycle: create, update, delete, version checkpoints, tax details, store assignment
+    and bulk show/hide of the saleable catalogue. This is management of the vendor''s customers'' product
+    offering end to end, mapping to Product Lifecycle Management at L1.'
+- tag: Teammates
+  spec_file: flipdish-teammates-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/v1.0/{appId}/teammates/grantaccess; Teammates_AcceptInvitation; RedeemInvitation;
+    schemas Teammate, PendingInvitation
+  reason: Creating/deleting teammates, issuing and redeeming invitations and granting access to an app
+    account is user account and access administration, not HR management of employees.
