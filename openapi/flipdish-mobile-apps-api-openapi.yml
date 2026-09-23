@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MobileApps API
+  title: Flipdish API - Apps Mobile Apps API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -16,13 +16,13 @@ security:
 - oauth2:
   - api
 tags:
-- name: MobileApps
+- name: Mobile Apps
   description: Operations for Mobile Apps.
 paths:
   /api/v1.0/mobileapps/{appId}/submission/details:
     get:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: GetSubmissionDetails
       parameters:
       - name: appId
@@ -140,7 +140,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/saleschannel/details:
     get:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: GetAppConfigSalesChannel
       parameters:
       - name: appId
@@ -253,7 +253,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/submission/{submissionId}/status:
     get:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: GetSubmissionStatus
       parameters:
       - name: appId
@@ -378,7 +378,7 @@ paths:
         dispatcher: FALLBACK
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: UpdateSubmissionStatus
       parameters:
       - name: appId
@@ -518,7 +518,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/statistics:
     get:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: GetStatistics
       parameters:
       - name: appId
@@ -642,7 +642,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/submission:
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: Submission
       parameters:
       - name: appId
@@ -761,7 +761,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/resubmission:
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: Resubmission
       parameters:
       - name: appId
@@ -880,7 +880,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/saleschannel:
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: UpdateAppConfigSalesChannel
       parameters:
       - name: appId
@@ -1008,7 +1008,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/submission/image:
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: UploadImage
       parameters:
       - name: appId
@@ -1137,7 +1137,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/submission/{submissionId}/publish:
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: Publish
       parameters:
       - name: appId
@@ -1266,7 +1266,7 @@ paths:
   /api/v1.0/mobileapps/{appId}/submission/{submissionId}/unpublish:
     post:
       tags:
-      - MobileApps
+      - Mobile Apps
       operationId: Unpublish
       parameters:
       - name: appId
@@ -1393,6 +1393,164 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_MobileAppsSubmissionStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmissionStatus'
+    MobileAppsSubmissionDetails:
+      description: Mobile Apps form submission
+      type: object
+      properties:
+        MobileAppsSubmissionId:
+          format: int32
+          description: Mobile Apps Submission Id
+          type: integer
+          example: 500123
+        AppName:
+          description: App Name
+          type: string
+          example: Example Name
+        AppDescription:
+          description: App Description
+          type: string
+          example: string
+        AppShortDescription:
+          description: App Description
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        AppLogoUrl:
+          description: Logo URL
+          type: string
+          example: https://api.flipdish.co/example
+        AutoPublish:
+          description: Publish automatically
+          type: boolean
+          example: true
+        Status:
+          description: Mobile App Status
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileAppsSubmissionStatus'
+          example: []
+    RestApiResult_UpdateMobileAppsSubmissionStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UpdateMobileAppsSubmissionStatus'
+    RestApiResult_MobileAppsImage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsImage'
+    MobileAppsImage:
+      description: Mobile Apps Image
+      type: object
+      properties:
+        ImageUri:
+          description: Unique catalog Item id
+          type: string
+          example: https://api.flipdish.co/example
+    UpdateMobileAppsSubmissionStatus:
+      description: Update Mobile Apps Status
+      type: object
+      properties:
+        MobileAppsSubmissionStatusId:
+          format: int32
+          description: Mobile Apps Submission Status Id
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        Type:
+          description: Mobile Type
+          enum:
+          - None
+          - Android
+          - IOS
+          type: string
+          example: None
+        AppStatus:
+          description: Mobile App Status
+          enum:
+          - None
+          - Published
+          - Unpublished
+          type: string
+          example: None
+        UpdateStatus:
+          description: Mobile App Status
+          enum:
+          - None
+          - Submitted
+          - InReview
+          - Rejected
+          - Approved
+          - Published
+          type: string
+          example: None
+        LastUpdateStatusTime:
+          format: date-time
+          description: Mobile LastUpdateStatusTime
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
+        Notes:
+          description: Mobile Notes
+          type: string
+          example: string
+    RestApiResult_MobileAppsSubmissionDetails_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmissionDetails'
+    RestApiResult_AppConfigSalesChannel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppConfigSalesChannel'
+    RestApiIntegerResult:
+      description: Rest api integer result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          format: int32
+          description: Data integer
+          type: integer
+          example: 1
+    RestApiResult_MobileAppsSubmission_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmission'
     MobileAppsSubmissionStatus:
       description: Mobile Apps Status
       type: object
@@ -1437,8 +1595,9 @@ components:
         LastUpdateStatusTime:
           format: date-time
           description: Mobile LastUpdateStatusTime
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: '2026-06-02T12:00:00Z'
         CreateTime:
           format: date-time
@@ -1448,71 +1607,14 @@ components:
         UpdateTime:
           format: date-time
           description: Mobile UpdateTime
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: '2026-06-02T12:00:00Z'
         Notes:
           description: Mobile Notes
           type: string
           example: string
-    MobileAppsImage:
-      description: Mobile Apps Image
-      type: object
-      properties:
-        ImageUri:
-          description: Unique catalog Item id
-          type: string
-          example: https://api.flipdish.co/example
-    MobileAppsSubmissionDetails:
-      description: Mobile Apps form submission
-      type: object
-      properties:
-        MobileAppsSubmissionId:
-          format: int32
-          description: Mobile Apps Submission Id
-          type: integer
-          example: 500123
-        AppName:
-          description: App Name
-          type: string
-          example: Example Name
-        AppDescription:
-          description: App Description
-          type: string
-          example: string
-        AppShortDescription:
-          description: App Description
-          type: string
-          example: string
-        Keywords:
-          description: Keywords
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        AppLogoUrl:
-          description: Logo URL
-          type: string
-          example: https://api.flipdish.co/example
-        AutoPublish:
-          description: Publish automatically
-          type: boolean
-          example: true
-        Status:
-          description: Mobile App Status
-          type: array
-          items:
-            $ref: '#/components/schemas/MobileAppsSubmissionStatus'
-          example: []
-    RestApiResult_MobileAppsSubmissionDetails_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MobileAppsSubmissionDetails'
     RestApiArrayResult_MobileAppsStatistics_:
       description: Rest api array result
       required:
@@ -1525,132 +1627,6 @@ components:
           items:
             $ref: '#/components/schemas/MobileAppsStatistics'
           example: []
-    RestApiIntegerResult:
-      description: Rest api integer result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          format: int32
-          description: Data integer
-          type: integer
-          example: 1
-    UpdateMobileAppsSubmissionStatus:
-      description: Update Mobile Apps Status
-      type: object
-      properties:
-        MobileAppsSubmissionStatusId:
-          format: int32
-          description: Mobile Apps Submission Status Id
-          type: integer
-          nullable: true
-          example: 500123
-        Type:
-          description: Mobile Type
-          enum:
-          - None
-          - Android
-          - IOS
-          type: string
-          example: None
-        AppStatus:
-          description: Mobile App Status
-          enum:
-          - None
-          - Published
-          - Unpublished
-          type: string
-          example: None
-        UpdateStatus:
-          description: Mobile App Status
-          enum:
-          - None
-          - Submitted
-          - InReview
-          - Rejected
-          - Approved
-          - Published
-          type: string
-          example: None
-        LastUpdateStatusTime:
-          format: date-time
-          description: Mobile LastUpdateStatusTime
-          type: string
-          nullable: true
-          example: '2026-06-02T12:00:00Z'
-        Notes:
-          description: Mobile Notes
-          type: string
-          example: string
-    RestApiResult_AppConfigSalesChannel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppConfigSalesChannel'
-    RestApiResult_UpdateMobileAppsSubmissionStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/UpdateMobileAppsSubmissionStatus'
-    MobileAppsSubmission:
-      description: Mobile Apps form submission
-      required:
-      - AppName
-      - AppDescription
-      - AppShortDescription
-      type: object
-      properties:
-        SubmissionId:
-          format: int32
-          description: Mobile Apps Submission Id
-          type: integer
-          example: 500123
-        AppName:
-          description: App Name
-          type: string
-          example: Example Name
-        AppDescription:
-          description: App Description
-          type: string
-          example: string
-        AppShortDescription:
-          description: App Description
-          type: string
-          example: string
-        Keywords:
-          description: Keywords
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        AutoPublish:
-          description: Publish automatically
-          type: boolean
-          example: true
-    RestApiResult_MobileAppsSubmissionStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MobileAppsSubmissionStatus'
-    RestApiResult_MobileAppsSubmission_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MobileAppsSubmission'
     AppConfigSalesChannel:
       description: App Config Sales Channel
       type: object
@@ -1705,14 +1681,42 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_MobileAppsImage_:
-      description: Rest api result
+    MobileAppsSubmission:
+      description: Mobile Apps form submission
       required:
-      - Data
+      - AppName
+      - AppDescription
+      - AppShortDescription
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/MobileAppsImage'
+        SubmissionId:
+          format: int32
+          description: Mobile Apps Submission Id
+          type: integer
+          example: 500123
+        AppName:
+          description: App Name
+          type: string
+          example: Example Name
+        AppDescription:
+          description: App Description
+          type: string
+          example: string
+        AppShortDescription:
+          description: App Description
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        AutoPublish:
+          description: Publish automatically
+          type: boolean
+          example: true
     RestApiResult_RestApiIntegerResult_:
       description: Rest api result
       required:

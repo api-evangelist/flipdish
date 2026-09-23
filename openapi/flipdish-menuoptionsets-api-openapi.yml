@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MenuOptionSets API
+  title: Flipdish API - Menus Menu Option Sets API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -1020,16 +1020,18 @@ components:
           minLength: 0
           type: string
           example: string
-    RestApiStringResult:
-      description: Rest api string result
+    RestApiArrayResult_MenuItemOptionSet_:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Data string
-          type: string
-          example: string
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSet'
+          example: []
     MenuItemOptionSet:
       description: Menu item option set
       type: object
@@ -1088,7 +1090,9 @@ components:
           type: integer
           example: 3
         CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
           enum:
           - Small
           - Medium
@@ -1096,6 +1100,103 @@ components:
           - HiddenImage
           type: string
           example: Small
+    MenuItemOptionSetItem:
+      description: Menu item option set item
+      type: object
+      properties:
+        MenuItemOptionSetItemId:
+          format: int32
+          description: Menu item option set item identifier
+          type: integer
+          example: 500123
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Metadata:
+          description: List of metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateMetadata'
+          example: []
+        NextMenuItemOptionSetId:
+          format: int32
+          description: if null, next option set is next. if -1, this is the final option set
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        CatalogItemId:
+          description: Catalog item Id when the OptionSet is associated to a Product
+          type: string
+          example: '500123'
+        TaxRateName:
+          description: Tax rate name
+          type: string
+          example: Example Name
+        TaxRateId:
+          format: int32
+          description: TaxRateId.
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        TaxValue:
+          format: double
+          description: TaxValue.
+          type: number
+          example: 1.0
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          description: An optional fee that can be added to the price of the item.
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+          example: 1
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
     MenuItemOptionSetBase:
       description: Menu item option set
       type: object
@@ -1126,7 +1227,9 @@ components:
           type: integer
           example: 3
         CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
           enum:
           - Small
           - Medium
@@ -1139,6 +1242,14 @@ components:
           description: Permanent reference to the item.
           type: string
           example: 00000000-0000-0000-0000-000000000000
+    RestApiResult_MenuItemOptionSet_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuItemOptionSet'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1159,108 +1270,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    MenuItemOptionSetItem:
-      description: Menu item option set item
-      type: object
-      properties:
-        MenuItemOptionSetItemId:
-          format: int32
-          description: Menu item option set item identifier
-          type: integer
-          example: 500123
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Metadata:
-          description: List of metadata
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateMetadata'
-          example: []
-        NextMenuItemOptionSetId:
-          format: int32
-          description: if null, next option set is next. if -1, this is the final option set
-          type: integer
-          nullable: true
-          example: 500123
-        CatalogItemId:
-          description: Catalog item Id when the OptionSet is associated to a Product
-          type: string
-          example: '500123'
-        TaxRateName:
-          description: Tax rate name
-          type: string
-          example: Example Name
-        TaxRateId:
-          format: int32
-          description: TaxRateId.
-          type: integer
-          nullable: true
-          example: 500123
-        TaxValue:
-          format: double
-          description: TaxValue.
-          type: number
-          example: 1.0
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          description: An optional fee that can be added to the price of the item.
-          type: number
-          nullable: true
-          example: 12.5
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-    RestApiResult_MenuItemOptionSet_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuItemOptionSet'
-    RestApiArrayResult_MenuItemOptionSet_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSet'
-          example: []
   securitySchemes:
     oauth2:
       type: oauth2

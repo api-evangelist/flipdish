@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MetafieldDefinitions API
+  title: Flipdish API - Catalog Metafield Definitions API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Catalog operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -766,13 +766,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MetafieldDefinitionRecommendation:
-      description: OwnerEntity Metafield Definition Recommendation
+    UpdateMetafieldDefinition:
+      description: Information to update a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
+      type: object
+      properties:
+        Name:
+          description: Field Name
+          type: string
+          example: Example Name
+        Description:
+          description: Field Description
+          type: string
+          example: string
+        Behaviors:
+          description: Enable Metafield Behaviors
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+    OwnerEntityConfigurations:
+      description: Owner Entity Configurations
+      type: object
+      properties:
+        Configurations:
+          description: Owner Entity Configuration
+          type: array
+          items:
+            $ref: '#/components/schemas/OwnerEntityConfiguration'
+          example: []
+    MetafieldDefinition:
+      description: Metafield Definition
       required:
       - Key
       - Name
       type: object
       properties:
+        IsReadOnly:
+          description: Indicates if a definition can be edited or not
+          type: boolean
+          example: true
         OwnerEntity:
           description: The Metafield will extend the specified {Flipdish.Metafields.PublicModels.V1.MetafieldDefinitionBase.OwnerEntity}
           enum:
@@ -782,7 +818,11 @@ components:
           type: string
           example: CatalogItem
         Key:
-          description: "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore"
+          description: 'Key of the metafield.
+
+            The key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.
+
+            The parts can be composed of lowercase letters, numbers, hyphen and underscore'
           type: string
           example: string
         ValueType:
@@ -815,8 +855,9 @@ components:
         MetafieldDefinitionRecommendationId:
           format: int32
           description: Metafield Recommendation Id
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
     CreateMetafieldDefinition:
       description: Information to create a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
@@ -838,7 +879,11 @@ components:
           type: string
           example: CatalogItem
         Key:
-          description: "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore"
+          description: 'Key of the metafield.
+
+            The key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.
+
+            The parts can be composed of lowercase letters, numbers, hyphen and underscore'
           type: string
           example: string
         ValueType:
@@ -871,8 +916,9 @@ components:
         MetafieldDefinitionRecommendationId:
           format: int32
           description: Metafield Recommendation Id
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
     RestApiPaginationResult_MetafieldDefinition_:
       description: Rest api pagination result
@@ -904,6 +950,28 @@ components:
           items:
             $ref: '#/components/schemas/MetafieldDefinition'
           example: []
+    OwnerEntityConfiguration:
+      description: OwnerEntity information to configure its {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}s
+      type: object
+      properties:
+        OwnerEntity:
+          description: Owner Entity
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+          type: string
+          example: CatalogItem
+        AllowedBehaviors:
+          description: ''
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
     RestApiPaginationResult_MetafieldDefinitionRecommendation_:
       description: Rest api pagination result
       required:
@@ -934,14 +1002,6 @@ components:
           items:
             $ref: '#/components/schemas/MetafieldDefinitionRecommendation'
           example: []
-    RestApiResult_MetafieldDefinition_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MetafieldDefinition'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -962,17 +1022,21 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    MetafieldDefinition:
-      description: Metafield Definition
+    RestApiResult_MetafieldDefinition_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MetafieldDefinition'
+    MetafieldDefinitionRecommendation:
+      description: OwnerEntity Metafield Definition Recommendation
       required:
       - Key
       - Name
       type: object
       properties:
-        IsReadOnly:
-          description: Indicates if a definition can be edited or not
-          type: boolean
-          example: true
         OwnerEntity:
           description: The Metafield will extend the specified {Flipdish.Metafields.PublicModels.V1.MetafieldDefinitionBase.OwnerEntity}
           enum:
@@ -982,7 +1046,11 @@ components:
           type: string
           example: CatalogItem
         Key:
-          description: "Key of the metafield.\r\nThe key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.\r\nThe parts can be composed of lowercase letters, numbers, hyphen and underscore"
+          description: 'Key of the metafield.
+
+            The key must have two parts, separated by a dot. The first part acts as a category, for organizational purposes.
+
+            The parts can be composed of lowercase letters, numbers, hyphen and underscore'
           type: string
           example: string
         ValueType:
@@ -1015,63 +1083,10 @@ components:
         MetafieldDefinitionRecommendationId:
           format: int32
           description: Metafield Recommendation Id
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
-    OwnerEntityConfigurations:
-      description: Owner Entity Configurations
-      type: object
-      properties:
-        Configurations:
-          description: Owner Entity Configuration
-          type: array
-          items:
-            $ref: '#/components/schemas/OwnerEntityConfiguration'
-          example: []
-    OwnerEntityConfiguration:
-      description: OwnerEntity information to configure its {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}s
-      type: object
-      properties:
-        OwnerEntity:
-          description: Owner Entity
-          enum:
-          - CatalogItem
-          - CatalogGroup
-          - Menu
-          type: string
-          example: CatalogItem
-        AllowedBehaviors:
-          description: ''
-          type: array
-          items:
-            enum:
-            - SendToOrder
-            - SendToMenu
-            type: string
-          example:
-          - SendToOrder
-    UpdateMetafieldDefinition:
-      description: Information to update a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
-      type: object
-      properties:
-        Name:
-          description: Field Name
-          type: string
-          example: Example Name
-        Description:
-          description: Field Description
-          type: string
-          example: string
-        Behaviors:
-          description: Enable Metafield Behaviors
-          type: array
-          items:
-            enum:
-            - SendToOrder
-            - SendToMenu
-            type: string
-          example:
-          - SendToOrder
   securitySchemes:
     oauth2:
       type: oauth2

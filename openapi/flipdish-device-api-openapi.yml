@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Device API
+  title: Flipdish API - Devices Device API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Devices operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -458,6 +458,54 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ClientDeviceAssignEnrolledDevice:
+      description: Assign enrolled device to AppId
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        PinCode:
+          description: Pin Code
+          type: string
+          example: string
+    RestApiArrayResult_ClientDeviceSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientDeviceSummary'
+          example: []
+    ClientDeviceSummary:
+      description: Client Device summary (header fields)
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
+    ClientDeviceEnrollmentResult:
+      description: Device enrollment result
+      type: object
+      properties:
+        PinCode:
+          description: PIN Code for assigning
+          type: string
+          example: string
     ClientDevice:
       description: Client Device
       type: object
@@ -474,26 +522,38 @@ components:
           description: Device Name
           type: string
           example: Example Name
-    ClientDeviceAssignEnrolledDevice:
-      description: Assign enrolled device to AppId
+    RestApiResult_ClientDeviceEnrollmentResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ClientDeviceEnrollmentResult'
+    RestApiResult_ClientDevice_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ClientDevice'
+    ClientDeviceEnroll:
+      description: Enroll a client device
       type: object
       properties:
         DeviceModel:
-          description: Device Model
+          description: Device model
           type: string
           example: string
-        PinCode:
-          description: Pin Code
+        DeviceId:
+          description: Device Id
           type: string
-          example: string
-    ClientDeviceEnrollmentResult:
-      description: Device enrollment result
-      type: object
-      properties:
-        PinCode:
-          description: PIN Code for assigning
+          example: '500123'
+        DeviceName:
+          description: Device Name
           type: string
-          example: string
+          example: Example Name
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -514,66 +574,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiArrayResult_ClientDeviceSummary_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ClientDeviceSummary'
-          example: []
-    ClientDeviceEnroll:
-      description: Enroll a client device
-      type: object
-      properties:
-        DeviceModel:
-          description: Device model
-          type: string
-          example: string
-        DeviceId:
-          description: Device Id
-          type: string
-          example: '500123'
-        DeviceName:
-          description: Device Name
-          type: string
-          example: Example Name
-    ClientDeviceSummary:
-      description: Client Device summary (header fields)
-      type: object
-      properties:
-        DeviceModel:
-          description: Device Model
-          type: string
-          example: string
-        DeviceId:
-          description: Device Id
-          type: string
-          example: '500123'
-        DeviceName:
-          description: Device Name
-          type: string
-          example: Example Name
-    RestApiResult_ClientDevice_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ClientDevice'
-    RestApiResult_ClientDeviceEnrollmentResult_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ClientDeviceEnrollmentResult'
   securitySchemes:
     oauth2:
       type: oauth2

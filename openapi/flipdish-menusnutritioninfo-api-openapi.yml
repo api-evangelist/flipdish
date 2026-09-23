@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MenusNutritionInfo API
+  title: Flipdish API - Menus Menus Nutrition Info API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -794,21 +794,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    NutritionInfoMenuOptionSetItem:
-      description: NutritionInfoMenuOptionSetItem.
-      type: object
-      properties:
-        PublicId:
-          format: uuid
-          description: Menu item option set item public id
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Labels:
-          description: List of Nutrition Info Labels for this menu item option set item
-          type: array
-          items:
-            $ref: '#/components/schemas/NutritionInfoLabel'
-          example: []
     RestApiResult_NutritionInfo_:
       description: Rest api result
       required:
@@ -817,25 +802,18 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/NutritionInfo'
-    NutritionInfoLabel:
-      description: NutritionInfoLabel.
+    RestApiArrayResult_Allergen_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        Name:
-          description: Name of the allergen / ingredient
-          type: string
-          example: Example Name
-        Values:
-          description: Optional list of values for the allergen / ingredient
+        Data:
+          description: Generic data object.
           type: array
           items:
-            type: string
-          example:
-          - string
-        IconUrl:
-          description: Url to the icon for the allergen / ingredient
-          type: string
-          example: https://api.flipdish.co/example
+            $ref: '#/components/schemas/Allergen'
+          example: []
     Allergen:
       description: Allergen.
       type: object
@@ -850,39 +828,6 @@ components:
           example: Example Name
         IconUrl:
           description: Url to the icon for the allergen
-          type: string
-          example: https://api.flipdish.co/example
-    NutritionInfoMenuItem:
-      description: NutritionInfoMenuItem.
-      type: object
-      properties:
-        PublicId:
-          format: uuid
-          description: Menu item public id
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Labels:
-          description: List of Nutrition Info Labels for this menu item
-          type: array
-          items:
-            $ref: '#/components/schemas/NutritionInfoLabel'
-          example: []
-    MenuNutritionInfoHeader:
-      description: MenuNutritionInfoHeader.
-      type: object
-      properties:
-        MenuId:
-          format: int32
-          description: Menu Id
-          type: integer
-          example: 500123
-        NutritionInfoVersionGuid:
-          format: uuid
-          description: Nutrition information version guid (generated every time the nutrition information is updated)
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        AbsoluteUrl:
-          description: Absolute URL of the nutrition information json file
           type: string
           example: https://api.flipdish.co/example
     NutritionInfo:
@@ -907,6 +852,81 @@ components:
           items:
             $ref: '#/components/schemas/NutritionInfoMenuOptionSetItem'
           example: []
+    MenuNutritionInfoHeader:
+      description: MenuNutritionInfoHeader.
+      type: object
+      properties:
+        MenuId:
+          format: int32
+          description: Menu Id
+          type: integer
+          example: 500123
+        NutritionInfoVersionGuid:
+          format: uuid
+          description: Nutrition information version guid (generated every time the nutrition information is updated)
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AbsoluteUrl:
+          description: Absolute URL of the nutrition information json file
+          type: string
+          example: https://api.flipdish.co/example
+    NutritionInfoLabel:
+      description: NutritionInfoLabel.
+      type: object
+      properties:
+        Name:
+          description: Name of the allergen / ingredient
+          type: string
+          example: Example Name
+        Values:
+          description: Optional list of values for the allergen / ingredient
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        IconUrl:
+          description: Url to the icon for the allergen / ingredient
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_MenuNutritionInfoHeader_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuNutritionInfoHeader'
+    NutritionInfoMenuItem:
+      description: NutritionInfoMenuItem.
+      type: object
+      properties:
+        PublicId:
+          format: uuid
+          description: Menu item public id
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Labels:
+          description: List of Nutrition Info Labels for this menu item
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoLabel'
+          example: []
+    NutritionInfoMenuOptionSetItem:
+      description: NutritionInfoMenuOptionSetItem.
+      type: object
+      properties:
+        PublicId:
+          format: uuid
+          description: Menu item option set item public id
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Labels:
+          description: List of Nutrition Info Labels for this menu item option set item
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoLabel'
+          example: []
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -927,26 +947,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_MenuNutritionInfoHeader_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuNutritionInfoHeader'
-    RestApiArrayResult_Allergen_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Allergen'
-          example: []
   securitySchemes:
     oauth2:
       type: oauth2

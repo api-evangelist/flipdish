@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts PaymentIntents API
+  title: Flipdish API - Payments Payment Intents API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Payments operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -16,13 +16,13 @@ security:
 - oauth2:
   - api
 tags:
-- name: PaymentIntents
+- name: Payment Intents
   description: Operations for Payment Intents.
 paths:
   /api/v1.0/payment_intents/{paymentIntentId}:
     get:
       tags:
-      - PaymentIntents
+      - Payment Intents
       operationId: GetPaymentIntent
       parameters:
       - name: paymentIntentId
@@ -124,33 +124,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PaymentIntent:
-      description: Represents stripe PaymentIntent
+    LastPaymentError:
+      description: List's the issues with the last failed payment intent
       type: object
       properties:
-        Id:
-          description: Id of payment intent
-          type: string
-          example: '500123'
-        Description:
-          description: An arbitrary string attached to the object. Often useful for displaying to users.
+        Code:
+          description: For some errors that could be handled programmatically, a short string indicating the error code reported.
           type: string
           example: string
-        Currency:
-          description: "Three-letter <a href=\"https://www.iso.org/iso-4217-currency-codes.html\">ISO currency\r\ncode</a>, in lowercase. Must be a <a href=\"https://stripe.com/docs/currencies\">supported\r\ncurrency</a>."
+        DeclineCode:
+          description: For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one.
           type: string
-          example: EUR
-        Status:
-          description: "Status of this PaymentIntent, one of requires_payment_method,\r\nrequires_confirmation, requires_action, processing,\r\nrequires_capture, canceled, or succeeded. Read more about each\r\nPaymentIntent <a href=\"https://stripe.com/docs/payments/intents#intent-statuses\">status</a>.\r\nOne of: canceled, processing, requires_action,\r\nrequires_capture, requires_confirmation, requires_payment_method,\r\nor succeeded."
+          example: string
+        Message:
+          description: A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
           type: string
-          example: Active
-        Created:
-          format: date-time
-          description: Time at which the object was created. Measured in seconds since the Unix epoch.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        LastPaymentError:
-          $ref: '#/components/schemas/LastPaymentError'
+          example: string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -171,22 +160,49 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    LastPaymentError:
-      description: List's the issues with the last failed payment intent
+    PaymentIntent:
+      description: Represents stripe PaymentIntent
       type: object
       properties:
-        Code:
-          description: For some errors that could be handled programmatically, a short string indicating the error code reported.
+        Id:
+          description: Id of payment intent
+          type: string
+          example: '500123'
+        Description:
+          description: An arbitrary string attached to the object. Often useful for displaying to users.
           type: string
           example: string
-        DeclineCode:
-          description: For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one.
+        Currency:
+          description: 'Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+
+            code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+
+            currency</a>.'
           type: string
-          example: string
-        Message:
-          description: A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
+          example: EUR
+        Status:
+          description: 'Status of this PaymentIntent, one of requires_payment_method,
+
+            requires_confirmation, requires_action, processing,
+
+            requires_capture, canceled, or succeeded. Read more about each
+
+            PaymentIntent <a href="https://stripe.com/docs/payments/intents#intent-statuses">status</a>.
+
+            One of: canceled, processing, requires_action,
+
+            requires_capture, requires_confirmation, requires_payment_method,
+
+            or succeeded.'
           type: string
-          example: string
+          example: Active
+        Created:
+          format: date-time
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        LastPaymentError:
+          $ref: '#/components/schemas/LastPaymentError'
     RestApiResult_PaymentIntent_:
       description: Rest api result
       required:

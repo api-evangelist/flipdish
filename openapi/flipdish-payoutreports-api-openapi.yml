@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts PayoutReports API
+  title: Flipdish API - Payments Payout Reports API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Payments operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -1521,185 +1521,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_PayoutReport3Details_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/PayoutReport3Details'
-    PayoutReport3StorePayout:
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          type: integer
-          example: 500123
-        StoreName:
-          type: string
-          example: Example Name
-        SummaryTotalPayout:
-          format: double
-          type: number
-          example: 12.5
-        SummaryRevenue:
-          format: double
-          type: number
-          example: 1.0
-        SummaryCashRevenue:
-          format: double
-          type: number
-          example: 1.0
-        SummaryTotalFlipdishFees:
-          format: double
-          type: number
-          example: 12.5
-        SummaryAdjustments:
-          format: double
-          type: number
-          example: 1.0
-        Currency:
-          type: string
-          example: EUR
-    PayoutReport3Details:
-      type: object
-      properties:
-        Amount:
-          format: double
-          type: number
-          example: 12.5
-        Currency:
-          type: string
-          example: EUR
-        Summary:
-          $ref: '#/components/schemas/PayoutReport3DetailsSummary'
-        Revenue:
-          $ref: '#/components/schemas/PayoutReport3DetailsRevenue'
-        FlipdishFees:
-          $ref: '#/components/schemas/PayoutReport3DetailsFlipdishFees'
-        Adjustments:
-          $ref: '#/components/schemas/PayoutReport3DetailsAdjustments'
-    PayoutReport3Store:
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          type: integer
-          example: 500123
-        StoreName:
-          type: string
-          example: Example Name
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    PayoutReport3RefundedOrder:
-      type: object
-      properties:
-        OrderId:
-          format: int32
-          type: integer
-          example: 500123
-        PlacedAtTime:
-          format: date-time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        ModifiedAtTime:
-          format: date-time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        StoreName:
-          type: string
-          example: Example Name
-        Type:
-          enum:
-          - Cash
-          - Card
-          type: string
-          example: Cash
-        RefundedAmount:
-          format: double
-          type: number
-          example: 12.5
-        RefundedFees:
-          format: double
-          type: number
-          example: 12.5
-        RefundType:
-          type: string
-          example: string
-        CashFeeRefundedToCustomer:
-          format: double
-          type: number
-          example: 12.5
-    RestApiResult_FileCreationResult_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/FileCreationResult'
-    PayoutReport3DetailsSalesLine:
-      type: object
-      properties:
-        Online:
-          format: double
-          type: number
-          example: 1.0
-        Pos:
-          format: double
-          type: number
-          example: 1.0
-        Other:
-          format: double
-          type: number
-          example: 1.0
-        Total:
-          format: double
-          type: number
-          readOnly: true
-          example: 12.5
-    PayoutReport3PropertyDetails:
-      type: object
-      properties:
-        AvailableProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutReport3PropertyFilterOption'
-          example: []
-        SelectedPropertyIds:
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        MatchedStoreIds:
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        Details:
-          $ref: '#/components/schemas/PayoutReport3Details'
     PayoutReport3DetailsSummary:
       type: object
       properties:
@@ -1735,170 +1556,22 @@ components:
           format: double
           type: number
           example: 12.5
-    RestApiResult_PayoutReport3StorePayouts_:
+    RestApiResult_PayoutReport3Details_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/PayoutReport3StorePayouts'
-    PayoutReport3DetailsAdjustments:
-      type: object
-      properties:
-        OpeningBalanceDate:
-          format: date-time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        ClosingBalanceDate:
-          format: date-time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        OpeningBalance:
-          format: double
-          type: number
-          example: 1.0
-        RefundsOnCardOrders:
-          format: double
-          type: number
-          example: 1.0
-        RefundsOnCashOrders:
-          format: double
-          type: number
-          example: 1.0
-        CashCustomerFees:
-          format: double
-          type: number
-          example: 12.5
-        Chargebacks:
-          format: double
-          type: number
-          example: 1.0
-        OtherTransactions:
-          format: double
-          type: number
-          example: 1.0
-        ClosingBalance:
-          format: double
-          type: number
-          example: 1.0
-        BalanceRepaid:
-          format: double
-          type: number
-          example: 500123
-        RefundsOnCardOrdersBracketsAmount:
-          format: double
-          type: number
-          example: 12.5
-        RefundsOnCardOrdersBracketsOutOfAmount:
-          format: double
-          type: number
-          example: 12.5
-        RefundsOnCashOrdersBracketsAmount:
-          format: double
-          type: number
-          example: 12.5
-        RefundsOnCashOrdersBracketsOutOfAmount:
-          format: double
-          type: number
-          example: 12.5
-        CashCustomerFeesBracketsAmount:
-          format: double
-          type: number
-          example: 12.5
-        CashCustomerFeesBracketsOutOfAmount:
-          format: double
-          type: number
-          example: 12.5
-        BalanceChange:
-          format: double
-          type: number
-          example: 1.0
-        PreviousPayoutId:
-          format: int32
-          type: integer
-          nullable: true
-          example: 500123
-        NextPayoutId:
-          format: int32
-          type: integer
-          nullable: true
-          example: 500123
-        RefundedFeesOnChargebacks:
-          format: double
-          type: number
-          example: 12.5
-        TotalChargebackCost:
-          format: double
-          type: number
-          example: 12.5
-    PayoutReport3DetailsRevenue:
-      type: object
-      properties:
-        GrossSales:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        SalesTax:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        DeliveryCharges:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        OtherCharges:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        Tips:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        TotalRevenue:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        RevenueForFeeCalculations:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-        DrsCharges:
-          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
-    RestApiPaginationResult_PayoutReport3RefundedOrder_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutReport3RefundedOrder'
-          example: []
-    RestApiResult_PayoutReport3PropertyDetails_:
+          $ref: '#/components/schemas/PayoutReport3Details'
+    RestApiResult_FileCreationResult_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/PayoutReport3PropertyDetails'
-    PayoutReport3Overview:
-      type: object
-      properties:
-        PayoutReport3OverviewHeader:
-          $ref: '#/components/schemas/PayoutReport3OverviewHeader'
-        PayoutStores:
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutReport3Store'
-          example: []
+          $ref: '#/components/schemas/FileCreationResult'
     PayoutReport3DetailsFlipdishFees:
       type: object
       properties:
@@ -2026,6 +1699,237 @@ components:
           format: int32
           type: integer
           example: 1
+    PayoutReport3DetailsRevenue:
+      type: object
+      properties:
+        GrossSales:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        SalesTax:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        DeliveryCharges:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        OtherCharges:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        Tips:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        TotalRevenue:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        RevenueForFeeCalculations:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+        DrsCharges:
+          $ref: '#/components/schemas/PayoutReport3DetailsSalesLine'
+    RestApiPaginationResult_PayoutReport3RefundedOrder_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutReport3RefundedOrder'
+          example: []
+    RestApiResult_PayoutReport3StorePayouts_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PayoutReport3StorePayouts'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    PayoutReport3StorePayout:
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          type: integer
+          example: 500123
+        StoreName:
+          type: string
+          example: Example Name
+        SummaryTotalPayout:
+          format: double
+          type: number
+          example: 12.5
+        SummaryRevenue:
+          format: double
+          type: number
+          example: 1.0
+        SummaryCashRevenue:
+          format: double
+          type: number
+          example: 1.0
+        SummaryTotalFlipdishFees:
+          format: double
+          type: number
+          example: 12.5
+        SummaryAdjustments:
+          format: double
+          type: number
+          example: 1.0
+        Currency:
+          type: string
+          example: EUR
+    PayoutReport3DetailsSalesLine:
+      type: object
+      properties:
+        Online:
+          format: double
+          type: number
+          example: 1.0
+        Pos:
+          format: double
+          type: number
+          example: 1.0
+        Other:
+          format: double
+          type: number
+          example: 1.0
+        Total:
+          format: double
+          type: number
+          readOnly: true
+          example: 12.5
+    PayoutReport3Overview:
+      type: object
+      properties:
+        PayoutReport3OverviewHeader:
+          $ref: '#/components/schemas/PayoutReport3OverviewHeader'
+        PayoutStores:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutReport3Store'
+          example: []
+    PayoutReport3DetailsAdjustments:
+      type: object
+      properties:
+        OpeningBalanceDate:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ClosingBalanceDate:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        OpeningBalance:
+          format: double
+          type: number
+          example: 1.0
+        RefundsOnCardOrders:
+          format: double
+          type: number
+          example: 1.0
+        RefundsOnCashOrders:
+          format: double
+          type: number
+          example: 1.0
+        CashCustomerFees:
+          format: double
+          type: number
+          example: 12.5
+        Chargebacks:
+          format: double
+          type: number
+          example: 1.0
+        OtherTransactions:
+          format: double
+          type: number
+          example: 1.0
+        ClosingBalance:
+          format: double
+          type: number
+          example: 1.0
+        BalanceRepaid:
+          format: double
+          type: number
+          example: 500123
+        RefundsOnCardOrdersBracketsAmount:
+          format: double
+          type: number
+          example: 12.5
+        RefundsOnCardOrdersBracketsOutOfAmount:
+          format: double
+          type: number
+          example: 12.5
+        RefundsOnCashOrdersBracketsAmount:
+          format: double
+          type: number
+          example: 12.5
+        RefundsOnCashOrdersBracketsOutOfAmount:
+          format: double
+          type: number
+          example: 12.5
+        CashCustomerFeesBracketsAmount:
+          format: double
+          type: number
+          example: 12.5
+        CashCustomerFeesBracketsOutOfAmount:
+          format: double
+          type: number
+          example: 12.5
+        BalanceChange:
+          format: double
+          type: number
+          example: 1.0
+        PreviousPayoutId:
+          format: int32
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        NextPayoutId:
+          format: int32
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        RefundedFeesOnChargebacks:
+          format: double
+          type: number
+          example: 12.5
+        TotalChargebackCost:
+          format: double
+          type: number
+          example: 12.5
     PayoutReport3StorePayouts:
       type: object
       properties:
@@ -2034,6 +1938,107 @@ components:
           items:
             $ref: '#/components/schemas/PayoutReport3StorePayout'
           example: []
+    PayoutReport3PropertyFilterOption:
+      type: object
+      properties:
+        PropertyId:
+          type: string
+          example: '500123'
+        PropertyName:
+          type: string
+          example: Example Name
+        StoreIds:
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+    PayoutReport3RefundedOrder:
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          type: integer
+          example: 500123
+        PlacedAtTime:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ModifiedAtTime:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        StoreName:
+          type: string
+          example: Example Name
+        Type:
+          enum:
+          - Cash
+          - Card
+          type: string
+          example: Cash
+        RefundedAmount:
+          format: double
+          type: number
+          example: 12.5
+        RefundedFees:
+          format: double
+          type: number
+          example: 12.5
+        RefundType:
+          type: string
+          example: string
+        CashFeeRefundedToCustomer:
+          format: double
+          type: number
+          example: 12.5
+    PayoutReport3Details:
+      type: object
+      properties:
+        Amount:
+          format: double
+          type: number
+          example: 12.5
+        Currency:
+          type: string
+          example: EUR
+        Summary:
+          $ref: '#/components/schemas/PayoutReport3DetailsSummary'
+        Revenue:
+          $ref: '#/components/schemas/PayoutReport3DetailsRevenue'
+        FlipdishFees:
+          $ref: '#/components/schemas/PayoutReport3DetailsFlipdishFees'
+        Adjustments:
+          $ref: '#/components/schemas/PayoutReport3DetailsAdjustments'
+    RestApiResult_PayoutReport3Overview_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PayoutReport3Overview'
+    FileCreationResult:
+      description: FileCreationResult.
+      type: object
+      properties:
+        FileId:
+          description: FileId.
+          type: string
+          example: '500123'
+        Location:
+          description: Location.
+          type: string
+          example: string
+    RestApiResult_PayoutReport3PropertyDetails_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PayoutReport3PropertyDetails'
     PayoutReport3OverviewHeader:
       type: object
       properties:
@@ -2082,42 +2087,39 @@ components:
         BankAccountHasChanged:
           type: boolean
           example: true
-    PayoutReport3PropertyFilterOption:
+    PayoutReport3Store:
       type: object
       properties:
-        PropertyId:
-          type: string
-          example: '500123'
-        PropertyName:
+        StoreId:
+          format: int32
+          type: integer
+          example: 500123
+        StoreName:
           type: string
           example: Example Name
-        StoreIds:
+    PayoutReport3PropertyDetails:
+      type: object
+      properties:
+        AvailableProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutReport3PropertyFilterOption'
+          example: []
+        SelectedPropertyIds:
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        MatchedStoreIds:
           type: array
           items:
             format: int32
             type: integer
           example:
           - 1
-    RestApiResult_PayoutReport3Overview_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/PayoutReport3Overview'
-    FileCreationResult:
-      description: FileCreationResult.
-      type: object
-      properties:
-        FileId:
-          description: FileId.
-          type: string
-          example: '500123'
-        Location:
-          description: Location.
-          type: string
-          example: string
+        Details:
+          $ref: '#/components/schemas/PayoutReport3Details'
   securitySchemes:
     oauth2:
       type: oauth2

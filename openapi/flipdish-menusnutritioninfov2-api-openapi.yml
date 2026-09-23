@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MenusNutritionInfoV2 API
+  title: Flipdish API - Menus Menus Nutrition Info V2 API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -520,14 +520,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_NutritionInfoV2_:
-      description: Rest api result
+    RestApiArrayResult_Allergen_:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/NutritionInfoV2'
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Allergen'
+          example: []
     Allergen:
       description: Allergen.
       type: object
@@ -544,6 +548,22 @@ components:
           description: Url to the icon for the allergen
           type: string
           example: https://api.flipdish.co/example
+    NutritionInfoV2Allergen:
+      description: NutritionInfoV2Allergen.
+      type: object
+      properties:
+        AllergenId:
+          description: AllergenId (unique string identifier)
+          type: string
+          example: '500123'
+        LocalizedName:
+          description: Localized allergen name
+          type: string
+          example: Example Name
+        ImageName:
+          description: Name of the image file. Append it to ImageBaseUrl to get the full URL
+          type: string
+          example: Example Name
     NutritionInfoV2:
       description: Menu Nutrition Information. Version 2 (localized).
       type: object
@@ -564,37 +584,14 @@ components:
           description: Base url for allergen images
           type: string
           example: https://api.flipdish.co/example
-    NutritionInfoV2Item:
-      description: NutritionInfoV2Item.
+    RestApiResult_NutritionInfoV2_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        PublicId:
-          format: uuid
-          description: Menu item or menu item option set item public id
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Allergens:
-          description: List of allergens for this item
-          type: array
-          items:
-            $ref: '#/components/schemas/NutritionInfoV2Allergen'
-          example: []
-    NutritionInfoV2Allergen:
-      description: NutritionInfoV2Allergen.
-      type: object
-      properties:
-        AllergenId:
-          description: AllergenId (unique string identifier)
-          type: string
-          example: '500123'
-        LocalizedName:
-          description: Localized allergen name
-          type: string
-          example: Example Name
-        ImageName:
-          description: Name of the image file. Append it to ImageBaseUrl to get the full URL
-          type: string
-          example: Example Name
+        Data:
+          $ref: '#/components/schemas/NutritionInfoV2'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -615,17 +612,20 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiArrayResult_Allergen_:
-      description: Rest api array result
-      required:
-      - Data
+    NutritionInfoV2Item:
+      description: NutritionInfoV2Item.
       type: object
       properties:
-        Data:
-          description: Generic data object.
+        PublicId:
+          format: uuid
+          description: Menu item or menu item option set item public id
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Allergens:
+          description: List of allergens for this item
           type: array
           items:
-            $ref: '#/components/schemas/Allergen'
+            $ref: '#/components/schemas/NutritionInfoV2Allergen'
           example: []
   securitySchemes:
     oauth2:

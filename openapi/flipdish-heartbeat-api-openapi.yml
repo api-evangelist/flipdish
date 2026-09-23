@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Heartbeat API
+  title: Flipdish API - Devices Heartbeat API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Devices operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -177,6 +177,8 @@ paths:
       security:
       - oauth2:
         - api
+      summary: Head ping
+      x-summary-source: derived
   /api/v1.0/heartbeat/Hostname:
     get:
       tags:
@@ -330,8 +332,32 @@ paths:
       security:
       - oauth2:
         - api
+      summary: Head hostname
+      x-summary-source: derived
 components:
   schemas:
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+          example: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+          example: string
     ValidationErrorResult:
       description: Validation error result
       type: object
@@ -357,17 +383,26 @@ components:
           description: Data string
           type: string
           example: string
-    RestApiUnauthorizedResult:
-      description: Rest api unauthorized result
-      required:
-      - Message
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        Message:
-          description: Message
-          type: string
-          readOnly: true
-          example: string
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     RestApiErrorResult:
       description: Rest api error result
       required:
@@ -393,37 +428,6 @@ components:
           items:
             $ref: '#/components/schemas/ValidationErrorResult'
           example: []
-    RestApiForbiddenResult:
-      description: Rest Api Forbidden Result
-      required:
-      - Message
-      type: object
-      properties:
-        Message:
-          description: Message
-          type: string
-          readOnly: true
-          example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

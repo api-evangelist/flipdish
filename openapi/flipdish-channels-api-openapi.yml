@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Channels API
+  title: Flipdish API - Apps Channels API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -1345,6 +1345,105 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Response:
+      type: object
+      properties:
+        Stores:
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreItemHeader'
+          example: []
+    RestApiArrayResult_Channel_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+          example: []
+    RestApiResult_Channel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Channel'
+    StoreChannelAssignment:
+      description: Represents a store that is assigned to a Sales Channel
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Channel ID
+          type: integer
+          example: 500123
+        StoreId:
+          format: int32
+          description: Store ID
+          type: integer
+          example: 500123
+        StoreName:
+          description: Store Name
+          type: string
+          example: Example Name
+    RestApiArrayResult_StoreChannelAssignment_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreChannelAssignment'
+          example: []
+    AppChannelAssignment:
+      description: "Describes a ChannelAssignment which is \nwhen a AppId is assigned to a Sales Channel"
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Id of the channel on the assignment
+          type: integer
+          example: 500123
+        AppId:
+          description: AppId of the assignment
+          type: string
+          example: '500123'
+    RestApiResult_AppChannelAssignment_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppChannelAssignment'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     StoreItemHeader:
       type: object
       properties:
@@ -1355,14 +1454,6 @@ components:
         Name:
           type: string
           example: Example Name
-    Response:
-      type: object
-      properties:
-        Stores:
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreItemHeader'
-          example: []
     Channel:
       description: Channel.
       type: object
@@ -1395,44 +1486,6 @@ components:
           description: Channel is Maintained Externally or not
           type: boolean
           example: true
-    StoreChannelAssignment:
-      description: Represents a store that is assigned to a Sales Channel
-      type: object
-      properties:
-        ChannelId:
-          format: int32
-          description: Channel ID
-          type: integer
-          example: 500123
-        StoreId:
-          format: int32
-          description: Store ID
-          type: integer
-          example: 500123
-        StoreName:
-          description: Store Name
-          type: string
-          example: Example Name
-    RestApiArrayResult_Channel_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Channel'
-          example: []
-    RestApiResult_Channel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Channel'
     RestApiResult_StoreChannelAssignment_:
       description: Rest api result
       required:
@@ -1441,59 +1494,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/StoreChannelAssignment'
-    RestApiArrayResult_StoreChannelAssignment_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreChannelAssignment'
-          example: []
-    RestApiResult_AppChannelAssignment_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppChannelAssignment'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    AppChannelAssignment:
-      description: "Describes a ChannelAssignment which is \r\nwhen a AppId is assigned to a Sales Channel"
-      type: object
-      properties:
-        ChannelId:
-          format: int32
-          description: Id of the channel on the assignment
-          type: integer
-          example: 500123
-        AppId:
-          description: AppId of the assignment
-          type: string
-          example: '500123'
   securitySchemes:
     oauth2:
       type: oauth2

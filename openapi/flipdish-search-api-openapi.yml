@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Search API
+  title: Flipdish API - Platform Search API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -175,85 +175,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiPaginationResult_Restaurant_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Restaurant'
-          example: []
-    WhiteLabelConfig:
-      description: White label configuration details
-      type: object
-      properties:
-        WhiteLabelId:
-          format: int32
-          description: White label identifier
-          type: integer
-          example: 500123
-        WhiteLabelName:
-          description: White label name
-          type: string
-          example: Example Name
-        CountryId:
-          description: Country identifier
-          type: string
-          example: '500123'
-        AppNameId:
-          description: App id
-          type: string
-          example: '500123'
-        Website:
-          description: Website URL
-          type: string
-          example: string
-        PanaceaVanityUrl:
-          description: Panacea vanity URL
-          type: string
-          example: https://api.flipdish.co/example
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     Restaurant:
       description: Restaurant search result
       type: object
@@ -311,6 +232,85 @@ components:
             type: integer
           example:
           - 3
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    WhiteLabelConfig:
+      description: White label configuration details
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: White label identifier
+          type: integer
+          example: 500123
+        WhiteLabelName:
+          description: White label name
+          type: string
+          example: Example Name
+        CountryId:
+          description: Country identifier
+          type: string
+          example: '500123'
+        AppNameId:
+          description: App id
+          type: string
+          example: '500123'
+        Website:
+          description: Website URL
+          type: string
+          example: string
+        PanaceaVanityUrl:
+          description: Panacea vanity URL
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiPaginationResult_Restaurant_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

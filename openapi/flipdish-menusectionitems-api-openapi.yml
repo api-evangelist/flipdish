@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MenuSectionItems API
+  title: Flipdish API - Menus Menu Section Items API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -1498,14 +1498,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_MenuSectionItem_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuSectionItem'
     CreateMetadata:
       description: Create metadata
       type: object
@@ -1527,205 +1519,6 @@ components:
           minLength: 0
           type: string
           example: string
-    CreatedMenuSectionItems:
-      description: Response for the creation of multiple Menu Section Items
-      type: object
-      properties:
-        MenuSectionItems:
-          description: Created Menu Section Items
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuSectionItem'
-          example: []
-    MenuSectionItem:
-      description: Menu item
-      type: object
-      properties:
-        ActualPrice:
-          format: double
-          description: Actual price - the minimum price possible when all required option set items prices are included.
-          type: number
-          example: 12.5
-        MenuItemOptionSets:
-          description: Menu item option sets
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSet'
-          example: []
-        DailySpecialHours:
-          description: Daily special hours
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessHoursPeriod'
-          example: []
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        TaxRateName:
-          description: Tax rate name
-          type: string
-          example: Example Name
-        TaxRateId:
-          format: int32
-          description: TaxRate
-          type: integer
-          nullable: true
-          example: 500123
-        TaxValue:
-          format: double
-          description: TaxValue - the tax associated with this item, based on TaxRate / TaxType and Currency (currency determines decimal point precision)
-          type: number
-          example: 1.0
-        ExcludeFromVoucherDiscounting:
-          description: If true, the item is excluded from voucher discount calculations
-          type: boolean
-          example: true
-        Metadata:
-          description: List of metadata
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateMetadata'
-          example: []
-        CatalogItemId:
-          description: Catalog item Id when the Item is associated to a Product
-          type: string
-          example: '500123'
-        Name:
-          description: Menu item name (like "Korma")
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: Example Name
-        Description:
-          description: Description (like "A lovely dish from the east")
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: string
-        SpicinessRating:
-          description: Spiciness rating
-          enum:
-          - NotRated
-          - Mild
-          - Medium
-          - Hot
-          type: string
-          example: NotRated
-        Price:
-          format: double
-          description: Price - this is only used when there is no master option set and should be set to 0 if a master option set exists.
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          description: An optional fee that can be added to the price of the item.
-          type: number
-          nullable: true
-          example: 12.5
-        DisplayOrder:
-          format: int32
-          description: Display order
-          type: integer
-          example: 1
-        Alcohol:
-          description: To be set true if the item or an option of the item contains an alcoholic drink.
-          type: boolean
-          example: true
-        IsAvailable:
-          description: True if we accept orders for this item still
-          type: boolean
-          example: true
-        CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-        DisableVouchers:
-          description: If true, then vouchers won't be applied for this item
-          type: boolean
-          example: true
-        ImageName:
-          description: Image url
-          type: string
-          example: Example Name
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        MenuItemId:
-          format: int32
-          description: Menu Item Id
-          type: integer
-          example: 500123
-    RestApiResult_CreatedMenuSectionItems_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/CreatedMenuSectionItems'
-    RestApiArrayResult_MenuSectionItem_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuSectionItem'
-          example: []
-    CreateMenuSectionItemFromCatalogItems:
-      description: Add CatalogItems to a Menu
-      required:
-      - MenuCatalogItems
-      type: object
-      properties:
-        MenuCatalogItems:
-          description: List of CatalogItems to add to the section
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuCatalogItem'
-          example: []
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    MenuCatalogItem:
-      description: Information to add a CatalogItem to a Menu
-      required:
-      - CatalogItemId
-      type: object
-      properties:
-        CatalogItemId:
-          description: Product Id to the product to add as Menu Item
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        CellLayoutType:
-          description: "Small | Medium | Large | HiddenImage\r\nAffects the layout of the menu."
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
     MenuSectionItemBase:
       description: Menu item
       type: object
@@ -1759,8 +1552,9 @@ components:
         DepositReturnFee:
           format: double
           description: An optional fee that can be added to the price of the item.
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           example: 12.5
         DisplayOrder:
           format: int32
@@ -1776,7 +1570,9 @@ components:
           type: boolean
           example: true
         CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
           enum:
           - Small
           - Medium
@@ -1810,8 +1606,54 @@ components:
           description: Permanent reference to the item.
           type: string
           example: 00000000-0000-0000-0000-000000000000
+    BusinessHoursPeriod:
+      description: Business hours period
+      type: object
+      properties:
+        Early:
+          $ref: '#/components/schemas/Range'
+        Late:
+          $ref: '#/components/schemas/Range'
+        Ranges:
+          description: Ranges
+          type: array
+          items:
+            $ref: '#/components/schemas/Range'
+          example: []
+        DayOfWeek:
+          description: Day of week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        StartTime:
+          description: Start time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Period:
+          description: Period
+          type: string
+          example: string
+        StartTimeEarly:
+          description: Start time early
+          type: string
+          example: string
+        PeriodEarly:
+          description: Period early
+          type: string
+          example: string
     Range:
-      description: "A class that represents a single opening period in a day.\r\nThis starts 'StartTime' after midnight and runs for a 'Period'\r\nafter that, on the given DayOfWeek."
+      description: 'A class that represents a single opening period in a day.
+
+        This starts ''StartTime'' after midnight and runs for a ''Period''
+
+        after that, on the given DayOfWeek.'
       type: object
       properties:
         StartTime:
@@ -1892,7 +1734,9 @@ components:
           type: integer
           example: 3
         CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
           enum:
           - Small
           - Medium
@@ -1900,68 +1744,6 @@ components:
           - HiddenImage
           type: string
           example: Small
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    BusinessHoursPeriod:
-      description: Business hours period
-      type: object
-      properties:
-        Early:
-          $ref: '#/components/schemas/Range'
-        Late:
-          $ref: '#/components/schemas/Range'
-        Ranges:
-          description: Ranges
-          type: array
-          items:
-            $ref: '#/components/schemas/Range'
-          example: []
-        DayOfWeek:
-          description: Day of week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-        StartTime:
-          description: Start time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Period:
-          description: Period
-          type: string
-          example: string
-        StartTimeEarly:
-          description: Start time early
-          type: string
-          example: string
-        PeriodEarly:
-          description: Period early
-          type: string
-          example: string
     MenuItemOptionSetItem:
       description: Menu item option set item
       type: object
@@ -1985,8 +1767,9 @@ components:
         NextMenuItemOptionSetId:
           format: int32
           description: if null, next option set is next. if -1, this is the final option set
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
         CatalogItemId:
           description: Catalog item Id when the OptionSet is associated to a Product
@@ -1999,8 +1782,9 @@ components:
         TaxRateId:
           format: int32
           description: TaxRateId.
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
         TaxValue:
           format: double
@@ -2019,8 +1803,9 @@ components:
         DepositReturnFee:
           format: double
           description: An optional fee that can be added to the price of the item.
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           example: 12.5
         IsAvailable:
           description: Is available
@@ -2032,7 +1817,9 @@ components:
           type: integer
           example: 1
         CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
           enum:
           - Small
           - Medium
@@ -2044,6 +1831,239 @@ components:
           description: Image url
           type: string
           example: https://api.flipdish.co/example
+    MenuCatalogItem:
+      description: Information to add a CatalogItem to a Menu
+      required:
+      - CatalogItemId
+      type: object
+      properties:
+        CatalogItemId:
+          description: Product Id to the product to add as Menu Item
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        CellLayoutType:
+          description: 'Small | Medium | Large | HiddenImage
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+    RestApiResult_MenuSectionItem_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuSectionItem'
+    MenuSectionItem:
+      description: Menu item
+      type: object
+      properties:
+        ActualPrice:
+          format: double
+          description: Actual price - the minimum price possible when all required option set items prices are included.
+          type: number
+          example: 12.5
+        MenuItemOptionSets:
+          description: Menu item option sets
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSet'
+          example: []
+        DailySpecialHours:
+          description: Daily special hours
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessHoursPeriod'
+          example: []
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        TaxRateName:
+          description: Tax rate name
+          type: string
+          example: Example Name
+        TaxRateId:
+          format: int32
+          description: TaxRate
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        TaxValue:
+          format: double
+          description: TaxValue - the tax associated with this item, based on TaxRate / TaxType and Currency (currency determines decimal point precision)
+          type: number
+          example: 1.0
+        ExcludeFromVoucherDiscounting:
+          description: If true, the item is excluded from voucher discount calculations
+          type: boolean
+          example: true
+        Metadata:
+          description: List of metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateMetadata'
+          example: []
+        CatalogItemId:
+          description: Catalog item Id when the Item is associated to a Product
+          type: string
+          example: '500123'
+        Name:
+          description: Menu item name (like "Korma")
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Description (like "A lovely dish from the east")
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: string
+        SpicinessRating:
+          description: Spiciness rating
+          enum:
+          - NotRated
+          - Mild
+          - Medium
+          - Hot
+          type: string
+          example: NotRated
+        Price:
+          format: double
+          description: Price - this is only used when there is no master option set and should be set to 0 if a master option set exists.
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          description: An optional fee that can be added to the price of the item.
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        DisplayOrder:
+          format: int32
+          description: Display order
+          type: integer
+          example: 1
+        Alcohol:
+          description: To be set true if the item or an option of the item contains an alcoholic drink.
+          type: boolean
+          example: true
+        IsAvailable:
+          description: True if we accept orders for this item still
+          type: boolean
+          example: true
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+        DisableVouchers:
+          description: If true, then vouchers won't be applied for this item
+          type: boolean
+          example: true
+        ImageName:
+          description: Image url
+          type: string
+          example: Example Name
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+        MenuItemId:
+          format: int32
+          description: Menu Item Id
+          type: integer
+          example: 500123
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    RestApiResult_CreatedMenuSectionItems_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/CreatedMenuSectionItems'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_MenuSectionItem_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuSectionItem'
+          example: []
+    CreateMenuSectionItemFromCatalogItems:
+      description: Add CatalogItems to a Menu
+      required:
+      - MenuCatalogItems
+      type: object
+      properties:
+        MenuCatalogItems:
+          description: List of CatalogItems to add to the section
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuCatalogItem'
+          example: []
+    CreatedMenuSectionItems:
+      description: Response for the creation of multiple Menu Section Items
+      type: object
+      properties:
+        MenuSectionItems:
+          description: Created Menu Section Items
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuSectionItem'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

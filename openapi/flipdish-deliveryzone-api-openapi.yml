@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts DeliveryZone API
+  title: Flipdish API - Stores Delivery Zone API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Stores operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -483,18 +483,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiArrayResult_DeliveryZone_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/DeliveryZone'
-          example: []
     RestApiResult_DeliveryZone_:
       description: Rest api result
       required:
@@ -535,8 +523,9 @@ components:
         FeeChargedToStore:
           format: double
           description: Delivery Fee charged to store
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           example: 12.5
         DeliveryFee:
           format: double
@@ -549,13 +538,27 @@ components:
           type: number
           example: 12.5
         WellKnownText:
-          description: "Spatial data in Well Known Text format\r\nWe also support CIRCLE((0 0, 200)) - (centerLong centerLat, radius in m)"
+          description: 'Spatial data in Well Known Text format
+
+            We also support CIRCLE((0 0, 200)) - (centerLong centerLat, radius in m)'
           type: string
           example: string
         IsEnabled:
           description: Is delivery zone enabled
           type: boolean
           example: true
+    RestApiArrayResult_DeliveryZone_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveryZone'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

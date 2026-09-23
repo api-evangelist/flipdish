@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts OAuthClients API
+  title: Flipdish API - Platform O Auth Clients API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -16,13 +16,13 @@ security:
 - oauth2:
   - api
 tags:
-- name: OAuthClients
+- name: OAuth Clients
   description: Operations for OAuth Clients.
 paths:
   /api/v1.0/{appId}/oauthclients/appnames:
     get:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: OAuthClients_GetApplications
       parameters:
       - name: appId
@@ -115,7 +115,7 @@ paths:
   /api/v1.0/{appId}/oauthclients/{oauthAppId}:
     get:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: GetOAuthClientByClientId
       parameters:
       - name: oauthAppId
@@ -237,7 +237,7 @@ paths:
         dispatcher: FALLBACK
     post:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: UpdateOAuthApp
       parameters:
       - name: oauthAppId
@@ -345,7 +345,7 @@ paths:
         dispatcher: FALLBACK
     delete:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: DeleteOAuthApp
       parameters:
       - name: oauthAppId
@@ -436,7 +436,7 @@ paths:
   /api/v1.0/{appId}/oauthclients/{oauthAppId}/secret:
     get:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: GetOAuthClientSecret
       parameters:
       - name: oauthAppId
@@ -552,7 +552,7 @@ paths:
   /api/v1.0/{appId}/oauthclients/{oauthAppId}/accesstoken:
     get:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: GetOauthAccessToken
       parameters:
       - name: oauthAppId
@@ -653,7 +653,7 @@ paths:
   /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis:
     get:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: GetRedirectUris
       parameters:
       - name: oauthAppId
@@ -753,7 +753,7 @@ paths:
         dispatcher: FALLBACK
     post:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: AddRedirectUri
       parameters:
       - name: oauthAppId
@@ -859,7 +859,7 @@ paths:
   /api/v1.0/{appId}/oauthclients:
     get:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: GetOAuthApps
       parameters:
       - name: oauthAppName
@@ -974,7 +974,7 @@ paths:
         dispatcher: FALLBACK
     post:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: CreateOAuthApp
       parameters:
       - name: appId
@@ -1061,7 +1061,7 @@ paths:
   /api/v1.0/{appId}/oauthclients/{oauthAppId}/redirecturis/{uriId}:
     delete:
       tags:
-      - OAuthClients
+      - OAuth Clients
       operationId: RemoveRedirectUri
       parameters:
       - name: oauthAppId
@@ -1159,30 +1159,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiArrayResult_OAuthApp_:
-      description: Rest api array result
+    RestApiResult_OauthClientRedirectUri_:
+      description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OAuthApp'
-          example: []
-    RestApiArrayResult_OauthClientRedirectUri_:
-      description: Rest api array result
-      required:
-      - Data
+          $ref: '#/components/schemas/OauthClientRedirectUri'
+    OauthClientRedirectUri:
+      description: OAuth client redirect uri
       type: object
       properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OauthClientRedirectUri'
-          example: []
+        Id:
+          format: int32
+          description: Redirect uri identifier
+          type: integer
+          example: 500123
+        Uri:
+          description: Redirect uri
+          type: string
+          example: https://api.flipdish.co/example
     OAuthApp:
       description: Oauth client (also knowns as 'app')
       type: object
@@ -1211,28 +1208,32 @@ components:
           - Implicit
           - Hybrid
           - ClientCredentials
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: AuthorizationCode
         RefreshTokenUsage:
-          description: "ReUse: the refresh token handle will stay the same when refreshing tokens \r\nOneTime: the refresh token handle will be updated when refreshing tokens"
+          description: "ReUse: the refresh token handle will stay the same when refreshing tokens \nOneTime: the refresh token handle will be updated when refreshing tokens"
           enum:
           - ReUse
           - OneTimeOnly
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: ReUse
         AccessTokenLifetime:
           format: int32
           description: Timem it takes for the IdentityToken to expire in seconds
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 1
         AbsoluteRefreshTokenLifetime:
           format: int32
           description: Maximum lifetime of a refresh token in seconds
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 1
       example:
         OauthAppId: '6364835077453070787486'
@@ -1242,27 +1243,30 @@ components:
         Flow: 2
         AccessTokenLifetime: 3600
         AbsoluteRefreshTokenLifetime: 2592000
-    OauthClientRedirectUri:
-      description: OAuth client redirect uri
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Redirect uri identifier
-          type: integer
-          example: 500123
-        Uri:
-          description: Redirect uri
-          type: string
-          example: https://api.flipdish.co/example
-    RestApiResult_OauthClientRedirectUri_:
-      description: Rest api result
+    RestApiArrayResult_OAuthApp_:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/OauthClientRedirectUri'
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OAuthApp'
+          example: []
+    RestApiArrayResult_OauthClientRedirectUri_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OauthClientRedirectUri'
+          example: []
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -1273,6 +1277,14 @@ components:
           description: Data string
           type: string
           example: string
+    RestApiResult_OAuthApp_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OAuthApp'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1293,14 +1305,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_OAuthApp_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OAuthApp'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MenuOptionSetItems API
+  title: Flipdish API - Menus Menu Option Set Items API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -1217,6 +1217,142 @@ components:
           minLength: 0
           type: string
           example: string
+    MenuItemOptionSetItemBase:
+      description: Menu item option set item
+      type: object
+      properties:
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          description: An optional fee that can be added to the price of the item.
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+          example: 1
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    MenuItemOptionSetItem:
+      description: Menu item option set item
+      type: object
+      properties:
+        MenuItemOptionSetItemId:
+          format: int32
+          description: Menu item option set item identifier
+          type: integer
+          example: 500123
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Metadata:
+          description: List of metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateMetadata'
+          example: []
+        NextMenuItemOptionSetId:
+          format: int32
+          description: if null, next option set is next. if -1, this is the final option set
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        CatalogItemId:
+          description: Catalog item Id when the OptionSet is associated to a Product
+          type: string
+          example: '500123'
+        TaxRateName:
+          description: Tax rate name
+          type: string
+          example: Example Name
+        TaxRateId:
+          format: int32
+          description: TaxRateId.
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        TaxValue:
+          format: double
+          description: TaxValue.
+          type: number
+          example: 1.0
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          description: An optional fee that can be added to the price of the item.
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+          example: 1
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
     RestApiResult_MenuItemOptionSetItem_:
       description: Rest api result
       required:
@@ -1225,6 +1361,18 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/MenuItemOptionSetItem'
+    RestApiArrayResult_MenuItemOptionSetItem_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSetItem'
+          example: []
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -1255,146 +1403,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    MenuItemOptionSetItemBase:
-      description: Menu item option set item
-      type: object
-      properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          description: An optional fee that can be added to the price of the item.
-          type: number
-          nullable: true
-          example: 12.5
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-    RestApiArrayResult_MenuItemOptionSetItem_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSetItem'
-          example: []
-    MenuItemOptionSetItem:
-      description: Menu item option set item
-      type: object
-      properties:
-        MenuItemOptionSetItemId:
-          format: int32
-          description: Menu item option set item identifier
-          type: integer
-          example: 500123
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Metadata:
-          description: List of metadata
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateMetadata'
-          example: []
-        NextMenuItemOptionSetId:
-          format: int32
-          description: if null, next option set is next. if -1, this is the final option set
-          type: integer
-          nullable: true
-          example: 500123
-        CatalogItemId:
-          description: Catalog item Id when the OptionSet is associated to a Product
-          type: string
-          example: '500123'
-        TaxRateName:
-          description: Tax rate name
-          type: string
-          example: Example Name
-        TaxRateId:
-          format: int32
-          description: TaxRateId.
-          type: integer
-          nullable: true
-          example: 500123
-        TaxValue:
-          format: double
-          description: TaxValue.
-          type: number
-          example: 1.0
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          description: An optional fee that can be added to the price of the item.
-          type: number
-          nullable: true
-          example: 12.5
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        CellLayoutType:
-          description: "Small | Medium | Large\r\nAffects the layout of the menu."
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts AppStoreEntitlements API
+  title: Flipdish API - Apps App Store Entitlements API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -139,25 +139,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_AppStoreAppEntitlements_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppStoreAppEntitlements'
-    AppStoreAppEntitlements:
-      type: object
-      properties:
-        EntitlementQuantity:
-          format: int32
-          type: integer
-          example: 3
-        CurrentUsage:
-          format: int32
-          type: integer
-          example: 1
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -178,6 +159,25 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_AppStoreAppEntitlements_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreAppEntitlements'
+    AppStoreAppEntitlements:
+      type: object
+      properties:
+        EntitlementQuantity:
+          format: int32
+          type: integer
+          example: 3
+        CurrentUsage:
+          format: int32
+          type: integer
+          example: 1
   securitySchemes:
     oauth2:
       type: oauth2

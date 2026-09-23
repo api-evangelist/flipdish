@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts AppStoreDeveloper API
+  title: Flipdish API - Apps App Store Developer API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -1022,6 +1022,137 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateAppStoreApp:
+      required:
+      - Details
+      - ConfigurationType
+      - StoreSelectorType
+      - PermissionsType
+      - Name
+      - Description
+      - Categories
+      - Countries
+      type: object
+      properties:
+        Details:
+          type: string
+          example: string
+        ConfigurationType:
+          enum:
+          - ExternalLink
+          - FlipdishHosted
+          type: string
+          example: ExternalLink
+        StoreSelectorType:
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        FieldGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldGroup'
+          example: []
+        SetupInstructions:
+          type: string
+          example: string
+        ExternalSetupLink:
+          type: string
+          example: https://api.flipdish.co/example
+        TeammateAppAccessLevel:
+          enum:
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          type: string
+          example: Owner
+        PermissionsType:
+          enum:
+          - Teammate
+          type: string
+          example: Teammate
+        Support:
+          $ref: '#/components/schemas/AppStoreAppSupportInfo'
+        ExternalFunctionActionUrl:
+          type: string
+          example: https://api.flipdish.co/example
+        ExternalFunctionSignatureKey:
+          type: string
+          example: string
+        IsPaid:
+          type: boolean
+          example: true
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        IsEnabled:
+          type: boolean
+          example: true
+        Categories:
+          type: array
+          items:
+            enum:
+            - PointOfSale
+            - DeliveryAndLogistics
+            - CRM
+            - GiftCard
+            - Accounting
+            - LoyaltyAndMarketing
+            - Other
+            type: string
+          example:
+          - PointOfSale
+        Countries:
+          type: array
+          items:
+            enum:
+            - GB
+            - IE
+            - FR
+            - ES
+            - PT
+            - IT
+            - DE
+            - PL
+            - BE
+            - LU
+            - NL
+            - US
+            - CA
+            - BG
+            - MX
+            - AU
+            - NZ
+            type: string
+          example:
+          - GB
+        DeveloperName:
+          type: string
+          example: Example Name
+    ValidValue:
+      required:
+      - Code
+      - Name
+      type: object
+      properties:
+        Code:
+          type: string
+          example: string
+        Name:
+          type: string
+          example: Example Name
     FieldGroup:
       required:
       - Name
@@ -1048,6 +1179,219 @@ components:
           items:
             $ref: '#/components/schemas/Field'
           example: []
+    UpdateAppStoreApp:
+      required:
+      - Details
+      - ConfigurationType
+      - StoreSelectorType
+      - PermissionsType
+      - Name
+      - Description
+      - Categories
+      - Countries
+      type: object
+      properties:
+        Details:
+          type: string
+          example: string
+        ConfigurationType:
+          enum:
+          - ExternalLink
+          - FlipdishHosted
+          type: string
+          example: ExternalLink
+        StoreSelectorType:
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        FieldGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldGroup'
+          example: []
+        SetupInstructions:
+          type: string
+          example: string
+        ExternalSetupLink:
+          type: string
+          example: https://api.flipdish.co/example
+        TeammateAppAccessLevel:
+          enum:
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          type: string
+          example: Owner
+        PermissionsType:
+          enum:
+          - Teammate
+          type: string
+          example: Teammate
+        Support:
+          $ref: '#/components/schemas/AppStoreAppSupportInfo'
+        ExternalFunctionActionUrl:
+          type: string
+          example: https://api.flipdish.co/example
+        ExternalFunctionSignatureKey:
+          type: string
+          example: string
+        IsPaid:
+          type: boolean
+          example: true
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        IsEnabled:
+          type: boolean
+          example: true
+        Categories:
+          type: array
+          items:
+            enum:
+            - PointOfSale
+            - DeliveryAndLogistics
+            - CRM
+            - GiftCard
+            - Accounting
+            - LoyaltyAndMarketing
+            - Other
+            type: string
+          example:
+          - PointOfSale
+        Countries:
+          type: array
+          items:
+            enum:
+            - GB
+            - IE
+            - FR
+            - ES
+            - PT
+            - IT
+            - DE
+            - PL
+            - BE
+            - LU
+            - NL
+            - US
+            - CA
+            - BG
+            - MX
+            - AU
+            - NZ
+            type: string
+          example:
+          - GB
+        DeveloperName:
+          type: string
+          example: Example Name
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Key:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        DefaultValue:
+          type: string
+          example: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+          example: []
+        ValidationRegex:
+          type: string
+          example: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+          example: Text
+        IsFlipdishRestricted:
+          type:
+          - boolean
+          - 'null'
+          example: true
+    UpdateAppStoreAppExternalProduct:
+      type: object
+      properties:
+        ExternalProductId:
+          type: string
+          example: '500123'
+    AppStoreAppSupportInfo:
+      type: object
+      properties:
+        PrivacyPolicy:
+          type: string
+          example: string
+        TermsOfUse:
+          type: string
+          example: string
+        CompanyWebsite:
+          type: string
+          example: string
+        LearnMore:
+          type: string
+          example: string
+        InstallationMessage:
+          type: string
+          example: string
+        SupportEmail:
+          type: string
+          example: owner@example.com
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
     AppStoreApp:
       required:
       - Id
@@ -1190,156 +1534,6 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    AppStoreAppSupportInfo:
-      type: object
-      properties:
-        PrivacyPolicy:
-          type: string
-          example: string
-        TermsOfUse:
-          type: string
-          example: string
-        CompanyWebsite:
-          type: string
-          example: string
-        LearnMore:
-          type: string
-          example: string
-        InstallationMessage:
-          type: string
-          example: string
-        SupportEmail:
-          type: string
-          example: owner@example.com
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    UpdateAppStoreApp:
-      required:
-      - Details
-      - ConfigurationType
-      - StoreSelectorType
-      - PermissionsType
-      - Name
-      - Description
-      - Categories
-      - Countries
-      type: object
-      properties:
-        Details:
-          type: string
-          example: string
-        ConfigurationType:
-          enum:
-          - ExternalLink
-          - FlipdishHosted
-          type: string
-          example: ExternalLink
-        StoreSelectorType:
-          enum:
-          - None
-          - Single
-          - Multiple
-          type: string
-          example: None
-        FieldGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldGroup'
-          example: []
-        SetupInstructions:
-          type: string
-          example: string
-        ExternalSetupLink:
-          type: string
-          example: https://api.flipdish.co/example
-        TeammateAppAccessLevel:
-          enum:
-          - Owner
-          - StoreOwner
-          - PropertyOwner
-          - ManagedOwner
-          - Integrator
-          - PropertyManager
-          - StoreManager
-          - StoreStaff
-          - StoreReadOnlyAccess
-          - FinanceManger
-          type: string
-          example: Owner
-        PermissionsType:
-          enum:
-          - Teammate
-          type: string
-          example: Teammate
-        Support:
-          $ref: '#/components/schemas/AppStoreAppSupportInfo'
-        ExternalFunctionActionUrl:
-          type: string
-          example: https://api.flipdish.co/example
-        ExternalFunctionSignatureKey:
-          type: string
-          example: string
-        IsPaid:
-          type: boolean
-          example: true
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        IsEnabled:
-          type: boolean
-          example: true
-        Categories:
-          type: array
-          items:
-            enum:
-            - PointOfSale
-            - DeliveryAndLogistics
-            - CRM
-            - GiftCard
-            - Accounting
-            - LoyaltyAndMarketing
-            - Other
-            type: string
-          example:
-          - PointOfSale
-        Countries:
-          type: array
-          items:
-            enum:
-            - GB
-            - IE
-            - FR
-            - ES
-            - PT
-            - IT
-            - DE
-            - PL
-            - BE
-            - LU
-            - NL
-            - US
-            - CA
-            - BG
-            - MX
-            - AU
-            - NZ
-            type: string
-          example:
-          - GB
-        DeveloperName:
-          type: string
-          example: Example Name
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1360,187 +1554,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    Field:
-      required:
-      - Name
-      - Description
-      - Key
-      - Position
-      - FieldType
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        Key:
-          type: string
-          example: string
-        Tooltip:
-          type: string
-          example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        DefaultValue:
-          type: string
-          example: string
-        ValidValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidValue'
-          example: []
-        ValidationRegex:
-          type: string
-          example: string
-        FieldType:
-          enum:
-          - Text
-          - TextArea
-          - Integer
-          - Decimal
-          - Date
-          - DateTime
-          - Time
-          - Select
-          - Boolean
-          - ActionButton
-          type: string
-          example: Text
-        IsFlipdishRestricted:
-          type: boolean
-          nullable: true
-          example: true
-    UpdateAppStoreAppExternalProduct:
-      type: object
-      properties:
-        ExternalProductId:
-          type: string
-          example: '500123'
-    CreateAppStoreApp:
-      required:
-      - Details
-      - ConfigurationType
-      - StoreSelectorType
-      - PermissionsType
-      - Name
-      - Description
-      - Categories
-      - Countries
-      type: object
-      properties:
-        Details:
-          type: string
-          example: string
-        ConfigurationType:
-          enum:
-          - ExternalLink
-          - FlipdishHosted
-          type: string
-          example: ExternalLink
-        StoreSelectorType:
-          enum:
-          - None
-          - Single
-          - Multiple
-          type: string
-          example: None
-        FieldGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldGroup'
-          example: []
-        SetupInstructions:
-          type: string
-          example: string
-        ExternalSetupLink:
-          type: string
-          example: https://api.flipdish.co/example
-        TeammateAppAccessLevel:
-          enum:
-          - Owner
-          - StoreOwner
-          - PropertyOwner
-          - ManagedOwner
-          - Integrator
-          - PropertyManager
-          - StoreManager
-          - StoreStaff
-          - StoreReadOnlyAccess
-          - FinanceManger
-          type: string
-          example: Owner
-        PermissionsType:
-          enum:
-          - Teammate
-          type: string
-          example: Teammate
-        Support:
-          $ref: '#/components/schemas/AppStoreAppSupportInfo'
-        ExternalFunctionActionUrl:
-          type: string
-          example: https://api.flipdish.co/example
-        ExternalFunctionSignatureKey:
-          type: string
-          example: string
-        IsPaid:
-          type: boolean
-          example: true
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        IsEnabled:
-          type: boolean
-          example: true
-        Categories:
-          type: array
-          items:
-            enum:
-            - PointOfSale
-            - DeliveryAndLogistics
-            - CRM
-            - GiftCard
-            - Accounting
-            - LoyaltyAndMarketing
-            - Other
-            type: string
-          example:
-          - PointOfSale
-        Countries:
-          type: array
-          items:
-            enum:
-            - GB
-            - IE
-            - FR
-            - ES
-            - PT
-            - IT
-            - DE
-            - PL
-            - BE
-            - LU
-            - NL
-            - US
-            - CA
-            - BG
-            - MX
-            - AU
-            - NZ
-            type: string
-          example:
-          - GB
-        DeveloperName:
-          type: string
-          example: Example Name
     RestApiResult_AppStoreApp_:
       description: Rest api result
       required:
@@ -1549,18 +1562,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/AppStoreApp'
-    ValidValue:
-      required:
-      - Code
-      - Name
-      type: object
-      properties:
-        Code:
-          type: string
-          example: string
-        Name:
-          type: string
-          example: Example Name
   securitySchemes:
     oauth2:
       type: oauth2

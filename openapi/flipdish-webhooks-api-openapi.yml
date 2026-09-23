@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Webhooks API
+  title: Flipdish API - Platform Webhooks API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -1152,6 +1152,86 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    WebhookSubscription:
+      description: Webhook subscription
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Webhook subscription identifier
+          type: integer
+          example: 500123
+        OwnerUserId:
+          format: int32
+          description: Webhook subscription owner user identifier
+          type: integer
+          example: 500123
+        Version:
+          description: Webhook subscription owner user identifier
+          type: string
+          example: string
+        EventNames:
+          description: Webhook subscription event names
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        CallbackUrl:
+          description: Callback url. Flipdish system POST messages to this url.
+          type: string
+          example: https://api.flipdish.co/example
+        Enabled:
+          description: Is webhook subscription enabled.
+          type: boolean
+          example: true
+        VerifyToken:
+          description: 'This is your token which will be in the Header of each POST request from Flipdish with name: X-Verify-Token.'
+          type: string
+          example: string
+    RestApiStringArrayResult:
+      description: Rest api string array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string array
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    RestApiPaginationResult_WebhookSubscription_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookSubscription'
+          example: []
     WebhookLog:
       description: Webhook log
       type: object
@@ -1219,64 +1299,6 @@ components:
           description: Flipdish webhook version
           type: string
           example: string
-    RestApiStringArrayResult:
-      description: Rest api string array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string array
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    WebhookEventSample:
-      description: Sample payload of a webhook event
-      type: object
-      properties:
-        Type:
-          description: Event name
-          type: string
-          example: string
-        CreateTime:
-          format: date-time
-          description: Sample event creation date and time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Body:
-          $ref: '#/components/schemas/FlipdishEventBase'
-    RestApiPaginationResult_WebhookSubscription_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookSubscription'
-          example: []
     RestApiIntegerResult:
       description: Rest api integer result
       required:
@@ -1288,26 +1310,6 @@ components:
           description: Data integer
           type: integer
           example: 1
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     FlipdishEventBase:
       description: Base Event
       type: object
@@ -1351,6 +1353,41 @@ components:
           description: Activity Type
           type: string
           example: string
+    WebhookEventSample:
+      description: Sample payload of a webhook event
+      type: object
+      properties:
+        Type:
+          description: Event name
+          type: string
+          example: string
+        CreateTime:
+          format: date-time
+          description: Sample event creation date and time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Body:
+          $ref: '#/components/schemas/FlipdishEventBase'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     RestApiPaginationResult_WebhookLog_:
       description: Rest api pagination result
       required:
@@ -1381,43 +1418,6 @@ components:
           items:
             $ref: '#/components/schemas/WebhookLog'
           example: []
-    WebhookSubscription:
-      description: Webhook subscription
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Webhook subscription identifier
-          type: integer
-          example: 500123
-        OwnerUserId:
-          format: int32
-          description: Webhook subscription owner user identifier
-          type: integer
-          example: 500123
-        Version:
-          description: Webhook subscription owner user identifier
-          type: string
-          example: string
-        EventNames:
-          description: Webhook subscription event names
-          type: array
-          items:
-            type: string
-          example:
-          - Example Name
-        CallbackUrl:
-          description: Callback url. Flipdish system POST messages to this url.
-          type: string
-          example: https://api.flipdish.co/example
-        Enabled:
-          description: Is webhook subscription enabled.
-          type: boolean
-          example: true
-        VerifyToken:
-          description: 'This is your token which will be in the Header of each POST request from Flipdish with name: X-Verify-Token.'
-          type: string
-          example: string
   securitySchemes:
     oauth2:
       type: oauth2

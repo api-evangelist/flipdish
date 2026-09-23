@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts AppStore API
+  title: Flipdish API - Apps App Store API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -16,13 +16,13 @@ security:
 - oauth2:
   - api
 tags:
-- name: AppStore
+- name: App Store
   description: Operations for App Store.
 paths:
   /api/v1.0/appstore/apps/{appStoreAppId}:
     get:
       tags:
-      - AppStore
+      - App Store
       operationId: GetAppStoreApp
       parameters:
       - name: appStoreAppId
@@ -169,7 +169,7 @@ paths:
   /api/v1.0/appstore/apps:
     get:
       tags:
-      - AppStore
+      - App Store
       operationId: GetAppStoreApps
       parameters:
       - name: search
@@ -295,6 +295,95 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ValidValue:
+      required:
+      - Code
+      - Name
+      type: object
+      properties:
+        Code:
+          type: string
+          example: string
+        Name:
+          type: string
+          example: Example Name
+    AppStoreAppSummary:
+      required:
+      - Id
+      - VerificationStatus
+      - Internal
+      - Name
+      - Description
+      - Categories
+      - Countries
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '500123'
+        VerificationStatus:
+          enum:
+          - Draft
+          - Submitted
+          - Verified
+          type: string
+          example: Draft
+        Logo:
+          type: string
+          example: string
+        Internal:
+          type: boolean
+          example: true
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        IsEnabled:
+          type: boolean
+          example: true
+        Categories:
+          type: array
+          items:
+            enum:
+            - PointOfSale
+            - DeliveryAndLogistics
+            - CRM
+            - GiftCard
+            - Accounting
+            - LoyaltyAndMarketing
+            - Other
+            type: string
+          example:
+          - PointOfSale
+        Countries:
+          type: array
+          items:
+            enum:
+            - GB
+            - IE
+            - FR
+            - ES
+            - PT
+            - IT
+            - DE
+            - PL
+            - BE
+            - LU
+            - NL
+            - US
+            - CA
+            - BG
+            - MX
+            - AU
+            - NZ
+            type: string
+          example:
+          - GB
+        DeveloperName:
+          type: string
+          example: Example Name
     FieldGroup:
       required:
       - Name
@@ -320,6 +409,114 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Field'
+          example: []
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Key:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        DefaultValue:
+          type: string
+          example: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+          example: []
+        ValidationRegex:
+          type: string
+          example: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+          example: Text
+        IsFlipdishRestricted:
+          type:
+          - boolean
+          - 'null'
+          example: true
+    AppStoreAppSupportInfo:
+      type: object
+      properties:
+        PrivacyPolicy:
+          type: string
+          example: string
+        TermsOfUse:
+          type: string
+          example: string
+        CompanyWebsite:
+          type: string
+          example: string
+        LearnMore:
+          type: string
+          example: string
+        InstallationMessage:
+          type: string
+          example: string
+        SupportEmail:
+          type: string
+          example: owner@example.com
+    RestApiPaginationResult_AppStoreAppSummary_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppStoreAppSummary'
           example: []
     AppStoreApp:
       required:
@@ -463,104 +660,6 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    AppStoreAppSupportInfo:
-      type: object
-      properties:
-        PrivacyPolicy:
-          type: string
-          example: string
-        TermsOfUse:
-          type: string
-          example: string
-        CompanyWebsite:
-          type: string
-          example: string
-        LearnMore:
-          type: string
-          example: string
-        InstallationMessage:
-          type: string
-          example: string
-        SupportEmail:
-          type: string
-          example: owner@example.com
-    AppStoreAppSummary:
-      required:
-      - Id
-      - VerificationStatus
-      - Internal
-      - Name
-      - Description
-      - Categories
-      - Countries
-      type: object
-      properties:
-        Id:
-          type: string
-          example: '500123'
-        VerificationStatus:
-          enum:
-          - Draft
-          - Submitted
-          - Verified
-          type: string
-          example: Draft
-        Logo:
-          type: string
-          example: string
-        Internal:
-          type: boolean
-          example: true
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        IsEnabled:
-          type: boolean
-          example: true
-        Categories:
-          type: array
-          items:
-            enum:
-            - PointOfSale
-            - DeliveryAndLogistics
-            - CRM
-            - GiftCard
-            - Accounting
-            - LoyaltyAndMarketing
-            - Other
-            type: string
-          example:
-          - PointOfSale
-        Countries:
-          type: array
-          items:
-            enum:
-            - GB
-            - IE
-            - FR
-            - ES
-            - PT
-            - IT
-            - DE
-            - PL
-            - BE
-            - LU
-            - NL
-            - US
-            - CA
-            - BG
-            - MX
-            - AU
-            - NZ
-            type: string
-          example:
-          - GB
-        DeveloperName:
-          type: string
-          example: Example Name
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -581,92 +680,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    Field:
-      required:
-      - Name
-      - Description
-      - Key
-      - Position
-      - FieldType
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        Key:
-          type: string
-          example: string
-        Tooltip:
-          type: string
-          example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        DefaultValue:
-          type: string
-          example: string
-        ValidValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidValue'
-          example: []
-        ValidationRegex:
-          type: string
-          example: string
-        FieldType:
-          enum:
-          - Text
-          - TextArea
-          - Integer
-          - Decimal
-          - Date
-          - DateTime
-          - Time
-          - Select
-          - Boolean
-          - ActionButton
-          type: string
-          example: Text
-        IsFlipdishRestricted:
-          type: boolean
-          nullable: true
-          example: true
-    RestApiPaginationResult_AppStoreAppSummary_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/AppStoreAppSummary'
-          example: []
     RestApiResult_AppStoreApp_:
       description: Rest api result
       required:
@@ -675,18 +688,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/AppStoreApp'
-    ValidValue:
-      required:
-      - Code
-      - Name
-      type: object
-      properties:
-        Code:
-          type: string
-          example: string
-        Name:
-          type: string
-          example: Example Name
   securitySchemes:
     oauth2:
       type: oauth2

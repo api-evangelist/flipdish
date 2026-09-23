@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts MenuZones API
+  title: Flipdish API - Menus Menu Zones API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -1283,14 +1283,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_MenuZone_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuZone'
     Stream:
       type: object
       properties:
@@ -1327,6 +1319,44 @@ components:
           format: int32
           type: integer
           example: 1
+    RestApiResult_MenuZone_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuZone'
+    HttpPostedFileBase:
+      type: object
+      properties:
+        ContentLength:
+          format: int32
+          type: integer
+          readOnly: true
+          example: 1
+        ContentType:
+          type: string
+          readOnly: true
+          example: string
+        FileName:
+          type: string
+          readOnly: true
+          example: Example Name
+        InputStream:
+          $ref: '#/components/schemas/Stream'
+    RestApiArrayResult_MenuZone_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuZone'
+          example: []
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1347,18 +1377,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiArrayResult_MenuZone_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuZone'
-          example: []
     MenuZone:
       description: MenuZone.
       type: object
@@ -1394,24 +1412,6 @@ components:
           description: ImageUrl.
           type: string
           example: https://api.flipdish.co/example
-    HttpPostedFileBase:
-      type: object
-      properties:
-        ContentLength:
-          format: int32
-          type: integer
-          readOnly: true
-          example: 1
-        ContentType:
-          type: string
-          readOnly: true
-          example: string
-        FileName:
-          type: string
-          readOnly: true
-          example: Example Name
-        InputStream:
-          $ref: '#/components/schemas/Stream'
   securitySchemes:
     oauth2:
       type: oauth2

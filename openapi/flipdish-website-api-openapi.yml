@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Website API
+  title: Flipdish API - Apps Website API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -974,6 +974,142 @@ components:
           description: Message of the testimonial
           type: string
           example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_WebsiteImage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WebsiteImage'
+    RestApiResult_IndexPage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/IndexPage'
+    IndexPageBase:
+      description: Base of Index Page
+      type: object
+      properties:
+        AboutSectionEnabled:
+          description: About section enabled
+          type: boolean
+          example: true
+        AboutSectionTitle:
+          description: About section title
+          type: string
+          example: string
+        AboutSectionSubtitle:
+          description: About section sub-title
+          type: string
+          example: string
+        AboutSectionLeftTitle:
+          description: About section title left
+          type: string
+          example: string
+        AboutSectionLeftBody:
+          description: About section text left
+          type: string
+          example: string
+        AboutSectionRightTitle:
+          description: About section title right
+          type: string
+          example: string
+        AboutSectionRightBody:
+          description: About section text right
+          type: string
+          example: string
+        OpeningHoursEnabled:
+          description: Opening hours section Enabled
+          type: boolean
+          example: true
+        MenuPreviewEnabled:
+          description: Menu Preview section Enabled
+          type: boolean
+          example: true
+        GalleryEnabled:
+          description: Gallery section enabled
+          type: boolean
+          example: true
+        TestimonialsEnabled:
+          description: Testimonials section Enabled
+          type: boolean
+          example: true
+        ContactFormEnabled:
+          description: Contact Form section Enabled
+          type: boolean
+          example: true
+        ContactFormEmail:
+          description: Contact Form Email
+          type: string
+          example: owner@example.com
+        MapEnabled:
+          description: Map section Enabled
+          type: boolean
+          example: true
+    RestApiResult_IndexPageBase_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/IndexPageBase'
+    RestApiResult_WebsiteTestimonial_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WebsiteTestimonial'
+    WebsiteImage:
+      description: Represents a website image
+      type: object
+      properties:
+        ImageId:
+          format: int32
+          description: Represents the id of the image
+          type: integer
+          example: 500123
+        ImageLocation:
+          description: Represents the location of the image
+          enum:
+          - IndexHeader
+          - IndexAboutSectionLeft
+          - IndexAboutSectionRight
+          - IndexGallery
+          - IndexOpeningHoursHeader
+          - IndexTestimonialsHeader
+          type: string
+          example: IndexHeader
+        ImageUrl:
+          description: Represents the image url
+          type: string
+          example: https://api.flipdish.co/example
     IndexPage:
       description: Index Page
       type: object
@@ -1046,142 +1182,6 @@ components:
           description: Map section Enabled
           type: boolean
           example: true
-    RestApiResult_WebsiteImage_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/WebsiteImage'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    IndexPageBase:
-      description: Base of Index Page
-      type: object
-      properties:
-        AboutSectionEnabled:
-          description: About section enabled
-          type: boolean
-          example: true
-        AboutSectionTitle:
-          description: About section title
-          type: string
-          example: string
-        AboutSectionSubtitle:
-          description: About section sub-title
-          type: string
-          example: string
-        AboutSectionLeftTitle:
-          description: About section title left
-          type: string
-          example: string
-        AboutSectionLeftBody:
-          description: About section text left
-          type: string
-          example: string
-        AboutSectionRightTitle:
-          description: About section title right
-          type: string
-          example: string
-        AboutSectionRightBody:
-          description: About section text right
-          type: string
-          example: string
-        OpeningHoursEnabled:
-          description: Opening hours section Enabled
-          type: boolean
-          example: true
-        MenuPreviewEnabled:
-          description: Menu Preview section Enabled
-          type: boolean
-          example: true
-        GalleryEnabled:
-          description: Gallery section enabled
-          type: boolean
-          example: true
-        TestimonialsEnabled:
-          description: Testimonials section Enabled
-          type: boolean
-          example: true
-        ContactFormEnabled:
-          description: Contact Form section Enabled
-          type: boolean
-          example: true
-        ContactFormEmail:
-          description: Contact Form Email
-          type: string
-          example: owner@example.com
-        MapEnabled:
-          description: Map section Enabled
-          type: boolean
-          example: true
-    RestApiResult_IndexPageBase_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/IndexPageBase'
-    WebsiteImage:
-      description: Represents a website image
-      type: object
-      properties:
-        ImageId:
-          format: int32
-          description: Represents the id of the image
-          type: integer
-          example: 500123
-        ImageLocation:
-          description: Represents the location of the image
-          enum:
-          - IndexHeader
-          - IndexAboutSectionLeft
-          - IndexAboutSectionRight
-          - IndexGallery
-          - IndexOpeningHoursHeader
-          - IndexTestimonialsHeader
-          type: string
-          example: IndexHeader
-        ImageUrl:
-          description: Represents the image url
-          type: string
-          example: https://api.flipdish.co/example
-    RestApiResult_IndexPage_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/IndexPage'
-    RestApiResult_WebsiteTestimonial_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/WebsiteTestimonial'
   securitySchemes:
     oauth2:
       type: oauth2

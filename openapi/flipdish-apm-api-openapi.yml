@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Apm API
+  title: Flipdish API - Platform Apm API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -16,13 +16,13 @@ security:
 - oauth2:
   - api
 tags:
-- name: Apm
+- name: APM
   description: Operations for Apm.
 paths:
   /api/v1.0/{appId}/apm/status:
     get:
       tags:
-      - Apm
+      - APM
       operationId: GetApmStatus
       parameters:
       - name: appId
@@ -117,7 +117,7 @@ paths:
   /api/v1.0/{appId}/apm/statistics:
     get:
       tags:
-      - Apm
+      - APM
       operationId: GetBasicStatistics
       parameters:
       - name: appId
@@ -226,7 +226,7 @@ paths:
   /api/v1.0/{appId}/apm/statistics/calendar:
     get:
       tags:
-      - Apm
+      - APM
       operationId: GetCalendarWeekStatistics
       parameters:
       - name: appId
@@ -332,7 +332,7 @@ paths:
   /api/v1.0/{appId}/apm/calls:
     get:
       tags:
-      - Apm
+      - APM
       operationId: GetPaginatedCallList
       parameters:
       - name: appId
@@ -457,7 +457,7 @@ paths:
   /api/v1.0/{appId}/apm/statistics/calls/{aggregateDataBy}:
     get:
       tags:
-      - Apm
+      - APM
       operationId: GetCallsStatistics
       parameters:
       - name: appId
@@ -582,7 +582,7 @@ paths:
   /api/v1.0/{appId}/apm/statistics/orders/{aggregateDataBy}:
     get:
       tags:
-      - Apm
+      - APM
       operationId: GetOrderStatistics
       parameters:
       - name: appId
@@ -706,78 +706,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ApmStatus:
-      description: APM status
+    ApmCurrencyDataPoint:
+      description: A single data point in timeline graphs related to APM
       type: object
       properties:
-        IsApmEnabled:
-          description: Indicates if APM is active or otherwise
-          type: boolean
-          example: true
-    PhoneCall:
-      description: Phone call
-      type: object
-      properties:
-        PhoneCallId:
-          format: int32
-          description: Phone call id
-          type: integer
-          example: 500123
-        CallSid:
-          description: Twilio Call SID
-          type: string
-          example: '500123'
-        TimeOfCall:
+        PeriodStart:
           format: date-time
-          description: Time of the call
+          description: Date from which the data point starts
           type: string
           example: '2026-06-02T12:00:00Z'
-        TimeOfCallLocal:
-          format: date-time
-          description: Time of the call, local to the store to which the call was made
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        StoreId:
+        PeriodLengthInDays:
           format: int32
-          description: ID of the store that the call was TO
-          type: integer
-          example: 500123
-        StoreName:
-          description: Name of the store that the call was TO
-          type: string
-          example: Example Name
-        CallerName:
-          description: Name of the caller
-          type: string
-          example: Example Name
-        CallerUserId:
-          format: int32
-          description: UserID of the caller
-          type: integer
-          example: 500123
-        CallerNumber:
-          description: Phone number of the caller
-          type: string
-          example: string
-        CallLengthInSeconds:
-          format: int32
-          description: The amount of time the call took
+          description: The length in days that this data point covers
           type: integer
           example: 1
-        CallStatus:
-          description: The status of the call
-          enum:
-          - Queued
-          - Ringing
-          - InProgress
-          - Completed
-          - Failed
-          - Busy
-          - NoAnswer
-          - Unknown
-          - Canceled
-          type: string
-          example: Queued
+        CurrencyData:
+          description: The values of this data point
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyData'
+          example: []
+    ApmStatistics:
+      description: APM Statistics
+      type: object
+      properties:
+        EstimatedMinutesSaved:
+          format: int32
+          description: Total amount of time spent with APM
+          type: integer
+          example: 1
+        EstimatedMinutesCouldSaved:
+          format: int32
+          description: Total amount of time that could be saved
+          type: integer
+          example: 1
+        CurrencyData:
+          description: Currency based data
+          type: array
+          items:
+            $ref: '#/components/schemas/StatisticsCurrencyDataPoint'
+          example: []
     CurrencyData:
       description: A single currency data piece, with no date
       type: object
@@ -905,165 +873,6 @@ components:
           description: Value
           type: number
           example: 1.0
-    ApmHourlyDataPoint:
-      description: Provides an average value for a single hour of day of the week
-      type: object
-      properties:
-        Day:
-          description: Day of the week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-        Hour:
-          format: int32
-          description: Hour in the day
-          type: integer
-          example: 1
-        TotalValue:
-          format: int32
-          description: Total Value
-          type: integer
-          example: 12.5
-    RestApiArrayResult_ApmHourlyDataPoint_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ApmHourlyDataPoint'
-          example: []
-    RestApiArrayResult_ApmDataPoint_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ApmDataPoint'
-          example: []
-    RestApiPaginationResult_PhoneCall_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PhoneCall'
-          example: []
-    RestApiResult_ApmStatistics_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ApmStatistics'
-    RestApiArrayResult_ApmCurrencyDataPoint_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ApmCurrencyDataPoint'
-          example: []
-    ApmStatistics:
-      description: APM Statistics
-      type: object
-      properties:
-        EstimatedMinutesSaved:
-          format: int32
-          description: Total amount of time spent with APM
-          type: integer
-          example: 1
-        EstimatedMinutesCouldSaved:
-          format: int32
-          description: Total amount of time that could be saved
-          type: integer
-          example: 1
-        CurrencyData:
-          description: Currency based data
-          type: array
-          items:
-            $ref: '#/components/schemas/StatisticsCurrencyDataPoint'
-          example: []
-    ApmDataPoint:
-      description: A single data point in timeline graphs related to APM
-      type: object
-      properties:
-        PeriodStart:
-          format: date-time
-          description: Date from which the data point starts
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        PeriodLengthInDays:
-          format: int32
-          description: The length in days that this data point covers
-          type: integer
-          example: 1
-        Value:
-          format: int32
-          description: The value of this data point
-          type: integer
-          example: 1
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     StatisticsCurrencyDataPoint:
       description: A single currency data point, with no date
       type: object
@@ -1209,7 +1018,187 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/ApmStatus'
-    ApmCurrencyDataPoint:
+    RestApiResult_ApmStatistics_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ApmStatistics'
+    RestApiPaginationResult_PhoneCall_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneCall'
+          example: []
+    PhoneCall:
+      description: Phone call
+      type: object
+      properties:
+        PhoneCallId:
+          format: int32
+          description: Phone call id
+          type: integer
+          example: 500123
+        CallSid:
+          description: Twilio Call SID
+          type: string
+          example: '500123'
+        TimeOfCall:
+          format: date-time
+          description: Time of the call
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        TimeOfCallLocal:
+          format: date-time
+          description: Time of the call, local to the store to which the call was made
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        StoreId:
+          format: int32
+          description: ID of the store that the call was TO
+          type: integer
+          example: 500123
+        StoreName:
+          description: Name of the store that the call was TO
+          type: string
+          example: Example Name
+        CallerName:
+          description: Name of the caller
+          type: string
+          example: Example Name
+        CallerUserId:
+          format: int32
+          description: UserID of the caller
+          type: integer
+          example: 500123
+        CallerNumber:
+          description: Phone number of the caller
+          type: string
+          example: string
+        CallLengthInSeconds:
+          format: int32
+          description: The amount of time the call took
+          type: integer
+          example: 1
+        CallStatus:
+          description: The status of the call
+          enum:
+          - Queued
+          - Ringing
+          - InProgress
+          - Completed
+          - Failed
+          - Busy
+          - NoAnswer
+          - Unknown
+          - Canceled
+          type: string
+          example: Queued
+    RestApiArrayResult_ApmDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ApmDataPoint'
+          example: []
+    ApmStatus:
+      description: APM status
+      type: object
+      properties:
+        IsApmEnabled:
+          description: Indicates if APM is active or otherwise
+          type: boolean
+          example: true
+    ApmHourlyDataPoint:
+      description: Provides an average value for a single hour of day of the week
+      type: object
+      properties:
+        Day:
+          description: Day of the week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        Hour:
+          format: int32
+          description: Hour in the day
+          type: integer
+          example: 1
+        TotalValue:
+          format: int32
+          description: Total Value
+          type: integer
+          example: 12.5
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_ApmHourlyDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ApmHourlyDataPoint'
+          example: []
+    ApmDataPoint:
       description: A single data point in timeline graphs related to APM
       type: object
       properties:
@@ -1223,11 +1212,22 @@ components:
           description: The length in days that this data point covers
           type: integer
           example: 1
-        CurrencyData:
-          description: The values of this data point
+        Value:
+          format: int32
+          description: The value of this data point
+          type: integer
+          example: 1
+    RestApiArrayResult_ApmCurrencyDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/CurrencyData'
+            $ref: '#/components/schemas/ApmCurrencyDataPoint'
           example: []
   securitySchemes:
     oauth2:

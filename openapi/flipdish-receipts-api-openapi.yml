@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Receipts API
+  title: Flipdish API - Payments Receipts API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Payments operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -164,6 +164,60 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PreviousOrderItemOption:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+    PreviousOrderItem:
+      type: object
+      properties:
+        MenuSectionDisplayOrder:
+          format: int32
+          type: integer
+          example: 1
+        MenuSectionName:
+          type: string
+          example: Example Name
+        Name:
+          type: string
+          example: Example Name
+        PriceIncludingOptionSetItems:
+          format: double
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          type: number
+          example: 12.5
+        PreviousOrderItemOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousOrderItemOption'
+          example: []
+    TaxRate:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Percentage:
+          format: double
+          type: number
+          example: 1.0
+        Total:
+          format: double
+          type: number
+          example: 12.5
     PreviousOrder:
       type: object
       properties:
@@ -403,60 +457,6 @@ components:
         CountryCode:
           type: string
           example: IE
-    PreviousOrderItemOption:
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        DepositReturnFee:
-          format: double
-          type: number
-          example: 12.5
-    TaxRate:
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Percentage:
-          format: double
-          type: number
-          example: 1.0
-        Total:
-          format: double
-          type: number
-          example: 12.5
-    PreviousOrderItem:
-      type: object
-      properties:
-        MenuSectionDisplayOrder:
-          format: int32
-          type: integer
-          example: 1
-        MenuSectionName:
-          type: string
-          example: Example Name
-        Name:
-          type: string
-          example: Example Name
-        PriceIncludingOptionSetItems:
-          format: double
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          type: number
-          example: 12.5
-        TaxAmount:
-          format: double
-          type: number
-          example: 12.5
-        PreviousOrderItemOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreviousOrderItemOption'
-          example: []
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).

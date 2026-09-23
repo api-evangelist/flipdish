@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts StoreGroups API
+  title: Flipdish API - Stores Store Groups API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Stores operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -941,26 +941,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_StoreGroupBase_:
-      description: Rest api result
+    RestApiPaginationResult_StoreGroup_:
+      description: Rest api pagination result
       required:
+      - Page
+      - Limit
+      - TotalRecordCount
       - Data
       type: object
       properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
         Data:
-          $ref: '#/components/schemas/StoreGroupBase'
-    CustomerMessages:
-      description: Delivery and pickup menu messages for a customer
-      type: object
-      properties:
-        DeliveryMenuMessage:
-          description: Delivery menu message
-          type: string
-          example: string
-        PickupMenuMessage:
-          description: Pickup menu message
-          type: string
-          example: string
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreGroup'
+          example: []
     GroupedCoordinates:
       description: Describes coordinates that have a group
       type: object
@@ -980,23 +990,6 @@ components:
           description: Count of members in the group
           type: integer
           example: 3
-    StoreHeader:
-      description: Represents the most basic store information, used mostly for searches
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Category:
-          description: Name
-          type: string
-          example: string
     StoreGroupBase:
       description: Update Store Group
       type: object
@@ -1123,27 +1116,10 @@ components:
           - BMD
           type: string
           example: EUR
-    StoreGroupExtended:
-      description: Store Group Extended
+    StoreGroup:
+      description: Store Group
       type: object
       properties:
-        TotalStores:
-          format: int32
-          description: Total Amount of Stores
-          type: integer
-          example: 12.5
-        GroupedCoordinates:
-          description: Grouped store coordinates
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupedCoordinates'
-          example: []
-        StoreHeaders:
-          description: Store Headers associated with Store Group
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreHeader'
-          example: []
         StoreGroupId:
           format: int32
           description: Unique Store Group Identifier
@@ -1152,8 +1128,9 @@ components:
         GeneralRating:
           format: double
           description: Store Group rating
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           example: 1.0
         GeneralRatingCount:
           format: int32
@@ -1297,6 +1274,18 @@ components:
           - BMD
           type: string
           example: EUR
+    CustomerMessages:
+      description: Delivery and pickup menu messages for a customer
+      type: object
+      properties:
+        DeliveryMenuMessage:
+          description: Delivery menu message
+          type: string
+          example: string
+        PickupMenuMessage:
+          description: Pickup menu message
+          type: string
+          example: string
     RestApiPaginationResult_StoreGroupExtended_:
       description: Rest api pagination result
       required:
@@ -1327,30 +1316,27 @@ components:
           items:
             $ref: '#/components/schemas/StoreGroupExtended'
           example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    StoreGroup:
-      description: Store Group
+    StoreGroupExtended:
+      description: Store Group Extended
       type: object
       properties:
+        TotalStores:
+          format: int32
+          description: Total Amount of Stores
+          type: integer
+          example: 12.5
+        GroupedCoordinates:
+          description: Grouped store coordinates
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupedCoordinates'
+          example: []
+        StoreHeaders:
+          description: Store Headers associated with Store Group
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreHeader'
+          example: []
         StoreGroupId:
           format: int32
           description: Unique Store Group Identifier
@@ -1359,8 +1345,9 @@ components:
         GeneralRating:
           format: double
           description: Store Group rating
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           example: 1.0
         GeneralRatingCount:
           format: int32
@@ -1504,36 +1491,43 @@ components:
           - BMD
           type: string
           example: EUR
-    RestApiPaginationResult_StoreGroup_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
+    StoreHeader:
+      description: Represents the most basic store information, used mostly for searches
       type: object
       properties:
-        Page:
+        StoreId:
           format: int32
-          description: Current page index
+          description: Store identifier
           type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreGroup'
-          example: []
+          example: 500123
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Category:
+          description: Name
+          type: string
+          example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     RestApiResult_StoreGroup_:
       description: Rest api result
       required:
@@ -1542,6 +1536,14 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/StoreGroup'
+    RestApiResult_StoreGroupBase_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreGroupBase'
   securitySchemes:
     oauth2:
       type: oauth2

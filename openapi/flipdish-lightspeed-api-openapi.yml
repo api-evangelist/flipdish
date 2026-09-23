@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Lightspeed API
+  title: Flipdish API - Platform Lightspeed API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -399,34 +399,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiResult_LightspeedSettings_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/LightspeedSettings'
     LightspeedSettings:
       description: Ligthspeed store settings
       type: object
@@ -479,8 +451,9 @@ components:
           - Default
           - Takeaway
           - Delivery
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: Default
         MenuId:
           format: int32
@@ -490,14 +463,16 @@ components:
         CollectionTableId:
           format: int32
           description: Collection Table ID to send orders
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
         DeliveryTableId:
           format: int32
           description: Delivery Table ID to send orders
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 500123
         CollectionTableIds:
           description: Collection Table IDs to send orders to
@@ -537,6 +512,34 @@ components:
           description: The Lightspeed Service Charge Id to map
           type: string
           example: '500123'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiResult_LightspeedSettings_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/LightspeedSettings'
   securitySchemes:
     oauth2:
       type: oauth2

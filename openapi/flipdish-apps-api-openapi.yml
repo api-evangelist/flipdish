@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Accounts Apps API
+  title: Flipdish Apps API
   version: v1.0
   description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
@@ -2437,123 +2437,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AppLookup:
-      description: App lookup model
-      type: object
-      properties:
-        AppId:
-          description: App id
-          type: string
-          example: '500123'
-    Coordinates:
-      description: Coordinates
-      type: object
-      properties:
-        Latitude:
-          format: double
-          description: Latitude
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude
-          type: number
-          example: 1.0
-    AppCompliance:
-      description: Application compliance model
-      type: object
-      properties:
-        AppId:
-          description: App ID
-          type: string
-          example: '500123'
-        ComplianceType:
-          description: "Type of compliance.\r\nThis controls if the Flipdish websites and apps display cookie consent banners and adjust cookies to be inline with various regulations. \r\nYou should set this correctly based on your region."
-          enum:
-          - Default
-          - GdprCompliance
-          type: string
-          example: Default
-        AllowDisablingOfGdpr:
-          description: For EU countries, we should not allow to change the option to “Default banner”, but all other countries should be able to do so.
-          type: boolean
-          example: true
-    RestApiResult_DnsRecordInformation_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/DnsRecordInformation'
-    RestApiResult_App_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/App'
-    AppConfigUpdateModel:
-      description: Application configuration
-      type: object
-      properties:
-        Name:
-          description: "App name. \r\nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites."
-          type: string
-          example: Example Name
-        HostName:
-          description: HostName on which the web-ordering system is allowed to be hosted or that a Flipdish website is hosted on.
-          type: string
-          example: Example Name
-        MainColor:
-          description: Main color of the web / Android / iOS applications
-          type: string
-          example: string
-        KioskPrimaryColour:
-          description: Primary colour used on the Kiosk
-          type: string
-          example: string
-        ApplicationCategory:
-          description: Application Category
-          enum:
-          - Restaurant
-          - Cafe
-          - Convenience
-          type: string
-          example: Restaurant
-        IsPanaceaEnabled:
-          description: "Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App's website is hosted on this domain.\r\nThe alternative to using Panacea websites is to use a custom domain."
-          type: boolean
-          example: true
-        PanaceaVanityUrl:
-          description: In case of IsPanaceaEnabled is true, the app can be accessed via https://my.flipdish.com/{PanaceaVanityUrl}
-          type: string
-          example: https://api.flipdish.co/example
-        CookieConsentPromptEnabled:
-          description: Cookie Consent Prompt Enabled
-          type: boolean
-          example: true
-        LogoImageUrl:
-          description: Logo image URL
-          type: string
-          example: https://api.flipdish.co/example
-        CountryId:
-          description: "Country identifier in ISO 3166-1 alpha-2 format. \r\nThis code is set automatically based on the locations of the Stores in the App. \r\n\r\nThe App Country is used \r\n - to determine how to parse mobile phone numbers that are entered in their local numbering format\r\n - to determine if country specific payment methods should be offered\r\n - in various fraud checks"
-          maxLength: 2
-          minLength: 0
-          type: string
-          example: '500123'
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
     DnsRecordInformation:
       description: Holds the information for the A and CNAME Records of a domain.
       type: object
@@ -2570,6 +2453,14 @@ components:
           description: indicates whether the API CNAME record is ready or not.
           type: boolean
           example: true
+    RestApiResult_App_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/App'
     Language:
       description: Sorted Language
       type: object
@@ -2591,84 +2482,25 @@ components:
           description: Is the language enabled for use.
           type: boolean
           example: true
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiResult_AppCompliance_:
-      description: Rest api result
-      required:
-      - Data
+    AppCompliance:
+      description: Application compliance model
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/AppCompliance'
-    RestApiArrayResult_SupportedCountry_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/SupportedCountry'
-          example: []
-    RestApiPaginationResult_App_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-          example: []
-    CreateAppParameters:
-      description: The parameters required to create a new app.
-      type: object
-      properties:
-        Name:
-          description: The name of the brand that this app/white-label represents.
+        AppId:
+          description: App ID
           type: string
-          example: Example Name
+          example: '500123'
+        ComplianceType:
+          description: "Type of compliance.\nThis controls if the Flipdish websites and apps display cookie consent banners and adjust cookies to be inline with various regulations. \nYou should set this correctly based on your region."
+          enum:
+          - Default
+          - GdprCompliance
+          type: string
+          example: Default
+        AllowDisablingOfGdpr:
+          description: For EU countries, we should not allow to change the option to “Default banner”, but all other countries should be able to do so.
+          type: boolean
+          example: true
     SupportedCountry:
       description: Describes a supported country
       type: object
@@ -2726,6 +2558,156 @@ components:
           - Benelux
           type: string
           example: Default
+    RestApiArrayResult_SupportedCountry_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedCountry'
+          example: []
+    RestApiResult_DnsRecordInformation_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/DnsRecordInformation'
+    RestApiPaginationResult_App_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+          example: []
+    CreateAppParameters:
+      description: The parameters required to create a new app.
+      type: object
+      properties:
+        Name:
+          description: The name of the brand that this app/white-label represents.
+          type: string
+          example: Example Name
+    AppConfigUpdateModel:
+      description: Application configuration
+      type: object
+      properties:
+        Name:
+          description: "App name. \nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites."
+          type: string
+          example: Example Name
+        HostName:
+          description: HostName on which the web-ordering system is allowed to be hosted or that a Flipdish website is hosted on.
+          type: string
+          example: Example Name
+        MainColor:
+          description: Main color of the web / Android / iOS applications
+          type: string
+          example: string
+        KioskPrimaryColour:
+          description: Primary colour used on the Kiosk
+          type: string
+          example: string
+        ApplicationCategory:
+          description: Application Category
+          enum:
+          - Restaurant
+          - Cafe
+          - Convenience
+          type: string
+          example: Restaurant
+        IsPanaceaEnabled:
+          description: 'Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App''s website is hosted on this domain.
+
+            The alternative to using Panacea websites is to use a custom domain.'
+          type: boolean
+          example: true
+        PanaceaVanityUrl:
+          description: In case of IsPanaceaEnabled is true, the app can be accessed via https://my.flipdish.com/{PanaceaVanityUrl}
+          type: string
+          example: https://api.flipdish.co/example
+        CookieConsentPromptEnabled:
+          description: Cookie Consent Prompt Enabled
+          type: boolean
+          example: true
+        LogoImageUrl:
+          description: Logo image URL
+          type: string
+          example: https://api.flipdish.co/example
+        CountryId:
+          description: "Country identifier in ISO 3166-1 alpha-2 format. \nThis code is set automatically based on the locations of the Stores in the App. \n\nThe App Country is used \n - to determine how to parse mobile phone numbers that are entered in their local numbering format\n - to determine if country specific payment methods should be offered\n - in various fraud checks"
+          maxLength: 2
+          minLength: 0
+          type: string
+          example: '500123'
+    Coordinates:
+      description: Coordinates
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    RestApiResult_AppCompliance_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppCompliance'
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    AppLookup:
+      description: App lookup model
+      type: object
+      properties:
+        AppId:
+          description: App id
+          type: string
+          example: '500123'
     App:
       description: App
       type: object
@@ -3036,7 +3018,7 @@ components:
           type: string
           example: NoRedirect
         Name:
-          description: "App name. \r\nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites."
+          description: "App name. \nThis is used in various places on the Apple App Store, Google Play Store, mobile apps and websites."
           type: string
           example: Example Name
         HostName:
@@ -3060,7 +3042,9 @@ components:
           type: string
           example: Restaurant
         IsPanaceaEnabled:
-          description: "Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App's website is hosted on this domain.\r\nThe alternative to using Panacea websites is to use a custom domain."
+          description: 'Panacea is the term used for websites that are hosted on the my.flipdish.com domain. This value is true when the App''s website is hosted on this domain.
+
+            The alternative to using Panacea websites is to use a custom domain.'
           type: boolean
           example: true
         PanaceaVanityUrl:
@@ -3072,11 +3056,31 @@ components:
           type: boolean
           example: true
         CountryId:
-          description: "Country identifier in ISO 3166-1 alpha-2 format. \r\nThis code is set automatically based on the locations of the Stores in the App. \r\n\r\nThe App Country is used \r\n - to determine how to parse mobile phone numbers that are entered in their local numbering format\r\n - to determine if country specific payment methods should be offered\r\n - in various fraud checks"
+          description: "Country identifier in ISO 3166-1 alpha-2 format. \nThis code is set automatically based on the locations of the Stores in the App. \n\nThe App Country is used \n - to determine how to parse mobile phone numbers that are entered in their local numbering format\n - to determine if country specific payment methods should be offered\n - in various fraud checks"
           maxLength: 2
           minLength: 0
           type: string
           example: '500123'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

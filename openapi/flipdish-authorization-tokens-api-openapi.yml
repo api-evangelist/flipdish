@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts AuditLogs API
+  title: Flipdish API - Platform Authorization Tokens API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -16,29 +16,61 @@ security:
 - oauth2:
   - api
 tags:
-- name: AuditLogs
-  description: Operations for Audit Logs.
+- name: Authorization Tokens
+  description: Operations for Authorization Tokens.
 paths:
-  /api/v1.0/auditlogs/orders/{orderId}:
-    post:
+  /api/v1.0/{appId}/authorizationtokens/{oauthAppId}:
+    get:
       tags:
-      - AuditLogs
-      operationId: AddOrderAuditLog
+      - Authorization Tokens
+      operationId: GetAuthorizationTokens
       parameters:
-      - name: orderId
+      - name: oauthAppId
         in: path
         required: true
         schema:
+          type: string
+        description: The oauth app id path parameter.
+        example: '500123'
+      - name: page
+        in: query
+        required: false
+        schema:
           type: integer
           format: int32
-        description: The order id path parameter.
-        example: 500123
-      requestBody:
+        description: The page query parameter.
+        example: 1
+      - name: limit
+        in: query
         required: false
-        content: {}
+        schema:
+          type: integer
+          format: int32
+        description: The limit query parameter.
+        example: 1
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_OAuthTokenModel_'
+              examples:
+                GetAuthorizationTokens200Example:
+                  summary: Default GetAuthorizationTokens 200 response
+                  x-microcks-default: true
+                  value:
+                    Page: 1
+                    Limit: 1
+                    TotalRecordCount: 12.5
+                    Data: []
         '400':
           description: BadRequest
           content:
@@ -46,8 +78,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddOrderAuditLog400Example:
-                  summary: Default AddOrderAuditLog 400 response
+                GetAuthorizationTokens400Example:
+                  summary: Default GetAuthorizationTokens 400 response
                   x-microcks-default: true
                   value:
                     error:
@@ -55,14 +87,14 @@ paths:
                       errorCode: BadRequest
                       details: Validation failed for field 'storeId'.
         '401':
-          description: Authentication has been denied for this request.
+          description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddOrderAuditLog401Example:
-                  summary: Default AddOrderAuditLog 401 response
+                GetAuthorizationTokens401Example:
+                  summary: Default GetAuthorizationTokens 401 response
                   x-microcks-default: true
                   value:
                     error:
@@ -70,14 +102,29 @@ paths:
                       errorCode: BadRequest
                       details: Validation failed for field 'storeId'.
         '403':
-          description: Successful authentication, but authorization has been denied for this request.
+          description: Forbidden
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddOrderAuditLog403Example:
-                  summary: Default AddOrderAuditLog 403 response
+                GetAuthorizationTokens403Example:
+                  summary: Default GetAuthorizationTokens 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                GetAuthorizationTokens404Example:
+                  summary: Default GetAuthorizationTokens 404 response
                   x-microcks-default: true
                   value:
                     error:
@@ -91,8 +138,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddOrderAuditLog500Example:
-                  summary: Default AddOrderAuditLog 500 response
+                GetAuthorizationTokens500Example:
+                  summary: Default GetAuthorizationTokens 500 response
                   x-microcks-default: true
                   value:
                     error:
@@ -102,28 +149,31 @@ paths:
       security:
       - oauth2:
         - api
-      summary: Flipdish Add Order Audit Log
-      description: Add Order Audit Log via the Flipdish Open API v1.0 (POST /api/v1.0/auditlogs/orders/{orderId}).
+      summary: Flipdish Get Authorization Tokens
+      description: Get Authorization Tokens via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/authorizationtokens/{oauthAppId}).
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /api/v1.0/auditlogs/stores/{storeId}:
-    post:
+  /api/v1.0/{appId}/authorizationtokens/{key}:
+    delete:
       tags:
-      - AuditLogs
-      operationId: AddStoreAuditLogEvent
+      - Authorization Tokens
+      operationId: RevokeToken
       parameters:
-      - name: storeId
+      - name: key
         in: path
         required: true
         schema:
-          type: integer
-          format: int32
-        description: The store id path parameter.
-        example: 500123
-      requestBody:
-        required: false
-        content: {}
+          type: string
+        description: The key path parameter.
+        example: string
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The app id path parameter.
+        example: '500123'
       responses:
         '200':
           description: OK
@@ -134,8 +184,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddStoreAuditLogEvent400Example:
-                  summary: Default AddStoreAuditLogEvent 400 response
+                RevokeToken400Example:
+                  summary: Default RevokeToken 400 response
                   x-microcks-default: true
                   value:
                     error:
@@ -143,14 +193,14 @@ paths:
                       errorCode: BadRequest
                       details: Validation failed for field 'storeId'.
         '401':
-          description: Authentication has been denied for this request.
+          description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddStoreAuditLogEvent401Example:
-                  summary: Default AddStoreAuditLogEvent 401 response
+                RevokeToken401Example:
+                  summary: Default RevokeToken 401 response
                   x-microcks-default: true
                   value:
                     error:
@@ -158,14 +208,29 @@ paths:
                       errorCode: BadRequest
                       details: Validation failed for field 'storeId'.
         '403':
-          description: Successful authentication, but authorization has been denied for this request.
+          description: Forbidden
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddStoreAuditLogEvent403Example:
-                  summary: Default AddStoreAuditLogEvent 403 response
+                RevokeToken403Example:
+                  summary: Default RevokeToken 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      errorMessage: Invalid or missing parameters.
+                      errorCode: BadRequest
+                      details: Validation failed for field 'storeId'.
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlipdishError'
+              examples:
+                RevokeToken404Example:
+                  summary: Default RevokeToken 404 response
                   x-microcks-default: true
                   value:
                     error:
@@ -179,8 +244,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlipdishError'
               examples:
-                AddStoreAuditLogEvent500Example:
-                  summary: Default AddStoreAuditLogEvent 500 response
+                RevokeToken500Example:
+                  summary: Default RevokeToken 500 response
                   x-microcks-default: true
                   value:
                     error:
@@ -190,13 +255,38 @@ paths:
       security:
       - oauth2:
         - api
-      summary: Flipdish Add Store Audit Log Event
-      description: Add Store Audit Log Event via the Flipdish Open API v1.0 (POST /api/v1.0/auditlogs/stores/{storeId}).
+      summary: Flipdish Revoke Token
+      description: Revoke Token via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/authorizationtokens/{key}).
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
 components:
   schemas:
+    OAuthTokenModel:
+      description: OAuth token model
+      type: object
+      properties:
+        Key:
+          description: Identitifier key
+          type: string
+          example: string
+        TokenType:
+          description: Token type
+          type: string
+          example: string
+        SubjectId:
+          description: Oauth subject identifier
+          type: string
+          example: '500123'
+        ClientId:
+          description: Oauth client identifier
+          type: string
+          example: '500123'
+        Expiry:
+          format: date-time
+          description: Token expiry
+          type: string
+          example: '2026-06-02T12:00:00Z'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -217,6 +307,36 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiPaginationResult_OAuthTokenModel_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OAuthTokenModel'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

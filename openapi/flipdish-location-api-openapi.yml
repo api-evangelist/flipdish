@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Location API
+  title: Flipdish API - Stores Location API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Stores operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -757,22 +757,14 @@ components:
           items:
             $ref: '#/components/schemas/LocationArea_Location'
           example: []
-    MappedLocation:
-      description: Representation of a Location and its External Mapping
+    RestApiResult_LocationArea_Location_:
+      description: Rest api result
       required:
-      - LocationId
-      - ExternalLocationId
+      - Data
       type: object
       properties:
-        LocationId:
-          format: int32
-          description: Id of the Location
-          type: integer
-          example: 500123
-        ExternalLocationId:
-          description: Id of the Location on an external system
-          type: string
-          example: '500123'
+        Data:
+          $ref: '#/components/schemas/LocationArea_Location'
     LocationArea_Location:
       description: 'Representation of a Location i.e: (Table, Hotel Room, Car Park, etc )'
       required:
@@ -803,34 +795,6 @@ components:
           description: Shows if the Location is deleted or not
           type: boolean
           example: true
-    RestApiResult_LocationArea_Location_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/LocationArea_Location'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     RestApiResult_MappedLocation_:
       description: Rest api result
       required:
@@ -839,6 +803,22 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/MappedLocation'
+    MappedLocation:
+      description: Representation of a Location and its External Mapping
+      required:
+      - LocationId
+      - ExternalLocationId
+      type: object
+      properties:
+        LocationId:
+          format: int32
+          description: Id of the Location
+          type: integer
+          example: 500123
+        ExternalLocationId:
+          description: Id of the Location on an external system
+          type: string
+          example: '500123'
     CreateLocation:
       description: Input model for creating a Location
       type: object
@@ -861,6 +841,26 @@ components:
           description: Id of the Location on an external system
           type: string
           example: '500123'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

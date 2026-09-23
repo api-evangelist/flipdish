@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts KioskIot API
+  title: Flipdish API - Devices Kiosk Iot API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Devices operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -221,47 +221,32 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    KioskIotConnectionParameters:
-      description: Connection parameters to IoT
+    TelemetrySeriesResult:
+      description: TelemetrySeriesResult.
       type: object
       properties:
-        ConnectionString:
-          description: The device connection string to the IoT server
-          type: string
-          example: string
-    RestApiResult_KioskIotConnectionParameters_:
+        Timestamps:
+          description: Timestamps.
+          type: array
+          items:
+            format: date-time
+            type: string
+          example:
+          - '2026-06-02T12:00:00Z'
+        Properties:
+          description: Properties.
+          type: array
+          items:
+            $ref: '#/components/schemas/TelemetrySeriesProperty'
+          example: []
+    RestApiResult_TelemetrySeriesResult_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/KioskIotConnectionParameters'
-    TelemetrySeriesQueryParameters:
-      description: TelemetrySeriesQueryParameters.
-      type: object
-      properties:
-        KioskId:
-          description: KioskId.
-          type: string
-          example: '500123'
-        Variables:
-          description: Variables.
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        StartDate:
-          format: date-time
-          description: StartDate.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndDate:
-          format: date-time
-          description: EndDate.
-          type: string
-          example: '2026-06-02T12:00:00Z'
+          $ref: '#/components/schemas/TelemetrySeriesResult'
     TelemetrySeriesProperty:
       description: TelemetrySeriesProperty.
       type: object
@@ -297,14 +282,14 @@ components:
             type: number
           example:
           - 1.0
-    RestApiResult_TelemetrySeriesResult_:
-      description: Rest api result
-      required:
-      - Data
+    KioskIotConnectionParameters:
+      description: Connection parameters to IoT
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/TelemetrySeriesResult'
+        ConnectionString:
+          description: The device connection string to the IoT server
+          type: string
+          example: string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -325,24 +310,39 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    TelemetrySeriesResult:
-      description: TelemetrySeriesResult.
+    TelemetrySeriesQueryParameters:
+      description: TelemetrySeriesQueryParameters.
       type: object
       properties:
-        Timestamps:
-          description: Timestamps.
+        KioskId:
+          description: KioskId.
+          type: string
+          example: '500123'
+        Variables:
+          description: Variables.
           type: array
           items:
-            format: date-time
             type: string
           example:
-          - '2026-06-02T12:00:00Z'
-        Properties:
-          description: Properties.
-          type: array
-          items:
-            $ref: '#/components/schemas/TelemetrySeriesProperty'
-          example: []
+          - string
+        StartDate:
+          format: date-time
+          description: StartDate.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndDate:
+          format: date-time
+          description: EndDate.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_KioskIotConnectionParameters_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/KioskIotConnectionParameters'
   securitySchemes:
     oauth2:
       type: oauth2

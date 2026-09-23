@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Home API
+  title: Flipdish API - Platform Home API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -452,14 +452,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OktaPortalFeatureFlag:
-      description: Okta Portal Feature Flag Value
+    RestApiArrayResult_HomeAction_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        OktaPortalEnabled:
-          description: Feature flag backend_portal_enableOktaWebApi value
-          type: boolean
-          example: true
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeAction'
+          example: []
     CurrencyData:
       description: A single currency data piece, with no date
       type: object
@@ -587,38 +591,6 @@ components:
           description: Value
           type: number
           example: 1.0
-    RestApiArrayResult_HomeAction_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/HomeAction'
-          example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     RestApiResult_HomeStatistics_:
       description: Rest api result
       required:
@@ -627,6 +599,24 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/HomeStatistics'
+    OktaPortalFeatureFlag:
+      description: Okta Portal Feature Flag Value
+      type: object
+      properties:
+        OktaPortalEnabled:
+          description: Feature flag backend_portal_enableOktaWebApi value
+          type: boolean
+          example: true
+    HomeStatistics:
+      description: Home statitstics
+      type: object
+      properties:
+        TotalMoneySaved:
+          description: Money saved
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyData'
+          example: []
     RestApiResult_OktaPortalFeatureFlag_:
       description: Rest api result
       required:
@@ -676,16 +666,26 @@ components:
           description: ''
           type: boolean
           example: true
-    HomeStatistics:
-      description: Home statitstics
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        TotalMoneySaved:
-          description: Money saved
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyData'
-          example: []
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

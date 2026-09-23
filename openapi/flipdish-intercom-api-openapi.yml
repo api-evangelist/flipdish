@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flipdish API - Apps Accounts Intercom API
+  title: Flipdish API - Platform Intercom API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
+  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
   contact:
     name: Flipdish Support
     email: help@flipdish.com
@@ -108,14 +108,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_IntercomUserHash_:
-      description: Rest api result
-      required:
-      - Data
+    IntercomUserHash:
+      description: Intercom user hash
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/IntercomUserHash'
+        UserHash:
+          description: User hash
+          type: string
+          example: string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -136,14 +136,14 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    IntercomUserHash:
-      description: Intercom user hash
+    RestApiResult_IntercomUserHash_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        UserHash:
-          description: User hash
-          type: string
-          example: string
+        Data:
+          $ref: '#/components/schemas/IntercomUserHash'
   securitySchemes:
     oauth2:
       type: oauth2
