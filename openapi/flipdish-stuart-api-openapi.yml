@@ -529,97 +529,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobDriver:
-      description: Job Driver
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Id
-          type: integer
-          example: 500123
-        DisplayName:
-          description: Display Name
-          type: string
-          example: Example Name
-        Phone:
-          description: Phone
-          type: string
-          example: '+353000000000'
-        PictureUrl:
-          description: Picture Url
-          type: string
-          example: https://api.flipdish.co/example
-        TransportType:
-          description: Transport Type
-          type: string
-          example: string
-        Latitude:
-          format: double
-          description: Latitude
-          type:
-          - number
-          - 'null'
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude
-          type:
-          - number
-          - 'null'
-          example: 1.0
-    JobPricing:
-      description: Job Pricing
-      type: object
-      properties:
-        Currency:
-          description: Currency
-          type: string
-          example: EUR
-        TaxPercentage:
-          format: double
-          description: Tax Percentage
-          type:
-          - number
-          - 'null'
-          example: 1.0
-        PriceTaxIncluded:
-          format: double
-          description: Price Tax Included
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        PriceTaxExcluded:
-          format: double
-          description: Price Tax Excluded
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        TaxAmount:
-          format: double
-          description: Tax Amount
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        InvoiceUrl:
-          description: Invoice Url
-          type: string
-          example: https://api.flipdish.co/example
-    JobEta:
-      description: Job Eta
-      type: object
-      properties:
-        Pickup:
-          description: Pickup
-          type: string
-          example: string
-        Dropoff:
-          description: Dropoff
-          type: string
-          example: string
     JobResponse:
       description: Job Response
       type: object
@@ -688,105 +597,34 @@ components:
           $ref: '#/components/schemas/JobPricing'
         Driver:
           $ref: '#/components/schemas/JobDriver'
-    JobProof:
-      description: Job Proof
+    JobCancellation:
+      description: Job Cancellation
       type: object
       properties:
-        SignatureUrl:
-          description: Signature Url
-          type: string
-          example: https://api.flipdish.co/example
-    RestApiResult_StuartSettings_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/StuartSettings'
-    RestApiResult_JobResponse_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/JobResponse'
-    JobDelivery:
-      description: Job Delivery
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Id
-          type: integer
-          example: 500123
-        Status:
-          description: Status
-          type: string
-          example: Active
-        PickedAt:
-          description: Picked At
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        DeliveredAt:
-          description: Delivered At
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        TrackingUrl:
-          description: Tracking Url
-          type: string
-          example: https://api.flipdish.co/example
-        ClientReference:
-          description: Client Reference
+        CanceledBy:
+          description: Canceled By
           type: string
           example: string
-        PackageDescription:
-          description: Package Description
+        ReasonKey:
+          description: Reason Key
           type: string
           example: string
-        PackageType:
-          description: Package Type
+        Comment:
+          description: Comment
           type: string
           example: string
+    JobEta:
+      description: Job Eta
+      type: object
+      properties:
         Pickup:
-          $ref: '#/components/schemas/JobDeliveryDetail'
-        Dropoff:
-          $ref: '#/components/schemas/JobDeliveryDetail'
-        Eta:
-          $ref: '#/components/schemas/JobEta'
-        Cancellation:
-          $ref: '#/components/schemas/JobCancellation'
-        Proof:
-          $ref: '#/components/schemas/JobProof'
-    JobContact:
-      description: Job Contact
-      type: object
-      properties:
-        Firstname:
-          description: Firstname
-          type: string
-          example: Example Name
-        Lastname:
-          description: Lastname
-          type: string
-          example: Example Name
-        Phone:
-          description: Phone
-          type: string
-          example: '+353000000000'
-        Email:
-          description: Email
-          type: string
-          example: owner@example.com
-        Company:
-          description: Company
+          description: Pickup
           type: string
           example: string
-        CompanyName:
-          description: Company Name
+        Dropoff:
+          description: Dropoff
           type: string
-          example: Example Name
+          example: string
     JobAddress:
       description: Job Address
       type: object
@@ -813,73 +651,6 @@ components:
           example: string
         FormattedAddress:
           description: Formatted Address
-          type: string
-          example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    JobDeliveryDetail:
-      description: Job Delivery Detail
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Id
-          type: integer
-          example: 500123
-        Latitude:
-          format: double
-          description: Latitude
-          type:
-          - number
-          - 'null'
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude
-          type:
-          - number
-          - 'null'
-          example: 1.0
-        Comment:
-          description: Comment
-          type: string
-          example: string
-        Address:
-          $ref: '#/components/schemas/JobAddress'
-        Contact:
-          $ref: '#/components/schemas/JobContact'
-    JobCancellation:
-      description: Job Cancellation
-      type: object
-      properties:
-        CanceledBy:
-          description: Canceled By
-          type: string
-          example: string
-        ReasonKey:
-          description: Reason Key
-          type: string
-          example: string
-        Comment:
-          description: Comment
           type: string
           example: string
     StuartSettings:
@@ -968,6 +739,235 @@ components:
             Van:
               format: double
               type: number
+    JobPricing:
+      description: Job Pricing
+      type: object
+      properties:
+        Currency:
+          description: Currency
+          type: string
+          example: EUR
+        TaxPercentage:
+          format: double
+          description: Tax Percentage
+          type:
+          - number
+          - 'null'
+          example: 1.0
+        PriceTaxIncluded:
+          format: double
+          description: Price Tax Included
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        PriceTaxExcluded:
+          format: double
+          description: Price Tax Excluded
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax Amount
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        InvoiceUrl:
+          description: Invoice Url
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_JobResponse_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/JobResponse'
+    JobDeliveryDetail:
+      description: Job Delivery Detail
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        Latitude:
+          format: double
+          description: Latitude
+          type:
+          - number
+          - 'null'
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type:
+          - number
+          - 'null'
+          example: 1.0
+        Comment:
+          description: Comment
+          type: string
+          example: string
+        Address:
+          $ref: '#/components/schemas/JobAddress'
+        Contact:
+          $ref: '#/components/schemas/JobContact'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    JobDelivery:
+      description: Job Delivery
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        Status:
+          description: Status
+          type: string
+          example: Active
+        PickedAt:
+          description: Picked At
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        DeliveredAt:
+          description: Delivered At
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        TrackingUrl:
+          description: Tracking Url
+          type: string
+          example: https://api.flipdish.co/example
+        ClientReference:
+          description: Client Reference
+          type: string
+          example: string
+        PackageDescription:
+          description: Package Description
+          type: string
+          example: string
+        PackageType:
+          description: Package Type
+          type: string
+          example: string
+        Pickup:
+          $ref: '#/components/schemas/JobDeliveryDetail'
+        Dropoff:
+          $ref: '#/components/schemas/JobDeliveryDetail'
+        Eta:
+          $ref: '#/components/schemas/JobEta'
+        Cancellation:
+          $ref: '#/components/schemas/JobCancellation'
+        Proof:
+          $ref: '#/components/schemas/JobProof'
+    JobProof:
+      description: Job Proof
+      type: object
+      properties:
+        SignatureUrl:
+          description: Signature Url
+          type: string
+          example: https://api.flipdish.co/example
+    JobDriver:
+      description: Job Driver
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id
+          type: integer
+          example: 500123
+        DisplayName:
+          description: Display Name
+          type: string
+          example: Example Name
+        Phone:
+          description: Phone
+          type: string
+          example: '+353000000000'
+        PictureUrl:
+          description: Picture Url
+          type: string
+          example: https://api.flipdish.co/example
+        TransportType:
+          description: Transport Type
+          type: string
+          example: string
+        Latitude:
+          format: double
+          description: Latitude
+          type:
+          - number
+          - 'null'
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type:
+          - number
+          - 'null'
+          example: 1.0
+    RestApiResult_StuartSettings_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StuartSettings'
+    JobContact:
+      description: Job Contact
+      type: object
+      properties:
+        Firstname:
+          description: Firstname
+          type: string
+          example: Example Name
+        Lastname:
+          description: Lastname
+          type: string
+          example: Example Name
+        Phone:
+          description: Phone
+          type: string
+          example: '+353000000000'
+        Email:
+          description: Email
+          type: string
+          example: owner@example.com
+        Company:
+          description: Company
+          type: string
+          example: string
+        CompanyName:
+          description: Company Name
+          type: string
+          example: Example Name
   securitySchemes:
     oauth2:
       type: oauth2

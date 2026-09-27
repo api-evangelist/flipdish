@@ -164,60 +164,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PreviousOrderItemOption:
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        DepositReturnFee:
-          format: double
-          type: number
-          example: 12.5
-    PreviousOrderItem:
-      type: object
-      properties:
-        MenuSectionDisplayOrder:
-          format: int32
-          type: integer
-          example: 1
-        MenuSectionName:
-          type: string
-          example: Example Name
-        Name:
-          type: string
-          example: Example Name
-        PriceIncludingOptionSetItems:
-          format: double
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          type: number
-          example: 12.5
-        TaxAmount:
-          format: double
-          type: number
-          example: 12.5
-        PreviousOrderItemOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreviousOrderItemOption'
-          example: []
-    TaxRate:
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Percentage:
-          format: double
-          type: number
-          example: 1.0
-        Total:
-          format: double
-          type: number
-          example: 12.5
     PreviousOrder:
       type: object
       properties:
@@ -421,6 +367,16 @@ components:
           format: int32
           type: integer
           example: 500123
+    PreviousOrderItemOption:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
     GetReceiptByOrderIdQueryResponse:
       type: object
       properties:
@@ -457,6 +413,21 @@ components:
         CountryCode:
           type: string
           example: IE
+    DepositReturnFeesSummary:
+      type: object
+      properties:
+        Count:
+          format: int32
+          type: integer
+          example: 3
+        Fee:
+          format: double
+          type: number
+          example: 12.5
+        Total:
+          format: double
+          type: number
+          example: 12.5
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -477,21 +448,50 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    DepositReturnFeesSummary:
+    TaxRate:
       type: object
       properties:
-        Count:
-          format: int32
-          type: integer
-          example: 3
-        Fee:
+        Name:
+          type: string
+          example: Example Name
+        Percentage:
           format: double
           type: number
-          example: 12.5
+          example: 1.0
         Total:
           format: double
           type: number
           example: 12.5
+    PreviousOrderItem:
+      type: object
+      properties:
+        MenuSectionDisplayOrder:
+          format: int32
+          type: integer
+          example: 1
+        MenuSectionName:
+          type: string
+          example: Example Name
+        Name:
+          type: string
+          example: Example Name
+        PriceIncludingOptionSetItems:
+          format: double
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          type: number
+          example: 12.5
+        PreviousOrderItemOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousOrderItemOption'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

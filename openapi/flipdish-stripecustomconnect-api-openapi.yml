@@ -1080,56 +1080,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelBase:
-      description: Model base
-      type: object
-      properties: {}
-    RestApiResult_StripeConnectedAccount_:
-      description: Rest api result
-      required:
-      - Data
+    StripeConnectedAccountInfo:
+      description: Represents information about a Stripe connected account associated with a bank account
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/StripeConnectedAccount'
-    StripeConnectedAccount:
-      description: Represents a Stripe custom connected account
-      type: object
-      properties:
-        FlipdishConnectedAccountId:
-          format: int32
-          description: Flipdish connected account identifier
-          type: integer
-          example: 500123
-        StripeId:
-          description: Stripe's own connected account identifier
-          type: string
-          example: '500123'
-        WhitelabelConfigId:
-          format: int32
-          description: Id of the WhitelabelConfig the connected account is assigned to
-          type: integer
-          example: 500123
-        CardPaymentsStatus:
-          description: Card payments capability status (Inactive, Pending, Active, Unrequested)
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        TransfersStatus:
-          description: Transfers capability status (Inactive, Pending, Active, Unrequested)
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
         AccountStatus:
-          description: Current status of the account
+          description: Stripe connected account status
           enum:
           - Disabled
           - Enabled
@@ -1141,18 +1097,119 @@ components:
           - PlatformPaused
           type: string
           example: Disabled
+        StripeId:
+          description: Stripe connected account id
+          type: string
+          example: '500123'
+        CardPaymentStatus:
+          description: Current status of the Card Payment capability of the account
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+          example: Inactive
+        PayoutScheduleInterval:
+          description: Payouts Schedule Interval
+          enum:
+          - Manual
+          - Daily
+          - Weekly
+          - Monthly
+          type: string
+          example: Manual
         PayoutsEnabled:
           description: Payouts Enabled status
           type:
           - boolean
           - 'null'
           example: true
+        PayoutsPaused:
+          description: Flag indicating if payouts are paused
+          type: boolean
+          example: true
         PaymentsEnabled:
-          description: Payments Enabled status
+          description: Flag indicating if payments are enabled
           type:
           - boolean
           - 'null'
           example: true
+    BankAccountDetailsUpdateRequest:
+      description: Represents a request to update bank account information details
+      type: object
+      properties:
+        BankAddress:
+          description: Address of the bank account
+          type: string
+          example: string
+        AccountHolderAddress:
+          description: Address of the payee
+          type: string
+          example: string
+        VatNumber:
+          description: Account Holders Vat Number
+          type: string
+          example: string
+        StoreIds:
+          description: List of stores to attach to Account
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        BankName:
+          description: Name of Bank
+          type: string
+          example: Example Name
+        AccountName:
+          description: Name of this account
+          type: string
+          example: Example Name
+        Iban:
+          description: IBAN of this account
+          type: string
+          example: string
+        Swift:
+          description: SWIFT of this bank account
+          type: string
+          example: string
+        NationalClearingCode:
+          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
+          type: string
+          example: string
+        PopulatedAccountFields:
+          description: 'A list of one or more populated account fields (field key-value pairs).
+
+            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldKeyValuePair'
+          example: []
+        RejectionReason:
+          description: Reason for Rejection
+          type: string
+          example: string
+        BusinessType:
+          description: Business Type
+          enum:
+          - Individual
+          - Company
+          - NonProfit
+          - GovernmentEntity
+          type:
+          - string
+          - 'null'
+          example: Individual
+    RestApiResult_BankAccountDetail_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BankAccountDetail'
     StripeCustomConnectedAccount:
       description: Flipdish Stripe Custom Connected Account associated to the Store
       type: object
@@ -1223,48 +1280,6 @@ components:
           description: The value of the field
           type: string
           example: string
-    RestApiResult_BankAccountDetail_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BankAccountDetail'
-    RestApiResult_ModelBase_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ModelBase'
-    StripeAccountLinkRequest:
-      description: Represents a request for Stripe account link creation
-      type: object
-      properties:
-        StripeId:
-          description: Stripe's own connected account identifier
-          type: string
-          example: '500123'
-        ReturnUrl:
-          description: URL to be hit if link creation succeeds
-          type: string
-          example: https://api.flipdish.co/example
-        Collect:
-          description: Which information to collect from users at this stage
-          enum:
-          - CurrentlyDue
-          - EventuallyDue
-          type: string
-          example: CurrentlyDue
-        Type:
-          description: Either onboarding or edit user information
-          enum:
-          - Onboarding
-          - Update
-          type: string
-          example: Onboarding
     BankAccountDetail:
       description: ''
       type: object
@@ -1481,79 +1496,52 @@ components:
           - string
           - 'null'
           example: Individual
-    BankAccountDetailsUpdateRequest:
-      description: Represents a request to update bank account information details
+    RestApiResult_ModelBase_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        BankAddress:
-          description: Address of the bank account
+        Data:
+          $ref: '#/components/schemas/ModelBase'
+    StripeConnectedAccount:
+      description: Represents a Stripe custom connected account
+      type: object
+      properties:
+        FlipdishConnectedAccountId:
+          format: int32
+          description: Flipdish connected account identifier
+          type: integer
+          example: 500123
+        StripeId:
+          description: Stripe's own connected account identifier
           type: string
-          example: string
-        AccountHolderAddress:
-          description: Address of the payee
-          type: string
-          example: string
-        VatNumber:
-          description: Account Holders Vat Number
-          type: string
-          example: string
-        StoreIds:
-          description: List of stores to attach to Account
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        BankName:
-          description: Name of Bank
-          type: string
-          example: Example Name
-        AccountName:
-          description: Name of this account
-          type: string
-          example: Example Name
-        Iban:
-          description: IBAN of this account
-          type: string
-          example: string
-        Swift:
-          description: SWIFT of this bank account
-          type: string
-          example: string
-        NationalClearingCode:
-          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
-          type: string
-          example: string
-        PopulatedAccountFields:
-          description: 'A list of one or more populated account fields (field key-value pairs).
-
-            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountFieldKeyValuePair'
-          example: []
-        RejectionReason:
-          description: Reason for Rejection
-          type: string
-          example: string
-        BusinessType:
-          description: Business Type
+          example: '500123'
+        WhitelabelConfigId:
+          format: int32
+          description: Id of the WhitelabelConfig the connected account is assigned to
+          type: integer
+          example: 500123
+        CardPaymentsStatus:
+          description: Card payments capability status (Inactive, Pending, Active, Unrequested)
           enum:
-          - Individual
-          - Company
-          - NonProfit
-          - GovernmentEntity
-          type:
-          - string
-          - 'null'
-          example: Individual
-    StripeConnectedAccountInfo:
-      description: Represents information about a Stripe connected account associated with a bank account
-      type: object
-      properties:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+          example: Inactive
+        TransfersStatus:
+          description: Transfers capability status (Inactive, Pending, Active, Unrequested)
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+          example: Inactive
         AccountStatus:
-          description: Stripe connected account status
+          description: Current status of the account
           enum:
           - Disabled
           - Enabled
@@ -1565,40 +1553,14 @@ components:
           - PlatformPaused
           type: string
           example: Disabled
-        StripeId:
-          description: Stripe connected account id
-          type: string
-          example: '500123'
-        CardPaymentStatus:
-          description: Current status of the Card Payment capability of the account
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        PayoutScheduleInterval:
-          description: Payouts Schedule Interval
-          enum:
-          - Manual
-          - Daily
-          - Weekly
-          - Monthly
-          type: string
-          example: Manual
         PayoutsEnabled:
           description: Payouts Enabled status
           type:
           - boolean
           - 'null'
           example: true
-        PayoutsPaused:
-          description: Flag indicating if payouts are paused
-          type: boolean
-          example: true
         PaymentsEnabled:
-          description: Flag indicating if payments are enabled
+          description: Payments Enabled status
           type:
           - boolean
           - 'null'
@@ -1635,6 +1597,44 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_StripeConnectedAccount_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StripeConnectedAccount'
+    ModelBase:
+      description: Model base
+      type: object
+      properties: {}
+    StripeAccountLinkRequest:
+      description: Represents a request for Stripe account link creation
+      type: object
+      properties:
+        StripeId:
+          description: Stripe's own connected account identifier
+          type: string
+          example: '500123'
+        ReturnUrl:
+          description: URL to be hit if link creation succeeds
+          type: string
+          example: https://api.flipdish.co/example
+        Collect:
+          description: Which information to collect from users at this stage
+          enum:
+          - CurrentlyDue
+          - EventuallyDue
+          type: string
+          example: CurrentlyDue
+        Type:
+          description: Either onboarding or edit user information
+          enum:
+          - Onboarding
+          - Update
+          type: string
+          example: Onboarding
   securitySchemes:
     oauth2:
       type: oauth2

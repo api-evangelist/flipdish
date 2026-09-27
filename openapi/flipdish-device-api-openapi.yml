@@ -458,18 +458,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ClientDeviceAssignEnrolledDevice:
-      description: Assign enrolled device to AppId
-      type: object
-      properties:
-        DeviceModel:
-          description: Device Model
-          type: string
-          example: string
-        PinCode:
-          description: Pin Code
-          type: string
-          example: string
     RestApiArrayResult_ClientDeviceSummary_:
       description: Rest api array result
       required:
@@ -482,22 +470,6 @@ components:
           items:
             $ref: '#/components/schemas/ClientDeviceSummary'
           example: []
-    ClientDeviceSummary:
-      description: Client Device summary (header fields)
-      type: object
-      properties:
-        DeviceModel:
-          description: Device Model
-          type: string
-          example: string
-        DeviceId:
-          description: Device Id
-          type: string
-          example: '500123'
-        DeviceName:
-          description: Device Name
-          type: string
-          example: Example Name
     ClientDeviceEnrollmentResult:
       description: Device enrollment result
       type: object
@@ -506,8 +478,8 @@ components:
           description: PIN Code for assigning
           type: string
           example: string
-    ClientDevice:
-      description: Client Device
+    ClientDeviceSummary:
+      description: Client Device summary (header fields)
       type: object
       properties:
         DeviceModel:
@@ -530,14 +502,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/ClientDeviceEnrollmentResult'
-    RestApiResult_ClientDevice_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ClientDevice'
     ClientDeviceEnroll:
       description: Enroll a client device
       type: object
@@ -554,6 +518,18 @@ components:
           description: Device Name
           type: string
           example: Example Name
+    ClientDeviceAssignEnrolledDevice:
+      description: Assign enrolled device to AppId
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        PinCode:
+          description: Pin Code
+          type: string
+          example: string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -574,6 +550,30 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_ClientDevice_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ClientDevice'
+    ClientDevice:
+      description: Client Device
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
   securitySchemes:
     oauth2:
       type: oauth2

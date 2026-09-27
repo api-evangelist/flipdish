@@ -941,381 +941,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiPaginationResult_StoreGroup_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreGroup'
-          example: []
-    GroupedCoordinates:
-      description: Describes coordinates that have a group
-      type: object
-      properties:
-        Latitude:
-          format: double
-          description: Latitude of this coordinate
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude of this coordinate
-          type: number
-          example: 1.0
-        Count:
-          format: int32
-          description: Count of members in the group
-          type: integer
-          example: 3
-    StoreGroupBase:
-      description: Update Store Group
-      type: object
-      properties:
-        Name:
-          description: Store Group Name
-          type: string
-          example: Example Name
-        Currency:
-          description: Currency used by the stores in this group
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-    StoreGroup:
-      description: Store Group
-      type: object
-      properties:
-        StoreGroupId:
-          format: int32
-          description: Unique Store Group Identifier
-          type: integer
-          example: 500123
-        GeneralRating:
-          format: double
-          description: Store Group rating
-          type:
-          - number
-          - 'null'
-          example: 1.0
-        GeneralRatingCount:
-          format: int32
-          description: Store Group rating count
-          type: integer
-          example: 3
-        DeliveryMenuMessage:
-          description: Delivery menu message
-          type: string
-          example: string
-        PickupMenuMessage:
-          description: Pickup menu message
-          type: string
-          example: string
-        BrandIds:
-          description: List of brand ids (AppIds) that are associated with this store group
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        Name:
-          description: Store Group Name
-          type: string
-          example: Example Name
-        Currency:
-          description: Currency used by the stores in this group
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-    CustomerMessages:
-      description: Delivery and pickup menu messages for a customer
-      type: object
-      properties:
-        DeliveryMenuMessage:
-          description: Delivery menu message
-          type: string
-          example: string
-        PickupMenuMessage:
-          description: Pickup menu message
-          type: string
-          example: string
-    RestApiPaginationResult_StoreGroupExtended_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreGroupExtended'
-          example: []
     StoreGroupExtended:
       description: Store Group Extended
       type: object
@@ -1491,6 +1116,14 @@ components:
           - BMD
           type: string
           example: EUR
+    RestApiResult_StoreGroup_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreGroup'
     StoreHeader:
       description: Represents the most basic store information, used mostly for searches
       type: object
@@ -1508,6 +1141,214 @@ components:
           description: Name
           type: string
           example: string
+    StoreGroup:
+      description: Store Group
+      type: object
+      properties:
+        StoreGroupId:
+          format: int32
+          description: Unique Store Group Identifier
+          type: integer
+          example: 500123
+        GeneralRating:
+          format: double
+          description: Store Group rating
+          type:
+          - number
+          - 'null'
+          example: 1.0
+        GeneralRatingCount:
+          format: int32
+          description: Store Group rating count
+          type: integer
+          example: 3
+        DeliveryMenuMessage:
+          description: Delivery menu message
+          type: string
+          example: string
+        PickupMenuMessage:
+          description: Pickup menu message
+          type: string
+          example: string
+        BrandIds:
+          description: List of brand ids (AppIds) that are associated with this store group
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        Name:
+          description: Store Group Name
+          type: string
+          example: Example Name
+        Currency:
+          description: Currency used by the stores in this group
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+    RestApiResult_StoreGroupBase_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreGroupBase'
+    CustomerMessages:
+      description: Delivery and pickup menu messages for a customer
+      type: object
+      properties:
+        DeliveryMenuMessage:
+          description: Delivery menu message
+          type: string
+          example: string
+        PickupMenuMessage:
+          description: Pickup menu message
+          type: string
+          example: string
+    RestApiPaginationResult_StoreGroupExtended_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreGroupExtended'
+          example: []
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1528,22 +1369,181 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_StoreGroup_:
-      description: Rest api result
+    GroupedCoordinates:
+      description: Describes coordinates that have a group
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude of this coordinate
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude of this coordinate
+          type: number
+          example: 1.0
+        Count:
+          format: int32
+          description: Count of members in the group
+          type: integer
+          example: 3
+    RestApiPaginationResult_StoreGroup_:
+      description: Rest api pagination result
       required:
+      - Page
+      - Limit
+      - TotalRecordCount
       - Data
       type: object
       properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
         Data:
-          $ref: '#/components/schemas/StoreGroup'
-    RestApiResult_StoreGroupBase_:
-      description: Rest api result
-      required:
-      - Data
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreGroup'
+          example: []
+    StoreGroupBase:
+      description: Update Store Group
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/StoreGroupBase'
+        Name:
+          description: Store Group Name
+          type: string
+          example: Example Name
+        Currency:
+          description: Currency used by the stores in this group
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
   securitySchemes:
     oauth2:
       type: oauth2

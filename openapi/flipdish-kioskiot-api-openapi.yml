@@ -221,6 +221,59 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_TelemetrySeriesResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/TelemetrySeriesResult'
+    TelemetrySeriesQueryParameters:
+      description: TelemetrySeriesQueryParameters.
+      type: object
+      properties:
+        KioskId:
+          description: KioskId.
+          type: string
+          example: '500123'
+        Variables:
+          description: Variables.
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        StartDate:
+          format: date-time
+          description: StartDate.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndDate:
+          format: date-time
+          description: EndDate.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     TelemetrySeriesResult:
       description: TelemetrySeriesResult.
       type: object
@@ -239,14 +292,22 @@ components:
           items:
             $ref: '#/components/schemas/TelemetrySeriesProperty'
           example: []
-    RestApiResult_TelemetrySeriesResult_:
+    KioskIotConnectionParameters:
+      description: Connection parameters to IoT
+      type: object
+      properties:
+        ConnectionString:
+          description: The device connection string to the IoT server
+          type: string
+          example: string
+    RestApiResult_KioskIotConnectionParameters_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/TelemetrySeriesResult'
+          $ref: '#/components/schemas/KioskIotConnectionParameters'
     TelemetrySeriesProperty:
       description: TelemetrySeriesProperty.
       type: object
@@ -282,67 +343,6 @@ components:
             type: number
           example:
           - 1.0
-    KioskIotConnectionParameters:
-      description: Connection parameters to IoT
-      type: object
-      properties:
-        ConnectionString:
-          description: The device connection string to the IoT server
-          type: string
-          example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    TelemetrySeriesQueryParameters:
-      description: TelemetrySeriesQueryParameters.
-      type: object
-      properties:
-        KioskId:
-          description: KioskId.
-          type: string
-          example: '500123'
-        Variables:
-          description: Variables.
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        StartDate:
-          format: date-time
-          description: StartDate.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndDate:
-          format: date-time
-          description: EndDate.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    RestApiResult_KioskIotConnectionParameters_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/KioskIotConnectionParameters'
   securitySchemes:
     oauth2:
       type: oauth2

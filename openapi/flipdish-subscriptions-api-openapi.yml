@@ -381,6 +381,24 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    HasPaymentMethodResponse:
+      description: Has Payment Method Response
+      required:
+      - HasPaymentMethod
+      type: object
+      properties:
+        HasPaymentMethod:
+          description: Has Payment Method
+          type: boolean
+          example: true
+    RestApiResult_Subscription_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Subscription'
     SubscriptionProduct:
       description: Product
       required:
@@ -469,6 +487,30 @@ components:
           example: 12.5
         Period:
           $ref: '#/components/schemas/InvoicePeriod'
+    SubscriptionStore:
+      description: Subscription Store
+      required:
+      - Id
+      - Name
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+    RestApiResult_HasPaymentMethodResponse_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/HasPaymentMethodResponse'
     InvoicePeriod:
       description: Invoice Period
       type: object
@@ -483,6 +525,106 @@ components:
           description: End
           type: string
           example: '2026-06-02T12:00:00Z'
+    RestApiArrayResult_SubscriptionSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionSummary'
+          example: []
+    UpcomingInvoice:
+      description: UpcomingInvoice.
+      required:
+      - Subtotal
+      - AmountDue
+      - Tax
+      type: object
+      properties:
+        Amount:
+          format: double
+          description: Amount
+          type: number
+          example: 12.5
+        NextBillingDate:
+          format: date-time
+          description: Next billing date
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Subtotal:
+          format: double
+          description: Subtotal
+          type: number
+          example: 12.5
+        TotalExcludingTax:
+          format: double
+          description: Total excluding tax
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        AmountDue:
+          format: double
+          description: Amount due
+          type: number
+          example: 12.5
+        Tax:
+          format: double
+          description: Tax
+          type: number
+          example: 1.0
+        Items:
+          description: Items
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+          example: []
+        Discounts:
+          description: Discounts
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDiscount'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    InvoiceDiscount:
+      description: Invoice Discount
+      required:
+      - Name
+      - Amount
+      type: object
+      properties:
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Amount:
+          format: double
+          description: Amount
+          type: number
+          example: 12.5
     Subscription:
       description: Subscription
       required:
@@ -688,60 +830,6 @@ components:
           - string
           - 'null'
           example: '2026-06-02T12:00:00Z'
-    SubscriptionStore:
-      description: Subscription Store
-      required:
-      - Id
-      - Name
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Store Id
-          type: integer
-          example: 500123
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-    HasPaymentMethodResponse:
-      description: Has Payment Method Response
-      required:
-      - HasPaymentMethod
-      type: object
-      properties:
-        HasPaymentMethod:
-          description: Has Payment Method
-          type: boolean
-          example: true
-    RestApiResult_Subscription_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Subscription'
-    RestApiResult_HasPaymentMethodResponse_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/HasPaymentMethodResponse'
-    RestApiArrayResult_SubscriptionSummary_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionSummary'
-          example: []
     SubscriptionSummary:
       description: Subscription Summary
       required:
@@ -926,94 +1014,6 @@ components:
           - string
           - 'null'
           example: '2026-06-02T12:00:00Z'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    InvoiceDiscount:
-      description: Invoice Discount
-      required:
-      - Name
-      - Amount
-      type: object
-      properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Amount:
-          format: double
-          description: Amount
-          type: number
-          example: 12.5
-    UpcomingInvoice:
-      description: UpcomingInvoice.
-      required:
-      - Subtotal
-      - AmountDue
-      - Tax
-      type: object
-      properties:
-        Amount:
-          format: double
-          description: Amount
-          type: number
-          example: 12.5
-        NextBillingDate:
-          format: date-time
-          description: Next billing date
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Subtotal:
-          format: double
-          description: Subtotal
-          type: number
-          example: 12.5
-        TotalExcludingTax:
-          format: double
-          description: Total excluding tax
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        AmountDue:
-          format: double
-          description: Amount due
-          type: number
-          example: 12.5
-        Tax:
-          format: double
-          description: Tax
-          type: number
-          example: 1.0
-        Items:
-          description: Items
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceItem'
-          example: []
-        Discounts:
-          description: Discounts
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceDiscount'
-          example: []
   securitySchemes:
     oauth2:
       type: oauth2

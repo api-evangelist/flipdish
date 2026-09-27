@@ -1657,82 +1657,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateBasicAccountModel:
-      description: Basic attributes for creating an account
-      required:
-      - StoreName
-      type: object
-      properties:
-        StoreName:
-          description: Store name
-          type: string
-          example: Example Name
-        LanguageId:
-          description: LanguageId
-          type: string
-          example: '500123'
-    LoginModel:
-      description: Login model
-      required:
-      - Email
-      - Password
-      type: object
-      properties:
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
-        Password:
-          description: Password
-          type: string
-          example: string
-    RestApiArrayResult_LocalisedTimeZone_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/LocalisedTimeZone'
-          example: []
-    RequestLoginPinResponse:
-      description: Request login PIN response
-      type: object
-      properties:
-        LoginPinSentViaEmail:
-          description: Login PIN sent via email to user
-          type: boolean
-          example: true
-        ForceOktaLogin:
-          description: All flipdishers must login via Okta
-          type: boolean
-          example: true
-    SignupStep:
-      description: ''
-      type: object
-      properties:
-        Action:
-          description: Action needs to take
-          enum:
-          - Question
-          - StoreLocation
-          - PaymentSubscription
-          - StoreName
-          type: string
-          example: Question
-        Question:
-          description: Question in case Action == Question
-          type: string
-          example: string
-        PredefinedAnswers:
-          description: Predefined answer in case Action == Question
-          type: array
-          items:
-            $ref: '#/components/schemas/PredefinedAnswer'
-          example: []
     PredefinedAnswer:
       description: Predefined answer
       type: object
@@ -1746,108 +1670,67 @@ components:
           description: Text
           type: string
           example: string
-    RequestPasswordResetPinResponse:
-      description: Request Password Reset PIN response
+    AccountDetailBase:
+      description: Account Details Base
       type: object
       properties:
-        PasswordResetPinSentViaEmail:
-          description: Password Reset PIN sent via email to user
-          type: boolean
-          example: true
-    LoginWithPinModel:
-      description: Login with PIN model
-      required:
-      - Email
-      - Pin
-      type: object
-      properties:
-        Email:
-          description: Email addres
+        Name:
+          description: Name
           type: string
-          example: owner@example.com
-        Pin:
-          format: int32
-          description: PIN code (received via email)
-          type: integer
-          example: 1
-    SetPasswordWithPinModel:
-      description: Set password with PIN model
-      required:
-      - Pin
-      - NewPassword
-      type: object
-      properties:
-        Pin:
-          format: int32
-          description: PIN code (received via email)
-          type: integer
-          example: 1
-        NewPassword:
-          description: New Password
+          example: Example Name
+        Language:
+          description: Language Id
           type: string
           example: string
-        RecaptchaToken:
-          description: Google Recaptcha Token
-          type: string
-          example: string
-    RestApiResult_AccountDetail_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AccountDetail'
-    RequestLoginPinModel:
-      description: Request login PIN response
-      required:
-      - Email
-      type: object
-      properties:
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
-    PasswordResetModel:
-      description: Password reset model
-      required:
-      - Password
-      - PasswordConfirmation
-      type: object
-      properties:
-        TokenId:
-          description: Token Id
+        TimeZoneInfoId:
+          description: Time Zone Info Id
           type: string
           example: '500123'
+        DisplayTimesInUserLocalTimeZone:
+          description: Display the time in time zone local to the user
+          type: boolean
+          example: true
+        ShowHiddenFeatures:
+          description: Show hidden features
+          type: boolean
+          example: true
+        CreatedAt:
+          format: date-time
+          description: User created at
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    CreateAccountModel:
+      description: Create account model
+      required:
+      - Email
+      - StoreName
+      type: object
+      properties:
         Email:
           description: Email address
           type: string
           example: owner@example.com
-        Password:
-          description: Password
+        StoreName:
+          description: Store name
           type: string
-          example: string
-        PasswordConfirmation:
-          description: Password confirmation
+          example: Example Name
+        LanguageId:
+          description: LanguageId
           type: string
-          example: string
-        Token:
-          description: Password reset token
+          example: '500123'
+        Rid:
+          format: int32
+          description: Referral ID
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        Cid:
+          description: Campaign ID
           type: string
-          example: string
-    ChangePasswordModel:
-      description: Change password model
-      required:
-      - OldPassword
-      - NewPassword
-      type: object
-      properties:
-        OldPassword:
-          description: Old password
-          type: string
-          example: string
-        NewPassword:
-          description: New password
+          example: '500123'
+        RecaptchaToken:
+          description: Google Recaptcha Token
           type: string
           example: string
     AccountDetail:
@@ -1902,35 +1785,130 @@ components:
           description: User created at
           type: string
           example: '2026-06-02T12:00:00Z'
-    AccountDetailBase:
-      description: Account Details Base
+    PasswordResetModel:
+      description: Password reset model
+      required:
+      - Password
+      - PasswordConfirmation
       type: object
       properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Language:
-          description: Language Id
-          type: string
-          example: string
-        TimeZoneInfoId:
-          description: Time Zone Info Id
+        TokenId:
+          description: Token Id
           type: string
           example: '500123'
-        DisplayTimesInUserLocalTimeZone:
-          description: Display the time in time zone local to the user
-          type: boolean
-          example: true
-        ShowHiddenFeatures:
-          description: Show hidden features
-          type: boolean
-          example: true
-        CreatedAt:
-          format: date-time
-          description: User created at
+        Email:
+          description: Email address
           type: string
-          example: '2026-06-02T12:00:00Z'
+          example: owner@example.com
+        Password:
+          description: Password
+          type: string
+          example: string
+        PasswordConfirmation:
+          description: Password confirmation
+          type: string
+          example: string
+        Token:
+          description: Password reset token
+          type: string
+          example: string
+    SignupStep:
+      description: ''
+      type: object
+      properties:
+        Action:
+          description: Action needs to take
+          enum:
+          - Question
+          - StoreLocation
+          - PaymentSubscription
+          - StoreName
+          type: string
+          example: Question
+        Question:
+          description: Question in case Action == Question
+          type: string
+          example: string
+        PredefinedAnswers:
+          description: Predefined answer in case Action == Question
+          type: array
+          items:
+            $ref: '#/components/schemas/PredefinedAnswer'
+          example: []
+    RestApiArrayResult_LocalisedTimeZone_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalisedTimeZone'
+          example: []
+    RequestLoginPinResponse:
+      description: Request login PIN response
+      type: object
+      properties:
+        LoginPinSentViaEmail:
+          description: Login PIN sent via email to user
+          type: boolean
+          example: true
+        ForceOktaLogin:
+          description: All flipdishers must login via Okta
+          type: boolean
+          example: true
+    SetPasswordWithPinModel:
+      description: Set password with PIN model
+      required:
+      - Pin
+      - NewPassword
+      type: object
+      properties:
+        Pin:
+          format: int32
+          description: PIN code (received via email)
+          type: integer
+          example: 1
+        NewPassword:
+          description: New Password
+          type: string
+          example: string
+        RecaptchaToken:
+          description: Google Recaptcha Token
+          type: string
+          example: string
+    LoginModel:
+      description: Login model
+      required:
+      - Email
+      - Password
+      type: object
+      properties:
+        Email:
+          description: Email address
+          type: string
+          example: owner@example.com
+        Password:
+          description: Password
+          type: string
+          example: string
+    ChangePasswordModel:
+      description: Change password model
+      required:
+      - OldPassword
+      - NewPassword
+      type: object
+      properties:
+        OldPassword:
+          description: Old password
+          type: string
+          example: string
+        NewPassword:
+          description: New password
+          type: string
+          example: string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1951,17 +1929,36 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    CreateAccountModel:
-      description: Create account model
+    LoginWithPinModel:
+      description: Login with PIN model
       required:
       - Email
-      - StoreName
+      - Pin
       type: object
       properties:
         Email:
-          description: Email address
+          description: Email addres
           type: string
           example: owner@example.com
+        Pin:
+          format: int32
+          description: PIN code (received via email)
+          type: integer
+          example: 1
+    RestApiResult_AccountDetail_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AccountDetail'
+    CreateBasicAccountModel:
+      description: Basic attributes for creating an account
+      required:
+      - StoreName
+      type: object
+      properties:
         StoreName:
           description: Store name
           type: string
@@ -1970,21 +1967,6 @@ components:
           description: LanguageId
           type: string
           example: '500123'
-        Rid:
-          format: int32
-          description: Referral ID
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        Cid:
-          description: Campaign ID
-          type: string
-          example: '500123'
-        RecaptchaToken:
-          description: Google Recaptcha Token
-          type: string
-          example: string
     LocalisedTimeZone:
       description: Represents a localised time zone
       type: object
@@ -2001,6 +1983,24 @@ components:
           description: Display name in users language
           type: string
           example: Example Name
+    RequestPasswordResetPinResponse:
+      description: Request Password Reset PIN response
+      type: object
+      properties:
+        PasswordResetPinSentViaEmail:
+          description: Password Reset PIN sent via email to user
+          type: boolean
+          example: true
+    RequestLoginPinModel:
+      description: Request login PIN response
+      required:
+      - Email
+      type: object
+      properties:
+        Email:
+          description: Email address
+          type: string
+          example: owner@example.com
   securitySchemes:
     oauth2:
       type: oauth2

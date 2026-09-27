@@ -1345,77 +1345,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Response:
-      type: object
-      properties:
-        Stores:
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreItemHeader'
-          example: []
-    RestApiArrayResult_Channel_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Channel'
-          example: []
-    RestApiResult_Channel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Channel'
-    StoreChannelAssignment:
-      description: Represents a store that is assigned to a Sales Channel
-      type: object
-      properties:
-        ChannelId:
-          format: int32
-          description: Channel ID
-          type: integer
-          example: 500123
-        StoreId:
-          format: int32
-          description: Store ID
-          type: integer
-          example: 500123
-        StoreName:
-          description: Store Name
-          type: string
-          example: Example Name
-    RestApiArrayResult_StoreChannelAssignment_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreChannelAssignment'
-          example: []
-    AppChannelAssignment:
-      description: "Describes a ChannelAssignment which is \nwhen a AppId is assigned to a Sales Channel"
-      type: object
-      properties:
-        ChannelId:
-          format: int32
-          description: Id of the channel on the assignment
-          type: integer
-          example: 500123
-        AppId:
-          description: AppId of the assignment
-          type: string
-          example: '500123'
     RestApiResult_AppChannelAssignment_:
       description: Rest api result
       required:
@@ -1424,6 +1353,32 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/AppChannelAssignment'
+    Response:
+      type: object
+      properties:
+        Stores:
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreItemHeader'
+          example: []
+    RestApiResult_StoreChannelAssignment_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreChannelAssignment'
+    StoreItemHeader:
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          type: integer
+          example: 500123
+        Name:
+          type: string
+          example: Example Name
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1444,16 +1399,69 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    StoreItemHeader:
+    StoreChannelAssignment:
+      description: Represents a store that is assigned to a Sales Channel
       type: object
       properties:
-        StoreId:
+        ChannelId:
           format: int32
+          description: Channel ID
           type: integer
           example: 500123
-        Name:
+        StoreId:
+          format: int32
+          description: Store ID
+          type: integer
+          example: 500123
+        StoreName:
+          description: Store Name
           type: string
           example: Example Name
+    RestApiArrayResult_Channel_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+          example: []
+    RestApiResult_Channel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Channel'
+    AppChannelAssignment:
+      description: "Describes a ChannelAssignment which is \nwhen a AppId is assigned to a Sales Channel"
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Id of the channel on the assignment
+          type: integer
+          example: 500123
+        AppId:
+          description: AppId of the assignment
+          type: string
+          example: '500123'
+    RestApiArrayResult_StoreChannelAssignment_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreChannelAssignment'
+          example: []
     Channel:
       description: Channel.
       type: object
@@ -1486,14 +1494,6 @@ components:
           description: Channel is Maintained Externally or not
           type: boolean
           example: true
-    RestApiResult_StoreChannelAssignment_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/StoreChannelAssignment'
   securitySchemes:
     oauth2:
       type: oauth2

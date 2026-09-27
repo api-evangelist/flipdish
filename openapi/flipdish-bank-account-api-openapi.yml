@@ -946,48 +946,106 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_AccountFieldsDefinitions_:
+    StripeConnectedAccountInfo:
+      description: Represents information about a Stripe connected account associated with a bank account
+      type: object
+      properties:
+        AccountStatus:
+          description: Stripe connected account status
+          enum:
+          - Disabled
+          - Enabled
+          - AdditionalInformationRequired
+          - PendingVerification
+          - Unverified
+          - Rejected
+          - UpdateExternalAccount
+          - PlatformPaused
+          type: string
+          example: Disabled
+        StripeId:
+          description: Stripe connected account id
+          type: string
+          example: '500123'
+        CardPaymentStatus:
+          description: Current status of the Card Payment capability of the account
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+          example: Inactive
+        PayoutScheduleInterval:
+          description: Payouts Schedule Interval
+          enum:
+          - Manual
+          - Daily
+          - Weekly
+          - Monthly
+          type: string
+          example: Manual
+        PayoutsEnabled:
+          description: Payouts Enabled status
+          type:
+          - boolean
+          - 'null'
+          example: true
+        PayoutsPaused:
+          description: Flag indicating if payouts are paused
+          type: boolean
+          example: true
+        PaymentsEnabled:
+          description: Flag indicating if payments are enabled
+          type:
+          - boolean
+          - 'null'
+          example: true
+    AccountFieldKeyValuePair:
+      description: Represents one populated account field (its key and value)
+      type: object
+      properties:
+        Key:
+          description: Depending on the Key, the field's value will be stored in a different field in PayeeBankAccountData
+          enum:
+          - Iban
+          - AccountNumber
+          - RoutingNumber
+          - BSB
+          - BranchCode
+          - BankCode
+          - InstitutionNumber
+          - TransitNumber
+          - ClearingCode
+          - IfscCode
+          - Clabe
+          - SortCode
+          - Swift
+          type: string
+          example: Iban
+        Value:
+          description: The value of the field
+          type: string
+          example: string
+    RestApiResult_BankAccountDetail_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/AccountFieldsDefinitions'
-    RestApiArrayResult_CountryWithAccountFieldsDefinitions_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/CountryWithAccountFieldsDefinitions'
-          example: []
-    CountryWithAccountFieldsDefinitions:
+          $ref: '#/components/schemas/BankAccountDetail'
+    AccountFieldsDefinitions:
       description: List of field definitions per country
       type: object
       properties:
-        CountryCode:
-          description: Country 2-letter ISO code
-          type: string
-          example: IE
-        DisplayName:
-          description: Display name of the country
-          type: string
-          example: Example Name
-        SupportType:
-          description: Country support type (supported-by-stripe-cc, supported-by-flipdish,not-supported)
-          type: string
-          example: string
-        FieldDefinitions:
-          description: Bank Account field definitions
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountFieldDefinition'
-          example: []
+        DefinitionsPerCountry:
+          description: List of field definitions per country
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountFieldDefinition'
     AccountFieldDefinition:
       description: Represents the format of a bank account field
       type: object
@@ -1043,40 +1101,170 @@ components:
           description: Regex for validating the field (if specified)
           type: string
           example: string
-    AccountFieldKeyValuePair:
-      description: Represents one populated account field (its key and value)
+    RestApiArrayResult_BankAccountSummary_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        Key:
-          description: Depending on the Key, the field's value will be stored in a different field in PayeeBankAccountData
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccountSummary'
+          example: []
+    BankAccountSummary:
+      description: ''
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id of this account
+          type: integer
+          example: 500123
+        StoreNames:
+          description: Store Names that are attached to this account
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        StoreIds:
+          description: Store Ids that are attached to this account
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        AccountState:
+          description: Status of Account
           enum:
-          - Iban
-          - AccountNumber
-          - RoutingNumber
-          - BSB
-          - BranchCode
-          - BankCode
-          - InstitutionNumber
-          - TransitNumber
-          - ClearingCode
-          - IfscCode
-          - Clabe
-          - SortCode
-          - Swift
+          - Unverified
+          - AwatingVerification
+          - Verified
+          - Grandfathered
           type: string
-          example: Iban
-        Value:
-          description: The value of the field
+          example: Unverified
+        CurrencyCode:
+          description: Currency of Account
+          type: string
+          example: EUR
+        VatNumber:
+          description: Account Holders Vat Number
           type: string
           example: string
-    RestApiResult_BankAccountDetail_:
+        AccountHolderAddress:
+          description: Account Holders Address
+          type: string
+          example: string
+        AccountHolderCountryCode:
+          description: Account Holders Country Code
+          type: string
+          example: IE
+        StripeConnectedAccountInfo:
+          $ref: '#/components/schemas/StripeConnectedAccountInfo'
+        AccountName:
+          description: Name of this account
+          type: string
+          example: Example Name
+        Iban:
+          description: IBAN of this account
+          type: string
+          example: string
+        Swift:
+          description: SWIFT of this bank account
+          type: string
+          example: string
+        NationalClearingCode:
+          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
+          type: string
+          example: string
+        PopulatedAccountFields:
+          description: 'A list of one or more populated account fields (field key-value pairs).
+
+            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldKeyValuePair'
+          example: []
+        RejectionReason:
+          description: Reason for Rejection
+          type: string
+          example: string
+        BusinessType:
+          description: Business Type
+          enum:
+          - Individual
+          - Company
+          - NonProfit
+          - GovernmentEntity
+          type:
+          - string
+          - 'null'
+          example: Individual
+    CountryWithAccountFieldsDefinitions:
+      description: List of field definitions per country
+      type: object
+      properties:
+        CountryCode:
+          description: Country 2-letter ISO code
+          type: string
+          example: IE
+        DisplayName:
+          description: Display name of the country
+          type: string
+          example: Example Name
+        SupportType:
+          description: Country support type (supported-by-stripe-cc, supported-by-flipdish,not-supported)
+          type: string
+          example: string
+        FieldDefinitions:
+          description: Bank Account field definitions
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldDefinition'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_CountryWithAccountFieldsDefinitions_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryWithAccountFieldsDefinitions'
+          example: []
+    RestApiResult_AccountFieldsDefinitions_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/BankAccountDetail'
+          $ref: '#/components/schemas/AccountFieldsDefinitions'
     BankAccountDetail:
       description: ''
       type: object
@@ -1254,194 +1442,6 @@ components:
           description: Name of Bank
           type: string
           example: Example Name
-        AccountName:
-          description: Name of this account
-          type: string
-          example: Example Name
-        Iban:
-          description: IBAN of this account
-          type: string
-          example: string
-        Swift:
-          description: SWIFT of this bank account
-          type: string
-          example: string
-        NationalClearingCode:
-          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
-          type: string
-          example: string
-        PopulatedAccountFields:
-          description: 'A list of one or more populated account fields (field key-value pairs).
-
-            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountFieldKeyValuePair'
-          example: []
-        RejectionReason:
-          description: Reason for Rejection
-          type: string
-          example: string
-        BusinessType:
-          description: Business Type
-          enum:
-          - Individual
-          - Company
-          - NonProfit
-          - GovernmentEntity
-          type:
-          - string
-          - 'null'
-          example: Individual
-    StripeConnectedAccountInfo:
-      description: Represents information about a Stripe connected account associated with a bank account
-      type: object
-      properties:
-        AccountStatus:
-          description: Stripe connected account status
-          enum:
-          - Disabled
-          - Enabled
-          - AdditionalInformationRequired
-          - PendingVerification
-          - Unverified
-          - Rejected
-          - UpdateExternalAccount
-          - PlatformPaused
-          type: string
-          example: Disabled
-        StripeId:
-          description: Stripe connected account id
-          type: string
-          example: '500123'
-        CardPaymentStatus:
-          description: Current status of the Card Payment capability of the account
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        PayoutScheduleInterval:
-          description: Payouts Schedule Interval
-          enum:
-          - Manual
-          - Daily
-          - Weekly
-          - Monthly
-          type: string
-          example: Manual
-        PayoutsEnabled:
-          description: Payouts Enabled status
-          type:
-          - boolean
-          - 'null'
-          example: true
-        PayoutsPaused:
-          description: Flag indicating if payouts are paused
-          type: boolean
-          example: true
-        PaymentsEnabled:
-          description: Flag indicating if payments are enabled
-          type:
-          - boolean
-          - 'null'
-          example: true
-    AccountFieldsDefinitions:
-      description: List of field definitions per country
-      type: object
-      properties:
-        DefinitionsPerCountry:
-          description: List of field definitions per country
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/AccountFieldDefinition'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiArrayResult_BankAccountSummary_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/BankAccountSummary'
-          example: []
-    BankAccountSummary:
-      description: ''
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Id of this account
-          type: integer
-          example: 500123
-        StoreNames:
-          description: Store Names that are attached to this account
-          type: array
-          items:
-            type: string
-          example:
-          - Example Name
-        StoreIds:
-          description: Store Ids that are attached to this account
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        AccountState:
-          description: Status of Account
-          enum:
-          - Unverified
-          - AwatingVerification
-          - Verified
-          - Grandfathered
-          type: string
-          example: Unverified
-        CurrencyCode:
-          description: Currency of Account
-          type: string
-          example: EUR
-        VatNumber:
-          description: Account Holders Vat Number
-          type: string
-          example: string
-        AccountHolderAddress:
-          description: Account Holders Address
-          type: string
-          example: string
-        AccountHolderCountryCode:
-          description: Account Holders Country Code
-          type: string
-          example: IE
-        StripeConnectedAccountInfo:
-          $ref: '#/components/schemas/StripeConnectedAccountInfo'
         AccountName:
           description: Name of this account
           type: string

@@ -452,18 +452,83 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiArrayResult_HomeAction_:
-      description: Rest api array result
+    OktaPortalFeatureFlag:
+      description: Okta Portal Feature Flag Value
+      type: object
+      properties:
+        OktaPortalEnabled:
+          description: Feature flag backend_portal_enableOktaWebApi value
+          type: boolean
+          example: true
+    HomeAction:
+      description: ''
+      type: object
+      properties:
+        HomeActionId:
+          format: int32
+          description: ''
+          type: integer
+          example: 500123
+        HomeActionType:
+          description: Type of Action
+          enum:
+          - Portal
+          - External
+          type: string
+          example: Portal
+        Order:
+          format: int32
+          description: ''
+          type: integer
+          example: 1
+        TitleKey:
+          description: ''
+          type: string
+          example: string
+        ActionKey:
+          description: ''
+          type: string
+          example: string
+        DescriptionKey:
+          description: ''
+          type: string
+          example: string
+        Action:
+          description: ''
+          type: string
+          example: string
+        Dismissible:
+          description: ''
+          type: boolean
+          example: true
+    RestApiResult_HomeStatistics_:
+      description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/HomeAction'
-          example: []
+          $ref: '#/components/schemas/HomeStatistics'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     CurrencyData:
       description: A single currency data piece, with no date
       type: object
@@ -591,22 +656,26 @@ components:
           description: Value
           type: number
           example: 1.0
-    RestApiResult_HomeStatistics_:
+    RestApiResult_OktaPortalFeatureFlag_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/HomeStatistics'
-    OktaPortalFeatureFlag:
-      description: Okta Portal Feature Flag Value
+          $ref: '#/components/schemas/OktaPortalFeatureFlag'
+    RestApiArrayResult_HomeAction_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        OktaPortalEnabled:
-          description: Feature flag backend_portal_enableOktaWebApi value
-          type: boolean
-          example: true
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeAction'
+          example: []
     HomeStatistics:
       description: Home statitstics
       type: object
@@ -617,75 +686,6 @@ components:
           items:
             $ref: '#/components/schemas/CurrencyData'
           example: []
-    RestApiResult_OktaPortalFeatureFlag_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OktaPortalFeatureFlag'
-    HomeAction:
-      description: ''
-      type: object
-      properties:
-        HomeActionId:
-          format: int32
-          description: ''
-          type: integer
-          example: 500123
-        HomeActionType:
-          description: Type of Action
-          enum:
-          - Portal
-          - External
-          type: string
-          example: Portal
-        Order:
-          format: int32
-          description: ''
-          type: integer
-          example: 1
-        TitleKey:
-          description: ''
-          type: string
-          example: string
-        ActionKey:
-          description: ''
-          type: string
-          example: string
-        DescriptionKey:
-          description: ''
-          type: string
-          example: string
-        Action:
-          description: ''
-          type: string
-          example: string
-        Dismissible:
-          description: ''
-          type: boolean
-          example: true
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

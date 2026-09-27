@@ -614,6 +614,51 @@ components:
           items:
             $ref: '#/components/schemas/Invoice'
           example: []
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+          example: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+          example: 1
+        StackTrace:
+          description: Stack trace
+          type: string
+          example: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     SubscriptionInvoice:
       description: Invoice
       required:
@@ -797,39 +842,6 @@ components:
           description: Overdue
           type: boolean
           example: true
-    ValidationErrorResult:
-      description: Validation error result
-      type: object
-      properties:
-        FieldName:
-          description: Field name
-          type: string
-          example: Example Name
-        Errors:
-          description: List of errors relates to field
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    Invoice:
-      description: Represents an ordering invoice for a period of time.
-      type: object
-      properties:
-        InvoiceNumber:
-          description: Invoice Number
-          type: string
-          example: string
-        StartDay:
-          format: date-time
-          description: The start day of the invoice period.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndDay:
-          format: date-time
-          description: The end day of the invoice period.
-          type: string
-          example: '2026-06-02T12:00:00Z'
     RestApiFinanceSearchPaginationResult_SubscriptionInvoice_:
       description: Rest api finance search pagination result
       required:
@@ -859,51 +871,39 @@ components:
           items:
             $ref: '#/components/schemas/SubscriptionInvoice'
           example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiErrorResult:
-      description: Rest api error result
-      required:
-      - Message
+    Invoice:
+      description: Represents an ordering invoice for a period of time.
       type: object
       properties:
-        Message:
-          description: Error message
+        InvoiceNumber:
+          description: Invoice Number
           type: string
           example: string
-        ErrorCode:
-          format: int32
-          description: Error code
-          type: integer
-          example: 1
-        StackTrace:
-          description: Stack trace
+        StartDay:
+          format: date-time
+          description: The start day of the invoice period.
           type: string
-          example: string
+          example: '2026-06-02T12:00:00Z'
+        EndDay:
+          format: date-time
+          description: The end day of the invoice period.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+          example: Example Name
         Errors:
-          description: List of errors grouped by field name
+          description: List of errors relates to field
           type: array
           items:
-            $ref: '#/components/schemas/ValidationErrorResult'
-          example: []
+            type: string
+          example:
+          - string
   securitySchemes:
     oauth2:
       type: oauth2

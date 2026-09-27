@@ -117,20 +117,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    KioskEntitlementsResult:
-      description: Kiosk entitlements and usage
+    RestApiResult_KioskEntitlementsResult_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        EntitledQuantity:
-          format: int32
-          description: Number of kiosk devices entitled
-          type: integer
-          example: 3
-        UsedQuantity:
-          format: int32
-          description: The quantity of entitlements that have been used
-          type: integer
-          example: 3
+        Data:
+          $ref: '#/components/schemas/KioskEntitlementsResult'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -151,14 +145,20 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_KioskEntitlementsResult_:
-      description: Rest api result
-      required:
-      - Data
+    KioskEntitlementsResult:
+      description: Kiosk entitlements and usage
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/KioskEntitlementsResult'
+        EntitledQuantity:
+          format: int32
+          description: Number of kiosk devices entitled
+          type: integer
+          example: 3
+        UsedQuantity:
+          format: int32
+          description: The quantity of entitlements that have been used
+          type: integer
+          example: 3
   securitySchemes:
     oauth2:
       type: oauth2

@@ -3603,1096 +3603,183 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_UserRole_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/UserRole'
-    UserWhiteLabelConfig:
-      description: User WhiteLabelConfig
+    StoreSummary:
+      description: Store summary
       type: object
       properties:
         Id:
           format: int32
-          description: Identifier
-          type: integer
-          example: 500123
-        ConfigId:
-          format: int32
-          description: WlConfigId
-          type: integer
-          example: 500123
-        AppId:
-          description: Brand Id
-          type: string
-          example: '500123'
-        Name:
-          description: WhiteLabel Name
-          type: string
-          example: Example Name
-        Level:
-          description: WhiteLabel Access Level
-          enum:
-          - None
-          - Owner
-          - StoreOwner
-          - PropertyOwner
-          - ManagedOwner
-          - Integrator
-          - PropertyManager
-          - StoreManager
-          - StoreStaff
-          - StoreReadOnlyAccess
-          - FinanceManager
-          - Support
-          type: string
-          example: None
-    UserDeliveryLocationAdmin:
-      description: Delivery location with identifiers for admin user management.
-      type: object
-      properties:
-        DeliveryLocationId:
-          format: int32
-          description: DeliveryLocationId.
-          type: integer
-          example: 500123
-        Building:
-          description: Building.
-          type: string
-          example: string
-        Street:
-          description: Street.
-          type: string
-          example: string
-        Town:
-          description: Town.
-          type: string
-          example: string
-        PostCode:
-          description: PostCode.
-          type: string
-          example: string
-        DeliveryInstructions:
-          description: DeliveryInstructions.
-          type: string
-          example: string
-        AutoSelectThisLocation:
-          description: AutoSelectThisLocation.
-          type: boolean
-          example: true
-        IsDisplayed:
-          description: IsDisplayed.
-          type: boolean
-          example: true
-        IsConfirmed:
-          description: IsConfirmed.
-          type:
-          - boolean
-          - 'null'
-          example: true
-        Coordinates:
-          $ref: '#/components/schemas/Coordinates'
-    CustomerSummary:
-      description: Customer summary
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Customer identifier
+          description: Store identifier
           type: integer
           example: 500123
         Name:
-          description: Customer name
+          description: Store name
           type: string
           example: Example Name
-        EmailAddress:
-          description: Customer email address
-          type: string
-          example: owner@example.com
-        PhoneNumberLocalFormat:
-          description: Customer local phone number
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        PhoneNumber:
-          description: Customer phone number
-          type: string
-          example: '+353000000000'
-        LanguagePreference:
-          description: Preferred language of the consumer
-          type: string
-          example: string
-    UserInfo:
-      description: User information
-      type: object
-      properties:
-        PhoneNumber:
-          description: The user's phone number.
-          type: string
-          example: '+353000000000'
-        Email:
-          description: The user's email address.
-          type: string
-          example: owner@example.com
-        EmailConfirmed:
-          description: Indicates if the user's email address has been confirmed.
-          type: boolean
-          example: true
-        PreventFromUsingCards:
-          description: Indicates if the user is prevented from using cards.
-          type: boolean
-          example: true
-        IsUserPhoneNumberBlocked:
-          description: Indicates if the user's phone number is blocked.
-          type: boolean
-          example: true
-        UserWhiteLabels:
-          description: List of white label information associated with the user.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserWhiteLabelInfo'
-          example: []
-        UserId:
+        MenuId:
           format: int32
-          description: The unique identifier for the user.
+          description: Stores menu identifier
           type: integer
           example: 500123
-        UserName:
-          description: The user's username.
+        MenuPublishId:
+          format: uuid
+          description: Stores menu publish GUID
           type: string
-          example: Example Name
-        CustomerName:
-          description: The customer's name.
-          type: string
-          example: Example Name
-        HasLoggedIn:
-          description: Indicates if the user has logged in.
-          type: boolean
-          example: true
-        DisableAppRatingControl:
-          description: Indicates if the app rating control is disabled for the user.
-          type: boolean
-          example: true
-        GloballyOptedOut:
-          description: Indicates if the user has globally opted out.
-          type: boolean
-          example: true
-        CompletedOrderCount:
-          format: int32
-          description: The number of completed orders by the user.
-          type: integer
-          example: 3
-        CancelledOrderCount:
-          format: int32
-          description: The number of cancelled orders by the user.
-          type: integer
-          example: 3
-        OrderTotalValue:
-          format: double
-          description: The total value of orders placed by the user.
-          type: number
-          example: 12.5
-        TsMostRecentOrder:
-          format: date-time
-          description: The timestamp of the user's most recent order.
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
-        TsFirstOrder:
-          format: date-time
-          description: The timestamp of the user's first order.
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
-        IsRestaurantUser:
-          description: Indicates if the user is a restaurant user.
-          type: boolean
-          example: true
-        Installs:
-          description: List of app installs associated with the user.
-          type: array
-          items:
-            $ref: '#/components/schemas/AppInstall'
-          example: []
-        DeliveryLocations:
-          description: List of delivery locations associated with the user.
-          type: array
-          items:
-            $ref: '#/components/schemas/DeliveryLocation'
-          example: []
-        PaymentAccounts:
-          description: List of payment accounts associated with the user.
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentAccount'
-          example: []
-        LanguageId:
-          description: The language identifier for the user.
-          type: string
-          example: '500123'
-        CurrentLanguageName:
-          description: Current language name for the user.
-          type: string
-          example: Example Name
-        Languages:
-          description: Available languages that the user can choose from.
-          type: array
-          items:
-            $ref: '#/components/schemas/Language'
-          example: []
-        SalesForceContactId:
-          description: The Salesforce contact ID for the user.
-          type: string
-          example: '500123'
-        StripeCustomerId:
-          description: The Stripe customer ID for the user.
-          type: string
-          example: '500123'
-        UserMonthlyCommissions:
-          description: User's monthly commissions.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserMonthlyCommission'
-          example: []
-    RestApiArrayResult_UserStoreInfo_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserStoreInfo'
-          example: []
-    RestApiPaginationResult_UserSearch_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSearch'
-          example: []
-    SetUserDeliveryLocationFieldRequest:
-      description: Update a single delivery location field (matches legacy SetDeliveryLocationInfo names).
-      type: object
-      properties:
-        Field:
-          description: Which field to update. Omit or set to null for a validation error.
-          enum:
-          - DeliveryInstructions
-          - IsDisplayed
-          - BuildingString
-          - StreetString
-          - TownString
-          type:
-          - string
-          - 'null'
-          example: DeliveryInstructions
-        Value:
-          description: Value.
-          type: string
-          example: string
-    FlipdishAccountName:
-      description: Flipdish Account Name
-      type: object
-      properties:
-        PayeeBankAccountDataId:
-          format: int32
-          description: Payee Bank Account Data Id
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        FlipdishAccountId:
-          format: int32
-          description: Flipdish Account Id
-          type: integer
-          example: 500123
-        Name:
-          description: Account Name
-          type: string
-          example: Example Name
-    RestApiArrayResult_UserOrderSummary_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserOrderSummary'
-          example: []
-    UserSearch:
-      description: User Search Result
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: User Id
-          type: integer
-          example: 500123
-        PhoneNumber:
-          description: Phone Number
-          type: string
-          example: '+353000000000'
-        Email:
-          description: Email
-          type: string
-          example: owner@example.com
-        CustomerName:
-          description: Customer Name
-          type: string
-          example: Example Name
-        HasLoggedIn:
-          description: Has Logged In
-          type: boolean
-          example: true
-        UserDiscriminator:
-          description: User Discriminator
-          enum:
-          - All
-          - ApplicationUsers
-          - RestaurantUsers
-          - HydraUsers
-          type: string
-          example: All
-        TsCreate:
-          format: date-time
-          description: Timestamp Created
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        WhiteLabelConfigs:
-          description: WhiteLabel Configs
-          type: array
-          items:
-            $ref: '#/components/schemas/UserWhiteLabelConfig'
-          example: []
-        UserType:
-          description: User Type
-          type: string
-          readOnly: true
-          example: string
-    RestApiResult_Order_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Order'
-    OrderItemOption:
-      description: Order item option
-      type: object
-      properties:
+          example: 00000000-0000-0000-0000-000000000000
         Metadata:
-          description: Metadata
+          description: Store metadata
           type: object
           additionalProperties:
             type: string
-        MenuItemOptionPublicId:
-          format: uuid
-          description: Public id of the Menu Item Option
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        MenuItemOptionId:
-          format: int32
-          description: Menu item option identifier
-          type: integer
-          example: 500123
-        IsMasterOptionSetItem:
-          description: Is master option set item
-          type: boolean
-          example: true
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        TaxAmount:
-          format: double
-          description: Tax currency amount
-          type: number
-          example: 12.5
-        MenuItemOptionDisplayOrder:
-          format: int32
-          description: Menu item option display order
-          type: integer
-          example: 1
-        MenuItemOptionSetDisplayOrder:
-          format: int32
-          description: Menu item option set display order
-          type: integer
-          example: 1
-        DepositReturnFee:
-          format: double
-          description: Deposit return fee
-          type:
-          - number
-          - 'null'
-          example: 12.5
-    FeeSummary:
-      description: Fee Summary
-      type: object
-      properties:
-        FeeAmount:
-          format: double
-          description: Fee amount
-          type: number
-          example: 12.5
-        PercentageRate:
-          format: double
-          description: Percentage rate
-          type: number
-          example: 1.0
-        PerTransactionFee:
-          format: double
-          description: Per transaction fee
-          type: number
-          example: 12.5
-    SendUserPushNotificationRequest:
-      description: Send a push notification to a user.
-      type: object
-      properties:
-        WhiteLabelId:
-          format: int32
-          description: WhiteLabelId.
-          type: integer
-          example: 500123
-        Message:
-          description: Message.
-          type: string
-          example: string
-    RestApiDefaultResponse:
-      description: Rest api default response
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          readOnly: true
-          example: string
-    RestApiArrayResult_FlipdishAccountName_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/FlipdishAccountName'
-          example: []
-    TaxItem:
-      description: A collection of tax items on the order.
-      type: object
-      properties:
-        Name:
-          description: The name of the tax item.
-          type: string
-          example: Example Name
-        Rate:
-          format: double
-          description: The tax rate applied to the item.
-          type: number
-          example: 1.0
-        Amount:
-          format: double
-          description: The amount of tax applied to the item.
-          type: number
-          example: 12.5
-    AppInstall:
-      description: App Install information
-      type: object
-      properties:
-        Name:
-          description: Name of the installed application.
-          type: string
-          example: Example Name
-        FirstLogin:
-          format: date-time
-          description: Date and time of the user's first login to the app.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        FirstLoginHuman:
-          description: Human-readable representation of the first login date.
-          type: string
-          example: string
-        LastActivity:
-          format: date-time
-          description: Date and time of the user's last activity in the app.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        LastActivityHuman:
-          description: Human-readable representation of the last activity date.
-          type: string
-          example: string
-        GoogleTokens:
-          format: int32
-          description: Number of Google push notification tokens associated with the app install.
-          type: integer
-          example: 1
-        AppleTokens:
-          format: int32
-          description: Number of Apple push notification tokens associated with the app install.
-          type: integer
-          example: 1
-        OrderCount:
-          format: int32
-          description: Number of orders placed by the user through this app install.
-          type: integer
-          example: 3
-        UserAgentAtSignup:
-          description: User agent string at the time of signup.
-          type: string
-          example: string
-        UserAgentMostRecent:
-          description: Most recent user agent string used by the user.
-          type: string
-          example: string
-    Coordinates:
-      description: Coordinates
-      type: object
-      properties:
-        Latitude:
-          format: double
-          description: Latitude
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude
-          type: number
-          example: 1.0
-    UserNote:
-      description: User Note
-      type: object
-      properties:
-        UserNoteId:
-          format: int32
-          description: Identifier for the user note.
-          type: integer
-          example: 500123
-        UserId:
-          format: int32
-          description: User identifier associated with the note.
-          type: integer
-          example: 500123
-        Note:
-          description: Note content.
-          type: string
-          example: string
-        TsCreate:
-          format: date-time
-          description: Creation timestamp of the note.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        CreatedByUserId:
-          format: int32
-          description: Identifier of the user who created the note.
-          type: integer
-          example: 500123
-        CreatedByUserName:
-          description: Name of the user who created the note.
-          type: string
-          example: Example Name
-        CreatedByUserEmail:
-          description: Email of the user who created the note.
-          type: string
-          example: owner@example.com
-    UserFlipdishAccount:
-      description: Flipdish account information associated with a user
-      type: object
-      properties:
-        PayeeBankAccountDataId:
-          format: int32
-          description: Payee Bank Account Data Id
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        FlipdishAccountId:
-          format: int32
-          description: Flipdish Account Id
-          type: integer
-          example: 500123
-        Name:
-          description: Flipdish Account Name
-          type: string
-          example: Example Name
-    UserSmsChatItem:
-      description: An SMS conversation item for admin user chat.
-      type: object
-      properties:
-        SmsConversationItemId:
-          format: int32
-          description: SmsConversationItemId.
-          type: integer
-          example: 500123
-        Direction:
-          description: Direction.
-          type: string
-          example: string
-        From:
-          description: From.
-          type: string
-          example: string
-        Text:
-          description: Text.
-          type: string
-          example: string
-        TsSentReceivedUtc:
-          format: date-time
-          description: TsSentReceivedUtc.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    UserRole:
-      description: User Role
-      type: object
-      properties:
-        RolesUserIn:
-          description: Roles the user is in
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        RolesUserNotIn:
-          description: Roles the user is not in
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    RestApiArrayResult_UserDeliveryLocationAdmin_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDeliveryLocationAdmin'
-          example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    OrderDropOffLocation:
-      description: OrderDropOffLocation.
-      type: object
-      properties:
-        OrderId:
-          format: int32
-          description: OrderId.
-          type: integer
-          example: 500123
-        LocationName:
-          description: LocationName.
-          type: string
-          example: Example Name
-        LocationAreaName:
-          description: LocationAreaName.
-          type: string
-          example: Example Name
-        LocationId:
-          format: int32
-          description: LocationId.
-          type: integer
-          example: 500123
-        LocationAreaId:
-          format: int32
-          description: LocationAreaId.
-          type: integer
-          example: 500123
-        ExternalLocationId:
-          description: ExternalLocationId.
-          type: string
-          example: '500123'
-    SetUserDeliveryLocationCoordinatesRequest:
-      description: Set delivery location coordinates.
-      type: object
-      properties:
-        Latitude:
-          format: double
-          description: Latitude.
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude.
-          type: number
-          example: 1.0
-    Language:
-      description: Sorted Language
-      type: object
-      properties:
-        LanguageId:
-          description: ISO 639-1 Language Code
-          type: string
-          example: '500123'
-        DisplayOrder:
-          format: int32
-          description: Display Order
-          type: integer
-          example: 1
-        Name:
-          description: Language Name
-          type: string
-          example: Example Name
-        Enabled:
-          description: Is the language enabled for use.
-          type: boolean
-          example: true
-    RestApiArrayResult_UserNote_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserNote'
-          example: []
-    OrderVoucherSummary:
-      description: Voucher summary
-      type: object
-      properties:
-        VoucherId:
-          format: int32
-          description: Voucher ID
-          type: integer
-          example: 500123
-        Name:
-          description: Voucher name
-          type: string
-          example: Example Name
-        Description:
-          description: Voucher description
-          type: string
-          example: string
-        Code:
-          description: Voucher code
-          type: string
-          example: string
-        Amount:
-          format: double
-          description: Voucher amount
-          type: number
-          example: 12.5
-        Type:
-          description: Voucher type
+        Currency:
+          description: Currency which used by the Store
           enum:
-          - PercentageDiscount
-          - LumpDiscount
-          - AddItem
-          - CreditNote
-          - FreeDelivery
-          type: string
-          example: PercentageDiscount
-        SubType:
-          description: Voucher sub type
-          enum:
-          - None
-          - SignUp
-          - Loyalty
-          - Loyalty25
-          - Retention
-          - SecondaryRetention
-          - Custom
-          type: string
-          example: None
-    PaymentAccount:
-      description: Payment Account information
-      type: object
-      properties:
-        UserId:
-          format: int32
-          description: The user ID associated with the payment account.
-          type: integer
-          example: 500123
-        PaymentAccountId:
-          format: int32
-          description: Unique identifier for the payment account.
-          type: integer
-          example: 500123
-        CanRemoveFromCustomerView:
-          description: Indicates if the payment account can be removed from the customer view.
-          type: boolean
-          example: true
-        Bin:
-          description: Bank Identification Number (BIN) of the payment method.
-          type: string
-          example: string
-        IsDefaultPaymentMethod:
-          description: Indicates if this is the default payment method.
-          type: boolean
-          example: true
-        IsVisibleToCustomer:
-          description: Indicates if the payment account is visible to the customer.
-          type: boolean
-          example: true
-        PaymentAccountType:
-          description: The type of payment account (e.g., card, PayPal).
-          type: string
-          example: string
-        Description:
-          description: Description of the payment account.
-          type: string
-          example: string
-        CustomerId:
-          description: The customer ID associated with the payment account.
-          type: string
-          example: '500123'
-    RestApiResult_UserPushNotificationSentResult_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/UserPushNotificationSentResult'
-    UserOrderSummary:
-      description: A previous order row for admin user management (structured; no HTML).
-      type: object
-      properties:
-        OrderId:
-          format: int32
-          description: OrderId.
-          type: integer
-          example: 500123
-        TsOrderPlacedUtc:
-          format: date-time
-          description: TsOrderPlacedUtc.
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
-        TsUpdateUtc:
-          format: date-time
-          description: TsUpdateUtc.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        RestaurantName:
-          description: RestaurantName.
-          type: string
-          example: Example Name
-        FoodAmount:
-          format: double
-          description: FoodAmount.
-          type: number
-          example: 12.5
-        TipAmount:
-          format: double
-          description: TipAmount.
-          type: number
-          example: 12.5
-        TotalRestaurantAmount:
-          format: double
-          description: TotalRestaurantAmount.
-          type: number
-          example: 12.5
-        IsoCurrency:
-          description: IsoCurrency.
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
           type: string
           example: EUR
-        DeliveryType:
-          description: DeliveryType.
-          type: string
-          example: string
-        OrderState:
-          description: OrderState.
-          type: string
-          example: string
-        PaymentAccountDescription:
-          description: PaymentAccountDescription.
-          type: string
-          example: string
-    OrderBatchSummary:
-      description: Order batch info
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Order batch id
-          type: integer
-          example: 500123
-        DisplayCode:
-          description: Order batch 6-sign human readable code
-          type: string
-          example: string
-        CreateTime:
-          format: date-time
-          description: Batch creation date and time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        IsPublished:
-          description: If the batch is already published
-          type: boolean
-          example: true
-    UserPushNotificationSentResult:
-      description: Result of sending push notification.
-      type: object
-      properties:
-        TokenCount:
-          format: int32
-          description: TokenCount.
-          type: integer
-          example: 3
-    UserWhiteLabelInfo:
-      description: User WhiteLabel information
-      type: object
-      properties:
-        WlConfigId:
-          format: int32
-          description: WhiteLabelConfig Id
-          type: integer
-          example: 500123
-        AppId:
-          description: Brand Id (AppId)
-          type: string
-          example: '500123'
-        WhiteLabelName:
-          description: WhiteLabel Name
-          type: string
-          example: Example Name
-    Channel:
-      description: Channel.
-      type: object
-      properties:
-        ChannelId:
-          format: int32
-          description: Channel Id
-          type: integer
-          example: 500123
-        TranslationKey:
-          description: Channel TranslationKey
-          type: string
-          example: string
-        Source:
-          description: Channel Source
-          enum:
-          - Internal
-          - External
-          type: string
-          example: Internal
-        LogoUri:
-          description: Channel Logo URl
-          type: string
-          example: https://api.flipdish.co/example
-        Available:
-          description: Channel is Available or not
-          type: boolean
-          example: true
-        MaintainedExternally:
-          description: Channel is Maintained Externally or not
-          type: boolean
-          example: true
-    UserStoreInfo:
-      description: Stores that the user is associated with
-      type: object
-      properties:
-        PropertyId:
-          description: Property Id
-          type: string
-          example: '500123'
-        StoreId:
-          format: int32
-          description: Store Id
-          type: integer
-          example: 500123
-        StoreName:
-          description: Store Name
-          type: string
-          example: Example Name
-    CreateUserDeliveryLocationRequest:
-      description: Create a delivery location for a user (admin).
-      type: object
-      properties:
-        Building:
-          description: Building.
-          type: string
-          example: string
-        Street:
-          description: Street.
-          type: string
-          example: string
-        Town:
-          description: Town.
-          type: string
-          example: string
-        PostCode:
-          description: PostCode.
-          type: string
-          example: string
-        FullAddressJson:
-          description: FullAddressJson.
-          type: string
-          example: string
-        DeliveryInstructions:
-          description: DeliveryInstructions.
-          type: string
-          example: string
         Coordinates:
           $ref: '#/components/schemas/Coordinates'
-        IsDisplayed:
-          description: Passed through to the same parameter position as legacy admin MVC (maps to IsCustomAddress in map service).
-          type: boolean
-          example: true
+        StoreTimezone:
+          description: Timezone of store
+          type: string
+          example: string
+        StoreIanaTimezone:
+          description: IANA Timezone of store
+          type: string
+          example: string
+        StoreGroupId:
+          format: int32
+          description: Store group id of store
+          type: integer
+          example: 500123
+        TaxId:
+          description: VAT number or generic Tax ID of the store
+          type: string
+          example: '500123'
+        PrettyAddress:
+          description: Address of the store
+          type: string
+          example: string
+        CountryCode:
+          description: Country code of the store address (ISO 3166-1 alpha-2)
+          type: string
+          example: IE
+        PropertyId:
+          description: Property identifier
+          type: string
+          example: '500123'
     Order:
       description: Order
       type: object
@@ -5016,30 +4103,53 @@ components:
           description: This contains the total deposit return fee amount for the order.
           type: number
           example: 12.5
-    RestApiStringArrayResult:
-      description: Rest api string array result
-      required:
-      - Data
+    RestApiDefaultResponse:
+      description: Rest api default response
       type: object
       properties:
         Data:
-          description: Data string array
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    RestApiArrayResult_UserFlipdishAccount_:
-      description: Rest api array result
+          description: Data string
+          type: string
+          readOnly: true
+          example: string
+    UserPushNotificationSentResult:
+      description: Result of sending push notification.
+      type: object
+      properties:
+        TokenCount:
+          format: int32
+          description: TokenCount.
+          type: integer
+          example: 3
+    RestApiPaginationResult_UserSearch_:
+      description: Rest api pagination result
       required:
+      - Page
+      - Limit
+      - TotalRecordCount
       - Data
       type: object
       properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
         Data:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/UserFlipdishAccount'
+            $ref: '#/components/schemas/UserSearch'
           example: []
     OrderFulfillmentStatusBase:
       description: Fulfillment Status Information
@@ -5057,6 +4167,164 @@ components:
           description: Status Icon
           type: string
           example: string
+    CreateUserDeliveryLocationRequest:
+      description: Create a delivery location for a user (admin).
+      type: object
+      properties:
+        Building:
+          description: Building.
+          type: string
+          example: string
+        Street:
+          description: Street.
+          type: string
+          example: string
+        Town:
+          description: Town.
+          type: string
+          example: string
+        PostCode:
+          description: PostCode.
+          type: string
+          example: string
+        FullAddressJson:
+          description: FullAddressJson.
+          type: string
+          example: string
+        DeliveryInstructions:
+          description: DeliveryInstructions.
+          type: string
+          example: string
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        IsDisplayed:
+          description: Passed through to the same parameter position as legacy admin MVC (maps to IsCustomAddress in map service).
+          type: boolean
+          example: true
+    UserSmsChatItem:
+      description: An SMS conversation item for admin user chat.
+      type: object
+      properties:
+        SmsConversationItemId:
+          format: int32
+          description: SmsConversationItemId.
+          type: integer
+          example: 500123
+        Direction:
+          description: Direction.
+          type: string
+          example: string
+        From:
+          description: From.
+          type: string
+          example: string
+        Text:
+          description: Text.
+          type: string
+          example: string
+        TsSentReceivedUtc:
+          format: date-time
+          description: TsSentReceivedUtc.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiArrayResult_UserDeliveryLocationAdmin_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDeliveryLocationAdmin'
+          example: []
+    OrderItemOption:
+      description: Order item option
+      type: object
+      properties:
+        Metadata:
+          description: Metadata
+          type: object
+          additionalProperties:
+            type: string
+        MenuItemOptionPublicId:
+          format: uuid
+          description: Public id of the Menu Item Option
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        MenuItemOptionId:
+          format: int32
+          description: Menu item option identifier
+          type: integer
+          example: 500123
+        IsMasterOptionSetItem:
+          description: Is master option set item
+          type: boolean
+          example: true
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax currency amount
+          type: number
+          example: 12.5
+        MenuItemOptionDisplayOrder:
+          format: int32
+          description: Menu item option display order
+          type: integer
+          example: 1
+        MenuItemOptionSetDisplayOrder:
+          format: int32
+          description: Menu item option set display order
+          type: integer
+          example: 1
+        DepositReturnFee:
+          format: double
+          description: Deposit return fee
+          type:
+          - number
+          - 'null'
+          example: 12.5
+    SetUserDeliveryLocationFieldRequest:
+      description: Update a single delivery location field (matches legacy SetDeliveryLocationInfo names).
+      type: object
+      properties:
+        Field:
+          description: Which field to update. Omit or set to null for a validation error.
+          enum:
+          - DeliveryInstructions
+          - IsDisplayed
+          - BuildingString
+          - StreetString
+          - TownString
+          type:
+          - string
+          - 'null'
+          example: DeliveryInstructions
+        Value:
+          description: Value.
+          type: string
+          example: string
+    RestApiArrayResult_UserNote_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserNote'
+          example: []
     RestApiResult_UserInfo_:
       description: Rest api result
       required:
@@ -5065,6 +4333,98 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/UserInfo'
+    OrderDropOffLocation:
+      description: OrderDropOffLocation.
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: OrderId.
+          type: integer
+          example: 500123
+        LocationName:
+          description: LocationName.
+          type: string
+          example: Example Name
+        LocationAreaName:
+          description: LocationAreaName.
+          type: string
+          example: Example Name
+        LocationId:
+          format: int32
+          description: LocationId.
+          type: integer
+          example: 500123
+        LocationAreaId:
+          format: int32
+          description: LocationAreaId.
+          type: integer
+          example: 500123
+        ExternalLocationId:
+          description: ExternalLocationId.
+          type: string
+          example: '500123'
+    Coordinates:
+      description: Coordinates
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    UserRole:
+      description: User Role
+      type: object
+      properties:
+        RolesUserIn:
+          description: Roles the user is in
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        RolesUserNotIn:
+          description: Roles the user is not in
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    RestApiArrayResult_UserSmsChatItem_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSmsChatItem'
+          example: []
+    UserStoreInfo:
+      description: Stores that the user is associated with
+      type: object
+      properties:
+        PropertyId:
+          description: Property Id
+          type: string
+          example: '500123'
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        StoreName:
+          description: Store Name
+          type: string
+          example: Example Name
     SendUserSmsRequest:
       description: Send an SMS to a user from admin.
       type: object
@@ -5082,7 +4442,90 @@ components:
           description: FromNumber.
           type: string
           example: string
-    RestApiArrayResult_UserSmsChatItem_:
+    SetUserDeliveryLocationCoordinatesRequest:
+      description: Set delivery location coordinates.
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude.
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude.
+          type: number
+          example: 1.0
+    UserFlipdishAccount:
+      description: Flipdish account information associated with a user
+      type: object
+      properties:
+        PayeeBankAccountDataId:
+          format: int32
+          description: Payee Bank Account Data Id
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        FlipdishAccountId:
+          format: int32
+          description: Flipdish Account Id
+          type: integer
+          example: 500123
+        Name:
+          description: Flipdish Account Name
+          type: string
+          example: Example Name
+    AppInstall:
+      description: App Install information
+      type: object
+      properties:
+        Name:
+          description: Name of the installed application.
+          type: string
+          example: Example Name
+        FirstLogin:
+          format: date-time
+          description: Date and time of the user's first login to the app.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        FirstLoginHuman:
+          description: Human-readable representation of the first login date.
+          type: string
+          example: string
+        LastActivity:
+          format: date-time
+          description: Date and time of the user's last activity in the app.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        LastActivityHuman:
+          description: Human-readable representation of the last activity date.
+          type: string
+          example: string
+        GoogleTokens:
+          format: int32
+          description: Number of Google push notification tokens associated with the app install.
+          type: integer
+          example: 1
+        AppleTokens:
+          format: int32
+          description: Number of Apple push notification tokens associated with the app install.
+          type: integer
+          example: 1
+        OrderCount:
+          format: int32
+          description: Number of orders placed by the user through this app install.
+          type: integer
+          example: 3
+        UserAgentAtSignup:
+          description: User agent string at the time of signup.
+          type: string
+          example: string
+        UserAgentMostRecent:
+          description: Most recent user agent string used by the user.
+          type: string
+          example: string
+    RestApiArrayResult_UserStoreInfo_:
       description: Rest api array result
       required:
       - Data
@@ -5092,8 +4535,206 @@ components:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/UserSmsChatItem'
+            $ref: '#/components/schemas/UserStoreInfo'
           example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_UserFlipdishAccount_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFlipdishAccount'
+          example: []
+    RestApiArrayResult_UserOrderSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderSummary'
+          example: []
+    UserSearch:
+      description: User Search Result
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: User Id
+          type: integer
+          example: 500123
+        PhoneNumber:
+          description: Phone Number
+          type: string
+          example: '+353000000000'
+        Email:
+          description: Email
+          type: string
+          example: owner@example.com
+        CustomerName:
+          description: Customer Name
+          type: string
+          example: Example Name
+        HasLoggedIn:
+          description: Has Logged In
+          type: boolean
+          example: true
+        UserDiscriminator:
+          description: User Discriminator
+          enum:
+          - All
+          - ApplicationUsers
+          - RestaurantUsers
+          - HydraUsers
+          type: string
+          example: All
+        TsCreate:
+          format: date-time
+          description: Timestamp Created
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        WhiteLabelConfigs:
+          description: WhiteLabel Configs
+          type: array
+          items:
+            $ref: '#/components/schemas/UserWhiteLabelConfig'
+          example: []
+        UserType:
+          description: User Type
+          type: string
+          readOnly: true
+          example: string
+    Language:
+      description: Sorted Language
+      type: object
+      properties:
+        LanguageId:
+          description: ISO 639-1 Language Code
+          type: string
+          example: '500123'
+        DisplayOrder:
+          format: int32
+          description: Display Order
+          type: integer
+          example: 1
+        Name:
+          description: Language Name
+          type: string
+          example: Example Name
+        Enabled:
+          description: Is the language enabled for use.
+          type: boolean
+          example: true
+    Channel:
+      description: Channel.
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Channel Id
+          type: integer
+          example: 500123
+        TranslationKey:
+          description: Channel TranslationKey
+          type: string
+          example: string
+        Source:
+          description: Channel Source
+          enum:
+          - Internal
+          - External
+          type: string
+          example: Internal
+        LogoUri:
+          description: Channel Logo URl
+          type: string
+          example: https://api.flipdish.co/example
+        Available:
+          description: Channel is Available or not
+          type: boolean
+          example: true
+        MaintainedExternally:
+          description: Channel is Maintained Externally or not
+          type: boolean
+          example: true
+    CustomerSummary:
+      description: Customer summary
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Customer identifier
+          type: integer
+          example: 500123
+        Name:
+          description: Customer name
+          type: string
+          example: Example Name
+        EmailAddress:
+          description: Customer email address
+          type: string
+          example: owner@example.com
+        PhoneNumberLocalFormat:
+          description: Customer local phone number
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PhoneNumber:
+          description: Customer phone number
+          type: string
+          example: '+353000000000'
+        LanguagePreference:
+          description: Preferred language of the consumer
+          type: string
+          example: string
+    OrderBatchSummary:
+      description: Order batch info
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Order batch id
+          type: integer
+          example: 500123
+        DisplayCode:
+          description: Order batch 6-sign human readable code
+          type: string
+          example: string
+        CreateTime:
+          format: date-time
+          description: Batch creation date and time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        IsPublished:
+          description: If the batch is already published
+          type: boolean
+          example: true
     DeliveryLocation:
       description: Delivery location
       type: object
@@ -5124,6 +4765,564 @@ components:
           description: Formatted, pretty address string
           type: string
           example: string
+    RestApiResult_Order_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Order'
+    MaskedPhoneNumber:
+      description: Represents a masked phone number
+      type: object
+      properties:
+        IsEnabled:
+          description: Defines if the feature is enabled
+          type: boolean
+          example: true
+        PhoneNumber:
+          description: Defines the phone number to call
+          type: string
+          example: '+353000000000'
+        Code:
+          description: Defines the code to enter
+          type: string
+          example: string
+    UserWhiteLabelInfo:
+      description: User WhiteLabel information
+      type: object
+      properties:
+        WlConfigId:
+          format: int32
+          description: WhiteLabelConfig Id
+          type: integer
+          example: 500123
+        AppId:
+          description: Brand Id (AppId)
+          type: string
+          example: '500123'
+        WhiteLabelName:
+          description: WhiteLabel Name
+          type: string
+          example: Example Name
+    UserOrderSummary:
+      description: A previous order row for admin user management (structured; no HTML).
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: OrderId.
+          type: integer
+          example: 500123
+        TsOrderPlacedUtc:
+          format: date-time
+          description: TsOrderPlacedUtc.
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
+        TsUpdateUtc:
+          format: date-time
+          description: TsUpdateUtc.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        RestaurantName:
+          description: RestaurantName.
+          type: string
+          example: Example Name
+        FoodAmount:
+          format: double
+          description: FoodAmount.
+          type: number
+          example: 12.5
+        TipAmount:
+          format: double
+          description: TipAmount.
+          type: number
+          example: 12.5
+        TotalRestaurantAmount:
+          format: double
+          description: TotalRestaurantAmount.
+          type: number
+          example: 12.5
+        IsoCurrency:
+          description: IsoCurrency.
+          type: string
+          example: EUR
+        DeliveryType:
+          description: DeliveryType.
+          type: string
+          example: string
+        OrderState:
+          description: OrderState.
+          type: string
+          example: string
+        PaymentAccountDescription:
+          description: PaymentAccountDescription.
+          type: string
+          example: string
+    UserDeliveryLocationAdmin:
+      description: Delivery location with identifiers for admin user management.
+      type: object
+      properties:
+        DeliveryLocationId:
+          format: int32
+          description: DeliveryLocationId.
+          type: integer
+          example: 500123
+        Building:
+          description: Building.
+          type: string
+          example: string
+        Street:
+          description: Street.
+          type: string
+          example: string
+        Town:
+          description: Town.
+          type: string
+          example: string
+        PostCode:
+          description: PostCode.
+          type: string
+          example: string
+        DeliveryInstructions:
+          description: DeliveryInstructions.
+          type: string
+          example: string
+        AutoSelectThisLocation:
+          description: AutoSelectThisLocation.
+          type: boolean
+          example: true
+        IsDisplayed:
+          description: IsDisplayed.
+          type: boolean
+          example: true
+        IsConfirmed:
+          description: IsConfirmed.
+          type:
+          - boolean
+          - 'null'
+          example: true
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+    UserInfo:
+      description: User information
+      type: object
+      properties:
+        PhoneNumber:
+          description: The user's phone number.
+          type: string
+          example: '+353000000000'
+        Email:
+          description: The user's email address.
+          type: string
+          example: owner@example.com
+        EmailConfirmed:
+          description: Indicates if the user's email address has been confirmed.
+          type: boolean
+          example: true
+        PreventFromUsingCards:
+          description: Indicates if the user is prevented from using cards.
+          type: boolean
+          example: true
+        IsUserPhoneNumberBlocked:
+          description: Indicates if the user's phone number is blocked.
+          type: boolean
+          example: true
+        UserWhiteLabels:
+          description: List of white label information associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserWhiteLabelInfo'
+          example: []
+        UserId:
+          format: int32
+          description: The unique identifier for the user.
+          type: integer
+          example: 500123
+        UserName:
+          description: The user's username.
+          type: string
+          example: Example Name
+        CustomerName:
+          description: The customer's name.
+          type: string
+          example: Example Name
+        HasLoggedIn:
+          description: Indicates if the user has logged in.
+          type: boolean
+          example: true
+        DisableAppRatingControl:
+          description: Indicates if the app rating control is disabled for the user.
+          type: boolean
+          example: true
+        GloballyOptedOut:
+          description: Indicates if the user has globally opted out.
+          type: boolean
+          example: true
+        CompletedOrderCount:
+          format: int32
+          description: The number of completed orders by the user.
+          type: integer
+          example: 3
+        CancelledOrderCount:
+          format: int32
+          description: The number of cancelled orders by the user.
+          type: integer
+          example: 3
+        OrderTotalValue:
+          format: double
+          description: The total value of orders placed by the user.
+          type: number
+          example: 12.5
+        TsMostRecentOrder:
+          format: date-time
+          description: The timestamp of the user's most recent order.
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
+        TsFirstOrder:
+          format: date-time
+          description: The timestamp of the user's first order.
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
+        IsRestaurantUser:
+          description: Indicates if the user is a restaurant user.
+          type: boolean
+          example: true
+        Installs:
+          description: List of app installs associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppInstall'
+          example: []
+        DeliveryLocations:
+          description: List of delivery locations associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveryLocation'
+          example: []
+        PaymentAccounts:
+          description: List of payment accounts associated with the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentAccount'
+          example: []
+        LanguageId:
+          description: The language identifier for the user.
+          type: string
+          example: '500123'
+        CurrentLanguageName:
+          description: Current language name for the user.
+          type: string
+          example: Example Name
+        Languages:
+          description: Available languages that the user can choose from.
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          example: []
+        SalesForceContactId:
+          description: The Salesforce contact ID for the user.
+          type: string
+          example: '500123'
+        StripeCustomerId:
+          description: The Stripe customer ID for the user.
+          type: string
+          example: '500123'
+        UserMonthlyCommissions:
+          description: User's monthly commissions.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMonthlyCommission'
+          example: []
+    RestApiArrayResult_FlipdishAccountName_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/FlipdishAccountName'
+          example: []
+    RestApiStringArrayResult:
+      description: Rest api string array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string array
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    FeeSummary:
+      description: Fee Summary
+      type: object
+      properties:
+        FeeAmount:
+          format: double
+          description: Fee amount
+          type: number
+          example: 12.5
+        PercentageRate:
+          format: double
+          description: Percentage rate
+          type: number
+          example: 1.0
+        PerTransactionFee:
+          format: double
+          description: Per transaction fee
+          type: number
+          example: 12.5
+    OrderVoucherSummary:
+      description: Voucher summary
+      type: object
+      properties:
+        VoucherId:
+          format: int32
+          description: Voucher ID
+          type: integer
+          example: 500123
+        Name:
+          description: Voucher name
+          type: string
+          example: Example Name
+        Description:
+          description: Voucher description
+          type: string
+          example: string
+        Code:
+          description: Voucher code
+          type: string
+          example: string
+        Amount:
+          format: double
+          description: Voucher amount
+          type: number
+          example: 12.5
+        Type:
+          description: Voucher type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        SubType:
+          description: Voucher sub type
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+    RestApiResult_UserPushNotificationSentResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UserPushNotificationSentResult'
+    TaxItem:
+      description: A collection of tax items on the order.
+      type: object
+      properties:
+        Name:
+          description: The name of the tax item.
+          type: string
+          example: Example Name
+        Rate:
+          format: double
+          description: The tax rate applied to the item.
+          type: number
+          example: 1.0
+        Amount:
+          format: double
+          description: The amount of tax applied to the item.
+          type: number
+          example: 12.5
+    OrderItem:
+      description: Order item
+      type: object
+      properties:
+        OrderItemOptions:
+          description: Option list
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemOption'
+          example: []
+        Metadata:
+          description: Metadata
+          type: object
+          additionalProperties:
+            type: string
+        MenuItemPublicId:
+          format: uuid
+          description: Public id of the Menu Item
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        MenuSectionName:
+          description: Menu section name
+          type: string
+          example: Example Name
+        MenuSectionDisplayOrder:
+          format: int32
+          description: Menu section display order
+          type: integer
+          example: 1
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Description:
+          description: Description
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax currency amount
+          type: number
+          example: 12.5
+        PriceIncludingOptionSetItems:
+          format: double
+          description: Price including option set items
+          type: number
+          example: 12.5
+        MenuItemId:
+          format: int32
+          description: Menu item identifier
+          type: integer
+          example: 500123
+        MenuItemDisplayOrder:
+          format: int32
+          description: Menu item display order
+          type: integer
+          example: 1
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DepositReturnFee:
+          format: double
+          description: Deposit return fee
+          type:
+          - number
+          - 'null'
+          example: 12.5
+    UserNote:
+      description: User Note
+      type: object
+      properties:
+        UserNoteId:
+          format: int32
+          description: Identifier for the user note.
+          type: integer
+          example: 500123
+        UserId:
+          format: int32
+          description: User identifier associated with the note.
+          type: integer
+          example: 500123
+        Note:
+          description: Note content.
+          type: string
+          example: string
+        TsCreate:
+          format: date-time
+          description: Creation timestamp of the note.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        CreatedByUserId:
+          format: int32
+          description: Identifier of the user who created the note.
+          type: integer
+          example: 500123
+        CreatedByUserName:
+          description: Name of the user who created the note.
+          type: string
+          example: Example Name
+        CreatedByUserEmail:
+          description: Email of the user who created the note.
+          type: string
+          example: owner@example.com
+    SendUserPushNotificationRequest:
+      description: Send a push notification to a user.
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: WhiteLabelId.
+          type: integer
+          example: 500123
+        Message:
+          description: Message.
+          type: string
+          example: string
+    PaymentAccount:
+      description: Payment Account information
+      type: object
+      properties:
+        UserId:
+          format: int32
+          description: The user ID associated with the payment account.
+          type: integer
+          example: 500123
+        PaymentAccountId:
+          format: int32
+          description: Unique identifier for the payment account.
+          type: integer
+          example: 500123
+        CanRemoveFromCustomerView:
+          description: Indicates if the payment account can be removed from the customer view.
+          type: boolean
+          example: true
+        Bin:
+          description: Bank Identification Number (BIN) of the payment method.
+          type: string
+          example: string
+        IsDefaultPaymentMethod:
+          description: Indicates if this is the default payment method.
+          type: boolean
+          example: true
+        IsVisibleToCustomer:
+          description: Indicates if the payment account is visible to the customer.
+          type: boolean
+          example: true
+        PaymentAccountType:
+          description: The type of payment account (e.g., card, PayPal).
+          type: string
+          example: string
+        Description:
+          description: Description of the payment account.
+          type: string
+          example: string
+        CustomerId:
+          description: The customer ID associated with the payment account.
+          type: string
+          example: '500123'
     UserMonthlyCommission:
       description: User Monthly Commission
       type: object
@@ -5265,199 +5464,73 @@ components:
           description: The ISO currency code for the commission currency.
           type: string
           example: EUR
-    MaskedPhoneNumber:
-      description: Represents a masked phone number
+    FlipdishAccountName:
+      description: Flipdish Account Name
       type: object
       properties:
-        IsEnabled:
-          description: Defines if the feature is enabled
-          type: boolean
-          example: true
-        PhoneNumber:
-          description: Defines the phone number to call
+        PayeeBankAccountDataId:
+          format: int32
+          description: Payee Bank Account Data Id
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        FlipdishAccountId:
+          format: int32
+          description: Flipdish Account Id
+          type: integer
+          example: 500123
+        Name:
+          description: Account Name
           type: string
-          example: '+353000000000'
-        Code:
-          description: Defines the code to enter
-          type: string
-          example: string
-    StoreSummary:
-      description: Store summary
+          example: Example Name
+    RestApiResult_UserRole_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UserRole'
+    UserWhiteLabelConfig:
+      description: User WhiteLabelConfig
       type: object
       properties:
         Id:
           format: int32
-          description: Store identifier
+          description: Identifier
           type: integer
           example: 500123
+        ConfigId:
+          format: int32
+          description: WlConfigId
+          type: integer
+          example: 500123
+        AppId:
+          description: Brand Id
+          type: string
+          example: '500123'
         Name:
-          description: Store name
+          description: WhiteLabel Name
           type: string
           example: Example Name
-        MenuId:
-          format: int32
-          description: Stores menu identifier
-          type: integer
-          example: 500123
-        MenuPublishId:
-          format: uuid
-          description: Stores menu publish GUID
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Metadata:
-          description: Store metadata
-          type: object
-          additionalProperties:
-            type: string
-        Currency:
-          description: Currency which used by the Store
+        Level:
+          description: WhiteLabel Access Level
           enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
+          - None
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManager
+          - Support
           type: string
-          example: EUR
-        Coordinates:
-          $ref: '#/components/schemas/Coordinates'
-        StoreTimezone:
-          description: Timezone of store
-          type: string
-          example: string
-        StoreIanaTimezone:
-          description: IANA Timezone of store
-          type: string
-          example: string
-        StoreGroupId:
-          format: int32
-          description: Store group id of store
-          type: integer
-          example: 500123
-        TaxId:
-          description: VAT number or generic Tax ID of the store
-          type: string
-          example: '500123'
-        PrettyAddress:
-          description: Address of the store
-          type: string
-          example: string
-        CountryCode:
-          description: Country code of the store address (ISO 3166-1 alpha-2)
-          type: string
-          example: IE
-        PropertyId:
-          description: Property identifier
-          type: string
-          example: '500123'
+          example: None
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -5468,79 +5541,6 @@ components:
           description: Data string
           type: string
           example: string
-    OrderItem:
-      description: Order item
-      type: object
-      properties:
-        OrderItemOptions:
-          description: Option list
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemOption'
-          example: []
-        Metadata:
-          description: Metadata
-          type: object
-          additionalProperties:
-            type: string
-        MenuItemPublicId:
-          format: uuid
-          description: Public id of the Menu Item
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        MenuSectionName:
-          description: Menu section name
-          type: string
-          example: Example Name
-        MenuSectionDisplayOrder:
-          format: int32
-          description: Menu section display order
-          type: integer
-          example: 1
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Description:
-          description: Description
-          type: string
-          example: string
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        TaxAmount:
-          format: double
-          description: Tax currency amount
-          type: number
-          example: 12.5
-        PriceIncludingOptionSetItems:
-          format: double
-          description: Price including option set items
-          type: number
-          example: 12.5
-        MenuItemId:
-          format: int32
-          description: Menu item identifier
-          type: integer
-          example: 500123
-        MenuItemDisplayOrder:
-          format: int32
-          description: Menu item display order
-          type: integer
-          example: 1
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DepositReturnFee:
-          format: double
-          description: Deposit return fee
-          type:
-          - number
-          - 'null'
-          example: 12.5
   securitySchemes:
     oauth2:
       type: oauth2

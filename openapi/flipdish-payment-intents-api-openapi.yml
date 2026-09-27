@@ -124,42 +124,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LastPaymentError:
-      description: List's the issues with the last failed payment intent
-      type: object
-      properties:
-        Code:
-          description: For some errors that could be handled programmatically, a short string indicating the error code reported.
-          type: string
-          example: string
-        DeclineCode:
-          description: For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one.
-          type: string
-          example: string
-        Message:
-          description: A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
-          type: string
-          example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     PaymentIntent:
       description: Represents stripe PaymentIntent
       type: object
@@ -211,6 +175,42 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/PaymentIntent'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    LastPaymentError:
+      description: List's the issues with the last failed payment intent
+      type: object
+      properties:
+        Code:
+          description: For some errors that could be handled programmatically, a short string indicating the error code reported.
+          type: string
+          example: string
+        DeclineCode:
+          description: For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one.
+          type: string
+          example: string
+        Message:
+          description: A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
+          type: string
+          example: string
   securitySchemes:
     oauth2:
       type: oauth2

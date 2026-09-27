@@ -154,6 +154,18 @@ components:
           description: Fixed fee to customer, including VAT
           type: number
           example: 12.5
+    RestApiArrayResult_ProcessingFeeConfig_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessingFeeConfig'
+          example: []
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -174,18 +186,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiArrayResult_ProcessingFeeConfig_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessingFeeConfig'
-          example: []
   securitySchemes:
     oauth2:
       type: oauth2

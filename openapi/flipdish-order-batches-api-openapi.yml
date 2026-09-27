@@ -266,6 +266,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiArrayResult_OrderBatch_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderBatch'
+          example: []
     OrderBatch:
       description: Order batch detailed information
       type: object
@@ -296,26 +308,6 @@ components:
           description: If the batch is already published
           type: boolean
           example: true
-    RestApiArrayResult_OrderBatch_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderBatch'
-          example: []
-    RestApiResult_OrderBatch_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OrderBatch'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -336,6 +328,14 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_OrderBatch_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OrderBatch'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -468,34 +468,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CustomerCreateModel:
-      description: Defines a customer create model
-      type: object
-      properties:
-        PhoneNumber:
-          description: Customer Phone Number
-          type: string
-          example: '+353000000000'
-        AppType:
-          description: Customer AppType
-          enum:
-          - Unknown
-          - Ios
-          - Android
-          - Web
-          - Kiosk
-          - Pos
-          - TelephoneCall
-          - Sms
-          - PwaAndroid
-          - PwaIos
-          - Google
-          type: string
-          example: Unknown
-        Name:
-          description: Customer Name
-          type: string
-          example: Example Name
     CustomerUpdateModel:
       description: Defines a customer update model
       type: object
@@ -512,14 +484,6 @@ components:
           description: Customer can receive marketing
           type: boolean
           example: true
-    RestApiResult_Customer_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Customer'
     Customers:
       description: Defines a list of customers
       type: object
@@ -530,6 +494,14 @@ components:
           items:
             $ref: '#/components/schemas/Customer'
           example: []
+    RestApiResult_Customers_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Customers'
     Customer:
       description: Defines a customer
       type: object
@@ -564,14 +536,6 @@ components:
           description: Customer can receive marketing
           type: boolean
           example: true
-    RestApiResult_Customers_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Customers'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -592,6 +556,42 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_Customer_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Customer'
+    CustomerCreateModel:
+      description: Defines a customer create model
+      type: object
+      properties:
+        PhoneNumber:
+          description: Customer Phone Number
+          type: string
+          example: '+353000000000'
+        AppType:
+          description: Customer AppType
+          enum:
+          - Unknown
+          - Ios
+          - Android
+          - Web
+          - Kiosk
+          - Pos
+          - TelephoneCall
+          - Sms
+          - PwaAndroid
+          - PwaIos
+          - Google
+          type: string
+          example: Unknown
+        Name:
+          description: Customer Name
+          type: string
+          example: Example Name
   securitySchemes:
     oauth2:
       type: oauth2
