@@ -2105,6 +2105,95 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CustomerSummary:
+      description: Customer summary
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Customer identifier
+          type: integer
+          example: 500123
+        Name:
+          description: Customer name
+          type: string
+          example: Example Name
+        EmailAddress:
+          description: Customer email address
+          type: string
+          example: owner@example.com
+        PhoneNumberLocalFormat:
+          description: Customer local phone number
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PhoneNumber:
+          description: Customer phone number
+          type: string
+          example: '+353000000000'
+        LanguagePreference:
+          description: Preferred language of the consumer
+          type: string
+          example: string
+    RestApiResult_OrderFulfillmentStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OrderFulfillmentStatus'
+    OrderList:
+      description: A list of orders.
+      type: object
+      properties:
+        Orders:
+          description: A list of orders.
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderReference'
+          example: []
+    FulfillentStatusActionItem:
+      description: Action item for next fulfillment status selector
+      type: object
+      properties:
+        Id:
+          description: Status Id
+          type: string
+          example: '500123'
+        Name:
+          description: Status Name
+          type: string
+          example: Example Name
+    DeliveryLocation:
+      description: Delivery location
+      type: object
+      properties:
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        Building:
+          description: Building
+          type: string
+          example: string
+        Street:
+          description: Street
+          type: string
+          example: string
+        Town:
+          description: Town
+          type: string
+          example: string
+        PostCode:
+          description: Post code
+          type: string
+          example: string
+        DeliveryInstructions:
+          description: Delivery instructions
+          type: string
+          example: string
+        PrettyAddressString:
+          description: Formatted, pretty address string
+          type: string
+          example: string
     StoreSummary:
       description: Store summary
       type: object
@@ -2282,14 +2371,6 @@ components:
           description: Property identifier
           type: string
           example: '500123'
-    RestApiResult_OrderFulfillmentStatusWithConfigurationActions_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OrderFulfillmentStatusWithConfigurationActions'
     Order:
       description: Order
       type: object
@@ -2613,6 +2694,220 @@ components:
           description: This contains the total deposit return fee amount for the order.
           type: number
           example: 12.5
+    MaskedPhoneNumber:
+      description: Represents a masked phone number
+      type: object
+      properties:
+        IsEnabled:
+          description: Defines if the feature is enabled
+          type: boolean
+          example: true
+        PhoneNumber:
+          description: Defines the phone number to call
+          type: string
+          example: '+353000000000'
+        Code:
+          description: Defines the code to enter
+          type: string
+          example: string
+    OrderItem:
+      description: Order item
+      type: object
+      properties:
+        OrderItemOptions:
+          description: Option list
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemOption'
+          example: []
+        Metadata:
+          description: Metadata
+          type: object
+          additionalProperties:
+            type: string
+        MenuItemPublicId:
+          format: uuid
+          description: Public id of the Menu Item
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        MenuSectionName:
+          description: Menu section name
+          type: string
+          example: Example Name
+        MenuSectionDisplayOrder:
+          format: int32
+          description: Menu section display order
+          type: integer
+          example: 1
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Description:
+          description: Description
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          description: Tax currency amount
+          type: number
+          example: 12.5
+        PriceIncludingOptionSetItems:
+          format: double
+          description: Price including option set items
+          type: number
+          example: 12.5
+        MenuItemId:
+          format: int32
+          description: Menu item identifier
+          type: integer
+          example: 500123
+        MenuItemDisplayOrder:
+          format: int32
+          description: Menu item display order
+          type: integer
+          example: 1
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DepositReturnFee:
+          format: double
+          description: Deposit return fee
+          type:
+          - number
+          - 'null'
+          example: 12.5
+    OrderFulfillmentStatusUpdate:
+      description: OrderFulfillmentStatusUpdate.
+      type: object
+      properties:
+        StatusId:
+          description: Fulfillment Status Id
+          type: string
+          example: '500123'
+    Refund:
+      description: Refund
+      required:
+      - RefundAmount
+      - NotifyCustomer
+      type: object
+      properties:
+        RefundReason:
+          description: Refund reason
+          type: string
+          example: string
+        RefundAmount:
+          format: double
+          description: Refund amount
+          minimum: 0
+          type: number
+          example: 12.5
+        NotifyCustomer:
+          description: If true, the system sends notification to the customer about the refund
+          type: boolean
+          example: true
+      example:
+        RefundReason: reason
+        RefundAmount: 20
+        NotifyCustomer: true
+    Channel:
+      description: Channel.
+      type: object
+      properties:
+        ChannelId:
+          format: int32
+          description: Channel Id
+          type: integer
+          example: 500123
+        TranslationKey:
+          description: Channel TranslationKey
+          type: string
+          example: string
+        Source:
+          description: Channel Source
+          enum:
+          - Internal
+          - External
+          type: string
+          example: Internal
+        LogoUri:
+          description: Channel Logo URl
+          type: string
+          example: https://api.flipdish.co/example
+        Available:
+          description: Channel is Available or not
+          type: boolean
+          example: true
+        MaintainedExternally:
+          description: Channel is Maintained Externally or not
+          type: boolean
+          example: true
+    OrderFulfillmentStatus:
+      description: Order Fulfillment Status Information
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: Order Id
+          type: integer
+          example: 500123
+        StatusId:
+          description: Fulfillment Status Id
+          type: string
+          example: '500123'
+        StatusName:
+          description: Fulfillment Status Name
+          type: string
+          example: Example Name
+        Icon:
+          description: Status Icon
+          type: string
+          example: string
+    RestApiArrayResult_OrderFulfillmentStatus_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderFulfillmentStatus'
+          example: []
+    Reject:
+      description: Reject
+      required:
+      - RejectReason
+      type: object
+      properties:
+        RejectReason:
+          description: Reject reason.
+          enum:
+          - TooBusy
+          - FoodUnavailable
+          - UnableToDeliver
+          - UnknownAddress
+          - UnknownReason
+          - TooSoon
+          - TimeUnavailable
+          - DontDeliverToArea
+          - StoreUncontactable
+          type: string
+          example: TooBusy
+        DoNotNotifyCustomer:
+          description: Notify customer. The server will not send and SMS to the customer if the value is true.
+          type: boolean
+          example: true
+      example:
+        RejectReason: 0
+        DoNotNotifyCustomer: false
     OrderSummary:
       description: Order summary
       type: object
@@ -2911,15 +3206,82 @@ components:
           $ref: '#/components/schemas/OrderBatchSummary'
         DeliveryLocation:
           $ref: '#/components/schemas/DeliveryLocation'
-    OrderDeliveryInformation:
-      description: Order Delivery Status Information
+    Accept:
+      description: Accept
+      type: object
+      properties:
+        EstimatedMinutesForDelivery:
+          format: int32
+          description: Estimated minutes for delivery
+          maximum: 200
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          example: 1
+      example:
+        EstimatedMinutesForDelivery: 45
+    OrderReference:
+      description: A reference to an order.
       type: object
       properties:
         OrderId:
           format: int32
-          description: Order Id
+          description: The ID of the order.
           type: integer
           example: 500123
+    TaxItem:
+      description: A collection of tax items on the order.
+      type: object
+      properties:
+        Name:
+          description: The name of the tax item.
+          type: string
+          example: Example Name
+        Rate:
+          format: double
+          description: The tax rate applied to the item.
+          type: number
+          example: 1.0
+        Amount:
+          format: double
+          description: The amount of tax applied to the item.
+          type: number
+          example: 12.5
+    RestApiPaginationResult_OrderSummary_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderSummary'
+          example: []
+    OrderDeliveryInformationBase:
+      description: Order Delivery Status Information
+      type: object
+      properties:
         ExternalReferenceId:
           description: External Reference Id
           type: string
@@ -2960,35 +3322,119 @@ components:
           description: Integration Name
           type: string
           example: Example Name
-    Refund:
-      description: Refund
-      required:
-      - RefundAmount
-      - NotifyCustomer
+    OrderVoucherSummary:
+      description: Voucher summary
       type: object
       properties:
-        RefundReason:
-          description: Refund reason
+        VoucherId:
+          format: int32
+          description: Voucher ID
+          type: integer
+          example: 500123
+        Name:
+          description: Voucher name
+          type: string
+          example: Example Name
+        Description:
+          description: Voucher description
           type: string
           example: string
-        RefundAmount:
+        Code:
+          description: Voucher code
+          type: string
+          example: string
+        Amount:
           format: double
-          description: Refund amount
-          minimum: 0
+          description: Voucher amount
           type: number
           example: 12.5
-        NotifyCustomer:
-          description: If true, the system sends notification to the customer about the refund
-          type: boolean
-          example: true
-      example:
-        RefundReason: reason
-        RefundAmount: 20
-        NotifyCustomer: true
+        Type:
+          description: Voucher type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        SubType:
+          description: Voucher sub type
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+    RestApiPaginationResult_Order_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+          example: []
     OrderFulfillmentStatusBase:
       description: Fulfillment Status Information
       type: object
       properties:
+        StatusId:
+          description: Fulfillment Status Id
+          type: string
+          example: '500123'
+        StatusName:
+          description: Fulfillment Status Name
+          type: string
+          example: Example Name
+        Icon:
+          description: Status Icon
+          type: string
+          example: string
+    OrderFulfillmentStatusWithConfigurationActions:
+      description: Order Fulfillment status with configured next actions
+      type: object
+      properties:
+        DefaultNextStatus:
+          description: Default next status (id)
+          type: string
+          example: Active
+        NextStatuses:
+          description: Possible next statuses
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillentStatusActionItem'
+          example: []
+        OrderId:
+          format: int32
+          description: Order Id
+          type: integer
+          example: 500123
         StatusId:
           description: Fulfillment Status Id
           type: string
@@ -3055,20 +3501,25 @@ components:
           - number
           - 'null'
           example: 12.5
-    Coordinates:
-      description: Coordinates
+    FeeSummary:
+      description: Fee Summary
       type: object
       properties:
-        Latitude:
+        FeeAmount:
           format: double
-          description: Latitude
+          description: Fee amount
+          type: number
+          example: 12.5
+        PercentageRate:
+          format: double
+          description: Percentage rate
           type: number
           example: 1.0
-        Longitude:
+        PerTransactionFee:
           format: double
-          description: Longitude
+          description: Per transaction fee
           type: number
-          example: 1.0
+          example: 12.5
     OrderDropOffLocation:
       description: OrderDropOffLocation.
       type: object
@@ -3100,30 +3551,15 @@ components:
           description: ExternalLocationId.
           type: string
           example: '500123'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    OrderDeliveryInformationBase:
+    OrderDeliveryInformation:
       description: Order Delivery Status Information
       type: object
       properties:
+        OrderId:
+          format: int32
+          description: Order Id
+          type: integer
+          example: 500123
         ExternalReferenceId:
           description: External Reference Id
           type: string
@@ -3164,121 +3600,56 @@ components:
           description: Integration Name
           type: string
           example: Example Name
-    Channel:
-      description: Channel.
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    Coordinates:
+      description: Coordinates
       type: object
       properties:
-        ChannelId:
-          format: int32
-          description: Channel Id
-          type: integer
-          example: 500123
-        TranslationKey:
-          description: Channel TranslationKey
-          type: string
-          example: string
-        Source:
-          description: Channel Source
-          enum:
-          - Internal
-          - External
-          type: string
-          example: Internal
-        LogoUri:
-          description: Channel Logo URl
-          type: string
-          example: https://api.flipdish.co/example
-        Available:
-          description: Channel is Available or not
-          type: boolean
-          example: true
-        MaintainedExternally:
-          description: Channel is Maintained Externally or not
-          type: boolean
-          example: true
-    OrderFulfillmentStatusUpdate:
-      description: OrderFulfillmentStatusUpdate.
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    RestApiResult_OrderFulfillmentStatusWithConfigurationActions_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        StatusId:
-          description: Fulfillment Status Id
-          type: string
-          example: '500123'
-    Accept:
-      description: Accept
+        Data:
+          $ref: '#/components/schemas/OrderFulfillmentStatusWithConfigurationActions'
+    RestApiResult_OrderDeliveryInformation_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        EstimatedMinutesForDelivery:
-          format: int32
-          description: Estimated minutes for delivery
-          maximum: 200
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-          example: 1
-      example:
-        EstimatedMinutesForDelivery: 45
-    CustomerSummary:
-      description: Customer summary
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Customer identifier
-          type: integer
-          example: 500123
-        Name:
-          description: Customer name
-          type: string
-          example: Example Name
-        EmailAddress:
-          description: Customer email address
-          type: string
-          example: owner@example.com
-        PhoneNumberLocalFormat:
-          description: Customer local phone number
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        PhoneNumber:
-          description: Customer phone number
-          type: string
-          example: '+353000000000'
-        LanguagePreference:
-          description: Preferred language of the consumer
-          type: string
-          example: string
-    OrderFulfillmentStatusWithConfigurationActions:
-      description: Order Fulfillment status with configured next actions
-      type: object
-      properties:
-        DefaultNextStatus:
-          description: Default next status (id)
-          type: string
-          example: Active
-        NextStatuses:
-          description: Possible next statuses
-          type: array
-          items:
-            $ref: '#/components/schemas/FulfillentStatusActionItem'
-          example: []
-        OrderId:
-          format: int32
-          description: Order Id
-          type: integer
-          example: 500123
-        StatusId:
-          description: Fulfillment Status Id
-          type: string
-          example: '500123'
-        StatusName:
-          description: Fulfillment Status Name
-          type: string
-          example: Example Name
-        Icon:
-          description: Status Icon
-          type: string
-          example: string
+        Data:
+          $ref: '#/components/schemas/OrderDeliveryInformation'
     OrderBatchSummary:
       description: Order batch info
       type: object
@@ -3301,36 +3672,6 @@ components:
           description: If the batch is already published
           type: boolean
           example: true
-    DeliveryLocation:
-      description: Delivery location
-      type: object
-      properties:
-        Coordinates:
-          $ref: '#/components/schemas/Coordinates'
-        Building:
-          description: Building
-          type: string
-          example: string
-        Street:
-          description: Street
-          type: string
-          example: string
-        Town:
-          description: Town
-          type: string
-          example: string
-        PostCode:
-          description: Post code
-          type: string
-          example: string
-        DeliveryInstructions:
-          description: Delivery instructions
-          type: string
-          example: string
-        PrettyAddressString:
-          description: Formatted, pretty address string
-          type: string
-          example: string
     RestApiResult_Order_:
       description: Rest api result
       required:
@@ -3339,347 +3680,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/Order'
-    MaskedPhoneNumber:
-      description: Represents a masked phone number
-      type: object
-      properties:
-        IsEnabled:
-          description: Defines if the feature is enabled
-          type: boolean
-          example: true
-        PhoneNumber:
-          description: Defines the phone number to call
-          type: string
-          example: '+353000000000'
-        Code:
-          description: Defines the code to enter
-          type: string
-          example: string
-    FulfillentStatusActionItem:
-      description: Action item for next fulfillment status selector
-      type: object
-      properties:
-        Id:
-          description: Status Id
-          type: string
-          example: '500123'
-        Name:
-          description: Status Name
-          type: string
-          example: Example Name
-    RestApiPaginationResult_OrderSummary_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderSummary'
-          example: []
-    OrderFulfillmentStatus:
-      description: Order Fulfillment Status Information
-      type: object
-      properties:
-        OrderId:
-          format: int32
-          description: Order Id
-          type: integer
-          example: 500123
-        StatusId:
-          description: Fulfillment Status Id
-          type: string
-          example: '500123'
-        StatusName:
-          description: Fulfillment Status Name
-          type: string
-          example: Example Name
-        Icon:
-          description: Status Icon
-          type: string
-          example: string
-    OrderReference:
-      description: A reference to an order.
-      type: object
-      properties:
-        OrderId:
-          format: int32
-          description: The ID of the order.
-          type: integer
-          example: 500123
-    OrderVoucherSummary:
-      description: Voucher summary
-      type: object
-      properties:
-        VoucherId:
-          format: int32
-          description: Voucher ID
-          type: integer
-          example: 500123
-        Name:
-          description: Voucher name
-          type: string
-          example: Example Name
-        Description:
-          description: Voucher description
-          type: string
-          example: string
-        Code:
-          description: Voucher code
-          type: string
-          example: string
-        Amount:
-          format: double
-          description: Voucher amount
-          type: number
-          example: 12.5
-        Type:
-          description: Voucher type
-          enum:
-          - PercentageDiscount
-          - LumpDiscount
-          - AddItem
-          - CreditNote
-          - FreeDelivery
-          type: string
-          example: PercentageDiscount
-        SubType:
-          description: Voucher sub type
-          enum:
-          - None
-          - SignUp
-          - Loyalty
-          - Loyalty25
-          - Retention
-          - SecondaryRetention
-          - Custom
-          type: string
-          example: None
-    Reject:
-      description: Reject
-      required:
-      - RejectReason
-      type: object
-      properties:
-        RejectReason:
-          description: Reject reason.
-          enum:
-          - TooBusy
-          - FoodUnavailable
-          - UnableToDeliver
-          - UnknownAddress
-          - UnknownReason
-          - TooSoon
-          - TimeUnavailable
-          - DontDeliverToArea
-          - StoreUncontactable
-          type: string
-          example: TooBusy
-        DoNotNotifyCustomer:
-          description: Notify customer. The server will not send and SMS to the customer if the value is true.
-          type: boolean
-          example: true
-      example:
-        RejectReason: 0
-        DoNotNotifyCustomer: false
-    FeeSummary:
-      description: Fee Summary
-      type: object
-      properties:
-        FeeAmount:
-          format: double
-          description: Fee amount
-          type: number
-          example: 12.5
-        PercentageRate:
-          format: double
-          description: Percentage rate
-          type: number
-          example: 1.0
-        PerTransactionFee:
-          format: double
-          description: Per transaction fee
-          type: number
-          example: 12.5
-    RestApiPaginationResult_Order_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-          example: []
-    OrderItem:
-      description: Order item
-      type: object
-      properties:
-        OrderItemOptions:
-          description: Option list
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemOption'
-          example: []
-        Metadata:
-          description: Metadata
-          type: object
-          additionalProperties:
-            type: string
-        MenuItemPublicId:
-          format: uuid
-          description: Public id of the Menu Item
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        MenuSectionName:
-          description: Menu section name
-          type: string
-          example: Example Name
-        MenuSectionDisplayOrder:
-          format: int32
-          description: Menu section display order
-          type: integer
-          example: 1
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Description:
-          description: Description
-          type: string
-          example: string
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        TaxAmount:
-          format: double
-          description: Tax currency amount
-          type: number
-          example: 12.5
-        PriceIncludingOptionSetItems:
-          format: double
-          description: Price including option set items
-          type: number
-          example: 12.5
-        MenuItemId:
-          format: int32
-          description: Menu item identifier
-          type: integer
-          example: 500123
-        MenuItemDisplayOrder:
-          format: int32
-          description: Menu item display order
-          type: integer
-          example: 1
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DepositReturnFee:
-          format: double
-          description: Deposit return fee
-          type:
-          - number
-          - 'null'
-          example: 12.5
-    TaxItem:
-      description: A collection of tax items on the order.
-      type: object
-      properties:
-        Name:
-          description: The name of the tax item.
-          type: string
-          example: Example Name
-        Rate:
-          format: double
-          description: The tax rate applied to the item.
-          type: number
-          example: 1.0
-        Amount:
-          format: double
-          description: The amount of tax applied to the item.
-          type: number
-          example: 12.5
-    RestApiResult_OrderDeliveryInformation_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OrderDeliveryInformation'
-    RestApiResult_OrderFulfillmentStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OrderFulfillmentStatus'
-    OrderList:
-      description: A list of orders.
-      type: object
-      properties:
-        Orders:
-          description: A list of orders.
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderReference'
-          example: []
-    RestApiArrayResult_OrderFulfillmentStatus_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderFulfillmentStatus'
-          example: []
   securitySchemes:
     oauth2:
       type: oauth2

@@ -2437,108 +2437,57 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Language:
-      description: Sorted Language
-      type: object
-      properties:
-        LanguageId:
-          description: ISO 639-1 Language Code
-          type: string
-          example: '500123'
-        DisplayOrder:
-          format: int32
-          description: Display Order
-          type: integer
-          example: 1
-        Name:
-          description: Language Name
-          type: string
-          example: Example Name
-        Enabled:
-          description: Is the language enabled for use.
-          type: boolean
-          example: true
-    RestApiResult_App_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/App'
-    SupportedCountry:
-      description: Describes a supported country
-      type: object
-      properties:
-        CountryCode:
-          description: Country code
-          type: string
-          example: IE
-        Name:
-          description: Nice display name for a country
-          type: string
-          example: Example Name
-        PhoneCode:
-          format: int32
-          description: Country internatinoal phone code prefix
-          type: integer
-          example: 1
-        LanguageCode:
-          description: Language code
-          type: string
-          example: string
-        LanguageName:
-          description: Language name
-          type: string
-          example: Example Name
-        OtpNumber:
-          description: The phone number provided to Store staff which, in conjunction with a one-time-code, will connect them to the customer.
-          type: string
-          example: string
-        SupportNumber:
-          description: The store's support phone number, displayed to customers.
-          type: string
-          example: string
-        AddressLayout:
-          description: Address layout format. This changes the layout of address entry forms on the web app, iOS and Android app and should be set based on local custom.
-          enum:
-          - BuildingFirst
-          - AddressFirst
-          - FullStreetAddressFirst
-          type: string
-          example: BuildingFirst
-        PostCodeType:
-          description: Post code type
-          enum:
-          - None
-          - PostCode
-          - Zip
-          type: string
-          example: None
-        SupportRegion:
-          description: Supported region. This is not used.
-          enum:
-          - Default
-          - Spain
-          - Benelux
-          type: string
-          example: Default
-    AppLookup:
-      description: App lookup model
+    AppCompliance:
+      description: Application compliance model
       type: object
       properties:
         AppId:
-          description: App id
+          description: App ID
           type: string
           example: '500123'
-    RestApiResult_AppCompliance_:
-      description: Rest api result
+        ComplianceType:
+          description: "Type of compliance.\nThis controls if the Flipdish websites and apps display cookie consent banners and adjust cookies to be inline with various regulations. \nYou should set this correctly based on your region."
+          enum:
+          - Default
+          - GdprCompliance
+          type: string
+          example: Default
+        AllowDisablingOfGdpr:
+          description: For EU countries, we should not allow to change the option to “Default banner”, but all other countries should be able to do so.
+          type: boolean
+          example: true
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiArrayResult_SupportedCountry_:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/AppCompliance'
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedCountry'
+          example: []
     App:
       description: App
       type: object
@@ -2892,6 +2841,186 @@ components:
           minLength: 0
           type: string
           example: '500123'
+    Coordinates:
+      description: Coordinates
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    DnsRecordInformation:
+      description: Holds the information for the A and CNAME Records of a domain.
+      type: object
+      properties:
+        IsCNameReady:
+          description: indicates whether the CNAME record is ready or not.
+          type: boolean
+          example: true
+        IsAReady:
+          description: indicates whether the A record is ready or not.
+          type: boolean
+          example: true
+        IsApiCNameReady:
+          description: indicates whether the API CNAME record is ready or not.
+          type: boolean
+          example: true
+    RestApiPaginationResult_App_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+          example: []
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    AppLookup:
+      description: App lookup model
+      type: object
+      properties:
+        AppId:
+          description: App id
+          type: string
+          example: '500123'
+    Language:
+      description: Sorted Language
+      type: object
+      properties:
+        LanguageId:
+          description: ISO 639-1 Language Code
+          type: string
+          example: '500123'
+        DisplayOrder:
+          format: int32
+          description: Display Order
+          type: integer
+          example: 1
+        Name:
+          description: Language Name
+          type: string
+          example: Example Name
+        Enabled:
+          description: Is the language enabled for use.
+          type: boolean
+          example: true
+    CreateAppParameters:
+      description: The parameters required to create a new app.
+      type: object
+      properties:
+        Name:
+          description: The name of the brand that this app/white-label represents.
+          type: string
+          example: Example Name
+    RestApiResult_App_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/App'
+    RestApiResult_DnsRecordInformation_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/DnsRecordInformation'
+    SupportedCountry:
+      description: Describes a supported country
+      type: object
+      properties:
+        CountryCode:
+          description: Country code
+          type: string
+          example: IE
+        Name:
+          description: Nice display name for a country
+          type: string
+          example: Example Name
+        PhoneCode:
+          format: int32
+          description: Country internatinoal phone code prefix
+          type: integer
+          example: 1
+        LanguageCode:
+          description: Language code
+          type: string
+          example: string
+        LanguageName:
+          description: Language name
+          type: string
+          example: Example Name
+        OtpNumber:
+          description: The phone number provided to Store staff which, in conjunction with a one-time-code, will connect them to the customer.
+          type: string
+          example: string
+        SupportNumber:
+          description: The store's support phone number, displayed to customers.
+          type: string
+          example: string
+        AddressLayout:
+          description: Address layout format. This changes the layout of address entry forms on the web app, iOS and Android app and should be set based on local custom.
+          enum:
+          - BuildingFirst
+          - AddressFirst
+          - FullStreetAddressFirst
+          type: string
+          example: BuildingFirst
+        PostCodeType:
+          description: Post code type
+          enum:
+          - None
+          - PostCode
+          - Zip
+          type: string
+          example: None
+        SupportRegion:
+          description: Supported region. This is not used.
+          enum:
+          - Default
+          - Spain
+          - Benelux
+          type: string
+          example: Default
     AppConfigUpdateModel:
       description: Application configuration
       type: object
@@ -2944,143 +3073,14 @@ components:
           minLength: 0
           type: string
           example: '500123'
-    AppCompliance:
-      description: Application compliance model
-      type: object
-      properties:
-        AppId:
-          description: App ID
-          type: string
-          example: '500123'
-        ComplianceType:
-          description: "Type of compliance.\nThis controls if the Flipdish websites and apps display cookie consent banners and adjust cookies to be inline with various regulations. \nYou should set this correctly based on your region."
-          enum:
-          - Default
-          - GdprCompliance
-          type: string
-          example: Default
-        AllowDisablingOfGdpr:
-          description: For EU countries, we should not allow to change the option to “Default banner”, but all other countries should be able to do so.
-          type: boolean
-          example: true
-    RestApiArrayResult_SupportedCountry_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/SupportedCountry'
-          example: []
-    DnsRecordInformation:
-      description: Holds the information for the A and CNAME Records of a domain.
-      type: object
-      properties:
-        IsCNameReady:
-          description: indicates whether the CNAME record is ready or not.
-          type: boolean
-          example: true
-        IsAReady:
-          description: indicates whether the A record is ready or not.
-          type: boolean
-          example: true
-        IsApiCNameReady:
-          description: indicates whether the API CNAME record is ready or not.
-          type: boolean
-          example: true
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    CreateAppParameters:
-      description: The parameters required to create a new app.
-      type: object
-      properties:
-        Name:
-          description: The name of the brand that this app/white-label represents.
-          type: string
-          example: Example Name
-    Coordinates:
-      description: Coordinates
-      type: object
-      properties:
-        Latitude:
-          format: double
-          description: Latitude
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude
-          type: number
-          example: 1.0
-    RestApiPaginationResult_App_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-          example: []
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    RestApiResult_DnsRecordInformation_:
+    RestApiResult_AppCompliance_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/DnsRecordInformation'
+          $ref: '#/components/schemas/AppCompliance'
   securitySchemes:
     oauth2:
       type: oauth2

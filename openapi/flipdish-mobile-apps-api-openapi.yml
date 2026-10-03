@@ -1393,77 +1393,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_UpdateMobileAppsSubmissionStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/UpdateMobileAppsSubmissionStatus'
-    RestApiResult_MobileAppsSubmission_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MobileAppsSubmission'
-    RestApiResult_AppConfigSalesChannel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppConfigSalesChannel'
-    MobileAppsStatistics:
-      description: Mobile Apps Statistics
-      type: object
-      properties:
-        NumberDownload:
-          format: int32
-          description: Number Download
-          type: integer
-          example: 3
-        CurrentRate:
-          format: int32
-          description: Current Rate
-          type: integer
-          example: 1
-        CurrentVersion:
-          description: Current Version
-          type: string
-          example: string
-        PlayStoreLink:
-          description: Play Store Link
-          type: string
-          example: https://api.flipdish.co/example
-        AppBundleId:
-          description: App Bundle Id
-          type: string
-          example: '500123'
-        LastUpdated:
-          format: date-time
-          description: Last Updated
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Notes:
-          description: Last Updated
-          type: string
-          example: string
-        Published:
-          description: Published
-          type: boolean
-          example: true
-        PlatformType:
-          description: Platform Type
-          enum:
-          - None
-          - Android
-          - IOS
-          type: string
-          example: None
     RestApiIntegerResult:
       description: Rest api integer result
       required:
@@ -1475,14 +1404,48 @@ components:
           description: Data integer
           type: integer
           example: 1
-    RestApiResult_MobileAppsSubmissionStatus_:
-      description: Rest api result
-      required:
-      - Data
+    MobileAppsSubmissionDetails:
+      description: Mobile Apps form submission
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/MobileAppsSubmissionStatus'
+        MobileAppsSubmissionId:
+          format: int32
+          description: Mobile Apps Submission Id
+          type: integer
+          example: 500123
+        AppName:
+          description: App Name
+          type: string
+          example: Example Name
+        AppDescription:
+          description: App Description
+          type: string
+          example: string
+        AppShortDescription:
+          description: App Description
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        AppLogoUrl:
+          description: Logo URL
+          type: string
+          example: https://api.flipdish.co/example
+        AutoPublish:
+          description: Publish automatically
+          type: boolean
+          example: true
+        Status:
+          description: Mobile App Status
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileAppsSubmissionStatus'
+          example: []
     UpdateMobileAppsSubmissionStatus:
       description: Update Mobile Apps Status
       type: object
@@ -1532,130 +1495,14 @@ components:
           description: Mobile Notes
           type: string
           example: string
-    AppConfigSalesChannel:
-      description: App Config Sales Channel
-      type: object
-      properties:
-        EmailRequestMode:
-          description: Display a popup to users requesting their email address
-          enum:
-          - DoNotRequest
-          - Request
-          - Require
-          type: string
-          example: DoNotRequest
-        WebToAppRedirect:
-          description: Sends users to their native apps or request them to install the pwa
-          enum:
-          - NoRedirect
-          - RedirectOnce
-          - RedirectAlways
-          - SuggestPwa
-          - ForcePwa
-          type: string
-          example: NoRedirect
-        AddressEntryType:
-          description: Address entry type - TextEntryManualDisallowed is the only supported configuration
-          enum:
-          - MapFirst
-          - TextEntryManualAllowed
-          - TextEntryManualDisallowed
-          type: string
-          example: MapFirst
-        DisplayDeliveryRestaurantListScreen:
-          description: Display Pickup Restaurant List Screen
-          type: boolean
-          example: true
-    MobileAppsImage:
-      description: Mobile Apps Image
-      type: object
-      properties:
-        ImageUri:
-          description: Unique catalog Item id
-          type: string
-          example: https://api.flipdish.co/example
-    MobileAppsSubmissionDetails:
-      description: Mobile Apps form submission
-      type: object
-      properties:
-        MobileAppsSubmissionId:
-          format: int32
-          description: Mobile Apps Submission Id
-          type: integer
-          example: 500123
-        AppName:
-          description: App Name
-          type: string
-          example: Example Name
-        AppDescription:
-          description: App Description
-          type: string
-          example: string
-        AppShortDescription:
-          description: App Description
-          type: string
-          example: string
-        Keywords:
-          description: Keywords
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        AppLogoUrl:
-          description: Logo URL
-          type: string
-          example: https://api.flipdish.co/example
-        AutoPublish:
-          description: Publish automatically
-          type: boolean
-          example: true
-        Status:
-          description: Mobile App Status
-          type: array
-          items:
-            $ref: '#/components/schemas/MobileAppsSubmissionStatus'
-          example: []
-    RestApiArrayResult_MobileAppsStatistics_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MobileAppsStatistics'
-          example: []
-    RestApiResult_MobileAppsSubmissionDetails_:
+    RestApiResult_MobileAppsSubmissionStatus_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/MobileAppsSubmissionDetails'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+          $ref: '#/components/schemas/MobileAppsSubmissionStatus'
     MobileAppsSubmission:
       description: Mobile Apps form submission
       required:
@@ -1692,6 +1539,52 @@ components:
           description: Publish automatically
           type: boolean
           example: true
+    AppConfigSalesChannel:
+      description: App Config Sales Channel
+      type: object
+      properties:
+        EmailRequestMode:
+          description: Display a popup to users requesting their email address
+          enum:
+          - DoNotRequest
+          - Request
+          - Require
+          type: string
+          example: DoNotRequest
+        WebToAppRedirect:
+          description: Sends users to their native apps or request them to install the pwa
+          enum:
+          - NoRedirect
+          - RedirectOnce
+          - RedirectAlways
+          - SuggestPwa
+          - ForcePwa
+          type: string
+          example: NoRedirect
+        AddressEntryType:
+          description: Address entry type - TextEntryManualDisallowed is the only supported configuration
+          enum:
+          - MapFirst
+          - TextEntryManualAllowed
+          - TextEntryManualDisallowed
+          type: string
+          example: MapFirst
+        DisplayDeliveryRestaurantListScreen:
+          description: Display Pickup Restaurant List Screen
+          type: boolean
+          example: true
+    RestApiArrayResult_MobileAppsStatistics_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileAppsStatistics'
+          example: []
     RestApiResult_MobileAppsImage_:
       description: Rest api result
       required:
@@ -1700,14 +1593,85 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/MobileAppsImage'
-    RestApiResult_RestApiIntegerResult_:
+    RestApiResult_MobileAppsSubmissionDetails_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/RestApiIntegerResult'
+          $ref: '#/components/schemas/MobileAppsSubmissionDetails'
+    RestApiResult_AppConfigSalesChannel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppConfigSalesChannel'
+    MobileAppsImage:
+      description: Mobile Apps Image
+      type: object
+      properties:
+        ImageUri:
+          description: Unique catalog Item id
+          type: string
+          example: https://api.flipdish.co/example
+    MobileAppsStatistics:
+      description: Mobile Apps Statistics
+      type: object
+      properties:
+        NumberDownload:
+          format: int32
+          description: Number Download
+          type: integer
+          example: 3
+        CurrentRate:
+          format: int32
+          description: Current Rate
+          type: integer
+          example: 1
+        CurrentVersion:
+          description: Current Version
+          type: string
+          example: string
+        PlayStoreLink:
+          description: Play Store Link
+          type: string
+          example: https://api.flipdish.co/example
+        AppBundleId:
+          description: App Bundle Id
+          type: string
+          example: '500123'
+        LastUpdated:
+          format: date-time
+          description: Last Updated
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Notes:
+          description: Last Updated
+          type: string
+          example: string
+        Published:
+          description: Published
+          type: boolean
+          example: true
+        PlatformType:
+          description: Platform Type
+          enum:
+          - None
+          - Android
+          - IOS
+          type: string
+          example: None
+    RestApiResult_UpdateMobileAppsSubmissionStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/UpdateMobileAppsSubmissionStatus'
     MobileAppsSubmissionStatus:
       description: Mobile Apps Status
       type: object
@@ -1772,6 +1736,42 @@ components:
           description: Mobile Notes
           type: string
           example: string
+    RestApiResult_RestApiIntegerResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RestApiIntegerResult'
+    RestApiResult_MobileAppsSubmission_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MobileAppsSubmission'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

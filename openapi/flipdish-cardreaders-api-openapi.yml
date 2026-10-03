@@ -1422,82 +1422,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    StripeTerminalConnectionToken:
-      description: Stripe Terminal Connection Token
-      type: object
-      properties:
-        Token:
-          description: Connection Token
-          type: string
-          example: string
-    RestApiResult_BluetoothTerminalStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BluetoothTerminalStatus'
-    RestApiResult_StripeTerminalConnectionToken_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/StripeTerminalConnectionToken'
-    ProcessPaymentIntentRequest:
-      description: Initiate card reader Payment process request
-      required:
-      - PaymentIntentId
-      type: object
-      properties:
-        PaymentIntentId:
-          description: Device card paymentIntentId
-          type: string
-          example: '500123'
-    StripeTerminalLocation:
-      description: Stripe Terminal Private Key
-      type: object
-      properties:
-        Location:
-          description: Registered location of the terminal
-          type: string
-          example: string
-    GeoPointRequest:
-      description: Terminal location request
-      type: object
-      properties:
-        Latitude:
-          format: double
-          description: Kiosk device latitude
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Kiosk device longitude
-          type: number
-          example: 1.0
-    ReaderActionStateInfo:
-      description: Card reader state information
-      type: object
-      properties:
-        ActionState:
-          description: Action state
-          type: string
-          example: string
-        FailureCode:
-          description: Failure code
-          type: string
-          example: string
-        FailureMessage:
-          description: Failure Message
-          type: string
-          example: string
-        Type:
-          description: Type
-          type: string
-          example: string
     CardReader:
       description: Card reader
       type: object
@@ -1534,22 +1458,20 @@ components:
           example: true
         Action:
           $ref: '#/components/schemas/ReaderActionStateInfo'
-    RestApiResult_StripeTerminalLocation_:
-      description: Rest api result
+    CardReaderRegistrationRequest:
+      description: Card reader registration request
       required:
-      - Data
+      - RegistrationCode
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/StripeTerminalLocation'
-    RestApiResult_CardReader_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/CardReader'
+        RegistrationCode:
+          description: The reader registration code
+          type: string
+          example: string
+        KioskDeviceId:
+          description: The kiosk device id
+          type: string
+          example: '500123'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1570,19 +1492,58 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    UnRegisterCardReaderRequest:
-      description: Un-Register card reader request
-      required:
-      - ReaderId
-      - KioskDeviceId
+    StripeTerminalConnectionToken:
+      description: Stripe Terminal Connection Token
       type: object
       properties:
-        ReaderId:
-          description: Device card readerid
+        Token:
+          description: Connection Token
           type: string
-          example: '500123'
-        KioskDeviceId:
-          description: The kiosk device id
+          example: string
+    RestApiResult_BluetoothTerminalStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BluetoothTerminalStatus'
+    RestApiResult_StripeTerminalLocation_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StripeTerminalLocation'
+    ReaderActionStateInfo:
+      description: Card reader state information
+      type: object
+      properties:
+        ActionState:
+          description: Action state
+          type: string
+          example: string
+        FailureCode:
+          description: Failure code
+          type: string
+          example: string
+        FailureMessage:
+          description: Failure Message
+          type: string
+          example: string
+        Type:
+          description: Type
+          type: string
+          example: string
+    ProcessPaymentIntentRequest:
+      description: Initiate card reader Payment process request
+      required:
+      - PaymentIntentId
+      type: object
+      properties:
+        PaymentIntentId:
+          description: Device card paymentIntentId
           type: string
           example: '500123'
     BluetoothTerminalStatus:
@@ -1633,20 +1594,59 @@ components:
           description: ReaderId for Stripe Terminal
           type: string
           example: '500123'
-    CardReaderRegistrationRequest:
-      description: Card reader registration request
-      required:
-      - RegistrationCode
+    StripeTerminalLocation:
+      description: Stripe Terminal Private Key
       type: object
       properties:
-        RegistrationCode:
-          description: The reader registration code
+        Location:
+          description: Registered location of the terminal
           type: string
           example: string
+    UnRegisterCardReaderRequest:
+      description: Un-Register card reader request
+      required:
+      - ReaderId
+      - KioskDeviceId
+      type: object
+      properties:
+        ReaderId:
+          description: Device card readerid
+          type: string
+          example: '500123'
         KioskDeviceId:
           description: The kiosk device id
           type: string
           example: '500123'
+    RestApiResult_StripeTerminalConnectionToken_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StripeTerminalConnectionToken'
+    GeoPointRequest:
+      description: Terminal location request
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Kiosk device latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Kiosk device longitude
+          type: number
+          example: 1.0
+    RestApiResult_CardReader_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/CardReader'
   securitySchemes:
     oauth2:
       type: oauth2

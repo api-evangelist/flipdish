@@ -726,65 +726,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GroupReference:
-      description: Reference to an existing {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
-      required:
-      - CatalogItemId
-      - GroupType
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        Group:
-          $ref: '#/components/schemas/Group'
-        CatalogItemId:
-          description: Identifier of the ProductId to use as SubProduct
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        GroupType:
-          description: Type of the SupProduct
-          enum:
-          - ModifierGroup
-          type: string
-          example: ModifierGroup
-    Metafield:
-      description: Metafield
-      required:
-      - Key
-      - Value
-      type: object
-      properties:
-        Key:
-          description: 'Key of the metafield.
-
-            Allowed characters: lowercase letters, numbers, hyphen, underscore and dot'
-          type: string
-          example: string
-        Value:
-          description: Value of the metafield.
-          type: string
-          example: string
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     CreateGroupReference:
       description: Information to create a reference to a {System.Text.RegularExpressions.Group}
-      required:
-      - CatalogItemId
-      - GroupType
-      type: object
-      properties:
-        CatalogItemId:
-          description: Identifier of the ProductId to use as SubProduct
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        GroupType:
-          description: Type of the SupProduct
-          enum:
-          - ModifierGroup
-          type: string
-          example: ModifierGroup
-    UpdateGroupReference:
-      description: Data to update a {Flipdish.Menus.PublicModels.V1.Catalog.Products.GroupReference}
       required:
       - CatalogItemId
       - GroupType
@@ -932,6 +895,61 @@ components:
           minLength: 0
           type: string
           example: Example Name
+    RestApiPaginationResult_Product_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+          example: []
+    RestApiResult_Product_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Product'
+    Metafield:
+      description: Metafield
+      required:
+      - Key
+      - Value
+      type: object
+      properties:
+        Key:
+          description: 'Key of the metafield.
+
+            Allowed characters: lowercase letters, numbers, hyphen, underscore and dot'
+          type: string
+          example: string
+        Value:
+          description: Value of the metafield.
+          type: string
+          example: string
     Product:
       description: Product
       required:
@@ -1033,6 +1051,27 @@ components:
           description: Quantity of the modifier that will be set when the parent product is placed in the basket
           type: integer
           example: 3
+    GroupReference:
+      description: Reference to an existing {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
+      required:
+      - CatalogItemId
+      - GroupType
+      type: object
+      properties:
+        Group:
+          $ref: '#/components/schemas/Group'
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
     CreateProduct:
       description: Create a Catalog Item
       required:
@@ -1095,64 +1134,25 @@ components:
           description: Product contains alcohol
           type: boolean
           example: true
-    RestApiResult_Product_:
-      description: Rest api result
+    UpdateGroupReference:
+      description: Data to update a {Flipdish.Menus.PublicModels.V1.Catalog.Products.GroupReference}
       required:
-      - Data
+      - CatalogItemId
+      - GroupType
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/Product'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiPaginationResult_Product_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-          example: []
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
   securitySchemes:
     oauth2:
       type: oauth2

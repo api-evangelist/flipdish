@@ -356,6 +356,26 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     RestApiPaginationResult_PendingMenuChanges_:
       description: Rest api pagination result
       required:
@@ -386,6 +406,35 @@ components:
           items:
             $ref: '#/components/schemas/PendingMenuChanges'
           example: []
+    PendingMenuChangesSummaries:
+      description: Pending menu changes summaries
+      type: object
+      properties:
+        MenuId:
+          format: int32
+          description: Menu id
+          type: integer
+          example: 500123
+        TotalPendingChanges:
+          format: int32
+          description: Sum of pending changes per menu id
+          type: integer
+          example: 12.5
+    PendingMenuChanges:
+      description: Pending Menu Changes
+      type: object
+      properties:
+        CatalogItemId:
+          description: Unique catalog item id
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        MenuId:
+          format: int32
+          description: Unique menu id
+          type: integer
+          example: 500123
     PublishMenuChanges:
       description: Publish Menu Changes
       type: object
@@ -404,40 +453,6 @@ components:
             type: integer
           example:
           - 1
-    PendingMenuChangesSummaries:
-      description: Pending menu changes summaries
-      type: object
-      properties:
-        MenuId:
-          format: int32
-          description: Menu id
-          type: integer
-          example: 500123
-        TotalPendingChanges:
-          format: int32
-          description: Sum of pending changes per menu id
-          type: integer
-          example: 12.5
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     RestApiArrayResult_PendingMenuChangesSummaries_:
       description: Rest api array result
       required:
@@ -450,21 +465,6 @@ components:
           items:
             $ref: '#/components/schemas/PendingMenuChangesSummaries'
           example: []
-    PendingMenuChanges:
-      description: Pending Menu Changes
-      type: object
-      properties:
-        CatalogItemId:
-          description: Unique catalog item id
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        MenuId:
-          format: int32
-          description: Unique menu id
-          type: integer
-          example: 500123
   securitySchemes:
     oauth2:
       type: oauth2

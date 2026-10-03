@@ -1400,90 +1400,35 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/MenuSectionAvailability'
-    Range:
-      description: 'A class that represents a single opening period in a day.
-
-        This starts ''StartTime'' after midnight and runs for a ''Period''
-
-        after that, on the given DayOfWeek.'
+    MenuSectionAvailability:
+      description: Menu section availability
       type: object
       properties:
-        StartTime:
-          description: Start time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Period:
-          description: Period
-          type: string
-          example: string
-        DayOfWeek:
-          description: Day of week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-    ObjectDisplayOrder:
-      description: ''
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: ID of object to be ordered
-          type: integer
-          example: 500123
-        DisplayOrder:
-          format: int32
-          description: New Display order
-          type: integer
-          example: 1
-    BusinessHoursPeriod:
-      description: Business hours period
-      type: object
-      properties:
-        Early:
-          $ref: '#/components/schemas/Range'
-        Late:
-          $ref: '#/components/schemas/Range'
-        Ranges:
-          description: Ranges
+        AvailableTimes:
+          description: Available times
           type: array
           items:
-            $ref: '#/components/schemas/Range'
+            $ref: '#/components/schemas/BusinessHoursPeriod'
           example: []
-        DayOfWeek:
-          description: Day of week
+        AvailabilityMode:
+          description: Availability mode
           enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-        StartTime:
-          description: Start time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Period:
-          description: Period
-          type: string
-          example: string
-        StartTimeEarly:
-          description: Start time early
-          type: string
-          example: string
-        PeriodEarly:
-          description: Period early
-          type: string
-          example: string
+          - DisplayAlways
+          - DisplayBasedOnTimes
+          - DisplayAlwaysStartCollapsed
+          - DisplayAlwaysStartCollapsedBasedOnTimes
+          type:
+          - string
+          - 'null'
+          example: DisplayAlways
+    RestApiResult_BusinessHoursPeriod_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BusinessHoursPeriod'
     RestApiArrayResult_MenuSection_:
       description: Rest api array result
       required:
@@ -1496,26 +1441,6 @@ components:
           items:
             $ref: '#/components/schemas/MenuSection'
           example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     MenuSectionAvailabilityBase:
       description: Menu section availability
       type: object
@@ -1531,6 +1456,27 @@ components:
           - string
           - 'null'
           example: DisplayAlways
+    CreateMetadata:
+      description: Create metadata
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        Key:
+          description: Metadata key (Unique identifier)
+          maxLength: 128
+          minLength: 0
+          type: string
+          example: string
+        Value:
+          description: Metadata value
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: string
     BusinessHoursPeriodBase:
       description: Business hours period
       type: object
@@ -1563,6 +1509,28 @@ components:
           description: Period early
           type: string
           example: string
+    ObjectDisplayOrder:
+      description: ''
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: ID of object to be ordered
+          type: integer
+          example: 500123
+        DisplayOrder:
+          format: int32
+          description: New Display order
+          type: integer
+          example: 1
+    RestApiResult_MenuSection_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuSection'
     MenuSectionItem:
       description: Menu item
       type: object
@@ -1693,6 +1661,91 @@ components:
           description: Menu Item Id
           type: integer
           example: 500123
+    MenuSectionBase:
+      description: Menu section
+      type: object
+      properties:
+        Name:
+          description: Name
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Description
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: string
+        DisplayOrder:
+          format: int32
+          description: Display order
+          type: integer
+          example: 1
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        IsHiddenFromCustomers:
+          description: Is hidden from customer. Perhaps when the item is out of stock.
+          type: boolean
+          example: true
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+        MenuSectionId:
+          format: int32
+          description: Menu Section Id
+          type: integer
+          example: 500123
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    BusinessHoursPeriod:
+      description: Business hours period
+      type: object
+      properties:
+        Early:
+          $ref: '#/components/schemas/Range'
+        Late:
+          $ref: '#/components/schemas/Range'
+        Ranges:
+          description: Ranges
+          type: array
+          items:
+            $ref: '#/components/schemas/Range'
+          example: []
+        DayOfWeek:
+          description: Day of week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        StartTime:
+          description: Start time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Period:
+          description: Period
+          type: string
+          example: string
+        StartTimeEarly:
+          description: Start time early
+          type: string
+          example: string
+        PeriodEarly:
+          description: Period early
+          type: string
+          example: string
     MenuItemOptionSet:
       description: Menu item option set
       type: object
@@ -1761,49 +1814,6 @@ components:
           - HiddenImage
           type: string
           example: Small
-    MenuSectionBase:
-      description: Menu section
-      type: object
-      properties:
-        Name:
-          description: Name
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: Example Name
-        Description:
-          description: Description
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: string
-        DisplayOrder:
-          format: int32
-          description: Display order
-          type: integer
-          example: 1
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        IsHiddenFromCustomers:
-          description: Is hidden from customer. Perhaps when the item is out of stock.
-          type: boolean
-          example: true
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        MenuSectionId:
-          format: int32
-          description: Menu Section Id
-          type: integer
-          example: 500123
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
     MenuItemOptionSetItem:
       description: Menu item option set item
       type: object
@@ -1891,74 +1901,6 @@ components:
           description: Image url
           type: string
           example: https://api.flipdish.co/example
-    CreateMetadata:
-      description: Create metadata
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        Key:
-          description: Metadata key (Unique identifier)
-          maxLength: 128
-          minLength: 0
-          type: string
-          example: string
-        Value:
-          description: Metadata value
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: string
-    MenuSectionAvailability:
-      description: Menu section availability
-      type: object
-      properties:
-        AvailableTimes:
-          description: Available times
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessHoursPeriod'
-          example: []
-        AvailabilityMode:
-          description: Availability mode
-          enum:
-          - DisplayAlways
-          - DisplayBasedOnTimes
-          - DisplayAlwaysStartCollapsed
-          - DisplayAlwaysStartCollapsedBasedOnTimes
-          type:
-          - string
-          - 'null'
-          example: DisplayAlways
-    MenuObjectDisplayOrders:
-      description: Collection of Display Orders for a Menu Object (Menu Section / Menu Items / Option Sets etc)
-      type: object
-      properties:
-        DisplayOrders:
-          description: List of Objects and their new Display Orders
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectDisplayOrder'
-          example: []
-    RestApiResult_MenuSection_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuSection'
-    RestApiResult_BusinessHoursPeriod_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BusinessHoursPeriod'
     MenuSection:
       description: Menu section
       type: object
@@ -2014,6 +1956,26 @@ components:
           description: Image url
           type: string
           example: https://api.flipdish.co/example
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -2024,6 +1986,44 @@ components:
           description: Data string
           type: string
           example: string
+    MenuObjectDisplayOrders:
+      description: Collection of Display Orders for a Menu Object (Menu Section / Menu Items / Option Sets etc)
+      type: object
+      properties:
+        DisplayOrders:
+          description: List of Objects and their new Display Orders
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectDisplayOrder'
+          example: []
+    Range:
+      description: 'A class that represents a single opening period in a day.
+
+        This starts ''StartTime'' after midnight and runs for a ''Period''
+
+        after that, on the given DayOfWeek.'
+      type: object
+      properties:
+        StartTime:
+          description: Start time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Period:
+          description: Period
+          type: string
+          example: string
+        DayOfWeek:
+          description: Day of week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
   securitySchemes:
     oauth2:
       type: oauth2

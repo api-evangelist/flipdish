@@ -766,8 +766,90 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MetafieldDefinition:
-      description: Metafield Definition
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    OwnerEntityConfigurations:
+      description: Owner Entity Configurations
+      type: object
+      properties:
+        Configurations:
+          description: Owner Entity Configuration
+          type: array
+          items:
+            $ref: '#/components/schemas/OwnerEntityConfiguration'
+          example: []
+    UpdateMetafieldDefinition:
+      description: Information to update a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
+      type: object
+      properties:
+        Name:
+          description: Field Name
+          type: string
+          example: Example Name
+        Description:
+          description: Field Description
+          type: string
+          example: string
+        Behaviors:
+          description: Enable Metafield Behaviors
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+    OwnerEntityConfiguration:
+      description: OwnerEntity information to configure its {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}s
+      type: object
+      properties:
+        OwnerEntity:
+          description: Owner Entity
+          enum:
+          - CatalogItem
+          - CatalogGroup
+          - Menu
+          type: string
+          example: CatalogItem
+        AllowedBehaviors:
+          description: ''
+          type: array
+          items:
+            enum:
+            - SendToOrder
+            - SendToMenu
+            type: string
+          example:
+          - SendToOrder
+    RestApiResult_MetafieldDefinition_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MetafieldDefinition'
+    CreateMetafieldDefinition:
+      description: Information to create a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
       required:
       - Key
       - Name
@@ -827,38 +909,6 @@ components:
           - integer
           - 'null'
           example: 500123
-    OwnerEntityConfiguration:
-      description: OwnerEntity information to configure its {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}s
-      type: object
-      properties:
-        OwnerEntity:
-          description: Owner Entity
-          enum:
-          - CatalogItem
-          - CatalogGroup
-          - Menu
-          type: string
-          example: CatalogItem
-        AllowedBehaviors:
-          description: ''
-          type: array
-          items:
-            enum:
-            - SendToOrder
-            - SendToMenu
-            type: string
-          example:
-          - SendToOrder
-    OwnerEntityConfigurations:
-      description: Owner Entity Configurations
-      type: object
-      properties:
-        Configurations:
-          description: Owner Entity Configuration
-          type: array
-          items:
-            $ref: '#/components/schemas/OwnerEntityConfiguration'
-          example: []
     MetafieldDefinitionRecommendation:
       description: OwnerEntity Metafield Definition Recommendation
       required:
@@ -916,46 +966,8 @@ components:
           - integer
           - 'null'
           example: 500123
-    RestApiPaginationResult_MetafieldDefinitionRecommendation_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MetafieldDefinitionRecommendation'
-          example: []
-    RestApiResult_MetafieldDefinition_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MetafieldDefinition'
-    CreateMetafieldDefinition:
-      description: Information to create a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
+    MetafieldDefinition:
+      description: Metafield Definition
       required:
       - Key
       - Name
@@ -1045,48 +1057,36 @@ components:
           items:
             $ref: '#/components/schemas/MetafieldDefinition'
           example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    UpdateMetafieldDefinition:
-      description: Information to update a {Flipdish.Metafields.PublicModels.V1.MetafieldDefinition}
+    RestApiPaginationResult_MetafieldDefinitionRecommendation_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
       type: object
       properties:
-        Name:
-          description: Field Name
-          type: string
-          example: Example Name
-        Description:
-          description: Field Description
-          type: string
-          example: string
-        Behaviors:
-          description: Enable Metafield Behaviors
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
           type: array
           items:
-            enum:
-            - SendToOrder
-            - SendToMenu
-            type: string
-          example:
-          - SendToOrder
+            $ref: '#/components/schemas/MetafieldDefinitionRecommendation'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

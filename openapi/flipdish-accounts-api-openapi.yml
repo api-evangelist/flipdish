@@ -1657,6 +1657,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RequestPasswordResetPinResponse:
+      description: Request Password Reset PIN response
+      type: object
+      properties:
+        PasswordResetPinSentViaEmail:
+          description: Password Reset PIN sent via email to user
+          type: boolean
+          example: true
+    LocalisedTimeZone:
+      description: Represents a localised time zone
+      type: object
+      properties:
+        TimeZoneId:
+          description: Microsoft Time Zone Id
+          type: string
+          example: '500123'
+        IanaTimeZoneId:
+          description: Iana Time Zone Id
+          type: string
+          example: '500123'
+        DisplayName:
+          description: Display name in users language
+          type: string
+          example: Example Name
+    LoginWithPinModel:
+      description: Login with PIN model
+      required:
+      - Email
+      - Pin
+      type: object
+      properties:
+        Email:
+          description: Email addres
+          type: string
+          example: owner@example.com
+        Pin:
+          format: int32
+          description: PIN code (received via email)
+          type: integer
+          example: 1
     PredefinedAnswer:
       description: Predefined answer
       type: object
@@ -1668,6 +1708,99 @@ components:
           example: 500123
         Text:
           description: Text
+          type: string
+          example: string
+    SignupStep:
+      description: ''
+      type: object
+      properties:
+        Action:
+          description: Action needs to take
+          enum:
+          - Question
+          - StoreLocation
+          - PaymentSubscription
+          - StoreName
+          type: string
+          example: Question
+        Question:
+          description: Question in case Action == Question
+          type: string
+          example: string
+        PredefinedAnswers:
+          description: Predefined answer in case Action == Question
+          type: array
+          items:
+            $ref: '#/components/schemas/PredefinedAnswer'
+          example: []
+    LoginModel:
+      description: Login model
+      required:
+      - Email
+      - Password
+      type: object
+      properties:
+        Email:
+          description: Email address
+          type: string
+          example: owner@example.com
+        Password:
+          description: Password
+          type: string
+          example: string
+    SetPasswordWithPinModel:
+      description: Set password with PIN model
+      required:
+      - Pin
+      - NewPassword
+      type: object
+      properties:
+        Pin:
+          format: int32
+          description: PIN code (received via email)
+          type: integer
+          example: 1
+        NewPassword:
+          description: New Password
+          type: string
+          example: string
+        RecaptchaToken:
+          description: Google Recaptcha Token
+          type: string
+          example: string
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    ChangePasswordModel:
+      description: Change password model
+      required:
+      - OldPassword
+      - NewPassword
+      type: object
+      properties:
+        OldPassword:
+          description: Old password
+          type: string
+          example: string
+        NewPassword:
+          description: New password
           type: string
           example: string
     AccountDetailBase:
@@ -1785,6 +1918,62 @@ components:
           description: User created at
           type: string
           example: '2026-06-02T12:00:00Z'
+    CreateBasicAccountModel:
+      description: Basic attributes for creating an account
+      required:
+      - StoreName
+      type: object
+      properties:
+        StoreName:
+          description: Store name
+          type: string
+          example: Example Name
+        LanguageId:
+          description: LanguageId
+          type: string
+          example: '500123'
+    RequestLoginPinResponse:
+      description: Request login PIN response
+      type: object
+      properties:
+        LoginPinSentViaEmail:
+          description: Login PIN sent via email to user
+          type: boolean
+          example: true
+        ForceOktaLogin:
+          description: All flipdishers must login via Okta
+          type: boolean
+          example: true
+    RestApiResult_AccountDetail_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AccountDetail'
+    RestApiArrayResult_LocalisedTimeZone_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalisedTimeZone'
+          example: []
+    RequestLoginPinModel:
+      description: Request login PIN response
+      required:
+      - Email
+      type: object
+      properties:
+        Email:
+          description: Email address
+          type: string
+          example: owner@example.com
     PasswordResetModel:
       description: Password reset model
       required:
@@ -1812,195 +2001,6 @@ components:
           description: Password reset token
           type: string
           example: string
-    SignupStep:
-      description: ''
-      type: object
-      properties:
-        Action:
-          description: Action needs to take
-          enum:
-          - Question
-          - StoreLocation
-          - PaymentSubscription
-          - StoreName
-          type: string
-          example: Question
-        Question:
-          description: Question in case Action == Question
-          type: string
-          example: string
-        PredefinedAnswers:
-          description: Predefined answer in case Action == Question
-          type: array
-          items:
-            $ref: '#/components/schemas/PredefinedAnswer'
-          example: []
-    RestApiArrayResult_LocalisedTimeZone_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/LocalisedTimeZone'
-          example: []
-    RequestLoginPinResponse:
-      description: Request login PIN response
-      type: object
-      properties:
-        LoginPinSentViaEmail:
-          description: Login PIN sent via email to user
-          type: boolean
-          example: true
-        ForceOktaLogin:
-          description: All flipdishers must login via Okta
-          type: boolean
-          example: true
-    SetPasswordWithPinModel:
-      description: Set password with PIN model
-      required:
-      - Pin
-      - NewPassword
-      type: object
-      properties:
-        Pin:
-          format: int32
-          description: PIN code (received via email)
-          type: integer
-          example: 1
-        NewPassword:
-          description: New Password
-          type: string
-          example: string
-        RecaptchaToken:
-          description: Google Recaptcha Token
-          type: string
-          example: string
-    LoginModel:
-      description: Login model
-      required:
-      - Email
-      - Password
-      type: object
-      properties:
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
-        Password:
-          description: Password
-          type: string
-          example: string
-    ChangePasswordModel:
-      description: Change password model
-      required:
-      - OldPassword
-      - NewPassword
-      type: object
-      properties:
-        OldPassword:
-          description: Old password
-          type: string
-          example: string
-        NewPassword:
-          description: New password
-          type: string
-          example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    LoginWithPinModel:
-      description: Login with PIN model
-      required:
-      - Email
-      - Pin
-      type: object
-      properties:
-        Email:
-          description: Email addres
-          type: string
-          example: owner@example.com
-        Pin:
-          format: int32
-          description: PIN code (received via email)
-          type: integer
-          example: 1
-    RestApiResult_AccountDetail_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AccountDetail'
-    CreateBasicAccountModel:
-      description: Basic attributes for creating an account
-      required:
-      - StoreName
-      type: object
-      properties:
-        StoreName:
-          description: Store name
-          type: string
-          example: Example Name
-        LanguageId:
-          description: LanguageId
-          type: string
-          example: '500123'
-    LocalisedTimeZone:
-      description: Represents a localised time zone
-      type: object
-      properties:
-        TimeZoneId:
-          description: Microsoft Time Zone Id
-          type: string
-          example: '500123'
-        IanaTimeZoneId:
-          description: Iana Time Zone Id
-          type: string
-          example: '500123'
-        DisplayName:
-          description: Display name in users language
-          type: string
-          example: Example Name
-    RequestPasswordResetPinResponse:
-      description: Request Password Reset PIN response
-      type: object
-      properties:
-        PasswordResetPinSentViaEmail:
-          description: Password Reset PIN sent via email to user
-          type: boolean
-          example: true
-    RequestLoginPinModel:
-      description: Request login PIN response
-      required:
-      - Email
-      type: object
-      properties:
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
   securitySchemes:
     oauth2:
       type: oauth2

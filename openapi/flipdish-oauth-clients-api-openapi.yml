@@ -1159,38 +1159,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_OauthClientRedirectUri_:
-      description: Rest api result
-      required:
-      - Data
+    OauthClientRedirectUri:
+      description: OAuth client redirect uri
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/OauthClientRedirectUri'
-    RestApiArrayResult_OAuthApp_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OAuthApp'
-          example: []
-    RestApiArrayResult_OauthClientRedirectUri_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OauthClientRedirectUri'
-          example: []
+        Id:
+          format: int32
+          description: Redirect uri identifier
+          type: integer
+          example: 500123
+        Uri:
+          description: Redirect uri
+          type: string
+          example: https://api.flipdish.co/example
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1211,27 +1192,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_OAuthApp_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OAuthApp'
-    OauthClientRedirectUri:
-      description: OAuth client redirect uri
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Redirect uri identifier
-          type: integer
-          example: 500123
-        Uri:
-          description: Redirect uri
-          type: string
-          example: https://api.flipdish.co/example
     OAuthApp:
       description: Oauth client (also knowns as 'app')
       type: object
@@ -1295,6 +1255,18 @@ components:
         Flow: 2
         AccessTokenLifetime: 3600
         AbsoluteRefreshTokenLifetime: 2592000
+    RestApiArrayResult_OAuthApp_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OAuthApp'
+          example: []
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -1305,6 +1277,34 @@ components:
           description: Data string
           type: string
           example: string
+    RestApiResult_OauthClientRedirectUri_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OauthClientRedirectUri'
+    RestApiResult_OAuthApp_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OAuthApp'
+    RestApiArrayResult_OauthClientRedirectUri_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OauthClientRedirectUri'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

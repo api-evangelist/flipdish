@@ -1581,15 +1581,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreditNoteDetails:
-      description: Credit note details
+    RestApiArrayResult_VoucherDataPoint_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        RemainingCredit:
-          format: double
-          description: Remaining credit
-          type: number
-          example: 1.0
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherDataPoint'
+          example: []
     RestApiPaginationResult_VoucherSummary_:
       description: Rest api pagination result
       required:
@@ -1620,42 +1623,10 @@ components:
           items:
             $ref: '#/components/schemas/VoucherSummary'
           example: []
-    CreatePromotion:
-      description: Create Promotion
+    CreateVoucher:
+      description: Create Voucher
       type: object
       properties:
-        Name:
-          description: Promotion Name
-          type: string
-          example: Example Name
-        MenuItemPublicIds:
-          description: Promotion Menu Item Awards
-          type: array
-          items:
-            format: uuid
-            type: string
-            example: 00000000-0000-0000-0000-000000000000
-          example:
-          - 00000000-0000-0000-0000-000000000000
-    Voucher:
-      description: Voucher
-      type: object
-      properties:
-        VoucherId:
-          format: int32
-          description: Voucher Id
-          type: integer
-          example: 500123
-        Status:
-          description: Voucher Status
-          enum:
-          - Valid
-          - NotYetValid
-          - Expired
-          - Used
-          - Disabled
-          type: string
-          example: Valid
         VoucherType:
           description: Voucher Type
           enum:
@@ -1666,133 +1637,8 @@ components:
           - FreeDelivery
           type: string
           example: PercentageDiscount
-        Currency:
-          description: Currency of the voucher
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-        StoreNames:
-          description: Stores that this voucher applies to
-          type: array
-          items:
-            type: string
-          example:
-          - Example Name
-        PromotionDetails:
-          $ref: '#/components/schemas/PromotionDetails'
+        Promotion:
+          $ref: '#/components/schemas/CreatePromotion'
         CreditNoteDetails:
           $ref: '#/components/schemas/CreditNoteDetails'
         LumpDiscountDetails:
@@ -1932,26 +1778,132 @@ components:
           - integer
           - 'null'
           example: 1
-    FlipdishError:
+    PromotionAward:
+      description: Promotion
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        PromotionAwardId:
+          format: int32
+          description: Promotion Award Id
+          type: integer
+          example: 500123
+        MenuItemPublicId:
+          format: uuid
+          description: The public id of the menu item that will be awarded
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    VoucherDataPoint:
+      description: A single data point in timeline graphs related to Vouchers
+      type: object
+      properties:
+        PeriodStart:
+          format: date-time
+          description: Date from which the data point starts
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodLengthInDays:
+          format: int32
+          description: The length in days that this data point covers
+          type: integer
+          example: 1
+        Value:
+          format: int32
+          description: The value of this data point
+          type: integer
+          example: 1
+    PercentDiscountDetails:
+      description: Percent discount details
+      type: object
+      properties:
+        PercentageDiscount:
+          format: int32
+          description: Percentage discount
+          type: integer
+          example: 3
+        MaxDiscountAmount:
+          format: double
+          description: 'The maximum amount that the percentage discount value can be.
+
+            If not set then there is no maximum.
+
+            If set to e.g. 20 euro, and the percentage discount is 25%, and the order total is 100 euro, then the discount will be 20 euro (not 25 euro).'
+          type:
+          - number
+          - 'null'
+          example: 12.5
+    CreditNoteDetails:
+      description: Credit note details
+      type: object
+      properties:
+        RemainingCredit:
+          format: double
+          description: Remaining credit
+          type: number
+          example: 1.0
+    VoucherSummary:
+      description: Voucher Summary
+      type: object
+      properties:
+        VoucherId:
+          format: int32
+          description: Voucher Id
+          type: integer
+          example: 500123
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Status:
+          description: Voucher Status
+          enum:
+          - Valid
+          - NotYetValid
+          - Expired
+          - Used
+          - Disabled
+          type: string
+          example: Valid
+        VoucherType:
+          description: Voucher Type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        VoucherSubType:
+          description: Voucher Sub Type
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        StoreNames:
+          description: Store names associated with this voucher
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        IsAvailableOnAllStores:
+          description: True if the voucher is available on all active stores in the app
+          type: boolean
+          example: true
     UpdateVoucher:
       description: Update Voucher
       type: object
@@ -2107,41 +2059,6 @@ components:
           - integer
           - 'null'
           example: 1
-    RestApiResult_VoucherWithStats_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/VoucherWithStats'
-    UpdateVoucherUsage:
-      description: Update Voucher Usage
-      type: object
-      properties:
-        IsUsed:
-          description: Flag indicating whether the voucher is used
-          type: boolean
-          example: true
-        UsedByCustomerId:
-          format: int32
-          description: Indicates Customer that used the voucher.
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        TransactionKey:
-          description: "An opaque string, to ensure idempotency. This allows for safely retrying requests without accidentally performing the same stamp operation twice. \nThis will typically contain the the ID of the sale order."
-          type: string
-          example: string
-    RestApiResult_Voucher_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Voucher'
     VoucherWithStats:
       description: Voucher With Statistics
       type: object
@@ -2472,36 +2389,7 @@ components:
           - integer
           - 'null'
           example: 1
-    SetVoucherValidityPeriodsSimplifiedRequest:
-      description: Set the validity periods of a voucher.
-      type: object
-      properties:
-        DaysOfWeek:
-          description: Days of week when the voucher is valid
-          type: array
-          items:
-            enum:
-            - Sunday
-            - Monday
-            - Tuesday
-            - Wednesday
-            - Thursday
-            - Friday
-            - Saturday
-            type: string
-          example:
-          - Sunday
-        StartTime:
-          description: Start time of the day when the voucher is valid
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndTime:
-          description: 'End time of the day when the voucher is valid.
-
-            If the end time is before the start time, the end time is assumed to be the next day.'
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    RestApiArrayResult_VoucherDataPoint_:
+    RestApiArrayResult_VoucherSummary_:
       description: Rest api array result
       required:
       - Data
@@ -2511,7 +2399,7 @@ components:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/VoucherDataPoint'
+            $ref: '#/components/schemas/VoucherSummary'
           example: []
     PromotionDetails:
       description: Promotion
@@ -2532,34 +2420,25 @@ components:
           items:
             $ref: '#/components/schemas/PromotionAward'
           example: []
-    ValidityPeriod:
-      description: ValidityPeriod.
+    Voucher:
+      description: Voucher
       type: object
       properties:
-        DayOfWeek:
-          description: DayOfWeek.
+        VoucherId:
+          format: int32
+          description: Voucher Id
+          type: integer
+          example: 500123
+        Status:
+          description: Voucher Status
           enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
+          - Valid
+          - NotYetValid
+          - Expired
+          - Used
+          - Disabled
           type: string
-          example: Sunday
-        StartTime:
-          description: StartTime.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndTime:
-          description: EndTime.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    CreateVoucher:
-      description: Create Voucher
-      type: object
-      properties:
+          example: Valid
         VoucherType:
           description: Voucher Type
           enum:
@@ -2570,8 +2449,133 @@ components:
           - FreeDelivery
           type: string
           example: PercentageDiscount
-        Promotion:
-          $ref: '#/components/schemas/CreatePromotion'
+        Currency:
+          description: Currency of the voucher
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        StoreNames:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        PromotionDetails:
+          $ref: '#/components/schemas/PromotionDetails'
         CreditNoteDetails:
           $ref: '#/components/schemas/CreditNoteDetails'
         LumpDiscountDetails:
@@ -2720,135 +2724,131 @@ components:
           description: Discount amount
           type: number
           example: 12.5
-    PercentDiscountDetails:
-      description: Percent discount details
+    CreatePromotion:
+      description: Create Promotion
       type: object
       properties:
-        PercentageDiscount:
-          format: int32
-          description: Percentage discount
-          type: integer
-          example: 3
-        MaxDiscountAmount:
-          format: double
-          description: 'The maximum amount that the percentage discount value can be.
-
-            If not set then there is no maximum.
-
-            If set to e.g. 20 euro, and the percentage discount is 25%, and the order total is 100 euro, then the discount will be 20 euro (not 25 euro).'
-          type:
-          - number
-          - 'null'
-          example: 12.5
-    VoucherDataPoint:
-      description: A single data point in timeline graphs related to Vouchers
+        Name:
+          description: Promotion Name
+          type: string
+          example: Example Name
+        MenuItemPublicIds:
+          description: Promotion Menu Item Awards
+          type: array
+          items:
+            format: uuid
+            type: string
+            example: 00000000-0000-0000-0000-000000000000
+          example:
+          - 00000000-0000-0000-0000-000000000000
+    SetVoucherValidityPeriodsSimplifiedRequest:
+      description: Set the validity periods of a voucher.
       type: object
       properties:
-        PeriodStart:
-          format: date-time
-          description: Date from which the data point starts
+        DaysOfWeek:
+          description: Days of week when the voucher is valid
+          type: array
+          items:
+            enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+            type: string
+          example:
+          - Sunday
+        StartTime:
+          description: Start time of the day when the voucher is valid
           type: string
           example: '2026-06-02T12:00:00Z'
-        PeriodLengthInDays:
-          format: int32
-          description: The length in days that this data point covers
-          type: integer
-          example: 1
-        Value:
-          format: int32
-          description: The value of this data point
-          type: integer
-          example: 1
-    PromotionAward:
-      description: Promotion
-      type: object
-      properties:
-        PromotionAwardId:
-          format: int32
-          description: Promotion Award Id
-          type: integer
-          example: 500123
-        MenuItemPublicId:
-          format: uuid
-          description: The public id of the menu item that will be awarded
+        EndTime:
+          description: 'End time of the day when the voucher is valid.
+
+            If the end time is before the start time, the end time is assumed to be the next day.'
           type: string
-          example: 00000000-0000-0000-0000-000000000000
-    RestApiArrayResult_VoucherSummary_:
-      description: Rest api array result
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_VoucherWithStats_:
+      description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/VoucherSummary'
-          example: []
-    VoucherSummary:
-      description: Voucher Summary
+          $ref: '#/components/schemas/VoucherWithStats'
+    ValidityPeriod:
+      description: ValidityPeriod.
       type: object
       properties:
-        VoucherId:
+        DayOfWeek:
+          description: DayOfWeek.
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        StartTime:
+          description: StartTime.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndTime:
+          description: EndTime.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_Voucher_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Voucher'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    UpdateVoucherUsage:
+      description: Update Voucher Usage
+      type: object
+      properties:
+        IsUsed:
+          description: Flag indicating whether the voucher is used
+          type: boolean
+          example: true
+        UsedByCustomerId:
           format: int32
-          description: Voucher Id
-          type: integer
+          description: Indicates Customer that used the voucher.
+          type:
+          - integer
+          - 'null'
           example: 500123
-        Code:
-          description: Voucher Code
+        TransactionKey:
+          description: "An opaque string, to ensure idempotency. This allows for safely retrying requests without accidentally performing the same stamp operation twice. \nThis will typically contain the the ID of the sale order."
           type: string
           example: string
-        Status:
-          description: Voucher Status
-          enum:
-          - Valid
-          - NotYetValid
-          - Expired
-          - Used
-          - Disabled
-          type: string
-          example: Valid
-        VoucherType:
-          description: Voucher Type
-          enum:
-          - PercentageDiscount
-          - LumpDiscount
-          - AddItem
-          - CreditNote
-          - FreeDelivery
-          type: string
-          example: PercentageDiscount
-        VoucherSubType:
-          description: Voucher Sub Type
-          enum:
-          - None
-          - SignUp
-          - Loyalty
-          - Loyalty25
-          - Retention
-          - SecondaryRetention
-          - Custom
-          type: string
-          example: None
-        Description:
-          description: Voucher Description (Visible on printout)
-          type: string
-          example: string
-        IsEnabled:
-          description: Is voucher enabled
-          type: boolean
-          example: true
-        StoreNames:
-          description: Store names associated with this voucher
-          type: array
-          items:
-            type: string
-          example:
-          - Example Name
-        IsAvailableOnAllStores:
-          description: True if the voucher is available on all active stores in the app
-          type: boolean
-          example: true
   securitySchemes:
     oauth2:
       type: oauth2
