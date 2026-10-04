@@ -1134,83 +1134,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Field:
-      required:
-      - Name
-      - Description
-      - Key
-      - Position
-      - FieldType
+    ExecuteConfigurationActionRequest:
       type: object
       properties:
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
         Key:
           type: string
           example: string
-        Tooltip:
+        Action:
           type: string
           example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        DefaultValue:
-          type: string
-          example: string
-        ValidValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidValue'
-          example: []
-        ValidationRegex:
-          type: string
-          example: string
-        FieldType:
-          enum:
-          - Text
-          - TextArea
-          - Integer
-          - Decimal
-          - Date
-          - DateTime
-          - Time
-          - Select
-          - Boolean
-          - ActionButton
-          type: string
-          example: Text
-        IsFlipdishRestricted:
-          type:
-          - boolean
-          - 'null'
-          example: true
-    UpdateAppStoreAppConfiguration:
-      required:
-      - IsEnabled
+    ConfiguredStore:
       type: object
       properties:
-        IsEnabled:
-          type: boolean
-          example: true
-        StoreIds:
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        Settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
-          example: []
+        StoreId:
+          format: int32
+          type: integer
+          example: 500123
+        Name:
+          type: string
+          example: Example Name
     AppStoreAppConfigurationSummary:
       required:
       - Id
@@ -1270,75 +1212,47 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    Setting:
+    RestApiArrayResult_AppStoreAppSummary_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        Key:
-          type: string
-          example: string
-        Value:
-          type: string
-          example: string
-    ExecuteConfigurationActionRequest:
-      type: object
-      properties:
-        Key:
-          type: string
-          example: string
-        Action:
-          type: string
-          example: string
-    ConfiguredStore:
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          type: integer
-          example: 500123
-        Name:
-          type: string
-          example: Example Name
-    ExecuteConfigurationActionResult:
-      type: object
-      properties:
-        ErrorMessage:
-          type: string
-          example: string
-        InfoMessage:
-          type: string
-          example: string
-        RedirectUrl:
-          type: string
-          example: https://api.flipdish.co/example
-        RedirectTarget:
-          enum:
-          - Default
-          - NewWindow
-          - Popup
-          type:
-          - string
-          - 'null'
-          example: Default
-    RestApiResult_ExecuteConfigurationActionResult_:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppStoreAppSummary'
+          example: []
+    RestApiResult_AppStoreAppConfiguration_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/ExecuteConfigurationActionResult'
-    ValidValue:
-      required:
-      - Code
-      - Name
+          $ref: '#/components/schemas/AppStoreAppConfiguration'
+    AppStoreAppSupportInfo:
       type: object
       properties:
-        Code:
+        PrivacyPolicy:
           type: string
           example: string
-        Name:
+        TermsOfUse:
           type: string
-          example: Example Name
+          example: string
+        CompanyWebsite:
+          type: string
+          example: string
+        LearnMore:
+          type: string
+          example: string
+        InstallationMessage:
+          type: string
+          example: string
+        SupportEmail:
+          type: string
+          example: owner@example.com
     FieldGroup:
       required:
       - Name
@@ -1365,27 +1279,16 @@ components:
           items:
             $ref: '#/components/schemas/Field'
           example: []
-    AppStoreAppSupportInfo:
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
       type: object
       properties:
-        PrivacyPolicy:
+        Data:
+          description: Data string
           type: string
           example: string
-        TermsOfUse:
-          type: string
-          example: string
-        CompanyWebsite:
-          type: string
-          example: string
-        LearnMore:
-          type: string
-          example: string
-        InstallationMessage:
-          type: string
-          example: string
-        SupportEmail:
-          type: string
-          example: owner@example.com
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1406,32 +1309,18 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiStringResult:
-      description: Rest api string result
+    ValidValue:
       required:
-      - Data
+      - Code
+      - Name
       type: object
       properties:
-        Data:
-          description: Data string
+        Code:
           type: string
           example: string
-    RestApiResult_AppStoreAppConfiguration_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppStoreAppConfiguration'
-    UpdateAppStoreAppConfigurationValuesBatch:
-      type: object
-      properties:
-        Settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
-          example: []
+        Name:
+          type: string
+          example: Example Name
     RestApiArrayResult_AppStoreAppConfigurationSummary_:
       description: Rest api array result
       required:
@@ -1444,83 +1333,44 @@ components:
           items:
             $ref: '#/components/schemas/AppStoreAppConfigurationSummary'
           example: []
-    AppStoreAppSummary:
-      required:
-      - Id
-      - VerificationStatus
-      - Internal
-      - Name
-      - Description
-      - Categories
-      - Countries
+    ExecuteConfigurationActionResult:
       type: object
       properties:
-        Id:
+        ErrorMessage:
           type: string
-          example: '500123'
-        VerificationStatus:
+          example: string
+        InfoMessage:
+          type: string
+          example: string
+        RedirectUrl:
+          type: string
+          example: https://api.flipdish.co/example
+        RedirectTarget:
           enum:
-          - Draft
-          - Submitted
-          - Verified
-          type: string
-          example: Draft
-        Logo:
-          type: string
-          example: string
-        Internal:
-          type: boolean
-          example: true
-        Name:
-          type: string
-          example: Example Name
-        Description:
+          - Default
+          - NewWindow
+          - Popup
+          type:
+          - string
+          - 'null'
+          example: Default
+    Setting:
+      type: object
+      properties:
+        Key:
           type: string
           example: string
-        IsEnabled:
-          type: boolean
-          example: true
-        Categories:
-          type: array
-          items:
-            enum:
-            - PointOfSale
-            - DeliveryAndLogistics
-            - CRM
-            - GiftCard
-            - Accounting
-            - LoyaltyAndMarketing
-            - Other
-            type: string
-          example:
-          - PointOfSale
-        Countries:
-          type: array
-          items:
-            enum:
-            - GB
-            - IE
-            - FR
-            - ES
-            - PT
-            - IT
-            - DE
-            - PL
-            - BE
-            - LU
-            - NL
-            - US
-            - CA
-            - BG
-            - MX
-            - AU
-            - NZ
-            type: string
-          example:
-          - GB
-        DeveloperName:
+        Value:
           type: string
-          example: Example Name
+          example: string
+    UpdateAppStoreAppConfigurationValuesBatch:
+      type: object
+      properties:
+        Settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+          example: []
     AppStoreAppConfiguration:
       required:
       - Id
@@ -1684,18 +1534,168 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    RestApiArrayResult_AppStoreAppSummary_:
-      description: Rest api array result
+    RestApiResult_ExecuteConfigurationActionResult_:
+      description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Generic data object.
+          $ref: '#/components/schemas/ExecuteConfigurationActionResult'
+    AppStoreAppSummary:
+      required:
+      - Id
+      - VerificationStatus
+      - Internal
+      - Name
+      - Description
+      - Categories
+      - Countries
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '500123'
+        VerificationStatus:
+          enum:
+          - Draft
+          - Submitted
+          - Verified
+          type: string
+          example: Draft
+        Logo:
+          type: string
+          example: string
+        Internal:
+          type: boolean
+          example: true
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        IsEnabled:
+          type: boolean
+          example: true
+        Categories:
           type: array
           items:
-            $ref: '#/components/schemas/AppStoreAppSummary'
+            enum:
+            - PointOfSale
+            - DeliveryAndLogistics
+            - CRM
+            - GiftCard
+            - Accounting
+            - LoyaltyAndMarketing
+            - Other
+            type: string
+          example:
+          - PointOfSale
+        Countries:
+          type: array
+          items:
+            enum:
+            - GB
+            - IE
+            - FR
+            - ES
+            - PT
+            - IT
+            - DE
+            - PL
+            - BE
+            - LU
+            - NL
+            - US
+            - CA
+            - BG
+            - MX
+            - AU
+            - NZ
+            type: string
+          example:
+          - GB
+        DeveloperName:
+          type: string
+          example: Example Name
+    UpdateAppStoreAppConfiguration:
+      required:
+      - IsEnabled
+      type: object
+      properties:
+        IsEnabled:
+          type: boolean
+          example: true
+        StoreIds:
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        Settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
           example: []
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Key:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        DefaultValue:
+          type: string
+          example: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+          example: []
+        ValidationRegex:
+          type: string
+          example: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+          example: Text
+        IsFlipdishRestricted:
+          type:
+          - boolean
+          - 'null'
+          example: true
   securitySchemes:
     oauth2:
       type: oauth2

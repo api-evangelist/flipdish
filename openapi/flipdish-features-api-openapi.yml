@@ -217,6 +217,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiStringArrayResult:
+      description: Rest api string array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string array
+          type: array
+          items:
+            type: string
+          example:
+          - string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -237,19 +250,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiStringArrayResult:
-      description: Rest api string array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string array
-          type: array
-          items:
-            type: string
-          example:
-          - string
   securitySchemes:
     oauth2:
       type: oauth2

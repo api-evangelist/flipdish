@@ -745,26 +745,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     LocationArea_Location:
       description: 'Representation of a Location i.e: (Table, Hotel Room, Car Park, etc )'
       required:
@@ -795,22 +775,22 @@ components:
           description: Shows if the Location is deleted or not
           type: boolean
           example: true
-    RestApiResult_MappedLocation_:
-      description: Rest api result
+    MappedLocation:
+      description: Representation of a Location and its External Mapping
       required:
-      - Data
+      - LocationId
+      - ExternalLocationId
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/MappedLocation'
-    RestApiResult_LocationArea_Location_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/LocationArea_Location'
+        LocationId:
+          format: int32
+          description: Id of the Location
+          type: integer
+          example: 500123
+        ExternalLocationId:
+          description: Id of the Location on an external system
+          type: string
+          example: '500123'
     CreateLocation:
       description: Input model for creating a Location
       type: object
@@ -845,22 +825,42 @@ components:
           items:
             $ref: '#/components/schemas/LocationArea_Location'
           example: []
-    MappedLocation:
-      description: Representation of a Location and its External Mapping
+    RestApiResult_LocationArea_Location_:
+      description: Rest api result
       required:
-      - LocationId
-      - ExternalLocationId
+      - Data
       type: object
       properties:
-        LocationId:
-          format: int32
-          description: Id of the Location
-          type: integer
-          example: 500123
-        ExternalLocationId:
-          description: Id of the Location on an external system
-          type: string
-          example: '500123'
+        Data:
+          $ref: '#/components/schemas/LocationArea_Location'
+    RestApiResult_MappedLocation_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MappedLocation'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

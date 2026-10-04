@@ -1196,26 +1196,96 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
+    RestApiResult_MenuItemOptionSetItem_:
+      description: Rest api result
+      required:
+      - Data
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        Data:
+          $ref: '#/components/schemas/MenuItemOptionSetItem'
+    CreateMetadata:
+      description: Create metadata
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        Key:
+          description: Metadata key (Unique identifier)
+          maxLength: 128
+          minLength: 0
+          type: string
+          example: string
+        Value:
+          description: Metadata value
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: string
+    MenuItemOptionSetItemBase:
+      description: Menu item option set item
+      type: object
+      properties:
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          description: An optional fee that can be added to the price of the item.
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+          example: 1
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    RestApiArrayResult_MenuItemOptionSetItem_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSetItem'
+          example: []
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -1313,96 +1383,26 @@ components:
           description: Image url
           type: string
           example: https://api.flipdish.co/example
-    CreateMetadata:
-      description: Create metadata
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        Key:
-          description: Metadata key (Unique identifier)
-          maxLength: 128
-          minLength: 0
-          type: string
-          example: string
-        Value:
-          description: Metadata value
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: string
-    MenuItemOptionSetItemBase:
-      description: Menu item option set item
-      type: object
-      properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          description: An optional fee that can be added to the price of the item.
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        CellLayoutType:
-          description: 'Small | Medium | Large
-
-            Affects the layout of the menu.'
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-    RestApiArrayResult_MenuItemOptionSetItem_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSetItem'
-          example: []
-    RestApiResult_MenuItemOptionSetItem_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuItemOptionSetItem'
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

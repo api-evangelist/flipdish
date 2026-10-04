@@ -1005,56 +1005,45 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishFeesDetails:
-      description: Fees breakdown
+    PosRevenueDetails:
+      description: Breakdown of POS charges
       type: object
       properties:
-        OnlineSalesFees:
+        PosSalesAmount:
           format: double
-          description: Fees on online sales
+          description: POS sale amount for the store
           type: number
           example: 12.5
-        CashSalesFees:
+        PosSalesTax:
           format: double
-          description: Fees on cash sales
+          description: POS sale Tax for the store
+          type: number
+          example: 1.0
+        PosSalesTips:
+          format: double
+          description: POS sale tips for the store
+          type: number
+          example: 1.0
+        TotalPosRevenue:
+          format: double
+          description: POS Total Revenue for the store
           type: number
           example: 12.5
-        PosSalesFees:
+    BalanceDetails:
+      description: Period opening and closing balance
+      type: object
+      properties:
+        OpeningBalance:
           format: double
-          description: Fees of POS sales
+          description: OpeningBalance.
           type: number
-          example: 12.5
-        TotalSalesFees:
+          example: 1.0
+        ClosingBalance:
           format: double
-          description: Total online and cash sales
+          description: ClosingBalance.
           type: number
-          example: 12.5
-        OnlineSalesRefundedFees:
-          format: double
-          description: Fees on refunds for online sales
-          type: number
-          example: 12.5
-        CashSalesRefundedFees:
-          format: double
-          description: Fees on refunds for cash sales
-          type: number
-          example: 12.5
-        PosSalesRefundedFees:
-          format: double
-          description: Fees on refunds for POS sales
-          type: number
-          example: 12.5
-        SalesFeesVat:
-          format: double
-          description: VAT on sales fees
-          type: number
-          example: 12.5
-        TotalFees:
-          format: double
-          description: Total fees
-          type: number
-          example: 12.5
-    RestApiPaginationResult_PayoutRefund_:
+          example: 1.0
+    RestApiPaginationResult_PayoutChargeback_:
       description: Rest api pagination result
       required:
       - Page
@@ -1082,8 +1071,180 @@ components:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/PayoutRefund'
+            $ref: '#/components/schemas/PayoutChargeback'
           example: []
+    RestApiPaginationResult_Payout_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Payout'
+          example: []
+    PayoutSummary:
+      description: Holds the information for a whitelabel payouts summary.
+      type: object
+      properties:
+        PayoutStatus:
+          description: Status of the payout
+          enum:
+          - Pending
+          - InTransit
+          - Paid
+          - Failed
+          - Cancelled
+          type: string
+          example: Pending
+        TotalAmount:
+          format: double
+          description: Total payouts amount
+          type: number
+          example: 12.5
+        Currency:
+          description: Payout currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        TotalCount:
+          format: int32
+          description: Total payouts count
+          type: integer
+          example: 12.5
     PayoutChargeback:
       description: Holds the information for a chargeback related to a payout
       type: object
@@ -1246,6 +1407,603 @@ components:
         RefundedFees:
           format: double
           description: Amount of refunded fees
+          type: number
+          example: 12.5
+    PayoutDetail:
+      description: Holds the information for a whitelabel payout with details broken down by Store
+      type: object
+      properties:
+        PayoutId:
+          format: int32
+          description: The id of the payout.
+          type: integer
+          example: 500123
+        BankAccountId:
+          format: int32
+          description: Bank account identifier
+          type: integer
+          example: 500123
+        AccountName:
+          description: Account name of the payout destination
+          type: string
+          example: Example Name
+        PayoutStatus:
+          description: Status of the payout
+          enum:
+          - Pending
+          - InTransit
+          - Paid
+          - Failed
+          - Cancelled
+          type: string
+          example: Pending
+        CreatedDate:
+          format: date-time
+          description: Date payout was created
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodStartTime:
+          format: date-time
+          description: This payout includes operations after at this date (inclusive)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodEndTime:
+          format: date-time
+          description: This payout includes operations before at this date (exclusive)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        DestinationBank:
+          description: Destination bank name
+          type: string
+          example: string
+        DestinationAccount:
+          description: Last 4 digits of the destination bank IBAN
+          type: string
+          example: string
+        PayoutType:
+          description: Type of payout source
+          enum:
+          - Internal
+          - Stripe
+          type: string
+          example: Internal
+        Currency:
+          description: Payout currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutStores:
+          description: Payout information broken down by Store
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutStore'
+          example: []
+        Amount:
+          format: double
+          description: Payout amount
+          type: number
+          example: 12.5
+        CutoffDate:
+          format: date-time
+          description: Payouts before this date do not have a details breakdown
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    ChargebackDetails:
+      description: Chargebacks breakdown
+      type: object
+      properties:
+        ChargebackAmount:
+          format: double
+          description: Chargeback amount
+          type: number
+          example: 12.5
+        PosSalesChargebackAmount:
+          format: double
+          description: POS Chargeback amount
+          type: number
+          example: 12.5
+        ChargebackRefundedFees:
+          format: double
+          description: Chargeback refunded feeds
+          type: number
+          example: 12.5
+        ChargebacksCount:
+          format: int32
+          description: Number of chargebacks
+          type: integer
+          example: 3
+        TotalChargebackCost:
+          format: double
+          description: Total amount
+          type: number
+          example: 12.5
+    OtherChargesDetails:
+      description: Breakdown of other charges
+      type: object
+      properties:
+        TotalOtherCharges:
+          format: double
+          description: Total amount of other charges
+          type: number
+          example: 12.5
+        ChargesCount:
+          format: int32
+          description: Number of other charges
+          type: integer
+          example: 3
+    PayoutStore:
+      description: Payout details for a single store
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: The id of the Store.
+          type: integer
+          example: 500123
+        StoreName:
+          description: Name of the store
+          type: string
+          example: Example Name
+        Amount:
+          format: double
+          description: Amount of the payout for this Store
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        OnlineRevenue:
+          $ref: '#/components/schemas/RevenueDetail'
+        Revenue:
+          $ref: '#/components/schemas/RevenueDetail'
+        RevenueAdjustments:
+          $ref: '#/components/schemas/RevenueAdjustmentsDetails'
+        FlipdishFees:
+          $ref: '#/components/schemas/FlipdishFeesDetails'
+        Chargebacks:
+          $ref: '#/components/schemas/ChargebackDetails'
+        OtherCharges:
+          $ref: '#/components/schemas/OtherChargesDetails'
+        Balance:
+          $ref: '#/components/schemas/BalanceDetails'
+        PosRevenue:
+          $ref: '#/components/schemas/PosRevenueDetails'
+        ThirdPartyFees:
+          $ref: '#/components/schemas/ThirdPartyFeesDetails'
+    RestApiPaginationResult_PayoutOtherCharge_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutOtherCharge'
+          example: []
+    ThirdPartyFeesDetails:
+      description: Breakdown of third party integration fees
+      type: object
+      properties:
+        DeliveryIntegrationFee:
+          format: double
+          description: Third party integration delivery fee
+          type: number
+          example: 12.5
+        DeliveryTipFee:
+          format: double
+          description: Third party integration delivery tip fee
+          type: number
+          example: 12.5
+        TotalThirdPartyFees:
+          format: double
+          description: Total third party integration fees
+          type: number
+          example: 12.5
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RevenueDetail:
+      description: Sales information
+      type: object
+      properties:
+        OnlineSalesAmount:
+          format: double
+          description: Online sales amount
+          type: number
+          example: 12.5
+        OnlineSalesTax:
+          format: double
+          description: Online sales tax
+          type: number
+          example: 1.0
+        OnlineSalesIncludingTax:
+          format: double
+          description: Online sales amount plus online sales tax
+          type: number
+          example: 1.0
+        OnlineSalesFeesBaseAmount:
+          format: double
+          description: Online sales base amount to calculate fees
+          type: number
+          example: 12.5
+        CashSalesAmount:
+          format: double
+          description: Cash sales amount
+          type: number
+          example: 12.5
+        CashSalesTax:
+          format: double
+          description: Cash sales tax
+          type: number
+          example: 1.0
+        CashSalesIncludingTax:
+          format: double
+          description: Cash sales amount plus online sales tax
+          type: number
+          example: 1.0
+        CashSalesFeesBaseAmount:
+          format: double
+          description: Online sales base amount to calculate fees
+          type: number
+          example: 12.5
+        TotalSalesIncludingTax:
+          format: double
+          description: Total Sales (online and cash) including tax
+          type: number
+          example: 12.5
+        OnlineSalesDeliveryCharges:
+          format: double
+          description: Delivery charges on online sales
+          type: number
+          example: 1.0
+        OnlineSalesTips:
+          format: double
+          description: Tips for online sales
+          type: number
+          example: 1.0
+        TotalOnlineRevenue:
+          format: double
+          description: Online sales plus online delivery charges and tips
+          type: number
+          example: 12.5
+        OnlineSalesServiceCharges:
+          format: double
+          description: Service charge on online sales
+          type: number
+          example: 1.0
+    RestApiArrayResult_PayoutSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutSummary'
+          example: []
+    PayoutRefund:
+      description: Holds the information for a refund related to a payout
+      type: object
+      properties:
+        OrderId:
+          format: int32
+          description: The id of the order the refund was for
+          type: integer
+          example: 500123
+        OrderCurrency:
+          description: Order currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutId:
+          format: int32
+          description: The id of the payout the order is related to
+          type: integer
+          example: 500123
+        OrderDate:
+          format: date-time
+          description: The date the order was placed
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        OrderType:
+          description: Order type (online or cash)
+          enum:
+          - Cash
+          - Online
+          type: string
+          example: Cash
+        RefundDate:
+          format: date-time
+          description: The date the refund was done
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+        TotalRefund:
+          format: double
+          description: Total refund amount
+          type: number
+          example: 12.5
+        RefundedFees:
+          format: double
+          description: Refunded fees amount
+          type: number
+          example: 12.5
+        RefundedAmount:
+          format: double
+          description: Refunded amount
+          type: number
+          example: 12.5
+        CashFeeRefundedToCustomer:
+          format: double
+          description: Cash fee refunded to customer
           type: number
           example: 12.5
     Payout:
@@ -1595,1042 +2353,6 @@ components:
           description: Indicates whether the bank account has changed since the previous payout
           type: boolean
           example: true
-    RestApiPaginationResult_PayoutOtherCharge_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutOtherCharge'
-          example: []
-    PosRevenueDetails:
-      description: Breakdown of POS charges
-      type: object
-      properties:
-        PosSalesAmount:
-          format: double
-          description: POS sale amount for the store
-          type: number
-          example: 12.5
-        PosSalesTax:
-          format: double
-          description: POS sale Tax for the store
-          type: number
-          example: 1.0
-        PosSalesTips:
-          format: double
-          description: POS sale tips for the store
-          type: number
-          example: 1.0
-        TotalPosRevenue:
-          format: double
-          description: POS Total Revenue for the store
-          type: number
-          example: 12.5
-    RevenueDetail:
-      description: Sales information
-      type: object
-      properties:
-        OnlineSalesAmount:
-          format: double
-          description: Online sales amount
-          type: number
-          example: 12.5
-        OnlineSalesTax:
-          format: double
-          description: Online sales tax
-          type: number
-          example: 1.0
-        OnlineSalesIncludingTax:
-          format: double
-          description: Online sales amount plus online sales tax
-          type: number
-          example: 1.0
-        OnlineSalesFeesBaseAmount:
-          format: double
-          description: Online sales base amount to calculate fees
-          type: number
-          example: 12.5
-        CashSalesAmount:
-          format: double
-          description: Cash sales amount
-          type: number
-          example: 12.5
-        CashSalesTax:
-          format: double
-          description: Cash sales tax
-          type: number
-          example: 1.0
-        CashSalesIncludingTax:
-          format: double
-          description: Cash sales amount plus online sales tax
-          type: number
-          example: 1.0
-        CashSalesFeesBaseAmount:
-          format: double
-          description: Online sales base amount to calculate fees
-          type: number
-          example: 12.5
-        TotalSalesIncludingTax:
-          format: double
-          description: Total Sales (online and cash) including tax
-          type: number
-          example: 12.5
-        OnlineSalesDeliveryCharges:
-          format: double
-          description: Delivery charges on online sales
-          type: number
-          example: 1.0
-        OnlineSalesTips:
-          format: double
-          description: Tips for online sales
-          type: number
-          example: 1.0
-        TotalOnlineRevenue:
-          format: double
-          description: Online sales plus online delivery charges and tips
-          type: number
-          example: 12.5
-        OnlineSalesServiceCharges:
-          format: double
-          description: Service charge on online sales
-          type: number
-          example: 1.0
-    RestApiPaginationResult_Payout_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Payout'
-          example: []
-    OtherChargesDetails:
-      description: Breakdown of other charges
-      type: object
-      properties:
-        TotalOtherCharges:
-          format: double
-          description: Total amount of other charges
-          type: number
-          example: 12.5
-        ChargesCount:
-          format: int32
-          description: Number of other charges
-          type: integer
-          example: 3
-    PayoutSummary:
-      description: Holds the information for a whitelabel payouts summary.
-      type: object
-      properties:
-        PayoutStatus:
-          description: Status of the payout
-          enum:
-          - Pending
-          - InTransit
-          - Paid
-          - Failed
-          - Cancelled
-          type: string
-          example: Pending
-        TotalAmount:
-          format: double
-          description: Total payouts amount
-          type: number
-          example: 12.5
-        Currency:
-          description: Payout currency
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-        TotalCount:
-          format: int32
-          description: Total payouts count
-          type: integer
-          example: 12.5
-    PayoutDetail:
-      description: Holds the information for a whitelabel payout with details broken down by Store
-      type: object
-      properties:
-        PayoutId:
-          format: int32
-          description: The id of the payout.
-          type: integer
-          example: 500123
-        BankAccountId:
-          format: int32
-          description: Bank account identifier
-          type: integer
-          example: 500123
-        AccountName:
-          description: Account name of the payout destination
-          type: string
-          example: Example Name
-        PayoutStatus:
-          description: Status of the payout
-          enum:
-          - Pending
-          - InTransit
-          - Paid
-          - Failed
-          - Cancelled
-          type: string
-          example: Pending
-        CreatedDate:
-          format: date-time
-          description: Date payout was created
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        PeriodStartTime:
-          format: date-time
-          description: This payout includes operations after at this date (inclusive)
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        PeriodEndTime:
-          format: date-time
-          description: This payout includes operations before at this date (exclusive)
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        DestinationBank:
-          description: Destination bank name
-          type: string
-          example: string
-        DestinationAccount:
-          description: Last 4 digits of the destination bank IBAN
-          type: string
-          example: string
-        PayoutType:
-          description: Type of payout source
-          enum:
-          - Internal
-          - Stripe
-          type: string
-          example: Internal
-        Currency:
-          description: Payout currency
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-        PayoutStores:
-          description: Payout information broken down by Store
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutStore'
-          example: []
-        Amount:
-          format: double
-          description: Payout amount
-          type: number
-          example: 12.5
-        CutoffDate:
-          format: date-time
-          description: Payouts before this date do not have a details breakdown
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    RestApiPaginationResult_PayoutChargeback_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutChargeback'
-          example: []
-    PayoutStore:
-      description: Payout details for a single store
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: The id of the Store.
-          type: integer
-          example: 500123
-        StoreName:
-          description: Name of the store
-          type: string
-          example: Example Name
-        Amount:
-          format: double
-          description: Amount of the payout for this Store
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        OnlineRevenue:
-          $ref: '#/components/schemas/RevenueDetail'
-        Revenue:
-          $ref: '#/components/schemas/RevenueDetail'
-        RevenueAdjustments:
-          $ref: '#/components/schemas/RevenueAdjustmentsDetails'
-        FlipdishFees:
-          $ref: '#/components/schemas/FlipdishFeesDetails'
-        Chargebacks:
-          $ref: '#/components/schemas/ChargebackDetails'
-        OtherCharges:
-          $ref: '#/components/schemas/OtherChargesDetails'
-        Balance:
-          $ref: '#/components/schemas/BalanceDetails'
-        PosRevenue:
-          $ref: '#/components/schemas/PosRevenueDetails'
-        ThirdPartyFees:
-          $ref: '#/components/schemas/ThirdPartyFeesDetails'
-    RevenueAdjustmentsDetails:
-      description: Revenue Adjustments breakdown
-      type: object
-      properties:
-        OnlineSalesRefundedAmount:
-          format: double
-          description: Online sales refunds
-          type: number
-          example: 12.5
-        PosSalesRefundedAmount:
-          format: double
-          description: POS Online sales refunds
-          type: number
-          example: 12.5
-        CashSalesRefundedAmount:
-          format: double
-          description: Cash sales refunds
-          type: number
-          example: 12.5
-        CustomerCashFees:
-          format: double
-          description: Customer cash fees
-          type: number
-          example: 12.5
-        RefundsCount:
-          format: int32
-          description: Number of refunds
-          type: integer
-          example: 3
-        PayGreenSalesAmount:
-          format: double
-          description: PayGreen sales
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        PayGreenProcessingFees:
-          format: double
-          description: PayGreen processing fees charged to end-user
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        TotalOnlineRevenueAdjustments:
-          format: double
-          description: Total revenue adjustments
-          type: number
-          example: 12.5
-    PayoutOtherCharge:
-      description: Holds the information for a charge related to a payout
-      type: object
-      properties:
-        ChargeId:
-          format: int32
-          description: The id of the charge
-          type: integer
-          example: 500123
-        Amount:
-          format: double
-          description: Charge amount
-          type: number
-          example: 12.5
-        Currency:
-          description: Currency of the charge
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-        PayoutId:
-          format: int32
-          description: The id of the payout the order is related to
-          type: integer
-          example: 500123
-        ChargeDate:
-          format: date-time
-          description: The date the order was placed
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        ChargeType:
-          description: Charge type
-          enum:
-          - Other
-          - Fees
-          - Chargeback
-          - TipFailure
-          - ExternalDisbursement
-          - Goods
-          - RestaurantSales
-          - Tips
-          type: string
-          example: Other
-        ChargeDescription:
-          description: Charge description
-          type: string
-          example: string
-        StoreId:
-          format: int32
-          description: Store id
-          type: integer
-          example: 500123
-    PayoutRefund:
-      description: Holds the information for a refund related to a payout
-      type: object
-      properties:
-        OrderId:
-          format: int32
-          description: The id of the order the refund was for
-          type: integer
-          example: 500123
-        OrderCurrency:
-          description: Order currency
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-        PayoutId:
-          format: int32
-          description: The id of the payout the order is related to
-          type: integer
-          example: 500123
-        OrderDate:
-          format: date-time
-          description: The date the order was placed
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        OrderType:
-          description: Order type (online or cash)
-          enum:
-          - Cash
-          - Online
-          type: string
-          example: Cash
-        RefundDate:
-          format: date-time
-          description: The date the refund was done
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        StoreId:
-          format: int32
-          description: Store id
-          type: integer
-          example: 500123
-        TotalRefund:
-          format: double
-          description: Total refund amount
-          type: number
-          example: 12.5
-        RefundedFees:
-          format: double
-          description: Refunded fees amount
-          type: number
-          example: 12.5
-        RefundedAmount:
-          format: double
-          description: Refunded amount
-          type: number
-          example: 12.5
-        CashFeeRefundedToCustomer:
-          format: double
-          description: Cash fee refunded to customer
-          type: number
-          example: 12.5
-    RestApiPaginationResult_PayoutOrder_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutOrder'
-          example: []
-    RestApiArrayResult_PayoutSummary_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PayoutSummary'
-          example: []
-    ThirdPartyFeesDetails:
-      description: Breakdown of third party integration fees
-      type: object
-      properties:
-        DeliveryIntegrationFee:
-          format: double
-          description: Third party integration delivery fee
-          type: number
-          example: 12.5
-        DeliveryTipFee:
-          format: double
-          description: Third party integration delivery tip fee
-          type: number
-          example: 12.5
-        TotalThirdPartyFees:
-          format: double
-          description: Total third party integration fees
-          type: number
-          example: 12.5
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     PayoutOrder:
       description: Holds the information for an order related to a payout
       type: object
@@ -2860,49 +2582,327 @@ components:
           description: Order ServiceChargePercentage amount
           type: number
           example: 1.0
-    ChargebackDetails:
-      description: Chargebacks breakdown
+    RevenueAdjustmentsDetails:
+      description: Revenue Adjustments breakdown
       type: object
       properties:
-        ChargebackAmount:
+        OnlineSalesRefundedAmount:
           format: double
-          description: Chargeback amount
+          description: Online sales refunds
           type: number
           example: 12.5
-        PosSalesChargebackAmount:
+        PosSalesRefundedAmount:
           format: double
-          description: POS Chargeback amount
+          description: POS Online sales refunds
           type: number
           example: 12.5
-        ChargebackRefundedFees:
+        CashSalesRefundedAmount:
           format: double
-          description: Chargeback refunded feeds
+          description: Cash sales refunds
           type: number
           example: 12.5
-        ChargebacksCount:
+        CustomerCashFees:
+          format: double
+          description: Customer cash fees
+          type: number
+          example: 12.5
+        RefundsCount:
           format: int32
-          description: Number of chargebacks
+          description: Number of refunds
           type: integer
           example: 3
-        TotalChargebackCost:
+        PayGreenSalesAmount:
           format: double
-          description: Total amount
+          description: PayGreen sales
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        PayGreenProcessingFees:
+          format: double
+          description: PayGreen processing fees charged to end-user
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        TotalOnlineRevenueAdjustments:
+          format: double
+          description: Total revenue adjustments
           type: number
           example: 12.5
-    BalanceDetails:
-      description: Period opening and closing balance
+    RestApiPaginationResult_PayoutRefund_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
       type: object
       properties:
-        OpeningBalance:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutRefund'
+          example: []
+    PayoutOtherCharge:
+      description: Holds the information for a charge related to a payout
+      type: object
+      properties:
+        ChargeId:
+          format: int32
+          description: The id of the charge
+          type: integer
+          example: 500123
+        Amount:
           format: double
-          description: OpeningBalance.
+          description: Charge amount
           type: number
-          example: 1.0
-        ClosingBalance:
+          example: 12.5
+        Currency:
+          description: Currency of the charge
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        PayoutId:
+          format: int32
+          description: The id of the payout the order is related to
+          type: integer
+          example: 500123
+        ChargeDate:
+          format: date-time
+          description: The date the order was placed
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChargeType:
+          description: Charge type
+          enum:
+          - Other
+          - Fees
+          - Chargeback
+          - TipFailure
+          - ExternalDisbursement
+          - Goods
+          - RestaurantSales
+          - Tips
+          type: string
+          example: Other
+        ChargeDescription:
+          description: Charge description
+          type: string
+          example: string
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
+    RestApiPaginationResult_PayoutOrder_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutOrder'
+          example: []
+    FlipdishFeesDetails:
+      description: Fees breakdown
+      type: object
+      properties:
+        OnlineSalesFees:
           format: double
-          description: ClosingBalance.
+          description: Fees on online sales
           type: number
-          example: 1.0
+          example: 12.5
+        CashSalesFees:
+          format: double
+          description: Fees on cash sales
+          type: number
+          example: 12.5
+        PosSalesFees:
+          format: double
+          description: Fees of POS sales
+          type: number
+          example: 12.5
+        TotalSalesFees:
+          format: double
+          description: Total online and cash sales
+          type: number
+          example: 12.5
+        OnlineSalesRefundedFees:
+          format: double
+          description: Fees on refunds for online sales
+          type: number
+          example: 12.5
+        CashSalesRefundedFees:
+          format: double
+          description: Fees on refunds for cash sales
+          type: number
+          example: 12.5
+        PosSalesRefundedFees:
+          format: double
+          description: Fees on refunds for POS sales
+          type: number
+          example: 12.5
+        SalesFeesVat:
+          format: double
+          description: VAT on sales fees
+          type: number
+          example: 12.5
+        TotalFees:
+          format: double
+          description: Total fees
+          type: number
+          example: 12.5
   securitySchemes:
     oauth2:
       type: oauth2

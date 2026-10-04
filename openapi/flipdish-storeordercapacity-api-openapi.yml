@@ -276,53 +276,6 @@ components:
           items:
             $ref: '#/components/schemas/StoreOrderCapacityPeriod'
           example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    StoreOrderCapacityConfig:
-      description: Represents one store's order capacity configuration
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        DeliveryType:
-          description: Signifies whether the order capacity configuration is for Delivery / Pickup
-          enum:
-          - Delivery
-          - Pickup
-          type: string
-          example: Delivery
-        StoreIntervalInMinutes:
-          format: int32
-          description: Store Interval - time between orders, e.g. 10 minutes between each order time available to customer
-          type: integer
-          example: 1
-        OrderCapacityPeriods:
-          description: Order capacity periods
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreOrderCapacityPeriod'
-          example: []
     StoreOrderCapacityPeriod:
       description: Represents a single order capacity period
       type: object
@@ -370,6 +323,33 @@ components:
           description: The minutes after the hour the period ends at
           type: integer
           example: 1
+    StoreOrderCapacityConfig:
+      description: Represents one store's order capacity configuration
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        DeliveryType:
+          description: Signifies whether the order capacity configuration is for Delivery / Pickup
+          enum:
+          - Delivery
+          - Pickup
+          type: string
+          example: Delivery
+        StoreIntervalInMinutes:
+          format: int32
+          description: Store Interval - time between orders, e.g. 10 minutes between each order time available to customer
+          type: integer
+          example: 1
+        OrderCapacityPeriods:
+          description: Order capacity periods
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreOrderCapacityPeriod'
+          example: []
     RestApiResult_StoreOrderCapacityConfig_:
       description: Rest api result
       required:
@@ -378,6 +358,26 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/StoreOrderCapacityConfig'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

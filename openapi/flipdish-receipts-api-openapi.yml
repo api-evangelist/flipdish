@@ -164,26 +164,72 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
+    GetReceiptByOrderIdQueryResponse:
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        PreviousOrder:
+          $ref: '#/components/schemas/PreviousOrder'
+        DepositReturnFeesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/DepositReturnFeesSummary'
+          example: []
+        TsRequestedForLocal:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        TsOrderPlacedLocal:
+          format: date-time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        LogoUrl:
+          type: string
+          example: https://api.flipdish.co/example
+        Address:
+          type: string
+          example: string
+        VatNumber:
+          type: string
+          example: string
+        PaymentMethodDescription:
+          type: string
+          example: string
+        OrgId:
+          type: string
+          example: '500123'
+        CountryCode:
+          type: string
+          example: IE
+    PreviousOrderItem:
+      type: object
+      properties:
+        MenuSectionDisplayOrder:
+          format: int32
+          type: integer
+          example: 1
+        MenuSectionName:
+          type: string
+          example: Example Name
+        Name:
+          type: string
+          example: Example Name
+        PriceIncludingOptionSetItems:
+          format: double
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          type: number
+          example: 12.5
+        PreviousOrderItemOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousOrderItemOption'
+          example: []
     PreviousOrder:
       type: object
       properties:
@@ -387,42 +433,6 @@ components:
           format: int32
           type: integer
           example: 500123
-    GetReceiptByOrderIdQueryResponse:
-      type: object
-      properties:
-        PreviousOrder:
-          $ref: '#/components/schemas/PreviousOrder'
-        DepositReturnFeesSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/DepositReturnFeesSummary'
-          example: []
-        TsRequestedForLocal:
-          format: date-time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        TsOrderPlacedLocal:
-          format: date-time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        LogoUrl:
-          type: string
-          example: https://api.flipdish.co/example
-        Address:
-          type: string
-          example: string
-        VatNumber:
-          type: string
-          example: string
-        PaymentMethodDescription:
-          type: string
-          example: string
-        OrgId:
-          type: string
-          example: '500123'
-        CountryCode:
-          type: string
-          example: IE
     PreviousOrderItemOption:
       type: object
       properties:
@@ -462,36 +472,26 @@ components:
           format: double
           type: number
           example: 12.5
-    PreviousOrderItem:
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        MenuSectionDisplayOrder:
-          format: int32
-          type: integer
-          example: 1
-        MenuSectionName:
-          type: string
-          example: Example Name
-        Name:
-          type: string
-          example: Example Name
-        PriceIncludingOptionSetItems:
-          format: double
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          type: number
-          example: 12.5
-        TaxAmount:
-          format: double
-          type: number
-          example: 12.5
-        PreviousOrderItemOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreviousOrderItemOption'
-          example: []
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

@@ -957,6 +957,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    WebsiteTestimonial:
+      description: Represents a testimonial
+      type: object
+      properties:
+        TestimonialId:
+          format: int32
+          description: Id of the testimonial
+          type: integer
+          example: 500123
+        Author:
+          description: Author of the testimonial
+          type: string
+          example: string
+        Message:
+          description: Message of the testimonial
+          type: string
+          example: string
+    RestApiResult_WebsiteImage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WebsiteImage'
+    RestApiResult_IndexPage_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/IndexPage'
     WebsiteImage:
       description: Represents a website image
       type: object
@@ -981,34 +1014,22 @@ components:
           description: Represents the image url
           type: string
           example: https://api.flipdish.co/example
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiResult_IndexPage_:
+    RestApiResult_IndexPageBase_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/IndexPage'
+          $ref: '#/components/schemas/IndexPageBase'
+    RestApiResult_WebsiteTestimonial_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/WebsiteTestimonial'
     IndexPageBase:
       description: Base of Index Page
       type: object
@@ -1069,31 +1090,6 @@ components:
           description: Map section Enabled
           type: boolean
           example: true
-    WebsiteTestimonial:
-      description: Represents a testimonial
-      type: object
-      properties:
-        TestimonialId:
-          format: int32
-          description: Id of the testimonial
-          type: integer
-          example: 500123
-        Author:
-          description: Author of the testimonial
-          type: string
-          example: string
-        Message:
-          description: Message of the testimonial
-          type: string
-          example: string
-    RestApiResult_WebsiteTestimonial_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/WebsiteTestimonial'
     IndexPage:
       description: Index Page
       type: object
@@ -1166,22 +1162,26 @@ components:
           description: Map section Enabled
           type: boolean
           example: true
-    RestApiResult_IndexPageBase_:
-      description: Rest api result
-      required:
-      - Data
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        Data:
-          $ref: '#/components/schemas/IndexPageBase'
-    RestApiResult_WebsiteImage_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/WebsiteImage'
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

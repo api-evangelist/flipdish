@@ -546,74 +546,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    GoogleLocation:
-      type: object
-      properties:
-        Lat:
-          format: float
-          type: number
-          example: 1.0
-        Lng:
-          format: float
-          type: number
-          example: 1.0
-    CountryFormResponse:
-      description: Country
-      type: object
-      properties:
-        Value:
-          description: ISO two letter code.
-          type: string
-          example: string
-        Label:
-          description: Label
-          type: string
-          example: string
-    DynamicFormRules:
-      type: object
-      properties:
-        MaxLength:
-          $ref: '#/components/schemas/DynamicFormRule'
-        MinLength:
-          $ref: '#/components/schemas/DynamicFormRule'
-        Required:
-          $ref: '#/components/schemas/DynamicFormRule'
-        Pattern:
-          $ref: '#/components/schemas/DynamicFormRule'
-        Predefined:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicFormFieldOption'
-          example: []
-    DynamicFormFieldOption:
-      type: object
-      properties:
-        Display:
-          type: string
-          example: string
-        Value:
-          type: string
-          example: string
     DynamicFormRule:
       type: object
       properties:
@@ -625,141 +557,16 @@ components:
         Scopes:
           type: string
           example: string
-    AddressFormDisplayFormat:
+    CountryFormResponse:
+      description: Country
       type: object
       properties:
-        OneLine:
-          type: string
-          example: string
-        TwoLines:
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    AddressFormResponse:
-      description: A response of a dyanmic form definition.
-      type: object
-      properties:
-        FormData:
-          description: List of field definitions.
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicFormField'
-          example: []
-        CountryCode:
+        Value:
           description: ISO two letter code.
-          type: string
-          example: IE
-        Language:
-          description: ISO culture code.
-          type: string
-          example: string
-        DisplayFormat:
-          $ref: '#/components/schemas/AddressFormDisplayFormat'
-    GoogleViewport:
-      type: object
-      properties:
-        Northeast:
-          $ref: '#/components/schemas/GoogleCoordinates'
-        Southwest:
-          $ref: '#/components/schemas/GoogleCoordinates'
-    RestApiResult_AddressFormResponse_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AddressFormResponse'
-    GoogleCoordinates:
-      type: object
-      properties:
-        Lat:
-          format: float
-          type: number
-          example: 1.0
-        Lng:
-          format: float
-          type: number
-          example: 1.0
-    GoogleGeometry:
-      type: object
-      properties:
-        Location:
-          $ref: '#/components/schemas/GoogleLocation'
-        Location_type:
-          type: string
-          example: string
-        Viewport:
-          $ref: '#/components/schemas/GoogleViewport'
-    GoogleAddressResult:
-      type: object
-      properties:
-        Address_components:
-          type: array
-          items:
-            $ref: '#/components/schemas/GoogleAddressComponent'
-          example: []
-        Formatted_address:
-          type: string
-          example: string
-        Geometry:
-          $ref: '#/components/schemas/GoogleGeometry'
-        Place_id:
-          type: string
-          example: '500123'
-        Types:
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    RestApiResult_CountryFormResponse_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/CountryFormResponse'
-    DynamicFormField:
-      type: object
-      properties:
-        Identifier:
           type: string
           example: string
         Label:
-          type: string
-          example: string
-        Placeholder:
-          type: string
-          example: string
-        Rules:
-          $ref: '#/components/schemas/DynamicFormRules'
-        Mapping:
-          type: object
-          additionalProperties:
-            type: string
-        Modifiers:
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        Value:
-          type: object
-        Scopes:
+          description: Label
           type: string
           example: string
     GoogleAddress:
@@ -790,6 +597,199 @@ components:
             type: string
           example:
           - string
+    AddressFormDisplayFormat:
+      type: object
+      properties:
+        OneLine:
+          type: string
+          example: string
+        TwoLines:
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    GoogleCoordinates:
+      type: object
+      properties:
+        Lat:
+          format: float
+          type: number
+          example: 1.0
+        Lng:
+          format: float
+          type: number
+          example: 1.0
+    GoogleViewport:
+      type: object
+      properties:
+        Northeast:
+          $ref: '#/components/schemas/GoogleCoordinates'
+        Southwest:
+          $ref: '#/components/schemas/GoogleCoordinates'
+    GoogleAddressResult:
+      type: object
+      properties:
+        Address_components:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoogleAddressComponent'
+          example: []
+        Formatted_address:
+          type: string
+          example: string
+        Geometry:
+          $ref: '#/components/schemas/GoogleGeometry'
+        Place_id:
+          type: string
+          example: '500123'
+        Types:
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    GoogleGeometry:
+      type: object
+      properties:
+        Location:
+          $ref: '#/components/schemas/GoogleLocation'
+        Location_type:
+          type: string
+          example: string
+        Viewport:
+          $ref: '#/components/schemas/GoogleViewport'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    RestApiResult_CountryFormResponse_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/CountryFormResponse'
+    GoogleLocation:
+      type: object
+      properties:
+        Lat:
+          format: float
+          type: number
+          example: 1.0
+        Lng:
+          format: float
+          type: number
+          example: 1.0
+    DynamicFormFieldOption:
+      type: object
+      properties:
+        Display:
+          type: string
+          example: string
+        Value:
+          type: string
+          example: string
+    DynamicFormField:
+      type: object
+      properties:
+        Identifier:
+          type: string
+          example: string
+        Label:
+          type: string
+          example: string
+        Placeholder:
+          type: string
+          example: string
+        Rules:
+          $ref: '#/components/schemas/DynamicFormRules'
+        Mapping:
+          type: object
+          additionalProperties:
+            type: string
+        Modifiers:
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        Value:
+          type: object
+        Scopes:
+          type: string
+          example: string
+    AddressFormResponse:
+      description: A response of a dyanmic form definition.
+      type: object
+      properties:
+        FormData:
+          description: List of field definitions.
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicFormField'
+          example: []
+        CountryCode:
+          description: ISO two letter code.
+          type: string
+          example: IE
+        Language:
+          description: ISO culture code.
+          type: string
+          example: string
+        DisplayFormat:
+          $ref: '#/components/schemas/AddressFormDisplayFormat'
+    DynamicFormRules:
+      type: object
+      properties:
+        MaxLength:
+          $ref: '#/components/schemas/DynamicFormRule'
+        MinLength:
+          $ref: '#/components/schemas/DynamicFormRule'
+        Required:
+          $ref: '#/components/schemas/DynamicFormRule'
+        Pattern:
+          $ref: '#/components/schemas/DynamicFormRule'
+        Predefined:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicFormFieldOption'
+          example: []
+    RestApiResult_AddressFormResponse_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AddressFormResponse'
   securitySchemes:
     oauth2:
       type: oauth2

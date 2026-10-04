@@ -139,6 +139,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_AppStoreAppEntitlements_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreAppEntitlements'
+    AppStoreAppEntitlements:
+      type: object
+      properties:
+        EntitlementQuantity:
+          format: int32
+          type: integer
+          example: 3
+        CurrentUsage:
+          format: int32
+          type: integer
+          example: 1
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -159,25 +178,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_AppStoreAppEntitlements_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppStoreAppEntitlements'
-    AppStoreAppEntitlements:
-      type: object
-      properties:
-        EntitlementQuantity:
-          format: int32
-          type: integer
-          example: 3
-        CurrentUsage:
-          format: int32
-          type: integer
-          example: 1
   securitySchemes:
     oauth2:
       type: oauth2

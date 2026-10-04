@@ -520,46 +520,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    NutritionInfoV2:
-      description: Menu Nutrition Information. Version 2 (localized).
+    RestApiArrayResult_Allergen_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
       properties:
-        MenuItems:
-          description: List of menu item nutrition infos
+        Data:
+          description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/NutritionInfoV2Item'
+            $ref: '#/components/schemas/Allergen'
           example: []
-        MenuItemOptionSetItems:
-          description: List of menu item option set nutrition infos
-          type: array
-          items:
-            $ref: '#/components/schemas/NutritionInfoV2Item'
-          example: []
-        ImageBaseUrl:
-          description: Base url for allergen images
-          type: string
-          example: https://api.flipdish.co/example
     RestApiResult_NutritionInfoV2_:
       description: Rest api result
       required:
@@ -583,34 +555,6 @@ components:
           items:
             $ref: '#/components/schemas/NutritionInfoV2Allergen'
           example: []
-    RestApiArrayResult_Allergen_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Allergen'
-          example: []
-    Allergen:
-      description: Allergen.
-      type: object
-      properties:
-        AllergenId:
-          description: A unique identifier for the allergen
-          type: string
-          example: '500123'
-        LocalizedName:
-          description: Localized name of the allergen
-          type: string
-          example: Example Name
-        IconUrl:
-          description: Url to the icon for the allergen
-          type: string
-          example: https://api.flipdish.co/example
     NutritionInfoV2Allergen:
       description: NutritionInfoV2Allergen.
       type: object
@@ -627,6 +571,62 @@ components:
           description: Name of the image file. Append it to ImageBaseUrl to get the full URL
           type: string
           example: Example Name
+    NutritionInfoV2:
+      description: Menu Nutrition Information. Version 2 (localized).
+      type: object
+      properties:
+        MenuItems:
+          description: List of menu item nutrition infos
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoV2Item'
+          example: []
+        MenuItemOptionSetItems:
+          description: List of menu item option set nutrition infos
+          type: array
+          items:
+            $ref: '#/components/schemas/NutritionInfoV2Item'
+          example: []
+        ImageBaseUrl:
+          description: Base url for allergen images
+          type: string
+          example: https://api.flipdish.co/example
+    Allergen:
+      description: Allergen.
+      type: object
+      properties:
+        AllergenId:
+          description: A unique identifier for the allergen
+          type: string
+          example: '500123'
+        LocalizedName:
+          description: Localized name of the allergen
+          type: string
+          example: Example Name
+        IconUrl:
+          description: Url to the icon for the allergen
+          type: string
+          example: https://api.flipdish.co/example
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

@@ -5198,30 +5198,62 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_ProcessingFeeConfig_:
-      description: Rest api result
-      required:
-      - Data
+    StoreDataPoint:
+      description: Store Data Point
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/ProcessingFeeConfig'
-    LeadTime:
-      description: ''
-      required:
-      - DispatchType
-      - LeadTimeMinutes
+        Day:
+          format: date-time
+          description: Day
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Value:
+          format: double
+          description: Value for the day
+          type: number
+          example: 1.0
+    BusinessHoursPeriod:
+      description: Business hours period
       type: object
       properties:
-        DispatchType:
-          description: There are two valid values for this field - `collection` and `delivery`.
+        Early:
+          $ref: '#/components/schemas/Range'
+        Late:
+          $ref: '#/components/schemas/Range'
+        Ranges:
+          description: Ranges
+          type: array
+          items:
+            $ref: '#/components/schemas/Range'
+          example: []
+        DayOfWeek:
+          description: Day of week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+        StartTime:
+          description: Start time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Period:
+          description: Period
           type: string
           example: string
-        LeadTimeMinutes:
-          format: int32
-          description: This must be a positive integer.
-          type: integer
-          example: 1
+        StartTimeEarly:
+          description: Start time early
+          type: string
+          example: string
+        PeriodEarly:
+          description: Period early
+          type: string
+          example: string
     StoreValidationConfig:
       description: Hey
       type: object
@@ -5246,276 +5278,7 @@ components:
           example: 500123
         ConfigValidation:
           $ref: '#/components/schemas/StoreConfig'
-    StoreBase:
-      description: Store Base
-      type: object
-      properties:
-        PhoneNumber:
-          description: Phone number
-          type: string
-          example: '+353000000000'
-        AlwaysAppearOpen:
-          description: True if the store always appears open
-          type: boolean
-          example: true
-        PreOrderEnabled:
-          description: True if the store accepts pre-orders
-          type: boolean
-          example: true
-        TakeOutEnabled:
-          description: True if the store accepts take-out orders
-          type: boolean
-          example: true
-        TableServiceEnabled:
-          description: True if the store has table service
-          type: boolean
-          example: true
-        DineInEnabled:
-          description: True if the store accepts dine-in orders
-          type: boolean
-          example: true
-        AllowPreOrdersAndTableService:
-          description: True if both pre-orders and talbe service can be enabled
-          type: boolean
-          example: true
-        PickupEnabled:
-          description: True if the store accepts pickup orders
-          type: boolean
-          example: true
-        DeliveryEnabled:
-          description: True if the store accepts delivery orders
-          type: boolean
-          example: true
-        CardOrderDeliveryEnabled:
-          description: True if the store accepts card payment for delivery orders
-          type: boolean
-          example: true
-        CashOrdersDeliveryEnabled:
-          description: True if the store accepts cash payment for delivery orders
-          type: boolean
-          example: true
-        CardOrdersPickupEnabled:
-          description: True if the store accepts card payment for pickup orders
-          type: boolean
-          example: true
-        CashOrdersPickupEnabled:
-          description: True if the store accepts cash payment for pickup orders
-          type: boolean
-          example: true
-        TipsEnabled:
-          description: True if the store accepts tips
-          type: boolean
-          example: true
-        AutomaticallyAcceptOrders:
-          description: True if the stores orders are automatically accepted in Flipdish
-          type: boolean
-          example: true
-        OpenForDelivery:
-          description: True if the store is open for delivery
-          type: boolean
-          example: true
-        OpenForPickup:
-          description: True if the store is open for pickup
-          type: boolean
-          example: true
-        MinimumPickupOrderAmount:
-          format: double
-          description: Minimum pickup order amount
-          type: number
-          example: 12.5
-        RequireCustomerNameForPickup:
-          description: True if customer name required for pickup orders
-          type: boolean
-          example: true
-        GdprCustomerPhoneNumbers:
-          description: Mask your customers phone numbers printed on receipts and reduce the amout of personally identifiable customer information that is exposed.
-          type: boolean
-          example: true
-        RequireCustomerNameForDelivery:
-          description: True if customer name required for delivery orders
-          type: boolean
-          example: true
-        AllowChefNotes:
-          description: True if the customer is allowed enter custom notes with their orders
-          type: boolean
-          example: true
-        EtaInPickupConfirmationSmsEnabled:
-          description: True if order confirmation sms includes estimated time when order will be ready for collection
-          type: boolean
-          example: true
-        EtaInDeliveryConfirmationSmsEnabled:
-          description: True if order confirmation sms includes estimated time when order will delivered
-          type: boolean
-          example: true
-        IsArchived:
-          description: Is the Store Archived
-          type: boolean
-          example: true
-        IsPublished:
-          description: Is the Store Published
-          type: boolean
-          example: true
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        EmailAddress:
-          description: Email address (visible to customers)
-          maxLength: 100
-          minLength: 0
-          type: string
-          example: owner@example.com
-        StaffLanguage:
-          description: 'Staff Language (used for communication with the staff)
-
-            Emails, Printouts etc'
-          type: string
-          example: string
-        SalesChannelTypes:
-          description: Sales Channel Types
-          type: array
-          items:
-            enum:
-            - Web
-            - App
-            - Kiosk
-            - Pos
-            - None
-            type: string
-          example:
-          - Web
-        InheritanceConfigTypes:
-          description: Inheritance Config Types
-          type: array
-          items:
-            enum:
-            - CollectionSettings
-            type: string
-          example:
-          - CollectionSettings
-    RestApiArrayResult_ProcessingFeeConfig_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessingFeeConfig'
-          example: []
-    RestApiResult_BusinessHoursOverride_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BusinessHoursOverride'
-    RestApiArrayResult_StoreStatistics_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreStatistics'
-          example: []
-    RestApiResult_BusinessHoursPeriod_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BusinessHoursPeriod'
-    BusinessHoursOverrideBase:
-      description: ''
-      required:
-      - StartTime
-      - EndTime
-      type: object
-      properties:
-        DeliveryType:
-          description: Delivery or Pickup
-          enum:
-          - Delivery
-          - Pickup
-          type: string
-          example: Delivery
-        StartTime:
-          format: date-time
-          description: Date and time in ISO 8601 format.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndTime:
-          format: date-time
-          description: Date and time in ISO 8601 format.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Type:
-          description: Open, Closed or ClosedAllowPreOrders
-          enum:
-          - Open
-          - Closed
-          - ClosedAllowPreOrders
-          type: string
-          example: Open
-    StoreAddressBase:
-      description: Store address base
-      type: object
-      properties:
-        Line1:
-          description: Address line 1
-          type: string
-          example: string
-        Postcode:
-          description: Postcode
-          type: string
-          example: string
-        City:
-          description: City
-          type: string
-          example: string
-        CountryCode:
-          description: Country code (ISO-alpha2)
-          maxLength: 2
-          minLength: 0
-          type: string
-          example: IE
-        DisplayForCustomer:
-          description: Display for customer
-          type: string
-          example: string
-        AddressFields:
-          description: Dyanmic field/value pairs, defined by the form assigned to the given country code.
-          type: object
-          additionalProperties:
-            type: object
-        SingleLineDisplay:
-          description: Single line display i18n, may be empty for not supported countries
-          type: string
-          example: string
-        TwoLinesDisplay:
-          description: Two line display i18n, may be empty for not supported countries
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    RestApiResult_StoreEndOfDayReport_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/StoreEndOfDayReport'
-    RestApiPaginationResult_BusinessHoursOverride_:
+    RestApiPaginationResult_StoreValidationConfig_:
       description: Rest api pagination result
       required:
       - Page
@@ -5543,75 +5306,82 @@ components:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/BusinessHoursOverride'
+            $ref: '#/components/schemas/StoreValidationConfig'
           example: []
-    StoreAddress:
-      description: Store address
-      type: object
-      properties:
-        AddressId:
-          format: int32
-          description: Address identifier
-          type: integer
-          example: 500123
-        Coordinates:
-          $ref: '#/components/schemas/Coordinates'
-        Line1:
-          description: Address line 1
-          type: string
-          example: string
-        Postcode:
-          description: Postcode
-          type: string
-          example: string
-        City:
-          description: City
-          type: string
-          example: string
-        CountryCode:
-          description: Country code (ISO-alpha2)
-          maxLength: 2
-          minLength: 0
-          type: string
-          example: IE
-        DisplayForCustomer:
-          description: Display for customer
-          type: string
-          example: string
-        AddressFields:
-          description: Dyanmic field/value pairs, defined by the form assigned to the given country code.
-          type: object
-          additionalProperties:
-            type: object
-        SingleLineDisplay:
-          description: Single line display i18n, may be empty for not supported countries
-          type: string
-          example: string
-        TwoLinesDisplay:
-          description: Two line display i18n, may be empty for not supported countries
-          type: array
-          items:
-            type: string
-          example:
-          - string
-    StoreDeliveryZoneFeeConfigUpdateRequest:
-      description: Request to update store delivery zone fee config
-      type: object
-      properties:
-        DeliveryZoneFees:
-          description: Delivery zone fees to update
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreDeliveryZoneFeeConfig'
-          example: []
-    RestApiResult_PreOrderConfig_:
+    RestApiResult_BusinessHoursOverride_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/PreOrderConfig'
+          $ref: '#/components/schemas/BusinessHoursOverride'
+    RestApiArrayResult_BusinessHoursPeriod_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessHoursPeriod'
+          example: []
+    RestApiPaginationResult_StoreHeader_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreHeader'
+          example: []
+    LeadTime:
+      description: ''
+      required:
+      - DispatchType
+      - LeadTimeMinutes
+      type: object
+      properties:
+        DispatchType:
+          description: There are two valid values for this field - `collection` and `delivery`.
+          type: string
+          example: string
+        LeadTimeMinutes:
+          format: int32
+          description: This must be a positive integer.
+          type: integer
+          example: 1
+    RestApiResult_StoreEndOfDayReport_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreEndOfDayReport'
     DeliveryZone:
       description: Delivery Zone
       type: object
@@ -5648,6 +5418,110 @@ components:
           description: Is delivery zone enabled
           type: boolean
           example: true
+    RestApiResult_ServiceCharge_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ServiceCharge'
+    RestApiResult_AssignedBankAccount_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AssignedBankAccount'
+    ProcessingFeeConfig:
+      description: Processing fee config
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        PaymentAccountType:
+          description: Payment account type
+          enum:
+          - Card
+          - Cash
+          - Ideal
+          - Bancontact
+          - Giropay
+          - Eps
+          - Emv
+          - PayPal
+          - PayGreen
+          - GoogleWalletToken
+          type: string
+          example: Card
+        PercentFee:
+          format: double
+          description: Percent fee to customer, including VAT
+          type: number
+          example: 12.5
+        FixedFee:
+          format: double
+          description: Fixed fee to customer, including VAT
+          type: number
+          example: 12.5
+    StoreCloneSettings:
+      description: Settings for cloning a store
+      type: object
+      properties:
+        TargetStoreGroupId:
+          format: int32
+          description: If specified will clone to a specific store group, otherwise will clone to the store group of the Store which is being cloned
+          type:
+          - integer
+          - 'null'
+          example: 500123
+    RestApiPaginationResult_Store_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Store'
+          example: []
+    AssignedBankAccount:
+      description: Assigned to Store Bank Account
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: Id of Bank Account
+          type: integer
+          example: 500123
+        BankAccountName:
+          description: Name of Bank Account
+          type: string
+          example: Example Name
     Store:
       description: Store
       type: object
@@ -6016,356 +5890,6 @@ components:
             type: string
           example:
           - CollectionSettings
-    AssignedBankAccount:
-      description: Assigned to Store Bank Account
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: Id of Bank Account
-          type: integer
-          example: 500123
-        BankAccountName:
-          description: Name of Bank Account
-          type: string
-          example: Example Name
-    BusinessHoursPeriodBase:
-      description: Business hours period
-      type: object
-      properties:
-        DayOfWeek:
-          description: Day of week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-        StartTime:
-          description: Start time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Period:
-          description: Period
-          type: string
-          example: string
-        StartTimeEarly:
-          description: Start time early
-          type: string
-          example: string
-        PeriodEarly:
-          description: Period early
-          type: string
-          example: string
-    RestApiResult_Store_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Store'
-    RestApiPaginationResult_StoreValidationConfig_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreValidationConfig'
-          example: []
-    BusinessHoursOverride:
-      description: ''
-      required:
-      - StartTime
-      - EndTime
-      type: object
-      properties:
-        BusinessHoursOverrideId:
-          format: int32
-          description: Unique identifier
-          type: integer
-          example: 500123
-        DeliveryType:
-          description: Delivery or Pickup
-          enum:
-          - Delivery
-          - Pickup
-          type: string
-          example: Delivery
-        StartTime:
-          format: date-time
-          description: Date and time in ISO 8601 format.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndTime:
-          format: date-time
-          description: Date and time in ISO 8601 format.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Type:
-          description: Open, Closed or ClosedAllowPreOrders
-          enum:
-          - Open
-          - Closed
-          - ClosedAllowPreOrders
-          type: string
-          example: Open
-    RestApiArrayResult_BusinessHoursPeriod_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessHoursPeriod'
-          example: []
-    StoreNote:
-      description: Store note
-      type: object
-      properties:
-        UserId:
-          format: int32
-          description: User identifier
-          type: integer
-          example: 500123
-        CreateTime:
-          format: date-time
-          description: Create time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Note:
-          description: Note
-          type: string
-          example: string
-    BusinessHoursPeriod:
-      description: Business hours period
-      type: object
-      properties:
-        Early:
-          $ref: '#/components/schemas/Range'
-        Late:
-          $ref: '#/components/schemas/Range'
-        Ranges:
-          description: Ranges
-          type: array
-          items:
-            $ref: '#/components/schemas/Range'
-          example: []
-        DayOfWeek:
-          description: Day of week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-        StartTime:
-          description: Start time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Period:
-          description: Period
-          type: string
-          example: string
-        StartTimeEarly:
-          description: Start time early
-          type: string
-          example: string
-        PeriodEarly:
-          description: Period early
-          type: string
-          example: string
-    RestApiArrayResult_RestApiDefaultResponse_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/RestApiDefaultResponse'
-          example: []
-    StoreCloneSettings:
-      description: Settings for cloning a store
-      type: object
-      properties:
-        TargetStoreGroupId:
-          format: int32
-          description: If specified will clone to a specific store group, otherwise will clone to the store group of the Store which is being cloned
-          type:
-          - integer
-          - 'null'
-          example: 500123
-    RestApiResult_StoreAddress_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/StoreAddress'
-    RestApiResult_OrderLeadTimes_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OrderLeadTimes'
-    RestApiResult_ServiceCharge_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ServiceCharge'
-    RestApiResult_RestApiDefaultResponse_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/RestApiDefaultResponse'
-    RestApiResult_Coordinates_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Coordinates'
-    OrderLeadTimes:
-      description: 'When orders are accepted, and no lead time is specified by the operator, this is the lead time that will be
-
-        applied to the order.'
-      type: object
-      properties:
-        LeadTimeMinutes:
-          description: 'Mapping from the type of order to, to the default lead time that will be applied to those orders.
-
-            The lead time is an integer number of minutes.'
-          type: object
-          additionalProperties:
-            format: int32
-            type: integer
-    StoreStatistics:
-      description: Store statistics
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store Id
-          type: integer
-          example: 500123
-        Data:
-          description: Store Data Points
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreDataPoint'
-          example: []
-    RestApiResult_AssignedBankAccount_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AssignedBankAccount'
-    RestApiPaginationResult_StoreHeader_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreHeader'
-          example: []
-    StoreDataPoint:
-      description: Store Data Point
-      type: object
-      properties:
-        Day:
-          format: date-time
-          description: Day
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Value:
-          format: double
-          description: Value for the day
-          type: number
-          example: 1.0
-    StoreDeliveryZoneFeeConfig:
-      description: Store delivery zone fee config
-      type: object
-      properties:
-        DeliveryZoneId:
-          format: int32
-          description: ID of the delivery zone this fee corresponds to
-          type: integer
-          example: 500123
-        Fee:
-          format: double
-          description: Fee for delivery within this zone
-          type: number
-          example: 12.5
     StoreEndOfDayReport:
       description: Store end of day report
       type: object
@@ -6612,6 +6136,130 @@ components:
           description: End Time
           type: string
           example: '2026-06-02T12:00:00Z'
+    PreOrderTime:
+      description: Time order can be placed
+      type: object
+      properties:
+        StartTime:
+          format: date-time
+          description: Start Time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndTime:
+          format: date-time
+          description: End Time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_ProcessingFeeConfig_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ProcessingFeeConfig'
+    StoreHeader:
+      description: Represents the most basic store information, used mostly for searches
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Category:
+          description: Name
+          type: string
+          example: string
+    StoreDeliveryZoneFeeConfig:
+      description: Store delivery zone fee config
+      type: object
+      properties:
+        DeliveryZoneId:
+          format: int32
+          description: ID of the delivery zone this fee corresponds to
+          type: integer
+          example: 500123
+        Fee:
+          format: double
+          description: Fee for delivery within this zone
+          type: number
+          example: 12.5
+    OrderLeadTimes:
+      description: 'When orders are accepted, and no lead time is specified by the operator, this is the lead time that will be
+
+        applied to the order.'
+      type: object
+      properties:
+        LeadTimeMinutes:
+          description: 'Mapping from the type of order to, to the default lead time that will be applied to those orders.
+
+            The lead time is an integer number of minutes.'
+          type: object
+          additionalProperties:
+            format: int32
+            type: integer
+    StoreCollectionSettings:
+      description: Store Collection Settings
+      required:
+      - PickupEnabled
+      - MinimumPickupOrderAmount
+      - RequireCustomerNameForPickup
+      - CashOrdersPickupEnabled
+      - LeadTimeMinutes
+      - EtaInPickupConfirmationSmsEnabled
+      type: object
+      properties:
+        PickupEnabled:
+          description: True if the store accepts pickup orders
+          type: boolean
+          example: true
+        MinimumPickupOrderAmount:
+          format: double
+          description: Minimum pickup order amount
+          type: number
+          example: 12.5
+        RequireCustomerNameForPickup:
+          description: True if customer name required for pickup orders
+          type: boolean
+          example: true
+        CashOrdersPickupEnabled:
+          description: True if the store accepts cash payment for pickup orders
+          type: boolean
+          example: true
+        LeadTimeMinutes:
+          format: int32
+          description: Auto accept lead time for collection orders
+          type: integer
+          example: 1
+        EtaInPickupConfirmationSmsEnabled:
+          description: True if order confirmation sms includes estimated time when order will be ready for collection
+          type: boolean
+          example: true
+    RestApiArrayResult_StoreDeliveryZoneFeeConfig_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreDeliveryZoneFeeConfig'
+          example: []
+    RestApiResult_Coordinates_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Coordinates'
     PreOrderConfig:
       description: Pre Order Config
       type: object
@@ -6667,6 +6315,48 @@ components:
           description: Force customer to select collection time.
           type: boolean
           example: true
+    ServiceCharge:
+      description: Store Service Charge
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        PercentageValue:
+          format: double
+          description: The Default Service Charge Value
+          type: number
+          example: 1.0
+        Enabled:
+          description: Enable Service Charge for store true(on) / false(off)
+          type: boolean
+          example: true
+        IsOptional:
+          description: Sets the service charge to be optional
+          type: boolean
+          example: true
+        DisplayWithProcessingFee:
+          description: Display service charge together with processing fee
+          type: boolean
+          example: true
+        IncludesVouchers:
+          description: "If true, will include voucher value in calculation \ni.e 10E order with 1E service charge and 5E voucher would have service charge at 0.5E"
+          type: boolean
+          example: true
+    RestApiArrayResult_RestApiDefaultResponse_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/RestApiDefaultResponse'
+          example: []
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -6687,6 +6377,99 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_PreOrderConfig_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PreOrderConfig'
+    RestApiResult_RestApiDefaultResponse_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RestApiDefaultResponse'
+    StoreDeliveryZoneFeeConfigUpdateRequest:
+      description: Request to update store delivery zone fee config
+      type: object
+      properties:
+        DeliveryZoneFees:
+          description: Delivery zone fees to update
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreDeliveryZoneFeeConfig'
+          example: []
+    RestApiArrayResult_StoreStatistics_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreStatistics'
+          example: []
+    Range:
+      description: 'A class that represents a single opening period in a day.
+
+        This starts ''StartTime'' after midnight and runs for a ''Period''
+
+        after that, on the given DayOfWeek.'
+      type: object
+      properties:
+        StartTime:
+          description: Start time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Period:
+          description: Period
+          type: string
+          example: string
+        DayOfWeek:
+          description: Day of week
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+          example: Sunday
+    RestApiArrayResult_PreOrderTime_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderTime'
+          example: []
+    StoreStatistics:
+      description: Store statistics
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store Id
+          type: integer
+          example: 500123
+        Data:
+          description: Store Data Points
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreDataPoint'
+          example: []
     StoreConfig:
       description: StoreConfig.
       type: object
@@ -6715,6 +6498,340 @@ components:
           description: Is the Store Published
           type: boolean
           example: true
+    RestApiResult_StoreAddress_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StoreAddress'
+    RestApiArrayResult_ProcessingFeeConfig_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessingFeeConfig'
+          example: []
+    StoreAddress:
+      description: Store address
+      type: object
+      properties:
+        AddressId:
+          format: int32
+          description: Address identifier
+          type: integer
+          example: 500123
+        Coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        Line1:
+          description: Address line 1
+          type: string
+          example: string
+        Postcode:
+          description: Postcode
+          type: string
+          example: string
+        City:
+          description: City
+          type: string
+          example: string
+        CountryCode:
+          description: Country code (ISO-alpha2)
+          maxLength: 2
+          minLength: 0
+          type: string
+          example: IE
+        DisplayForCustomer:
+          description: Display for customer
+          type: string
+          example: string
+        AddressFields:
+          description: Dyanmic field/value pairs, defined by the form assigned to the given country code.
+          type: object
+          additionalProperties:
+            type: object
+        SingleLineDisplay:
+          description: Single line display i18n, may be empty for not supported countries
+          type: string
+          example: string
+        TwoLinesDisplay:
+          description: Two line display i18n, may be empty for not supported countries
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    BusinessHoursOverrideBase:
+      description: ''
+      required:
+      - StartTime
+      - EndTime
+      type: object
+      properties:
+        DeliveryType:
+          description: Delivery or Pickup
+          enum:
+          - Delivery
+          - Pickup
+          type: string
+          example: Delivery
+        StartTime:
+          format: date-time
+          description: Date and time in ISO 8601 format.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndTime:
+          format: date-time
+          description: Date and time in ISO 8601 format.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Type:
+          description: Open, Closed or ClosedAllowPreOrders
+          enum:
+          - Open
+          - Closed
+          - ClosedAllowPreOrders
+          type: string
+          example: Open
+    StoreNote:
+      description: Store note
+      type: object
+      properties:
+        UserId:
+          format: int32
+          description: User identifier
+          type: integer
+          example: 500123
+        CreateTime:
+          format: date-time
+          description: Create time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Note:
+          description: Note
+          type: string
+          example: string
+    StoreBase:
+      description: Store Base
+      type: object
+      properties:
+        PhoneNumber:
+          description: Phone number
+          type: string
+          example: '+353000000000'
+        AlwaysAppearOpen:
+          description: True if the store always appears open
+          type: boolean
+          example: true
+        PreOrderEnabled:
+          description: True if the store accepts pre-orders
+          type: boolean
+          example: true
+        TakeOutEnabled:
+          description: True if the store accepts take-out orders
+          type: boolean
+          example: true
+        TableServiceEnabled:
+          description: True if the store has table service
+          type: boolean
+          example: true
+        DineInEnabled:
+          description: True if the store accepts dine-in orders
+          type: boolean
+          example: true
+        AllowPreOrdersAndTableService:
+          description: True if both pre-orders and talbe service can be enabled
+          type: boolean
+          example: true
+        PickupEnabled:
+          description: True if the store accepts pickup orders
+          type: boolean
+          example: true
+        DeliveryEnabled:
+          description: True if the store accepts delivery orders
+          type: boolean
+          example: true
+        CardOrderDeliveryEnabled:
+          description: True if the store accepts card payment for delivery orders
+          type: boolean
+          example: true
+        CashOrdersDeliveryEnabled:
+          description: True if the store accepts cash payment for delivery orders
+          type: boolean
+          example: true
+        CardOrdersPickupEnabled:
+          description: True if the store accepts card payment for pickup orders
+          type: boolean
+          example: true
+        CashOrdersPickupEnabled:
+          description: True if the store accepts cash payment for pickup orders
+          type: boolean
+          example: true
+        TipsEnabled:
+          description: True if the store accepts tips
+          type: boolean
+          example: true
+        AutomaticallyAcceptOrders:
+          description: True if the stores orders are automatically accepted in Flipdish
+          type: boolean
+          example: true
+        OpenForDelivery:
+          description: True if the store is open for delivery
+          type: boolean
+          example: true
+        OpenForPickup:
+          description: True if the store is open for pickup
+          type: boolean
+          example: true
+        MinimumPickupOrderAmount:
+          format: double
+          description: Minimum pickup order amount
+          type: number
+          example: 12.5
+        RequireCustomerNameForPickup:
+          description: True if customer name required for pickup orders
+          type: boolean
+          example: true
+        GdprCustomerPhoneNumbers:
+          description: Mask your customers phone numbers printed on receipts and reduce the amout of personally identifiable customer information that is exposed.
+          type: boolean
+          example: true
+        RequireCustomerNameForDelivery:
+          description: True if customer name required for delivery orders
+          type: boolean
+          example: true
+        AllowChefNotes:
+          description: True if the customer is allowed enter custom notes with their orders
+          type: boolean
+          example: true
+        EtaInPickupConfirmationSmsEnabled:
+          description: True if order confirmation sms includes estimated time when order will be ready for collection
+          type: boolean
+          example: true
+        EtaInDeliveryConfirmationSmsEnabled:
+          description: True if order confirmation sms includes estimated time when order will delivered
+          type: boolean
+          example: true
+        IsArchived:
+          description: Is the Store Archived
+          type: boolean
+          example: true
+        IsPublished:
+          description: Is the Store Published
+          type: boolean
+          example: true
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        EmailAddress:
+          description: Email address (visible to customers)
+          maxLength: 100
+          minLength: 0
+          type: string
+          example: owner@example.com
+        StaffLanguage:
+          description: 'Staff Language (used for communication with the staff)
+
+            Emails, Printouts etc'
+          type: string
+          example: string
+        SalesChannelTypes:
+          description: Sales Channel Types
+          type: array
+          items:
+            enum:
+            - Web
+            - App
+            - Kiosk
+            - Pos
+            - None
+            type: string
+          example:
+          - Web
+        InheritanceConfigTypes:
+          description: Inheritance Config Types
+          type: array
+          items:
+            enum:
+            - CollectionSettings
+            type: string
+          example:
+          - CollectionSettings
+    RestApiResult_OrderLeadTimes_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OrderLeadTimes'
+    RestApiDefaultResponse:
+      description: Rest api default response
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          readOnly: true
+          example: string
+    Coordinates:
+      description: Coordinates
+      type: object
+      properties:
+        Latitude:
+          format: double
+          description: Latitude
+          type: number
+          example: 1.0
+        Longitude:
+          format: double
+          description: Longitude
+          type: number
+          example: 1.0
+    BusinessHoursOverride:
+      description: ''
+      required:
+      - StartTime
+      - EndTime
+      type: object
+      properties:
+        BusinessHoursOverrideId:
+          format: int32
+          description: Unique identifier
+          type: integer
+          example: 500123
+        DeliveryType:
+          description: Delivery or Pickup
+          enum:
+          - Delivery
+          - Pickup
+          type: string
+          example: Delivery
+        StartTime:
+          format: date-time
+          description: Date and time in ISO 8601 format.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        EndTime:
+          format: date-time
+          description: Date and time in ISO 8601 format.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Type:
+          description: Open, Closed or ClosedAllowPreOrders
+          enum:
+          - Open
+          - Closed
+          - ClosedAllowPreOrders
+          type: string
+          example: Open
     StoreFeeConfig:
       description: ''
       type: object
@@ -6993,96 +7110,89 @@ components:
           description: Gets or sets the fixed fee cash orders phone agent charged to customer including vat.
           type: number
           example: 12.5
-    Coordinates:
-      description: Coordinates
+    StoreAddressBase:
+      description: Store address base
       type: object
       properties:
-        Latitude:
-          format: double
-          description: Latitude
-          type: number
-          example: 1.0
-        Longitude:
-          format: double
-          description: Longitude
-          type: number
-          example: 1.0
-    RestApiArrayResult_PreOrderTime_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PreOrderTime'
-          example: []
-    RestApiArrayResult_StoreDeliveryZoneFeeConfig_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreDeliveryZoneFeeConfig'
-          example: []
-    StoreHeader:
-      description: Represents the most basic store information, used mostly for searches
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Category:
-          description: Name
+        Line1:
+          description: Address line 1
           type: string
           example: string
-    ProcessingFeeConfig:
-      description: Processing fee config
+        Postcode:
+          description: Postcode
+          type: string
+          example: string
+        City:
+          description: City
+          type: string
+          example: string
+        CountryCode:
+          description: Country code (ISO-alpha2)
+          maxLength: 2
+          minLength: 0
+          type: string
+          example: IE
+        DisplayForCustomer:
+          description: Display for customer
+          type: string
+          example: string
+        AddressFields:
+          description: Dyanmic field/value pairs, defined by the form assigned to the given country code.
+          type: object
+          additionalProperties:
+            type: object
+        SingleLineDisplay:
+          description: Single line display i18n, may be empty for not supported countries
+          type: string
+          example: string
+        TwoLinesDisplay:
+          description: Two line display i18n, may be empty for not supported countries
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    RestApiResult_Store_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        StoreId:
-          format: int32
-          description: Store Id
-          type: integer
-          example: 500123
-        PaymentAccountType:
-          description: Payment account type
+        Data:
+          $ref: '#/components/schemas/Store'
+    BusinessHoursPeriodBase:
+      description: Business hours period
+      type: object
+      properties:
+        DayOfWeek:
+          description: Day of week
           enum:
-          - Card
-          - Cash
-          - Ideal
-          - Bancontact
-          - Giropay
-          - Eps
-          - Emv
-          - PayPal
-          - PayGreen
-          - GoogleWalletToken
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
           type: string
-          example: Card
-        PercentFee:
-          format: double
-          description: Percent fee to customer, including VAT
-          type: number
-          example: 12.5
-        FixedFee:
-          format: double
-          description: Fixed fee to customer, including VAT
-          type: number
-          example: 12.5
-    RestApiPaginationResult_Store_:
+          example: Sunday
+        StartTime:
+          description: Start time
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Period:
+          description: Period
+          type: string
+          example: string
+        StartTimeEarly:
+          description: Start time early
+          type: string
+          example: string
+        PeriodEarly:
+          description: Period early
+          type: string
+          example: string
+    RestApiPaginationResult_BusinessHoursOverride_:
       description: Rest api pagination result
       required:
       - Page
@@ -7110,126 +7220,16 @@ components:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/Store'
+            $ref: '#/components/schemas/BusinessHoursOverride'
           example: []
-    StoreCollectionSettings:
-      description: Store Collection Settings
+    RestApiResult_BusinessHoursPeriod_:
+      description: Rest api result
       required:
-      - PickupEnabled
-      - MinimumPickupOrderAmount
-      - RequireCustomerNameForPickup
-      - CashOrdersPickupEnabled
-      - LeadTimeMinutes
-      - EtaInPickupConfirmationSmsEnabled
-      type: object
-      properties:
-        PickupEnabled:
-          description: True if the store accepts pickup orders
-          type: boolean
-          example: true
-        MinimumPickupOrderAmount:
-          format: double
-          description: Minimum pickup order amount
-          type: number
-          example: 12.5
-        RequireCustomerNameForPickup:
-          description: True if customer name required for pickup orders
-          type: boolean
-          example: true
-        CashOrdersPickupEnabled:
-          description: True if the store accepts cash payment for pickup orders
-          type: boolean
-          example: true
-        LeadTimeMinutes:
-          format: int32
-          description: Auto accept lead time for collection orders
-          type: integer
-          example: 1
-        EtaInPickupConfirmationSmsEnabled:
-          description: True if order confirmation sms includes estimated time when order will be ready for collection
-          type: boolean
-          example: true
-    RestApiDefaultResponse:
-      description: Rest api default response
+      - Data
       type: object
       properties:
         Data:
-          description: Data string
-          type: string
-          readOnly: true
-          example: string
-    Range:
-      description: 'A class that represents a single opening period in a day.
-
-        This starts ''StartTime'' after midnight and runs for a ''Period''
-
-        after that, on the given DayOfWeek.'
-      type: object
-      properties:
-        StartTime:
-          description: Start time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Period:
-          description: Period
-          type: string
-          example: string
-        DayOfWeek:
-          description: Day of week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-          example: Sunday
-    PreOrderTime:
-      description: Time order can be placed
-      type: object
-      properties:
-        StartTime:
-          format: date-time
-          description: Start Time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        EndTime:
-          format: date-time
-          description: End Time
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    ServiceCharge:
-      description: Store Service Charge
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        PercentageValue:
-          format: double
-          description: The Default Service Charge Value
-          type: number
-          example: 1.0
-        Enabled:
-          description: Enable Service Charge for store true(on) / false(off)
-          type: boolean
-          example: true
-        IsOptional:
-          description: Sets the service charge to be optional
-          type: boolean
-          example: true
-        DisplayWithProcessingFee:
-          description: Display service charge together with processing fee
-          type: boolean
-          example: true
-        IncludesVouchers:
-          description: "If true, will include voucher value in calculation \ni.e 10E order with 1E service charge and 5E voucher would have service charge at 0.5E"
-          type: boolean
-          example: true
+          $ref: '#/components/schemas/BusinessHoursPeriod'
   securitySchemes:
     oauth2:
       type: oauth2

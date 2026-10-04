@@ -1581,48 +1581,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiArrayResult_VoucherDataPoint_:
-      description: Rest api array result
+    RestApiResult_Voucher_:
+      description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/VoucherDataPoint'
-          example: []
-    RestApiPaginationResult_VoucherSummary_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
+          $ref: '#/components/schemas/Voucher'
+    PromotionAward:
+      description: Promotion
       type: object
       properties:
-        Page:
+        PromotionAwardId:
           format: int32
-          description: Current page index
+          description: Promotion Award Id
           type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/VoucherSummary'
-          example: []
+          example: 500123
+        MenuItemPublicId:
+          format: uuid
+          description: The public id of the menu item that will be awarded
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
     CreateVoucher:
       description: Create Voucher
       type: object
@@ -1645,287 +1625,6 @@ components:
           $ref: '#/components/schemas/LumpDiscountDetails'
         PercentDiscountDetails:
           $ref: '#/components/schemas/PercentDiscountDetails'
-        Code:
-          description: Voucher Code
-          type: string
-          example: string
-        Description:
-          description: Voucher Description (Visible on printout)
-          type: string
-          example: string
-        Stores:
-          description: Stores that this voucher applies to
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        ValidOnOrdersOver:
-          format: double
-          description: Valid on orders on or above
-          type: number
-          example: 1.0
-        TakesPriority:
-          description: Takes priority
-          type: boolean
-          example: true
-        IsEnabled:
-          description: Is voucher enabled
-          type: boolean
-          example: true
-        IsAutomaticallyApplied:
-          description: Is voucher automatically applied
-          type: boolean
-          example: true
-        IncludeDeliveryFee:
-          description: Include delivery fees
-          type: boolean
-          example: true
-        IsValidForDeliveryOrders:
-          description: Valid for delivery orders
-          type: boolean
-          example: true
-        IsValidForPickupOrders:
-          description: Valid for pickup orders
-          type: boolean
-          example: true
-        IsValidForOrdersPayedOnline:
-          description: Valid for orders payed online
-          type: boolean
-          example: true
-        IsValidForOrdersPayedByCash:
-          description: Valid for orders payed in cash
-          type: boolean
-          example: true
-        IsValidForFirstOrderOnly:
-          description: Valid only on the first order by the customer
-          type: boolean
-          example: true
-        IsValidOncePerCustomer:
-          description: Valid once per customer
-          type: boolean
-          example: true
-        IsValidOnlyOnce:
-          description: Valid only once, by any customer (once used cannot be used again by any other customer)
-          type: boolean
-          example: true
-        IsDiscoverable:
-          description: Enables the voucher to be offered in the Voucher Discoverability feature
-          type: boolean
-          example: true
-        ForceDiscount:
-          description: Force the discount to be applied which bypasses some menu restrictions
-          type: boolean
-          example: true
-        StartDate:
-          format: date-time
-          description: Voucher Starts On (Time in UTC)
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        ExpiryDate:
-          format: date-time
-          description: Voucher Expires On (Time in UTC)
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        ChannelRestrictions:
-          description: Limit the channels this voucher can be used on
-          type: array
-          items:
-            enum:
-            - Ios
-            - Android
-            - Web
-            - Kiosk
-            - Pos
-            - Google
-            type: string
-          example:
-          - Ios
-        ValidityPeriods:
-          description: 'Periods in which the voucher is valid.
-
-            An empty list means the voucher is valid at all times.
-
-            When updating the voucher, if this is set to null, the validity periods won''t be updated.'
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidityPeriod'
-          example: []
-        VoucherSubType:
-          description: Voucher Subtype
-          enum:
-          - None
-          - SignUp
-          - Loyalty
-          - Loyalty25
-          - Retention
-          - SecondaryRetention
-          - Custom
-          type: string
-          example: None
-        CustomerId:
-          format: int32
-          description: Customer UserID
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        MaxRedemptions:
-          format: int32
-          description: Maximum number of times the voucher can be redeemed (used)
-          type:
-          - integer
-          - 'null'
-          example: 1
-    PromotionAward:
-      description: Promotion
-      type: object
-      properties:
-        PromotionAwardId:
-          format: int32
-          description: Promotion Award Id
-          type: integer
-          example: 500123
-        MenuItemPublicId:
-          format: uuid
-          description: The public id of the menu item that will be awarded
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-    VoucherDataPoint:
-      description: A single data point in timeline graphs related to Vouchers
-      type: object
-      properties:
-        PeriodStart:
-          format: date-time
-          description: Date from which the data point starts
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        PeriodLengthInDays:
-          format: int32
-          description: The length in days that this data point covers
-          type: integer
-          example: 1
-        Value:
-          format: int32
-          description: The value of this data point
-          type: integer
-          example: 1
-    PercentDiscountDetails:
-      description: Percent discount details
-      type: object
-      properties:
-        PercentageDiscount:
-          format: int32
-          description: Percentage discount
-          type: integer
-          example: 3
-        MaxDiscountAmount:
-          format: double
-          description: 'The maximum amount that the percentage discount value can be.
-
-            If not set then there is no maximum.
-
-            If set to e.g. 20 euro, and the percentage discount is 25%, and the order total is 100 euro, then the discount will be 20 euro (not 25 euro).'
-          type:
-          - number
-          - 'null'
-          example: 12.5
-    CreditNoteDetails:
-      description: Credit note details
-      type: object
-      properties:
-        RemainingCredit:
-          format: double
-          description: Remaining credit
-          type: number
-          example: 1.0
-    VoucherSummary:
-      description: Voucher Summary
-      type: object
-      properties:
-        VoucherId:
-          format: int32
-          description: Voucher Id
-          type: integer
-          example: 500123
-        Code:
-          description: Voucher Code
-          type: string
-          example: string
-        Status:
-          description: Voucher Status
-          enum:
-          - Valid
-          - NotYetValid
-          - Expired
-          - Used
-          - Disabled
-          type: string
-          example: Valid
-        VoucherType:
-          description: Voucher Type
-          enum:
-          - PercentageDiscount
-          - LumpDiscount
-          - AddItem
-          - CreditNote
-          - FreeDelivery
-          type: string
-          example: PercentageDiscount
-        VoucherSubType:
-          description: Voucher Sub Type
-          enum:
-          - None
-          - SignUp
-          - Loyalty
-          - Loyalty25
-          - Retention
-          - SecondaryRetention
-          - Custom
-          type: string
-          example: None
-        Description:
-          description: Voucher Description (Visible on printout)
-          type: string
-          example: string
-        IsEnabled:
-          description: Is voucher enabled
-          type: boolean
-          example: true
-        StoreNames:
-          description: Store names associated with this voucher
-          type: array
-          items:
-            type: string
-          example:
-          - Example Name
-        IsAvailableOnAllStores:
-          description: True if the voucher is available on all active stores in the app
-          type: boolean
-          example: true
-    UpdateVoucher:
-      description: Update Voucher
-      type: object
-      properties:
-        PromotionId:
-          format: int32
-          description: Promotion ID to update
-          type: integer
-          example: 500123
-        PromotionName:
-          description: The updated name of the promotion
-          type: string
-          example: Example Name
-        PromotionAwardMenuItemPublicIds:
-          description: The updated menu items that the promotion awards
-          type: array
-          items:
-            format: uuid
-            type: string
-            example: 00000000-0000-0000-0000-000000000000
-          example:
-          - 00000000-0000-0000-0000-000000000000
         Code:
           description: Voucher Code
           type: string
@@ -2389,37 +2088,6 @@ components:
           - integer
           - 'null'
           example: 1
-    RestApiArrayResult_VoucherSummary_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/VoucherSummary'
-          example: []
-    PromotionDetails:
-      description: Promotion
-      type: object
-      properties:
-        PromotionId:
-          format: int32
-          description: Promotion Id
-          type: integer
-          example: 500123
-        Name:
-          description: The name of the promotion
-          type: string
-          example: Example Name
-        PromotionAwards:
-          description: The items that this promotion will award
-          type: array
-          items:
-            $ref: '#/components/schemas/PromotionAward'
-          example: []
     Voucher:
       description: Voucher
       type: object
@@ -2715,25 +2383,21 @@ components:
           - integer
           - 'null'
           example: 1
-    LumpDiscountDetails:
-      description: Lump discount details
+    UpdateVoucher:
+      description: Update Voucher
       type: object
       properties:
-        DiscountAmount:
-          format: double
-          description: Discount amount
-          type: number
-          example: 12.5
-    CreatePromotion:
-      description: Create Promotion
-      type: object
-      properties:
-        Name:
-          description: Promotion Name
+        PromotionId:
+          format: int32
+          description: Promotion ID to update
+          type: integer
+          example: 500123
+        PromotionName:
+          description: The updated name of the promotion
           type: string
           example: Example Name
-        MenuItemPublicIds:
-          description: Promotion Menu Item Awards
+        PromotionAwardMenuItemPublicIds:
+          description: The updated menu items that the promotion awards
           type: array
           items:
             format: uuid
@@ -2741,6 +2405,338 @@ components:
             example: 00000000-0000-0000-0000-000000000000
           example:
           - 00000000-0000-0000-0000-000000000000
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        Stores:
+          description: Stores that this voucher applies to
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        ValidOnOrdersOver:
+          format: double
+          description: Valid on orders on or above
+          type: number
+          example: 1.0
+        TakesPriority:
+          description: Takes priority
+          type: boolean
+          example: true
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        IsAutomaticallyApplied:
+          description: Is voucher automatically applied
+          type: boolean
+          example: true
+        IncludeDeliveryFee:
+          description: Include delivery fees
+          type: boolean
+          example: true
+        IsValidForDeliveryOrders:
+          description: Valid for delivery orders
+          type: boolean
+          example: true
+        IsValidForPickupOrders:
+          description: Valid for pickup orders
+          type: boolean
+          example: true
+        IsValidForOrdersPayedOnline:
+          description: Valid for orders payed online
+          type: boolean
+          example: true
+        IsValidForOrdersPayedByCash:
+          description: Valid for orders payed in cash
+          type: boolean
+          example: true
+        IsValidForFirstOrderOnly:
+          description: Valid only on the first order by the customer
+          type: boolean
+          example: true
+        IsValidOncePerCustomer:
+          description: Valid once per customer
+          type: boolean
+          example: true
+        IsValidOnlyOnce:
+          description: Valid only once, by any customer (once used cannot be used again by any other customer)
+          type: boolean
+          example: true
+        IsDiscoverable:
+          description: Enables the voucher to be offered in the Voucher Discoverability feature
+          type: boolean
+          example: true
+        ForceDiscount:
+          description: Force the discount to be applied which bypasses some menu restrictions
+          type: boolean
+          example: true
+        StartDate:
+          format: date-time
+          description: Voucher Starts On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ExpiryDate:
+          format: date-time
+          description: Voucher Expires On (Time in UTC)
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        ChannelRestrictions:
+          description: Limit the channels this voucher can be used on
+          type: array
+          items:
+            enum:
+            - Ios
+            - Android
+            - Web
+            - Kiosk
+            - Pos
+            - Google
+            type: string
+          example:
+          - Ios
+        ValidityPeriods:
+          description: 'Periods in which the voucher is valid.
+
+            An empty list means the voucher is valid at all times.
+
+            When updating the voucher, if this is set to null, the validity periods won''t be updated.'
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidityPeriod'
+          example: []
+        VoucherSubType:
+          description: Voucher Subtype
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        CustomerId:
+          format: int32
+          description: Customer UserID
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        MaxRedemptions:
+          format: int32
+          description: Maximum number of times the voucher can be redeemed (used)
+          type:
+          - integer
+          - 'null'
+          example: 1
+    RestApiResult_VoucherWithStats_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/VoucherWithStats'
+    RestApiPaginationResult_VoucherSummary_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherSummary'
+          example: []
+    PercentDiscountDetails:
+      description: Percent discount details
+      type: object
+      properties:
+        PercentageDiscount:
+          format: int32
+          description: Percentage discount
+          type: integer
+          example: 3
+        MaxDiscountAmount:
+          format: double
+          description: 'The maximum amount that the percentage discount value can be.
+
+            If not set then there is no maximum.
+
+            If set to e.g. 20 euro, and the percentage discount is 25%, and the order total is 100 euro, then the discount will be 20 euro (not 25 euro).'
+          type:
+          - number
+          - 'null'
+          example: 12.5
+    VoucherDataPoint:
+      description: A single data point in timeline graphs related to Vouchers
+      type: object
+      properties:
+        PeriodStart:
+          format: date-time
+          description: Date from which the data point starts
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        PeriodLengthInDays:
+          format: int32
+          description: The length in days that this data point covers
+          type: integer
+          example: 1
+        Value:
+          format: int32
+          description: The value of this data point
+          type: integer
+          example: 1
+    PromotionDetails:
+      description: Promotion
+      type: object
+      properties:
+        PromotionId:
+          format: int32
+          description: Promotion Id
+          type: integer
+          example: 500123
+        Name:
+          description: The name of the promotion
+          type: string
+          example: Example Name
+        PromotionAwards:
+          description: The items that this promotion will award
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionAward'
+          example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    VoucherSummary:
+      description: Voucher Summary
+      type: object
+      properties:
+        VoucherId:
+          format: int32
+          description: Voucher Id
+          type: integer
+          example: 500123
+        Code:
+          description: Voucher Code
+          type: string
+          example: string
+        Status:
+          description: Voucher Status
+          enum:
+          - Valid
+          - NotYetValid
+          - Expired
+          - Used
+          - Disabled
+          type: string
+          example: Valid
+        VoucherType:
+          description: Voucher Type
+          enum:
+          - PercentageDiscount
+          - LumpDiscount
+          - AddItem
+          - CreditNote
+          - FreeDelivery
+          type: string
+          example: PercentageDiscount
+        VoucherSubType:
+          description: Voucher Sub Type
+          enum:
+          - None
+          - SignUp
+          - Loyalty
+          - Loyalty25
+          - Retention
+          - SecondaryRetention
+          - Custom
+          type: string
+          example: None
+        Description:
+          description: Voucher Description (Visible on printout)
+          type: string
+          example: string
+        IsEnabled:
+          description: Is voucher enabled
+          type: boolean
+          example: true
+        StoreNames:
+          description: Store names associated with this voucher
+          type: array
+          items:
+            type: string
+          example:
+          - Example Name
+        IsAvailableOnAllStores:
+          description: True if the voucher is available on all active stores in the app
+          type: boolean
+          example: true
+    UpdateVoucherUsage:
+      description: Update Voucher Usage
+      type: object
+      properties:
+        IsUsed:
+          description: Flag indicating whether the voucher is used
+          type: boolean
+          example: true
+        UsedByCustomerId:
+          format: int32
+          description: Indicates Customer that used the voucher.
+          type:
+          - integer
+          - 'null'
+          example: 500123
+        TransactionKey:
+          description: "An opaque string, to ensure idempotency. This allows for safely retrying requests without accidentally performing the same stamp operation twice. \nThis will typically contain the the ID of the sale order."
+          type: string
+          example: string
     SetVoucherValidityPeriodsSimplifiedRequest:
       description: Set the validity periods of a voucher.
       type: object
@@ -2770,14 +2766,65 @@ components:
             If the end time is before the start time, the end time is assumed to be the next day.'
           type: string
           example: '2026-06-02T12:00:00Z'
-    RestApiResult_VoucherWithStats_:
-      description: Rest api result
+    CreditNoteDetails:
+      description: Credit note details
+      type: object
+      properties:
+        RemainingCredit:
+          format: double
+          description: Remaining credit
+          type: number
+          example: 1.0
+    RestApiArrayResult_VoucherDataPoint_:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/VoucherWithStats'
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherDataPoint'
+          example: []
+    CreatePromotion:
+      description: Create Promotion
+      type: object
+      properties:
+        Name:
+          description: Promotion Name
+          type: string
+          example: Example Name
+        MenuItemPublicIds:
+          description: Promotion Menu Item Awards
+          type: array
+          items:
+            format: uuid
+            type: string
+            example: 00000000-0000-0000-0000-000000000000
+          example:
+          - 00000000-0000-0000-0000-000000000000
+    LumpDiscountDetails:
+      description: Lump discount details
+      type: object
+      properties:
+        DiscountAmount:
+          format: double
+          description: Discount amount
+          type: number
+          example: 12.5
+    RestApiArrayResult_VoucherSummary_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherSummary'
+          example: []
     ValidityPeriod:
       description: ValidityPeriod.
       type: object
@@ -2802,53 +2849,6 @@ components:
           description: EndTime.
           type: string
           example: '2026-06-02T12:00:00Z'
-    RestApiResult_Voucher_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Voucher'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    UpdateVoucherUsage:
-      description: Update Voucher Usage
-      type: object
-      properties:
-        IsUsed:
-          description: Flag indicating whether the voucher is used
-          type: boolean
-          example: true
-        UsedByCustomerId:
-          format: int32
-          description: Indicates Customer that used the voucher.
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        TransactionKey:
-          description: "An opaque string, to ensure idempotency. This allows for safely retrying requests without accidentally performing the same stamp operation twice. \nThis will typically contain the the ID of the sale order."
-          type: string
-          example: string
   securitySchemes:
     oauth2:
       type: oauth2

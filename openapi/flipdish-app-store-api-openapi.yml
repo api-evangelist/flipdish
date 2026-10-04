@@ -295,26 +295,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
+    ValidValue:
+      required:
+      - Code
+      - Name
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        Code:
+          type: string
+          example: string
+        Name:
+          type: string
+          example: Example Name
     AppStoreApp:
       required:
       - Id
@@ -457,18 +449,84 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    ValidValue:
-      required:
-      - Code
-      - Name
+    AppStoreAppSupportInfo:
       type: object
       properties:
-        Code:
+        PrivacyPolicy:
           type: string
           example: string
+        TermsOfUse:
+          type: string
+          example: string
+        CompanyWebsite:
+          type: string
+          example: string
+        LearnMore:
+          type: string
+          example: string
+        InstallationMessage:
+          type: string
+          example: string
+        SupportEmail:
+          type: string
+          example: owner@example.com
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
+      type: object
+      properties:
         Name:
           type: string
           example: Example Name
+        Description:
+          type: string
+          example: string
+        Key:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        DefaultValue:
+          type: string
+          example: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+          example: []
+        ValidationRegex:
+          type: string
+          example: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+          example: Text
+        IsFlipdishRestricted:
+          type:
+          - boolean
+          - 'null'
+          example: true
     RestApiResult_AppStoreApp_:
       description: Rest api result
       required:
@@ -477,6 +535,32 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/AppStoreApp'
+    FieldGroup:
+      required:
+      - Name
+      - Position
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        Fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
     AppStoreAppSummary:
       required:
       - Id
@@ -554,110 +638,6 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    Field:
-      required:
-      - Name
-      - Description
-      - Key
-      - Position
-      - FieldType
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        Key:
-          type: string
-          example: string
-        Tooltip:
-          type: string
-          example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        DefaultValue:
-          type: string
-          example: string
-        ValidValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidValue'
-          example: []
-        ValidationRegex:
-          type: string
-          example: string
-        FieldType:
-          enum:
-          - Text
-          - TextArea
-          - Integer
-          - Decimal
-          - Date
-          - DateTime
-          - Time
-          - Select
-          - Boolean
-          - ActionButton
-          type: string
-          example: Text
-        IsFlipdishRestricted:
-          type:
-          - boolean
-          - 'null'
-          example: true
-    FieldGroup:
-      required:
-      - Name
-      - Position
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        Tooltip:
-          type: string
-          example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        Fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-          example: []
-    AppStoreAppSupportInfo:
-      type: object
-      properties:
-        PrivacyPolicy:
-          type: string
-          example: string
-        TermsOfUse:
-          type: string
-          example: string
-        CompanyWebsite:
-          type: string
-          example: string
-        LearnMore:
-          type: string
-          example: string
-        InstallationMessage:
-          type: string
-          example: string
-        SupportEmail:
-          type: string
-          example: owner@example.com
     RestApiPaginationResult_AppStoreAppSummary_:
       description: Rest api pagination result
       required:
@@ -688,6 +668,26 @@ components:
           items:
             $ref: '#/components/schemas/AppStoreAppSummary'
           example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

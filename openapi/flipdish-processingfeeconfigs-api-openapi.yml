@@ -120,26 +120,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FlipdishError:
+    RestApiArrayResult_ProcessingFeeConfig_:
+      description: Rest api array result
+      required:
+      - Data
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessingFeeConfig'
+          example: []
     ProcessingFeeConfig:
       description: Processing fee config
       type: object
@@ -174,18 +166,26 @@ components:
           description: Fixed fee to customer, including VAT
           type: number
           example: 12.5
-    RestApiArrayResult_ProcessingFeeConfig_:
-      description: Rest api array result
-      required:
-      - Data
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessingFeeConfig'
-          example: []
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

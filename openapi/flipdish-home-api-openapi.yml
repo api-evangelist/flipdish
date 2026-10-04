@@ -452,6 +452,75 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    HomeAction:
+      description: ''
+      type: object
+      properties:
+        HomeActionId:
+          format: int32
+          description: ''
+          type: integer
+          example: 500123
+        HomeActionType:
+          description: Type of Action
+          enum:
+          - Portal
+          - External
+          type: string
+          example: Portal
+        Order:
+          format: int32
+          description: ''
+          type: integer
+          example: 1
+        TitleKey:
+          description: ''
+          type: string
+          example: string
+        ActionKey:
+          description: ''
+          type: string
+          example: string
+        DescriptionKey:
+          description: ''
+          type: string
+          example: string
+        Action:
+          description: ''
+          type: string
+          example: string
+        Dismissible:
+          description: ''
+          type: boolean
+          example: true
+    OktaPortalFeatureFlag:
+      description: Okta Portal Feature Flag Value
+      type: object
+      properties:
+        OktaPortalEnabled:
+          description: Feature flag backend_portal_enableOktaWebApi value
+          type: boolean
+          example: true
+    RestApiResult_HomeStatistics_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/HomeStatistics'
+    RestApiArrayResult_HomeAction_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeAction'
+          example: []
     CurrencyData:
       description: A single currency data piece, with no date
       type: object
@@ -579,6 +648,24 @@ components:
           description: Value
           type: number
           example: 1.0
+    HomeStatistics:
+      description: Home statitstics
+      type: object
+      properties:
+        TotalMoneySaved:
+          description: Money saved
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyData'
+          example: []
+    RestApiResult_OktaPortalFeatureFlag_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OktaPortalFeatureFlag'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -599,93 +686,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    RestApiResult_OktaPortalFeatureFlag_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OktaPortalFeatureFlag'
-    RestApiArrayResult_HomeAction_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/HomeAction'
-          example: []
-    HomeAction:
-      description: ''
-      type: object
-      properties:
-        HomeActionId:
-          format: int32
-          description: ''
-          type: integer
-          example: 500123
-        HomeActionType:
-          description: Type of Action
-          enum:
-          - Portal
-          - External
-          type: string
-          example: Portal
-        Order:
-          format: int32
-          description: ''
-          type: integer
-          example: 1
-        TitleKey:
-          description: ''
-          type: string
-          example: string
-        ActionKey:
-          description: ''
-          type: string
-          example: string
-        DescriptionKey:
-          description: ''
-          type: string
-          example: string
-        Action:
-          description: ''
-          type: string
-          example: string
-        Dismissible:
-          description: ''
-          type: boolean
-          example: true
-    HomeStatistics:
-      description: Home statitstics
-      type: object
-      properties:
-        TotalMoneySaved:
-          description: Money saved
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyData'
-          example: []
-    RestApiResult_HomeStatistics_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/HomeStatistics'
-    OktaPortalFeatureFlag:
-      description: Okta Portal Feature Flag Value
-      type: object
-      properties:
-        OktaPortalEnabled:
-          description: Feature flag backend_portal_enableOktaWebApi value
-          type: boolean
-          example: true
   securitySchemes:
     oauth2:
       type: oauth2

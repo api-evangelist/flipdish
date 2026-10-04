@@ -436,14 +436,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_PushNotificationResponse_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/PushNotificationResponse'
     PushNotificationResponse:
       description: Push Notification
       required:
@@ -472,26 +464,14 @@ components:
           description: Message of the notification
           type: string
           example: string
-    FlipdishError:
+    RestApiResult_PushNotificationResponse_:
+      description: Rest api result
+      required:
+      - Data
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        Data:
+          $ref: '#/components/schemas/PushNotificationResponse'
     RestApiPaginationResult_PushNotificationResponse_:
       description: Rest api pagination result
       required:
@@ -522,6 +502,26 @@ components:
           items:
             $ref: '#/components/schemas/PushNotificationResponse'
           example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

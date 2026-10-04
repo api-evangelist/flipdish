@@ -1137,6 +1137,148 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_AcceptInvitationResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AcceptInvitationResult'
+    TeammateBase:
+      description: ''
+      type: object
+      properties:
+        AppAccessLevel:
+          description: App access level
+          enum:
+          - None
+          - Owner
+          - StoreOwner
+          - PropertyOwner
+          - ManagedOwner
+          - Integrator
+          - PropertyManager
+          - StoreManager
+          - StoreStaff
+          - StoreReadOnlyAccess
+          - FinanceManger
+          - Onboarding
+          - Support
+          type: string
+          example: None
+        HasAccessToAllStores:
+          description: The user has access to all stores for the app (including new stores that added later)
+          type: boolean
+          example: true
+        StoreIds:
+          description: Store IDs the user has access to (if HasAccessToAllStores is false)
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        PropertyIds:
+          description: Property Ids the user has access to (if HasAccessToAllStores is false)
+          type: array
+          items:
+            type: string
+          example:
+          - string
+    RestApiArrayResult_PendingInvitation_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingInvitation'
+          example: []
+    PendingInvitation:
+      description: An invitation to join a team at Flipdish.
+      type: object
+      properties:
+        AppName:
+          description: The name of the brand that you have been invited to join.
+          type: string
+          example: Example Name
+        Email:
+          description: The email address that the invitation was sent to.
+          type: string
+          example: owner@example.com
+        Otc:
+          description: The one-time code that can be used to accept the invitation.
+          type: string
+          example: string
+        CreatedAt:
+          format: date-time
+          description: The time that the invitation was created.
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RedeemInvitationResult:
+      description: ''
+      type: object
+      properties:
+        AppId:
+          description: Access level is for this App
+          type: string
+          example: '500123'
+        InvitationStatus:
+          description: Invitation status
+          enum:
+          - Pending
+          - Accepted
+          - Expired
+          type: string
+          example: Pending
+    RestApiResult_RedeemInvitationResult_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RedeemInvitationResult'
+    AcceptInvitationResult:
+      description: ''
+      type: object
+      properties:
+        IsNewUser:
+          description: Bool indicating if the user accepting the invitation is a new user
+          type: boolean
+          example: true
+        InvitedEmailAddress:
+          description: The email address that was invited.
+          type: string
+          example: owner@example.com
+    RestApiArrayResult_Teammate_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Teammate'
+          example: []
+    RestApiArrayResult_RedeemInvitationResult_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/RedeemInvitationResult'
+          example: []
     Teammate:
       description: ''
       type: object
@@ -1216,6 +1358,14 @@ components:
             type: string
           example:
           - string
+    RestApiResult_Teammate_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Teammate'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1236,156 +1386,6 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
-    PendingInvitation:
-      description: An invitation to join a team at Flipdish.
-      type: object
-      properties:
-        AppName:
-          description: The name of the brand that you have been invited to join.
-          type: string
-          example: Example Name
-        Email:
-          description: The email address that the invitation was sent to.
-          type: string
-          example: owner@example.com
-        Otc:
-          description: The one-time code that can be used to accept the invitation.
-          type: string
-          example: string
-        CreatedAt:
-          format: date-time
-          description: The time that the invitation was created.
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    RestApiArrayResult_RedeemInvitationResult_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/RedeemInvitationResult'
-          example: []
-    RestApiArrayResult_PendingInvitation_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/PendingInvitation'
-          example: []
-    RestApiArrayResult_Teammate_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Teammate'
-          example: []
-    AcceptInvitationResult:
-      description: ''
-      type: object
-      properties:
-        IsNewUser:
-          description: Bool indicating if the user accepting the invitation is a new user
-          type: boolean
-          example: true
-        InvitedEmailAddress:
-          description: The email address that was invited.
-          type: string
-          example: owner@example.com
-    RestApiResult_Teammate_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Teammate'
-    RestApiResult_AcceptInvitationResult_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AcceptInvitationResult'
-    RedeemInvitationResult:
-      description: ''
-      type: object
-      properties:
-        AppId:
-          description: Access level is for this App
-          type: string
-          example: '500123'
-        InvitationStatus:
-          description: Invitation status
-          enum:
-          - Pending
-          - Accepted
-          - Expired
-          type: string
-          example: Pending
-    RestApiResult_RedeemInvitationResult_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/RedeemInvitationResult'
-    TeammateBase:
-      description: ''
-      type: object
-      properties:
-        AppAccessLevel:
-          description: App access level
-          enum:
-          - None
-          - Owner
-          - StoreOwner
-          - PropertyOwner
-          - ManagedOwner
-          - Integrator
-          - PropertyManager
-          - StoreManager
-          - StoreStaff
-          - StoreReadOnlyAccess
-          - FinanceManger
-          - Onboarding
-          - Support
-          type: string
-          example: None
-        HasAccessToAllStores:
-          description: The user has access to all stores for the app (including new stores that added later)
-          type: boolean
-          example: true
-        StoreIds:
-          description: Store IDs the user has access to (if HasAccessToAllStores is false)
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        PropertyIds:
-          description: Property Ids the user has access to (if HasAccessToAllStores is false)
-          type: array
-          items:
-            type: string
-          example:
-          - string
   securitySchemes:
     oauth2:
       type: oauth2
