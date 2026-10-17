@@ -1196,84 +1196,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_MenuItemOptionSetItem_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuItemOptionSetItem'
-    CreateMetadata:
-      description: Create metadata
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        Key:
-          description: Metadata key (Unique identifier)
-          maxLength: 128
-          minLength: 0
-          type: string
-          example: string
-        Value:
-          description: Metadata value
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: string
-    MenuItemOptionSetItemBase:
-      description: Menu item option set item
-      type: object
-      properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Price:
-          format: double
-          description: Price
-          type: number
-          example: 12.5
-        DepositReturnFee:
-          format: double
-          description: An optional fee that can be added to the price of the item.
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        IsAvailable:
-          description: Is available
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        CellLayoutType:
-          description: 'Small | Medium | Large
-
-            Affects the layout of the menu.'
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
     RestApiArrayResult_MenuItemOptionSetItem_:
       description: Rest api array result
       required:
@@ -1286,16 +1208,6 @@ components:
           items:
             $ref: '#/components/schemas/MenuItemOptionSetItem'
           example: []
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
     MenuItemOptionSetItem:
       description: Menu item option set item
       type: object
@@ -1403,6 +1315,94 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    CreateMetadata:
+      description: Create metadata
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        Key:
+          description: Metadata key (Unique identifier)
+          maxLength: 128
+          minLength: 0
+          type: string
+          example: string
+        Value:
+          description: Metadata value
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: string
+    RestApiResult_MenuItemOptionSetItem_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuItemOptionSetItem'
+    MenuItemOptionSetItemBase:
+      description: Menu item option set item
+      type: object
+      properties:
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Price:
+          format: double
+          description: Price
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          description: An optional fee that can be added to the price of the item.
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        IsAvailable:
+          description: Is available
+          type: boolean
+          example: true
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+          example: 1
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
   securitySchemes:
     oauth2:
       type: oauth2

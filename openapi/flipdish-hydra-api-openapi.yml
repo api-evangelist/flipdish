@@ -2775,55 +2775,73 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EmvTerminal:
-      description: EMV Payment Terminal
+    HydraRegistrationRequest:
+      description: Hydra registration result
+      required:
+      - StoreIds
+      - DeviceName
       type: object
       properties:
-        EmvTerminalId:
+        StoreIds:
+          description: Stores to assign the hydra
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        DeviceName:
+          description: Hydra device name
+          type: string
+          example: Example Name
+        PinCode:
           format: int32
-          description: Flipdish Identifier of Terminal
+          description: 6 digit PIN code (not starting with zero).
+          maximum: 999999
+          minimum: 100000
           type: integer
-          example: 500123
-        TerminalId:
-          description: External Identifier of Terminal
-          type: string
-          example: '500123'
-        Url:
-          description: URL at which terminal can be accessed
-          type: string
-          example: https://api.flipdish.co/example
-        Token:
-          description: TOKEN required to access terminal
+          example: 1
+    HydraConfig:
+      description: Hydra configuration
+      required:
+      - MinimumVersion
+      - PaymentOptions
+      - DeviceSettings
+      type: object
+      properties:
+        MinimumVersion:
+          description: Minimum version
           type: string
           example: string
-        SoftwareHouseId:
-          description: Identifies us to Provider
+        PaymentOptions:
+          description: Payment options
+          type: array
+          items:
+            enum:
+            - Online
+            - Emv
+            - Counter
+            type: string
+          example:
+          - Online
+        DeviceSettings:
+          $ref: '#/components/schemas/DeviceSettings'
+        Version:
+          description: Version of the device
           type: string
-          example: '500123'
-        InstallerId:
-          description: Identifies installer of terminal
+          example: string
+        BuildNumber:
+          description: Build number of the device
           type: string
-          example: '500123'
-    RestApiResult_HydraStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/HydraStatus'
-    KioskSettings:
-      description: Kiosk level settings
-      type: object
-      properties:
-        HideLogoFromFrontPage:
-          description: Hide logo from front page
-          type: boolean
-          example: true
-        TwoColumnMenuLayout:
-          description: 2 Column Menu Layout
-          type: boolean
-          example: true
+          example: string
+        GitSha:
+          description: SHA of the commit
+          type: string
+          example: string
+        GitBranch:
+          description: Build branch
+          type: string
+          example: string
     PaymentTerminalTransactionDetails:
       description: Details of Payment Terminal Transaction
       type: object
@@ -2852,82 +2870,56 @@ components:
           description: Type of Verification.
           type: string
           example: string
-    DeviceSettings:
-      description: Device settings for Hydra
+    RestApiArrayResult_EmvTerminalWithAssignments_:
+      description: Rest api array result
       required:
-      - Volume
-      - FontSize
-      - Brightness
+      - Data
       type: object
       properties:
-        Volume:
-          format: int32
-          description: Gets or sets the device volume
-          maximum: 10
-          minimum: 0
-          type: integer
-          example: 1
-        FontSize:
-          format: double
-          description: Gets or sets the font size used on the device
-          maximum: 100
-          minimum: 1
-          type: number
-          example: 1.0
-        Brightness:
-          format: int32
-          description: Gets or sets the display brightness on the device
-          maximum: 100
-          minimum: 0
-          type: integer
-          example: 1
-    HydraStatus:
-      description: Hydra status
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmvTerminalWithAssignments'
+          example: []
+    RestApiResult_KioskSettings_:
+      description: Rest api result
       required:
-      - AppId
-      - IsRegistered
+      - Data
       type: object
       properties:
-        AppId:
-          description: ''
-          type: string
-          example: '500123'
-        StoreIds:
-          description: Store to assign the hydra
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        IsRegistered:
-          description: The device has been already registered
-          type: boolean
-          example: true
-        PinCode:
+        Data:
+          $ref: '#/components/schemas/KioskSettings'
+    RestApiPaginationResult_HydraDeviceDetails_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
           format: int32
-          description: 6 digit PIN code (not starting with zero).
-          maximum: 999999
-          minimum: 100000
-          type:
-          - integer
-          - 'null'
+          description: Current page index
+          type: integer
           example: 1
-        Images:
-          description: Hydra images (covers)
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
           type: array
           items:
-            type: string
-          example:
-          - string
-        UserType:
-          description: Hydra User Type
-          enum:
-          - Kiosk
-          - Terminal
-          - LegacyPrinter
-          type: string
-          example: Kiosk
+            $ref: '#/components/schemas/HydraDeviceDetails'
+          example: []
     HydraDeviceDetails:
       description: Hydra device details
       type: object
@@ -2994,91 +2986,6 @@ components:
           description: Build branch
           type: string
           example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiResult_HydraDeviceDetails_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/HydraDeviceDetails'
-    RestApiResult_PaymentTerminalDetails_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/PaymentTerminalDetails'
-    HydraConfig:
-      description: Hydra configuration
-      required:
-      - MinimumVersion
-      - PaymentOptions
-      - DeviceSettings
-      type: object
-      properties:
-        MinimumVersion:
-          description: Minimum version
-          type: string
-          example: string
-        PaymentOptions:
-          description: Payment options
-          type: array
-          items:
-            enum:
-            - Online
-            - Emv
-            - Counter
-            type: string
-          example:
-          - Online
-        DeviceSettings:
-          $ref: '#/components/schemas/DeviceSettings'
-        Version:
-          description: Version of the device
-          type: string
-          example: string
-        BuildNumber:
-          description: Build number of the device
-          type: string
-          example: string
-        GitSha:
-          description: SHA of the commit
-          type: string
-          example: string
-        GitBranch:
-          description: Build branch
-          type: string
-          example: string
-    RestApiResult_HydraConfig_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/HydraConfig'
     RestApiArrayResult_KioskCashPaymentSettings_:
       description: Rest api array result
       required:
@@ -3091,107 +2998,43 @@ components:
           items:
             $ref: '#/components/schemas/KioskCashPaymentSettings'
           example: []
-    HydraStoreData:
-      description: Store Data
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Id of the store
-          type: integer
-          example: 500123
-        StoreName:
-          description: Name of the store
-          type: string
-          example: Example Name
-    RestApiPaginationResult_HydraDeviceDetails_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/HydraDeviceDetails'
-          example: []
-    HydraRegistrationRequest:
-      description: Hydra registration result
-      required:
-      - StoreIds
-      - DeviceName
-      type: object
-      properties:
-        StoreIds:
-          description: Stores to assign the hydra
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        DeviceName:
-          description: Hydra device name
-          type: string
-          example: Example Name
-        PinCode:
-          format: int32
-          description: 6 digit PIN code (not starting with zero).
-          maximum: 999999
-          minimum: 100000
-          type: integer
-          example: 1
-    RestApiArrayResult_EmvTerminalWithAssignments_:
-      description: Rest api array result
+    RestApiResult_PaymentTerminalTransactionDetails_:
+      description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/EmvTerminalWithAssignments'
-          example: []
-    PaymentTerminalDetails:
-      description: Details of Payment Terminal
+          $ref: '#/components/schemas/PaymentTerminalTransactionDetails'
+    DeviceSettings:
+      description: Device settings for Hydra
+      required:
+      - Volume
+      - FontSize
+      - Brightness
       type: object
       properties:
-        TerminalId:
-          description: Terminal Id (tid)
-          type: string
-          example: '500123'
-        Status:
-          description: Status of Terminal
-          type: string
-          example: Active
-        Currency:
-          description: Currency configured on the terminal
-          type: string
-          example: EUR
-        Uri:
-          description: Location to Device
-          type: string
-          example: https://api.flipdish.co/example
+        Volume:
+          format: int32
+          description: Gets or sets the device volume
+          maximum: 10
+          minimum: 0
+          type: integer
+          example: 1
+        FontSize:
+          format: double
+          description: Gets or sets the font size used on the device
+          maximum: 100
+          minimum: 1
+          type: number
+          example: 1.0
+        Brightness:
+          format: int32
+          description: Gets or sets the display brightness on the device
+          maximum: 100
+          minimum: 0
+          type: integer
+          example: 1
     EmvTerminalWithAssignments:
       description: EMV Payment Terminal
       type: object
@@ -3223,22 +3066,139 @@ components:
           description: hydra device name (null if the terminal is not assigned to any hydra device)
           type: string
           example: Example Name
-    RestApiResult_KioskSettings_:
+    HydraStoreData:
+      description: Store Data
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Id of the store
+          type: integer
+          example: 500123
+        StoreName:
+          description: Name of the store
+          type: string
+          example: Example Name
+    RestApiResult_PaymentTerminalDetails_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/KioskSettings'
-    RestApiResult_PaymentTerminalTransactionDetails_:
+          $ref: '#/components/schemas/PaymentTerminalDetails'
+    EmvTerminal:
+      description: EMV Payment Terminal
+      type: object
+      properties:
+        EmvTerminalId:
+          format: int32
+          description: Flipdish Identifier of Terminal
+          type: integer
+          example: 500123
+        TerminalId:
+          description: External Identifier of Terminal
+          type: string
+          example: '500123'
+        Url:
+          description: URL at which terminal can be accessed
+          type: string
+          example: https://api.flipdish.co/example
+        Token:
+          description: TOKEN required to access terminal
+          type: string
+          example: string
+        SoftwareHouseId:
+          description: Identifies us to Provider
+          type: string
+          example: '500123'
+        InstallerId:
+          description: Identifies installer of terminal
+          type: string
+          example: '500123'
+    RestApiResult_HydraStatus_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/PaymentTerminalTransactionDetails'
+          $ref: '#/components/schemas/HydraStatus'
+    PaymentTerminalDetails:
+      description: Details of Payment Terminal
+      type: object
+      properties:
+        TerminalId:
+          description: Terminal Id (tid)
+          type: string
+          example: '500123'
+        Status:
+          description: Status of Terminal
+          type: string
+          example: Active
+        Currency:
+          description: Currency configured on the terminal
+          type: string
+          example: EUR
+        Uri:
+          description: Location to Device
+          type: string
+          example: https://api.flipdish.co/example
+    RestApiResult_HydraConfig_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/HydraConfig'
+    HydraStatus:
+      description: Hydra status
+      required:
+      - AppId
+      - IsRegistered
+      type: object
+      properties:
+        AppId:
+          description: ''
+          type: string
+          example: '500123'
+        StoreIds:
+          description: Store to assign the hydra
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
+        IsRegistered:
+          description: The device has been already registered
+          type: boolean
+          example: true
+        PinCode:
+          format: int32
+          description: 6 digit PIN code (not starting with zero).
+          maximum: 999999
+          minimum: 100000
+          type:
+          - integer
+          - 'null'
+          example: 1
+        Images:
+          description: Hydra images (covers)
+          type: array
+          items:
+            type: string
+          example:
+          - string
+        UserType:
+          description: Hydra User Type
+          enum:
+          - Kiosk
+          - Terminal
+          - LegacyPrinter
+          type: string
+          example: Kiosk
     KioskCashPaymentSettings:
       description: Get Cash Payment Settings for a UserId
       type: object
@@ -3254,6 +3214,46 @@ components:
           description: HydraUser ID of the Device
           type: integer
           example: 500123
+    KioskSettings:
+      description: Kiosk level settings
+      type: object
+      properties:
+        HideLogoFromFrontPage:
+          description: Hide logo from front page
+          type: boolean
+          example: true
+        TwoColumnMenuLayout:
+          description: 2 Column Menu Layout
+          type: boolean
+          example: true
+    RestApiResult_HydraDeviceDetails_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/HydraDeviceDetails'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

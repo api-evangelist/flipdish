@@ -1007,95 +1007,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/MenuItemOptionSet'
-    MenuItemOptionSet:
-      description: Menu item option set
-      type: object
-      properties:
-        MenuItemOptionSetId:
-          format: int32
-          description: Menu item option set identifier
-          type: integer
-          example: 500123
-        ImageName:
-          description: Image Name
-          type: string
-          example: Example Name
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        MenuItemOptionSetItems:
-          description: Option set items
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSetItem'
-          example: []
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        CatalogItemId:
-          description: Catalog item Id when the OptionSet is associated to a Product
-          type: string
-          example: '500123'
-        Name:
-          description: Menu item option set name
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: Example Name
-        IsMasterOptionSet:
-          description: Is master option set. This can affect the layout of the options in the menu displayed to the customer. Usually it is true if the option could be considerd a standalone item as opposed to an addition ("with ketchup") or modifier ("large").
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        MinSelectCount:
-          format: int32
-          description: Minimum items must be selected
-          type: integer
-          example: 3
-        MaxSelectCount:
-          format: int32
-          description: Maximum number of items can be selected
-          type: integer
-          example: 3
-        CellLayoutType:
-          description: 'Small | Medium | Large
-
-            Affects the layout of the menu.'
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-    CreateMetadata:
-      description: Create metadata
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Store identifier
-          type: integer
-          example: 500123
-        Key:
-          description: Metadata key (Unique identifier)
-          maxLength: 128
-          minLength: 0
-          type: string
-          example: string
-        Value:
-          description: Metadata value
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: string
     MenuItemOptionSetBase:
       description: Menu item option set
       type: object
@@ -1141,28 +1052,6 @@ components:
           description: Permanent reference to the item.
           type: string
           example: 00000000-0000-0000-0000-000000000000
-    RestApiArrayResult_MenuItemOptionSet_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSet'
-          example: []
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
     MenuItemOptionSetItem:
       description: Menu item option set item
       type: object
@@ -1250,6 +1139,74 @@ components:
           description: Image url
           type: string
           example: https://api.flipdish.co/example
+    MenuItemOptionSet:
+      description: Menu item option set
+      type: object
+      properties:
+        MenuItemOptionSetId:
+          format: int32
+          description: Menu item option set identifier
+          type: integer
+          example: 500123
+        ImageName:
+          description: Image Name
+          type: string
+          example: Example Name
+        ImageUrl:
+          description: Image url
+          type: string
+          example: https://api.flipdish.co/example
+        MenuItemOptionSetItems:
+          description: Option set items
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSetItem'
+          example: []
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        CatalogItemId:
+          description: Catalog item Id when the OptionSet is associated to a Product
+          type: string
+          example: '500123'
+        Name:
+          description: Menu item option set name
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: Example Name
+        IsMasterOptionSet:
+          description: Is master option set. This can affect the layout of the options in the menu displayed to the customer. Usually it is true if the option could be considerd a standalone item as opposed to an addition ("with ketchup") or modifier ("large").
+          type: boolean
+          example: true
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+          example: 1
+        MinSelectCount:
+          format: int32
+          description: Minimum items must be selected
+          type: integer
+          example: 3
+        MaxSelectCount:
+          format: int32
+          description: Maximum number of items can be selected
+          type: integer
+          example: 3
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+          example: Small
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1270,6 +1227,49 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    CreateMetadata:
+      description: Create metadata
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Store identifier
+          type: integer
+          example: 500123
+        Key:
+          description: Metadata key (Unique identifier)
+          maxLength: 128
+          minLength: 0
+          type: string
+          example: string
+        Value:
+          description: Metadata value
+          maxLength: 4000
+          minLength: 0
+          type: string
+          example: string
+    RestApiArrayResult_MenuItemOptionSet_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSet'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

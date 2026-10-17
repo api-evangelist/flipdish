@@ -1502,124 +1502,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    HttpPostedFileBase:
-      type: object
-      properties:
-        ContentLength:
-          format: int32
-          type: integer
-          readOnly: true
-          example: 1
-        ContentType:
-          type: string
-          readOnly: true
-          example: string
-        FileName:
-          type: string
-          readOnly: true
-          example: Example Name
-        InputStream:
-          $ref: '#/components/schemas/Stream'
-    AppStoreConfigModel:
-      description: App Store configuration model
-      type: object
-      properties:
-        WhiteLabelId:
-          format: int32
-          description: White label ID
-          type: integer
-          example: 500123
-        ReadyToPublishToAppStore:
-          description: Ready to publish to app store
-          type: boolean
-          example: true
-        AppStoreName:
-          description: App store name
-          type: string
-          example: Example Name
-        AppStoreAppleId:
-          description: App Store Apple ID
-          type: string
-          example: '500123'
-        AppStoreUrl:
-          description: App Store URL
-          type: string
-          example: https://api.flipdish.co/example
-        AppStoreId:
-          description: App Store ID
-          type: string
-          example: '500123'
-        AppStorePassword:
-          description: App Store password
-          type: string
-          example: string
-        TeamId:
-          description: Team ID
-          type: string
-          example: '500123'
-        AppGroupId:
-          description: App Group ID
-          type: string
-          example: '500123'
-        BundleId:
-          description: Bundle ID
-          type: string
-          example: '500123'
-        AppStoreSigningIdentity:
-          description: App Store signing identity
-          type: string
-          example: string
-        AppStoreToken:
-          description: App Store token
-          type: string
-          example: string
-        AppStoreMerchantId:
-          description: App Store merchant ID
-          type: string
-          example: '500123'
-        P8PrivateKey:
-          description: P8 private key
-          type: string
-          example: string
-        P8PrivateKeyId:
-          description: P8 private key ID
-          type: string
-          example: '500123'
-    RestApiResult_AppGeneralConfigModel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppGeneralConfigModel'
-    WhiteLabelAssetModel:
-      description: White label asset model
-      type: object
-      properties:
-        WhiteLabelAssetId:
-          format: int32
-          description: White label asset ID
-          type: integer
-          example: 500123
-        WhiteLabelConfigId:
-          format: int32
-          description: White label configuration ID
-          type: integer
-          example: 500123
-        FilePath:
-          description: File path
-          type: string
-          example: string
-        Url:
-          description: Asset URL
-          type: string
-          example: https://api.flipdish.co/example
-        TsUpdate:
-          format: date-time
-          description: Timestamp update
-          type: string
-          example: '2026-06-02T12:00:00Z'
     AppGeneralConfigModel:
       description: App general configuration model
       type: object
@@ -1696,42 +1578,79 @@ components:
           description: Display pickup restaurant list screen
           type: boolean
           example: true
-    Stream:
+    RestApiResult_WhiteLabelConfigModel_:
+      description: Rest api result
+      required:
+      - Data
       type: object
       properties:
-        CanRead:
-          type: boolean
-          readOnly: true
-          example: true
-        CanSeek:
-          type: boolean
-          readOnly: true
-          example: true
-        CanTimeout:
-          type: boolean
-          readOnly: true
-          example: true
-        CanWrite:
-          type: boolean
-          readOnly: true
-          example: true
-        Length:
-          format: int64
-          type: integer
-          readOnly: true
-          example: 1
-        Position:
-          format: int64
-          type: integer
-          example: 1
-        ReadTimeout:
+        Data:
+          $ref: '#/components/schemas/WhiteLabelConfigModel'
+    AppStoreConfigModel:
+      description: App Store configuration model
+      type: object
+      properties:
+        WhiteLabelId:
           format: int32
+          description: White label ID
           type: integer
-          example: 1
-        WriteTimeout:
-          format: int32
-          type: integer
-          example: 1
+          example: 500123
+        ReadyToPublishToAppStore:
+          description: Ready to publish to app store
+          type: boolean
+          example: true
+        AppStoreName:
+          description: App store name
+          type: string
+          example: Example Name
+        AppStoreAppleId:
+          description: App Store Apple ID
+          type: string
+          example: '500123'
+        AppStoreUrl:
+          description: App Store URL
+          type: string
+          example: https://api.flipdish.co/example
+        AppStoreId:
+          description: App Store ID
+          type: string
+          example: '500123'
+        AppStorePassword:
+          description: App Store password
+          type: string
+          example: string
+        TeamId:
+          description: Team ID
+          type: string
+          example: '500123'
+        AppGroupId:
+          description: App Group ID
+          type: string
+          example: '500123'
+        BundleId:
+          description: Bundle ID
+          type: string
+          example: '500123'
+        AppStoreSigningIdentity:
+          description: App Store signing identity
+          type: string
+          example: string
+        AppStoreToken:
+          description: App Store token
+          type: string
+          example: string
+        AppStoreMerchantId:
+          description: App Store merchant ID
+          type: string
+          example: '500123'
+        P8PrivateKey:
+          description: P8 private key
+          type: string
+          example: string
+        P8PrivateKeyId:
+          description: P8 private key ID
+          type: string
+          example: '500123'
     WhiteLabelColorSchemeModel:
       description: White label color scheme model
       type: object
@@ -1793,90 +1712,6 @@ components:
           description: Color 12 (Kiosk Primary Colour)
           type: string
           example: string
-    RestApiResult_AssetResultModel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AssetResultModel'
-    AssetResultModel:
-      description: Asset result model
-      type: object
-      properties:
-        Message:
-          description: Asset result message
-          type: string
-          example: string
-        AssetUrl:
-          description: Asset URL or path
-          type: string
-          example: https://api.flipdish.co/example
-        AssetName:
-          description: Asset name
-          type: string
-          example: Example Name
-    PlayStoreConfigModel:
-      description: Play Store configuration model
-      type: object
-      properties:
-        WhiteLabelId:
-          format: int32
-          description: White label ID
-          type: integer
-          example: 500123
-        BundleId:
-          description: Bundle ID
-          type: string
-          example: '500123'
-        Description:
-          description: Description
-          type: string
-          example: string
-        ShortDescription:
-          description: Short description
-          type: string
-          example: string
-        Copyright:
-          description: Copyright
-          type: string
-          example: string
-        Keywords:
-          description: Keywords
-          type: string
-          example: string
-        MarketingUrl:
-          description: Marketing URL
-          type: string
-          example: https://api.flipdish.co/example
-        PrivacyUrl:
-          description: Privacy URL
-          type: string
-          example: https://api.flipdish.co/example
-        SupportUrl:
-          description: Support URL
-          type: string
-          example: https://api.flipdish.co/example
-        PlayConsoleAccount:
-          format: int32
-          description: 'Play Console account
-
-            0: UK, 1: IE'
-          type: integer
-          example: 3
-        ReleaseNotes:
-          description: Release notes
-          type: string
-          example: string
-        StoreIcon:
-          description: Store icon URL
-          type: string
-          example: string
-        ReadyToPublishAndroid:
-          description: Ready to publish Android
-          type: boolean
-          example: true
     RestApiResult_PlayStoreConfigModel_:
       description: Rest api result
       required:
@@ -1885,6 +1720,49 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/PlayStoreConfigModel'
+    WhiteLabelAssetModel:
+      description: White label asset model
+      type: object
+      properties:
+        WhiteLabelAssetId:
+          format: int32
+          description: White label asset ID
+          type: integer
+          example: 500123
+        WhiteLabelConfigId:
+          format: int32
+          description: White label configuration ID
+          type: integer
+          example: 500123
+        FilePath:
+          description: File path
+          type: string
+          example: string
+        Url:
+          description: Asset URL
+          type: string
+          example: https://api.flipdish.co/example
+        TsUpdate:
+          format: date-time
+          description: Timestamp update
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    RestApiResult_AppStoreConfigModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreConfigModel'
+    WhiteLabelLanguageModel:
+      description: White label language model
+      type: object
+      properties:
+        LanguageId:
+          description: Language ID
+          type: string
+          example: '500123'
     WhiteLabelConfigModel:
       description: WhiteLabelConfig model
       type: object
@@ -2363,30 +2241,58 @@ components:
           description: Referral campaign ID
           type: string
           example: '500123'
-    WhiteLabelLanguageModel:
-      description: White label language model
+    AssetResultModel:
+      description: Asset result model
       type: object
       properties:
-        LanguageId:
-          description: Language ID
+        Message:
+          description: Asset result message
           type: string
-          example: '500123'
-    RestApiResult_WhiteLabelConfigModel_:
-      description: Rest api result
-      required:
-      - Data
+          example: string
+        AssetUrl:
+          description: Asset URL or path
+          type: string
+          example: https://api.flipdish.co/example
+        AssetName:
+          description: Asset name
+          type: string
+          example: Example Name
+    Stream:
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/WhiteLabelConfigModel'
-    RestApiResult_AppStoreConfigModel_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppStoreConfigModel'
+        CanRead:
+          type: boolean
+          readOnly: true
+          example: true
+        CanSeek:
+          type: boolean
+          readOnly: true
+          example: true
+        CanTimeout:
+          type: boolean
+          readOnly: true
+          example: true
+        CanWrite:
+          type: boolean
+          readOnly: true
+          example: true
+        Length:
+          format: int64
+          type: integer
+          readOnly: true
+          example: 1
+        Position:
+          format: int64
+          type: integer
+          example: 1
+        ReadTimeout:
+          format: int32
+          type: integer
+          example: 1
+        WriteTimeout:
+          format: int32
+          type: integer
+          example: 1
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -2407,6 +2313,100 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_AssetResultModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AssetResultModel'
+    RestApiResult_AppGeneralConfigModel_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppGeneralConfigModel'
+    PlayStoreConfigModel:
+      description: Play Store configuration model
+      type: object
+      properties:
+        WhiteLabelId:
+          format: int32
+          description: White label ID
+          type: integer
+          example: 500123
+        BundleId:
+          description: Bundle ID
+          type: string
+          example: '500123'
+        Description:
+          description: Description
+          type: string
+          example: string
+        ShortDescription:
+          description: Short description
+          type: string
+          example: string
+        Copyright:
+          description: Copyright
+          type: string
+          example: string
+        Keywords:
+          description: Keywords
+          type: string
+          example: string
+        MarketingUrl:
+          description: Marketing URL
+          type: string
+          example: https://api.flipdish.co/example
+        PrivacyUrl:
+          description: Privacy URL
+          type: string
+          example: https://api.flipdish.co/example
+        SupportUrl:
+          description: Support URL
+          type: string
+          example: https://api.flipdish.co/example
+        PlayConsoleAccount:
+          format: int32
+          description: 'Play Console account
+
+            0: UK, 1: IE'
+          type: integer
+          example: 3
+        ReleaseNotes:
+          description: Release notes
+          type: string
+          example: string
+        StoreIcon:
+          description: Store icon URL
+          type: string
+          example: string
+        ReadyToPublishAndroid:
+          description: Ready to publish Android
+          type: boolean
+          example: true
+    HttpPostedFileBase:
+      type: object
+      properties:
+        ContentLength:
+          format: int32
+          type: integer
+          readOnly: true
+          example: 1
+        ContentType:
+          type: string
+          readOnly: true
+          example: string
+        FileName:
+          type: string
+          readOnly: true
+          example: Example Name
+        InputStream:
+          $ref: '#/components/schemas/Stream'
   securitySchemes:
     oauth2:
       type: oauth2

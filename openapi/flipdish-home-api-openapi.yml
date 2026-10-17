@@ -452,6 +452,26 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_OktaPortalFeatureFlag_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OktaPortalFeatureFlag'
+    RestApiArrayResult_HomeAction_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeAction'
+          example: []
     HomeAction:
       description: ''
       type: object
@@ -501,26 +521,26 @@ components:
           description: Feature flag backend_portal_enableOktaWebApi value
           type: boolean
           example: true
-    RestApiResult_HomeStatistics_:
-      description: Rest api result
-      required:
-      - Data
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        Data:
-          $ref: '#/components/schemas/HomeStatistics'
-    RestApiArrayResult_HomeAction_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/HomeAction'
-          example: []
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     CurrencyData:
       description: A single currency data piece, with no date
       type: object
@@ -648,6 +668,14 @@ components:
           description: Value
           type: number
           example: 1.0
+    RestApiResult_HomeStatistics_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/HomeStatistics'
     HomeStatistics:
       description: Home statitstics
       type: object
@@ -658,34 +686,6 @@ components:
           items:
             $ref: '#/components/schemas/CurrencyData'
           example: []
-    RestApiResult_OktaPortalFeatureFlag_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OktaPortalFeatureFlag'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

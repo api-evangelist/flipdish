@@ -381,6 +381,227 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    InvoiceItem:
+      description: Invoice Item
+      required:
+      - Description
+      - Quantity
+      - UnitAmountExcludingTax
+      - Tax
+      - Amount
+      - Period
+      type: object
+      properties:
+        Description:
+          description: Description
+          type: string
+          example: string
+        Quantity:
+          format: int64
+          description: Quantity
+          type: integer
+          example: 3
+        UnitAmountExcludingTax:
+          format: double
+          description: Unit Amount Excluding Tax
+          type: number
+          example: 12.5
+        Tax:
+          format: double
+          description: Tax
+          type: number
+          example: 1.0
+        Amount:
+          format: double
+          description: Amount
+          type: number
+          example: 12.5
+        Period:
+          $ref: '#/components/schemas/InvoicePeriod'
+    SubscriptionSummary:
+      description: Subscription Summary
+      required:
+      - SubscriptionId
+      - Name
+      - Status
+      - Currency
+      - User
+      type: object
+      properties:
+        NextInvoiceAmount:
+          format: double
+          description: Next invoice amount
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        NextInvoiceBillingDate:
+          format: date-time
+          description: Next invoice billing date
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
+        SubscriptionId:
+          description: The subscription identifier
+          type: string
+          example: '500123'
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Status:
+          description: Status
+          enum:
+          - Incomplete
+          - IncompleteExpired
+          - Trialing
+          - Active
+          - PastDue
+          - Canceled
+          - Unpaid
+          type: string
+          example: Incomplete
+        Currency:
+          description: Currency
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+          example: EUR
+        User:
+          description: User
+          type: string
+          example: string
+        DefaultPaymentDescription:
+          description: Default payment description
+          type: string
+          example: string
+        CancellationRequestDate:
+          format: date-time
+          description: Cancellation Date
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
+        CancellationDate:
+          format: date-time
+          description: Cancel Date
+          type:
+          - string
+          - 'null'
+          example: '2026-06-02T12:00:00Z'
     Subscription:
       description: Subscription
       required:
@@ -586,6 +807,32 @@ components:
           - string
           - 'null'
           example: '2026-06-02T12:00:00Z'
+    HasPaymentMethodResponse:
+      description: Has Payment Method Response
+      required:
+      - HasPaymentMethod
+      type: object
+      properties:
+        HasPaymentMethod:
+          description: Has Payment Method
+          type: boolean
+          example: true
+    InvoiceDiscount:
+      description: Invoice Discount
+      required:
+      - Name
+      - Amount
+      type: object
+      properties:
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        Amount:
+          format: double
+          description: Amount
+          type: number
+          example: 12.5
     SubscriptionStore:
       description: Subscription Store
       required:
@@ -602,190 +849,100 @@ components:
           description: Name
           type: string
           example: Example Name
-    SubscriptionSummary:
-      description: Subscription Summary
+    RestApiResult_Subscription_:
+      description: Rest api result
       required:
-      - SubscriptionId
-      - Name
-      - Status
-      - Currency
-      - User
+      - Data
       type: object
       properties:
-        NextInvoiceAmount:
+        Data:
+          $ref: '#/components/schemas/Subscription'
+    InvoicePeriod:
+      description: Invoice Period
+      type: object
+      properties:
+        Start:
+          format: date-time
+          description: Start
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        End:
+          format: date-time
+          description: End
+          type: string
+          example: '2026-06-02T12:00:00Z'
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    UpcomingInvoice:
+      description: UpcomingInvoice.
+      required:
+      - Subtotal
+      - AmountDue
+      - Tax
+      type: object
+      properties:
+        Amount:
           format: double
-          description: Next invoice amount
+          description: Amount
+          type: number
+          example: 12.5
+        NextBillingDate:
+          format: date-time
+          description: Next billing date
+          type: string
+          example: '2026-06-02T12:00:00Z'
+        Subtotal:
+          format: double
+          description: Subtotal
+          type: number
+          example: 12.5
+        TotalExcludingTax:
+          format: double
+          description: Total excluding tax
           type:
           - number
           - 'null'
           example: 12.5
-        NextInvoiceBillingDate:
-          format: date-time
-          description: Next invoice billing date
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
-        SubscriptionId:
-          description: The subscription identifier
-          type: string
-          example: '500123'
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Status:
-          description: Status
-          enum:
-          - Incomplete
-          - IncompleteExpired
-          - Trialing
-          - Active
-          - PastDue
-          - Canceled
-          - Unpaid
-          type: string
-          example: Incomplete
-        Currency:
-          description: Currency
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - CAD
-          - AUD
-          - DJF
-          - ZAR
-          - ETB
-          - AED
-          - BHD
-          - DZD
-          - EGP
-          - IQD
-          - JOD
-          - KWD
-          - LBP
-          - LYD
-          - MAD
-          - OMR
-          - QAR
-          - SAR
-          - SYP
-          - TND
-          - YER
-          - CLP
-          - INR
-          - AZN
-          - RUB
-          - BYN
-          - BGN
-          - NGN
-          - BDT
-          - CNY
-          - BAM
-          - CZK
-          - DKK
-          - CHF
-          - MVR
-          - BTN
-          - XCD
-          - BZD
-          - HKD
-          - IDR
-          - JMD
-          - MYR
-          - NZD
-          - PHP
-          - SGD
-          - TTD
-          - XDR
-          - ARS
-          - BOB
-          - COP
-          - CRC
-          - CUP
-          - DOP
-          - GTQ
-          - HNL
-          - MXN
-          - NIO
-          - PAB
-          - PEN
-          - PYG
-          - UYU
-          - VEF
-          - IRR
-          - XOF
-          - CDF
-          - XAF
-          - HTG
-          - ILS
-          - HRK
-          - HUF
-          - AMD
-          - ISK
-          - JPY
-          - GEL
-          - KZT
-          - KHR
-          - KRW
-          - KGS
-          - LAK
-          - MKD
-          - MNT
-          - BND
-          - MMK
-          - NOK
-          - NPR
-          - PKR
-          - PLN
-          - AFN
-          - BRL
-          - MDL
-          - RON
-          - RWF
-          - SEK
-          - LKR
-          - SOS
-          - ALL
-          - RSD
-          - KES
-          - TJS
-          - THB
-          - ERN
-          - TMT
-          - BWP
-          - TRY
-          - UAH
-          - UZS
-          - VND
-          - MOP
-          - TWD
-          - BMD
-          type: string
-          example: EUR
-        User:
-          description: User
-          type: string
-          example: string
-        DefaultPaymentDescription:
-          description: Default payment description
-          type: string
-          example: string
-        CancellationRequestDate:
-          format: date-time
-          description: Cancellation Date
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
-        CancellationDate:
-          format: date-time
-          description: Cancel Date
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
+        AmountDue:
+          format: double
+          description: Amount due
+          type: number
+          example: 12.5
+        Tax:
+          format: double
+          description: Tax
+          type: number
+          example: 1.0
+        Items:
+          description: Items
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+          example: []
+        Discounts:
+          description: Discounts
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDiscount'
+          example: []
     RestApiArrayResult_SubscriptionSummary_:
       description: Rest api array result
       required:
@@ -849,22 +1006,6 @@ components:
           items:
             $ref: '#/components/schemas/SubscriptionStore'
           example: []
-    InvoiceDiscount:
-      description: Invoice Discount
-      required:
-      - Name
-      - Amount
-      type: object
-      properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Amount:
-          format: double
-          description: Amount
-          type: number
-          example: 12.5
     RestApiResult_HasPaymentMethodResponse_:
       description: Rest api result
       required:
@@ -873,147 +1014,6 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/HasPaymentMethodResponse'
-    InvoicePeriod:
-      description: Invoice Period
-      type: object
-      properties:
-        Start:
-          format: date-time
-          description: Start
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        End:
-          format: date-time
-          description: End
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    UpcomingInvoice:
-      description: UpcomingInvoice.
-      required:
-      - Subtotal
-      - AmountDue
-      - Tax
-      type: object
-      properties:
-        Amount:
-          format: double
-          description: Amount
-          type: number
-          example: 12.5
-        NextBillingDate:
-          format: date-time
-          description: Next billing date
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        Subtotal:
-          format: double
-          description: Subtotal
-          type: number
-          example: 12.5
-        TotalExcludingTax:
-          format: double
-          description: Total excluding tax
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        AmountDue:
-          format: double
-          description: Amount due
-          type: number
-          example: 12.5
-        Tax:
-          format: double
-          description: Tax
-          type: number
-          example: 1.0
-        Items:
-          description: Items
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceItem'
-          example: []
-        Discounts:
-          description: Discounts
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceDiscount'
-          example: []
-    RestApiResult_Subscription_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/Subscription'
-    HasPaymentMethodResponse:
-      description: Has Payment Method Response
-      required:
-      - HasPaymentMethod
-      type: object
-      properties:
-        HasPaymentMethod:
-          description: Has Payment Method
-          type: boolean
-          example: true
-    InvoiceItem:
-      description: Invoice Item
-      required:
-      - Description
-      - Quantity
-      - UnitAmountExcludingTax
-      - Tax
-      - Amount
-      - Period
-      type: object
-      properties:
-        Description:
-          description: Description
-          type: string
-          example: string
-        Quantity:
-          format: int64
-          description: Quantity
-          type: integer
-          example: 3
-        UnitAmountExcludingTax:
-          format: double
-          description: Unit Amount Excluding Tax
-          type: number
-          example: 12.5
-        Tax:
-          format: double
-          description: Tax
-          type: number
-          example: 1.0
-        Amount:
-          format: double
-          description: Amount
-          type: number
-          example: 12.5
-        Period:
-          $ref: '#/components/schemas/InvoicePeriod'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

@@ -536,36 +536,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LocationArea_Location:
-      description: 'Representation of a Location i.e: (Table, Hotel Room, Car Park, etc )'
+    RestApiResult_LocationAreaWithLocations_:
+      description: Rest api result
       required:
-      - LocationId
-      - LocationName
-      - DisplayOrder
+      - Data
       type: object
       properties:
-        LocationId:
-          format: int32
-          description: Id of the Location
-          type: integer
-          example: 500123
-        LocationName:
-          description: Name of the Location
-          type: string
-          example: Example Name
-        DisplayOrder:
-          format: int32
-          description: The order that the Location should be displayed on the screen
-          type: integer
-          example: 1
-        ExternalLocationId:
-          description: Id of the Location on an external system
-          type: string
-          example: '500123'
-        IsDeleted:
-          description: Shows if the Location is deleted or not
-          type: boolean
-          example: true
+        Data:
+          $ref: '#/components/schemas/LocationAreaWithLocations'
     RestApiArrayResult_LocationAreaWithLocations_:
       description: Rest api array result
       required:
@@ -598,14 +576,24 @@ components:
           description: Sets if the Location Area should be soft deleted or not
           type: boolean
           example: true
-    RestApiResult_LocationAreaWithLocations_:
-      description: Rest api result
-      required:
-      - Data
+    LocationArea:
+      description: Represents a LocationArea
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/LocationAreaWithLocations'
+        LocationAreaId:
+          format: int32
+          description: Id of the LocationArea
+          type: integer
+          example: 500123
+        StoreId:
+          format: int32
+          description: Id of the Store that this LocationArea belongs to
+          type: integer
+          example: 500123
+        LocationAreaName:
+          description: Descriptive LocationArea name
+          type: string
+          example: Example Name
     LocationAreaWithLocations:
       description: Represents a LocationArea and its Location list
       required:
@@ -638,42 +626,36 @@ components:
           description: Returns if the LocationArea is deleted or not
           type: boolean
           example: true
-    RestApiResult_LocationArea_:
-      description: Rest api result
+    LocationArea_Location:
+      description: 'Representation of a Location i.e: (Table, Hotel Room, Car Park, etc )'
       required:
-      - Data
+      - LocationId
+      - LocationName
+      - DisplayOrder
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/LocationArea'
-    LocationArea:
-      description: Represents a LocationArea
-      type: object
-      properties:
-        LocationAreaId:
+        LocationId:
           format: int32
-          description: Id of the LocationArea
+          description: Id of the Location
           type: integer
           example: 500123
-        StoreId:
+        LocationName:
+          description: Name of the Location
+          type: string
+          example: Example Name
+        DisplayOrder:
           format: int32
-          description: Id of the Store that this LocationArea belongs to
+          description: The order that the Location should be displayed on the screen
           type: integer
-          example: 500123
-        LocationAreaName:
-          description: Descriptive LocationArea name
+          example: 1
+        ExternalLocationId:
+          description: Id of the Location on an external system
           type: string
-          example: Example Name
-    CreateLocationArea:
-      description: Input model for creating a LocationArea
-      required:
-      - LocationAreaName
-      type: object
-      properties:
-        LocationAreaName:
-          description: Descriptive LocationArea name
-          type: string
-          example: Example Name
+          example: '500123'
+        IsDeleted:
+          description: Shows if the Location is deleted or not
+          type: boolean
+          example: true
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -694,6 +676,24 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    CreateLocationArea:
+      description: Input model for creating a LocationArea
+      required:
+      - LocationAreaName
+      type: object
+      properties:
+        LocationAreaName:
+          description: Descriptive LocationArea name
+          type: string
+          example: Example Name
+    RestApiResult_LocationArea_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/LocationArea'
   securitySchemes:
     oauth2:
       type: oauth2

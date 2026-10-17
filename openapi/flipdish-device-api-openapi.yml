@@ -458,6 +458,58 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_ClientDevice_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ClientDevice'
+    ClientDeviceAssignEnrolledDevice:
+      description: Assign enrolled device to AppId
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        PinCode:
+          description: Pin Code
+          type: string
+          example: string
+    ClientDeviceSummary:
+      description: Client Device summary (header fields)
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
+    ClientDevice:
+      description: Client Device
+      type: object
+      properties:
+        DeviceModel:
+          description: Device Model
+          type: string
+          example: string
+        DeviceId:
+          description: Device Id
+          type: string
+          example: '500123'
+        DeviceName:
+          description: Device Name
+          type: string
+          example: Example Name
     RestApiArrayResult_ClientDeviceSummary_:
       description: Rest api array result
       required:
@@ -470,6 +522,26 @@ components:
           items:
             $ref: '#/components/schemas/ClientDeviceSummary'
           example: []
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     ClientDeviceEnroll:
       description: Enroll a client device
       type: object
@@ -502,78 +574,6 @@ components:
           description: PIN Code for assigning
           type: string
           example: string
-    RestApiResult_ClientDevice_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ClientDevice'
-    ClientDevice:
-      description: Client Device
-      type: object
-      properties:
-        DeviceModel:
-          description: Device Model
-          type: string
-          example: string
-        DeviceId:
-          description: Device Id
-          type: string
-          example: '500123'
-        DeviceName:
-          description: Device Name
-          type: string
-          example: Example Name
-    ClientDeviceAssignEnrolledDevice:
-      description: Assign enrolled device to AppId
-      type: object
-      properties:
-        DeviceModel:
-          description: Device Model
-          type: string
-          example: string
-        PinCode:
-          description: Pin Code
-          type: string
-          example: string
-    ClientDeviceSummary:
-      description: Client Device summary (header fields)
-      type: object
-      properties:
-        DeviceModel:
-          description: Device Model
-          type: string
-          example: string
-        DeviceId:
-          description: Device Id
-          type: string
-          example: '500123'
-        DeviceName:
-          description: Device Name
-          type: string
-          example: Example Name
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

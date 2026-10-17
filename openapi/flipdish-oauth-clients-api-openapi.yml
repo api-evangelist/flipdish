@@ -1159,6 +1159,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestApiResult_OauthClientRedirectUri_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OauthClientRedirectUri'
     OauthClientRedirectUri:
       description: OAuth client redirect uri
       type: object
@@ -1172,18 +1180,6 @@ components:
           description: Redirect uri
           type: string
           example: https://api.flipdish.co/example
-    RestApiArrayResult_OauthClientRedirectUri_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/OauthClientRedirectUri'
-          example: []
     OAuthApp:
       description: Oauth client (also knowns as 'app')
       type: object
@@ -1247,15 +1243,7 @@ components:
         Flow: 2
         AccessTokenLifetime: 3600
         AbsoluteRefreshTokenLifetime: 2592000
-    RestApiResult_OauthClientRedirectUri_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OauthClientRedirectUri'
-    RestApiArrayResult_OAuthApp_:
+    RestApiArrayResult_OauthClientRedirectUri_:
       description: Rest api array result
       required:
       - Data
@@ -1265,26 +1253,8 @@ components:
           description: Generic data object.
           type: array
           items:
-            $ref: '#/components/schemas/OAuthApp'
+            $ref: '#/components/schemas/OauthClientRedirectUri'
           example: []
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    RestApiResult_OAuthApp_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/OAuthApp'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1305,6 +1275,36 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    RestApiResult_OAuthApp_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/OAuthApp'
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    RestApiArrayResult_OAuthApp_:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/OAuthApp'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

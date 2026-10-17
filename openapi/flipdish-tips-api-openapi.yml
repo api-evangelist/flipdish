@@ -244,49 +244,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_TipConfiguration_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/TipConfiguration'
-    UpdateTipConfiguration:
-      description: Describes the configuration of tipping
-      type: object
-      properties:
-        IsEnabled:
-          description: Are tips enabled?
-          type: boolean
-          example: true
-        AllowCustomTips:
-          description: Are custom tips allowed?
-          type: boolean
-          example: true
-        AllowRoundUp:
-          description: Is round up allowed?
-          type: boolean
-          example: true
-        AllowEmojis:
-          description: Are emojis allowed?
-          type: boolean
-          example: true
-        Percentages:
-          description: Ordered list of tip breakpoints (smallest -&gt; largest)
-          type: array
-          items:
-            format: double
-            type: number
-          example:
-          - 1.0
-        DefaultPercentage:
-          format: double
-          description: Defines a default percentage, it must be in the list of Percentages
-          type:
-          - number
-          - 'null'
-          example: 1.0
     TipConfiguration:
       description: Describes the configuration of tipping
       type: object
@@ -327,6 +284,14 @@ components:
           - number
           - 'null'
           example: 1.0
+    RestApiResult_TipConfiguration_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/TipConfiguration'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -347,6 +312,41 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    UpdateTipConfiguration:
+      description: Describes the configuration of tipping
+      type: object
+      properties:
+        IsEnabled:
+          description: Are tips enabled?
+          type: boolean
+          example: true
+        AllowCustomTips:
+          description: Are custom tips allowed?
+          type: boolean
+          example: true
+        AllowRoundUp:
+          description: Is round up allowed?
+          type: boolean
+          example: true
+        AllowEmojis:
+          description: Are emojis allowed?
+          type: boolean
+          example: true
+        Percentages:
+          description: Ordered list of tip breakpoints (smallest -&gt; largest)
+          type: array
+          items:
+            format: double
+            type: number
+          example:
+          - 1.0
+        DefaultPercentage:
+          format: double
+          description: Defines a default percentage, it must be in the list of Percentages
+          type:
+          - number
+          - 'null'
+          example: 1.0
   securitySchemes:
     oauth2:
       type: oauth2

@@ -164,6 +164,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    TaxRate:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Example Name
+        Percentage:
+          format: double
+          type: number
+          example: 1.0
+        Total:
+          format: double
+          type: number
+          example: 12.5
     GetReceiptByOrderIdQueryResponse:
       type: object
       properties:
@@ -200,36 +214,16 @@ components:
         CountryCode:
           type: string
           example: IE
-    PreviousOrderItem:
+    PreviousOrderItemOption:
       type: object
       properties:
-        MenuSectionDisplayOrder:
-          format: int32
-          type: integer
-          example: 1
-        MenuSectionName:
-          type: string
-          example: Example Name
         Name:
           type: string
           example: Example Name
-        PriceIncludingOptionSetItems:
-          format: double
-          type: number
-          example: 12.5
         DepositReturnFee:
           format: double
           type: number
           example: 12.5
-        TaxAmount:
-          format: double
-          type: number
-          example: 12.5
-        PreviousOrderItemOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreviousOrderItemOption'
-          example: []
     PreviousOrder:
       type: object
       properties:
@@ -433,30 +427,6 @@ components:
           format: int32
           type: integer
           example: 500123
-    PreviousOrderItemOption:
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        DepositReturnFee:
-          format: double
-          type: number
-          example: 12.5
-    TaxRate:
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Example Name
-        Percentage:
-          format: double
-          type: number
-          example: 1.0
-        Total:
-          format: double
-          type: number
-          example: 12.5
     DepositReturnFeesSummary:
       type: object
       properties:
@@ -492,6 +462,36 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    PreviousOrderItem:
+      type: object
+      properties:
+        MenuSectionDisplayOrder:
+          format: int32
+          type: integer
+          example: 1
+        MenuSectionName:
+          type: string
+          example: Example Name
+        Name:
+          type: string
+          example: Example Name
+        PriceIncludingOptionSetItems:
+          format: double
+          type: number
+          example: 12.5
+        DepositReturnFee:
+          format: double
+          type: number
+          example: 12.5
+        TaxAmount:
+          format: double
+          type: number
+          example: 12.5
+        PreviousOrderItemOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousOrderItemOption'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

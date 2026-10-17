@@ -230,19 +230,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SetOrderBatchingConfiguration:
-      description: Describes the configuration of OrderBatching
-      type: object
-      properties:
-        BatchIntervalInSeconds:
-          format: int32
-          description: Batch sending interval in seconds
-          type: integer
-          example: 1
-        Enabled:
-          description: OrderBatching is enabled or not
-          type: boolean
-          example: true
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -284,6 +271,19 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/OrderBatchingConfiguration'
+    SetOrderBatchingConfiguration:
+      description: Describes the configuration of OrderBatching
+      type: object
+      properties:
+        BatchIntervalInSeconds:
+          format: int32
+          description: Batch sending interval in seconds
+          type: integer
+          example: 1
+        Enabled:
+          description: OrderBatching is enabled or not
+          type: boolean
+          example: true
   securitySchemes:
     oauth2:
       type: oauth2

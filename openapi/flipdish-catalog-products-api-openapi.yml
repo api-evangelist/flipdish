@@ -726,14 +726,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_Product_:
-      description: Rest api result
+    Metafield:
+      description: Metafield
       required:
-      - Data
+      - Key
+      - Value
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/Product'
+        Key:
+          description: 'Key of the metafield.
+
+            Allowed characters: lowercase letters, numbers, hyphen, underscore and dot'
+          type: string
+          example: string
+        Value:
+          description: Value of the metafield.
+          type: string
+          example: string
     Product:
       description: Product
       required:
@@ -758,6 +767,268 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+        ProductType:
+          description: Type of item (Product, Modifier, etc)
+          enum:
+          - Product
+          - Modifier
+          type: string
+          example: Product
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Product name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Product description
+          maxLength: 3000
+          minLength: 0
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Product price
+          minimum: 0
+          type: number
+          example: 12.5
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+        Alcohol:
+          description: Product contains alcohol
+          type: boolean
+          example: true
+    UpdateProduct:
+      description: Update Product
+      type: object
+      properties:
+        Sku:
+          description: Stock Keeping Unit (SKU)
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: string
+        Name:
+          description: Product name
+          maxLength: 300
+          minLength: 0
+          type: string
+          example: Example Name
+        Description:
+          description: Product description
+          maxLength: 3000
+          minLength: 0
+          type: string
+          example: string
+        Price:
+          format: double
+          description: Product price
+          minimum: 0
+          type:
+          - number
+          - 'null'
+          example: 12.5
+        ImageFileName:
+          description: Image File Name
+          maxLength: 512
+          minLength: 0
+          type: string
+          example: Example Name
+        Alcohol:
+          description: Product contains alcohol
+          type:
+          - boolean
+          - 'null'
+          example: true
+        Groups:
+          description: Collection of groups associated with this item
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateGroupReference'
+          example: []
+        Metafields:
+          description: Collection of metafields
+          type: array
+          items:
+            $ref: '#/components/schemas/Metafield'
+          example: []
+    CreateGroupReference:
+      description: Information to create a reference to a {System.Text.RegularExpressions.Group}
+      required:
+      - CatalogItemId
+      - GroupType
+      type: object
+      properties:
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    RestApiResult_Product_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/Product'
+    GroupReference:
+      description: Reference to an existing {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
+      required:
+      - CatalogItemId
+      - GroupType
+      type: object
+      properties:
+        Group:
+          $ref: '#/components/schemas/Group'
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    FlipdishError:
+      type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
+      properties:
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
+    ProductReference:
+      description: Catalog Item associated
+      required:
+      - CatalogItemId
+      - ProductType
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/Product'
+        Product:
+          $ref: '#/components/schemas/Product'
+        CatalogItemId:
+          description: Identifier of the CatalogItemId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        ProductType:
+          description: Type of the SupProduct
+          enum:
+          - Product
+          - Modifier
+          type: string
+          example: Product
+        PreselectedQuantity:
+          format: int32
+          description: Quantity of the modifier that will be set when the parent product is placed in the basket
+          type: integer
+          example: 3
+    RestApiPaginationResult_Product_:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+          example: 1
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+          example: 1
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+          example: 12.5
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+          example: []
+    UpdateGroupReference:
+      description: Data to update a {Flipdish.Menus.PublicModels.V1.Catalog.Products.GroupReference}
+      required:
+      - CatalogItemId
+      - GroupType
+      type: object
+      properties:
+        CatalogItemId:
+          description: Identifier of the ProductId to use as SubProduct
+          maxLength: 30
+          minLength: 0
+          type: string
+          example: '500123'
+        GroupType:
+          description: Type of the SupProduct
+          enum:
+          - ModifierGroup
+          type: string
+          example: ModifierGroup
+    CreateProduct:
+      description: Create a Catalog Item
+      required:
+      - ProductType
+      - Sku
+      - Name
+      - Price
+      type: object
+      properties:
+        Groups:
+          description: Collection of groups associated with this item
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateGroupReference'
           example: []
         Metafields:
           description: Collection of metafields
@@ -882,277 +1153,6 @@ components:
           minLength: 0
           type: string
           example: Example Name
-    CreateGroupReference:
-      description: Information to create a reference to a {System.Text.RegularExpressions.Group}
-      required:
-      - CatalogItemId
-      - GroupType
-      type: object
-      properties:
-        CatalogItemId:
-          description: Identifier of the ProductId to use as SubProduct
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        GroupType:
-          description: Type of the SupProduct
-          enum:
-          - ModifierGroup
-          type: string
-          example: ModifierGroup
-    UpdateGroupReference:
-      description: Data to update a {Flipdish.Menus.PublicModels.V1.Catalog.Products.GroupReference}
-      required:
-      - CatalogItemId
-      - GroupType
-      type: object
-      properties:
-        CatalogItemId:
-          description: Identifier of the ProductId to use as SubProduct
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        GroupType:
-          description: Type of the SupProduct
-          enum:
-          - ModifierGroup
-          type: string
-          example: ModifierGroup
-    ProductReference:
-      description: Catalog Item associated
-      required:
-      - CatalogItemId
-      - ProductType
-      type: object
-      properties:
-        Item:
-          $ref: '#/components/schemas/Product'
-        Product:
-          $ref: '#/components/schemas/Product'
-        CatalogItemId:
-          description: Identifier of the CatalogItemId to use as SubProduct
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        ProductType:
-          description: Type of the SupProduct
-          enum:
-          - Product
-          - Modifier
-          type: string
-          example: Product
-        PreselectedQuantity:
-          format: int32
-          description: Quantity of the modifier that will be set when the parent product is placed in the basket
-          type: integer
-          example: 3
-    CreateProduct:
-      description: Create a Catalog Item
-      required:
-      - ProductType
-      - Sku
-      - Name
-      - Price
-      type: object
-      properties:
-        Groups:
-          description: Collection of groups associated with this item
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateGroupReference'
-          example: []
-        Metafields:
-          description: Collection of metafields
-          type: array
-          items:
-            $ref: '#/components/schemas/Metafield'
-          example: []
-        ProductType:
-          description: Type of item (Product, Modifier, etc)
-          enum:
-          - Product
-          - Modifier
-          type: string
-          example: Product
-        Sku:
-          description: Stock Keeping Unit (SKU)
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: string
-        Name:
-          description: Product name
-          maxLength: 300
-          minLength: 0
-          type: string
-          example: Example Name
-        Description:
-          description: Product description
-          maxLength: 3000
-          minLength: 0
-          type: string
-          example: string
-        Price:
-          format: double
-          description: Product price
-          minimum: 0
-          type: number
-          example: 12.5
-        ImageFileName:
-          description: Image File Name
-          maxLength: 512
-          minLength: 0
-          type: string
-          example: Example Name
-        Alcohol:
-          description: Product contains alcohol
-          type: boolean
-          example: true
-    RestApiPaginationResult_Product_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-          example: []
-    UpdateProduct:
-      description: Update Product
-      type: object
-      properties:
-        Sku:
-          description: Stock Keeping Unit (SKU)
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: string
-        Name:
-          description: Product name
-          maxLength: 300
-          minLength: 0
-          type: string
-          example: Example Name
-        Description:
-          description: Product description
-          maxLength: 3000
-          minLength: 0
-          type: string
-          example: string
-        Price:
-          format: double
-          description: Product price
-          minimum: 0
-          type:
-          - number
-          - 'null'
-          example: 12.5
-        ImageFileName:
-          description: Image File Name
-          maxLength: 512
-          minLength: 0
-          type: string
-          example: Example Name
-        Alcohol:
-          description: Product contains alcohol
-          type:
-          - boolean
-          - 'null'
-          example: true
-        Groups:
-          description: Collection of groups associated with this item
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateGroupReference'
-          example: []
-        Metafields:
-          description: Collection of metafields
-          type: array
-          items:
-            $ref: '#/components/schemas/Metafield'
-          example: []
-    Metafield:
-      description: Metafield
-      required:
-      - Key
-      - Value
-      type: object
-      properties:
-        Key:
-          description: 'Key of the metafield.
-
-            Allowed characters: lowercase letters, numbers, hyphen, underscore and dot'
-          type: string
-          example: string
-        Value:
-          description: Value of the metafield.
-          type: string
-          example: string
-    GroupReference:
-      description: Reference to an existing {Flipdish.Menus.PublicModels.V1.Catalog.Groups.Group}
-      required:
-      - CatalogItemId
-      - GroupType
-      type: object
-      properties:
-        Group:
-          $ref: '#/components/schemas/Group'
-        CatalogItemId:
-          description: Identifier of the ProductId to use as SubProduct
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        GroupType:
-          description: Type of the SupProduct
-          enum:
-          - ModifierGroup
-          type: string
-          example: ModifierGroup
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
   securitySchemes:
     oauth2:
       type: oauth2

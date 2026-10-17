@@ -1022,18 +1022,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ValidValue:
-      required:
-      - Code
-      - Name
-      type: object
-      properties:
-        Code:
-          type: string
-          example: string
-        Name:
-          type: string
-          example: Example Name
     AppStoreAppSupportInfo:
       type: object
       properties:
@@ -1055,12 +1043,16 @@ components:
         SupportEmail:
           type: string
           example: owner@example.com
-    AppStoreApp:
+    RestApiResult_AppStoreApp_:
+      description: Rest api result
       required:
-      - Id
-      - VerificationStatus
-      - OAuthAppId
-      - Internal
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreApp'
+    UpdateAppStoreApp:
+      required:
       - Details
       - ConfigurationType
       - StoreSelectorType
@@ -1071,25 +1063,6 @@ components:
       - Countries
       type: object
       properties:
-        Id:
-          type: string
-          example: '500123'
-        VerificationStatus:
-          enum:
-          - Draft
-          - Submitted
-          - Verified
-          type: string
-          example: Draft
-        Logo:
-          type: string
-          example: string
-        OAuthAppId:
-          type: string
-          example: '500123'
-        Internal:
-          type: boolean
-          example: true
         Details:
           type: string
           example: string
@@ -1197,12 +1170,85 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    UpdateAppStoreAppExternalProduct:
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
       type: object
       properties:
-        ExternalProductId:
+        Name:
           type: string
-          example: '500123'
+          example: Example Name
+        Description:
+          type: string
+          example: string
+        Key:
+          type: string
+          example: string
+        Tooltip:
+          type: string
+          example: string
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          example: 1
+        DefaultValue:
+          type: string
+          example: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+          example: []
+        ValidationRegex:
+          type: string
+          example: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+          example: Text
+        IsFlipdishRestricted:
+          type:
+          - boolean
+          - 'null'
+          example: true
+    ValidValue:
+      required:
+      - Code
+      - Name
+      type: object
+      properties:
+        Code:
+          type: string
+          example: string
+        Name:
+          type: string
+          example: Example Name
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1249,26 +1295,12 @@ components:
           items:
             $ref: '#/components/schemas/Field'
           example: []
-    RestApiResult_AppStoreApp_:
-      description: Rest api result
+    AppStoreApp:
       required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppStoreApp'
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    UpdateAppStoreApp:
-      required:
+      - Id
+      - VerificationStatus
+      - OAuthAppId
+      - Internal
       - Details
       - ConfigurationType
       - StoreSelectorType
@@ -1279,6 +1311,25 @@ components:
       - Countries
       type: object
       properties:
+        Id:
+          type: string
+          example: '500123'
+        VerificationStatus:
+          enum:
+          - Draft
+          - Submitted
+          - Verified
+          type: string
+          example: Draft
+        Logo:
+          type: string
+          example: string
+        OAuthAppId:
+          type: string
+          example: '500123'
+        Internal:
+          type: boolean
+          example: true
         Details:
           type: string
           example: string
@@ -1505,63 +1556,12 @@ components:
         DeveloperName:
           type: string
           example: Example Name
-    Field:
-      required:
-      - Name
-      - Description
-      - Key
-      - Position
-      - FieldType
+    UpdateAppStoreAppExternalProduct:
       type: object
       properties:
-        Name:
+        ExternalProductId:
           type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
-        Key:
-          type: string
-          example: string
-        Tooltip:
-          type: string
-          example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        DefaultValue:
-          type: string
-          example: string
-        ValidValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidValue'
-          example: []
-        ValidationRegex:
-          type: string
-          example: string
-        FieldType:
-          enum:
-          - Text
-          - TextArea
-          - Integer
-          - Decimal
-          - Date
-          - DateTime
-          - Time
-          - Select
-          - Boolean
-          - ActionButton
-          type: string
-          example: Text
-        IsFlipdishRestricted:
-          type:
-          - boolean
-          - 'null'
-          example: true
+          example: '500123'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -725,17 +725,48 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FulfillmentStatesConfiguredStore:
-      description: Configured stores
+    FulfillmentStatesConfiguration:
+      description: Fulfillment States Configuration
       type: object
       properties:
-        StoreId:
-          format: int32
-          description: Store id
-          type: integer
-          example: 500123
+        States:
+          description: States
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatusConfigurationItem'
+          example: []
+        AutomaticTransitionsEnabled:
+          description: Enable automatic transitions
+          type:
+          - boolean
+          - 'null'
+          example: true
+        AppId:
+          description: AppId
+          type: string
+          example: '500123'
+        ConfigurationUid:
+          description: Configuration Uid
+          type: string
+          example: '500123'
+        StoreSelectorType:
+          description: Store Selector Type
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        StoreIds:
+          description: Store Ids
+          type: array
+          items:
+            format: int32
+            type: integer
+          example:
+          - 1
         Name:
-          description: Name of store
+          description: Name
           type: string
           example: Example Name
     UpdateFulfillmentStatesConfiguration:
@@ -797,90 +828,39 @@ components:
           description: Next status id
           type: string
           example: Active
-    RestApiResult_FulfillmentStatesConfiguration_:
-      description: Rest api result
-      required:
-      - Data
+    FulfillmentStatesConfiguredStore:
+      description: Configured stores
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/FulfillmentStatesConfiguration'
-    FulfillmentStatesConfiguration:
-      description: Fulfillment States Configuration
-      type: object
-      properties:
-        States:
-          description: States
-          type: array
-          items:
-            $ref: '#/components/schemas/FulfillmentStatusConfigurationItem'
-          example: []
-        AutomaticTransitionsEnabled:
-          description: Enable automatic transitions
-          type:
-          - boolean
-          - 'null'
-          example: true
-        AppId:
-          description: AppId
-          type: string
-          example: '500123'
-        ConfigurationUid:
-          description: Configuration Uid
-          type: string
-          example: '500123'
-        StoreSelectorType:
-          description: Store Selector Type
-          enum:
-          - None
-          - Single
-          - Multiple
-          type: string
-          example: None
-        StoreIds:
-          description: Store Ids
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
+        StoreId:
+          format: int32
+          description: Store id
+          type: integer
+          example: 500123
         Name:
-          description: Name
+          description: Name of store
           type: string
           example: Example Name
-    FulfillmentStatesConfigurationSummary:
-      description: Fulfillment configuration header information
-      required:
-      - AppId
+    FlipdishError:
       type: object
+      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        AppId:
-          description: AppId
-          type: string
-          example: '500123'
-        ConfigurationUid:
-          description: Configuration Uid
-          type: string
-          example: '500123'
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        StoreSelectorType:
-          description: Store selector type
-          enum:
-          - None
-          - Single
-          - Multiple
-          type: string
-          example: None
-        Stores:
-          description: Stores
-          type: array
-          items:
-            $ref: '#/components/schemas/FulfillmentStatesConfiguredStore'
-          example: []
+        error:
+          type: object
+          description: Error detail object.
+          properties:
+            errorMessage:
+              type: string
+              description: Descriptive explanation of the issue.
+              example: Invalid or missing parameters.
+            errorCode:
+              type: string
+              description: Unique identifier for programmatic error handling.
+              example: BadRequest
+            details:
+              type: string
+              description: Additional context returned in non-production environments.
+              example: Validation failed for field 'storeId'.
     RestApiArrayResult_FulfillmentStatesConfigurationSummary_:
       description: Rest api array result
       required:
@@ -893,6 +873,24 @@ components:
           items:
             $ref: '#/components/schemas/FulfillmentStatesConfigurationSummary'
           example: []
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+          example: string
+    RestApiResult_FulfillmentStatesConfiguration_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/FulfillmentStatesConfiguration'
     CreateFulfillmentStatesConfiguration:
       description: Create fulfillment states configuration
       type: object
@@ -929,16 +927,6 @@ components:
           description: Name
           type: string
           example: Example Name
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
     FulfillmentStatusConfigurationItem:
       description: Fulfillment Status Item
       type: object
@@ -1020,26 +1008,38 @@ components:
           description: Image (image filename, relative, not absolute URL)
           type: string
           example: string
-    FlipdishError:
+    FulfillmentStatesConfigurationSummary:
+      description: Fulfillment configuration header information
+      required:
+      - AppId
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        AppId:
+          description: AppId
+          type: string
+          example: '500123'
+        ConfigurationUid:
+          description: Configuration Uid
+          type: string
+          example: '500123'
+        Name:
+          description: Name
+          type: string
+          example: Example Name
+        StoreSelectorType:
+          description: Store selector type
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+          example: None
+        Stores:
+          description: Stores
+          type: array
+          items:
+            $ref: '#/components/schemas/FulfillmentStatesConfiguredStore'
+          example: []
   securitySchemes:
     oauth2:
       type: oauth2

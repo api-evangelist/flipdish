@@ -1422,14 +1422,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_CardReader_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/CardReader'
     GeoPointRequest:
       description: Terminal location request
       type: object
@@ -1444,6 +1436,93 @@ components:
           description: Kiosk device longitude
           type: number
           example: 1.0
+    UnRegisterCardReaderRequest:
+      description: Un-Register card reader request
+      required:
+      - ReaderId
+      - KioskDeviceId
+      type: object
+      properties:
+        ReaderId:
+          description: Device card readerid
+          type: string
+          example: '500123'
+        KioskDeviceId:
+          description: The kiosk device id
+          type: string
+          example: '500123'
+    StripeTerminalLocation:
+      description: Stripe Terminal Private Key
+      type: object
+      properties:
+        Location:
+          description: Registered location of the terminal
+          type: string
+          example: string
+    StripeTerminalConnectionToken:
+      description: Stripe Terminal Connection Token
+      type: object
+      properties:
+        Token:
+          description: Connection Token
+          type: string
+          example: string
+    CardReader:
+      description: Card reader
+      type: object
+      properties:
+        Id:
+          description: Stripe reader id
+          type: string
+          example: '500123'
+        DeviceSoftwareVersion:
+          description: Software version
+          type: string
+          example: string
+        SerialNumber:
+          description: Device serial number
+          type: string
+          example: string
+        Status:
+          description: Device status online or offline
+          type: string
+          example: Active
+        RegistrationCode:
+          description: Registration code
+          type: string
+          example: string
+        DeviceType:
+          description: Device type
+          type: string
+          example: string
+        Deleted:
+          description: Indicates that the reader is deleted or not
+          type:
+          - boolean
+          - 'null'
+          example: true
+        Action:
+          $ref: '#/components/schemas/ReaderActionStateInfo'
+    ReaderActionStateInfo:
+      description: Card reader state information
+      type: object
+      properties:
+        ActionState:
+          description: Action state
+          type: string
+          example: string
+        FailureCode:
+          description: Failure code
+          type: string
+          example: string
+        FailureMessage:
+          description: Failure Message
+          type: string
+          example: string
+        Type:
+          description: Type
+          type: string
+          example: string
     CardReaderRegistrationRequest:
       description: Card reader registration request
       required:
@@ -1458,40 +1537,14 @@ components:
           description: The kiosk device id
           type: string
           example: '500123'
-    RestApiResult_StripeTerminalConnectionToken_:
+    RestApiResult_CardReader_:
       description: Rest api result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/StripeTerminalConnectionToken'
-    RestApiResult_BluetoothTerminalStatus_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BluetoothTerminalStatus'
-    ProcessPaymentIntentRequest:
-      description: Initiate card reader Payment process request
-      required:
-      - PaymentIntentId
-      type: object
-      properties:
-        PaymentIntentId:
-          description: Device card paymentIntentId
-          type: string
-          example: '500123'
-    StripeTerminalLocation:
-      description: Stripe Terminal Private Key
-      type: object
-      properties:
-        Location:
-          description: Registered location of the terminal
-          type: string
-          example: string
+          $ref: '#/components/schemas/CardReader'
     BluetoothTerminalStatus:
       description: Status of the bluetooth terminal
       type: object
@@ -1540,26 +1593,6 @@ components:
           description: ReaderId for Stripe Terminal
           type: string
           example: '500123'
-    ReaderActionStateInfo:
-      description: Card reader state information
-      type: object
-      properties:
-        ActionState:
-          description: Action state
-          type: string
-          example: string
-        FailureCode:
-          description: Failure code
-          type: string
-          example: string
-        FailureMessage:
-          description: Failure Message
-          type: string
-          example: string
-        Type:
-          description: Type
-          type: string
-          example: string
     RestApiResult_StripeTerminalLocation_:
       description: Rest api result
       required:
@@ -1568,65 +1601,14 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/StripeTerminalLocation'
-    StripeTerminalConnectionToken:
-      description: Stripe Terminal Connection Token
-      type: object
-      properties:
-        Token:
-          description: Connection Token
-          type: string
-          example: string
-    UnRegisterCardReaderRequest:
-      description: Un-Register card reader request
+    RestApiResult_StripeTerminalConnectionToken_:
+      description: Rest api result
       required:
-      - ReaderId
-      - KioskDeviceId
+      - Data
       type: object
       properties:
-        ReaderId:
-          description: Device card readerid
-          type: string
-          example: '500123'
-        KioskDeviceId:
-          description: The kiosk device id
-          type: string
-          example: '500123'
-    CardReader:
-      description: Card reader
-      type: object
-      properties:
-        Id:
-          description: Stripe reader id
-          type: string
-          example: '500123'
-        DeviceSoftwareVersion:
-          description: Software version
-          type: string
-          example: string
-        SerialNumber:
-          description: Device serial number
-          type: string
-          example: string
-        Status:
-          description: Device status online or offline
-          type: string
-          example: Active
-        RegistrationCode:
-          description: Registration code
-          type: string
-          example: string
-        DeviceType:
-          description: Device type
-          type: string
-          example: string
-        Deleted:
-          description: Indicates that the reader is deleted or not
-          type:
-          - boolean
-          - 'null'
-          example: true
-        Action:
-          $ref: '#/components/schemas/ReaderActionStateInfo'
+        Data:
+          $ref: '#/components/schemas/StripeTerminalConnectionToken'
     FlipdishError:
       type: object
       description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
@@ -1647,6 +1629,24 @@ components:
               type: string
               description: Additional context returned in non-production environments.
               example: Validation failed for field 'storeId'.
+    ProcessPaymentIntentRequest:
+      description: Initiate card reader Payment process request
+      required:
+      - PaymentIntentId
+      type: object
+      properties:
+        PaymentIntentId:
+          description: Device card paymentIntentId
+          type: string
+          example: '500123'
+    RestApiResult_BluetoothTerminalStatus_:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BluetoothTerminalStatus'
   securitySchemes:
     oauth2:
       type: oauth2
