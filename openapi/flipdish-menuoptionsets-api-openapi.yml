@@ -1,29 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Menus Menu Option Sets API
   version: v1.0
-  description: Flipdish Open API v1.0 — Menus operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Menu Option Sets API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: MenuOptionSets
-  description: Operations for Menu Option Sets.
 paths:
   /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets:
     get:
       tags:
       - MenuOptionSets
-      summary: Flipdish Get Menu Item Option Sets
+      summary: Get menu item option sets
       operationId: GetMenuItemOptionSets
       parameters:
       - name: menuId
@@ -33,7 +21,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -41,7 +28,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -49,106 +35,76 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_MenuItemOptionSet_'
-              examples:
-                GetMenuItemOptionSets200Example:
-                  summary: Default GetMenuItemOptionSets 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_MenuItemOptionSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_MenuItemOptionSet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_MenuItemOptionSet'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_MenuItemOptionSet'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSets400Example:
-                  summary: Default GetMenuItemOptionSets 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSets401Example:
-                  summary: Default GetMenuItemOptionSets 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSets403Example:
-                  summary: Default GetMenuItemOptionSets 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSets404Example:
-                  summary: Default GetMenuItemOptionSets 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSets500Example:
-                  summary: Default GetMenuItemOptionSets 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Get Menu Item Option Sets via the Flipdish Open API v1.0 (GET /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
     post:
       tags:
       - MenuOptionSets
-      summary: Flipdish Create Menu Item Option Set
+      summary: Create menu item option set
       operationId: CreateMenuItemOptionSet
       parameters:
       - name: menuId
@@ -158,7 +114,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -166,7 +121,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -174,25 +128,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MenuItemOptionSetBase'
-            examples:
-              CreateMenuItemOptionSetRequestExample:
-                summary: Default CreateMenuItemOptionSet request
-                x-microcks-default: true
-                value:
-                  Name: Example Name
-                  IsMasterOptionSet: true
-                  DisplayOrder: 1
-                  MinSelectCount: 3
-                  MaxSelectCount: 3
-                  CellLayoutType: Small
-                  PublicId: 00000000-0000-0000-0000-000000000000
       responses:
         '200':
           description: OK
@@ -200,122 +135,104 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                CreateMenuItemOptionSet200Example:
-                  summary: Default CreateMenuItemOptionSet 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet_'
-              examples:
-                CreateMenuItemOptionSet201Example:
-                  summary: Default CreateMenuItemOptionSet 201 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      MenuItemOptionSetId: 500123
-                      ImageName: Example Name
-                      ImageUrl: https://api.flipdish.co/example
-                      MenuItemOptionSetItems: []
-                      PublicId: 00000000-0000-0000-0000-000000000000
-                      CatalogItemId: '500123'
-                      Name: Example Name
-                      IsMasterOptionSet: true
-                      DisplayOrder: 1
-                      MinSelectCount: 3
-                      MaxSelectCount: 3
-                      CellLayoutType: Small
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateMenuItemOptionSet400Example:
-                  summary: Default CreateMenuItemOptionSet 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateMenuItemOptionSet401Example:
-                  summary: Default CreateMenuItemOptionSet 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateMenuItemOptionSet403Example:
-                  summary: Default CreateMenuItemOptionSet 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateMenuItemOptionSet404Example:
-                  summary: Default CreateMenuItemOptionSet 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateMenuItemOptionSet500Example:
-                  summary: Default CreateMenuItemOptionSet 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Create Menu Item Option Set via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+        description: Menu item option set
+        required: true
   /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}:
     get:
       tags:
       - MenuOptionSets
-      summary: Flipdish Get Menu Item Option Set by Id
+      summary: Get menu item option set by identifier
       operationId: GetMenuItemOptionSetById
       parameters:
       - name: menuId
@@ -325,7 +242,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -333,7 +249,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -341,7 +256,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: optionSetId
         in: path
         description: Menu item option set identifier
@@ -349,118 +263,76 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet_'
-              examples:
-                GetMenuItemOptionSetById200Example:
-                  summary: Default GetMenuItemOptionSetById 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      MenuItemOptionSetId: 500123
-                      ImageName: Example Name
-                      ImageUrl: https://api.flipdish.co/example
-                      MenuItemOptionSetItems: []
-                      PublicId: 00000000-0000-0000-0000-000000000000
-                      CatalogItemId: '500123'
-                      Name: Example Name
-                      IsMasterOptionSet: true
-                      DisplayOrder: 1
-                      MinSelectCount: 3
-                      MaxSelectCount: 3
-                      CellLayoutType: Small
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_MenuItemOptionSet'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSetById400Example:
-                  summary: Default GetMenuItemOptionSetById 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSetById401Example:
-                  summary: Default GetMenuItemOptionSetById 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSetById403Example:
-                  summary: Default GetMenuItemOptionSetById 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSetById404Example:
-                  summary: Default GetMenuItemOptionSetById 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetMenuItemOptionSetById500Example:
-                  summary: Default GetMenuItemOptionSetById 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Get Menu Item Option Set by Id via the Flipdish Open API v1.0 (GET /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
     post:
       tags:
       - MenuOptionSets
-      summary: Flipdish Update Menu Item Option Set
+      summary: Update menu item option set
       operationId: UpdateMenuItemOptionSet
       parameters:
       - name: menuId
@@ -470,7 +342,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -478,7 +349,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -486,7 +356,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: optionSetId
         in: path
         description: Option set identifier
@@ -494,25 +363,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MenuItemOptionSetBase'
-            examples:
-              UpdateMenuItemOptionSetRequestExample:
-                summary: Default UpdateMenuItemOptionSet request
-                x-microcks-default: true
-                value:
-                  Name: Example Name
-                  IsMasterOptionSet: true
-                  DisplayOrder: 1
-                  MinSelectCount: 3
-                  MaxSelectCount: 3
-                  CellLayoutType: Small
-                  PublicId: 00000000-0000-0000-0000-000000000000
       responses:
         '200':
           description: OK
@@ -521,87 +371,74 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateMenuItemOptionSet400Example:
-                  summary: Default UpdateMenuItemOptionSet 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateMenuItemOptionSet401Example:
-                  summary: Default UpdateMenuItemOptionSet 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateMenuItemOptionSet403Example:
-                  summary: Default UpdateMenuItemOptionSet 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateMenuItemOptionSet404Example:
-                  summary: Default UpdateMenuItemOptionSet 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateMenuItemOptionSet500Example:
-                  summary: Default UpdateMenuItemOptionSet 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Update Menu Item Option Set via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MenuItemOptionSetBase'
+        description: Menu item option set (delta)
+        required: true
     delete:
       tags:
       - MenuOptionSets
-      summary: Flipdish Delete Menu Item Option Set
+      summary: Delete menu item option set
       operationId: DeleteMenuItemOptionSet
       parameters:
       - name: menuId
@@ -611,7 +448,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -619,7 +455,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -627,7 +462,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: optionSetId
         in: path
         description: Option set identifier
@@ -635,7 +469,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       responses:
         '200':
           description: OK
@@ -644,88 +477,56 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteMenuItemOptionSet400Example:
-                  summary: Default DeleteMenuItemOptionSet 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteMenuItemOptionSet401Example:
-                  summary: Default DeleteMenuItemOptionSet 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteMenuItemOptionSet403Example:
-                  summary: Default DeleteMenuItemOptionSet 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteMenuItemOptionSet404Example:
-                  summary: Default DeleteMenuItemOptionSet 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteMenuItemOptionSet500Example:
-                  summary: Default DeleteMenuItemOptionSet 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Delete Menu Item Option Set via the Flipdish Open API v1.0 (DELETE /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
   /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}/image:
     post:
       tags:
       - MenuOptionSets
-      summary: Flipdish Upload Option Set Image
+      summary: Upload menu item option set image
       operationId: UploadOptionSetImage
       parameters:
       - name: menuId
@@ -735,7 +536,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -743,7 +543,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -751,7 +550,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: optionSetId
         in: path
         description: Option set identifier
@@ -759,26 +557,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                Image:
-                  description: Option set image
-                  type: string
-                  format: binary
-              required:
-              - Image
-            examples:
-              UploadOptionSetImageRequestExample:
-                summary: Default UploadOptionSetImage request
-                x-microcks-default: true
-                value:
-                  Image: string
       responses:
         '200':
           description: OK
@@ -786,98 +564,81 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestApiStringResult'
-              examples:
-                UploadOptionSetImage200Example:
-                  summary: Default UploadOptionSetImage 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UploadOptionSetImage400Example:
-                  summary: Default UploadOptionSetImage 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UploadOptionSetImage401Example:
-                  summary: Default UploadOptionSetImage 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UploadOptionSetImage403Example:
-                  summary: Default UploadOptionSetImage 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UploadOptionSetImage404Example:
-                  summary: Default UploadOptionSetImage 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UploadOptionSetImage500Example:
-                  summary: Default UploadOptionSetImage 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Upload Option Set Image via the Flipdish Open API v1.0 (POST /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}/image).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                Image:
+                  type: string
+                  description: Option set image
+                  format: binary
+              required:
+              - Image
     delete:
       tags:
       - MenuOptionSets
-      summary: Flipdish Delete Option Set Image
+      summary: Delete option set image
       operationId: DeleteOptionSetImage
       parameters:
       - name: menuId
@@ -887,7 +648,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionId
         in: path
         description: Menu section identifier
@@ -895,7 +655,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: menuSectionItemId
         in: path
         description: Menu section item identifier
@@ -903,7 +662,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: optionSetId
         in: path
         description: Option set identifier
@@ -911,7 +669,6 @@ paths:
         schema:
           type: integer
           format: int32
-        example: 500123
       responses:
         '200':
           description: OK
@@ -920,122 +677,100 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteOptionSetImage400Example:
-                  summary: Default DeleteOptionSetImage 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteOptionSetImage401Example:
-                  summary: Default DeleteOptionSetImage 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteOptionSetImage403Example:
-                  summary: Default DeleteOptionSetImage 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteOptionSetImage404Example:
-                  summary: Default DeleteOptionSetImage 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteOptionSetImage500Example:
-                  summary: Default DeleteOptionSetImage 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      description: Delete Option Set Image via the Flipdish Open API v1.0 (DELETE /api/v1.0/menus/{menuId}/sections/{menuSectionId}/sectionitems/{menuSectionItemId}/optionsets/{optionSetId}/image).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 components:
   schemas:
-    RestApiResult_MenuItemOptionSet_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/MenuItemOptionSet'
-    MenuItemOptionSetBase:
+    MenuItemOptionSet:
       description: Menu item option set
       type: object
       properties:
+        MenuItemOptionSetId:
+          format: int32
+          description: Menu item option set identifier
+          type: integer
+        ImageName:
+          description: Image Name
+          type: string
+        ImageUrl:
+          description: Image url
+          type: string
+        MenuItemOptionSetItems:
+          description: Option set items
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemOptionSetItem'
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        CatalogItemId:
+          description: Catalog item Id when the OptionSet is associated to a Product
+          type: string
         Name:
           description: Menu item option set name
           maxLength: 4000
           minLength: 0
           type: string
-          example: Example Name
         IsMasterOptionSet:
           description: Is master option set. This can affect the layout of the options in the menu displayed to the customer. Usually it is true if the option could be considerd a standalone item as opposed to an addition ("with ketchup") or modifier ("large").
           type: boolean
-          example: true
         DisplayOrder:
           format: int32
           description: Display order. Displayed in ascending order.
           type: integer
-          example: 1
         MinSelectCount:
           format: int32
           description: Minimum items must be selected
           type: integer
-          example: 3
         MaxSelectCount:
           format: int32
           description: Maximum number of items can be selected
           type: integer
-          example: 3
         CellLayoutType:
           description: 'Small | Medium | Large
 
@@ -1046,12 +781,6 @@ components:
           - Large
           - HiddenImage
           type: string
-          example: Small
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
     MenuItemOptionSetItem:
       description: Menu item option set item
       type: object
@@ -1060,7 +789,6 @@ components:
           format: int32
           description: Menu item option set item identifier
           type: integer
-          example: 500123
         PublicId:
           format: uuid
           description: Permanent reference to the item.
@@ -1071,59 +799,48 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateMetadata'
-          example: []
         NextMenuItemOptionSetId:
           format: int32
           description: if null, next option set is next. if -1, this is the final option set
           type:
           - integer
           - 'null'
-          example: 500123
         CatalogItemId:
           description: Catalog item Id when the OptionSet is associated to a Product
           type: string
-          example: '500123'
         TaxRateName:
           description: Tax rate name
           type: string
-          example: Example Name
         TaxRateId:
           format: int32
           description: TaxRateId.
           type:
           - integer
           - 'null'
-          example: 500123
         TaxValue:
           format: double
           description: TaxValue.
           type: number
-          example: 1.0
         Name:
           description: Name
           type: string
-          example: Example Name
         Price:
           format: double
           description: Price
           type: number
-          example: 12.5
         DepositReturnFee:
           format: double
           description: An optional fee that can be added to the price of the item.
           type:
           - number
           - 'null'
-          example: 12.5
         IsAvailable:
           description: Is available
           type: boolean
-          example: true
         DisplayOrder:
           format: int32
           description: Display order. Displayed in ascending order.
           type: integer
-          example: 1
         CellLayoutType:
           description: 'Small | Medium | Large
 
@@ -1134,109 +851,9 @@ components:
           - Large
           - HiddenImage
           type: string
-          example: Small
         ImageUrl:
           description: Image url
           type: string
-          example: https://api.flipdish.co/example
-    MenuItemOptionSet:
-      description: Menu item option set
-      type: object
-      properties:
-        MenuItemOptionSetId:
-          format: int32
-          description: Menu item option set identifier
-          type: integer
-          example: 500123
-        ImageName:
-          description: Image Name
-          type: string
-          example: Example Name
-        ImageUrl:
-          description: Image url
-          type: string
-          example: https://api.flipdish.co/example
-        MenuItemOptionSetItems:
-          description: Option set items
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItemOptionSetItem'
-          example: []
-        PublicId:
-          format: uuid
-          description: Permanent reference to the item.
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        CatalogItemId:
-          description: Catalog item Id when the OptionSet is associated to a Product
-          type: string
-          example: '500123'
-        Name:
-          description: Menu item option set name
-          maxLength: 4000
-          minLength: 0
-          type: string
-          example: Example Name
-        IsMasterOptionSet:
-          description: Is master option set. This can affect the layout of the options in the menu displayed to the customer. Usually it is true if the option could be considerd a standalone item as opposed to an addition ("with ketchup") or modifier ("large").
-          type: boolean
-          example: true
-        DisplayOrder:
-          format: int32
-          description: Display order. Displayed in ascending order.
-          type: integer
-          example: 1
-        MinSelectCount:
-          format: int32
-          description: Minimum items must be selected
-          type: integer
-          example: 3
-        MaxSelectCount:
-          format: int32
-          description: Maximum number of items can be selected
-          type: integer
-          example: 3
-        CellLayoutType:
-          description: 'Small | Medium | Large
-
-            Affects the layout of the menu.'
-          enum:
-          - Small
-          - Medium
-          - Large
-          - HiddenImage
-          type: string
-          example: Small
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
     CreateMetadata:
       description: Create metadata
       type: object
@@ -1245,20 +862,99 @@ components:
           format: int32
           description: Store identifier
           type: integer
-          example: 500123
         Key:
           description: Metadata key (Unique identifier)
           maxLength: 128
           minLength: 0
           type: string
-          example: string
         Value:
           description: Metadata value
           maxLength: 4000
           minLength: 0
           type: string
-          example: string
-    RestApiArrayResult_MenuItemOptionSet_:
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    MenuItemOptionSetBase:
+      description: Menu item option set
+      type: object
+      properties:
+        Name:
+          description: Menu item option set name
+          maxLength: 4000
+          minLength: 0
+          type: string
+        IsMasterOptionSet:
+          description: Is master option set. This can affect the layout of the options in the menu displayed to the customer. Usually it is true if the option could be considerd a standalone item as opposed to an addition ("with ketchup") or modifier ("large").
+          type: boolean
+        DisplayOrder:
+          format: int32
+          description: Display order. Displayed in ascending order.
+          type: integer
+        MinSelectCount:
+          format: int32
+          description: Minimum items must be selected
+          type: integer
+        MaxSelectCount:
+          format: int32
+          description: Maximum number of items can be selected
+          type: integer
+        CellLayoutType:
+          description: 'Small | Medium | Large
+
+            Affects the layout of the menu.'
+          enum:
+          - Small
+          - Medium
+          - Large
+          - HiddenImage
+          type: string
+        PublicId:
+          format: uuid
+          description: Permanent reference to the item.
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    RestApiArrayResult_MenuItemOptionSet:
       description: Rest api array result
       required:
       - Data
@@ -1269,17 +965,220 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MenuItemOptionSet'
-          example: []
+    RestApiResult_MenuItemOptionSet:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/MenuItemOptionSet'
+          description: Generic data object.
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Customers Drivers API
   version: v1.0
-  description: Flipdish Open API v1.0 — Customers operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Drivers API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: Drivers
-  description: Operations for Drivers.
 paths:
   /api/v1.0/drivers/profile:
     get:
@@ -31,97 +19,71 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_GetDriverProfile200Example:
-                  summary: Default Drivers_GetDriverProfile 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetDriverProfile400Example:
-                  summary: Default Drivers_GetDriverProfile 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetDriverProfile401Example:
-                  summary: Default Drivers_GetDriverProfile 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetDriverProfile403Example:
-                  summary: Default Drivers_GetDriverProfile 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetDriverProfile500Example:
-                  summary: Default Drivers_GetDriverProfile 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Get Driver Profile
-      description: Drivers_Get Driver Profile via the Flipdish Open API v1.0 (GET /api/v1.0/drivers/profile).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Drivers get driver profile
+      x-summary-source: derived
     post:
       tags:
       - Drivers
       operationId: Drivers_UpdateDriverProfile
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateDriverProfileModel'
-            examples:
-              Drivers_UpdateDriverProfileRequestExample:
-                summary: Default Drivers_UpdateDriverProfile request
-                x-microcks-default: true
-                value:
-                  Name: Example Name
       responses:
         '200':
           description: OK
@@ -129,79 +91,83 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_UpdateDriverProfile200Example:
-                  summary: Default Drivers_UpdateDriverProfile 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDriverProfile400Example:
-                  summary: Default Drivers_UpdateDriverProfile 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDriverProfile401Example:
-                  summary: Default Drivers_UpdateDriverProfile 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDriverProfile403Example:
-                  summary: Default Drivers_UpdateDriverProfile 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDriverProfile500Example:
-                  summary: Default Drivers_UpdateDriverProfile 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Update Driver Profile
-      description: Drivers_Update Driver Profile via the Flipdish Open API v1.0 (POST /api/v1.0/drivers/profile).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverProfileModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverProfileModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverProfileModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverProfileModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverProfileModel'
+        required: true
+      summary: Drivers update driver profile
+      x-summary-source: derived
   /api/v1.0/drivers/assignedstores:
     get:
       tags:
@@ -214,98 +180,72 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_GetStoresForDriver200Example:
-                  summary: Default Drivers_GetStoresForDriver 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetStoresForDriver400Example:
-                  summary: Default Drivers_GetStoresForDriver 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetStoresForDriver401Example:
-                  summary: Default Drivers_GetStoresForDriver 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetStoresForDriver403Example:
-                  summary: Default Drivers_GetStoresForDriver 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_GetStoresForDriver500Example:
-                  summary: Default Drivers_GetStoresForDriver 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Get Stores for Driver
-      description: Drivers_Get Stores for Driver via the Flipdish Open API v1.0 (GET /api/v1.0/drivers/assignedstores).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Drivers get stores for driver
+      x-summary-source: derived
   /api/v1.0/drivers/pin:
     post:
       tags:
       - Drivers
       operationId: Drivers_DriverRequestLoginCodeSms
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DriverRequestLoginPinModel'
-            examples:
-              Drivers_DriverRequestLoginCodeSmsRequestExample:
-                summary: Default Drivers_DriverRequestLoginCodeSms request
-                x-microcks-default: true
-                value:
-                  PhoneNumber: '+353000000000'
       responses:
         '200':
           description: OK
@@ -313,99 +253,90 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_DriverRequestLoginCodeSms200Example:
-                  summary: Default Drivers_DriverRequestLoginCodeSms 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverRequestLoginCodeSms400Example:
-                  summary: Default Drivers_DriverRequestLoginCodeSms 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverRequestLoginCodeSms401Example:
-                  summary: Default Drivers_DriverRequestLoginCodeSms 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverRequestLoginCodeSms403Example:
-                  summary: Default Drivers_DriverRequestLoginCodeSms 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverRequestLoginCodeSms500Example:
-                  summary: Default Drivers_DriverRequestLoginCodeSms 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Driver Request Login Code Sms
-      description: Drivers_Driver Request Login Code Sms via the Flipdish Open API v1.0 (POST /api/v1.0/drivers/pin).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverRequestLoginPinModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DriverRequestLoginPinModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DriverRequestLoginPinModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DriverRequestLoginPinModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DriverRequestLoginPinModel'
+        required: true
+      summary: Drivers driver request login code sms
+      x-summary-source: derived
   /api/v1.0/drivers/login:
     post:
       tags:
       - Drivers
       operationId: Drivers_DriverLogin
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DriverLoginModel'
-            examples:
-              Drivers_DriverLoginRequestExample:
-                summary: Default Drivers_DriverLogin request
-                x-microcks-default: true
-                value:
-                  PhoneNumber: '+353000000000'
-                  Code: string
       responses:
         '200':
           description: OK
@@ -413,89 +344,90 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_DriverLogin200Example:
-                  summary: Default Drivers_DriverLogin 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverLogin400Example:
-                  summary: Default Drivers_DriverLogin 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverLogin401Example:
-                  summary: Default Drivers_DriverLogin 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverLogin403Example:
-                  summary: Default Drivers_DriverLogin 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DriverLogin500Example:
-                  summary: Default Drivers_DriverLogin 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Driver Login
-      description: Drivers_Driver Login via the Flipdish Open API v1.0 (POST /api/v1.0/drivers/login).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverLoginModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DriverLoginModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DriverLoginModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DriverLoginModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DriverLoginModel'
+        required: true
+      summary: Drivers driver login
+      x-summary-source: derived
   /api/v1.0/drivers/token:
     post:
       tags:
       - Drivers
       operationId: Drivers_AddDriverNotificationToken
-      requestBody:
-        required: false
-        content: {}
       responses:
         '200':
           description: OK
@@ -503,88 +435,89 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_AddDriverNotificationToken200Example:
-                  summary: Default Drivers_AddDriverNotificationToken 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_AddDriverNotificationToken400Example:
-                  summary: Default Drivers_AddDriverNotificationToken 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_AddDriverNotificationToken401Example:
-                  summary: Default Drivers_AddDriverNotificationToken 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_AddDriverNotificationToken403Example:
-                  summary: Default Drivers_AddDriverNotificationToken 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_AddDriverNotificationToken500Example:
-                  summary: Default Drivers_AddDriverNotificationToken 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Add Driver Notification Token
-      description: Drivers_Add Driver Notification Token via the Flipdish Open API v1.0 (POST /api/v1.0/drivers/token).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+        required: true
+      summary: Drivers add driver notification token
+      x-summary-source: derived
     delete:
       tags:
       - Drivers
       operationId: Drivers_RemoveDriverNotificationToken
-      requestBody:
-        required: false
-        content: {}
       responses:
         '200':
           description: OK
@@ -592,81 +525,85 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_RemoveDriverNotificationToken200Example:
-                  summary: Default Drivers_RemoveDriverNotificationToken 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_RemoveDriverNotificationToken400Example:
-                  summary: Default Drivers_RemoveDriverNotificationToken 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_RemoveDriverNotificationToken401Example:
-                  summary: Default Drivers_RemoveDriverNotificationToken 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_RemoveDriverNotificationToken403Example:
-                  summary: Default Drivers_RemoveDriverNotificationToken 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_RemoveDriverNotificationToken500Example:
-                  summary: Default Drivers_RemoveDriverNotificationToken 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Remove Driver Notification Token
-      description: Drivers_Remove Driver Notification Token via the Flipdish Open API v1.0 (DELETE /api/v1.0/drivers/token).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverNotificationToken'
+        required: true
+      summary: Drivers remove driver notification token
+      x-summary-source: derived
   /api/v1.0/drivers/profile/image:
     post:
       tags:
@@ -679,81 +616,67 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_SetDriverProfileImage200Example:
-                  summary: Default Drivers_SetDriverProfileImage 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverProfileImage400Example:
-                  summary: Default Drivers_SetDriverProfileImage 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverProfileImage401Example:
-                  summary: Default Drivers_SetDriverProfileImage 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverProfileImage403Example:
-                  summary: Default Drivers_SetDriverProfileImage 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverProfileImage500Example:
-                  summary: Default Drivers_SetDriverProfileImage 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Set Driver Profile Image
-      description: Drivers_Set Driver Profile Image via the Flipdish Open API v1.0 (POST /api/v1.0/drivers/profile/image).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Drivers set driver profile image
+      x-summary-source: derived
     delete:
       tags:
       - Drivers
@@ -765,81 +688,67 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_DeleteDriverProfileImage200Example:
-                  summary: Default Drivers_DeleteDriverProfileImage 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DeleteDriverProfileImage400Example:
-                  summary: Default Drivers_DeleteDriverProfileImage 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DeleteDriverProfileImage401Example:
-                  summary: Default Drivers_DeleteDriverProfileImage 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DeleteDriverProfileImage403Example:
-                  summary: Default Drivers_DeleteDriverProfileImage 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_DeleteDriverProfileImage500Example:
-                  summary: Default Drivers_DeleteDriverProfileImage 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Delete Driver Profile Image
-      description: Drivers_Delete Driver Profile Image via the Flipdish Open API v1.0 (DELETE /api/v1.0/drivers/profile/image).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Drivers delete driver profile image
+      x-summary-source: derived
   /api/v1.0/drivers/stores/{storeId}/presence/{presence}:
     post:
       tags:
@@ -852,8 +761,6 @@ paths:
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       - name: presence
         in: path
         required: true
@@ -862,8 +769,6 @@ paths:
           enum:
           - Offline
           - Online
-        description: The presence path parameter.
-        example: Offline
       responses:
         '200':
           description: OK
@@ -871,81 +776,67 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_SetDriverPresenceForStore200Example:
-                  summary: Default Drivers_SetDriverPresenceForStore 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverPresenceForStore400Example:
-                  summary: Default Drivers_SetDriverPresenceForStore 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverPresenceForStore401Example:
-                  summary: Default Drivers_SetDriverPresenceForStore 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverPresenceForStore403Example:
-                  summary: Default Drivers_SetDriverPresenceForStore 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_SetDriverPresenceForStore500Example:
-                  summary: Default Drivers_SetDriverPresenceForStore 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Set Driver Presence for Store
-      description: Drivers_Set Driver Presence for Store via the Flipdish Open API v1.0 (POST /api/v1.0/drivers/stores/{storeId}/presence/{presence}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Drivers set driver presence for store
+      x-summary-source: derived
   /api/v1.0/orders/{orderId}/tracking/{deliveryTrackingStatus}:
     post:
       tags:
@@ -958,8 +849,6 @@ paths:
         schema:
           type: integer
           format: int32
-        description: The order id path parameter.
-        example: 500123
       - name: deliveryTrackingStatus
         in: path
         required: true
@@ -974,8 +863,6 @@ paths:
           - ArrivedAtLocation
           - Delivered
           - CannotDeliver
-        description: The delivery tracking status path parameter.
-        example: Unassigned
       responses:
         '200':
           description: OK
@@ -983,103 +870,69 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Drivers_UpdateDeliveryTrackingStatus200Example:
-                  summary: Default Drivers_UpdateDeliveryTrackingStatus 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDeliveryTrackingStatus400Example:
-                  summary: Default Drivers_UpdateDeliveryTrackingStatus 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDeliveryTrackingStatus401Example:
-                  summary: Default Drivers_UpdateDeliveryTrackingStatus 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDeliveryTrackingStatus403Example:
-                  summary: Default Drivers_UpdateDeliveryTrackingStatus 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '410':
           description: Gone
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Drivers_UpdateDeliveryTrackingStatus500Example:
-                  summary: Default Drivers_UpdateDeliveryTrackingStatus 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Drivers_Update Delivery Tracking Status
-      description: Drivers_Update Delivery Tracking Status via the Flipdish Open API v1.0 (POST /api/v1.0/orders/{orderId}/tracking/{deliveryTrackingStatus}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Drivers update delivery tracking status
+      x-summary-source: derived
 components:
   schemas:
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
     DriverLoginModel:
       description: Driver Login model
       required:
@@ -1090,11 +943,59 @@ components:
         PhoneNumber:
           description: Phone number
           type: string
-          example: '+353000000000'
         Code:
           description: Code
           type: string
-          example: string
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    UpdateDriverProfileModel:
+      description: Update Driver Profile
+      type: object
+      properties:
+        Name:
+          description: The new name of the Driver.
+          type: string
     DriverRequestLoginPinModel:
       description: Driver Request Login Pin model
       required:
@@ -1104,25 +1005,211 @@ components:
         PhoneNumber:
           description: Email address
           type: string
-          example: '+353000000000'
-    UpdateDriverProfileModel:
-      description: Update Driver Profile
+    UpdateDriverNotificationToken:
+      description: UpdateDriver Push Notification Token
+      required:
+      - PushNotificationsToken
       type: object
       properties:
-        Name:
-          description: The new name of the Driver.
+        PushNotificationsToken:
+          description: Push notifications token, cannot be null
           type: string
-          example: Example Name
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

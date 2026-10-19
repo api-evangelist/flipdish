@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Platform Hydra API
   version: v1.0
-  description: Flipdish Open API v1.0 — Platform operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Hydra API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: Hydra
-  description: Operations for Hydra.
 paths:
   /api/v1.0/hydra/settings:
     get:
@@ -30,107 +18,68 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraConfig_'
-              examples:
-                GetSettings200Example:
-                  summary: Default GetSettings 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      MinimumVersion: string
-                      PaymentOptions:
-                      - Online
-                      DeviceSettings:
-                        Volume: 1
-                        FontSize: 1.0
-                        Brightness: 1
-                      Version: string
-                      BuildNumber: string
-                      GitSha: string
-                      GitBranch: string
+                $ref: '#/components/schemas/RestApiResult_HydraConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraConfig'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetSettings400Example:
-                  summary: Default GetSettings 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetSettings401Example:
-                  summary: Default GetSettings 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetSettings403Example:
-                  summary: Default GetSettings 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetSettings404Example:
-                  summary: Default GetSettings 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetSettings500Example:
-                  summary: Default GetSettings 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Settings
-      description: Get Settings via the Flipdish Open API v1.0 (GET /api/v1.0/hydra/settings).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get settings
+      x-summary-source: derived
   /api/v1.0/hydra/ably_token:
     get:
       tags:
@@ -144,84 +93,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAblyToken400Example:
-                  summary: Default GetAblyToken 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAblyToken401Example:
-                  summary: Default GetAblyToken 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAblyToken403Example:
-                  summary: Default GetAblyToken 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAblyToken404Example:
-                  summary: Default GetAblyToken 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAblyToken500Example:
-                  summary: Default GetAblyToken 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Ably Token
-      description: Get Ably Token via the Flipdish Open API v1.0 (GET /api/v1.0/hydra/ably_token).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get ably token
+      x-summary-source: derived
   /api/v1.0/hydra/registration:
     get:
       tags:
@@ -233,104 +151,68 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraStatus_'
-              examples:
-                GetRegistration200Example:
-                  summary: Default GetRegistration 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      AppId: '500123'
-                      StoreIds:
-                      - 1
-                      IsRegistered: true
-                      PinCode: 1
-                      Images:
-                      - string
-                      UserType: Kiosk
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetRegistration400Example:
-                  summary: Default GetRegistration 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetRegistration401Example:
-                  summary: Default GetRegistration 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetRegistration403Example:
-                  summary: Default GetRegistration 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetRegistration404Example:
-                  summary: Default GetRegistration 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetRegistration500Example:
-                  summary: Default GetRegistration 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Registration
-      description: Get Registration via the Flipdish Open API v1.0 (GET /api/v1.0/hydra/registration).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get registration
+      x-summary-source: derived
   /api/v1.0/{appId}/emvterminals:
     get:
       tags:
@@ -342,89 +224,72 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_EmvTerminalWithAssignments_'
-              examples:
-                Hydra_GetEmvsForAppId200Example:
-                  summary: Default Hydra_GetEmvsForAppId 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_EmvTerminalWithAssignments'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_EmvTerminalWithAssignments'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_EmvTerminalWithAssignments'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_EmvTerminalWithAssignments'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_GetEmvsForAppId400Example:
-                  summary: Default Hydra_GetEmvsForAppId 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_GetEmvsForAppId401Example:
-                  summary: Default Hydra_GetEmvsForAppId 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_GetEmvsForAppId403Example:
-                  summary: Default Hydra_GetEmvsForAppId 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_GetEmvsForAppId500Example:
-                  summary: Default Hydra_GetEmvsForAppId 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Hydra_Get Emvs for App Id
-      description: Hydra_Get Emvs for App Id via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/emvterminals).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Hydra get emvs for app id
+      x-summary-source: derived
     post:
       tags:
       - Hydra
@@ -435,25 +300,6 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EmvTerminal'
-            examples:
-              Hydra_CreateEmvRequestExample:
-                summary: Default Hydra_CreateEmv request
-                x-microcks-default: true
-                value:
-                  EmvTerminalId: 500123
-                  TerminalId: '500123'
-                  Url: https://api.flipdish.co/example
-                  Token: string
-                  SoftwareHouseId: '500123'
-                  InstallerId: '500123'
       responses:
         '200':
           description: OK
@@ -461,79 +307,83 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Hydra_CreateEmv200Example:
-                  summary: Default Hydra_CreateEmv 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_CreateEmv400Example:
-                  summary: Default Hydra_CreateEmv 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_CreateEmv401Example:
-                  summary: Default Hydra_CreateEmv 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_CreateEmv403Example:
-                  summary: Default Hydra_CreateEmv 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_CreateEmv500Example:
-                  summary: Default Hydra_CreateEmv 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Hydra_Create Emv
-      description: Hydra_Create Emv via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/emvterminals).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmvTerminal'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EmvTerminal'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/EmvTerminal'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/EmvTerminal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmvTerminal'
+        required: true
+      summary: Hydra create emv
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/emvterminal:
     get:
       tags:
@@ -545,108 +395,74 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_PaymentTerminalDetails_'
-              examples:
-                GetEMVTerminalDetails200Example:
-                  summary: Default GetEMVTerminalDetails 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      TerminalId: '500123'
-                      Status: Active
-                      Currency: EUR
-                      Uri: https://api.flipdish.co/example
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalDetails'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEMVTerminalDetails400Example:
-                  summary: Default GetEMVTerminalDetails 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEMVTerminalDetails401Example:
-                  summary: Default GetEMVTerminalDetails 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEMVTerminalDetails403Example:
-                  summary: Default GetEMVTerminalDetails 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEMVTerminalDetails404Example:
-                  summary: Default GetEMVTerminalDetails 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEMVTerminalDetails500Example:
-                  summary: Default GetEMVTerminalDetails 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get EMV Terminal Details
-      description: Get EMV Terminal Details via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/hydra/emvterminal).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get EMV terminal details
+      x-summary-source: derived
   /api/v1.0/{appId}/kiosksettings/{deviceId}:
     get:
       tags:
@@ -658,98 +474,77 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_KioskSettings_'
-              examples:
-                GetKioskSettings200Example:
-                  summary: Default GetKioskSettings 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      HideLogoFromFrontPage: true
-                      TwoColumnMenuLayout: true
+                $ref: '#/components/schemas/RestApiResult_KioskSettings'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_KioskSettings'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_KioskSettings'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_KioskSettings'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskSettings400Example:
-                  summary: Default GetKioskSettings 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskSettings401Example:
-                  summary: Default GetKioskSettings 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskSettings403Example:
-                  summary: Default GetKioskSettings 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskSettings500Example:
-                  summary: Default GetKioskSettings 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Kiosk Settings
-      description: Get Kiosk Settings via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/kiosksettings/{deviceId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get kiosk settings
+      x-summary-source: derived
     post:
       tags:
       - Hydra
@@ -760,28 +555,11 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KioskSettings'
-            examples:
-              UpdateKioskSettingsRequestExample:
-                summary: Default UpdateKioskSettings request
-                x-microcks-default: true
-                value:
-                  HideLogoFromFrontPage: true
-                  TwoColumnMenuLayout: true
       responses:
         '200':
           description: OK
@@ -790,69 +568,69 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskSettings400Example:
-                  summary: Default UpdateKioskSettings 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskSettings401Example:
-                  summary: Default UpdateKioskSettings 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskSettings403Example:
-                  summary: Default UpdateKioskSettings 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskSettings500Example:
-                  summary: Default UpdateKioskSettings 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update Kiosk Settings
-      description: Update Kiosk Settings via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/kiosksettings/{deviceId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KioskSettings'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/KioskSettings'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/KioskSettings'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/KioskSettings'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/KioskSettings'
+        required: true
+      summary: Update kiosk settings
+      x-summary-source: derived
   /api/v1.0/{appId}/kioskcashsettings/{deviceId}:
     get:
       tags:
@@ -864,96 +642,77 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_KioskCashPaymentSettings_'
-              examples:
-                GetKioskCashPaymentSettings200Example:
-                  summary: Default GetKioskCashPaymentSettings 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_KioskCashPaymentSettings'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_KioskCashPaymentSettings'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_KioskCashPaymentSettings'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_KioskCashPaymentSettings'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskCashPaymentSettings400Example:
-                  summary: Default GetKioskCashPaymentSettings 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskCashPaymentSettings401Example:
-                  summary: Default GetKioskCashPaymentSettings 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskCashPaymentSettings403Example:
-                  summary: Default GetKioskCashPaymentSettings 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetKioskCashPaymentSettings500Example:
-                  summary: Default GetKioskCashPaymentSettings 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Kiosk Cash Payment Settings
-      description: Get Kiosk Cash Payment Settings via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/kioskcashsettings/{deviceId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get kiosk cash payment settings
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/emvorderstate/{orderId}:
     get:
       tags:
@@ -966,117 +725,79 @@ paths:
         schema:
           type: integer
           format: int32
-        description: The order id path parameter.
-        example: 500123
       - name: appId
         in: path
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_PaymentTerminalTransactionDetails_'
-              examples:
-                GetEmvOrderState200Example:
-                  summary: Default GetEmvOrderState 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      CardSchemeName: Example Name
-                      DateOfExpiry: '2026-06-02T12:00:00Z'
-                      AuthCode: string
-                      TransactionResult: string
-                      PrimaryAccountNumber: string
-                      CardholderVerificationMethod: string
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalTransactionDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalTransactionDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalTransactionDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_PaymentTerminalTransactionDetails'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEmvOrderState400Example:
-                  summary: Default GetEmvOrderState 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEmvOrderState401Example:
-                  summary: Default GetEmvOrderState 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEmvOrderState403Example:
-                  summary: Default GetEmvOrderState 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEmvOrderState404Example:
-                  summary: Default GetEmvOrderState 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetEmvOrderState500Example:
-                  summary: Default GetEmvOrderState 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Emv Order State
-      description: Get Emv Order State via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/hydra/emvorderstate/{orderId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get emv order state
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/{deviceType}/{deviceId}:
     get:
       tags:
@@ -1088,8 +809,6 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceType
         in: path
         required: true
@@ -1099,123 +818,79 @@ paths:
           - Kiosk
           - Terminal
           - LegacyPrinter
-        description: The device type path parameter.
-        example: Kiosk
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraDeviceDetails_'
-              examples:
-                GetAttachedDevice200Example:
-                  summary: Default GetAttachedDevice 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      HydraConfigId: 500123
-                      DeviceId: '500123'
-                      SerialNumber: string
-                      DeviceType: Kiosk
-                      Status: Online
-                      DeviceName: Example Name
-                      StoreNames: []
-                      LastPollUtc: '2026-06-02T12:00:00Z'
-                      Version: string
-                      BuildNumber: string
-                      GitSha: string
-                      GitBranch: string
+                $ref: '#/components/schemas/RestApiResult_HydraDeviceDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraDeviceDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraDeviceDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraDeviceDetails'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevice400Example:
-                  summary: Default GetAttachedDevice 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevice401Example:
-                  summary: Default GetAttachedDevice 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevice403Example:
-                  summary: Default GetAttachedDevice 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevice404Example:
-                  summary: Default GetAttachedDevice 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevice500Example:
-                  summary: Default GetAttachedDevice 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Attached Device
-      description: Get Attached Device via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/hydra/{deviceType}/{deviceId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get attached device
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/{deviceType}/list:
     get:
       tags:
@@ -1227,8 +902,6 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceType
         in: path
         required: true
@@ -1238,145 +911,102 @@ paths:
           - Kiosk
           - Terminal
           - LegacyPrinter
-        description: The device type path parameter.
-        example: Kiosk
       - name: pageIndex
         in: query
         required: false
         schema:
           type: integer
           format: int32
-        description: The page index query parameter.
-        example: 1
       - name: pageSize
         in: query
         required: false
         schema:
           type: integer
           format: int32
-        description: The page size query parameter.
-        example: 1
       - name: storeId
         in: query
         required: false
         schema:
           type: integer
           format: int32
-        description: The store id query parameter.
-        example: 500123
       - name: deviceName
         in: query
         required: false
         schema:
           type: string
-        description: The device name query parameter.
-        example: Example Name
       - name: deviceSerial
         in: query
         required: false
         schema:
           type: string
-        description: The device serial query parameter.
-        example: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiPaginationResult_HydraDeviceDetails_'
-              examples:
-                GetAttachedDevices200Example:
-                  summary: Default GetAttachedDevices 200 response
-                  x-microcks-default: true
-                  value:
-                    Page: 1
-                    Limit: 1
-                    TotalRecordCount: 12.5
-                    Data: []
+                $ref: '#/components/schemas/RestApiPaginationResult_HydraDeviceDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_HydraDeviceDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_HydraDeviceDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_HydraDeviceDetails'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevices400Example:
-                  summary: Default GetAttachedDevices 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevices401Example:
-                  summary: Default GetAttachedDevices 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevices403Example:
-                  summary: Default GetAttachedDevices 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevices404Example:
-                  summary: Default GetAttachedDevices 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAttachedDevices500Example:
-                  summary: Default GetAttachedDevices 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Attached Devices
-      description: Get Attached Devices via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/hydra/{deviceType}/list).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get attached devices
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/registration:
     post:
       tags:
@@ -1388,127 +1018,92 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/HydraRegistrationRequest'
-            examples:
-              RegisterRequestExample:
-                summary: Default Register request
-                x-microcks-default: true
-                value:
-                  StoreIds:
-                  - 1
-                  DeviceName: Example Name
-                  PinCode: 1
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraStatus_'
-              examples:
-                Register200Example:
-                  summary: Default Register 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      AppId: '500123'
-                      StoreIds:
-                      - 1
-                      IsRegistered: true
-                      PinCode: 1
-                      Images:
-                      - string
-                      UserType: Kiosk
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Register400Example:
-                  summary: Default Register 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Register401Example:
-                  summary: Default Register 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Register403Example:
-                  summary: Default Register 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Register404Example:
-                  summary: Default Register 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Register500Example:
-                  summary: Default Register 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Register
-      description: Register via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/hydra/registration).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HydraRegistrationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/HydraRegistrationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/HydraRegistrationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/HydraRegistrationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HydraRegistrationRequest'
+        required: true
+      summary: Register
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/cancelemvpayment/{orderId}:
     post:
       tags:
@@ -1521,15 +1116,11 @@ paths:
         schema:
           type: integer
           format: int32
-        description: The order id path parameter.
-        example: 500123
       - name: appId
         in: path
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
@@ -1538,84 +1129,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CancelEmvPayment400Example:
-                  summary: Default CancelEmvPayment 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CancelEmvPayment401Example:
-                  summary: Default CancelEmvPayment 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CancelEmvPayment403Example:
-                  summary: Default CancelEmvPayment 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CancelEmvPayment404Example:
-                  summary: Default CancelEmvPayment 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CancelEmvPayment500Example:
-                  summary: Default CancelEmvPayment 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Cancel Emv Payment
-      description: Cancel Emv Payment via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/hydra/cancelemvpayment/{orderId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Cancel emv payment
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/{deviceId}/attach/{storeId}:
     post:
       tags:
@@ -1627,127 +1187,85 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraStatus_'
-              examples:
-                AttachStoreToTerminal200Example:
-                  summary: Default AttachStoreToTerminal 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      AppId: '500123'
-                      StoreIds:
-                      - 1
-                      IsRegistered: true
-                      PinCode: 1
-                      Images:
-                      - string
-                      UserType: Kiosk
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToTerminal400Example:
-                  summary: Default AttachStoreToTerminal 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToTerminal401Example:
-                  summary: Default AttachStoreToTerminal 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToTerminal403Example:
-                  summary: Default AttachStoreToTerminal 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToTerminal404Example:
-                  summary: Default AttachStoreToTerminal 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToTerminal500Example:
-                  summary: Default AttachStoreToTerminal 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Attach Store to Terminal
-      description: Attach Store to Terminal via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/hydra/{deviceId}/attach/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Attach store to terminal
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/{deviceId}/detach/{storeId}:
     post:
       tags:
@@ -1759,127 +1277,85 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraStatus_'
-              examples:
-                DetachStoreFromTerminal200Example:
-                  summary: Default DetachStoreFromTerminal 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      AppId: '500123'
-                      StoreIds:
-                      - 1
-                      IsRegistered: true
-                      PinCode: 1
-                      Images:
-                      - string
-                      UserType: Kiosk
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DetachStoreFromTerminal400Example:
-                  summary: Default DetachStoreFromTerminal 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DetachStoreFromTerminal401Example:
-                  summary: Default DetachStoreFromTerminal 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DetachStoreFromTerminal403Example:
-                  summary: Default DetachStoreFromTerminal 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DetachStoreFromTerminal404Example:
-                  summary: Default DetachStoreFromTerminal 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DetachStoreFromTerminal500Example:
-                  summary: Default DetachStoreFromTerminal 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Detach Store from Terminal
-      description: Detach Store from Terminal via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/hydra/{deviceId}/detach/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Detach store from terminal
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/emvterminal/unassign/{hydraConfigId}:
     post:
       tags:
@@ -1891,16 +1367,12 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: hydraConfigId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The hydra config id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
@@ -1909,69 +1381,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnassignEmv400Example:
-                  summary: Default UnassignEmv 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnassignEmv401Example:
-                  summary: Default UnassignEmv 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnassignEmv403Example:
-                  summary: Default UnassignEmv 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnassignEmv500Example:
-                  summary: Default UnassignEmv 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Unassign Emv
-      description: Unassign Emv via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/hydra/emvterminal/unassign/{hydraConfigId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Unassign emv
+      x-summary-source: derived
   /api/v1.0/{appId}/AttachStoreToKiosk/{deviceId}/store/{storeId}:
     post:
       tags:
@@ -1983,127 +1437,85 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraStatus_'
-              examples:
-                AttachStoreToKiosk200Example:
-                  summary: Default AttachStoreToKiosk 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      AppId: '500123'
-                      StoreIds:
-                      - 1
-                      IsRegistered: true
-                      PinCode: 1
-                      Images:
-                      - string
-                      UserType: Kiosk
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToKiosk400Example:
-                  summary: Default AttachStoreToKiosk 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToKiosk401Example:
-                  summary: Default AttachStoreToKiosk 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToKiosk403Example:
-                  summary: Default AttachStoreToKiosk 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToKiosk404Example:
-                  summary: Default AttachStoreToKiosk 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AttachStoreToKiosk500Example:
-                  summary: Default AttachStoreToKiosk 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Attach Store to Kiosk
-      description: Attach Store to Kiosk via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/AttachStoreToKiosk/{deviceId}/store/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Attach store to kiosk
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/emvterminal/assign/{hydraConfigId}/{emvTerminalId}:
     post:
       tags:
@@ -2115,95 +1527,58 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: hydraConfigId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The hydra config id path parameter.
-        example: 500123
       - name: emvTerminalId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The emv terminal id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
         '400':
           description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AssignEmv400Example:
-                  summary: Default AssignEmv 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AssignEmv401Example:
-                  summary: Default AssignEmv 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AssignEmv403Example:
-                  summary: Default AssignEmv 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AssignEmv500Example:
-                  summary: Default AssignEmv 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Assign Emv
-      description: Assign Emv via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/hydra/emvterminal/assign/{hydraConfigId}/{emvTerminalId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Assign emv
+      x-summary-source: derived
   /api/v1.0/hydra/{deviceId}/login:
     post:
       tags:
@@ -2215,8 +1590,6 @@ paths:
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       - name: hydraUserType
         in: query
         required: false
@@ -2226,15 +1599,11 @@ paths:
           - Kiosk
           - Terminal
           - LegacyPrinter
-        description: The hydra user type query parameter.
-        example: Kiosk
       - name: serialNumber
         in: query
         required: false
         schema:
           type: string
-        description: The serial number query parameter.
-        example: string
       responses:
         '200':
           description: OK
@@ -2243,84 +1612,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithDeviceId400Example:
-                  summary: Default LoginWithDeviceId 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithDeviceId401Example:
-                  summary: Default LoginWithDeviceId 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithDeviceId403Example:
-                  summary: Default LoginWithDeviceId 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithDeviceId404Example:
-                  summary: Default LoginWithDeviceId 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithDeviceId500Example:
-                  summary: Default LoginWithDeviceId 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Login with Device Id
-      description: Login with Device Id via the Flipdish Open API v1.0 (POST /api/v1.0/hydra/{deviceId}/login).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Login with device id
+      x-summary-source: derived
   /api/v1.0/{appId}/kioskupdatecashsettings:
     post:
       tags:
@@ -2332,22 +1670,16 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: query
         required: true
         schema:
           type: string
-        description: The device id query parameter.
-        example: '500123'
       - name: isCashEnabled
         in: query
         required: true
         schema:
           type: boolean
-        description: The is cash enabled query parameter.
-        example: true
       responses:
         '200':
           description: OK
@@ -2356,84 +1688,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskCashVisibilitySettings400Example:
-                  summary: Default UpdateKioskCashVisibilitySettings 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskCashVisibilitySettings401Example:
-                  summary: Default UpdateKioskCashVisibilitySettings 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskCashVisibilitySettings403Example:
-                  summary: Default UpdateKioskCashVisibilitySettings 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskCashVisibilitySettings404Example:
-                  summary: Default UpdateKioskCashVisibilitySettings 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateKioskCashVisibilitySettings500Example:
-                  summary: Default UpdateKioskCashVisibilitySettings 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Update Kiosk Cash Visibility Settings
-      description: Update Kiosk Cash Visibility Settings via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/kioskupdatecashsettings).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Update kiosk cash visibility settings
+      x-summary-source: derived
   /api/v1.0/{appId}/emvterminals/{id}:
     delete:
       tags:
@@ -2445,16 +1746,12 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: id
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
@@ -2462,79 +1759,65 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                Hydra_DeleteEmv200Example:
-                  summary: Default Hydra_DeleteEmv 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DeleteEmv400Example:
-                  summary: Default Hydra_DeleteEmv 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DeleteEmv401Example:
-                  summary: Default Hydra_DeleteEmv 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DeleteEmv403Example:
-                  summary: Default Hydra_DeleteEmv 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DeleteEmv500Example:
-                  summary: Default Hydra_DeleteEmv 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Hydra_Delete Emv
-      description: Hydra_Delete Emv via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/emvterminals/{id}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Hydra delete emv
+      x-summary-source: derived
   /api/v1.0/{appId}/hydra/{deviceId}/registration:
     delete:
       tags:
@@ -2546,15 +1829,11 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
@@ -2563,84 +1842,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnAssign400Example:
-                  summary: Default UnAssign 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnAssign401Example:
-                  summary: Default UnAssign 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnAssign403Example:
-                  summary: Default UnAssign 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnAssign404Example:
-                  summary: Default UnAssign 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UnAssign500Example:
-                  summary: Default UnAssign 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Un Assign
-      description: Un Assign via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/hydra/{deviceId}/registration).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Un assign
+      x-summary-source: derived
   /api/v1.0/{appId}/DetachStoreFromKiosk/{deviceId}/store/{storeId}:
     delete:
       tags:
@@ -2652,129 +1900,189 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       - name: deviceId
         in: path
         required: true
         schema:
           type: string
-        description: The device id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_HydraStatus_'
-              examples:
-                Hydra_DetachStoreFromKiosk200Example:
-                  summary: Default Hydra_DetachStoreFromKiosk 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      AppId: '500123'
-                      StoreIds:
-                      - 1
-                      IsRegistered: true
-                      PinCode: 1
-                      Images:
-                      - string
-                      UserType: Kiosk
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_HydraStatus'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DetachStoreFromKiosk400Example:
-                  summary: Default Hydra_DetachStoreFromKiosk 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DetachStoreFromKiosk401Example:
-                  summary: Default Hydra_DetachStoreFromKiosk 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DetachStoreFromKiosk403Example:
-                  summary: Default Hydra_DetachStoreFromKiosk 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DetachStoreFromKiosk404Example:
-                  summary: Default Hydra_DetachStoreFromKiosk 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Hydra_DetachStoreFromKiosk500Example:
-                  summary: Default Hydra_DetachStoreFromKiosk 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      summary: Flipdish Hydra_Detach Store from Kiosk
-      description: Hydra_Detach Store from Kiosk via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/DetachStoreFromKiosk/{deviceId}/store/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Hydra detach store from kiosk
+      x-summary-source: derived
 components:
   schemas:
+    HydraStatus:
+      description: Hydra status
+      required:
+      - AppId
+      - IsRegistered
+      type: object
+      properties:
+        AppId:
+          description: ''
+          type: string
+        StoreIds:
+          description: Store to assign the hydra
+          type: array
+          items:
+            format: int32
+            type: integer
+        PropertyIds:
+          description: AuthZ Property ids for assigned stores
+          type: array
+          items:
+            type: string
+        IsRegistered:
+          description: The device has been already registered
+          type: boolean
+        PinCode:
+          format: int32
+          description: 6 digit PIN code (not starting with zero).
+          maximum: 999999
+          minimum: 100000
+          type:
+          - integer
+          - 'null'
+        Images:
+          description: Hydra images (covers)
+          type: array
+          items:
+            type: string
+        UserType:
+          description: Hydra User Type as integer. Prefer {Flipdish.PublicModels.V1.Hydra.HydraStatus.DeviceType}.
+          enum:
+          - Kiosk
+          - Terminal
+          - LegacyPrinter
+          type: string
+        DeviceType:
+          description: Hydra device type (Kiosk / Terminal), serialized as string.
+          enum:
+          - Kiosk
+          - Terminal
+          - LegacyPrinter
+          type: string
+        HydraUserId:
+          format: int32
+          description: Zeus Hydra user id
+          type: integer
+    RestApiPaginationResult_HydraDeviceDetails:
+      description: Rest api pagination result
+      required:
+      - Page
+      - Limit
+      - TotalRecordCount
+      - Data
+      type: object
+      properties:
+        Page:
+          format: int32
+          description: Current page index
+          type: integer
+        Limit:
+          format: int32
+          description: Current page size
+          type: integer
+        TotalRecordCount:
+          format: int32
+          description: Total record count
+          type: integer
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/HydraDeviceDetails'
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
     HydraRegistrationRequest:
       description: Hydra registration result
       required:
@@ -2788,224 +2096,15 @@ components:
           items:
             format: int32
             type: integer
-          example:
-          - 1
         DeviceName:
           description: Hydra device name
           type: string
-          example: Example Name
         PinCode:
           format: int32
           description: 6 digit PIN code (not starting with zero).
           maximum: 999999
           minimum: 100000
           type: integer
-          example: 1
-    HydraConfig:
-      description: Hydra configuration
-      required:
-      - MinimumVersion
-      - PaymentOptions
-      - DeviceSettings
-      type: object
-      properties:
-        MinimumVersion:
-          description: Minimum version
-          type: string
-          example: string
-        PaymentOptions:
-          description: Payment options
-          type: array
-          items:
-            enum:
-            - Online
-            - Emv
-            - Counter
-            type: string
-          example:
-          - Online
-        DeviceSettings:
-          $ref: '#/components/schemas/DeviceSettings'
-        Version:
-          description: Version of the device
-          type: string
-          example: string
-        BuildNumber:
-          description: Build number of the device
-          type: string
-          example: string
-        GitSha:
-          description: SHA of the commit
-          type: string
-          example: string
-        GitBranch:
-          description: Build branch
-          type: string
-          example: string
-    PaymentTerminalTransactionDetails:
-      description: Details of Payment Terminal Transaction
-      type: object
-      properties:
-        CardSchemeName:
-          description: Card Type
-          type: string
-          example: Example Name
-        DateOfExpiry:
-          description: Expirey Date on Card
-          type: string
-          example: '2026-06-02T12:00:00Z'
-        AuthCode:
-          description: AuthCode
-          type: string
-          example: string
-        TransactionResult:
-          description: State of Request, "PENDING" is not yet completed
-          type: string
-          example: string
-        PrimaryAccountNumber:
-          description: Masked PAN
-          type: string
-          example: string
-        CardholderVerificationMethod:
-          description: Type of Verification.
-          type: string
-          example: string
-    RestApiArrayResult_EmvTerminalWithAssignments_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/EmvTerminalWithAssignments'
-          example: []
-    RestApiResult_KioskSettings_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/KioskSettings'
-    RestApiPaginationResult_HydraDeviceDetails_:
-      description: Rest api pagination result
-      required:
-      - Page
-      - Limit
-      - TotalRecordCount
-      - Data
-      type: object
-      properties:
-        Page:
-          format: int32
-          description: Current page index
-          type: integer
-          example: 1
-        Limit:
-          format: int32
-          description: Current page size
-          type: integer
-          example: 1
-        TotalRecordCount:
-          format: int32
-          description: Total record count
-          type: integer
-          example: 12.5
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/HydraDeviceDetails'
-          example: []
-    HydraDeviceDetails:
-      description: Hydra device details
-      type: object
-      properties:
-        HydraConfigId:
-          format: int32
-          description: Flipdish internal device identifier
-          type: integer
-          example: 500123
-        DeviceId:
-          description: Device Id
-          type: string
-          example: '500123'
-        SerialNumber:
-          description: Serial Number
-          type: string
-          example: string
-        DeviceType:
-          description: Type of the device
-          enum:
-          - Kiosk
-          - Terminal
-          - LegacyPrinter
-          type: string
-          example: Kiosk
-        Status:
-          description: Status of the device
-          enum:
-          - Online
-          - PossiblyOffline
-          - Offline
-          type: string
-          example: Online
-        DeviceName:
-          description: Device Name
-          type: string
-          example: Example Name
-        StoreNames:
-          description: Store Names
-          type: array
-          items:
-            $ref: '#/components/schemas/HydraStoreData'
-          example: []
-        LastPollUtc:
-          format: date-time
-          description: Last poll time in UTC
-          type:
-          - string
-          - 'null'
-          example: '2026-06-02T12:00:00Z'
-        Version:
-          description: Version of the device
-          type: string
-          example: string
-        BuildNumber:
-          description: Build number of the device
-          type: string
-          example: string
-        GitSha:
-          description: SHA of the commit
-          type: string
-          example: string
-        GitBranch:
-          description: Build branch
-          type: string
-          example: string
-    RestApiArrayResult_KioskCashPaymentSettings_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/KioskCashPaymentSettings'
-          example: []
-    RestApiResult_PaymentTerminalTransactionDetails_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/PaymentTerminalTransactionDetails'
     DeviceSettings:
       description: Device settings for Hydra
       required:
@@ -3020,52 +2119,18 @@ components:
           maximum: 10
           minimum: 0
           type: integer
-          example: 1
         FontSize:
           format: double
           description: Gets or sets the font size used on the device
           maximum: 100
           minimum: 1
           type: number
-          example: 1.0
         Brightness:
           format: int32
           description: Gets or sets the display brightness on the device
           maximum: 100
           minimum: 0
           type: integer
-          example: 1
-    EmvTerminalWithAssignments:
-      description: EMV Payment Terminal
-      type: object
-      properties:
-        EmvTerminalId:
-          description: Flipdish Internal identifier of the Terminal
-          type: string
-          example: '500123'
-        TerminalId:
-          description: External Identifier of the Terminal
-          type: string
-          example: '500123'
-        IsAssignedToHydraDevice:
-          description: true if the terminal is assigned to a hydra device (e.g. a kiosk)
-          type: boolean
-          example: true
-        HydraConfigId:
-          format: int32
-          description: hydra device id (null if the terminal is not assigned to any hydra device)
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        HydraDeviceId:
-          description: external hydra device id (null if the terminal is not assigned to any hydra device)
-          type: string
-          example: '500123'
-        HydraName:
-          description: hydra device name (null if the terminal is not assigned to any hydra device)
-          type: string
-          example: Example Name
     HydraStoreData:
       description: Store Data
       type: object
@@ -3074,49 +2139,110 @@ components:
           format: int32
           description: Id of the store
           type: integer
-          example: 500123
         StoreName:
           description: Name of the store
           type: string
-          example: Example Name
-    RestApiResult_PaymentTerminalDetails_:
-      description: Rest api result
+    HydraConfig:
+      description: Hydra configuration
+      required:
+      - MinimumVersion
+      - PaymentOptions
+      - DeviceSettings
+      type: object
+      properties:
+        MinimumVersion:
+          description: Minimum version
+          type: string
+        PaymentOptions:
+          description: Payment options
+          type: array
+          items:
+            enum:
+            - Online
+            - Emv
+            - Counter
+            type: string
+        DeviceSettings:
+          $ref: '#/components/schemas/DeviceSettings'
+          description: Device settings
+        Version:
+          description: Version of the device
+          type: string
+        BuildNumber:
+          description: Build number of the device
+          type: string
+        GitSha:
+          description: SHA of the commit
+          type: string
+        GitBranch:
+          description: Build branch
+          type: string
+    RestApiArrayResult_EmvTerminalWithAssignments:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/PaymentTerminalDetails'
-    EmvTerminal:
-      description: EMV Payment Terminal
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmvTerminalWithAssignments'
+    HydraDeviceDetails:
+      description: Hydra device details
       type: object
       properties:
-        EmvTerminalId:
+        HydraConfigId:
           format: int32
-          description: Flipdish Identifier of Terminal
+          description: Flipdish internal device identifier
           type: integer
-          example: 500123
-        TerminalId:
-          description: External Identifier of Terminal
+        DeviceId:
+          description: Device Id
           type: string
-          example: '500123'
-        Url:
-          description: URL at which terminal can be accessed
+        SerialNumber:
+          description: Serial Number
           type: string
-          example: https://api.flipdish.co/example
-        Token:
-          description: TOKEN required to access terminal
+        DeviceType:
+          description: Type of the device
+          enum:
+          - Kiosk
+          - Terminal
+          - LegacyPrinter
           type: string
-          example: string
-        SoftwareHouseId:
-          description: Identifies us to Provider
+        Status:
+          description: Status of the device
+          enum:
+          - Online
+          - PossiblyOffline
+          - Offline
           type: string
-          example: '500123'
-        InstallerId:
-          description: Identifies installer of terminal
+        DeviceName:
+          description: Device Name
           type: string
-          example: '500123'
-    RestApiResult_HydraStatus_:
+        StoreNames:
+          description: Store Names
+          type: array
+          items:
+            $ref: '#/components/schemas/HydraStoreData'
+        LastPollUtc:
+          format: date-time
+          description: Last poll time in UTC
+          type:
+          - string
+          - 'null'
+        Version:
+          description: Version of the device
+          type: string
+        BuildNumber:
+          description: Build number of the device
+          type: string
+        GitSha:
+          description: SHA of the commit
+          type: string
+        GitBranch:
+          description: Build branch
+          type: string
+    RestApiResult_HydraStatus:
       description: Rest api result
       required:
       - Data
@@ -3124,81 +2250,7 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/HydraStatus'
-    PaymentTerminalDetails:
-      description: Details of Payment Terminal
-      type: object
-      properties:
-        TerminalId:
-          description: Terminal Id (tid)
-          type: string
-          example: '500123'
-        Status:
-          description: Status of Terminal
-          type: string
-          example: Active
-        Currency:
-          description: Currency configured on the terminal
-          type: string
-          example: EUR
-        Uri:
-          description: Location to Device
-          type: string
-          example: https://api.flipdish.co/example
-    RestApiResult_HydraConfig_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/HydraConfig'
-    HydraStatus:
-      description: Hydra status
-      required:
-      - AppId
-      - IsRegistered
-      type: object
-      properties:
-        AppId:
-          description: ''
-          type: string
-          example: '500123'
-        StoreIds:
-          description: Store to assign the hydra
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        IsRegistered:
-          description: The device has been already registered
-          type: boolean
-          example: true
-        PinCode:
-          format: int32
-          description: 6 digit PIN code (not starting with zero).
-          maximum: 999999
-          minimum: 100000
-          type:
-          - integer
-          - 'null'
-          example: 1
-        Images:
-          description: Hydra images (covers)
-          type: array
-          items:
-            type: string
-          example:
-          - string
-        UserType:
-          description: Hydra User Type
-          enum:
-          - Kiosk
-          - Terminal
-          - LegacyPrinter
-          type: string
-          example: Kiosk
+          description: Generic data object.
     KioskCashPaymentSettings:
       description: Get Cash Payment Settings for a UserId
       type: object
@@ -3208,12 +2260,10 @@ components:
 
             true :enable cash on kiosk'
           type: boolean
-          example: true
         UserId:
           format: int32
           description: HydraUser ID of the Device
           type: integer
-          example: 500123
     KioskSettings:
       description: Kiosk level settings
       type: object
@@ -3221,12 +2271,138 @@ components:
         HideLogoFromFrontPage:
           description: Hide logo from front page
           type: boolean
-          example: true
         TwoColumnMenuLayout:
           description: 2 Column Menu Layout
           type: boolean
-          example: true
-    RestApiResult_HydraDeviceDetails_:
+    RestApiResult_PaymentTerminalTransactionDetails:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PaymentTerminalTransactionDetails'
+          description: Generic data object.
+    RestApiResult_PaymentTerminalDetails:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/PaymentTerminalDetails'
+          description: Generic data object.
+    PaymentTerminalTransactionDetails:
+      description: Details of Payment Terminal Transaction
+      type: object
+      properties:
+        CardSchemeName:
+          description: Card Type
+          type: string
+        DateOfExpiry:
+          description: Expirey Date on Card
+          type: string
+        AuthCode:
+          description: AuthCode
+          type: string
+        TransactionResult:
+          description: State of Request, "PENDING" is not yet completed
+          type: string
+        PrimaryAccountNumber:
+          description: Masked PAN
+          type: string
+        CardholderVerificationMethod:
+          description: Type of Verification.
+          type: string
+    RestApiResult_KioskSettings:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/KioskSettings'
+          description: Generic data object.
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    EmvTerminal:
+      description: EMV Payment Terminal
+      type: object
+      properties:
+        EmvTerminalId:
+          format: int32
+          description: Flipdish Identifier of Terminal
+          type: integer
+        TerminalId:
+          description: External Identifier of Terminal
+          type: string
+        Url:
+          description: URL at which terminal can be accessed
+          type: string
+        Token:
+          description: TOKEN required to access terminal
+          type: string
+        SoftwareHouseId:
+          description: Identifies us to Provider
+          type: string
+        InstallerId:
+          description: Identifies installer of terminal
+          type: string
+    EmvTerminalWithAssignments:
+      description: EMV Payment Terminal
+      type: object
+      properties:
+        EmvTerminalId:
+          description: Flipdish Internal identifier of the Terminal
+          type: string
+        TerminalId:
+          description: External Identifier of the Terminal
+          type: string
+        IsAssignedToHydraDevice:
+          description: true if the terminal is assigned to a hydra device (e.g. a kiosk)
+          type: boolean
+        HydraConfigId:
+          format: int32
+          description: hydra device id (null if the terminal is not assigned to any hydra device)
+          type:
+          - integer
+          - 'null'
+        HydraDeviceId:
+          description: external hydra device id (null if the terminal is not assigned to any hydra device)
+          type: string
+        HydraName:
+          description: hydra device name (null if the terminal is not assigned to any hydra device)
+          type: string
+    RestApiResult_HydraConfig:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/HydraConfig'
+          description: Generic data object.
+    RestApiResult_HydraDeviceDetails:
       description: Rest api result
       required:
       - Data
@@ -3234,36 +2410,230 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/HydraDeviceDetails'
-    FlipdishError:
+          description: Generic data object.
+    RestApiArrayResult_KioskCashPaymentSettings:
+      description: Rest api array result
+      required:
+      - Data
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/KioskCashPaymentSettings'
+    PaymentTerminalDetails:
+      description: Details of Payment Terminal
+      type: object
+      properties:
+        TerminalId:
+          description: Terminal Id (tid)
+          type: string
+        Status:
+          description: Status of Terminal
+          type: string
+        Currency:
+          description: Currency configured on the terminal
+          type: string
+        Uri:
+          description: Location to Device
+          type: string
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

@@ -1,275 +1,208 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Catalog Catalog Changes API
   version: v1.0
-  description: Flipdish Open API v1.0 — Catalog operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Catalog Changes API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: CatalogChanges
-  description: Operations for Catalog Changes.
 paths:
   /api/v1.0/{appId}/menus/catalog-changes/summaries:
     get:
       tags:
       - CatalogChanges
-      summary: Flipdish Get Pending Menu Changes Summaries
+      summary: Get menu pending changes summaries by appId
       operationId: GetPendingMenuChangesSummaries
       parameters:
       - name: appId
         in: path
-        description: The app id path parameter.
+        description: ''
         required: true
         schema:
           type: string
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_PendingMenuChangesSummaries_'
-              examples:
-                GetPendingMenuChangesSummaries200Example:
-                  summary: Default GetPendingMenuChangesSummaries 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_PendingMenuChangesSummaries'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_PendingMenuChangesSummaries'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_PendingMenuChangesSummaries'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_PendingMenuChangesSummaries'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChangesSummaries400Example:
-                  summary: Default GetPendingMenuChangesSummaries 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChangesSummaries401Example:
-                  summary: Default GetPendingMenuChangesSummaries 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChangesSummaries403Example:
-                  summary: Default GetPendingMenuChangesSummaries 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChangesSummaries500Example:
-                  summary: Default GetPendingMenuChangesSummaries 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      description: Get Pending Menu Changes Summaries via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/menus/catalog-changes/summaries).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
   /api/v1.0/{appId}/menus/catalog-changes:
     get:
       tags:
       - CatalogChanges
-      summary: Flipdish Get Pending Menu Changes
-      description: Get Pending Menu Changes via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/menus/catalog-changes).
+      summary: Get menu pending changes from Catalog groups and items
+      description: '[BETA - this endpoint is under development, do not use it in your production system]'
       operationId: GetPendingMenuChanges
       parameters:
       - name: appId
         in: path
-        description: The app id path parameter.
+        description: ''
         required: true
         schema:
           type: string
-        example: '500123'
       - name: menuId
         in: query
-        description: The menu id query parameter.
+        description: ''
         required: false
         schema:
           type: integer
           format: int32
-        example: 500123
       - name: catalogItemId
         in: query
-        description: The catalog item id query parameter.
+        description: ''
         required: false
         schema:
           type: string
-        example: '500123'
       - name: page
         in: query
-        description: The page query parameter.
+        description: ''
         required: false
         schema:
           type: integer
           format: int32
-        example: 1
       - name: limit
         in: query
-        description: The limit query parameter.
+        description: ''
         required: false
         schema:
           type: integer
           format: int32
-        example: 1
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiPaginationResult_PendingMenuChanges_'
-              examples:
-                GetPendingMenuChanges200Example:
-                  summary: Default GetPendingMenuChanges 200 response
-                  x-microcks-default: true
-                  value:
-                    Page: 1
-                    Limit: 1
-                    TotalRecordCount: 12.5
-                    Data: []
+                $ref: '#/components/schemas/RestApiPaginationResult_PendingMenuChanges'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PendingMenuChanges'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PendingMenuChanges'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginationResult_PendingMenuChanges'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChanges400Example:
-                  summary: Default GetPendingMenuChanges 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChanges401Example:
-                  summary: Default GetPendingMenuChanges 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChanges403Example:
-                  summary: Default GetPendingMenuChanges 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPendingMenuChanges500Example:
-                  summary: Default GetPendingMenuChanges 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
   /api/v1.0/{appId}/menus/catalog-changes/publish:
     post:
       tags:
       - CatalogChanges
-      summary: Flipdish Publish Pending Menu Changes
-      description: Publish Pending Menu Changes via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/menus/catalog-changes/publish).
+      summary: Update menus with the pending changes from Catalog groups and items
+      description: '[BETA - this endpoint is under development, do not use it in your production system]'
       operationId: PublishPendingMenuChanges
       parameters:
       - name: appId
         in: path
-        description: The app id path parameter.
+        description: ''
         required: true
         schema:
           type: string
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PublishMenuChanges'
-            examples:
-              PublishPendingMenuChangesRequestExample:
-                summary: Default PublishPendingMenuChanges request
-                x-microcks-default: true
-                value:
-                  CatalogItemId: '500123'
-                  MenuIds:
-                  - 1
       responses:
         '200':
           description: OK
@@ -278,85 +211,72 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PublishPendingMenuChanges400Example:
-                  summary: Default PublishPendingMenuChanges 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PublishPendingMenuChanges401Example:
-                  summary: Default PublishPendingMenuChanges 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PublishPendingMenuChanges403Example:
-                  summary: Default PublishPendingMenuChanges 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PublishPendingMenuChanges404Example:
-                  summary: Default PublishPendingMenuChanges 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PublishPendingMenuChanges500Example:
-                  summary: Default PublishPendingMenuChanges 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
       security:
       - oauth2:
         - api
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMenuChanges'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PublishMenuChanges'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PublishMenuChanges'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PublishMenuChanges'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishMenuChanges'
+        required: true
 components:
   schemas:
-    RestApiArrayResult_PendingMenuChangesSummaries_:
+    RestApiArrayResult_PendingMenuChangesSummaries:
       description: Rest api array result
       required:
       - Data
@@ -367,22 +287,75 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PendingMenuChangesSummaries'
-          example: []
-    PendingMenuChangesSummaries:
-      description: Pending menu changes summaries
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
       type: object
       properties:
-        MenuId:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
           format: int32
-          description: Menu id
+          description: Error code
           type: integer
-          example: 500123
-        TotalPendingChanges:
-          format: int32
-          description: Sum of pending changes per menu id
-          type: integer
-          example: 12.5
-    RestApiPaginationResult_PendingMenuChanges_:
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    PublishMenuChanges:
+      description: Publish Menu Changes
+      type: object
+      properties:
+        CatalogItemId:
+          description: Optional Catalog item id
+          maxLength: 30
+          minLength: 0
+          type: string
+        MenuIds:
+          description: Optional Collection of Menu id
+          type: array
+          items:
+            format: int32
+            type: integer
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    RestApiPaginationResult_PendingMenuChanges:
       description: Rest api pagination result
       required:
       - Page
@@ -395,61 +368,31 @@ components:
           format: int32
           description: Current page index
           type: integer
-          example: 1
         Limit:
           format: int32
           description: Current page size
           type: integer
-          example: 1
         TotalRecordCount:
           format: int32
           description: Total record count
           type: integer
-          example: 12.5
         Data:
           description: Generic data object.
           type: array
           items:
             $ref: '#/components/schemas/PendingMenuChanges'
-          example: []
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    PublishMenuChanges:
-      description: Publish Menu Changes
+    PendingMenuChangesSummaries:
+      description: Pending menu changes summaries
       type: object
       properties:
-        CatalogItemId:
-          description: Optional Catalog item id
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: '500123'
-        MenuIds:
-          description: Optional Collection of Menu id
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
+        MenuId:
+          format: int32
+          description: Menu id
+          type: integer
+        TotalPendingChanges:
+          format: int32
+          description: Sum of pending changes per menu id
+          type: integer
     PendingMenuChanges:
       description: Pending Menu Changes
       type: object
@@ -459,22 +402,196 @@ components:
           maxLength: 30
           minLength: 0
           type: string
-          example: '500123'
         MenuId:
           format: int32
           description: Unique menu id
           type: integer
-          example: 500123
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

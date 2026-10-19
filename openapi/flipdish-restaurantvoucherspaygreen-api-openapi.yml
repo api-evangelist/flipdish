@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Marketing Restaurant Vouchers Pay Green API
   version: v1.0
-  description: Flipdish Open API v1.0 — Marketing operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Restaurant Vouchers Pay Green API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: RestaurantVouchersPayGreen
-  description: Operations for Restaurant Vouchers Pay Green.
 paths:
   /api/v1.0/{appId}/restaurant-vouchers/paygreen:
     get:
@@ -30,89 +18,72 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfiguration_'
-              examples:
-                GetPayGreenConfigurations200Example:
-                  summary: Default GetPayGreenConfigurations 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPayGreenConfigurations400Example:
-                  summary: Default GetPayGreenConfigurations 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPayGreenConfigurations401Example:
-                  summary: Default GetPayGreenConfigurations 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPayGreenConfigurations403Example:
-                  summary: Default GetPayGreenConfigurations 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetPayGreenConfigurations500Example:
-                  summary: Default GetPayGreenConfigurations 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Pay Green Configurations
-      description: Get Pay Green Configurations via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/restaurant-vouchers/paygreen).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get pay green configurations
+      x-summary-source: derived
     post:
       tags:
       - RestaurantVouchersPayGreen
@@ -123,109 +94,90 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePayGreenConfigurationRequest'
-            examples:
-              CreatePayGreenConfigurationRequestExample:
-                summary: Default CreatePayGreenConfiguration request
-                x-microcks-default: true
-                value:
-                  Name: Example Name
-                  PayGreenId: '500123'
-                  PayGreenPrivateKey: string
-                  AssignedStores:
-                  - 1
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration_'
-              examples:
-                CreatePayGreenConfiguration200Example:
-                  summary: Default CreatePayGreenConfiguration 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Name: Example Name
-                      PayGreenId: '500123'
-                      PayGreenConfigurationId: 500123
-                      AssignedStores: []
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreatePayGreenConfiguration400Example:
-                  summary: Default CreatePayGreenConfiguration 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreatePayGreenConfiguration401Example:
-                  summary: Default CreatePayGreenConfiguration 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreatePayGreenConfiguration403Example:
-                  summary: Default CreatePayGreenConfiguration 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreatePayGreenConfiguration500Example:
-                  summary: Default CreatePayGreenConfiguration 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Create Pay Green Configuration
-      description: Create Pay Green Configuration via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/restaurant-vouchers/paygreen).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayGreenConfigurationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayGreenConfigurationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreatePayGreenConfigurationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreatePayGreenConfigurationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreatePayGreenConfigurationRequest'
+        required: true
+      summary: Create pay green configuration
+      x-summary-source: derived
   /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores:
     get:
       tags:
@@ -237,89 +189,72 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherEligibleStore_'
-              examples:
-                GetElegibleStores200Example:
-                  summary: Default GetElegibleStores 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherEligibleStore'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherEligibleStore'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherEligibleStore'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherEligibleStore'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetElegibleStores400Example:
-                  summary: Default GetElegibleStores 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetElegibleStores401Example:
-                  summary: Default GetElegibleStores 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetElegibleStores403Example:
-                  summary: Default GetElegibleStores 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetElegibleStores500Example:
-                  summary: Default GetElegibleStores 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Elegible Stores
-      description: Get Elegible Stores via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get elegible stores
+      x-summary-source: derived
   /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores/{storeId}:
     get:
       tags:
@@ -331,101 +266,78 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration_'
-              examples:
-                GetStorePayGreenConfiguration 200Example:
-                  summary: Default GetStorePayGreenConfiguration  200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Name: Example Name
-                      Active: true
-                      PayGreenId: '500123'
-                      PayGreenConfigurationId: 500123
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStorePayGreenConfiguration 400Example:
-                  summary: Default GetStorePayGreenConfiguration  400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStorePayGreenConfiguration 401Example:
-                  summary: Default GetStorePayGreenConfiguration  401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStorePayGreenConfiguration 403Example:
-                  summary: Default GetStorePayGreenConfiguration  403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStorePayGreenConfiguration 500Example:
-                  summary: Default GetStorePayGreenConfiguration  500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Store Pay Green Configuration
-      description: Get Store Pay Green Configuration via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get store pay green configuration
+      x-summary-source: derived
       x-operation-id-source: normalized
       x-operation-id-original: 'GetStorePayGreenConfiguration '
     post:
@@ -438,114 +350,96 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateStorePayGreenConfigurationRequest'
-            examples:
-              UpdateStorePayGreenConfiguration RequestExample:
-                summary: Default UpdateStorePayGreenConfiguration  request
-                x-microcks-default: true
-                value:
-                  Active: true
-                  PayGreenConfigurationId: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration_'
-              examples:
-                UpdateStorePayGreenConfiguration 200Example:
-                  summary: Default UpdateStorePayGreenConfiguration  200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Name: Example Name
-                      Active: true
-                      PayGreenId: '500123'
-                      PayGreenConfigurationId: 500123
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenStoreConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateStorePayGreenConfiguration 400Example:
-                  summary: Default UpdateStorePayGreenConfiguration  400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateStorePayGreenConfiguration 401Example:
-                  summary: Default UpdateStorePayGreenConfiguration  401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateStorePayGreenConfiguration 403Example:
-                  summary: Default UpdateStorePayGreenConfiguration  403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateStorePayGreenConfiguration 500Example:
-                  summary: Default UpdateStorePayGreenConfiguration  500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update Store Pay Green Configuration
-      description: Update Store Pay Green Configuration via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStorePayGreenConfigurationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStorePayGreenConfigurationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateStorePayGreenConfigurationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateStorePayGreenConfigurationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateStorePayGreenConfigurationRequest'
+        required: true
+      summary: Update store pay green configuration
+      x-summary-source: derived
       x-operation-id-source: normalized
       x-operation-id-original: 'UpdateStorePayGreenConfiguration '
   /api/v1.0/{appId}/restaurant-vouchers/paygreen/{paygreenConfigurationId}:
@@ -559,101 +453,78 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: paygreenConfigurationId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The paygreen configuration id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration_'
-              examples:
-                ListPayGreenConfigurations200Example:
-                  summary: Default ListPayGreenConfigurations 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Name: Example Name
-                      PayGreenId: '500123'
-                      PayGreenConfigurationId: 500123
-                      AssignedStores: []
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ListPayGreenConfigurations400Example:
-                  summary: Default ListPayGreenConfigurations 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ListPayGreenConfigurations401Example:
-                  summary: Default ListPayGreenConfigurations 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ListPayGreenConfigurations403Example:
-                  summary: Default ListPayGreenConfigurations 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ListPayGreenConfigurations500Example:
-                  summary: Default ListPayGreenConfigurations 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish List Pay Green Configurations
-      description: List Pay Green Configurations via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/restaurant-vouchers/paygreen/{paygreenConfigurationId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: List pay green configurations
+      x-summary-source: derived
     post:
       tags:
       - RestaurantVouchersPayGreen
@@ -664,115 +535,96 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: paygreenConfigurationId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The paygreen configuration id path parameter.
-        example: 500123
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdatePayGreenConfigurationRequest'
-            examples:
-              UpdatePayGreenConfigurationRequestExample:
-                summary: Default UpdatePayGreenConfiguration request
-                x-microcks-default: true
-                value:
-                  Name: Example Name
-                  AssignedStores:
-                  - 1
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration_'
-              examples:
-                UpdatePayGreenConfiguration200Example:
-                  summary: Default UpdatePayGreenConfiguration 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Name: Example Name
-                      PayGreenId: '500123'
-                      PayGreenConfigurationId: 500123
-                      AssignedStores: []
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_RestaurantVoucherPayGreenConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayGreenConfiguration400Example:
-                  summary: Default UpdatePayGreenConfiguration 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayGreenConfiguration401Example:
-                  summary: Default UpdatePayGreenConfiguration 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayGreenConfiguration403Example:
-                  summary: Default UpdatePayGreenConfiguration 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayGreenConfiguration500Example:
-                  summary: Default UpdatePayGreenConfiguration 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update Pay Green Configuration
-      description: Update Pay Green Configuration via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/restaurant-vouchers/paygreen/{paygreenConfigurationId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePayGreenConfigurationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePayGreenConfigurationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdatePayGreenConfigurationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdatePayGreenConfigurationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdatePayGreenConfigurationRequest'
+        required: true
+      summary: Update pay green configuration
+      x-summary-source: derived
     delete:
       tags:
       - RestaurantVouchersPayGreen
@@ -783,16 +635,12 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: paygreenConfigurationId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The paygreen configuration id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
@@ -800,79 +648,65 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                DeletePayGreenConfiguration200Example:
-                  summary: Default DeletePayGreenConfiguration 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeletePayGreenConfiguration400Example:
-                  summary: Default DeletePayGreenConfiguration 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeletePayGreenConfiguration401Example:
-                  summary: Default DeletePayGreenConfiguration 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeletePayGreenConfiguration403Example:
-                  summary: Default DeletePayGreenConfiguration 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeletePayGreenConfiguration500Example:
-                  summary: Default DeletePayGreenConfiguration 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Delete Pay Green Configuration
-      description: Delete Pay Green Configuration via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/restaurant-vouchers/paygreen/{paygreenConfigurationId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Delete pay green configuration
+      x-summary-source: derived
   /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores/{storeId}/available-configurations:
     get:
       tags:
@@ -884,112 +718,94 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: storeId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary_'
-              examples:
-                GetStoreAvailablePayGreenConfigurations200Example:
-                  summary: Default GetStoreAvailablePayGreenConfigurations 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStoreAvailablePayGreenConfigurations400Example:
-                  summary: Default GetStoreAvailablePayGreenConfigurations 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStoreAvailablePayGreenConfigurations401Example:
-                  summary: Default GetStoreAvailablePayGreenConfigurations 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStoreAvailablePayGreenConfigurations403Example:
-                  summary: Default GetStoreAvailablePayGreenConfigurations 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetStoreAvailablePayGreenConfigurations500Example:
-                  summary: Default GetStoreAvailablePayGreenConfigurations 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Store Available Pay Green Configurations
-      description: Get Store Available Pay Green Configurations via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/restaurant-vouchers/paygreen/stores/{storeId}/available-configurations).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get store available pay green configurations
+      x-summary-source: derived
 components:
   schemas:
-    RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary_:
-      description: Rest api array result
-      required:
-      - Data
+    UpdatePayGreenConfigurationRequest:
+      description: UpdatePayGreenConfigurationRequest.
       type: object
       properties:
-        Data:
-          description: Generic data object.
+        Name:
+          description: Name.
+          type: string
+        AssignedStores:
+          description: AssignedStores.
           type: array
           items:
-            $ref: '#/components/schemas/RestaurantVoucherPayGreenConfigurationSummary'
-          example: []
-    RestApiArrayResult_RestaurantVoucherPayGreenConfiguration_:
+            format: int32
+            type: integer
+    RestApiArrayResult_RestaurantVoucherPayGreenConfiguration:
       description: Rest api array result
       required:
       - Data
@@ -1000,84 +816,28 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RestaurantVoucherPayGreenConfiguration'
-          example: []
-    UpdatePayGreenConfigurationRequest:
-      description: UpdatePayGreenConfigurationRequest.
-      type: object
-      properties:
-        Name:
-          description: Name.
-          type: string
-          example: Example Name
-        AssignedStores:
-          description: AssignedStores.
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-    RestaurantVoucherPayGreenConfiguration:
-      description: RestaurantVoucherPayGreenConfiguration.
-      type: object
-      properties:
-        Name:
-          description: Name.
-          type: string
-          example: Example Name
-        PayGreenId:
-          description: PayGreenId.
-          type: string
-          example: '500123'
-        PayGreenConfigurationId:
-          format: int32
-          description: PayGreenConfigurationId.
-          type: integer
-          example: 500123
-        AssignedStores:
-          description: AssignedStores.
-          type: array
-          items:
-            $ref: '#/components/schemas/RestaurantVoucherAssignedStore'
-          example: []
-    RestaurantVoucherAssignedStore:
-      description: RestaurantVoucherAssignedStore.
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: StoreId.
-          type: integer
-          example: 500123
-        Name:
-          description: Name.
-          type: string
-          example: Example Name
-        Active:
-          description: Active.
-          type: boolean
-          example: true
-    RestApiResult_RestaurantVoucherPayGreenConfiguration_:
-      description: Rest api result
+    RestApiArrayResult_RestaurantVoucherPayGreenConfigurationSummary:
+      description: Rest api array result
       required:
       - Data
       type: object
       properties:
         Data:
-          $ref: '#/components/schemas/RestaurantVoucherPayGreenConfiguration'
-    UpdateStorePayGreenConfigurationRequest:
-      description: UpdateStorePayGreenConfigurationRequest.
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/RestaurantVoucherPayGreenConfigurationSummary'
+    RestaurantVoucherPayGreenConfigurationSummary:
+      description: RestaurantVoucherPayGreenConfigurationSummary.
       type: object
       properties:
-        Active:
-          description: Active.
-          type: boolean
-          example: true
+        Name:
+          description: Name.
+          type: string
         PayGreenConfigurationId:
           format: int32
           description: PayGreenConfigurationId.
           type: integer
-          example: 500123
     RestaurantVoucherEligibleStore:
       description: RestaurantVoucherEligibleStore.
       type: object
@@ -1086,11 +846,9 @@ components:
           format: int32
           description: StoreId.
           type: integer
-          example: 500123
         Name:
           description: Name.
           type: string
-          example: Example Name
     CreatePayGreenConfigurationRequest:
       description: CreatePayGreenConfigurationRequest.
       type: object
@@ -1098,44 +856,81 @@ components:
         Name:
           description: Name.
           type: string
-          example: Example Name
         PayGreenId:
           description: PayGreenId.
           type: string
-          example: '500123'
         PayGreenPrivateKey:
           description: PayGreenPrivateKey.
           type: string
-          example: string
         AssignedStores:
           description: AssignedStores.
           type: array
           items:
             format: int32
             type: integer
-          example:
-          - 1
-    FlipdishError:
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
       type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
       properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiResult_RestaurantVoucherPayGreenStoreConfiguration_:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    RestaurantVoucherPayGreenConfiguration:
+      description: RestaurantVoucherPayGreenConfiguration.
+      type: object
+      properties:
+        Name:
+          description: Name.
+          type: string
+        PayGreenId:
+          description: PayGreenId.
+          type: string
+        PayGreenConfigurationId:
+          format: int32
+          description: PayGreenConfigurationId.
+          type: integer
+        AssignedStores:
+          description: AssignedStores.
+          type: array
+          items:
+            $ref: '#/components/schemas/RestaurantVoucherAssignedStore'
+    RestApiResult_RestaurantVoucherPayGreenStoreConfiguration:
       description: Rest api result
       required:
       - Data
@@ -1143,7 +938,34 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/RestaurantVoucherPayGreenStoreConfiguration'
-    RestApiArrayResult_RestaurantVoucherEligibleStore_:
+          description: Generic data object.
+    RestaurantVoucherPayGreenStoreConfiguration:
+      description: RestaurantVoucherPayGreenStoreConfiguration.
+      type: object
+      properties:
+        Name:
+          description: Name.
+          type: string
+        Active:
+          description: Active.
+          type: boolean
+        PayGreenId:
+          description: PayGreenId.
+          type: string
+        PayGreenConfigurationId:
+          format: int32
+          description: PayGreenConfigurationId.
+          type: integer
+    RestApiResult_RestaurantVoucherPayGreenConfiguration:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/RestaurantVoucherPayGreenConfiguration'
+          description: Generic data object.
+    RestApiArrayResult_RestaurantVoucherEligibleStore:
       description: Rest api array result
       required:
       - Data
@@ -1154,51 +976,227 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RestaurantVoucherEligibleStore'
-          example: []
-    RestaurantVoucherPayGreenStoreConfiguration:
-      description: RestaurantVoucherPayGreenStoreConfiguration.
+    UpdateStorePayGreenConfigurationRequest:
+      description: UpdateStorePayGreenConfigurationRequest.
       type: object
       properties:
-        Name:
-          description: Name.
-          type: string
-          example: Example Name
         Active:
           description: Active.
           type: boolean
-          example: true
-        PayGreenId:
-          description: PayGreenId.
-          type: string
-          example: '500123'
         PayGreenConfigurationId:
           format: int32
           description: PayGreenConfigurationId.
           type: integer
-          example: 500123
-    RestaurantVoucherPayGreenConfigurationSummary:
-      description: RestaurantVoucherPayGreenConfigurationSummary.
+    RestaurantVoucherAssignedStore:
+      description: RestaurantVoucherAssignedStore.
       type: object
       properties:
+        StoreId:
+          format: int32
+          description: StoreId.
+          type: integer
         Name:
           description: Name.
           type: string
-          example: Example Name
-        PayGreenConfigurationId:
-          format: int32
-          description: PayGreenConfigurationId.
-          type: integer
-          example: 500123
+        Active:
+          description: Active.
+          type: boolean
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

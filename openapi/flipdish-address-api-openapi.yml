@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Stores Address API
   version: v1.0
-  description: Flipdish Open API v1.0 — Stores operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Address API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: Address
-  description: Operations for Address.
 paths:
   /api/v1.0/address/countries:
     get:
@@ -30,91 +18,72 @@ paths:
         required: false
         schema:
           type: string
-        description: The language query parameter.
-        example: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_CountryFormResponse_'
-              examples:
-                GetCountries200Example:
-                  summary: Default GetCountries 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Value: string
-                      Label: string
+                $ref: '#/components/schemas/RestApiResult_CountryFormResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_CountryFormResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_CountryFormResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_CountryFormResponse'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCountries400Example:
-                  summary: Default GetCountries 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCountries401Example:
-                  summary: Default GetCountries 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCountries403Example:
-                  summary: Default GetCountries 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCountries500Example:
-                  summary: Default GetCountries 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Countries
-      description: Get Countries via the Flipdish Open API v1.0 (GET /api/v1.0/address/countries).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get countries
+      x-summary-source: derived
   /api/v1.0/app/{appId}/address/form:
     get:
       tags:
@@ -126,103 +95,77 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: language
         in: query
         required: false
         schema:
           type: string
-        description: The language query parameter.
-        example: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_AddressFormResponse_'
-              examples:
-                FormByApp200Example:
-                  summary: Default FormByApp 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FormData: []
-                      CountryCode: IE
-                      Language: string
-                      DisplayFormat:
-                        OneLine: string
-                        TwoLines:
-                        - string
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByApp400Example:
-                  summary: Default FormByApp 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByApp401Example:
-                  summary: Default FormByApp 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByApp403Example:
-                  summary: Default FormByApp 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByApp500Example:
-                  summary: Default FormByApp 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Form by App
-      description: Form by App via the Flipdish Open API v1.0 (GET /api/v1.0/app/{appId}/address/form).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Form by app
+      x-summary-source: derived
   /api/v1.0/address/country/{countryCode}/form:
     get:
       tags:
@@ -234,111 +177,82 @@ paths:
         required: true
         schema:
           type: string
-        description: The country code path parameter.
-        example: IE
       - name: language
         in: query
         required: false
         schema:
           type: string
-        description: The language query parameter.
-        example: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_AddressFormResponse_'
-              examples:
-                FormByCountry200Example:
-                  summary: Default FormByCountry 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FormData: []
-                      CountryCode: IE
-                      Language: string
-                      DisplayFormat:
-                        OneLine: string
-                        TwoLines:
-                        - string
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByCountry400Example:
-                  summary: Default FormByCountry 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByCountry401Example:
-                  summary: Default FormByCountry 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByCountry403Example:
-                  summary: Default FormByCountry 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormByCountry500Example:
-                  summary: Default FormByCountry 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Form by Country
-      description: Form by Country via the Flipdish Open API v1.0 (GET /api/v1.0/address/country/{countryCode}/form).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Form by country
+      x-summary-source: derived
   /api/v1.0/address/templates:
     post:
       tags:
       - Address
       operationId: AddressTemplates
-      requestBody:
-        required: false
-        content: {}
       responses:
         '200':
           description: OK
@@ -346,80 +260,83 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestApiStringResult'
-              examples:
-                AddressTemplates200Example:
-                  summary: Default AddressTemplates 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AddressTemplates400Example:
-                  summary: Default AddressTemplates 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AddressTemplates401Example:
-                  summary: Default AddressTemplates 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AddressTemplates403Example:
-                  summary: Default AddressTemplates 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AddressTemplates500Example:
-                  summary: Default AddressTemplates 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Address Templates
-      description: Address Templates via the Flipdish Open API v1.0 (POST /api/v1.0/address/templates).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreAddressForm'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/StoreAddressForm'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/StoreAddressForm'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StoreAddressForm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StoreAddressForm'
+        required: true
+      summary: Address templates
+      x-summary-source: derived
   /api/v1.0/address/google:
     post:
       tags:
@@ -431,148 +348,165 @@ paths:
         required: false
         schema:
           type: string
-        description: The language query parameter.
-        example: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GoogleAddress'
-            examples:
-              FormatGoogleAddressRequestExample:
-                summary: Default FormatGoogleAddress request
-                x-microcks-default: true
-                value:
-                  Results: []
-                  Result:
-                    Address_components: []
-                    Formatted_address: string
-                    Geometry:
-                      Location: {}
-                      Location_type: string
-                      Viewport: {}
-                    Place_id: '500123'
-                    Types:
-                    - string
-                  Status: Active
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_AddressFormResponse_'
-              examples:
-                FormatGoogleAddress200Example:
-                  summary: Default FormatGoogleAddress 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FormData: []
-                      CountryCode: IE
-                      Language: string
-                      DisplayFormat:
-                        OneLine: string
-                        TwoLines:
-                        - string
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AddressFormResponse'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormatGoogleAddress400Example:
-                  summary: Default FormatGoogleAddress 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormatGoogleAddress401Example:
-                  summary: Default FormatGoogleAddress 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormatGoogleAddress403Example:
-                  summary: Default FormatGoogleAddress 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                FormatGoogleAddress500Example:
-                  summary: Default FormatGoogleAddress 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Format Google Address
-      description: Format Google Address via the Flipdish Open API v1.0 (POST /api/v1.0/address/google).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleAddress'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GoogleAddress'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GoogleAddress'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GoogleAddress'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GoogleAddress'
+        required: true
+      summary: Format google address
+      x-summary-source: derived
 components:
   schemas:
-    GoogleLocation:
+    DynamicFormRule:
       type: object
       properties:
-        Lat:
-          format: float
-          type: number
-          example: 1.0
-        Lng:
-          format: float
-          type: number
-          example: 1.0
-    GoogleAddressComponent:
+        Value:
+          type: object
+        Message:
+          type: string
+        Scopes:
+          type: string
+    StoreAddressForm:
+      description: Address form payload.
+      required:
+      - AddressFields
+      - CountryCode
       type: object
       properties:
-        Long_name:
+        AddressFields:
+          description: The dynamic fields generated by the address form.
+          type: object
+          additionalProperties:
+            type: object
+        CountryCode:
+          description: ISO 2 letters code for the country, should be the same as the form that generates the fields.
           type: string
-          example: Example Name
-        Short_name:
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
           type: string
-          example: Example Name
-        Types:
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
           type: array
           items:
-            type: string
-          example:
-          - string
-    RestApiResult_AddressFormResponse_:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    RestApiResult_CountryFormResponse:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/CountryFormResponse'
+          description: Generic data object.
+    GoogleViewport:
+      type: object
+      properties:
+        Northeast:
+          $ref: '#/components/schemas/GoogleCoordinates'
+        Southwest:
+          $ref: '#/components/schemas/GoogleCoordinates'
+    GoogleAddress:
+      type: object
+      properties:
+        Results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoogleAddressResult'
+        Result:
+          $ref: '#/components/schemas/GoogleAddressResult'
+        Status:
+          type: string
+    RestApiResult_AddressFormResponse:
       description: Rest api result
       required:
       - Data
@@ -580,6 +514,45 @@ components:
       properties:
         Data:
           $ref: '#/components/schemas/AddressFormResponse'
+          description: Generic data object.
+    AddressFormDisplayFormat:
+      type: object
+      properties:
+        OneLine:
+          type: string
+        TwoLines:
+          type: array
+          items:
+            type: string
+    GoogleCoordinates:
+      type: object
+      properties:
+        Lat:
+          format: float
+          type: number
+        Lng:
+          format: float
+          type: number
+    GoogleAddressComponent:
+      type: object
+      properties:
+        Long_name:
+          type: string
+        Short_name:
+          type: string
+        Types:
+          type: array
+          items:
+            type: string
+    GoogleGeometry:
+      type: object
+      properties:
+        Location:
+          $ref: '#/components/schemas/GoogleLocation'
+        Location_type:
+          type: string
+        Viewport:
+          $ref: '#/components/schemas/GoogleViewport'
     AddressFormResponse:
       description: A response of a dyanmic form definition.
       type: object
@@ -589,96 +562,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DynamicFormField'
-          example: []
         CountryCode:
           description: ISO two letter code.
           type: string
-          example: IE
         Language:
           description: ISO culture code.
           type: string
-          example: string
         DisplayFormat:
           $ref: '#/components/schemas/AddressFormDisplayFormat'
-    GoogleGeometry:
-      type: object
-      properties:
-        Location:
-          $ref: '#/components/schemas/GoogleLocation'
-        Location_type:
-          type: string
-          example: string
-        Viewport:
-          $ref: '#/components/schemas/GoogleViewport'
+          description: Templates used to format form fields when displaying items in a list.
     DynamicFormFieldOption:
       type: object
       properties:
         Display:
           type: string
-          example: string
         Value:
           type: string
-          example: string
-    GoogleCoordinates:
+    GoogleLocation:
       type: object
       properties:
         Lat:
           format: float
           type: number
-          example: 1.0
         Lng:
           format: float
           type: number
-          example: 1.0
-    GoogleViewport:
-      type: object
-      properties:
-        Northeast:
-          $ref: '#/components/schemas/GoogleCoordinates'
-        Southwest:
-          $ref: '#/components/schemas/GoogleCoordinates'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    GoogleAddressResult:
-      type: object
-      properties:
-        Address_components:
-          type: array
-          items:
-            $ref: '#/components/schemas/GoogleAddressComponent'
-          example: []
-        Formatted_address:
-          type: string
-          example: string
-        Geometry:
-          $ref: '#/components/schemas/GoogleGeometry'
-        Place_id:
-          type: string
-          example: '500123'
-        Types:
-          type: array
-          items:
-            type: string
-          example:
-          - string
     RestApiStringResult:
       description: Rest api string result
       required:
@@ -688,20 +596,23 @@ components:
         Data:
           description: Data string
           type: string
-          example: string
-    GoogleAddress:
+    GoogleAddressResult:
       type: object
       properties:
-        Results:
+        Address_components:
           type: array
           items:
-            $ref: '#/components/schemas/GoogleAddressResult'
-          example: []
-        Result:
-          $ref: '#/components/schemas/GoogleAddressResult'
-        Status:
+            $ref: '#/components/schemas/GoogleAddressComponent'
+        Formatted_address:
           type: string
-          example: Active
+        Geometry:
+          $ref: '#/components/schemas/GoogleGeometry'
+        Place_id:
+          type: string
+        Types:
+          type: array
+          items:
+            type: string
     CountryFormResponse:
       description: Country
       type: object
@@ -709,42 +620,31 @@ components:
         Value:
           description: ISO two letter code.
           type: string
-          example: string
         Label:
           description: Label
           type: string
-          example: string
-    RestApiResult_CountryFormResponse_:
-      description: Rest api result
-      required:
-      - Data
+    ValidationErrorResult:
+      description: Validation error result
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/CountryFormResponse'
-    DynamicFormRule:
-      type: object
-      properties:
-        Value:
-          type: object
-        Message:
+        FieldName:
+          description: Field name
           type: string
-          example: string
-        Scopes:
-          type: string
-          example: string
-    AddressFormDisplayFormat:
-      type: object
-      properties:
-        OneLine:
-          type: string
-          example: string
-        TwoLines:
+        Errors:
+          description: List of errors relates to field
           type: array
           items:
             type: string
-          example:
-          - string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
     DynamicFormRules:
       type: object
       properties:
@@ -760,19 +660,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DynamicFormFieldOption'
-          example: []
     DynamicFormField:
       type: object
       properties:
         Identifier:
           type: string
-          example: string
         Label:
           type: string
-          example: string
         Placeholder:
           type: string
-          example: string
         Rules:
           $ref: '#/components/schemas/DynamicFormRules'
         Mapping:
@@ -783,23 +679,206 @@ components:
           type: array
           items:
             type: string
-          example:
-          - string
         Value:
           type: object
         Scopes:
           type: string
-          example: string
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

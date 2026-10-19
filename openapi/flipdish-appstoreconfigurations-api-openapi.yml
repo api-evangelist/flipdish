@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Apps App Store Configurations API
   version: v1.0
-  description: Flipdish Open API v1.0 — Apps operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 App Store Configurations API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: AppStoreConfigurations
-  description: Operations for App Store Configurations.
 paths:
   /api/v1.0/{appId}/appstore/apps:
     get:
@@ -30,89 +18,72 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppSummary_'
-              examples:
-                GetConfiguredApps200Example:
-                  summary: Default GetConfiguredApps 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppSummary'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppSummary'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppSummary'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppSummary'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredApps400Example:
-                  summary: Default GetConfiguredApps 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredApps401Example:
-                  summary: Default GetConfiguredApps 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredApps403Example:
-                  summary: Default GetConfiguredApps 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredApps500Example:
-                  summary: Default GetConfiguredApps 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Configured Apps
-      description: Get Configured Apps via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/appstore/apps).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get configured apps
+      x-summary-source: derived
   /api/v1.0/{appId}/appstore/apps/{appStoreAppId}:
     get:
       tags:
@@ -124,111 +95,92 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppConfigurationSummary_'
-              examples:
-                GetConfiguredAppSingleApp200Example:
-                  summary: Default GetConfiguredAppSingleApp 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppConfigurationSummary'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppConfigurationSummary'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppConfigurationSummary'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_AppStoreAppConfigurationSummary'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredAppSingleApp400Example:
-                  summary: Default GetConfiguredAppSingleApp 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredAppSingleApp401Example:
-                  summary: Default GetConfiguredAppSingleApp 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredAppSingleApp403Example:
-                  summary: Default GetConfiguredAppSingleApp 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredAppSingleApp404Example:
-                  summary: Default GetConfiguredAppSingleApp 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetConfiguredAppSingleApp500Example:
-                  summary: Default GetConfiguredAppSingleApp 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Configured App Single App
-      description: Get Configured App Single App via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/appstore/apps/{appStoreAppId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get configured app single app
+      x-summary-source: derived
   /api/v1.0/appstore/oauthresponse/{appStoreAppId}/responsecode:
     get:
       tags:
@@ -240,8 +192,6 @@ paths:
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
@@ -249,79 +199,65 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                AppStoreConfigurations_AppStoreHandleOauthResponseCode200Example:
-                  summary: Default AppStoreConfigurations_AppStoreHandleOauthResponseCode 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AppStoreConfigurations_AppStoreHandleOauthResponseCode400Example:
-                  summary: Default AppStoreConfigurations_AppStoreHandleOauthResponseCode 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AppStoreConfigurations_AppStoreHandleOauthResponseCode401Example:
-                  summary: Default AppStoreConfigurations_AppStoreHandleOauthResponseCode 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AppStoreConfigurations_AppStoreHandleOauthResponseCode403Example:
-                  summary: Default AppStoreConfigurations_AppStoreHandleOauthResponseCode 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AppStoreConfigurations_AppStoreHandleOauthResponseCode500Example:
-                  summary: Default AppStoreConfigurations_AppStoreHandleOauthResponseCode 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish App Store Configurations_App Store Handle Oauth Response Code
-      description: App Store Configurations_App Store Handle Oauth Response Code via the Flipdish Open API v1.0 (GET /api/v1.0/appstore/oauthresponse/{appStoreAppId}/responsecode).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: App store configurations app store handle oauth response code
+      x-summary-source: derived
   /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}:
     get:
       tags:
@@ -333,154 +269,97 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       - name: configId
         in: path
         required: true
         schema:
           type: string
-        description: The config id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration_'
-              examples:
-                GetAppStoreConfig200Example:
-                  summary: Default GetAppStoreConfig 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Id: '500123'
-                      AppId: '500123'
-                      AppStoreAppId: '500123'
-                      IsEnabled: true
-                      StoreIds:
-                      - 1
-                      Settings: []
-                      VerificationStatus: Draft
-                      Logo: string
-                      OAuthAppId: '500123'
-                      Internal: true
-                      Details: string
-                      ConfigurationType: ExternalLink
-                      StoreSelectorType: None
-                      FieldGroups: []
-                      SetupInstructions: string
-                      ExternalSetupLink: https://api.flipdish.co/example
-                      TeammateAppAccessLevel: Owner
-                      PermissionsType: Teammate
-                      Support:
-                        PrivacyPolicy: string
-                        TermsOfUse: string
-                        CompanyWebsite: string
-                        LearnMore: string
-                        InstallationMessage: string
-                        SupportEmail: owner@example.com
-                      ExternalFunctionActionUrl: https://api.flipdish.co/example
-                      ExternalFunctionSignatureKey: string
-                      IsPaid: true
-                      Name: Example Name
-                      Description: string
-                      Categories:
-                      - PointOfSale
-                      Countries:
-                      - GB
-                      DeveloperName: Example Name
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAppStoreConfig400Example:
-                  summary: Default GetAppStoreConfig 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAppStoreConfig401Example:
-                  summary: Default GetAppStoreConfig 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAppStoreConfig403Example:
-                  summary: Default GetAppStoreConfig 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAppStoreConfig404Example:
-                  summary: Default GetAppStoreConfig 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAppStoreConfig500Example:
-                  summary: Default GetAppStoreConfig 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get App Store Config
-      description: Get App Store Config via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get app store config
+      x-summary-source: derived
     put:
       tags:
       - AppStoreConfigurations
@@ -491,37 +370,16 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       - name: configId
         in: path
         required: true
         schema:
           type: string
-        description: The config id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateAppStoreAppConfiguration'
-            examples:
-              UpdateAppStoreConfigRequestExample:
-                summary: Default UpdateAppStoreConfig request
-                x-microcks-default: true
-                value:
-                  IsEnabled: true
-                  StoreIds:
-                  - 1
-                  Settings: []
       responses:
         '200':
           description: OK
@@ -530,84 +388,99 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfig400Example:
-                  summary: Default UpdateAppStoreConfig 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfig401Example:
-                  summary: Default UpdateAppStoreConfig 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfig403Example:
-                  summary: Default UpdateAppStoreConfig 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfig404Example:
-                  summary: Default UpdateAppStoreConfig 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+        '409':
+          description: Conflict
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfig500Example:
-                  summary: Default UpdateAppStoreConfig 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update App Store Config
-      description: Update App Store Config via the Flipdish Open API v1.0 (PUT /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfiguration'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfiguration'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfiguration'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfiguration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfiguration'
+        required: true
+      summary: Update app store config
+      x-summary-source: derived
     delete:
       tags:
       - AppStoreConfigurations
@@ -618,22 +491,16 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       - name: configId
         in: path
         required: true
         schema:
           type: string
-        description: The config id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
@@ -641,95 +508,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestApiStringResult'
-              examples:
-                DeleteAppStoreConfig200Example:
-                  summary: Default DeleteAppStoreConfig 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiStringResult'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteAppStoreConfig400Example:
-                  summary: Default DeleteAppStoreConfig 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteAppStoreConfig401Example:
-                  summary: Default DeleteAppStoreConfig 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteAppStoreConfig403Example:
-                  summary: Default DeleteAppStoreConfig 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteAppStoreConfig404Example:
-                  summary: Default DeleteAppStoreConfig 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                DeleteAppStoreConfig500Example:
-                  summary: Default DeleteAppStoreConfig 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Delete App Store Config
-      description: Delete App Store Config via the Flipdish Open API v1.0 (DELETE /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Delete app store config
+      x-summary-source: derived
   /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config:
     post:
       tags:
@@ -741,147 +593,92 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration_'
-              examples:
-                CreateAppStoreConfig200Example:
-                  summary: Default CreateAppStoreConfig 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Id: '500123'
-                      AppId: '500123'
-                      AppStoreAppId: '500123'
-                      IsEnabled: true
-                      StoreIds:
-                      - 1
-                      Settings: []
-                      VerificationStatus: Draft
-                      Logo: string
-                      OAuthAppId: '500123'
-                      Internal: true
-                      Details: string
-                      ConfigurationType: ExternalLink
-                      StoreSelectorType: None
-                      FieldGroups: []
-                      SetupInstructions: string
-                      ExternalSetupLink: https://api.flipdish.co/example
-                      TeammateAppAccessLevel: Owner
-                      PermissionsType: Teammate
-                      Support:
-                        PrivacyPolicy: string
-                        TermsOfUse: string
-                        CompanyWebsite: string
-                        LearnMore: string
-                        InstallationMessage: string
-                        SupportEmail: owner@example.com
-                      ExternalFunctionActionUrl: https://api.flipdish.co/example
-                      ExternalFunctionSignatureKey: string
-                      IsPaid: true
-                      Name: Example Name
-                      Description: string
-                      Categories:
-                      - PointOfSale
-                      Countries:
-                      - GB
-                      DeveloperName: Example Name
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AppStoreAppConfiguration'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAppStoreConfig400Example:
-                  summary: Default CreateAppStoreConfig 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAppStoreConfig401Example:
-                  summary: Default CreateAppStoreConfig 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAppStoreConfig403Example:
-                  summary: Default CreateAppStoreConfig 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAppStoreConfig404Example:
-                  summary: Default CreateAppStoreConfig 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAppStoreConfig500Example:
-                  summary: Default CreateAppStoreConfig 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Create App Store Config
-      description: Create App Store Config via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Create app store config
+      x-summary-source: derived
   /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}/action:
     post:
       tags:
@@ -893,120 +690,100 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       - name: configId
         in: path
         required: true
         schema:
           type: string
-        description: The config id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExecuteConfigurationActionRequest'
-            examples:
-              ExecuteConfigurationActionRequestExample:
-                summary: Default ExecuteConfigurationAction request
-                x-microcks-default: true
-                value:
-                  Key: string
-                  Action: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_ExecuteConfigurationActionResult_'
-              examples:
-                ExecuteConfigurationAction200Example:
-                  summary: Default ExecuteConfigurationAction 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      ErrorMessage: string
-                      InfoMessage: string
-                      RedirectUrl: https://api.flipdish.co/example
-                      RedirectTarget: Default
+                $ref: '#/components/schemas/RestApiResult_ExecuteConfigurationActionResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ExecuteConfigurationActionResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ExecuteConfigurationActionResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ExecuteConfigurationActionResult'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ExecuteConfigurationAction400Example:
-                  summary: Default ExecuteConfigurationAction 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ExecuteConfigurationAction401Example:
-                  summary: Default ExecuteConfigurationAction 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ExecuteConfigurationAction403Example:
-                  summary: Default ExecuteConfigurationAction 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ExecuteConfigurationAction500Example:
-                  summary: Default ExecuteConfigurationAction 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Execute Configuration Action
-      description: Execute Configuration Action via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}/action).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteConfigurationActionRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteConfigurationActionRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ExecuteConfigurationActionRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ExecuteConfigurationActionRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExecuteConfigurationActionRequest'
+        required: true
+      summary: Execute configuration action
+      x-summary-source: derived
   /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}/updatesettings:
     post:
       tags:
@@ -1018,34 +795,16 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: appStoreAppId
         in: path
         required: true
         schema:
           type: string
-        description: The app store app id path parameter.
-        example: '500123'
       - name: configId
         in: path
         required: true
         schema:
           type: string
-        description: The config id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateAppStoreAppConfigurationValuesBatch'
-            examples:
-              UpdateAppStoreConfigSettingValuesRequestExample:
-                summary: Default UpdateAppStoreConfigSettingValues request
-                x-microcks-default: true
-                value:
-                  Settings: []
       responses:
         '200':
           description: OK
@@ -1054,185 +813,86 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfigSettingValues400Example:
-                  summary: Default UpdateAppStoreConfigSettingValues 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfigSettingValues401Example:
-                  summary: Default UpdateAppStoreConfigSettingValues 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfigSettingValues403Example:
-                  summary: Default UpdateAppStoreConfigSettingValues 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfigSettingValues404Example:
-                  summary: Default UpdateAppStoreConfigSettingValues 404 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAppStoreConfigSettingValues500Example:
-                  summary: Default UpdateAppStoreConfigSettingValues 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update App Store Config Setting Values
-      description: Update App Store Config Setting Values via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/appstore/apps/{appStoreAppId}/config/{configId}/updatesettings).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfigurationValuesBatch'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfigurationValuesBatch'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfigurationValuesBatch'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfigurationValuesBatch'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateAppStoreAppConfigurationValuesBatch'
+        required: true
+      summary: Update app store config setting values
+      x-summary-source: derived
 components:
   schemas:
-    UpdateAppStoreAppConfigurationValuesBatch:
-      type: object
-      properties:
-        Settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
-          example: []
-    ValidValue:
-      required:
-      - Code
-      - Name
-      type: object
-      properties:
-        Code:
-          type: string
-          example: string
-        Name:
-          type: string
-          example: Example Name
-    RestApiStringResult:
-      description: Rest api string result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Data string
-          type: string
-          example: string
-    UpdateAppStoreAppConfiguration:
-      required:
-      - IsEnabled
-      type: object
-      properties:
-        IsEnabled:
-          type: boolean
-          example: true
-        StoreIds:
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        Settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
-          example: []
-    Setting:
-      type: object
-      properties:
-        Key:
-          type: string
-          example: string
-        Value:
-          type: string
-          example: string
-    ExecuteConfigurationActionRequest:
-      type: object
-      properties:
-        Key:
-          type: string
-          example: string
-        Action:
-          type: string
-          example: string
-    AppStoreAppSupportInfo:
-      type: object
-      properties:
-        PrivacyPolicy:
-          type: string
-          example: string
-        TermsOfUse:
-          type: string
-          example: string
-        CompanyWebsite:
-          type: string
-          example: string
-        LearnMore:
-          type: string
-          example: string
-        InstallationMessage:
-          type: string
-          example: string
-        SupportEmail:
-          type: string
-          example: owner@example.com
-    ConfiguredStore:
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          type: integer
-          example: 500123
-        Name:
-          type: string
-          example: Example Name
     AppStoreAppSummary:
       required:
       - Id
@@ -1246,29 +906,22 @@ components:
       properties:
         Id:
           type: string
-          example: '500123'
         VerificationStatus:
           enum:
           - Draft
           - Submitted
           - Verified
           type: string
-          example: Draft
         Logo:
           type: string
-          example: string
         Internal:
           type: boolean
-          example: true
         Name:
           type: string
-          example: Example Name
         Description:
           type: string
-          example: string
         IsEnabled:
           type: boolean
-          example: true
         Categories:
           type: array
           items:
@@ -1281,8 +934,6 @@ components:
             - LoyaltyAndMarketing
             - Other
             type: string
-          example:
-          - PointOfSale
         Countries:
           type: array
           items:
@@ -1305,12 +956,65 @@ components:
             - AU
             - NZ
             type: string
-          example:
-          - GB
         DeveloperName:
           type: string
-          example: Example Name
-    RestApiArrayResult_AppStoreAppSummary_:
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    AppStoreAppSupportInfo:
+      type: object
+      properties:
+        PrivacyPolicy:
+          type: string
+        TermsOfUse:
+          type: string
+        CompanyWebsite:
+          type: string
+        LearnMore:
+          type: string
+        InstallationMessage:
+          type: string
+        SupportEmail:
+          type: string
+    ValidValue:
+      required:
+      - Code
+      - Name
+      type: object
+      properties:
+        Code:
+          type: string
+        Name:
+          type: string
+    RestApiArrayResult_AppStoreAppSummary:
       description: Rest api array result
       required:
       - Data
@@ -1321,8 +1025,94 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AppStoreAppSummary'
-          example: []
-    RestApiArrayResult_AppStoreAppConfigurationSummary_:
+    Setting:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+    RestApiResult_ExecuteConfigurationActionResult:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ExecuteConfigurationActionResult'
+          description: Generic data object.
+    AppStoreAppConfigurationSummary:
+      required:
+      - Id
+      - AppId
+      - IsEnabled
+      - Stores
+      - ConfigurationType
+      - StoreSelectorType
+      - Internal
+      - AppStoreAppId
+      - Name
+      - Description
+      type: object
+      properties:
+        Id:
+          type: string
+        AppId:
+          type: string
+        IsEnabled:
+          type: boolean
+        Stores:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfiguredStore'
+        ConfigurationType:
+          enum:
+          - ExternalLink
+          - FlipdishHosted
+          type: string
+        StoreSelectorType:
+          enum:
+          - None
+          - Single
+          - Multiple
+          type: string
+        Internal:
+          type: boolean
+        AppStoreAppId:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        Logo:
+          type: string
+        DeveloperName:
+          type: string
+    RestApiResult_AppStoreAppConfiguration:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AppStoreAppConfiguration'
+          description: Generic data object.
+    ConfiguredStore:
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          type: integer
+        Name:
+          type: string
+    UpdateAppStoreAppConfigurationValuesBatch:
+      type: object
+      properties:
+        Settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    RestApiArrayResult_AppStoreAppConfigurationSummary:
       description: Rest api array result
       required:
       - Data
@@ -1333,64 +1123,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AppStoreAppConfigurationSummary'
-          example: []
-    Field:
-      required:
-      - Name
-      - Description
-      - Key
-      - Position
-      - FieldType
+    ExecuteConfigurationActionRequest:
       type: object
       properties:
-        Name:
-          type: string
-          example: Example Name
-        Description:
-          type: string
-          example: string
         Key:
           type: string
-          example: string
-        Tooltip:
+        Action:
           type: string
-          example: string
-        Position:
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-          example: 1
-        DefaultValue:
-          type: string
-          example: string
-        ValidValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidValue'
-          example: []
-        ValidationRegex:
-          type: string
-          example: string
-        FieldType:
-          enum:
-          - Text
-          - TextArea
-          - Integer
-          - Decimal
-          - Date
-          - DateTime
-          - Time
-          - Select
-          - Boolean
-          - ActionButton
-          type: string
-          example: Text
-        IsFlipdishRestricted:
-          type:
-          - boolean
-          - 'null'
-          example: true
     FieldGroup:
       required:
       - Name
@@ -1399,36 +1138,37 @@ components:
       properties:
         Name:
           type: string
-          example: Example Name
         Description:
           type: string
-          example: string
         Tooltip:
           type: string
-          example: string
         Position:
           format: int32
           maximum: 1000
           minimum: 1
           type: integer
-          example: 1
         Fields:
           type: array
           items:
             $ref: '#/components/schemas/Field'
-          example: []
+    RestApiStringResult:
+      description: Rest api string result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Data string
+          type: string
     ExecuteConfigurationActionResult:
       type: object
       properties:
         ErrorMessage:
           type: string
-          example: string
         InfoMessage:
           type: string
-          example: string
         RedirectUrl:
           type: string
-          example: https://api.flipdish.co/example
         RedirectTarget:
           enum:
           - Default
@@ -1437,7 +1177,6 @@ components:
           type:
           - string
           - 'null'
-          example: Default
     AppStoreAppConfiguration:
       required:
       - Id
@@ -1459,71 +1198,54 @@ components:
       properties:
         Id:
           type: string
-          example: '500123'
         AppId:
           type: string
-          example: '500123'
         AppStoreAppId:
           type: string
-          example: '500123'
         IsEnabled:
           type: boolean
-          example: true
         StoreIds:
           type: array
           items:
             format: int32
             type: integer
-          example:
-          - 1
         Settings:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
-          example: []
         VerificationStatus:
           enum:
           - Draft
           - Submitted
           - Verified
           type: string
-          example: Draft
         Logo:
           type: string
-          example: string
         OAuthAppId:
           type: string
-          example: '500123'
         Internal:
           type: boolean
-          example: true
         Details:
           type: string
-          example: string
         ConfigurationType:
           enum:
           - ExternalLink
           - FlipdishHosted
           type: string
-          example: ExternalLink
         StoreSelectorType:
           enum:
           - None
           - Single
           - Multiple
           type: string
-          example: None
         FieldGroups:
           type: array
           items:
             $ref: '#/components/schemas/FieldGroup'
-          example: []
         SetupInstructions:
           type: string
-          example: string
         ExternalSetupLink:
           type: string
-          example: https://api.flipdish.co/example
         TeammateAppAccessLevel:
           enum:
           - Owner
@@ -1534,32 +1256,26 @@ components:
           - PropertyManager
           - StoreManager
           - StoreStaff
+          - StaffMember
           - StoreReadOnlyAccess
           - FinanceManger
           type: string
-          example: Owner
         PermissionsType:
           enum:
           - Teammate
           type: string
-          example: Teammate
         Support:
           $ref: '#/components/schemas/AppStoreAppSupportInfo'
         ExternalFunctionActionUrl:
           type: string
-          example: https://api.flipdish.co/example
         ExternalFunctionSignatureKey:
           type: string
-          example: string
         IsPaid:
           type: boolean
-          example: true
         Name:
           type: string
-          example: Example Name
         Description:
           type: string
-          example: string
         Categories:
           type: array
           items:
@@ -1572,8 +1288,6 @@ components:
             - LoyaltyAndMarketing
             - Other
             type: string
-          example:
-          - PointOfSale
         Countries:
           type: array
           items:
@@ -1596,116 +1310,279 @@ components:
             - AU
             - NZ
             type: string
-          example:
-          - GB
         DeveloperName:
           type: string
-          example: Example Name
-    RestApiResult_ExecuteConfigurationActionResult_:
-      description: Rest api result
-      required:
-      - Data
+    ValidationErrorResult:
+      description: Validation error result
       type: object
       properties:
-        Data:
-          $ref: '#/components/schemas/ExecuteConfigurationActionResult'
-    RestApiResult_AppStoreAppConfiguration_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AppStoreAppConfiguration'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    AppStoreAppConfigurationSummary:
-      required:
-      - Id
-      - AppId
-      - IsEnabled
-      - Stores
-      - ConfigurationType
-      - StoreSelectorType
-      - Internal
-      - AppStoreAppId
-      - Name
-      - Description
-      type: object
-      properties:
-        Id:
+        FieldName:
+          description: Field name
           type: string
-          example: '500123'
-        AppId:
-          type: string
-          example: '500123'
-        IsEnabled:
-          type: boolean
-          example: true
-        Stores:
+        Errors:
+          description: List of errors relates to field
           type: array
           items:
-            $ref: '#/components/schemas/ConfiguredStore'
-          example: []
-        ConfigurationType:
-          enum:
-          - ExternalLink
-          - FlipdishHosted
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
           type: string
-          example: ExternalLink
-        StoreSelectorType:
-          enum:
-          - None
-          - Single
-          - Multiple
-          type: string
-          example: None
-        Internal:
+          readOnly: true
+    UpdateAppStoreAppConfiguration:
+      required:
+      - IsEnabled
+      type: object
+      properties:
+        IsEnabled:
           type: boolean
-          example: true
-        AppStoreAppId:
-          type: string
-          example: '500123'
+        StoreIds:
+          type: array
+          items:
+            format: int32
+            type: integer
+        Settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Field:
+      required:
+      - Name
+      - Description
+      - Key
+      - Position
+      - FieldType
+      type: object
+      properties:
         Name:
           type: string
-          example: Example Name
         Description:
           type: string
-          example: string
-        Logo:
+        Key:
           type: string
-          example: string
-        DeveloperName:
+        Tooltip:
           type: string
-          example: Example Name
+        Position:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+        DefaultValue:
+          type: string
+        ValidValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidValue'
+        ValidationRegex:
+          type: string
+        FieldType:
+          enum:
+          - Text
+          - TextArea
+          - Integer
+          - Decimal
+          - Date
+          - DateTime
+          - Time
+          - Select
+          - Boolean
+          - ActionButton
+          type: string
+        IsFlipdishRestricted:
+          type:
+          - boolean
+          - 'null'
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

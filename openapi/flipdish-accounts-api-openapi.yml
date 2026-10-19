@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Customers Accounts API
   version: v1.0
-  description: Flipdish Open API v1.0 — Customers operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Accounts API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: Accounts
-  description: Operations for Accounts.
 paths:
   /api/v1.0/accounts:
     get:
@@ -30,276 +18,206 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_AccountDetail_'
-              examples:
-                GetAccountDetails200Example:
-                  summary: Default GetAccountDetails 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Email: owner@example.com
-                      SignupSteps: []
-                      IsVerified: true
-                      IsSelfServeUser: true
-                      AccountId: 500123
-                      Name: Example Name
-                      Language: string
-                      TimeZoneInfoId: '500123'
-                      DisplayTimesInUserLocalTimeZone: true
-                      ShowHiddenFeatures: true
-                      CreatedAt: '2026-06-02T12:00:00Z'
+                $ref: '#/components/schemas/RestApiResult_AccountDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AccountDetail'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AccountDetail'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_AccountDetail'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAccountDetails400Example:
-                  summary: Default GetAccountDetails 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAccountDetails401Example:
-                  summary: Default GetAccountDetails 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAccountDetails403Example:
-                  summary: Default GetAccountDetails 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetAccountDetails500Example:
-                  summary: Default GetAccountDetails 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Account Details
-      description: Get Account Details via the Flipdish Open API v1.0 (GET /api/v1.0/accounts).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get account details
+      x-summary-source: derived
     put:
       tags:
       - Accounts
       operationId: UpdateAccount
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            Message:
+              example: An error has occured
+            ErrorCode:
+              example: 0
+            StackTrace:
+              example: An error has occured
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+      security:
+      - oauth2:
+        - api
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AccountDetailBase'
-            examples:
-              UpdateAccountRequestExample:
-                summary: Default UpdateAccount request
-                x-microcks-default: true
-                value:
-                  Name: Example Name
-                  Language: string
-                  TimeZoneInfoId: '500123'
-                  DisplayTimesInUserLocalTimeZone: true
-                  ShowHiddenFeatures: true
-                  CreatedAt: '2026-06-02T12:00:00Z'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAccount400Example:
-                  summary: Default UpdateAccount 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAccount401Example:
-                  summary: Default UpdateAccount 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAccount403Example:
-                  summary: Default UpdateAccount 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateAccount500Example:
-                  summary: Default UpdateAccount 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Update Account
-      description: Update Account via the Flipdish Open API v1.0 (PUT /api/v1.0/accounts).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AccountDetailBase'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AccountDetailBase'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AccountDetailBase'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AccountDetailBase'
+        required: true
+      summary: Update account
+      x-summary-source: derived
     post:
       tags:
       - Accounts
       operationId: CreateAccount
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateAccountModel'
-            examples:
-              CreateAccountRequestExample:
-                summary: Default CreateAccount request
-                x-microcks-default: true
-                value:
-                  Email: owner@example.com
-                  StoreName: Example Name
-                  LanguageId: '500123'
-                  Rid: 500123
-                  Cid: '500123'
-                  RecaptchaToken: string
       responses:
         '200':
           description: OK
         '400':
           description: BadRequest
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAccount400Example:
-                  summary: Default CreateAccount 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+            Message:
+              example: An error has occured
+            ErrorCode:
+              example: 0
+            StackTrace:
+              example: An error has occured
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAccount401Example:
-                  summary: Default CreateAccount 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAccount403Example:
-                  summary: Default CreateAccount 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateAccount500Example:
-                  summary: Default CreateAccount 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+        '410':
+          description: Gone
       security:
       - oauth2:
         - api
-      summary: Flipdish Create Account
-      description: Create Account via the Flipdish Open API v1.0 (POST /api/v1.0/accounts).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateAccountModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateAccountModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateAccountModel'
+        required: true
+      summary: Create account
+      x-summary-source: derived
   /api/v1.0/accounts/timezones:
     get:
       tags:
@@ -311,498 +229,218 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_LocalisedTimeZone_'
-              examples:
-                GetLocalisedTimeZones200Example:
-                  summary: Default GetLocalisedTimeZones 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_LocalisedTimeZone'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_LocalisedTimeZone'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_LocalisedTimeZone'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_LocalisedTimeZone'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetLocalisedTimeZones400Example:
-                  summary: Default GetLocalisedTimeZones 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetLocalisedTimeZones401Example:
-                  summary: Default GetLocalisedTimeZones 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetLocalisedTimeZones403Example:
-                  summary: Default GetLocalisedTimeZones 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetLocalisedTimeZones500Example:
-                  summary: Default GetLocalisedTimeZones 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Localised Time Zones
-      description: Get Localised Time Zones via the Flipdish Open API v1.0 (GET /api/v1.0/accounts/timezones).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get localised time zones
+      x-summary-source: derived
   /api/v1.0/accounts/password:
     put:
       tags:
       - Accounts
       operationId: ChangePassword
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+        '409':
+          description: Conflict
+      security:
+      - oauth2:
+        - api
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangePasswordModel'
-            examples:
-              ChangePasswordRequestExample:
-                summary: Default ChangePassword request
-                x-microcks-default: true
-                value:
-                  OldPassword: string
-                  NewPassword: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePassword400Example:
-                  summary: Default ChangePassword 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePassword401Example:
-                  summary: Default ChangePassword 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePassword403Example:
-                  summary: Default ChangePassword 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '409':
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePassword409Example:
-                  summary: Default ChangePassword 409 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePassword500Example:
-                  summary: Default ChangePassword 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Change Password
-      description: Change Password via the Flipdish Open API v1.0 (PUT /api/v1.0/accounts/password).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordModel'
+        required: true
+      summary: Change password
+      x-summary-source: derived
     post:
       tags:
       - Accounts
       operationId: PasswordResetWithToken
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            Message:
+              example: An error has occured
+            ErrorCode:
+              example: 0
+            StackTrace:
+              example: An error has occured
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+      security:
+      - oauth2:
+        - api
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PasswordResetModel'
-            examples:
-              PasswordResetWithTokenRequestExample:
-                summary: Default PasswordResetWithToken request
-                x-microcks-default: true
-                value:
-                  TokenId: '500123'
-                  Email: owner@example.com
-                  Password: string
-                  PasswordConfirmation: string
-                  Token: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PasswordResetWithToken400Example:
-                  summary: Default PasswordResetWithToken 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PasswordResetWithToken401Example:
-                  summary: Default PasswordResetWithToken 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PasswordResetWithToken403Example:
-                  summary: Default PasswordResetWithToken 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                PasswordResetWithToken500Example:
-                  summary: Default PasswordResetWithToken 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Password Reset with Token
-      description: Password Reset with Token via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/password).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/v1.0/accounts/password/pin:
-    put:
-      tags:
-      - Accounts
-      operationId: ChangePasswordWithPin
-      requestBody:
-        required: true
-        content:
-          application/json:
+          text/json:
             schema:
-              $ref: '#/components/schemas/SetPasswordWithPinModel'
-            examples:
-              ChangePasswordWithPinRequestExample:
-                summary: Default ChangePasswordWithPin request
-                x-microcks-default: true
-                value:
-                  Pin: 1
-                  NewPassword: string
-                  RecaptchaToken: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePasswordWithPin400Example:
-                  summary: Default ChangePasswordWithPin 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePasswordWithPin401Example:
-                  summary: Default ChangePasswordWithPin 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePasswordWithPin403Example:
-                  summary: Default ChangePasswordWithPin 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '409':
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePasswordWithPin409Example:
-                  summary: Default ChangePasswordWithPin 409 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                ChangePasswordWithPin500Example:
-                  summary: Default ChangePasswordWithPin 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Change Password with Pin
-      description: Change Password with Pin via the Flipdish Open API v1.0 (PUT /api/v1.0/accounts/password/pin).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/v1.0/accounts/pin:
-    post:
-      tags:
-      - Accounts
-      operationId: RequestLoginPin
-      requestBody:
-        required: true
-        content:
-          application/json:
+              $ref: '#/components/schemas/PasswordResetModel'
+          application/xml:
             schema:
-              $ref: '#/components/schemas/RequestLoginPinModel'
-            examples:
-              RequestLoginPinRequestExample:
-                summary: Default RequestLoginPin request
-                x-microcks-default: true
-                value:
-                  Email: owner@example.com
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestLoginPinResponse'
-              examples:
-                RequestLoginPin200Example:
-                  summary: Default RequestLoginPin 200 response
-                  x-microcks-default: true
-                  value:
-                    LoginPinSentViaEmail: true
-                    ForceOktaLogin: true
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestLoginPin400Example:
-                  summary: Default RequestLoginPin 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestLoginPin401Example:
-                  summary: Default RequestLoginPin 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestLoginPin403Example:
-                  summary: Default RequestLoginPin 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestLoginPin500Example:
-                  summary: Default RequestLoginPin 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Request Login Pin
-      description: Request Login Pin via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/pin).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+              $ref: '#/components/schemas/PasswordResetModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PasswordResetModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetModel'
+        required: true
+      summary: Password reset with token
+      x-summary-source: derived
   /api/v1.0/accounts/login:
     post:
       tags:
       - Accounts
       operationId: Login
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginModel'
-            examples:
-              LoginRequestExample:
-                summary: Default Login request
-                x-microcks-default: true
-                value:
-                  Email: owner@example.com
-                  Password: string
       responses:
         '200':
           description: OK
@@ -811,69 +449,69 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Login400Example:
-                  summary: Default Login 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Login401Example:
-                  summary: Default Login 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Login403Example:
-                  summary: Default Login 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Login500Example:
-                  summary: Default Login 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Login
-      description: Login via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/login).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+        required: true
+      summary: Login
+      x-summary-source: derived
   /api/v1.0/accounts/logout:
     post:
       tags:
@@ -887,158 +525,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Logout400Example:
-                  summary: Default Logout 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Logout401Example:
-                  summary: Default Logout 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Logout403Example:
-                  summary: Default Logout 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                Logout500Example:
-                  summary: Default Logout 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Logout
-      description: Logout via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/logout).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/v1.0/accounts/login/pin:
-    post:
-      tags:
-      - Accounts
-      operationId: LoginWithPin
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginWithPinModel'
-            examples:
-              LoginWithPinRequestExample:
-                summary: Default LoginWithPin request
-                x-microcks-default: true
-                value:
-                  Email: owner@example.com
-                  Pin: 1
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithPin400Example:
-                  summary: Default LoginWithPin 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithPin401Example:
-                  summary: Default LoginWithPin 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithPin403Example:
-                  summary: Default LoginWithPin 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginWithPin500Example:
-                  summary: Default LoginWithPin 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Login with Pin
-      description: Login with Pin via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/login/pin).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Logout
+      x-summary-source: derived
   /api/v1.0/accounts/login/sso:
     post:
       tags:
@@ -1052,87 +583,56 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginSso400Example:
-                  summary: Default LoginSso 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginSso401Example:
-                  summary: Default LoginSso 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginSso403Example:
-                  summary: Default LoginSso 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                LoginSso500Example:
-                  summary: Default LoginSso 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Login Sso
-      description: Login Sso via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/login/sso).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Login sso
+      x-summary-source: derived
   /api/v1.0/accounts/basic-account:
     post:
       tags:
       - Accounts
       operationId: CreateBasicAccount
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateBasicAccountModel'
-            examples:
-              CreateBasicAccountRequestExample:
-                summary: Default CreateBasicAccount request
-                x-microcks-default: true
-                value:
-                  StoreName: Example Name
-                  LanguageId: '500123'
       responses:
         '200':
           description: OK
@@ -1140,247 +640,147 @@ paths:
             application/json:
               schema:
                 type: string
-              examples:
-                CreateBasicAccount200Example:
-                  summary: Default CreateBasicAccount 200 response
-                  x-microcks-default: true
-                  value: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
         '400':
           description: BadRequest
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBasicAccount400Example:
-                  summary: Default CreateBasicAccount 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+            Message:
+              example: An error has occured
+            ErrorCode:
+              example: 0
+            StackTrace:
+              example: An error has occured
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBasicAccount401Example:
-                  summary: Default CreateBasicAccount 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBasicAccount403Example:
-                  summary: Default CreateBasicAccount 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBasicAccount500Example:
-                  summary: Default CreateBasicAccount 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Create Basic Account
-      description: Create Basic Account via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/basic-account).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBasicAccountModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateBasicAccountModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateBasicAccountModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateBasicAccountModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateBasicAccountModel'
+        required: true
+      summary: Create basic account
+      x-summary-source: derived
   /api/v1.0/accounts/passwordreset:
     post:
       tags:
       - Accounts
       operationId: RequestPasswordReset
-      requestBody:
-        required: false
-        content: {}
       responses:
         '200':
           description: OK
         '400':
           description: BadRequest
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestPasswordReset400Example:
-                  summary: Default RequestPasswordReset 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+            Message:
+              example: An error has occured
+            ErrorCode:
+              example: 0
+            StackTrace:
+              example: An error has occured
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestPasswordReset401Example:
-                  summary: Default RequestPasswordReset 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestPasswordReset403Example:
-                  summary: Default RequestPasswordReset 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RequestPasswordReset500Example:
-                  summary: Default RequestPasswordReset 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Request Password Reset
-      description: Request Password Reset via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/passwordreset).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/v1.0/accounts/password/resetpin:
-    post:
-      tags:
-      - Accounts
-      operationId: SendPinForPasswordReset
       requestBody:
-        required: false
-        content: {}
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestPasswordResetPinResponse'
-              examples:
-                SendPinForPasswordReset200Example:
-                  summary: Default SendPinForPasswordReset 200 response
-                  x-microcks-default: true
-                  value:
-                    PasswordResetPinSentViaEmail: true
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SendPinForPasswordReset400Example:
-                  summary: Default SendPinForPasswordReset 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SendPinForPasswordReset401Example:
-                  summary: Default SendPinForPasswordReset 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SendPinForPasswordReset403Example:
-                  summary: Default SendPinForPasswordReset 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SendPinForPasswordReset500Example:
-                  summary: Default SendPinForPasswordReset 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Send Pin for Password Reset
-      description: Send Pin for Password Reset via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/password/resetpin).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPasswordResetModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RequestPasswordResetModel'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/RequestPasswordResetModel'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/RequestPasswordResetModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RequestPasswordResetModel'
+        required: true
+      summary: Request password reset
+      x-summary-source: derived
   /api/v1.0/accounts/recaptcha:
     post:
       tags:
@@ -1392,79 +792,53 @@ paths:
         required: true
         schema:
           type: string
-        description: The token query parameter.
-        example: string
       responses:
         '200':
           description: OK
         '400':
           description: BadRequest
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RecaptchaValidate400Example:
-                  summary: Default RecaptchaValidate 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+            Message:
+              example: An error has occured
+            ErrorCode:
+              example: 0
+            StackTrace:
+              example: An error has occured
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RecaptchaValidate401Example:
-                  summary: Default RecaptchaValidate 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RecaptchaValidate403Example:
-                  summary: Default RecaptchaValidate 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                RecaptchaValidate500Example:
-                  summary: Default RecaptchaValidate 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Recaptcha Validate
-      description: Recaptcha Validate via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/recaptcha).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Recaptcha validate
+      x-summary-source: derived
   /api/v1.0/accounts/signupstep/{signupStepAction}/skip:
     post:
       tags:
@@ -1481,8 +855,6 @@ paths:
           - StoreLocation
           - PaymentSubscription
           - StoreName
-        description: The signup step action path parameter.
-        example: Question
       responses:
         '200':
           description: OK
@@ -1491,69 +863,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SkipSignupStep400Example:
-                  summary: Default SkipSignupStep 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SkipSignupStep401Example:
-                  summary: Default SkipSignupStep 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SkipSignupStep403Example:
-                  summary: Default SkipSignupStep 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SkipSignupStep500Example:
-                  summary: Default SkipSignupStep 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Skip Signup Step
-      description: Skip Signup Step via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/signupstep/{signupStepAction}/skip).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Skip signup step
+      x-summary-source: derived
   /api/v1.0/accounts/signupstep/{signupStepAction}/answer:
     post:
       tags:
@@ -1570,20 +924,6 @@ paths:
           - StoreLocation
           - PaymentSubscription
           - StoreName
-        description: The signup step action path parameter.
-        example: Question
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              format: int32
-              type: integer
-            examples:
-              AnswerSignUpQuestionRequestExample:
-                summary: Default AnswerSignUpQuestion request
-                x-microcks-default: true
-                value: 1
       responses:
         '200':
           description: OK
@@ -1592,234 +932,76 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AnswerSignUpQuestion400Example:
-                  summary: Default AnswerSignUpQuestion 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AnswerSignUpQuestion401Example:
-                  summary: Default AnswerSignUpQuestion 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AnswerSignUpQuestion403Example:
-                  summary: Default AnswerSignUpQuestion 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                AnswerSignUpQuestion500Example:
-                  summary: Default AnswerSignUpQuestion 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Answer Sign Up Question
-      description: Answer Sign Up Question via the Flipdish Open API v1.0 (POST /api/v1.0/accounts/signupstep/{signupStepAction}/answer).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              format: int32
+              type: integer
+          text/json:
+            schema:
+              format: int32
+              type: integer
+          application/xml:
+            schema:
+              format: int32
+              type: integer
+          text/xml:
+            schema:
+              format: int32
+              type: integer
+          application/x-www-form-urlencoded:
+            schema:
+              format: int32
+              type: integer
+        required: true
+      summary: Answer sign up question
+      x-summary-source: derived
 components:
   schemas:
-    LocalisedTimeZone:
-      description: Represents a localised time zone
-      type: object
-      properties:
-        TimeZoneId:
-          description: Microsoft Time Zone Id
-          type: string
-          example: '500123'
-        IanaTimeZoneId:
-          description: Iana Time Zone Id
-          type: string
-          example: '500123'
-        DisplayName:
-          description: Display name in users language
-          type: string
-          example: Example Name
-    ChangePasswordModel:
-      description: Change password model
-      required:
-      - OldPassword
-      - NewPassword
-      type: object
-      properties:
-        OldPassword:
-          description: Old password
-          type: string
-          example: string
-        NewPassword:
-          description: New password
-          type: string
-          example: string
-    CreateBasicAccountModel:
-      description: Basic attributes for creating an account
-      required:
-      - StoreName
-      type: object
-      properties:
-        StoreName:
-          description: Store name
-          type: string
-          example: Example Name
-        LanguageId:
-          description: LanguageId
-          type: string
-          example: '500123'
-    RequestPasswordResetPinResponse:
-      description: Request Password Reset PIN response
-      type: object
-      properties:
-        PasswordResetPinSentViaEmail:
-          description: Password Reset PIN sent via email to user
-          type: boolean
-          example: true
-    AccountDetailBase:
-      description: Account Details Base
-      type: object
-      properties:
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Language:
-          description: Language Id
-          type: string
-          example: string
-        TimeZoneInfoId:
-          description: Time Zone Info Id
-          type: string
-          example: '500123'
-        DisplayTimesInUserLocalTimeZone:
-          description: Display the time in time zone local to the user
-          type: boolean
-          example: true
-        ShowHiddenFeatures:
-          description: Show hidden features
-          type: boolean
-          example: true
-        CreatedAt:
-          format: date-time
-          description: User created at
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    RestApiResult_AccountDetail_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/AccountDetail'
-    CreateAccountModel:
-      description: Create account model
-      required:
-      - Email
-      - StoreName
-      type: object
-      properties:
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
-        StoreName:
-          description: Store name
-          type: string
-          example: Example Name
-        LanguageId:
-          description: LanguageId
-          type: string
-          example: '500123'
-        Rid:
-          format: int32
-          description: Referral ID
-          type:
-          - integer
-          - 'null'
-          example: 500123
-        Cid:
-          description: Campaign ID
-          type: string
-          example: '500123'
-        RecaptchaToken:
-          description: Google Recaptcha Token
-          type: string
-          example: string
-    RequestLoginPinResponse:
-      description: Request login PIN response
-      type: object
-      properties:
-        LoginPinSentViaEmail:
-          description: Login PIN sent via email to user
-          type: boolean
-          example: true
-        ForceOktaLogin:
-          description: All flipdishers must login via Okta
-          type: boolean
-          example: true
-    PasswordResetModel:
-      description: Password reset model
-      required:
-      - Password
-      - PasswordConfirmation
-      type: object
-      properties:
-        TokenId:
-          description: Token Id
-          type: string
-          example: '500123'
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
-        Password:
-          description: Password
-          type: string
-          example: string
-        PasswordConfirmation:
-          description: Password confirmation
-          type: string
-          example: string
-        Token:
-          description: Password reset token
-          type: string
-          example: string
     PredefinedAnswer:
       description: Predefined answer
       type: object
@@ -1828,125 +1010,9 @@ components:
           format: int32
           description: Identifier
           type: integer
-          example: 500123
         Text:
           description: Text
           type: string
-          example: string
-    AccountDetail:
-      description: Account details
-      type: object
-      properties:
-        Email:
-          description: Email
-          type: string
-          example: owner@example.com
-        SignupSteps:
-          description: Signup steps
-          type: array
-          items:
-            $ref: '#/components/schemas/SignupStep'
-          example: []
-        IsVerified:
-          description: Is account email verified
-          type: boolean
-          example: true
-        IsSelfServeUser:
-          description: is the account a Self Server
-          type: boolean
-          example: true
-        AccountId:
-          format: int32
-          description: Accounts Id
-          type: integer
-          example: 500123
-        Name:
-          description: Name
-          type: string
-          example: Example Name
-        Language:
-          description: Language Id
-          type: string
-          example: string
-        TimeZoneInfoId:
-          description: Time Zone Info Id
-          type: string
-          example: '500123'
-        DisplayTimesInUserLocalTimeZone:
-          description: Display the time in time zone local to the user
-          type: boolean
-          example: true
-        ShowHiddenFeatures:
-          description: Show hidden features
-          type: boolean
-          example: true
-        CreatedAt:
-          format: date-time
-          description: User created at
-          type: string
-          example: '2026-06-02T12:00:00Z'
-    SetPasswordWithPinModel:
-      description: Set password with PIN model
-      required:
-      - Pin
-      - NewPassword
-      type: object
-      properties:
-        Pin:
-          format: int32
-          description: PIN code (received via email)
-          type: integer
-          example: 1
-        NewPassword:
-          description: New Password
-          type: string
-          example: string
-        RecaptchaToken:
-          description: Google Recaptcha Token
-          type: string
-          example: string
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RequestLoginPinModel:
-      description: Request login PIN response
-      required:
-      - Email
-      type: object
-      properties:
-        Email:
-          description: Email address
-          type: string
-          example: owner@example.com
-    RestApiArrayResult_LocalisedTimeZone_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/LocalisedTimeZone'
-          example: []
     LoginModel:
       description: Login model
       required:
@@ -1957,11 +1023,9 @@ components:
         Email:
           description: Email address
           type: string
-          example: owner@example.com
         Password:
           description: Password
           type: string
-          example: string
     SignupStep:
       description: ''
       type: object
@@ -1974,43 +1038,435 @@ components:
           - PaymentSubscription
           - StoreName
           type: string
-          example: Question
         Question:
           description: Question in case Action == Question
           type: string
-          example: string
         PredefinedAnswers:
           description: Predefined answer in case Action == Question
           type: array
           items:
             $ref: '#/components/schemas/PredefinedAnswer'
-          example: []
-    LoginWithPinModel:
-      description: Login with PIN model
-      required:
-      - Email
-      - Pin
+    RequestPasswordResetModel:
+      description: ''
       type: object
       properties:
         Email:
-          description: Email addres
+          description: Email address
           type: string
-          example: owner@example.com
-        Pin:
+        RecaptchaToken:
+          description: Google Recaptcha Token
+          type: string
+    CreateAccountModel:
+      description: Create account model
+      required:
+      - Email
+      - StoreName
+      type: object
+      properties:
+        Email:
+          description: Email address
+          type: string
+        StoreName:
+          description: Store name
+          type: string
+        LanguageId:
+          description: LanguageId
+          type: string
+        Rid:
           format: int32
-          description: PIN code (received via email)
+          description: Referral ID
+          type:
+          - integer
+          - 'null'
+        Cid:
+          description: Campaign ID
+          type: string
+        RecaptchaToken:
+          description: Google Recaptcha Token
+          type: string
+    LocalisedTimeZone:
+      description: Represents a localised time zone
+      type: object
+      properties:
+        TimeZoneId:
+          description: Microsoft Time Zone Id
+          type: string
+        IanaTimeZoneId:
+          description: Iana Time Zone Id
+          type: string
+        DisplayName:
+          description: Display name in users language
+          type: string
+    RestApiArrayResult_LocalisedTimeZone:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalisedTimeZone'
+    CreateBasicAccountModel:
+      description: Basic attributes for creating an account
+      required:
+      - StoreName
+      type: object
+      properties:
+        StoreName:
+          description: Store name
+          type: string
+        LanguageId:
+          description: LanguageId
+          type: string
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
           type: integer
-          example: 1
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    RestApiResult_AccountDetail:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/AccountDetail'
+          description: Generic data object.
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    ChangePasswordModel:
+      description: Change password model
+      required:
+      - OldPassword
+      - NewPassword
+      type: object
+      properties:
+        OldPassword:
+          description: Old password
+          type: string
+        NewPassword:
+          description: New password
+          type: string
+    PasswordResetModel:
+      description: Password reset model
+      required:
+      - Password
+      - PasswordConfirmation
+      type: object
+      properties:
+        TokenId:
+          description: Token Id
+          type: string
+        Email:
+          description: Email address
+          type: string
+        Password:
+          description: Password
+          type: string
+        PasswordConfirmation:
+          description: Password confirmation
+          type: string
+        Token:
+          description: Password reset token
+          type: string
+    AccountDetail:
+      description: Account details
+      type: object
+      properties:
+        Email:
+          description: Email
+          type: string
+        SignupSteps:
+          description: Signup steps
+          type: array
+          items:
+            $ref: '#/components/schemas/SignupStep'
+        IsVerified:
+          description: Is account email verified
+          type: boolean
+        IsSelfServeUser:
+          description: is the account a Self Server
+          type: boolean
+        AccountId:
+          format: int32
+          description: Accounts Id
+          type: integer
+        Name:
+          description: Name
+          type: string
+        Language:
+          description: Language Id
+          type: string
+        TimeZoneInfoId:
+          description: Time Zone Info Id
+          type: string
+        DisplayTimesInUserLocalTimeZone:
+          description: Display the time in time zone local to the user
+          type: boolean
+        ShowHiddenFeatures:
+          description: Show hidden features
+          type: boolean
+        CreatedAt:
+          format: date-time
+          description: User created at
+          type: string
+    AccountDetailBase:
+      description: Account Details Base
+      type: object
+      properties:
+        Name:
+          description: Name
+          type: string
+        Language:
+          description: Language Id
+          type: string
+        TimeZoneInfoId:
+          description: Time Zone Info Id
+          type: string
+        DisplayTimesInUserLocalTimeZone:
+          description: Display the time in time zone local to the user
+          type: boolean
+        ShowHiddenFeatures:
+          description: Show hidden features
+          type: boolean
+        CreatedAt:
+          format: date-time
+          description: User created at
+          type: string
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

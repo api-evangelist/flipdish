@@ -1,0 +1,677 @@
+openapi: 3.2.0
+info:
+  version: v1.0
+  title: Flipdish Open API v1.0 End User Fees API
+servers:
+- url: https://api.flipdish.co
+tags:
+- name: EndUserFees
+paths:
+  /api/v1.0/{appId}/stores/{storeId}/end-user-fees:
+    get:
+      tags:
+      - EndUserFees
+      operationId: GetEndUserFeesForStore
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_GetEndUserFeeConfigsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_GetEndUserFeeConfigsResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_GetEndUserFeeConfigsResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_GetEndUserFeeConfigsResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+      security:
+      - oauth2:
+        - api
+      summary: Get end user fees for store
+      x-summary-source: derived
+    post:
+      tags:
+      - EndUserFees
+      operationId: CreateEndUserFeeConfig
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_EndUserFeeConfig'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_EndUserFeeConfig'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_EndUserFeeConfig'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_EndUserFeeConfig'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+      security:
+      - oauth2:
+        - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserFeeConfig'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserFeeConfig'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserFeeConfig'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserFeeConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserFeeConfig'
+        required: true
+      summary: Create end user fee config
+      x-summary-source: derived
+  /api/v1.0/{appId}/stores/{storeId}/end-user-fees/v2-fee-calculation:
+    post:
+      tags:
+      - EndUserFees
+      operationId: SetV2FeeCalculation
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_SetV2FeeCalculationRequest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_SetV2FeeCalculationRequest'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_SetV2FeeCalculationRequest'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_SetV2FeeCalculationRequest'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+      security:
+      - oauth2:
+        - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetV2FeeCalculationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SetV2FeeCalculationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SetV2FeeCalculationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SetV2FeeCalculationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetV2FeeCalculationRequest'
+        required: true
+      summary: Set V2Fee calculation
+      x-summary-source: derived
+components:
+  schemas:
+    RestApiResult_SetV2FeeCalculationRequest:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/SetV2FeeCalculationRequest'
+          description: Generic data object.
+    GetEndUserFeeConfigsResponse:
+      description: The current end user fee configs for a Store, one per channel and payment method
+      type: object
+      properties:
+        EndUserFees:
+          description: The current end user fee configs for the Store, one per channel and payment method combination present
+          type: array
+          items:
+            $ref: '#/components/schemas/EndUserFeeConfig'
+        IsV2FeeCalculationEnabled:
+          description: Whether the V2 (tiered) fee calculation is enabled for this Store
+          type: boolean
+    RestApiResult_GetEndUserFeeConfigsResponse:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/GetEndUserFeeConfigsResponse'
+          description: Generic data object.
+    RestApiResult_EndUserFeeConfig:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/EndUserFeeConfig'
+          description: Generic data object.
+    SetV2FeeCalculationRequest:
+      description: Input model for setting whether the V2 (tiered) fee calculation is enabled for a Store
+      type: object
+      properties:
+        IsEnabled:
+          description: Whether the V2 (tiered) fee calculation should be enabled for this Store. Required.
+          type:
+          - boolean
+          - 'null'
+    CreateEndUserFeeConfig:
+      description: Input model for setting an end user fee config
+      required:
+      - Channel
+      - PaymentMethod
+      type: object
+      properties:
+        Channel:
+          description: The order channel this fee config applies to
+          enum:
+          - WebApp
+          - InStore
+          - Kiosk
+          type: string
+        PaymentMethod:
+          description: The payment method this fee config applies to
+          enum:
+          - Cash
+          - Card
+          type: string
+        MinOrderAmount:
+          format: double
+          description: Order amount below which MinFixedFee is charged instead of the percent/fixed calculation
+          type: number
+        MinFixedFee:
+          format: double
+          description: Fixed fee charged for orders at or below MinOrderAmount
+          type: number
+        PercentFee:
+          format: double
+          description: Percentage fee applied to the order amount
+          type: number
+        FixedFee:
+          format: double
+          description: Fixed fee compared against the percentage fee - the greater of the two is charged
+          type: number
+        Cap:
+          format: double
+          description: Maximum fee that can be charged
+          type: number
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    EndUserFeeConfig:
+      description: Tiered end user fee config for a given order channel and payment method
+      type: object
+      properties:
+        Channel:
+          description: The order channel this fee config applies to
+          enum:
+          - WebApp
+          - InStore
+          - Kiosk
+          type: string
+        PaymentMethod:
+          description: The payment method this fee config applies to
+          enum:
+          - Cash
+          - Card
+          type: string
+        MinOrderAmount:
+          format: double
+          description: Order amount below which MinFixedFee is charged instead of the percent/fixed calculation
+          type: number
+        MinFixedFee:
+          format: double
+          description: Fixed fee charged for orders at or below MinOrderAmount
+          type: number
+        PercentFee:
+          format: double
+          description: Percentage fee applied to the order amount
+          type: number
+        FixedFee:
+          format: double
+          description: Fixed fee compared against the percentage fee - the greater of the two is charged
+          type: number
+        Cap:
+          format: double
+          description: Maximum fee that can be charged
+          type: number
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            api: Access to Flipdish API
+          authorizationUrl: https://api.flipdish.co/identity/connect/authorize
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []

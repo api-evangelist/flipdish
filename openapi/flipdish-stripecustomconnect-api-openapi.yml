@@ -1,23 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Flipdish API - Payments Stripe Custom Connect API
   version: v1.0
-  description: Flipdish Open API v1.0 — Payments operations. Flipdish is an online ordering and branded-app platform for restaurants and takeaways. This specification was derived from the official Flipdish Swagger document and grouped by resource domain.
-  contact:
-    name: Flipdish Support
-    email: help@flipdish.com
-    url: https://help.flipdish.com
-  x-generated-from: https://api.flipdish.co/swagger/docs/v1.0
-  x-last-validated: '2026-06-02'
+  title: Flipdish Open API v1.0 Stripe Custom Connect API
 servers:
 - url: https://api.flipdish.co
-  description: Flipdish production API
-security:
-- oauth2:
-  - api
 tags:
 - name: StripeCustomConnect
-  description: Operations for Stripe Custom Connect.
 paths:
   /api/v1.0/{appId}/customconnect/{storeId}:
     get:
@@ -31,96 +19,77 @@ paths:
         schema:
           type: integer
           format: int32
-        description: The store id path parameter.
-        example: 500123
       - name: appId
         in: path
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiArrayResult_StripeCustomConnectedAccount_'
-              examples:
-                GetCustomConnect200Example:
-                  summary: Default GetCustomConnect 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: []
+                $ref: '#/components/schemas/RestApiArrayResult_StripeCustomConnectedAccount'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_StripeCustomConnectedAccount'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_StripeCustomConnectedAccount'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiArrayResult_StripeCustomConnectedAccount'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCustomConnect400Example:
-                  summary: Default GetCustomConnect 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCustomConnect401Example:
-                  summary: Default GetCustomConnect 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCustomConnect403Example:
-                  summary: Default GetCustomConnect 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetCustomConnect500Example:
-                  summary: Default GetCustomConnect 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Get Custom Connect
-      description: Get Custom Connect via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/customconnect/{storeId}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Get custom connect
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/refresh-link:
     get:
       tags:
@@ -133,15 +102,11 @@ paths:
         schema:
           type: integer
           format: int32
-        description: The link request id query parameter.
-        example: 500123
       - name: appId
         in: path
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       responses:
         '200':
           description: OK
@@ -149,188 +114,65 @@ paths:
             application/json:
               schema:
                 type: object
-              examples:
-                StripeCustomConnect_Refresh200Example:
-                  summary: Default StripeCustomConnect_Refresh 200 response
-                  x-microcks-default: true
-                  value: {}
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                StripeCustomConnect_Refresh400Example:
-                  summary: Default StripeCustomConnect_Refresh 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                StripeCustomConnect_Refresh401Example:
-                  summary: Default StripeCustomConnect_Refresh 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                StripeCustomConnect_Refresh403Example:
-                  summary: Default StripeCustomConnect_Refresh 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                StripeCustomConnect_Refresh500Example:
-                  summary: Default StripeCustomConnect_Refresh 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Stripe Custom Connect_Refresh
-      description: Stripe Custom Connect_Refresh via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/customconnect/refresh-link).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/v1.0/{appId}/customconnect/verification-status:
-    get:
-      tags:
-      - StripeCustomConnect
-      operationId: GetVerificationStatus
-      parameters:
-      - name: appId
-        in: path
-        required: true
-        schema:
-          type: string
-        description: The app id path parameter.
-        example: '500123'
-      - name: stripeConnectedAccountId
-        in: query
-        required: true
-        schema:
-          type: string
-        description: The stripe connected account id query parameter.
-        example: '500123'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount_'
-              examples:
-                GetVerificationStatus200Example:
-                  summary: Default GetVerificationStatus 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FlipdishConnectedAccountId: 500123
-                      StripeId: '500123'
-                      WhitelabelConfigId: 500123
-                      CardPaymentsStatus: Inactive
-                      TransfersStatus: Inactive
-                      AccountStatus: Disabled
-                      PayoutsEnabled: true
-                      PaymentsEnabled: true
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetVerificationStatus400Example:
-                  summary: Default GetVerificationStatus 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetVerificationStatus401Example:
-                  summary: Default GetVerificationStatus 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetVerificationStatus403Example:
-                  summary: Default GetVerificationStatus 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                GetVerificationStatus500Example:
-                  summary: Default GetVerificationStatus 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Get Verification Status
-      description: Get Verification Status via the Flipdish Open API v1.0 (GET /api/v1.0/{appId}/customconnect/verification-status).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Stripe custom connect refresh
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/bank-account:
     post:
       tags:
@@ -342,120 +184,90 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
-      requestBody:
-        required: false
-        content: {}
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_BankAccountDetail_'
-              examples:
-                CreateBankAccountAndConnectedAccount200Example:
-                  summary: Default CreateBankAccountAndConnectedAccount 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Id: 500123
-                      StoreNames:
-                      - Example Name
-                      AccountState: Unverified
-                      StripeConnectedAccountInfo:
-                        AccountStatus: Disabled
-                        StripeId: '500123'
-                        CardPaymentStatus: Inactive
-                        PayoutScheduleInterval: Manual
-                        PayoutsEnabled: true
-                        PayoutsPaused: true
-                        PaymentsEnabled: true
-                      BankAddress: string
-                      BankCountryCode: IE
-                      AccountHolderAddress: string
-                      AccountHolderCountryCode: IE
-                      VatNumber: string
-                      CurrencyCode: EUR
-                      StoreIds:
-                      - 1
-                      BankName: Example Name
-                      AccountName: Example Name
-                      Iban: string
-                      Swift: string
-                      NationalClearingCode: string
-                      PopulatedAccountFields: []
-                      RejectionReason: string
-                      BusinessType: Individual
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBankAccountAndConnectedAccount400Example:
-                  summary: Default CreateBankAccountAndConnectedAccount 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBankAccountAndConnectedAccount401Example:
-                  summary: Default CreateBankAccountAndConnectedAccount 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBankAccountAndConnectedAccount403Example:
-                  summary: Default CreateBankAccountAndConnectedAccount 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateBankAccountAndConnectedAccount500Example:
-                  summary: Default CreateBankAccountAndConnectedAccount 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Create Bank Account and Connected Account
-      description: Create Bank Account and Connected Account via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customconnect/bank-account).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountCreate'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountCreate'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BankAccountCreate'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BankAccountCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BankAccountCreate'
+        required: true
+      summary: Create bank account and connected account
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/{bankAccountId}/create-update-account:
     post:
       tags:
@@ -467,105 +279,78 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: bankAccountId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The bank account id path parameter.
-        example: 500123
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount_'
-              examples:
-                CreateStripeConnectedAccount200Example:
-                  summary: Default CreateStripeConnectedAccount 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FlipdishConnectedAccountId: 500123
-                      StripeId: '500123'
-                      WhitelabelConfigId: 500123
-                      CardPaymentsStatus: Inactive
-                      TransfersStatus: Inactive
-                      AccountStatus: Disabled
-                      PayoutsEnabled: true
-                      PaymentsEnabled: true
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccount400Example:
-                  summary: Default CreateStripeConnectedAccount 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccount401Example:
-                  summary: Default CreateStripeConnectedAccount 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccount403Example:
-                  summary: Default CreateStripeConnectedAccount 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccount500Example:
-                  summary: Default CreateStripeConnectedAccount 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Create Stripe Connected Account
-      description: Create Stripe Connected Account via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customconnect/{bankAccountId}/create-update-account).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Create stripe connected account
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/bank-account/{bankAccountId}/businesstype:
     post:
       tags:
@@ -577,18 +362,77 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: bankAccountId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The bank account id path parameter.
-        example: 500123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_BankAccountDetail'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+        '401':
+          description: Authentication has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+        '403':
+          description: Successful authentication, but authorization has been denied for this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+      security:
+      - oauth2:
+        - api
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -598,120 +442,41 @@ paths:
               - NonProfit
               - GovernmentEntity
               type: string
-            examples:
-              SetBankAccountBusinessTypeRequestExample:
-                summary: Default SetBankAccountBusinessType request
-                x-microcks-default: true
-                value: Individual
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestApiResult_BankAccountDetail_'
-              examples:
-                SetBankAccountBusinessType200Example:
-                  summary: Default SetBankAccountBusinessType 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      Id: 500123
-                      StoreNames:
-                      - Example Name
-                      AccountState: Unverified
-                      StripeConnectedAccountInfo:
-                        AccountStatus: Disabled
-                        StripeId: '500123'
-                        CardPaymentStatus: Inactive
-                        PayoutScheduleInterval: Manual
-                        PayoutsEnabled: true
-                        PayoutsPaused: true
-                        PaymentsEnabled: true
-                      BankAddress: string
-                      BankCountryCode: IE
-                      AccountHolderAddress: string
-                      AccountHolderCountryCode: IE
-                      VatNumber: string
-                      CurrencyCode: EUR
-                      StoreIds:
-                      - 1
-                      BankName: Example Name
-                      AccountName: Example Name
-                      Iban: string
-                      Swift: string
-                      NationalClearingCode: string
-                      PopulatedAccountFields: []
-                      RejectionReason: string
-                      BusinessType: Individual
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SetBankAccountBusinessType400Example:
-                  summary: Default SetBankAccountBusinessType 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '401':
-          description: Authentication has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SetBankAccountBusinessType401Example:
-                  summary: Default SetBankAccountBusinessType 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '403':
-          description: Successful authentication, but authorization has been denied for this request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SetBankAccountBusinessType403Example:
-                  summary: Default SetBankAccountBusinessType 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                SetBankAccountBusinessType500Example:
-                  summary: Default SetBankAccountBusinessType 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-      security:
-      - oauth2:
-        - api
-      summary: Flipdish Set Bank Account Business Type
-      description: Set Bank Account Business Type via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customconnect/bank-account/{bankAccountId}/businesstype).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+          text/json:
+            schema:
+              enum:
+              - Individual
+              - Company
+              - NonProfit
+              - GovernmentEntity
+              type: string
+          application/xml:
+            schema:
+              enum:
+              - Individual
+              - Company
+              - NonProfit
+              - GovernmentEntity
+              type: string
+          text/xml:
+            schema:
+              enum:
+              - Individual
+              - Company
+              - NonProfit
+              - GovernmentEntity
+              type: string
+          application/x-www-form-urlencoded:
+            schema:
+              enum:
+              - Individual
+              - Company
+              - NonProfit
+              - GovernmentEntity
+              type: string
+        required: true
+      summary: Set bank account business type
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/{bankAccountId}/update-bank-account-details:
     post:
       tags:
@@ -723,129 +488,96 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: bankAccountId
         in: path
         required: true
         schema:
           type: integer
           format: int32
-        description: The bank account id path parameter.
-        example: 500123
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BankAccountDetailsUpdateRequest'
-            examples:
-              UpdateBankAccountDetailsRequestExample:
-                summary: Default UpdateBankAccountDetails request
-                x-microcks-default: true
-                value:
-                  BankAddress: string
-                  AccountHolderAddress: string
-                  VatNumber: string
-                  StoreIds:
-                  - 1
-                  BankName: Example Name
-                  AccountName: Example Name
-                  Iban: string
-                  Swift: string
-                  NationalClearingCode: string
-                  PopulatedAccountFields: []
-                  RejectionReason: string
-                  BusinessType: Individual
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount_'
-              examples:
-                UpdateBankAccountDetails200Example:
-                  summary: Default UpdateBankAccountDetails 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FlipdishConnectedAccountId: 500123
-                      StripeId: '500123'
-                      WhitelabelConfigId: 500123
-                      CardPaymentsStatus: Inactive
-                      TransfersStatus: Inactive
-                      AccountStatus: Disabled
-                      PayoutsEnabled: true
-                      PaymentsEnabled: true
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateBankAccountDetails400Example:
-                  summary: Default UpdateBankAccountDetails 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateBankAccountDetails401Example:
-                  summary: Default UpdateBankAccountDetails 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateBankAccountDetails403Example:
-                  summary: Default UpdateBankAccountDetails 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdateBankAccountDetails500Example:
-                  summary: Default UpdateBankAccountDetails 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update Bank Account Details
-      description: Update Bank Account Details via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customconnect/{bankAccountId}/update-bank-account-details).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountDetailsUpdateRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountDetailsUpdateRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BankAccountDetailsUpdateRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BankAccountDetailsUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BankAccountDetailsUpdateRequest'
+        required: true
+      summary: Update bank account details
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/{stripeConnectedAccountId}/create-account-link:
     post:
       tags:
@@ -857,119 +589,95 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: stripeConnectedAccountId
         in: path
         required: true
         schema:
           type: string
-        description: The stripe connected account id path parameter.
-        example: '500123'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StripeAccountLinkRequest'
-            examples:
-              CreateStripeConnectedAccountLinkRequestExample:
-                summary: Default CreateStripeConnectedAccountLink request
-                x-microcks-default: true
-                value:
-                  StripeId: '500123'
-                  ReturnUrl: https://api.flipdish.co/example
-                  Collect: CurrentlyDue
-                  Type: Onboarding
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount_'
-              examples:
-                CreateStripeConnectedAccountLink200Example:
-                  summary: Default CreateStripeConnectedAccountLink 200 response
-                  x-microcks-default: true
-                  value:
-                    Data:
-                      FlipdishConnectedAccountId: 500123
-                      StripeId: '500123'
-                      WhitelabelConfigId: 500123
-                      CardPaymentsStatus: Inactive
-                      TransfersStatus: Inactive
-                      AccountStatus: Disabled
-                      PayoutsEnabled: true
-                      PaymentsEnabled: true
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_StripeConnectedAccount'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccountLink400Example:
-                  summary: Default CreateStripeConnectedAccountLink 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccountLink401Example:
-                  summary: Default CreateStripeConnectedAccountLink 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccountLink403Example:
-                  summary: Default CreateStripeConnectedAccountLink 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                CreateStripeConnectedAccountLink500Example:
-                  summary: Default CreateStripeConnectedAccountLink 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Create Stripe Connected Account Link
-      description: Create Stripe Connected Account Link via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customconnect/{stripeConnectedAccountId}/create-account-link).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeAccountLinkRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/StripeAccountLinkRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/StripeAccountLinkRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StripeAccountLinkRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StripeAccountLinkRequest'
+        required: true
+      summary: Create stripe connected account link
+      x-summary-source: derived
   /api/v1.0/{appId}/customconnect/update-payout-schedule/{stripeConnectedAccountId}/{interval}:
     post:
       tags:
@@ -981,418 +689,84 @@ paths:
         required: true
         schema:
           type: string
-        description: The app id path parameter.
-        example: '500123'
       - name: stripeConnectedAccountId
         in: path
         required: true
         schema:
           type: string
-        description: The stripe connected account id path parameter.
-        example: '500123'
       - name: interval
         in: path
         required: true
         schema:
           type: string
-        description: The interval path parameter.
-        example: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestApiResult_ModelBase_'
-              examples:
-                UpdatePayoutSchedule200Example:
-                  summary: Default UpdatePayoutSchedule 200 response
-                  x-microcks-default: true
-                  value:
-                    Data: {}
+                $ref: '#/components/schemas/RestApiResult_ModelBase'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ModelBase'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ModelBase'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiResult_ModelBase'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayoutSchedule400Example:
-                  summary: Default UpdatePayoutSchedule 400 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResult'
         '401':
           description: Authentication has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayoutSchedule401Example:
-                  summary: Default UpdatePayoutSchedule 401 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiUnauthorizedResult'
         '403':
           description: Successful authentication, but authorization has been denied for this request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayoutSchedule403Example:
-                  summary: Default UpdatePayoutSchedule 403 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/json:
               schema:
-                $ref: '#/components/schemas/FlipdishError'
-              examples:
-                UpdatePayoutSchedule500Example:
-                  summary: Default UpdatePayoutSchedule 500 response
-                  x-microcks-default: true
-                  value:
-                    error:
-                      errorMessage: Invalid or missing parameters.
-                      errorCode: BadRequest
-                      details: Validation failed for field 'storeId'.
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RestApiForbiddenResult'
       security:
       - oauth2:
         - api
-      summary: Flipdish Update Payout Schedule
-      description: Update Payout Schedule via the Flipdish Open API v1.0 (POST /api/v1.0/{appId}/customconnect/update-payout-schedule/{stripeConnectedAccountId}/{interval}).
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+      summary: Update payout schedule
+      x-summary-source: derived
 components:
   schemas:
-    StripeConnectedAccount:
-      description: Represents a Stripe custom connected account
-      type: object
-      properties:
-        FlipdishConnectedAccountId:
-          format: int32
-          description: Flipdish connected account identifier
-          type: integer
-          example: 500123
-        StripeId:
-          description: Stripe's own connected account identifier
-          type: string
-          example: '500123'
-        WhitelabelConfigId:
-          format: int32
-          description: Id of the WhitelabelConfig the connected account is assigned to
-          type: integer
-          example: 500123
-        CardPaymentsStatus:
-          description: Card payments capability status (Inactive, Pending, Active, Unrequested)
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        TransfersStatus:
-          description: Transfers capability status (Inactive, Pending, Active, Unrequested)
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        AccountStatus:
-          description: Current status of the account
-          enum:
-          - Disabled
-          - Enabled
-          - AdditionalInformationRequired
-          - PendingVerification
-          - Unverified
-          - Rejected
-          - UpdateExternalAccount
-          - PlatformPaused
-          type: string
-          example: Disabled
-        PayoutsEnabled:
-          description: Payouts Enabled status
-          type:
-          - boolean
-          - 'null'
-          example: true
-        PaymentsEnabled:
-          description: Payments Enabled status
-          type:
-          - boolean
-          - 'null'
-          example: true
-    ModelBase:
-      description: Model base
-      type: object
-      properties: {}
-    RestApiResult_StripeConnectedAccount_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/StripeConnectedAccount'
-    StripeConnectedAccountInfo:
-      description: Represents information about a Stripe connected account associated with a bank account
-      type: object
-      properties:
-        AccountStatus:
-          description: Stripe connected account status
-          enum:
-          - Disabled
-          - Enabled
-          - AdditionalInformationRequired
-          - PendingVerification
-          - Unverified
-          - Rejected
-          - UpdateExternalAccount
-          - PlatformPaused
-          type: string
-          example: Disabled
-        StripeId:
-          description: Stripe connected account id
-          type: string
-          example: '500123'
-        CardPaymentStatus:
-          description: Current status of the Card Payment capability of the account
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        PayoutScheduleInterval:
-          description: Payouts Schedule Interval
-          enum:
-          - Manual
-          - Daily
-          - Weekly
-          - Monthly
-          type: string
-          example: Manual
-        PayoutsEnabled:
-          description: Payouts Enabled status
-          type:
-          - boolean
-          - 'null'
-          example: true
-        PayoutsPaused:
-          description: Flag indicating if payouts are paused
-          type: boolean
-          example: true
-        PaymentsEnabled:
-          description: Flag indicating if payments are enabled
-          type:
-          - boolean
-          - 'null'
-          example: true
-    StripeCustomConnectedAccount:
-      description: Flipdish Stripe Custom Connected Account associated to the Store
-      type: object
-      properties:
-        StoreId:
-          format: int32
-          description: Physical Restaurant Id
-          type: integer
-          example: 500123
-        StripeId:
-          description: Stripe's own connected account identifier
-          type: string
-          example: '500123'
-        CardPaymentsStatus:
-          description: Card payments capability status (Inactive, Pending, Active, Unrequested)
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        TransfersStatus:
-          description: Transfers capability status (Inactive, Pending, Active, Unrequested)
-          enum:
-          - Inactive
-          - Pending
-          - Active
-          - Unrequested
-          type: string
-          example: Inactive
-        AccountStatus:
-          description: Current status of the account
-          enum:
-          - Disabled
-          - Enabled
-          - AdditionalInformationRequired
-          - PendingVerification
-          - Unverified
-          - Rejected
-          - UpdateExternalAccount
-          - PlatformPaused
-          type: string
-          example: Disabled
-    BankAccountDetailsUpdateRequest:
-      description: Represents a request to update bank account information details
-      type: object
-      properties:
-        BankAddress:
-          description: Address of the bank account
-          type: string
-          example: string
-        AccountHolderAddress:
-          description: Address of the payee
-          type: string
-          example: string
-        VatNumber:
-          description: Account Holders Vat Number
-          type: string
-          example: string
-        StoreIds:
-          description: List of stores to attach to Account
-          type: array
-          items:
-            format: int32
-            type: integer
-          example:
-          - 1
-        BankName:
-          description: Name of Bank
-          type: string
-          example: Example Name
-        AccountName:
-          description: Name of this account
-          type: string
-          example: Example Name
-        Iban:
-          description: IBAN of this account
-          type: string
-          example: string
-        Swift:
-          description: SWIFT of this bank account
-          type: string
-          example: string
-        NationalClearingCode:
-          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
-          type: string
-          example: string
-        PopulatedAccountFields:
-          description: 'A list of one or more populated account fields (field key-value pairs).
-
-            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountFieldKeyValuePair'
-          example: []
-        RejectionReason:
-          description: Reason for Rejection
-          type: string
-          example: string
-        BusinessType:
-          description: Business Type
-          enum:
-          - Individual
-          - Company
-          - NonProfit
-          - GovernmentEntity
-          type:
-          - string
-          - 'null'
-          example: Individual
-    StripeAccountLinkRequest:
-      description: Represents a request for Stripe account link creation
-      type: object
-      properties:
-        StripeId:
-          description: Stripe's own connected account identifier
-          type: string
-          example: '500123'
-        ReturnUrl:
-          description: URL to be hit if link creation succeeds
-          type: string
-          example: https://api.flipdish.co/example
-        Collect:
-          description: Which information to collect from users at this stage
-          enum:
-          - CurrentlyDue
-          - EventuallyDue
-          type: string
-          example: CurrentlyDue
-        Type:
-          description: Either onboarding or edit user information
-          enum:
-          - Onboarding
-          - Update
-          type: string
-          example: Onboarding
-    RestApiArrayResult_StripeCustomConnectedAccount_:
-      description: Rest api array result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          description: Generic data object.
-          type: array
-          items:
-            $ref: '#/components/schemas/StripeCustomConnectedAccount'
-          example: []
-    RestApiResult_ModelBase_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/ModelBase'
-    FlipdishError:
-      type: object
-      description: Standard Flipdish API error response. Errors are returned as a JSON object with a human-readable message and a programmatic error code (see https://developers.flipdish.com/docs/error-handling).
-      properties:
-        error:
-          type: object
-          description: Error detail object.
-          properties:
-            errorMessage:
-              type: string
-              description: Descriptive explanation of the issue.
-              example: Invalid or missing parameters.
-            errorCode:
-              type: string
-              description: Unique identifier for programmatic error handling.
-              example: BadRequest
-            details:
-              type: string
-              description: Additional context returned in non-production environments.
-              example: Validation failed for field 'storeId'.
-    RestApiResult_BankAccountDetail_:
-      description: Rest api result
-      required:
-      - Data
-      type: object
-      properties:
-        Data:
-          $ref: '#/components/schemas/BankAccountDetail'
     BankAccountDetail:
       description: ''
       type: object
@@ -1401,14 +775,11 @@ components:
           format: int32
           description: Id of this account
           type: integer
-          example: 500123
         StoreNames:
           description: Store Names that are attached to this account
           type: array
           items:
             type: string
-          example:
-          - Example Name
         AccountState:
           description: Status of Account
           enum:
@@ -1417,29 +788,24 @@ components:
           - Verified
           - Grandfathered
           type: string
-          example: Unverified
         StripeConnectedAccountInfo:
           $ref: '#/components/schemas/StripeConnectedAccountInfo'
+          description: Information about the Stripe connected account associated with this bank account (if any)
         BankAddress:
           description: Address lf the bank
           type: string
-          example: string
         BankCountryCode:
           description: CountryCode of the Bank Account
           type: string
-          example: IE
         AccountHolderAddress:
           description: Account Holders Address
           type: string
-          example: string
         AccountHolderCountryCode:
           description: Account Holders Country Code
           type: string
-          example: IE
         VatNumber:
           description: Account Holders Vat Number
           type: string
-          example: string
         CurrencyCode:
           description: Currency of Account
           enum:
@@ -1557,35 +923,27 @@ components:
           - TWD
           - BMD
           type: string
-          example: EUR
         StoreIds:
           description: List of stores to attach to Account
           type: array
           items:
             format: int32
             type: integer
-          example:
-          - 1
         BankName:
           description: Name of Bank
           type: string
-          example: Example Name
         AccountName:
           description: Name of this account
           type: string
-          example: Example Name
         Iban:
           description: IBAN of this account
           type: string
-          example: string
         Swift:
           description: SWIFT of this bank account
           type: string
-          example: string
         NationalClearingCode:
           description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
           type: string
-          example: string
         PopulatedAccountFields:
           description: 'A list of one or more populated account fields (field key-value pairs).
 
@@ -1593,11 +951,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccountFieldKeyValuePair'
-          example: []
         RejectionReason:
           description: Reason for Rejection
           type: string
-          example: string
         BusinessType:
           description: Business Type
           enum:
@@ -1608,7 +964,309 @@ components:
           type:
           - string
           - 'null'
-          example: Individual
+    BankAccountDetailsUpdateRequest:
+      description: Represents a request to update bank account information details
+      type: object
+      properties:
+        BankAddress:
+          description: Address of the bank account
+          type: string
+        AccountHolderAddress:
+          description: Address of the payee
+          type: string
+        VatNumber:
+          description: Account Holders Vat Number
+          type: string
+        StoreIds:
+          description: List of stores to attach to Account
+          type: array
+          items:
+            format: int32
+            type: integer
+        BankName:
+          description: Name of Bank
+          type: string
+        AccountName:
+          description: Name of this account
+          type: string
+        Iban:
+          description: IBAN of this account
+          type: string
+        Swift:
+          description: SWIFT of this bank account
+          type: string
+        NationalClearingCode:
+          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
+          type: string
+        PopulatedAccountFields:
+          description: 'A list of one or more populated account fields (field key-value pairs).
+
+            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldKeyValuePair'
+        RejectionReason:
+          description: Reason for Rejection
+          type: string
+        BusinessType:
+          description: Business Type
+          enum:
+          - Individual
+          - Company
+          - NonProfit
+          - GovernmentEntity
+          type:
+          - string
+          - 'null'
+    RestApiArrayResult_StripeCustomConnectedAccount:
+      description: Rest api array result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          description: Generic data object.
+          type: array
+          items:
+            $ref: '#/components/schemas/StripeCustomConnectedAccount'
+    StripeCustomConnectedAccount:
+      description: Flipdish Stripe Custom Connected Account associated to the Store
+      type: object
+      properties:
+        StoreId:
+          format: int32
+          description: Physical Restaurant Id
+          type: integer
+        StripeId:
+          description: Stripe's own connected account identifier
+          type: string
+        CardPaymentsStatus:
+          description: Card payments capability status (Inactive, Pending, Active, Unrequested)
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+        TransfersStatus:
+          description: Transfers capability status (Inactive, Pending, Active, Unrequested)
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+        AccountStatus:
+          description: Current status of the account
+          enum:
+          - Disabled
+          - Enabled
+          - AdditionalInformationRequired
+          - PendingVerification
+          - Unverified
+          - Rejected
+          - UpdateExternalAccount
+          - PlatformPaused
+          type: string
+    BankAccountCreate:
+      description: ''
+      type: object
+      properties:
+        BankAddress:
+          description: Address lf the bank
+          type: string
+        BankCountryCode:
+          description: CountryCode of the Bank Account
+          type: string
+        AccountHolderAddress:
+          description: Account Holders Address
+          type: string
+        AccountHolderCountryCode:
+          description: Account Holders Country Code
+          type: string
+        VatNumber:
+          description: Account Holders Vat Number
+          type: string
+        CurrencyCode:
+          description: Currency of Account
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - CAD
+          - AUD
+          - DJF
+          - ZAR
+          - ETB
+          - AED
+          - BHD
+          - DZD
+          - EGP
+          - IQD
+          - JOD
+          - KWD
+          - LBP
+          - LYD
+          - MAD
+          - OMR
+          - QAR
+          - SAR
+          - SYP
+          - TND
+          - YER
+          - CLP
+          - INR
+          - AZN
+          - RUB
+          - BYN
+          - BGN
+          - NGN
+          - BDT
+          - CNY
+          - BAM
+          - CZK
+          - DKK
+          - CHF
+          - MVR
+          - BTN
+          - XCD
+          - BZD
+          - HKD
+          - IDR
+          - JMD
+          - MYR
+          - NZD
+          - PHP
+          - SGD
+          - TTD
+          - XDR
+          - ARS
+          - BOB
+          - COP
+          - CRC
+          - CUP
+          - DOP
+          - GTQ
+          - HNL
+          - MXN
+          - NIO
+          - PAB
+          - PEN
+          - PYG
+          - UYU
+          - VEF
+          - IRR
+          - XOF
+          - CDF
+          - XAF
+          - HTG
+          - ILS
+          - HRK
+          - HUF
+          - AMD
+          - ISK
+          - JPY
+          - GEL
+          - KZT
+          - KHR
+          - KRW
+          - KGS
+          - LAK
+          - MKD
+          - MNT
+          - BND
+          - MMK
+          - NOK
+          - NPR
+          - PKR
+          - PLN
+          - AFN
+          - BRL
+          - MDL
+          - RON
+          - RWF
+          - SEK
+          - LKR
+          - SOS
+          - ALL
+          - RSD
+          - KES
+          - TJS
+          - THB
+          - ERN
+          - TMT
+          - BWP
+          - TRY
+          - UAH
+          - UZS
+          - VND
+          - MOP
+          - TWD
+          - BMD
+          type: string
+        StoreIds:
+          description: List of stores to attach to Account
+          type: array
+          items:
+            format: int32
+            type: integer
+        BankName:
+          description: Name of Bank
+          type: string
+        AccountName:
+          description: Name of this account
+          type: string
+        Iban:
+          description: IBAN of this account
+          type: string
+        Swift:
+          description: SWIFT of this bank account
+          type: string
+        NationalClearingCode:
+          description: National Clearing Code (BSB in Australia, Routing Number in USA/Canada, NCC in NZ)
+          type: string
+        PopulatedAccountFields:
+          description: 'A list of one or more populated account fields (field key-value pairs).
+
+            If this list contains at least one item, the Iban, Swift and NationalClearingCode fields will be ignored.'
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFieldKeyValuePair'
+        RejectionReason:
+          description: Reason for Rejection
+          type: string
+        BusinessType:
+          description: Business Type
+          enum:
+          - Individual
+          - Company
+          - NonProfit
+          - GovernmentEntity
+          type:
+          - string
+          - 'null'
+    StripeAccountLinkRequest:
+      description: Represents a request for Stripe account link creation
+      type: object
+      properties:
+        StripeId:
+          description: Stripe's own connected account identifier
+          type: string
+        ReturnUrl:
+          description: URL to be hit if link creation succeeds
+          type: string
+        Collect:
+          description: Which information to collect from users at this stage
+          enum:
+          - CurrentlyDue
+          - EventuallyDue
+          type: string
+        Type:
+          description: Either onboarding or edit user information
+          enum:
+          - Onboarding
+          - Update
+          type: string
     AccountFieldKeyValuePair:
       description: Represents one populated account field (its key and value)
       type: object
@@ -1630,21 +1288,401 @@ components:
           - SortCode
           - Swift
           type: string
-          example: Iban
         Value:
           description: The value of the field
           type: string
-          example: string
+    RestApiErrorResult:
+      description: Rest api error result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Error message
+          type: string
+        ErrorCode:
+          format: int32
+          description: Error code
+          type: integer
+        StackTrace:
+          description: Stack trace
+          type: string
+        Errors:
+          description: List of errors grouped by field name
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResult'
+    StripeConnectedAccountInfo:
+      description: Represents information about a Stripe connected account associated with a bank account
+      type: object
+      properties:
+        AccountStatus:
+          description: Stripe connected account status
+          enum:
+          - Disabled
+          - Enabled
+          - AdditionalInformationRequired
+          - PendingVerification
+          - Unverified
+          - Rejected
+          - UpdateExternalAccount
+          - PlatformPaused
+          type: string
+        StripeId:
+          description: Stripe connected account id
+          type: string
+        CardPaymentStatus:
+          description: Current status of the Card Payment capability of the account
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+        PayoutScheduleInterval:
+          description: Payouts Schedule Interval
+          enum:
+          - Manual
+          - Daily
+          - Weekly
+          - Monthly
+          type: string
+        PayoutsEnabled:
+          description: Payouts Enabled status
+          type:
+          - boolean
+          - 'null'
+        PayoutsPaused:
+          description: Flag indicating if payouts are paused
+          type: boolean
+        PaymentsEnabled:
+          description: Flag indicating if payments are enabled
+          type:
+          - boolean
+          - 'null'
+        DisabledReason:
+          description: 'If the Stripe connected account is disabled, this is Stripe''s raw
+
+            requirements.disabled_reason describing why, as last recorded from a Stripe
+
+            connected-account webhook. Known values are requirements.fields_needed,
+
+            requirements.past_due, requirements.pending_verification,
+
+            rejected.fraud, rejected.terms_of_service, rejected.listed,
+
+            rejected.other and platform_paused, but Stripe can introduce new ones, so
+
+            the value is passed through unmapped (the same way
+
+            CapabilityRequirementsInfo.DisabledReason is). null when the account is
+
+            not disabled. Note that {Flipdish.PublicModels.V1.BankAccount.StripeConnectedAccountInfo.AccountStatus} is a deliberately lossy mapping of
+
+            this value and the two can legitimately disagree - do not derive one from the other.'
+          type: string
+    StripeConnectedAccount:
+      description: Represents a Stripe custom connected account
+      type: object
+      properties:
+        FlipdishConnectedAccountId:
+          format: int32
+          description: Flipdish connected account identifier
+          type: integer
+        StripeId:
+          description: Stripe's own connected account identifier
+          type: string
+        WhitelabelConfigId:
+          format: int32
+          description: Id of the WhitelabelConfig the connected account is assigned to
+          type: integer
+        CardPaymentsStatus:
+          description: Card payments capability status (Inactive, Pending, Active, Unrequested)
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+        TransfersStatus:
+          description: Transfers capability status (Inactive, Pending, Active, Unrequested)
+          enum:
+          - Inactive
+          - Pending
+          - Active
+          - Unrequested
+          type: string
+        AccountStatus:
+          description: Current status of the account
+          enum:
+          - Disabled
+          - Enabled
+          - AdditionalInformationRequired
+          - PendingVerification
+          - Unverified
+          - Rejected
+          - UpdateExternalAccount
+          - PlatformPaused
+          type: string
+        PayoutsEnabled:
+          description: Payouts Enabled status
+          type:
+          - boolean
+          - 'null'
+        PaymentsEnabled:
+          description: Payments Enabled status
+          type:
+          - boolean
+          - 'null'
+    ValidationErrorResult:
+      description: Validation error result
+      type: object
+      properties:
+        FieldName:
+          description: Field name
+          type: string
+        Errors:
+          description: List of errors relates to field
+          type: array
+          items:
+            type: string
+    RestApiUnauthorizedResult:
+      description: Rest api unauthorized result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
+    RestApiResult_StripeConnectedAccount:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/StripeConnectedAccount'
+          description: Generic data object.
+    ModelBase:
+      description: Model base
+      type: object
+      properties: {}
+    RestApiResult_BankAccountDetail:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/BankAccountDetail'
+          description: Generic data object.
+    RestApiResult_ModelBase:
+      description: Rest api result
+      required:
+      - Data
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/ModelBase'
+          description: Generic data object.
+    RestApiForbiddenResult:
+      description: Rest Api Forbidden Result
+      required:
+      - Message
+      type: object
+      properties:
+        Message:
+          description: Message
+          type: string
+          readOnly: true
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0. Implicit grant for first-party portal apps; client credentials grant for server-to-server App Store apps (exchange Client ID + Secret Key for a bearer access token).
       flows:
         implicit:
+          scopes:
+            api: Access to Flipdish API
           authorizationUrl: https://api.flipdish.co/identity/connect/authorize
-          scopes:
-            api: Access to the Flipdish API
-        clientCredentials:
-          tokenUrl: https://api.flipdish.co/identity/connect/token
-          scopes:
-            api: Access to the Flipdish API
+      description: OAuth2 Implicit Grant
+x-samples-languages:
+- curl
+- node
+- csharp
+- ruby
+- javascript
+- python
+- swift
+x-send-defaults: true
+x-flipdish-signalr:
+- hubName: AnalyticsHub
+  events:
+  - eventName: analytics.website
+    eventType: AnalyticsClientEvent
+- hubName: AppHub
+  events:
+  - eventName: app.created
+    eventType: AppCreatedEvent
+  - eventName: app.updated
+    eventType: AppUpdatedEvent
+- hubName: AuthorizationHub
+  events: []
+- hubName: BankAccountHub
+  events:
+  - eventName: bankaccount.created
+    eventType: BankAccountCreatedEvent
+  - eventName: bankaccount.updated
+    eventType: BankAccountUpdatedEvent
+  - eventName: bankaccount.deleted
+    eventType: BankAccountDeletedEvent
+- hubName: CampaignHub
+  events: []
+- hubName: CardReaderHub
+  events:
+  - eventName: cardreaders.kiosk.bluetooth.initiatepairingmode
+    eventType: KioskBluetoothPairingModeEvent
+  - eventName: cardreaders.kiosk.bluetooth.unpaired
+    eventType: KioskBluetoothTerminalUnpairedEvent
+  - eventName: cardreaders.kiosk.bluetooth.updated
+    eventType: KioskBluetoothTerminalUpdatedEvent
+  - eventName: cardreaders.kiosk.bluetooth.checkforupdates
+    eventType: KioskBluetoothTerminalInitiateUpdateCheckEvent
+  - eventName: cardreaders.kiosk.bluetooth.initiateinstallupdatemode
+    eventType: KioskBluetoothInstallUpdateInitiateEvent
+  - eventName: cardreaders.kiosk.bluetooth.cancelupdateinstall
+    eventType: KioskBluetoothTerminalCancelUpdateEvent
+  - eventName: cardreaders.kiosk.bluetooth.installationstatus
+    eventType: KioskBluetoothTerminalInstallationStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.firmwareupdateversion
+    eventType: KioskBluetoothTerminalFirmwareVersionStatusEvent
+  - eventName: cardreaders.kiosk.bluetooth.terminalactionstatechanged
+    eventType: KioskTerminalActionStateChangedEvent
+- hubName: ChannelHub
+  events: []
+- hubName: CustomerHub
+  events:
+  - eventName: customer.created
+    eventType: CustomerCreatedEvent
+  - eventName: customer.updated
+    eventType: CustomerUpdatedEvent
+  - eventName: customer.consent.updated
+    eventType: CustomerConsentUpdatedEvent
+- hubName: HydraHub
+  events:
+  - eventName: hydra.assigned
+    eventType: HydraAssignedEvent
+  - eventName: hydra.request_reset
+    eventType: HydraRequestResetEvent
+  - eventName: hydra.setting_changed
+    eventType: HydraSettingChangedEvent
+  - eventName: hydra.conection_status_changed
+    eventType: HydraConnectionStatusChangedEvent
+  - eventName: hydra.unassigned
+    eventType: HydraUnAssignedEvent
+  - eventName: hydra.store.assigned
+    eventType: HydraStoreAssignedEvent
+  - eventName: hydra.store.unassigned
+    eventType: HydraStoreUnassignedEvent
+- hubName: MenuCheckpointHub
+  events: []
+- hubName: MenuHub
+  events: []
+- hubName: OrderHub
+  events:
+  - eventName: order.created
+    eventType: OrderCreatedEvent
+  - eventName: order.rejected
+    eventType: OrderRejectedEvent
+  - eventName: order.accepted
+    eventType: OrderAcceptedEvent
+  - eventName: order.refunded
+    eventType: OrderRefundedEvent
+- hubName: PhoneCallHub
+  events: []
+- hubName: PrinterHub
+  events: []
+- hubName: StoreGroupHub
+  events:
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+- hubName: StoreHub
+  events:
+  - eventName: store.created
+    eventType: StoreCreatedEvent
+  - eventName: store.updated
+    eventType: StoreUpdatedEvent
+  - eventName: store.archived
+    eventType: StoreArchivedEvent
+  - eventName: store.unarchived
+    eventType: StoreUnarchivedEvent
+  - eventName: store.published
+    eventType: StorePublishedEvent
+  - eventName: store.unpublished
+    eventType: StoreUnpublishedEvent
+  - eventName: store.deleted
+    eventType: StoreDeletedEvent
+  - eventName: store.address.updated
+    eventType: StoreAddressUpdatedEvent
+  - eventName: store.opening_hours.updated
+    eventType: StoreOpeningHoursUpdatedEvent
+  - eventName: store.menu.assigned
+    eventType: StoreMenuAssignedEvent
+  - eventName: store.delivery_zone.created
+    eventType: DeliveryZoneCreatedEvent
+  - eventName: store.delivery_zone.updated
+    eventType: DeliveryZoneUpdatedEvent
+  - eventName: store.delivery_zone.deleted
+    eventType: DeliveryZoneDeletedEvent
+  - eventName: store_group.created
+    eventType: StoreGroupCreatedEvent
+  - eventName: store_group.updated
+    eventType: StoreGroupUpdatedEvent
+  - eventName: store_group.deleted
+    eventType: StoreGroupDeletedEvent
+  - eventName: store.business_hours_override.created
+    eventType: StoreBusinessHoursOverrideCreatedEvent
+  - eventName: store.business_hours_override.deleted
+    eventType: StoreBusinessHoursOverrideDeletedEvent
+  - eventName: store.preorder_config.updated
+    eventType: StorePreOrderConfigUpdatedEvent
+  - eventName: store.logo.created
+    eventType: StoreLogoCreatedEvent
+  - eventName: store.logo.updated
+    eventType: StoreLogoUpdatedEvent
+  - eventName: store.logo.deleted
+    eventType: StoreLogoDeletedEvent
+  - eventName: store.kiosk_setting.updated
+    eventType: StoreKioskSettingUpdatedEvent
+  - eventName: store.fee_config.updated
+    eventType: StoreFeeConfigUpdatedEvent
+- hubName: TeammateHub
+  events:
+  - eventName: teammate.invite.sent
+    eventType: TeammateInviteSentEvent
+  - eventName: teammate.invite.accepted
+    eventType: TeammateInviteAcceptedEvent
+  - eventName: teammate.updated
+    eventType: TeammateUpdatedEvent
+  - eventName: teammate.deleted
+    eventType: TeammateDeletedEvent
+- hubName: TelephonyConfigHub
+  events: []
+- hubName: VoucherHub
+  events:
+  - eventName: voucher.created
+    eventType: VoucherCreatedEvent
+  - eventName: voucher.deleted
+    eventType: VoucherDeletedEvent
+  - eventName: voucher.updated
+    eventType: VoucherUpdatedEvent
+  - eventName: voucher.applied
+    eventType: VoucherAppliedEvent
+- hubName: WebhookHub
+  events: []
+- hubName: WebsiteHub
+  events: []
